@@ -1,0 +1,6 @@
+firebase_options.dart merge=ours
+firebase_app_id_file.json merge=ours
+
+/ios/Runner/GoogleService-Info.plist merge=ours
+/ios/GoogleService-Info.plist merge=ours
+/android/app/google-services.json merge=ours

@@ -1,0 +1,48 @@
+name: Flutter Test
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - main
+    # tagの作成時にビルド実行
+    tags:
+      - 'v*'
+jobs:
+  flutter_test:
+    if: ${{ false }}
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create dart-define
+        run: |
+          mkdir -p dart_defines
+          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
+      - name: Create Firebase Conf
+        run: |
+          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
+          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > lib/firebase_options_dev.dart
+          mkdir -p android/app/src/prod/
+          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > android/app/src/prod/google-services.json
+          mkdir -p ios/prod/
+          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > ios/prod/GoogleService-Info.plist
+      - name: Create env
+        run: |
+          mkdir -p scripts
+          mkdir -p scripts/env
+          echo -n ${{ secrets.ENV_FILE }} | base64 -d > scripts/env/.env
+          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > scripts/env/.env.dev
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ vars.FLUTTER_VERSION }}
+          channel: ${{ vars.FLUTTER_CHANNEL }}
+          cache: true
+      
+      # テスト実行
+      - run: flutter test
