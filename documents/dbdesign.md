@@ -2,6 +2,11 @@
 
 ## 技術選定
 
+当アプリでは、`Dynamic Links`をはじめとしたFirebaseのサービスを多用しており、
+一つのサービスに集約するため、`Cloud Firestore`を採用する
+
+Firestoreのドキュメント構造は下記の通り
+
 ## ドキュメント構造
 
 ### users/{userId}
@@ -82,8 +87,34 @@
 | surprise  | boolean    | サプライズフラグ、子供にヒミツにするか否か | true                |
 | price     | number     | 値段                                       | 1000                |
 | planDate  | Timestamp? | 購入予定日                                 | 1987-12-01 00:00:00 |
-| sentAt    | Timestamp? | 欲しい物を渡した日                         | 1987-12-01 00:00:00 |
-| itemCount | int        | 登録された欲しい物の数                     | 10                  |
-| premium   | bool       | プレミアムグループフラグ                   | true                |
+| sentAt    | Timestamp? | 欲しい物を渡した日                         | 1987-12-01 00:00:0  |
+| buyerName | string     | 購入した人の名前                           | サンプル 太郎       |
+| memo      | string     | メモ                                       | メモ                |
 | createdAt | Timestmap  | 作成日時                                   | 1987-12-01 00:00:00 |
 | updatedAt | Timestmap  | 更新日時                                   | 1987-12-01 00:00:00 |
+
+### groups/{groupId}/_dpurchases/{purchaseId}
+
+欲しい物の購入情報を保持するコレクション
+
+`purchases`コレクションとSameID構造で、構成も完全に一致するため割愛
+
+### groups/{groupId}/participants/{userId}
+
+グループに参加している利用者を保持するコレクション
+セキュリティルールの都合上、グループ内の利用者情報を参照する場合はこちらを参照する
+
+`users`コレクションとSameID構造で、構成も完全に一致するため割愛
+
+### shareLinks/{shareLinkId}
+
+グループへの招待リンクを保持するコレクション
+セキュリティルールの都合上、自身が所属しているグループのみ作成可能、参照や更新は不可。
+
+| Field     | Type      | Description            | Sample              |
+| --------- | --------- | ---------------------- | ------------------- |
+| id        | string    | サロゲートキー(UUID)   | XXXX (UUID)         |
+| groupId   | string    | グループID             | XXXX (UUID)         |
+| validDays | number    | リンクの有効期間(日数) | 3                   |
+| createdAt | Timestmap | 作成日時               | 1987-12-01 00:00:00 |
+| updatedAt | Timestmap | 更新日時               | 1987-12-01 00:00:00 |
