@@ -1,0 +1,14 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../../../domain/user/entity/user.dart';
+import '../user_usecase.dart';
+
+part 'group_join_users_provider.g.dart';
+
+/// グループに参加中のユーザー情報
+@Riverpod(keepAlive: true)
+Stream<List<User>> groupJoinUsers(
+  GroupJoinUsersRef ref, {
+  required String groupId,
+}) =>
+    ref.read(userUsecaseProvider).fetchByGroup(groupId: groupId);

@@ -1,0 +1,12 @@
+# version: 2
+# enable-beta-ecosystems: true
+# updates:
+#   # 監視するパッケージマネージャーを指定する。
+#   - package-ecosystem: "pub"
+
+#     # パッケージマニフェストの場所を指定する。
+#     directory: "/"
+
+#     # 確認頻度を指定する。
+#     schedule:
+#       interval: "weekly"

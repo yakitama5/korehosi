@@ -1,0 +1,117 @@
+name: Flutter Build
+on:
+  push:
+    # tagの作成時にビルド実行
+    tags:
+      - 'v*'
+jobs:
+
+  # Android
+  flutter_build_android:
+    if: ${{ false }}
+    name: Build(Android)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create dart-define
+        run: |
+          mkdir -p dart_defines
+          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
+      - name: Create Firebase Conf
+        run: |
+          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
+          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > lib/firebase_options_dev.dart
+          mkdir -p android/app/src/prod/
+          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > android/app/src/prod/google-services.json
+          mkdir -p ios/prod/
+          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > ios/prod/GoogleService-Info.plist
+      - name: Create env
+        run: |
+          mkdir -p scripts
+          mkdir -p scripts/env
+          echo -n ${{ secrets.ENV_FILE }} | base64 -d > scripts/env/.env
+          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > scripts/env/.env.dev
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ vars.FLUTTER_VERSION }}
+          channel: ${{ vars.FLUTTER_CHANNEL }}
+          cache: true
+
+      # Key情報の設定
+      - name: Create key.jks
+        run: echo -n ${{ secrets.ANDROID_KEY_JKS }} | base64 -d > android/app/key.jks
+
+      # Secrets から key.properties を生成
+      # key.properties には各種シークレットな文字列なり file name なりを渡している
+      - name: Create key.properties
+        run: |
+          echo 'storeFile=./key.jks' > android/key.properties
+          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> android/key.properties
+          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
+          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
+
+      # ビルド
+      - run: flutter pub get
+      - run: flutter gen-l10n
+      - run: flutter build appbundle --dart-define-from-file=dart_defines/prod.json
+
+      # GoogleCloudは課金対象になってしまうので、ビルドまでで止める
+
+
+  # iOS
+  flutter_build_ios:
+    # if: ${{ false }}
+    name: Build(iOS)
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create dart-define
+        run: |
+          mkdir -p dart_defines
+          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
+      - name: Create Firebase Conf
+        run: |
+          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
+          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > lib/firebase_options_dev.dart
+          mkdir -p android/app/src/prod/
+          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > android/app/src/prod/google-services.json
+          mkdir -p ios/prod/
+          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > ios/prod/GoogleService-Info.plist
+      - name: Create env
+        run: |
+          mkdir -p scripts
+          mkdir -p scripts/env
+          echo -n ${{ secrets.ENV_FILE }} | base64 -d > scripts/env/.env
+          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > scripts/env/.env.dev
+      - name: Create ExportOptions
+        run: |
+          echo -n ${{ secrets.EXPORT_OPTIONS }} | base64 -d > ExportOptions.plist
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ vars.FLUTTER_VERSION }}
+          channel: ${{ vars.FLUTTER_CHANNEL }}
+          cache: true
+
+      # プロビジョニングファイルの取り込み
+      - name: Import Provisioning Profile
+        run: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          touch ~/Library/MobileDevice/Provisioning\ Profiles/decoded.mobileprovision
+          echo -n '${{ secrets.PROVISIONING_PROFILE }}' | base64 -d -o ~/Library/MobileDevice/Provisioning\ Profiles/decoded.mobileprovision
+
+      # 証明書の取り込み
+      - name: Import Code-Signing Certificates
+        uses: Apple-Actions/import-codesign-certs@v1
+        with:
+          p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
+          p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+
+      # Build + Upload
+      - name: Build for iOS
+        run: flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=dart_defines/prod.json
