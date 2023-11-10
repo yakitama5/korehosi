@@ -2,6 +2,11 @@
 
 ## 技術選定
 
+当アプリでは、`Dynamic Links`をはじめとしたFirebaseのサービスを多用しており、
+一つのサービスに集約するため、`Cloud Firestore`を採用する
+
+Firestoreのドキュメント構造は下記の通り
+
 ## ドキュメント構造
 
 ### users/{userId}
