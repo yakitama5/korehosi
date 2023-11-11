@@ -1,6 +1,6 @@
 # 開発者向け資料
 
-## 環境構築
+## 💻環境構築
 
 ### 前提条件 (必要なツール類)
 
@@ -9,7 +9,7 @@
 - [fvm](https://fvm.app) のインストール
 - [Flutter Fire CLI](https://firebase.google.com/docs/flutter/setup?hl=ja&platform=ios) のインストール
 
-### Firebase
+### 🔥Firebase
 
 #### 初期設定 (flutter_fire_cli)
 
@@ -37,11 +37,11 @@
   - 開発：`android\app\src\dev\google-services.json`
   - 本番：`android\app\src\prod\google-services.json`
 
-### 設定ファイルの追加
+### 💻設定ファイルの追加
 
 アプリの環境変数やFirebaseへの接続情報などの機密情報については、それぞれ下記の内容を定義する必要がある
 
-#### 環境変数 (dart-define)
+#### 💻環境変数 (dart-define)
 
 1. 下記の形式で`dart-defines/`配下に`dev.json`, `prod.json`を作成する
 
@@ -62,7 +62,7 @@
 
    
 
-#### 機密情報 (.env)
+#### 🔒機密情報 (.env)
 
 1. 下記の形式で`scripts/env/`配下に`.env`, `.env.dev` を作成する
 
@@ -86,7 +86,7 @@
 
 1. XCodeでビルドした際に作成される`ExportOptions.plist`をプロジェクトルート配下に配置する
 
-## 実行手順
+## ▶️実行手順
 
 ### デバッグ
 
@@ -106,7 +106,7 @@
 
 
 
-## 開発中に多用するコマンド
+## 📋開発中に多用するコマンド
 
 ### プロジェクトの変更
 
