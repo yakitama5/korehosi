@@ -7,21 +7,25 @@ part 'item_repository.g.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 @Riverpod(keepAlive: true)
 ItemRepository itemRepository(ItemRepositoryRef ref) =>
-    // アプリ起動時 or テストときに `override` することを前提に利用
+    // アプリ起動時 or テスト時に `override` することを前提に利用
     throw UnimplementedError();
 
+/// ほしい物を管理するリポジトリ
 abstract class ItemRepository {
+  /// グループ内のほしい物を取得
   Stream<List<Item>> fetchByGroupId({required String groupId});
 
+  /// グループ内のほしい物を取得
+  /// (一意指定)
   Stream<Item?> fetchByGroupIdAndItemId({
     required String groupId,
     required String itemId,
   });
 
-  /// IDを発番する
+  /// ほしい物の一意IDを発番する
   Future<String> generateItemId({required String groupId});
 
-  /// 欲しい物を追加
+  /// ほしい物を追加
   /// ID項目は任意指定とし、指定されなかったら発番する
   Future<Item> add({
     String? itemId,
@@ -35,6 +39,7 @@ abstract class ItemRepository {
     String? memo,
   });
 
+  /// ほしい物を更新
   Future<void> update({
     required String groupId,
     required String itemId,
@@ -47,6 +52,7 @@ abstract class ItemRepository {
     String? memo,
   });
 
+  /// ほしい物を削除
   Future<void> delete({
     required String groupId,
     required String itemId,

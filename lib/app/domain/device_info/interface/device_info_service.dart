@@ -10,7 +10,8 @@ DeviceInfoService deviceInfoService(DeviceInfoServiceRef ref) =>
 // アプリ起動時 or テスト時に `override` することを前提に利用
     throw UnimplementedError();
 
-// ignore: one_member_abstracts
+/// Androidの端末情報
+/// ignore: one_member_abstracts
 abstract class DeviceInfoService {
   /// Androidの端末情報を取得する
   Future<AndroidInfo> fetchAndroidInfo();
