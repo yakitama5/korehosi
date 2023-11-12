@@ -3,10 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../state/loading_provider.dart';
 
 /// ユースケース実行のためのメソッドを備えた Mixin
-///
-/// 実行中に[`OverlayLoading`]を表示するためにloadingControllerを更新する
-/// ローディング表示を別の箇所に任せたい場合（ie.FutureProvider)はnullにする
 mixin RunUsecaseMixin {
+  /// 実行中にローディング表示する
+  /// ローディング表示を行わない場合は、`disableLoading`を指定する
   Future<T> execute<T>(
     Ref ref, {
     required Future<T> Function() action,

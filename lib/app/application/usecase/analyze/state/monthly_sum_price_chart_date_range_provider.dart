@@ -8,11 +8,12 @@ import 'monthly_sum_price_chart_range_provider.dart';
 
 part 'monthly_sum_price_chart_date_range_provider.g.dart';
 
+/// 分析で利用する月別の購入金額の日付範囲を管理
 @riverpod
 DateTimeRange monthlySumPriceChartDateRange(
   MonthlySumPriceChartDateRangeRef ref,
 ) {
-  // 常に最大値を一定する表示
+  // 常に最大値を一定にする場合はこちらの表示方法
   // final indexRange = ref.watch(sumPriceLinerXRangeProvider);
   // final from = min(indexRange.$1, -5);
   // final now = DateTime.now().firstDayOfTheMonth;

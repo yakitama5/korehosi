@@ -8,6 +8,7 @@ typedef DateTimeRangeMapper<T> = T Function(
 );
 
 /// 日時範囲型の拡張
+/// application layer
 extension DateTimeRangeForApplicationX on DateTimeRange {
   /// 月別に変換処理を行う
   List<T> mapByMonthly<T>(

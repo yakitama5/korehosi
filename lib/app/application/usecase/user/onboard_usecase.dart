@@ -9,6 +9,7 @@ part 'onboard_usecase.g.dart';
 @riverpod
 OnboardUsecase onboardUsecase(OnboardUsecaseRef ref) => OnboardUsecase(ref);
 
+/// オンボード(チュートリアル)に関するユースケース
 class OnboardUsecase with RunUsecaseMixin {
   const OnboardUsecase(this.ref);
 

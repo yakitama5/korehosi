@@ -7,6 +7,7 @@ import 'item_order_key.dart';
 
 part 'item_order_model.freezed.dart';
 
+/// ほしい物の並び順
 @freezed
 class ItemOrderModel with _$ItemOrderModel {
   const factory ItemOrderModel({

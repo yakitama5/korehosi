@@ -224,6 +224,7 @@ class _UrlKeys extends _$UrlKeys {
   }
 }
 
+/// 購入情報の入力フォーム
 @Riverpod(dependencies: [_purchase])
 class _PurchaseForm extends _$PurchaseForm {
   @override
@@ -250,7 +251,7 @@ class _PurchaseForm extends _$PurchaseForm {
 }
 
 // ignore: avoid_classes_with_only_static_members
-/// 欲しい物画面特有の状態を管理
+/// ほしい物の明細画面内でのみ利用するProvider
 class ItemPageProviders {
   static final itemIdProvider = _itemIdProvider;
   static final itemProvider = _itemProvider;

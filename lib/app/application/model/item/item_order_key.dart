@@ -12,6 +12,7 @@ enum ItemOrderKey {
 }
 
 extension ItemOrderX on ItemOrderKey {
+  /// 言語別の表示名
   String localeName(L10n l10n) {
     switch (this) {
       case ItemOrderKey.name:
@@ -23,6 +24,7 @@ extension ItemOrderX on ItemOrderKey {
     }
   }
 
+  /// アイコン
   IconData iconData(SortOrder type) {
     final asc = type == SortOrder.asc;
     switch (this) {
