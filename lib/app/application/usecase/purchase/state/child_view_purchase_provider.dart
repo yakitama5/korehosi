@@ -7,7 +7,7 @@ part 'child_view_purchase_provider.g.dart';
 
 /// (子供参照用)購入情報
 /// データの参照頻度を減らすため、`keepAlive`を指定
-@riverpod
+@Riverpod(keepAlive: true)
 Stream<Purchase?> childViewPurchase(
   ChildViewPurchaseRef ref, {
   required String groupId,
