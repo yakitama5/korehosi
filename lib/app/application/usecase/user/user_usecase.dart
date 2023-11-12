@@ -30,6 +30,7 @@ part 'user_usecase.g.dart';
 @riverpod
 UserUsecase userUsecase(UserUsecaseRef ref) => UserUsecase(ref);
 
+/// ユーザーに関するユースケース
 class UserUsecase with RunUsecaseMixin {
   const UserUsecase(this.ref);
 
@@ -231,7 +232,7 @@ class UserUsecase with RunUsecaseMixin {
     await ref.read(currentGroupIdProvider.notifier).set(groupId: groupId);
   }
 
-  /// FirestoreのPermissionエラーを避けるために取得データをリフレッシュする
+  /// Permissionエラーを避けるために、キャッシュしていた取得データをリフレッシュする
   void _invalidateStates() {
     logger.d('Refresh Firestore instance');
     ref

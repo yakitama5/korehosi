@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 /// 数値型の拡張
+/// application layer
 extension NumForApplicationX on num {
   /// カンマ区切りの文字列にフォーマット
   String formatComma({

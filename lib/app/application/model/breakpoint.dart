@@ -3,6 +3,7 @@ import 'package:responsive_framework/responsive_breakpoints.dart';
 // ignore: constant_identifier_names
 const String UHD = '4K';
 
+/// レスポンシブデザインのブレークポイント
 enum AppBreakpoint {
   mobile,
   tablet,

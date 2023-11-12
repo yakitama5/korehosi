@@ -6,6 +6,7 @@ import 'app_info_provider.dart';
 
 part 'force_update_provider.g.dart';
 
+/// アプリ更新が必要な最低バージョン
 @riverpod
 Future<bool> forceUpdate(ForceUpdateRef ref) async {
   // 現在のバージョンと更新通知を表示するバージョンを取得

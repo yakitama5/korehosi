@@ -7,6 +7,7 @@ import 'user_provider.dart';
 part 'auth_user_provider.g.dart';
 
 /// 認証済のユーザー
+/// データの参照頻度を減らすため、`keepAlive`を指定
 @Riverpod(keepAlive: true)
 Future<User?> authUser(AuthUserRef ref) async {
   final userId =

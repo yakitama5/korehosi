@@ -9,6 +9,7 @@ String _shareLinkId(_ShareLinkIdRef ref) =>
     throw UnimplementedError();
 
 // ignore: avoid_classes_with_only_static_members
+/// 共有リンクページ内でのみ利用するProvider
 class ShareLinkPageProviders {
   static final idProvider = _shareLinkIdProvider;
 }

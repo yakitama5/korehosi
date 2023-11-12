@@ -3,9 +3,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'theme_mode_provider.g.dart';
 
+/// テーマ
 @riverpod
 ThemeMode themeMode(ThemeModeRef ref) => throw UnimplementedError();
 
+/// テーマのNotifier
 @riverpod
 class ThemeModeNotifier extends _$ThemeModeNotifier {
   @override

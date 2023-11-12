@@ -23,6 +23,7 @@ GroupUsecase groupUsecase(GroupUsecaseRef ref) => GroupUsecase(ref);
 
 typedef LocationBuilder = String Function(String shareLinkId);
 
+/// グループに関するユースケース
 class GroupUsecase with RunUsecaseMixin {
   const GroupUsecase(this.ref);
 

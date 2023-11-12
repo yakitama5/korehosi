@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'introduction_screen_key_provider.g.dart';
 
+/// オンボード時のページキー
 @riverpod
 GlobalKey<IntroductionScreenState> introductionScreenKey(
   IntroductionScreenKeyRef ref,

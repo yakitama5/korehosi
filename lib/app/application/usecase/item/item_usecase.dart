@@ -19,6 +19,7 @@ part 'item_usecase.g.dart';
 @riverpod
 ItemUsecase itemUsecase(ItemUsecaseRef ref) => ItemUsecase(ref);
 
+/// ほしい物に関するユースケース
 class ItemUsecase with RunUsecaseMixin {
   ItemUsecase(this.ref);
 

@@ -4,6 +4,7 @@ import '../../utils/logger.dart';
 
 part 'loading_provider.g.dart';
 
+/// アプリ全体で共通するローディング表示を管理
 @riverpod
 class LoadingNotifier extends _$LoadingNotifier {
   int _count = 0;
