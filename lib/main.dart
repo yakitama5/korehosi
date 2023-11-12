@@ -45,7 +45,7 @@ void main() async {
   // Flutter Initialize
   WidgetsFlutterBinding.ensureInitialized();
 
-  //向き指定
+  // 画面の向きを強制
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -56,7 +56,7 @@ void main() async {
     Flavor.dev => dev.DefaultFirebaseOptions.currentPlatform,
   };
 
-  // Initialice Firebase
+  // Initialize Firebase
   await Firebase.initializeApp(
     options: firebaseOptions,
   );
@@ -76,7 +76,7 @@ void main() async {
     ),
   );
 
-  // AvenueCat
+  // RevenueCat
   await initPlatformState();
 
   // WebのURLから "#" を削除
