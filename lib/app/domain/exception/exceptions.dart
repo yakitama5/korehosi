@@ -13,7 +13,7 @@ class DeletePermissionException implements Exception {
   final String errorMessage;
 }
 
-/// アカウント連携の解除Exception
+/// アカウント連携時のException
 class AccountLinkException implements Exception {
   const AccountLinkException(this.errorMessage);
   final String errorMessage;
