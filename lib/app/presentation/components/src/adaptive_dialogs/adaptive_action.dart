@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nested/nested.dart';
 
+/// アダプティブダイアログで利用するアクション
+/// プラットフォームに応じたアダプティブレイアウトを提供
 class AdaptiveAction extends SingleChildStatelessWidget {
   const AdaptiveAction({
     super.key,
