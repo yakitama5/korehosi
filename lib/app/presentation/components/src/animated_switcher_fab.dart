@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final _expandedProvider = StateProvider<bool>((ref) => true);
 
+/// スクロールに応じたアニメーション表示を行うFAB
 class AnimatedSwitcherFab extends HookConsumerWidget {
   const AnimatedSwitcherFab({
     super.key,

@@ -8,8 +8,9 @@ import '../reactive_cupertino_text_field.dart';
 import '../reactive_outlined_text_field.dart';
 import 'adaptive_action.dart';
 
-const _nameKey = 'name';
+const _textKey = 'name';
 
+/// 「OK or Cancel」をアクションに持つ文字列入力用のダイアログ
 class TextDialog extends HookConsumerWidget {
   const TextDialog({
     super.key,
@@ -36,7 +37,7 @@ class TextDialog extends HookConsumerWidget {
 
     return ReactiveFormBuilder(
       form: () => FormGroup({
-        _nameKey: FormControl<String>(
+        _textKey: FormControl<String>(
           value: initial,
           validators: [
             if (isRequired) Validators.required,
@@ -76,7 +77,7 @@ class TextDialog extends HookConsumerWidget {
     }
 
     // 結果を呼び出し元に返却
-    final input = form.control(_nameKey).value as String;
+    final input = form.control(_textKey).value as String;
     Navigator.pop(context, input);
   }
 }
@@ -127,7 +128,7 @@ class _CupertinoTextField extends HookConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: ReactiveCupertinoDialogTextField<String>(
-        formControlName: _nameKey,
+        formControlName: _textKey,
         maxLength: maxLength,
         labelText: labelText,
         isRequired: isRequired,
@@ -151,7 +152,7 @@ class _MaterialTextField extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ReactiveOutlinedTextField<String>(
-      formControlName: _nameKey,
+      formControlName: _textKey,
       maxLength: maxLength,
       labelText: labelText,
       isRequired: isRequired,

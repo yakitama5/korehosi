@@ -5,6 +5,7 @@ import '../../../../application/model/dialog_result.dart';
 import '../../../../application/state/locale_provider.dart';
 import 'adaptive_action.dart';
 
+/// 「OK」をアクションに持つダイアログ
 class OkDialog extends HookConsumerWidget {
   const OkDialog({
     super.key,
