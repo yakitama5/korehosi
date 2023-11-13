@@ -8,6 +8,7 @@ const _maxGroupCountKey = 'max_group_count_by_free_plan';
 const String _maxItemCountKey = 'max_item_count_by_free_plan';
 const String _forceUpdateVersionKey = 'force_update_app_version';
 
+/// Firebaseを利用したサービスの実装
 class FirebaseConfigService implements ConfigService {
   const FirebaseConfigService(this.ref);
 

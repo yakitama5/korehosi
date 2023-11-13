@@ -4,6 +4,7 @@ import '../../../domain/device_info/entity/android_info.dart';
 import '../../../domain/device_info/interface/device_info_service.dart';
 import '../../../domain/device_info/value_object/android_version.dart';
 
+///  `device_info_plus`パッケージによるサービスの実装
 class DeviceInfoPlusDeviceInfoService implements DeviceInfoService {
   @override
   Future<AndroidInfo> fetchAndroidInfo() async {

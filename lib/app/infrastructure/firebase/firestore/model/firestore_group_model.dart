@@ -6,6 +6,7 @@ import '../converter/json_key.dart';
 part 'firestore_group_model.freezed.dart';
 part 'firestore_group_model.g.dart';
 
+/// `/groups/{groupId}`ドキュメントのモデル
 @freezed
 class FirestoreGroupModel with _$FirestoreGroupModel {
   const factory FirestoreGroupModel({
@@ -24,7 +25,7 @@ class FirestoreGroupModel with _$FirestoreGroupModel {
 }
 
 extension FirestoreGroupModelX on FirestoreGroupModel {
-  /// ドメイン層への変換
+  /// ドメイン層で定義しているエンティティへの変換
   Group toDomainModel() => Group(
         id: id,
         name: name,
@@ -36,6 +37,6 @@ extension FirestoreGroupModelX on FirestoreGroupModel {
         updatedAt: updatedAt!,
       );
 
-  /// `FieldValue`による更新が保留中か否かｚ
+  /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;
 }

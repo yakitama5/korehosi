@@ -19,6 +19,7 @@ import '../firestore/state/firestore_group_provider.dart';
 import '../firestore/state/firestore_participant_provider.dart';
 import '../firestore/state/firestore_user_provider.dart';
 
+/// Firebaseを利用したリポジトリの実装
 class FirebaseUserRepository implements UserRepository {
   const FirebaseUserRepository(this.ref);
 

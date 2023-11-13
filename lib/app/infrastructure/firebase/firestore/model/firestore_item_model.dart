@@ -6,6 +6,7 @@ import '../converter/json_key.dart';
 part 'firestore_item_model.freezed.dart';
 part 'firestore_item_model.g.dart';
 
+/// `/groups/{groupId}/items/{itemId}`ドキュメントのモデル
 @freezed
 class FirestoreItemModel with _$FirestoreItemModel {
   const factory FirestoreItemModel({
