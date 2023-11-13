@@ -8,7 +8,9 @@ part of 'force_update_provider.dart';
 
 String _$forceUpdateHash() => r'1314704d258bc61ae6ebff0a7e4854b57b305f86';
 
-/// See also [forceUpdate].
+/// アプリ更新が必要な最低バージョン
+///
+/// Copied from [forceUpdate].
 @ProviderFor(forceUpdate)
 final forceUpdateProvider = AutoDisposeFutureProvider<bool>.internal(
   forceUpdate,

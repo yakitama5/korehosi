@@ -8,7 +8,9 @@ part of 'buyed_sum_price.dart';
 
 String _$buyedSumPriceHash() => r'e712e454dca74162932261907b08da6d81309c1b';
 
-/// See also [buyedSumPrice].
+/// 購入済の合計金額
+///
+/// Copied from [buyedSumPrice].
 @ProviderFor(buyedSumPrice)
 final buyedSumPriceProvider = AutoDisposeFutureProvider<int>.internal(
   buyedSumPrice,

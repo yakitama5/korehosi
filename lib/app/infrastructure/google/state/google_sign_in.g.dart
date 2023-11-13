@@ -8,7 +8,10 @@ part of 'google_sign_in.dart';
 
 String _$googleSignInHash() => r'cd58e430e6b7485dfb4c8df86035d23cdd31a9a8';
 
-/// See also [googleSignIn].
+/// Google Sign In
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [googleSignIn].
 @ProviderFor(googleSignIn)
 final googleSignInProvider = AutoDisposeProvider<GoogleSignIn>.internal(
   googleSignIn,

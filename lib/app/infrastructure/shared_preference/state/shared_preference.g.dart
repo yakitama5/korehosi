@@ -8,7 +8,10 @@ part of 'shared_preference.dart';
 
 String _$sharedPreferencesHash() => r'25eceea0052302f519f44a896409ba30ede45562';
 
-/// See also [sharedPreferences].
+/// SharedPreference
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [sharedPreferences].
 @ProviderFor(sharedPreferences)
 final sharedPreferencesProvider = FutureProvider<SharedPreferences>.internal(
   sharedPreferences,

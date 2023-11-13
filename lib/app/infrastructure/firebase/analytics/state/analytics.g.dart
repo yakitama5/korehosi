@@ -8,7 +8,10 @@ part of 'analytics.dart';
 
 String _$analyticsHash() => r'b572c7a6f9e66b895963564869cebe950abd7351';
 
-/// See also [analytics].
+/// Firebase Analytics
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [analytics].
 @ProviderFor(analytics)
 final analyticsProvider = Provider<FirebaseAnalytics>.internal(
   analytics,

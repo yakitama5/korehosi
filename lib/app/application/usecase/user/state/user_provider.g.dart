@@ -29,22 +29,26 @@ class _SystemHash {
   }
 }
 
-/// ユーザー (ID指定)
+/// ユーザー
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [user].
 @ProviderFor(user)
 const userProvider = UserFamily();
 
-/// ユーザー (ID指定)
+/// ユーザー
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [user].
 class UserFamily extends Family<AsyncValue<User?>> {
-  /// ユーザー (ID指定)
+  /// ユーザー
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [user].
   const UserFamily();
 
-  /// ユーザー (ID指定)
+  /// ユーザー
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [user].
   UserProvider call({
@@ -79,11 +83,13 @@ class UserFamily extends Family<AsyncValue<User?>> {
   String? get name => r'userProvider';
 }
 
-/// ユーザー (ID指定)
+/// ユーザー
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [user].
 class UserProvider extends StreamProvider<User?> {
-  /// ユーザー (ID指定)
+  /// ユーザー
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [user].
   UserProvider({

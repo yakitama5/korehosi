@@ -9,7 +9,9 @@ part of 'monthly_sum_price_chart_date_range_provider.dart';
 String _$monthlySumPriceChartDateRangeHash() =>
     r'c03b1d0ae4d0e8654e7c8811f8ed9892c6cce010';
 
-/// See also [monthlySumPriceChartDateRange].
+/// 分析で利用する月別の購入金額の日付範囲を管理
+///
+/// Copied from [monthlySumPriceChartDateRange].
 @ProviderFor(monthlySumPriceChartDateRange)
 final monthlySumPriceChartDateRangeProvider =
     AutoDisposeProvider<DateTimeRange>.internal(

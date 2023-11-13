@@ -9,6 +9,7 @@ part of 'auth_user_provider.dart';
 String _$authUserHash() => r'f83eedeefec66633e0474c6f74d3718a9d6b8e81';
 
 /// 認証済のユーザー
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [authUser].
 @ProviderFor(authUser)

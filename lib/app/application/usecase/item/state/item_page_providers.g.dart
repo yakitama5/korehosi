@@ -307,7 +307,9 @@ final _urlKeysProvider =
 typedef _$UrlKeys = AutoDisposeNotifier<List<String>>;
 String _$purchaseFormHash() => r'8ceead9b8573bcd03c59bb2f2fde80e1548b5b3f';
 
-/// See also [_PurchaseForm].
+/// 購入情報の入力フォーム
+///
+/// Copied from [_PurchaseForm].
 @ProviderFor(_PurchaseForm)
 final _purchaseFormProvider =
     AutoDisposeAsyncNotifierProvider<_PurchaseForm, FormGroup>.internal(

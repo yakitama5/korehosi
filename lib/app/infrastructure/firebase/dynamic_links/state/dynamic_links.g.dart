@@ -8,7 +8,10 @@ part of 'dynamic_links.dart';
 
 String _$dynamicLinksHash() => r'58b7030f0942bef340348ba02a25f4a9ae7a53a8';
 
-/// See also [dynamicLinks].
+/// Firebase Dynamic Links
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [dynamicLinks].
 @ProviderFor(dynamicLinks)
 final dynamicLinksProvider = Provider<FirebaseDynamicLinks>.internal(
   dynamicLinks,

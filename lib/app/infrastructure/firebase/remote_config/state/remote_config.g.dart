@@ -8,7 +8,10 @@ part of 'remote_config.dart';
 
 String _$remoteConfigHash() => r'8087480f8173fd5dbfb8b7b7d141cdbcc07a2614';
 
-/// See also [remoteConfig].
+/// Firebase Remote Config
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [remoteConfig].
 @ProviderFor(remoteConfig)
 final remoteConfigProvider = FutureProvider<FirebaseRemoteConfig>.internal(
   remoteConfig,

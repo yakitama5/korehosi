@@ -8,7 +8,10 @@ part of 'firebase_functions.dart';
 
 String _$firebaseFunctionsHash() => r'e58635202b6557883a85badcd0ef4ecee6afd4bc';
 
-/// See also [firebaseFunctions].
+/// Firebase Functions
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [firebaseFunctions].
 @ProviderFor(firebaseFunctions)
 final firebaseFunctionsProvider =
     AutoDisposeProvider<FirebaseFunctions>.internal(
