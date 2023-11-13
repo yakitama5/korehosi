@@ -14,6 +14,6 @@ Stream<Purchase?> childViewPurchase(
   required String itemId,
 }) {
   return ref
-      .watch(purchaseUsecaseProvider)
+      .read(purchaseUsecaseProvider)
       .fetchByItemIdForChild(groupId: groupId, itemId: itemId);
 }
