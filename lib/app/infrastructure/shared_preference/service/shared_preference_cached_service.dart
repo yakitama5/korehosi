@@ -6,6 +6,7 @@ import '../state/shared_preference.dart';
 /// 現在のグループIDの保存Key
 const _currentGroupKey = 'current_group_id';
 
+/// `shared_preference`パッケージを利用したサービスの実装
 class SharedPreferenceCachedService implements CachedService {
   const SharedPreferenceCachedService(this.ref);
 

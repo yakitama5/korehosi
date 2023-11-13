@@ -3,6 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'package_info_provider.g.dart';
 
+/// PackageInfo
+/// テスト時にDIすることを考慮して、Providerとして定義
 @riverpod
 Future<PackageInfo> packageInfo(PackageInfoRef ref) =>
     PackageInfo.fromPlatform();

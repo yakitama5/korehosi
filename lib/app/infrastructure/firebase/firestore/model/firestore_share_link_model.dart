@@ -6,6 +6,7 @@ import '../converter/json_key.dart';
 part 'firestore_share_link_model.freezed.dart';
 part 'firestore_share_link_model.g.dart';
 
+/// `/shareLinks/{shareLinkId}`ドキュメントのモデル
 @freezed
 class FirestoreShareLinkModel with _$FirestoreShareLinkModel {
   const factory FirestoreShareLinkModel({

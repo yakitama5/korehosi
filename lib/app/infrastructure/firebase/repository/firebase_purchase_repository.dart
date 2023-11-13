@@ -8,6 +8,7 @@ import '../firestore/state/firestore_child_view_purchase_provider.dart';
 import '../firestore/state/firestore_deleted_purchase_provider.dart';
 import '../firestore/state/firestore_purchase_provider.dart';
 
+/// Firebaseを利用したリポジトリの実装
 class FirebasePurchaseRepository implements PurchaseRepository {
   const FirebasePurchaseRepository(this.ref);
 

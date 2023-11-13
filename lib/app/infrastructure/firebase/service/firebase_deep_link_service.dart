@@ -5,6 +5,7 @@ import '../../../application/config/app_config.dart';
 import '../../../domain/service/deep_link_service.dart';
 import '../dynamic_links/state/dynamic_links.dart';
 
+/// Firebaseを利用したサービスの実装
 class FirebaseDeepLinkService implements DeepLinkService {
   const FirebaseDeepLinkService(this.ref);
 

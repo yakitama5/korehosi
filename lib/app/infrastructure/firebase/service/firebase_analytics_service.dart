@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../domain/service/analytics_service.dart';
 import '../analytics/state/analytics.dart';
 
+/// Firebaseを利用したサービスの実装
 class FirebaseAnalyticsService implements AnalyticsService {
   const FirebaseAnalyticsService(this.ref);
 

@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../domain/service/storage_service.dart';
 import '../storage/state/firebase_storage.dart';
 
+/// Firebaseを利用したサービスの実装
 class FirebaseStorageService implements StorageService {
   const FirebaseStorageService(this.ref);
 
