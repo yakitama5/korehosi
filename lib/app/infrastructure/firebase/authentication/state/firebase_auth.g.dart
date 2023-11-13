@@ -8,7 +8,10 @@ part of 'firebase_auth.dart';
 
 String _$firebaseAuthHash() => r'c8e57c3e164ad1c2cad48c4508e47f6097e350a7';
 
-/// See also [firebaseAuth].
+/// Firebase Auth
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [firebaseAuth].
 @ProviderFor(firebaseAuth)
 final firebaseAuthProvider = Provider<FirebaseAuth>.internal(
   firebaseAuth,

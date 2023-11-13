@@ -29,16 +29,24 @@ class _SystemHash {
   }
 }
 
-/// See also [imageUrl].
+/// 画像URL
+///
+/// Copied from [imageUrl].
 @ProviderFor(imageUrl)
 const imageUrlProvider = ImageUrlFamily();
 
-/// See also [imageUrl].
+/// 画像URL
+///
+/// Copied from [imageUrl].
 class ImageUrlFamily extends Family<AsyncValue<String?>> {
-  /// See also [imageUrl].
+  /// 画像URL
+  ///
+  /// Copied from [imageUrl].
   const ImageUrlFamily();
 
-  /// See also [imageUrl].
+  /// 画像URL
+  ///
+  /// Copied from [imageUrl].
   ImageUrlProvider call(
     String? path,
   ) {
@@ -71,9 +79,13 @@ class ImageUrlFamily extends Family<AsyncValue<String?>> {
   String? get name => r'imageUrlProvider';
 }
 
-/// See also [imageUrl].
+/// 画像URL
+///
+/// Copied from [imageUrl].
 class ImageUrlProvider extends FutureProvider<String?> {
-  /// See also [imageUrl].
+  /// 画像URL
+  ///
+  /// Copied from [imageUrl].
   ImageUrlProvider(
     String? path,
   ) : this._internal(

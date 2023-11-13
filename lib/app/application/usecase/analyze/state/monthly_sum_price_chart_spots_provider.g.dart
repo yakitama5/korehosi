@@ -9,7 +9,9 @@ part of 'monthly_sum_price_chart_spots_provider.dart';
 String _$monthlySumPriceChartSpotsHash() =>
     r'b127b3c01be24abaefb729e026bc8ca9ba898d42';
 
-/// See also [monthlySumPriceChartSpots].
+/// 分析で利用する月別の購入金額のグラフデータを管理
+///
+/// Copied from [monthlySumPriceChartSpots].
 @ProviderFor(monthlySumPriceChartSpots)
 final monthlySumPriceChartSpotsProvider =
     AutoDisposeFutureProvider<List<FlSpot>>.internal(

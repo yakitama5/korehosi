@@ -8,7 +8,9 @@ part of 'loading_provider.dart';
 
 String _$loadingNotifierHash() => r'af1996d9ac77e923458cbf2039e2302f793c28b6';
 
-/// See also [LoadingNotifier].
+/// アプリ全体で共通するローディング表示を管理
+///
+/// Copied from [LoadingNotifier].
 @ProviderFor(LoadingNotifier)
 final loadingNotifierProvider =
     AutoDisposeNotifierProvider<LoadingNotifier, bool>.internal(

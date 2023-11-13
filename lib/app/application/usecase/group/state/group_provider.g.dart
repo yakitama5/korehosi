@@ -29,16 +29,28 @@ class _SystemHash {
   }
 }
 
-/// See also [group].
+/// グループ情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
+///
+/// Copied from [group].
 @ProviderFor(group)
 const groupProvider = GroupFamily();
 
-/// See also [group].
+/// グループ情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
+///
+/// Copied from [group].
 class GroupFamily extends Family<AsyncValue<Group?>> {
-  /// See also [group].
+  /// グループ情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
+  ///
+  /// Copied from [group].
   const GroupFamily();
 
-  /// See also [group].
+  /// グループ情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
+  ///
+  /// Copied from [group].
   GroupProvider call({
     required String groupId,
   }) {
@@ -71,9 +83,15 @@ class GroupFamily extends Family<AsyncValue<Group?>> {
   String? get name => r'groupProvider';
 }
 
-/// See also [group].
+/// グループ情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
+///
+/// Copied from [group].
 class GroupProvider extends StreamProvider<Group?> {
-  /// See also [group].
+  /// グループ情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
+  ///
+  /// Copied from [group].
   GroupProvider({
     required String groupId,
   }) : this._internal(

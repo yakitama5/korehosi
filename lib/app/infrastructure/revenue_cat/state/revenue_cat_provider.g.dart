@@ -8,7 +8,10 @@ part of 'revenue_cat_provider.dart';
 
 String _$revenueCatHash() => r'5220991195c1de8380e4546038121320fb301d05';
 
-/// See also [revenueCat].
+/// RevenueCat
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [revenueCat].
 @ProviderFor(revenueCat)
 final revenueCatProvider = Provider<Purchases>.internal(
   revenueCat,
