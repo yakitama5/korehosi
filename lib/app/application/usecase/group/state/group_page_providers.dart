@@ -35,6 +35,7 @@ Future<List<User>> _users(_UsersRef ref) async {
 }
 
 // ignore: avoid_classes_with_only_static_members
+/// グループの詳細ページ内限定で利用するProviderの一覧
 class GroupPageProviders {
   /// Copied from [_groupId].
   static final groupIdProvider = _groupIdProvider;

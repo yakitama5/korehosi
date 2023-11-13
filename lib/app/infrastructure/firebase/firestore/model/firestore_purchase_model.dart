@@ -6,6 +6,7 @@ import '../converter/json_key.dart';
 part 'firestore_purchase_model.freezed.dart';
 part 'firestore_purchase_model.g.dart';
 
+/// `/groups/{groupId}/purchases/{purchaseId}`ドキュメントのモデル
 @freezed
 class FirestorePurchaseModel with _$FirestorePurchaseModel {
   const factory FirestorePurchaseModel({
@@ -40,6 +41,6 @@ extension FirestorePurchaseModelX on FirestorePurchaseModel {
         updatedAt: updatedAt!,
       );
 
-  /// `FieldValue`による更新が保留中か否かｚ
+  /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;
 }

@@ -7,6 +7,7 @@ import '../converter/json_key.dart';
 part 'firestore_user_model.freezed.dart';
 part 'firestore_user_model.g.dart';
 
+/// `/users/{userId}`ドキュメントのモデル
 @freezed
 class FirestoreUserModel with _$FirestoreUserModel {
   const factory FirestoreUserModel({
@@ -33,6 +34,6 @@ extension FirestoreUserModelX on FirestoreUserModel {
         updatedAt: updatedAt!,
       );
 
-  /// `FieldValue`による更新が保留中か否かｚ
+  /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;
 }

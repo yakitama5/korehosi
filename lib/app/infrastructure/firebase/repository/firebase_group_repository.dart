@@ -18,6 +18,7 @@ import '../functions/model/functions_join_group_response.dart';
 import '../functions/model/join_group_request.dart';
 import '../functions/state/firebase_functions.dart';
 
+/// Firebaseを利用したリポジトリの実装
 class FirebaseGroupRepository implements GroupRepository {
   const FirebaseGroupRepository(this.ref);
 

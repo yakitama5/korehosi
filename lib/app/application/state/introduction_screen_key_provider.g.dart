@@ -9,7 +9,9 @@ part of 'introduction_screen_key_provider.dart';
 String _$introductionScreenKeyHash() =>
     r'0816cf5adf1cf301f2af6e13acdb3d37a7af93da';
 
-/// See also [introductionScreenKey].
+/// オンボード時のページキー
+///
+/// Copied from [introductionScreenKey].
 @ProviderFor(introductionScreenKey)
 final introductionScreenKeyProvider =
     AutoDisposeProvider<GlobalKey<IntroductionScreenState>>.internal(

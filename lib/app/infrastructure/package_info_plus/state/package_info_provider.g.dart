@@ -8,7 +8,10 @@ part of 'package_info_provider.dart';
 
 String _$packageInfoHash() => r'b888fbcb24b819c8f738c65829167982ceb7b68e';
 
-/// See also [packageInfo].
+/// PackageInfo
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [packageInfo].
 @ProviderFor(packageInfo)
 final packageInfoProvider = AutoDisposeFutureProvider<PackageInfo>.internal(
   packageInfo,

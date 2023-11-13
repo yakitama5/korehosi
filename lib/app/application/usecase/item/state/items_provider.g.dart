@@ -29,16 +29,28 @@ class _SystemHash {
   }
 }
 
-/// See also [items].
+/// ほしい物の一覧
+/// データの参照頻度を減らすため、`keepAlive`を指定
+///
+/// Copied from [items].
 @ProviderFor(items)
 const itemsProvider = ItemsFamily();
 
-/// See also [items].
+/// ほしい物の一覧
+/// データの参照頻度を減らすため、`keepAlive`を指定
+///
+/// Copied from [items].
 class ItemsFamily extends Family<AsyncValue<List<Item>>> {
-  /// See also [items].
+  /// ほしい物の一覧
+  /// データの参照頻度を減らすため、`keepAlive`を指定
+  ///
+  /// Copied from [items].
   const ItemsFamily();
 
-  /// See also [items].
+  /// ほしい物の一覧
+  /// データの参照頻度を減らすため、`keepAlive`を指定
+  ///
+  /// Copied from [items].
   ItemsProvider call({
     required String groupId,
   }) {
@@ -71,9 +83,15 @@ class ItemsFamily extends Family<AsyncValue<List<Item>>> {
   String? get name => r'itemsProvider';
 }
 
-/// See also [items].
+/// ほしい物の一覧
+/// データの参照頻度を減らすため、`keepAlive`を指定
+///
+/// Copied from [items].
 class ItemsProvider extends StreamProvider<List<Item>> {
-  /// See also [items].
+  /// ほしい物の一覧
+  /// データの参照頻度を減らすため、`keepAlive`を指定
+  ///
+  /// Copied from [items].
   ItemsProvider({
     required String groupId,
   }) : this._internal(

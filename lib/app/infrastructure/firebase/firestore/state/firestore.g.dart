@@ -8,7 +8,10 @@ part of 'firestore.dart';
 
 String _$firestoreHash() => r'4963ca786eb54685cef6453544040c7567e77c0f';
 
-/// See also [firestore].
+/// Cloud Firestore
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [firestore].
 @ProviderFor(firestore)
 final firestoreProvider = Provider<FirebaseFirestore>.internal(
   firestore,

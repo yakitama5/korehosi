@@ -8,7 +8,9 @@ part of 'current_group_provider.dart';
 
 String _$currentGroupHash() => r'2ad8ad112e81d4cbff93ab0071aac925fc92cb2d';
 
-/// See also [currentGroup].
+/// 現在のグループ情報
+///
+/// Copied from [currentGroup].
 @ProviderFor(currentGroup)
 final currentGroupProvider = AutoDisposeFutureProvider<Group?>.internal(
   currentGroup,

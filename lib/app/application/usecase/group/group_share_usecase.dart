@@ -15,6 +15,7 @@ part 'group_share_usecase.g.dart';
 GroupShareUsecase groupShareUsecase(GroupShareUsecaseRef ref) =>
     GroupShareUsecase(ref);
 
+/// グループの共有に関するユースケース
 class GroupShareUsecase with RunUsecaseMixin {
   const GroupShareUsecase(this.ref);
 

@@ -30,21 +30,25 @@ class _SystemHash {
 }
 
 /// グループに参加中のユーザー情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [groupJoinUsers].
 @ProviderFor(groupJoinUsers)
 const groupJoinUsersProvider = GroupJoinUsersFamily();
 
 /// グループに参加中のユーザー情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [groupJoinUsers].
 class GroupJoinUsersFamily extends Family<AsyncValue<List<User>>> {
   /// グループに参加中のユーザー情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [groupJoinUsers].
   const GroupJoinUsersFamily();
 
   /// グループに参加中のユーザー情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [groupJoinUsers].
   GroupJoinUsersProvider call({
@@ -80,10 +84,12 @@ class GroupJoinUsersFamily extends Family<AsyncValue<List<User>>> {
 }
 
 /// グループに参加中のユーザー情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [groupJoinUsers].
 class GroupJoinUsersProvider extends StreamProvider<List<User>> {
   /// グループに参加中のユーザー情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [groupJoinUsers].
   GroupJoinUsersProvider({

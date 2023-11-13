@@ -8,7 +8,10 @@ part of 'firebase_storage.dart';
 
 String _$firebaseStorageHash() => r'9b239ccbfd0ef129cc8465924f751c6af8cb3563';
 
-/// See also [firebaseStorage].
+/// Firebase Storage
+/// テスト時にDIすることを考慮して、Providerとして定義
+///
+/// Copied from [firebaseStorage].
 @ProviderFor(firebaseStorage)
 final firebaseStorageProvider = Provider<FirebaseStorage>.internal(
   firebaseStorage,

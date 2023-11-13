@@ -9,7 +9,7 @@ part 'user_repository.g.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 @Riverpod(keepAlive: true)
 UserRepository userRepository(UserRepositoryRef ref) =>
-    // アプリ起動時 or テストときに `override` することを前提に利用
+    // アプリ起動時 or テスト時に `override` することを前提に利用
     throw UnimplementedError();
 
 /// ユーザーモデル および ユーザーの認証に関するリポジトリ
@@ -54,7 +54,7 @@ abstract class UserRepository {
   /// Googleアカウントとの連携を解除
   Future<void> unlinkWithGoogle();
 
-  /// Googleアカウントとの連携を解除
+  /// Appleアカウントとの連携を解除
   Future<void> unlinkWithApple();
 
   /// サインアウト

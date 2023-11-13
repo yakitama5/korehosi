@@ -8,6 +8,7 @@ import 'monthly_sum_price_chart_date_range_provider.dart';
 
 part 'monthly_sum_price_chart_spots_provider.g.dart';
 
+/// 分析で利用する月別の購入金額のグラフデータを管理
 @riverpod
 Future<List<FlSpot>> monthlySumPriceChartSpots(
   MonthlySumPriceChartSpotsRef ref,

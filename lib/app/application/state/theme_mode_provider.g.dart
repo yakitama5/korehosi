@@ -8,7 +8,9 @@ part of 'theme_mode_provider.dart';
 
 String _$themeModeHash() => r'deb3ce62d7066560f4398dc69de42272657844b7';
 
-/// See also [themeMode].
+/// テーマ
+///
+/// Copied from [themeMode].
 @ProviderFor(themeMode)
 final themeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
   themeMode,
@@ -22,7 +24,9 @@ final themeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
 typedef ThemeModeRef = AutoDisposeProviderRef<ThemeMode>;
 String _$themeModeNotifierHash() => r'4c177e8251e8efeb415135958f02fd0733b8dbb3';
 
-/// See also [ThemeModeNotifier].
+/// テーマのNotifier
+///
+/// Copied from [ThemeModeNotifier].
 @ProviderFor(ThemeModeNotifier)
 final themeModeNotifierProvider =
     AutoDisposeNotifierProvider<ThemeModeNotifier, ThemeMode>.internal(

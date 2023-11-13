@@ -4,6 +4,7 @@ import '../../../domain/user/value_object/age_group.dart';
 
 part 'user_config.freezed.dart';
 
+/// ユーザーの設定
 @freezed
 class UserConfig with _$UserConfig {
   const factory UserConfig({

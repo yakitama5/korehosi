@@ -6,7 +6,7 @@ part of 'child_view_purchase_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$childViewPurchaseHash() => r'ea8589ee8891fa8e9af5119c627bb6e9aa67b7a1';
+String _$childViewPurchaseHash() => r'7ad872a50e851092ea0c8a5e494b6419604ce93d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,21 +30,25 @@ class _SystemHash {
 }
 
 /// (子供参照用)購入情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [childViewPurchase].
 @ProviderFor(childViewPurchase)
 const childViewPurchaseProvider = ChildViewPurchaseFamily();
 
 /// (子供参照用)購入情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [childViewPurchase].
 class ChildViewPurchaseFamily extends Family<AsyncValue<Purchase?>> {
   /// (子供参照用)購入情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [childViewPurchase].
   const ChildViewPurchaseFamily();
 
   /// (子供参照用)購入情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [childViewPurchase].
   ChildViewPurchaseProvider call({
@@ -83,10 +87,12 @@ class ChildViewPurchaseFamily extends Family<AsyncValue<Purchase?>> {
 }
 
 /// (子供参照用)購入情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [childViewPurchase].
-class ChildViewPurchaseProvider extends AutoDisposeStreamProvider<Purchase?> {
+class ChildViewPurchaseProvider extends StreamProvider<Purchase?> {
   /// (子供参照用)購入情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [childViewPurchase].
   ChildViewPurchaseProvider({
@@ -145,7 +151,7 @@ class ChildViewPurchaseProvider extends AutoDisposeStreamProvider<Purchase?> {
   }
 
   @override
-  AutoDisposeStreamProviderElement<Purchase?> createElement() {
+  StreamProviderElement<Purchase?> createElement() {
     return _ChildViewPurchaseProviderElement(this);
   }
 
@@ -166,7 +172,7 @@ class ChildViewPurchaseProvider extends AutoDisposeStreamProvider<Purchase?> {
   }
 }
 
-mixin ChildViewPurchaseRef on AutoDisposeStreamProviderRef<Purchase?> {
+mixin ChildViewPurchaseRef on StreamProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
   String get groupId;
 
@@ -174,8 +180,7 @@ mixin ChildViewPurchaseRef on AutoDisposeStreamProviderRef<Purchase?> {
   String get itemId;
 }
 
-class _ChildViewPurchaseProviderElement
-    extends AutoDisposeStreamProviderElement<Purchase?>
+class _ChildViewPurchaseProviderElement extends StreamProviderElement<Purchase?>
     with ChildViewPurchaseRef {
   _ChildViewPurchaseProviderElement(super.provider);
 

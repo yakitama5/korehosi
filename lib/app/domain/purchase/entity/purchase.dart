@@ -5,6 +5,7 @@ import '../value_object/purchase_status.dart';
 part 'purchase.freezed.dart';
 part 'purchase.g.dart';
 
+/// ほしい物の購入情報
 @freezed
 class Purchase with _$Purchase {
   const factory Purchase({
@@ -24,6 +25,7 @@ class Purchase with _$Purchase {
       _$PurchaseFromJson(json);
 }
 
+/// ほしい物の購入情報を利用しやすい形にするための拡張
 extension PurchaseX on Purchase? {
   /// 購入状況
   PurchaseStatus get status {

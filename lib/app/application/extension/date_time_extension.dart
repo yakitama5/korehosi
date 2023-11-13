@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 /// 日時型の拡張
+/// application layer向け
 extension DateTimeForApplicationX on DateTime {
   /// 年月形式に整形する
   String get formatYm => DateFormat('yyyyMM').format(this);

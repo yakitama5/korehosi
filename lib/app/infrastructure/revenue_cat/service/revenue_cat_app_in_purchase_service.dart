@@ -14,6 +14,7 @@ const _limitedReleasePlanPackageKey = 'premiumGroups';
 /// 欲しい物の登録数上限解除パッケージのキー
 const _limitedReleasePlanEntitlementKey = 'premiumGroupPlan';
 
+/// RevenueCatを利用したサービスの実装
 class RevenueCatAppInPurchaseService implements AppInPurchaseService {
   const RevenueCatAppInPurchaseService(this.ref);
 

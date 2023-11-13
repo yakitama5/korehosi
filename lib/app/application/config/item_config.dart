@@ -1,5 +1,6 @@
 import '../model/item/item_config.dart';
 
+/// ほしい物の設定
 const itemConfig = ItemConfig(
   initialWishRank: 0,
   nameKey: 'item_name',

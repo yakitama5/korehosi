@@ -30,21 +30,25 @@ class _SystemHash {
 }
 
 /// 購入情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [purchase].
 @ProviderFor(purchase)
 const purchaseProvider = PurchaseFamily();
 
 /// 購入情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [purchase].
 class PurchaseFamily extends Family<AsyncValue<Purchase?>> {
   /// 購入情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [purchase].
   const PurchaseFamily();
 
   /// 購入情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [purchase].
   PurchaseProvider call({
@@ -83,10 +87,12 @@ class PurchaseFamily extends Family<AsyncValue<Purchase?>> {
 }
 
 /// 購入情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [purchase].
 class PurchaseProvider extends StreamProvider<Purchase?> {
   /// 購入情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [purchase].
   PurchaseProvider({

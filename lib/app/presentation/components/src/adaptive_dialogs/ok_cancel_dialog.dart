@@ -5,6 +5,7 @@ import '../../../../application/model/dialog_result.dart';
 import '../../../../application/state/locale_provider.dart';
 import 'adaptive_action.dart';
 
+/// 「OK or Cancel」をアクションに持つダイアログ
 class OkCancelDialog extends HookConsumerWidget {
   const OkCancelDialog({
     super.key,

@@ -8,6 +8,7 @@ import '../firestore/state/firestore.dart';
 import '../firestore/state/firestore_deleted_item_provider.dart';
 import '../firestore/state/firestore_item_provider.dart';
 
+/// Firebaseを利用したリポジトリの実装
 class FirebaseItemRepository implements ItemRepository {
   const FirebaseItemRepository(this.ref);
 
