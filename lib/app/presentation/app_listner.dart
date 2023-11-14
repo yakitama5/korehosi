@@ -1,3 +1,4 @@
+import 'package:family_wish_list/app/application/config/app_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -43,7 +44,10 @@ class AppListner extends HookConsumerWidget {
 
           switch (result) {
             case DialogResult.ok:
-              await StoreRedirect.redirect();
+              await StoreRedirect.redirect(
+                androidAppId: appConfig.packageName,
+                iOSAppId: appConfig.appStoreId,
+              );
             case DialogResult.cancel:
             case null:
             // do nothing
