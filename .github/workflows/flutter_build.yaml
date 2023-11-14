@@ -82,6 +82,7 @@ jobs:
           echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > android/app/src/prod/google-services.json
           mkdir -p ios/prod/
           echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > ios/prod/GoogleService-Info.plist
+          echo -n ${{ secrets.FIREBASE_APP_ID_FILE }} | base64 -d > ios/prod/firebase_app_id_file.json
       - name: Create env
         run: |
           mkdir -p scripts
@@ -114,4 +115,7 @@ jobs:
 
       # Build + Upload
       - name: Build for iOS
-        run: flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=dart_defines/prod.json
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+          flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=dart_defines/prod.json

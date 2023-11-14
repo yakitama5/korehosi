@@ -203,6 +203,7 @@
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
+				C5EB18BC2B01BFFD003FC392 /* Copy firebase_app_id_file.json */,
 				C5A3EE122AB156420058C715 /* Copy GoogleServiceInfo.plist */,
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
@@ -372,7 +373,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 		C5A3EE122AB156420058C715 /* Copy GoogleServiceInfo.plist */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -392,6 +393,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\\cp -f ${SRCROOT}/${flavor}/GoogleService-Info.plist ${SRCROOT}/GoogleService-Info.plist\n";
+		};
+		C5EB18BC2B01BFFD003FC392 /* Copy firebase_app_id_file.json */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy firebase_app_id_file.json";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/firebase_app_id_file.json",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\\cp -f ${SRCROOT}/${flavor}/firebase_app_id_file.json ${SRCROOT}/firebase_app_id_file.json\n";
 		};
 		DFB607ED5AD549D9B47FCCC5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
