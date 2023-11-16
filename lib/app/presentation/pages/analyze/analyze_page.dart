@@ -60,35 +60,37 @@ class _PurchaseDonutChartCard extends HookConsumerWidget {
     }
 
     // TODO(yakitama5): GooglePlayConsoleを元にレイアウトを作り直す
-    return Column(
-      children: [
-        Row(
-          children: [
-            const Icon(Icons.pie_chart),
-            const Gap(4),
-            Text(l10n.purchaseRate, style: textTheme.titleMedium),
-          ],
-        ),
-        const Gap(4),
-        PagePadding(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return ElevatedCard(
+      child: Column(
+        children: [
+          Row(
             children: [
-              const Gap(8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GaugeChart(
-                    value: percent,
-                    radius: 80,
-                  ),
-                  const _BuyedItemCount(),
-                ],
-              ),
+              const Icon(Icons.pie_chart),
+              const Gap(4),
+              Text(l10n.purchaseRate, style: textTheme.titleMedium),
             ],
           ),
-        ),
-      ],
+          const Gap(4),
+          PagePadding(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Gap(8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GaugeChart(
+                      value: percent,
+                      radius: 80,
+                    ),
+                    const _BuyedItemCount(),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -145,36 +147,38 @@ class _SumPriceCard extends HookConsumerWidget {
       return const SizedBox.shrink();
     }
 
-    return Column(
-      children: [
-        Row(
-          children: [
-            const Icon(Icons.show_chart),
-            const Gap(4),
-            Text(l10n.purchasePrice, style: textTheme.titleMedium),
-          ],
-        ),
-        const Gap(4),
-        PagePadding(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return ElevatedCard(
+      child: Column(
+        children: [
+          Row(
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  currencyPrice,
-                  style: textTheme.headlineLarge,
-                ),
-              ),
-              const Gap(16),
-              SizedBox(
-                height: 240,
-                child: _TotalPriceLinerChart(spots: spots),
-              ),
+              const Icon(Icons.show_chart),
+              const Gap(4),
+              Text(l10n.purchasePrice, style: textTheme.titleMedium),
             ],
           ),
-        ),
-      ],
+          const Gap(4),
+          PagePadding(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    currencyPrice,
+                    style: textTheme.headlineLarge,
+                  ),
+                ),
+                const Gap(16),
+                SizedBox(
+                  height: 240,
+                  child: _TotalPriceLinerChart(spots: spots),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
