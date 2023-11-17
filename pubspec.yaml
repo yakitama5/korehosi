@@ -52,6 +52,7 @@ dependencies:
   json_serializable: ^6.7.1
   logger: ^2.0.2+1
   lottie: ^2.7.0
+  material_color_utilities: ^0.5.0
   material_design_icons_flutter: ^7.0.7296
   nested: ^1.0.0
   package_info_plus: ^4.2.0
