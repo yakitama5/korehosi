@@ -215,7 +215,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
           child: LineChart(
             LineChartData(
               // マテリアルカラーに沿って色を変更
-              backgroundColor: colorScheme.surface,
+              backgroundColor: colorScheme.surfaceContainerLow,
               borderData:
                   FlBorderData(border: Border.all(color: colorScheme.outline)),
 

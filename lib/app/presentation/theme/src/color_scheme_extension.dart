@@ -8,4 +8,13 @@ extension ColorSchemeX on ColorScheme {
         surfaceTint,
         3,
       );
+
+  /// HACK(yakitama5): SurfaceContainerLowのカラー設定がまだ未実装なので自分で作ってやる
+  Color get surfaceContainerLow {
+    return ElevationOverlay.applySurfaceTint(
+      background,
+      surfaceTint,
+      2,
+    );
+  }
 }
