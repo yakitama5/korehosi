@@ -59,7 +59,7 @@ class _PurchaseDonutChartCard extends HookConsumerWidget {
       return const SizedBox.shrink();
     }
 
-    // TODO(yakitama5): GooglePlayConsoleを元にレイアウトを作り直す
+    // TODO(yakitama5): 振り返り詳細ページを作成すること
     return ElevatedCard(
       child: Column(
         children: [
