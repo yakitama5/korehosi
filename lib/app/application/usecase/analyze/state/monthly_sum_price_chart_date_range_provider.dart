@@ -14,18 +14,18 @@ DateTimeRange monthlySumPriceChartDateRange(
   MonthlySumPriceChartDateRangeRef ref,
 ) {
   // 常に最大値を一定にする場合はこちらの表示方法
-  // final indexRange = ref.watch(sumPriceLinerXRangeProvider);
-  // final from = min(indexRange.$1, -5);
-  // final now = DateTime.now().firstDayOfTheMonth;
-  // return DateTimeRange(start: now.addMonth(from.toInt()), end: now);
-
-  // 最大値が期間によって異なる表示
   final indexRange = ref.watch(monthlySumPriceChartRangeProvider);
   final from = min(indexRange.$1, -5);
-  final to = min(indexRange.$2, 0);
   final now = DateTime.now().firstDayOfTheMonth;
-  return DateTimeRange(
-    start: now.addMonth(from.toInt()),
-    end: now.addMonth(to.toInt()),
-  );
+  return DateTimeRange(start: now.addMonth(from.toInt()), end: now);
+
+  // 最大値が期間によって異なる表示
+  // final indexRange = ref.watch(monthlySumPriceChartRangeProvider);
+  // final from = min(indexRange.$1, -5);
+  // final to = min(indexRange.$2, 0);
+  // final now = DateTime.now().firstDayOfTheMonth;
+  // return DateTimeRange(
+  //   start: now.addMonth(from.toInt()),
+  //   end: now.addMonth(to.toInt()),
+  // );
 }
