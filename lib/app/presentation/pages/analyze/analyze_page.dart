@@ -13,6 +13,7 @@ import '../../../application/usecase/purchase/state/buyed_purchase_count_provide
 import '../../../application/usecase/purchase/state/buyed_rate_provider.dart';
 import '../../../application/usecase/purchase/state/buyed_sum_price.dart';
 import '../../components/importer.dart';
+import '../../routes/src/routes_data.dart';
 import '../../theme/importer.dart';
 
 /// 「ふりかえり」画面
@@ -61,6 +62,7 @@ class _PurchaseDonutChartCard extends HookConsumerWidget {
 
     // TODO(yakitama5): 振り返り詳細ページを作成すること
     return ElevatedCard(
+      onTap: () => const AnalyzeDetailRouteData().go(context),
       child: Column(
         children: [
           Row(
