@@ -29,9 +29,9 @@ class ChartCard extends SingleChildStatelessWidget {
           Row(
             children: [
               if (iconData != null)
-                const Padding(
-                  padding: EdgeInsets.only(right: 4),
-                  child: Icon(Icons.pie_chart),
+                Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: Icon(iconData),
                 ),
               Text(title, style: textTheme.titleMedium),
             ],
