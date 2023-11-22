@@ -8,13 +8,11 @@ import '../../../application/extension/number_extension.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/analyze/state/monthly_sum_price_chart_range_provider.dart';
 import '../../../application/usecase/analyze/state/monthly_sum_price_chart_spots_provider.dart';
-import '../../../application/usecase/item/state/current_group_items_provider.dart';
-import '../../../application/usecase/purchase/state/buyed_purchase_count_provider.dart';
-import '../../../application/usecase/purchase/state/buyed_rate_provider.dart';
 import '../../../application/usecase/purchase/state/buyed_sum_price.dart';
 import '../../components/importer.dart';
 import '../../routes/src/routes_data.dart';
 import '../../theme/importer.dart';
+import 'components/purchase_donut_gauge_chart_card.dart';
 
 /// 「ふりかえり」画面
 class AnalyzePage extends HookConsumerWidget {
@@ -29,106 +27,21 @@ class AnalyzePage extends HookConsumerWidget {
         title: Text(l10n.analyze),
         centerTitle: true,
       ),
-      body: const SafeArea(
+      body: SafeArea(
         child: PagePadding(
           child: SingleChildScrollView(
             child: Column(
               children: [
-                _PurchaseDonutChartCard(),
-                Gap(16),
-                _SumPriceCard(),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// 購入率を表すCard
-class _PurchaseDonutChartCard extends HookConsumerWidget {
-  const _PurchaseDonutChartCard();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final textTheme = Theme.of(context).textTheme;
-    final percent = ref.watch(buyedRateProvider).value;
-    // 一瞬なのでローディング表示は行わない
-    if (percent == null) {
-      return const SizedBox.shrink();
-    }
-
-    // TODO(yakitama5): 振り返り詳細ページを作成すること
-    return ElevatedCard(
-      onTap: () => const AnalyzeDetailRouteData().go(context),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.pie_chart),
-              const Gap(4),
-              Text(l10n.purchaseRate, style: textTheme.titleMedium),
-            ],
-          ),
-          const Gap(4),
-          PagePadding(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Gap(8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GaugeChart(
-                      value: percent,
-                      radius: 80,
-                    ),
-                    const _BuyedItemCount(),
-                  ],
+                PurchaseGaugeChartCard(
+                  onTap: () => const AnalyzeDetailRouteData().go(context),
                 ),
+                const Gap(16),
+                const _SumPriceCard(),
               ],
             ),
           ),
-        ],
+        ),
       ),
-    );
-  }
-}
-
-class _BuyedItemCount extends HookConsumerWidget {
-  const _BuyedItemCount();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final count = ref.watch(buyedCountProvider).value;
-    final totalCount = ref.watch(
-      currentGroupItemsProvider.select((value) => value.value?.length),
-    );
-    if (count == null || totalCount == null) {
-      return const SizedBox.shrink();
-    }
-
-    return Column(
-      children: [
-        Icon(
-          Icons.shopping_cart,
-          size: 32,
-          color: Theme.of(context).colorScheme.secondary,
-        ),
-        Text(
-          l10n.formatFraction(count, totalCount),
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        Text(
-          l10n.purchased,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-        ),
-      ],
     );
   }
 }
