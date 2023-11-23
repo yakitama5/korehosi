@@ -30,7 +30,9 @@ class AnalyzePage extends HookConsumerWidget {
                   onTap: () => const AnalyzeDetailRouteData().go(context),
                 ),
                 const Gap(16),
-                const SumPriceChartCard(),
+                SumPriceChartCard(
+                  onTap: () => const AnalyzeDetailRouteData().go(context),
+                ),
               ],
             ),
           ),

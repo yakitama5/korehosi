@@ -14,7 +14,9 @@ import 'chart_card.dart';
 
 /// 購入金額の合計を表すCard
 class SumPriceChartCard extends HookConsumerWidget {
-  const SumPriceChartCard({super.key});
+  const SumPriceChartCard({super.key, this.onTap});
+
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,6 +31,7 @@ class SumPriceChartCard extends HookConsumerWidget {
     }
 
     return ChartCard(
+      onTap: onTap,
       title: l10n.purchasePrice,
       iconData: Icons.show_chart,
       child: Column(
