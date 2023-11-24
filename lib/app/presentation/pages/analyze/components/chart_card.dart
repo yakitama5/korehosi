@@ -33,7 +33,7 @@ class ChartCard extends SingleChildStatelessWidget {
                   padding: const EdgeInsets.only(right: 4),
                   child: Icon(iconData),
                 ),
-              Text(title, style: textTheme.titleMedium),
+              Text(title, style: textTheme.headlineMedium),
             ],
           ),
           const Gap(4),
