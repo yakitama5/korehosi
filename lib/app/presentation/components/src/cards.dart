@@ -20,6 +20,8 @@ class ElevatedCard extends SingleChildStatelessWidget {
     const padding = EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8);
 
     return Card(
+      // InkWellのスプラッシュ表示をはみ出さないように指定
+      clipBehavior: Clip.hardEdge,
       child: InkWell(
         onTap: _onTap,
         onLongPress: _onLongPress,
