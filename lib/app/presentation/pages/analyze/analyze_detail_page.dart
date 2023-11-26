@@ -3,16 +3,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import 'components/purchase_donut_gauge_chart_card.dart';
+import 'components/sum_price_chart_card.dart';
 
 class AnalyzeDetailPage extends HookConsumerWidget {
-  const AnalyzeDetailPage({super.key});
+  const AnalyzeDetailPage({super.key, this.initialIndex});
+
+  final int? initialIndex;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // TODO(yakitama5): ページをダミーで設定
     const pages = [
       PurchaseGaugeChartCard(),
-      PurchaseGaugeChartCard(),
-      PurchaseGaugeChartCard(),
+      SumPriceChartCard(),
     ];
 
     return Scaffold(
@@ -26,6 +29,7 @@ class AnalyzeDetailPage extends HookConsumerWidget {
           const Text('ここがフィルター郡'),
           Expanded(
             child: IntroductionScreen(
+              initialPage: initialIndex ?? 0,
               pages: pages
                   .map(
                     (e) => PageViewModel(

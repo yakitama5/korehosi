@@ -16,6 +16,7 @@ class AnalyzePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
 
+    var index = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.analyze),
@@ -27,11 +28,13 @@ class AnalyzePage extends HookConsumerWidget {
             child: Column(
               children: [
                 PurchaseGaugeChartCard(
-                  onTap: () => const AnalyzeDetailRouteData().go(context),
+                  onTap: () =>
+                      AnalyzeDetailRouteData(index: index++).go(context),
                 ),
                 const Gap(16),
                 SumPriceChartCard(
-                  onTap: () => const AnalyzeDetailRouteData().go(context),
+                  onTap: () =>
+                      AnalyzeDetailRouteData(index: index++).go(context),
                 ),
               ],
             ),

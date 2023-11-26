@@ -395,13 +395,15 @@ class AnalyzeRouteData extends GoRouteData {
 }
 
 class AnalyzeDetailRouteData extends GoRouteData {
-  const AnalyzeDetailRouteData();
+  const AnalyzeDetailRouteData({this.index});
 
   static const path = 'analyze_detail';
 
+  final int? index;
+
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const AnalyzeDetailPage();
+      AnalyzeDetailPage(initialIndex: index);
 }
 
 class ShareLinkRouteData extends GoRouteData {

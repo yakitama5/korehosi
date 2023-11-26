@@ -365,10 +365,15 @@ extension $AnalyzeRouteDataExtension on AnalyzeRouteData {
 
 extension $AnalyzeDetailRouteDataExtension on AnalyzeDetailRouteData {
   static AnalyzeDetailRouteData _fromState(GoRouterState state) =>
-      const AnalyzeDetailRouteData();
+      AnalyzeDetailRouteData(
+        index: _$convertMapValue('index', state.uri.queryParameters, int.parse),
+      );
 
   String get location => GoRouteData.$location(
         '/analyze/analyze_detail',
+        queryParams: {
+          if (index != null) 'index': index!.toString(),
+        },
       );
 
   void go(BuildContext context) => context.go(location);
