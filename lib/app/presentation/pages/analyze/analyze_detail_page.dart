@@ -1,7 +1,8 @@
-import 'package:family_wish_list/app/presentation/pages/analyze/components/purchase_donut_gauge_chart_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+
+import 'components/purchase_donut_gauge_chart_card.dart';
 
 class AnalyzeDetailPage extends HookConsumerWidget {
   const AnalyzeDetailPage({super.key});
