@@ -16,6 +16,7 @@ class AnalyzePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
 
+    // TODO(yakitama5): インデックス関連をキレイにすること
     var index = 0;
     return Scaffold(
       appBar: AppBar(
