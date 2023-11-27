@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import 'components/buyer_name_filter_chip.dart';
 import 'components/purchase_donut_gauge_chart_card.dart';
 import 'components/sum_price_chart_card.dart';
+import 'components/wanter_name_filter_chip.dart';
 
 class AnalyzeDetailPage extends HookConsumerWidget {
   const AnalyzeDetailPage({super.key, this.initialIndex});
@@ -29,6 +31,8 @@ class AnalyzeDetailPage extends HookConsumerWidget {
               children: [
                 // TODO(yakitama5): フィルターを作っていく
                 BuyerNameFilterChip(),
+                Gap(8),
+                WanterNameFilterChip(),
               ],
             ),
           ),
