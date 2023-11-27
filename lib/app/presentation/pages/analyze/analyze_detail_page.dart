@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import 'components/buyer_name_filter_chip.dart';
 import 'components/purchase_donut_gauge_chart_card.dart';
 import 'components/sum_price_chart_card.dart';
 
@@ -19,22 +20,29 @@ class AnalyzeDetailPage extends HookConsumerWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        // TODO(yakitama5): 多言語化対応
-        title: const Text('タイトル'),
-      ),
+      appBar: AppBar(),
       body: Column(
         children: [
-          // TODO(yakitama5): フィルターを作っていく
-          const Text('ここがフィルター郡'),
+          const Padding(
+            padding: EdgeInsets.only(left: 16, right: 16),
+            child: Row(
+              children: [
+                // TODO(yakitama5): フィルターを作っていく
+                BuyerNameFilterChip(),
+              ],
+            ),
+          ),
           Expanded(
             child: IntroductionScreen(
               initialPage: initialIndex ?? 0,
+              // rawPages: pages.map((e) => e).toList(),
               pages: pages
                   .map(
                     (e) => PageViewModel(
-                      bodyWidget: e,
+                      decoration:
+                          const PageDecoration(titlePadding: EdgeInsets.zero),
                       titleWidget: const SizedBox.shrink(),
+                      bodyWidget: e,
                     ),
                   )
                   .toList(),

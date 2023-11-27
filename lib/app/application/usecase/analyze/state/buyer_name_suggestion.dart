@@ -9,20 +9,23 @@ part 'buyer_name_suggestion.g.dart';
 /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー
 @riverpod
 Future<List<String>> buyerNameSuggestion(BuyerNameSuggestionRef ref) async {
-  final buyerNameHsts = await ref.watch(
-    currentGroupAgeApplicablePurchasesProvider.selectAsync(
-      (list) =>
-          list.map((purchase) => purchase.buyerName).whereNotNull().toList(),
-    ),
+  // `selectAsync`を利用すると、後続のProviderがdisposeされてしまうため、同時に定義
+  final buyerNameHsts = ref.watch(
+    currentGroupAgeApplicablePurchasesProvider.future.select((data) async {
+      final a = await data;
+      return a.map((e) => e.buyerName).whereNotNull().toList();
+    }),
   );
-  final currentGroupUserNames = await ref.watch(
-    currentGroupJoinUsersProvider
-        .selectAsync((data) => data.map((e) => e.name).whereNotNull().toList()),
+  final currentGroupUserNames = ref.watch(
+    currentGroupJoinUsersProvider.future.select((data) async {
+      final a = await data;
+      return a.map((e) => e.name).whereNotNull().toList();
+    }),
   );
 
   // 購入者の履歴を優先して結合
   return {
-    ...buyerNameHsts,
-    ...currentGroupUserNames,
+    ...await buyerNameHsts,
+    ...await currentGroupUserNames,
   }.toList();
 }
