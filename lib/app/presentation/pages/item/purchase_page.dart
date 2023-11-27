@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:family_wish_list/app/application/usecase/analyze/state/buyer_name_suggestion.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +11,7 @@ import '../../../application/config/purchase_config.dart';
 import '../../../application/extension/string_extension.dart';
 import '../../../application/model/dialog_result.dart';
 import '../../../application/state/locale_provider.dart';
+import '../../../application/usecase/analyze/state/buyer_name_suggestion.dart';
 import '../../../application/usecase/item/state/item_page_providers.dart';
 import '../../../application/usecase/purchase/purchase_usecase.dart';
 import '../../components/importer.dart';
