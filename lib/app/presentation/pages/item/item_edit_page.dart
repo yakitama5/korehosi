@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:family_wish_list/app/application/usecase/purchase/state/wanter_name_suggestion.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +14,6 @@ import '../../../application/model/item/selected_image_model.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
 import '../../../application/usecase/item/state/item_page_providers.dart';
-import '../../../application/usecase/user/state/current_group_join_users_provider.dart';
 import '../../components/importer.dart';
 import '../../routes/src/routes_data.dart';
 import '../error/components/error_view.dart';
@@ -329,12 +329,10 @@ class _WanterNameField extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
 
     // グループ内のユーザーを候補に上げる
-    final users = ref.watch(currentGroupJoinUsersProvider).value;
-    final userNames = users
-        ?.map(
-          (e) => e.name,
-        )
-        .whereNotNull()
+    final userNames = ref
+        .watch(wanterNameSuggestionProvider)
+        .value
+        ?.whereNotNull()
         // 重複の削除
         .toSet()
         .toList();
