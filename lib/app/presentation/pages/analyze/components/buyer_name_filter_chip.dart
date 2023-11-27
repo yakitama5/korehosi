@@ -11,13 +11,16 @@ import '../../../components/importer.dart';
 class BuyerNameFilterChip extends HookConsumerWidget {
   const BuyerNameFilterChip({super.key});
 
+  // 'すべて'の選択肢キー
+  static const String _allKey = 'all';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectName = useState<String?>(null);
     final selected = selectName.value != null;
     final l10n = ref.watch(l10nProvider);
     final defaultTitle = l10n.buyerName;
-    final allKey = l10n.all;
+    final allLabel = l10n.all;
 
     return LeadingIconInputChip(
       label: Text(selectName.value ?? defaultTitle),
@@ -30,32 +33,34 @@ class BuyerNameFilterChip extends HookConsumerWidget {
           return;
         }
 
-        // 選択肢に`すべて`を追加して表示
         final actions = [
-          allKey,
-          ...buyerNames,
+          // 選択肢に'すべて'を追加
+          AlertDialogAction<String>(key: _allKey, label: allLabel),
+
+          // 重複を削除しているため、keyも同値を設定
+          ...buyerNames.map(
+            (e) => AlertDialogAction<String>(
+              key: e,
+              label: e,
+            ),
+          ),
         ];
+
         final input = await showConfirmationDialog<String>(
           context: context,
           title: defaultTitle,
           initialSelectedActionKey: selectName.value,
-          actions: actions
-              .map(
-                (e) => AlertDialogAction<String>(
-                  key: e,
-                  label: e,
-                ),
-              )
-              .toList(),
+          actions: actions,
         );
 
-        // 定数でないと`swtich`は使えないので、`if`で愚直に対応
-        if (input == null) {
-          return;
-        } else if (input == allKey) {
-          selectName.value = null;
-        } else {
-          selectName.value = input;
+        // 入力内容に応じて状態を更新
+        switch (input) {
+          case null:
+            return;
+          case _allKey:
+            selectName.value = null;
+          default:
+            selectName.value = input;
         }
       },
     );
