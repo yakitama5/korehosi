@@ -23,7 +23,10 @@ class BuyerNameFilterChip extends HookConsumerWidget {
     final allLabel = l10n.all;
 
     return LeadingIconInputChip(
-      label: Text(selectName.value ?? defaultTitle),
+      label: Text(
+        selectName.value ?? defaultTitle,
+        overflow: TextOverflow.ellipsis,
+      ),
       iconData: Icons.arrow_drop_down,
       selected: selected,
       showCheckmark: selected,
