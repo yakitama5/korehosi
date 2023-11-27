@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/state/locale_provider.dart';
-import '../../../../application/usecase/analyze/state/buyer_name_suggestion.dart';
+import '../../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
 import '../../../components/importer.dart';
 
 /// 購入者名の`FilterChip`
