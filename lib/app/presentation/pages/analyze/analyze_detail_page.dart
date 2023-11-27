@@ -39,7 +39,6 @@ class AnalyzeDetailPage extends HookConsumerWidget {
           Expanded(
             child: IntroductionScreen(
               initialPage: initialIndex ?? 0,
-              // rawPages: pages.map((e) => e).toList(),
               pages: pages
                   .map(
                     (e) => PageViewModel(
