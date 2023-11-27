@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:family_wish_list/app/application/usecase/analyze/state/buyer_name_suggestion.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +14,6 @@ import '../../../application/model/dialog_result.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/state/item_page_providers.dart';
 import '../../../application/usecase/purchase/purchase_usecase.dart';
-import '../../../application/usecase/user/state/current_group_join_users_provider.dart';
 import '../../components/importer.dart';
 import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
@@ -338,12 +338,9 @@ class _BuyerNameField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
 
-    final users = ref.watch(currentGroupJoinUsersProvider).value;
-    final userNames = users
-        ?.map(
-          (e) => e.name,
-        )
-        .whereNotNull()
+    final names = ref.watch(buyerNameSuggestionProvider).value;
+    final userNames = names
+        ?.whereNotNull()
         // 重複の削除
         .toSet()
         .toList();
