@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:family_wish_list/app/application/usecase/purchase/state/wanter_name_suggestion.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +13,7 @@ import '../../../application/model/item/selected_image_model.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
 import '../../../application/usecase/item/state/item_page_providers.dart';
+import '../../../application/usecase/purchase/state/wanter_name_suggestion.dart';
 import '../../components/importer.dart';
 import '../../routes/src/routes_data.dart';
 import '../error/components/error_view.dart';
