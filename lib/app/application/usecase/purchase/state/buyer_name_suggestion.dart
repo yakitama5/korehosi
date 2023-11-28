@@ -11,13 +11,14 @@ part 'buyer_name_suggestion.g.dart';
 Future<List<String>> buyerNameSuggestion(BuyerNameSuggestionRef ref) async {
   // `selectAsync`を利用すると、後続のProviderがdisposeされてしまうため、同時に定義
   final buyerNameHsts = ref.watch(
-    currentGroupAgeApplicablePurchasesProvider.selectAsync(
-      (purchases) => purchases.map((e) => e.buyerName).whereNotNull().toList(),
+    currentGroupAgeApplicablePurchasesProvider.future.select(
+      (purchases) async =>
+          (await purchases).map((e) => e.buyerName).whereNotNull(),
     ),
   );
   final currentGroupUserNames = ref.watch(
-    currentGroupJoinUsersProvider.selectAsync(
-      (users) => users.map((e) => e.name).whereNotNull().toList(),
+    currentGroupJoinUsersProvider.future.select(
+      (users) async => (await users).map((e) => e.name).whereNotNull(),
     ),
   );
 
