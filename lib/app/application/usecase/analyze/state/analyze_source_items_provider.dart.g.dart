@@ -1,28 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'buyed_purchases_provider.dart';
+part of 'analyze_source_items_provider.dart.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$buyedPurchasesHash() => r'fef768ecf9caccc21c90af11af646d462d395d51';
+String _$analyzeSourceItemsHash() =>
+    r'1c8c6471c7c1ff295e284d48a54d1ef9f770959e';
 
-/// 購入済の購入情報
+/// ふりかえりで利用する欲しい物
 ///
-/// Copied from [buyedPurchases].
-@ProviderFor(buyedPurchases)
-final buyedPurchasesProvider =
-    AutoDisposeFutureProvider<List<Purchase>>.internal(
-  buyedPurchases,
-  name: r'buyedPurchasesProvider',
+/// Copied from [analyzeSourceItems].
+@ProviderFor(analyzeSourceItems)
+final analyzeSourceItemsProvider =
+    AutoDisposeFutureProvider<List<Item>>.internal(
+  analyzeSourceItems,
+  name: r'analyzeSourceItemsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$buyedPurchasesHash,
+      : _$analyzeSourceItemsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef BuyedPurchasesRef = AutoDisposeFutureProviderRef<List<Purchase>>;
+typedef AnalyzeSourceItemsRef = AutoDisposeFutureProviderRef<List<Item>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'buyed_purchase_count_provider.dart';
+part of 'buyed_rate_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$buyedCountHash() => r'90d664292c5ed35c1ce449d44b92c121069307f0';
+String _$buyedRateHash() => r'7c15653b6c2b8ad63d6518220aec23411fc1e799';
 
-/// 購入済件数
+/// 購入率
 ///
-/// Copied from [buyedCount].
-@ProviderFor(buyedCount)
-final buyedCountProvider = AutoDisposeFutureProvider<int>.internal(
-  buyedCount,
-  name: r'buyedCountProvider',
+/// Copied from [buyedRate].
+@ProviderFor(buyedRate)
+final buyedRateProvider = AutoDisposeFutureProvider<double>.internal(
+  buyedRate,
+  name: r'buyedRateProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$buyedCountHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$buyedRateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef BuyedCountRef = AutoDisposeFutureProviderRef<int>;
+typedef BuyedRateRef = AutoDisposeFutureProviderRef<double>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -6,6 +6,7 @@ import '../../../application/usecase/group/state/group_page_providers.dart';
 import '../../../application/usecase/group/state/share_link_page_providers.dart';
 import '../../../application/usecase/item/state/item_page_providers.dart';
 import '../../app_listner.dart';
+import '../../pages/analyze/analyze_detail_page.dart';
 import '../../pages/analyze/analyze_page.dart';
 import '../../pages/group/group_page.dart';
 import '../../pages/group/groups_page.dart';
@@ -68,7 +69,14 @@ final GlobalKey<NavigatorState> baseNavigatorKey = GlobalKey<NavigatorState>();
         ),
         TypedStatefulShellBranch<BranchAnalyzeData>(
           routes: [
-            TypedGoRoute<AnalyzeRouteData>(path: AnalyzeRouteData.path),
+            TypedGoRoute<AnalyzeRouteData>(
+              path: AnalyzeRouteData.path,
+              routes: [
+                TypedGoRoute<AnalyzeDetailRouteData>(
+                  path: AnalyzeDetailRouteData.path,
+                ),
+              ],
+            ),
           ],
         ),
         TypedStatefulShellBranch<BranchSettingsData>(
@@ -384,6 +392,21 @@ class AnalyzeRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const AnalyzePage();
+}
+
+class AnalyzeDetailRouteData extends GoRouteData {
+  const AnalyzeDetailRouteData({this.index});
+
+  static const path = 'analyze_detail';
+
+  final int? index;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      PageTransition.slideTransition(
+        context: context,
+        child: AnalyzeDetailPage(initialIndex: index),
+      );
 }
 
 class ShareLinkRouteData extends GoRouteData {

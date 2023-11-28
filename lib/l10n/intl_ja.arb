@@ -223,6 +223,7 @@
     "leave": "離脱",
     "select": "選択",
     "wanterName": "だれがほしい？",
+    "wanterNameChipTitle": "ほしい人",
     "businessErrorMessageOverItemCount": "登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。",
     "updateAppTitle": "アプリの更新",
     "updateAppMessage": "アプリの最新版がリリースされています。\nストアへ移動しますか？",

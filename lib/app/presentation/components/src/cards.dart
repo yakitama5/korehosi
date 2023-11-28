@@ -20,6 +20,8 @@ class ElevatedCard extends SingleChildStatelessWidget {
     const padding = EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8);
 
     return Card(
+      // InkWellのスプラッシュ表示をはみ出さないように指定
+      clipBehavior: Clip.hardEdge,
       child: InkWell(
         onTap: _onTap,
         onLongPress: _onLongPress,
@@ -51,6 +53,7 @@ class FilledCard extends SingleChildStatelessWidget {
     const padding = EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8);
 
     return Card(
+      clipBehavior: Clip.hardEdge,
       elevation: 0,
       color: Theme.of(context).colorScheme.surfaceVariant,
       child: InkWell(
@@ -86,7 +89,7 @@ class OutlinedCard extends SingleChildStatelessWidget {
 
     return Card(
       elevation: 0,
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: Theme.of(context).colorScheme.outline,

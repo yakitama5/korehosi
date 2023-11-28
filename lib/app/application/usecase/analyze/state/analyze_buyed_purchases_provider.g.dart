@@ -1,29 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'monthly_sum_price_provider.dart.dart';
+part of 'analyze_buyed_purchases_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$monthlySumPriceHash() => r'11b15d6a9a66aa23b17503525f7a2d735ee1d24b';
+String _$analyzeBuyedPurchasesHash() =>
+    r'07ca63e174e24f5b1ab2a343f2aae607656b6a19';
 
-/// 月間合計購入金額
+/// 購入済の購入情報
 ///
-/// Copied from [monthlySumPrice].
-@ProviderFor(monthlySumPrice)
-final monthlySumPriceProvider =
-    AutoDisposeFutureProvider<Map<DateTime, MonthlySumPrice>>.internal(
-  monthlySumPrice,
-  name: r'monthlySumPriceProvider',
+/// Copied from [analyzeBuyedPurchases].
+@ProviderFor(analyzeBuyedPurchases)
+final analyzeBuyedPurchasesProvider =
+    AutoDisposeFutureProvider<List<Purchase>>.internal(
+  analyzeBuyedPurchases,
+  name: r'analyzeBuyedPurchasesProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$monthlySumPriceHash,
+      : _$analyzeBuyedPurchasesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef MonthlySumPriceRef
-    = AutoDisposeFutureProviderRef<Map<DateTime, MonthlySumPrice>>;
+typedef AnalyzeBuyedPurchasesRef = AutoDisposeFutureProviderRef<List<Purchase>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -6,7 +6,7 @@ part of 'google_sign_in.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$googleSignInHash() => r'cd58e430e6b7485dfb4c8df86035d23cdd31a9a8';
+String _$googleSignInHash() => r'd40ab5cdc53c055f32ed5100dc3d5ff0584521e5';
 
 /// Google Sign In
 /// テスト時にDIすることを考慮して、Providerとして定義

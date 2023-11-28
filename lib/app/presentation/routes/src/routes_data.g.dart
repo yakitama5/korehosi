@@ -79,6 +79,12 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
                 GoRouteData.$route(
                   path: '/analyze',
                   factory: $AnalyzeRouteDataExtension._fromState,
+                  routes: [
+                    GoRouteData.$route(
+                      path: 'analyze_detail',
+                      factory: $AnalyzeDetailRouteDataExtension._fromState,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -345,6 +351,29 @@ extension $AnalyzeRouteDataExtension on AnalyzeRouteData {
 
   String get location => GoRouteData.$location(
         '/analyze',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AnalyzeDetailRouteDataExtension on AnalyzeDetailRouteData {
+  static AnalyzeDetailRouteData _fromState(GoRouterState state) =>
+      AnalyzeDetailRouteData(
+        index: _$convertMapValue('index', state.uri.queryParameters, int.parse),
+      );
+
+  String get location => GoRouteData.$location(
+        '/analyze/analyze_detail',
+        queryParams: {
+          if (index != null) 'index': index!.toString(),
+        },
       );
 
   void go(BuildContext context) => context.go(location);
