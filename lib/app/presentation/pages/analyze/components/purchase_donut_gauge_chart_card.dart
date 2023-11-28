@@ -23,7 +23,6 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
       return const SizedBox.shrink();
     }
 
-    // TODO(yakitama5): 振り返り詳細ページを作成すること
     return ChartCard(
       title: l10n.purchaseRate,
       iconData: Icons.pie_chart,
