@@ -26,7 +26,6 @@ class AnalyzeDetailPage extends HookConsumerWidget {
             padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
               children: [
-                // TODO(yakitama5): フィルターを作っていく
                 BuyerNameFilterChip(),
                 Gap(8),
                 WanterNameFilterChip(),
