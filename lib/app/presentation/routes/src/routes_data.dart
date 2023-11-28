@@ -402,8 +402,11 @@ class AnalyzeDetailRouteData extends GoRouteData {
   final int? index;
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      AnalyzeDetailPage(initialIndex: index);
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      PageTransition.slideTransition(
+        context: context,
+        child: AnalyzeDetailPage(initialIndex: index),
+      );
 }
 
 class ShareLinkRouteData extends GoRouteData {
