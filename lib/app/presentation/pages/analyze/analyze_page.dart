@@ -3,10 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../application/state/locale_provider.dart';
+import '../../../domain/analyze/value_object/analyze_typs.dart';
 import '../../components/importer.dart';
-import '../../routes/src/routes_data.dart';
-import 'components/purchase_donut_gauge_chart_card.dart';
-import 'components/sum_price_chart_card.dart';
+import 'components/analyze_type_switching_card.dart';
 
 /// 「ふりかえり」画面
 class AnalyzePage extends HookConsumerWidget {
@@ -16,8 +15,6 @@ class AnalyzePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
 
-    // TODO(yakitama5): インデックス関連をキレイにすること
-    var index = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.analyze),
@@ -25,20 +22,11 @@ class AnalyzePage extends HookConsumerWidget {
       ),
       body: SafeArea(
         child: PagePadding(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                PurchaseGaugeChartCard(
-                  onTap: () =>
-                      AnalyzeDetailRouteData(index: index++).go(context),
-                ),
-                const Gap(16),
-                SumPriceChartCard(
-                  onTap: () =>
-                      AnalyzeDetailRouteData(index: index++).go(context),
-                ),
-              ],
-            ),
+          child: ListView.separated(
+            itemBuilder: (_, i) =>
+                AnalyzeTypeSwitchingCard(analyzeType: AnalyzeType.values[i]),
+            separatorBuilder: (_, __) => const Gap(16),
+            itemCount: AnalyzeType.values.length,
           ),
         ),
       ),

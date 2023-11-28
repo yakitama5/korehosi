@@ -3,24 +3,21 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import '../../../domain/analyze/value_object/analyze_typs.dart';
+import 'components/analyze_type_switching_card.dart';
 import 'components/buyer_name_filter_chip.dart';
-import 'components/purchase_donut_gauge_chart_card.dart';
-import 'components/sum_price_chart_card.dart';
 import 'components/wanter_name_filter_chip.dart';
 
 class AnalyzeDetailPage extends HookConsumerWidget {
-  const AnalyzeDetailPage({super.key, this.initialIndex});
+  const AnalyzeDetailPage({
+    super.key,
+    int? initialIndex,
+  }) : _initialIndex = initialIndex ?? 0;
 
-  final int? initialIndex;
+  final int _initialIndex;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO(yakitama5): ページをダミーで設定
-    const pages = [
-      PurchaseGaugeChartCard(),
-      SumPriceChartCard(),
-    ];
-
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -38,14 +35,18 @@ class AnalyzeDetailPage extends HookConsumerWidget {
           ),
           Expanded(
             child: IntroductionScreen(
-              initialPage: initialIndex ?? 0,
-              pages: pages
+              initialPage: _initialIndex,
+              pages: AnalyzeType.values
                   .map(
                     (e) => PageViewModel(
                       decoration:
                           const PageDecoration(titlePadding: EdgeInsets.zero),
                       titleWidget: const SizedBox.shrink(),
-                      bodyWidget: e,
+                      bodyWidget: AnalyzeTypeSwitchingCard(
+                        analyzeType: e,
+                        // 画面遷移は行わないので`disabled`
+                        enabled: false,
+                      ),
                     ),
                   )
                   .toList(),

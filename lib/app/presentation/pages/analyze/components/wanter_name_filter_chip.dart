@@ -52,7 +52,8 @@ class WanterNameFilterChip extends HookConsumerWidget {
         final input = await showConfirmationDialog<String>(
           context: context,
           title: defaultTitle,
-          initialSelectedActionKey: selectName.value,
+          // 未選択であれば、'すべて'を選択した状態がデフォルト
+          initialSelectedActionKey: selectName.value ?? _allKey,
           actions: actions,
         );
 
