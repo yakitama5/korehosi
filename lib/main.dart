@@ -15,6 +15,7 @@ import 'app/application/model/flavor.dart';
 import 'app/application/state/initial_location_provider.dart';
 import 'app/domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import 'app/domain/app_info/interface/app_info_service.dart';
+import 'app/domain/device_info/interface/device_info_service.dart';
 import 'app/domain/group/interface/group_repository.dart';
 import 'app/domain/item/interface/item_repository.dart';
 import 'app/domain/purchase/interface/purchase_repository.dart';
@@ -24,6 +25,7 @@ import 'app/domain/service/config_service.dart';
 import 'app/domain/service/deep_link_service.dart';
 import 'app/domain/service/storage_service.dart';
 import 'app/domain/user/interface/user_repository.dart';
+import 'app/infrastructure/device_info_plus/service/device_info_plus_device_info_service.dart';
 import 'app/infrastructure/firebase/app_check/config/app_check_config.dart';
 import 'app/infrastructure/firebase/repository/firebase_group_repository.dart';
 import 'app/infrastructure/firebase/repository/firebase_item_repository.dart';
@@ -109,6 +111,9 @@ void main() async {
         cachedServiceProvider.overrideWith(SharedPreferenceCachedService.new),
         // `package_info_plus`
         appInfoServiceProvider.overrideWith(PackageInfoPlusAppInfoService.new),
+        // `device_info_plus`
+        deviceInfoServiceProvider
+            .overrideWith(DeviceInfoPlusDeviceInfoService.new),
         // RevenueCat
         appInPurchaseServiceProvider
             .overrideWith(RevenueCatAppInPurchaseService.new),
