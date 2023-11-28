@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/state/locale_provider.dart';
 import '../../../../application/usecase/analyze/state/wanter_filter_notifier_provider.dart';
-import '../../../../application/usecase/purchase/state/wanter_name_suggestion.dart';
+import '../../../../application/usecase/item/state/wanter_name_suggestion.dart';
 import '../../../components/importer.dart';
 
 /// 欲しい人の`FilterChip`
