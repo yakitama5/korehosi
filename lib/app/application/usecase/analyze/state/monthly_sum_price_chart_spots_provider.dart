@@ -3,8 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../extension/date_time_extension.dart';
 import '../../../extension/date_time_range_extension.dart';
-import '../../purchase/state/monthly_sum_price_provider.dart.dart';
 import 'monthly_sum_price_chart_date_range_provider.dart';
+import 'monthly_sum_price_provider.dart.dart';
 
 part 'monthly_sum_price_chart_spots_provider.g.dart';
 

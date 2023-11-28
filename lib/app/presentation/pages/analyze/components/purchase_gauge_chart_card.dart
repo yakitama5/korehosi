@@ -1,10 +1,10 @@
+import 'package:family_wish_list/app/application/usecase/analyze/state/analyze_source_items_provider.dart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/state/locale_provider.dart';
-import '../../../../application/usecase/item/state/current_group_items_provider.dart';
-import '../../../../application/usecase/purchase/state/buyed_purchase_count_provider.dart';
-import '../../../../application/usecase/purchase/state/buyed_rate_provider.dart';
+import '../../../../application/usecase/analyze/state/analyze_buyed_count_provider.dart';
+import '../../../../application/usecase/analyze/state/buyed_rate_provider.dart';
 import '../../../components/importer.dart';
 import 'chart_card.dart';
 
@@ -47,9 +47,9 @@ class _BuyedItemCount extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
-    final count = ref.watch(buyedCountProvider).value;
+    final count = ref.watch(analyzeBuyedCountProvider).value;
     final totalCount = ref.watch(
-      currentGroupItemsProvider.select((value) => value.value?.length),
+      analyzeSourceItemsProvider.select((value) => value.value?.length),
     );
     if (count == null || totalCount == null) {
       return const SizedBox.shrink();

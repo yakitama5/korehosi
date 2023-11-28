@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../domain/analyze/value_object/analyze_typs.dart';
 import '../../../routes/src/routes_data.dart';
-import 'purchase_donut_gauge_chart_card.dart';
+import 'purchase_gauge_chart_card.dart';
 import 'sum_price_chart_card.dart';
 
 /// 分析種別に応じて、表示を切り替える`Card`

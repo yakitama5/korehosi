@@ -6,9 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../application/extension/date_time_extension.dart';
 import '../../../../application/extension/number_extension.dart';
 import '../../../../application/state/locale_provider.dart';
+import '../../../../application/usecase/analyze/state/buyed_sum_price.dart';
 import '../../../../application/usecase/analyze/state/monthly_sum_price_chart_range_provider.dart';
 import '../../../../application/usecase/analyze/state/monthly_sum_price_chart_spots_provider.dart';
-import '../../../../application/usecase/purchase/state/buyed_sum_price.dart';
 import '../../../theme/importer.dart';
 import 'chart_card.dart';
 
