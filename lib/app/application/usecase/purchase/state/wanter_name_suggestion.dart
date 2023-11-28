@@ -12,16 +12,14 @@ part 'wanter_name_suggestion.g.dart';
 Future<List<String>> wanterNameSuggestion(WanterNameSuggestionRef ref) async {
   // `selectAsync`を利用すると、後続のProviderがdisposeされてしまうため、同時に定義
   final wanterNameHsts = ref.watch(
-    currentGroupItemsProvider.future.select((data) async {
-      final a = await data;
-      return a.map((e) => e.wanterName).whereNotNull().toList();
-    }),
+    currentGroupItemsProvider.selectAsync(
+      (items) => items.map((e) => e.wanterName).whereNotNull().toList(),
+    ),
   );
   final currentGroupUserNames = ref.watch(
-    currentGroupJoinUsersProvider.future.select((data) async {
-      final a = await data;
-      return a.map((e) => e.name).whereNotNull().toList();
-    }),
+    currentGroupJoinUsersProvider.selectAsync(
+      (users) => users.map((e) => e.name).whereNotNull().toList(),
+    ),
   );
 
   // ほしい人の履歴を優先して結合
