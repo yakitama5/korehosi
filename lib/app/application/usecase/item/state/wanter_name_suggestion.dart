@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../item/state/current_group_items_provider.dart';
 import '../../user/state/current_group_join_users_provider.dart';
+import 'current_group_items_provider.dart';
 
 part 'wanter_name_suggestion.g.dart';
 
