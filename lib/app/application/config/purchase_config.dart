@@ -3,7 +3,7 @@ import '../model/purchase/purchase_config.dart';
 /// ほしい物の購入情報に関する設定
 const purchaseConfig = PurchaseConfig(
   // 子供への誤公開を防ぐため、デフォルトがサプライズ設定
-  initialSurprise: false,
+  initialSurprise: true,
   priceKey: 'price',
   planDataKey: 'plan_date',
   buyerNameKey: 'buyer_name',
