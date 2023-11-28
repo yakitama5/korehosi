@@ -1,9 +1,9 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/state/locale_provider.dart';
+import '../../../../application/usecase/analyze/state/buyer_filter_notifier_provider.dart';
 import '../../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
 import '../../../components/importer.dart';
 
@@ -16,15 +16,15 @@ class BuyerNameFilterChip extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectName = useState<String?>(null);
-    final selected = selectName.value != null;
+    final selectName = ref.watch(buyerFilterNotifierProvider);
+    final selected = selectName != null;
     final l10n = ref.watch(l10nProvider);
     final defaultTitle = l10n.buyerName;
     final allLabel = l10n.all;
 
     return LeadingIconInputChip(
       label: Text(
-        selectName.value ?? defaultTitle,
+        selectName ?? defaultTitle,
         overflow: TextOverflow.ellipsis,
       ),
       iconData: Icons.arrow_drop_down,
@@ -53,18 +53,19 @@ class BuyerNameFilterChip extends HookConsumerWidget {
           context: context,
           title: defaultTitle,
           // 未選択であれば、'すべて'を選択した状態がデフォルト
-          initialSelectedActionKey: selectName.value ?? _allKey,
+          initialSelectedActionKey: selectName ?? _allKey,
           actions: actions,
         );
 
         // 入力内容に応じて状態を更新
+        final notifier = ref.read(buyerFilterNotifierProvider.notifier);
         switch (input) {
           case null:
             return;
           case _allKey:
-            selectName.value = null;
+            notifier.reset();
           default:
-            selectName.value = input;
+            notifier.update(input);
         }
       },
     );
