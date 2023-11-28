@@ -120,7 +120,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
               // Tooltip周り
               lineTouchData: LineTouchData(
                 touchTooltipData: LineTouchTooltipData(
-                  tooltipBgColor: colorScheme.surfaceContainer,
+                  tooltipBgColor: colorScheme.surfaceVariant,
                   tooltipRoundedRadius: 12,
                   getTooltipItems: (touchedSpots) => touchedSpots
                       .map(
