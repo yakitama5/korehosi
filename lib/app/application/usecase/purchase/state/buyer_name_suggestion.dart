@@ -12,13 +12,18 @@ Future<List<String>> buyerNameSuggestion(BuyerNameSuggestionRef ref) async {
   // `selectAsync`を利用すると、後続のProviderがdisposeされてしまうため、同時に定義
   final buyerNameHsts = ref.watch(
     currentGroupAgeApplicablePurchasesProvider.future.select(
-      (purchases) async =>
-          (await purchases).map((e) => e.buyerName).whereNotNull(),
+      (purchases) async => (await purchases)
+          .map((e) => e.buyerName)
+          .whereNotNull()
+          .where((e) => e.isNotEmpty),
     ),
   );
   final currentGroupUserNames = ref.watch(
     currentGroupJoinUsersProvider.future.select(
-      (users) async => (await users).map((e) => e.name).whereNotNull(),
+      (users) async => (await users)
+          .map((e) => e.name)
+          .whereNotNull()
+          .where((e) => e.isNotEmpty),
     ),
   );
 
