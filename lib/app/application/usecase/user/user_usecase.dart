@@ -4,6 +4,7 @@ import 'package:family_wish_list/app/application/config/app_config.dart';
 import 'package:family_wish_list/app/application/model/flavor.dart';
 import 'package:family_wish_list/app/application/usecase/user/state/auth_status_provider.dart';
 import 'package:family_wish_list/app/application/usecase/user/state/group_join_users_provider.dart';
+import 'package:family_wish_list/app/domain/service/messaging_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -184,10 +185,15 @@ class UserUsecase with RunUsecaseMixin {
 
     // アプリ内購入情報の状態を更新
     await _appInPurchaseSignIn();
+
+    // TODO(yakitama5): 通知処理をここで呼び出してみる
+    await ref.read(messagingServiceProvider).requestPermission();
+    final token = await ref.read(messagingServiceProvider).getToken();
+    logger.d('FCM Token is $token');
   }
 
-  /// サインイン後の処理
-  /// サインアップの際も含める
+  /// サインアウト後の処理
+  /// 退会の際も含める
   Future<void> _onSignedOut() async {
     // アプリ内購入情報の状態を更新
     await _appInPurchaseSignOut();

@@ -23,6 +23,7 @@ import 'app/domain/service/analytics_service.dart';
 import 'app/domain/service/cached_service.dart';
 import 'app/domain/service/config_service.dart';
 import 'app/domain/service/deep_link_service.dart';
+import 'app/domain/service/messaging_service.dart';
 import 'app/domain/service/storage_service.dart';
 import 'app/domain/user/interface/user_repository.dart';
 import 'app/infrastructure/device_info_plus/service/device_info_plus_device_info_service.dart';
@@ -34,6 +35,7 @@ import 'app/infrastructure/firebase/repository/firebase_user_repository.dart';
 import 'app/infrastructure/firebase/service/firebase_analytics_service.dart';
 import 'app/infrastructure/firebase/service/firebase_config_service.dart';
 import 'app/infrastructure/firebase/service/firebase_deep_link_service.dart';
+import 'app/infrastructure/firebase/service/firebase_messaging_messaging_service.dart';
 import 'app/infrastructure/firebase/service/firebase_storage_service.dart';
 import 'app/infrastructure/package_info_plus/service/package_info_plus_app_info_service.dart';
 import 'app/infrastructure/revenue_cat/config/revenue_cat_config.dart';
@@ -107,6 +109,8 @@ void main() async {
         configServiceProvider.overrideWith(FirebaseConfigService.new),
         deepLinkServiceProvider.overrideWith(FirebaseDeepLinkService.new),
         analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
+        messagingServiceProvider
+            .overrideWith(FirebaseMessagingMessagingService.new),
         // SharedPreference
         cachedServiceProvider.overrideWith(SharedPreferenceCachedService.new),
         // `package_info_plus`
