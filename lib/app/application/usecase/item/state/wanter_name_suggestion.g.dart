@@ -7,7 +7,7 @@ part of 'wanter_name_suggestion.dart';
 // **************************************************************************
 
 String _$wanterNameSuggestionHash() =>
-    r'4b6461a301fbe9e5b690da74f3f9d364a7df7002';
+    r'f50edfaab8c89527cdbfb4d27d959f6e2d326372';
 
 /// 欲しい人のサジェストリスト
 /// 対象は「だれがほしい？」に入力したことのある人 + 現在のグループ内のユーザー
