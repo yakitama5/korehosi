@@ -15,6 +15,7 @@ class FirestoreUserModel with _$FirestoreUserModel {
     required AgeGroup ageGroup,
     String? name,
     List<String>? joinGroupIds,
+    List<String>? fcmTokens,
     @timestampKey DateTime? createdAt,
     @timestampKey DateTime? updatedAt,
   }) = _FirestoreUserModel;
@@ -30,6 +31,7 @@ extension FirestoreUserModelX on FirestoreUserModel {
         ageGroup: ageGroup,
         name: name,
         joinGroupIds: joinGroupIds,
+        fcmTokens: fcmTokens,
         createdAt: createdAt!,
         updatedAt: updatedAt!,
       );

@@ -24,6 +24,7 @@ mixin _$FirestoreUserModel {
   AgeGroup get ageGroup => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   List<String>? get joinGroupIds => throw _privateConstructorUsedError;
+  List<String>? get fcmTokens => throw _privateConstructorUsedError;
   @timestampKey
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @timestampKey
@@ -46,6 +47,7 @@ abstract class $FirestoreUserModelCopyWith<$Res> {
       AgeGroup ageGroup,
       String? name,
       List<String>? joinGroupIds,
+      List<String>? fcmTokens,
       @timestampKey DateTime? createdAt,
       @timestampKey DateTime? updatedAt});
 }
@@ -67,6 +69,7 @@ class _$FirestoreUserModelCopyWithImpl<$Res, $Val extends FirestoreUserModel>
     Object? ageGroup = null,
     Object? name = freezed,
     Object? joinGroupIds = freezed,
+    Object? fcmTokens = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -86,6 +89,10 @@ class _$FirestoreUserModelCopyWithImpl<$Res, $Val extends FirestoreUserModel>
       joinGroupIds: freezed == joinGroupIds
           ? _value.joinGroupIds
           : joinGroupIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      fcmTokens: freezed == fcmTokens
+          ? _value.fcmTokens
+          : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -112,6 +119,7 @@ abstract class _$$FirestoreUserModelImplCopyWith<$Res>
       AgeGroup ageGroup,
       String? name,
       List<String>? joinGroupIds,
+      List<String>? fcmTokens,
       @timestampKey DateTime? createdAt,
       @timestampKey DateTime? updatedAt});
 }
@@ -131,6 +139,7 @@ class __$$FirestoreUserModelImplCopyWithImpl<$Res>
     Object? ageGroup = null,
     Object? name = freezed,
     Object? joinGroupIds = freezed,
+    Object? fcmTokens = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -150,6 +159,10 @@ class __$$FirestoreUserModelImplCopyWithImpl<$Res>
       joinGroupIds: freezed == joinGroupIds
           ? _value._joinGroupIds
           : joinGroupIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      fcmTokens: freezed == fcmTokens
+          ? _value._fcmTokens
+          : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -171,9 +184,11 @@ class _$FirestoreUserModelImpl implements _FirestoreUserModel {
       required this.ageGroup,
       this.name,
       final List<String>? joinGroupIds,
+      final List<String>? fcmTokens,
       @timestampKey this.createdAt,
       @timestampKey this.updatedAt})
-      : _joinGroupIds = joinGroupIds;
+      : _joinGroupIds = joinGroupIds,
+        _fcmTokens = fcmTokens;
 
   factory _$FirestoreUserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$FirestoreUserModelImplFromJson(json);
@@ -194,6 +209,16 @@ class _$FirestoreUserModelImpl implements _FirestoreUserModel {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<String>? _fcmTokens;
+  @override
+  List<String>? get fcmTokens {
+    final value = _fcmTokens;
+    if (value == null) return null;
+    if (_fcmTokens is EqualUnmodifiableListView) return _fcmTokens;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @timestampKey
   final DateTime? createdAt;
@@ -203,7 +228,7 @@ class _$FirestoreUserModelImpl implements _FirestoreUserModel {
 
   @override
   String toString() {
-    return 'FirestoreUserModel(id: $id, ageGroup: $ageGroup, name: $name, joinGroupIds: $joinGroupIds, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FirestoreUserModel(id: $id, ageGroup: $ageGroup, name: $name, joinGroupIds: $joinGroupIds, fcmTokens: $fcmTokens, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -217,6 +242,8 @@ class _$FirestoreUserModelImpl implements _FirestoreUserModel {
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._joinGroupIds, _joinGroupIds) &&
+            const DeepCollectionEquality()
+                .equals(other._fcmTokens, _fcmTokens) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -225,8 +252,15 @@ class _$FirestoreUserModelImpl implements _FirestoreUserModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, ageGroup, name,
-      const DeepCollectionEquality().hash(_joinGroupIds), createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      ageGroup,
+      name,
+      const DeepCollectionEquality().hash(_joinGroupIds),
+      const DeepCollectionEquality().hash(_fcmTokens),
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -249,6 +283,7 @@ abstract class _FirestoreUserModel implements FirestoreUserModel {
       required final AgeGroup ageGroup,
       final String? name,
       final List<String>? joinGroupIds,
+      final List<String>? fcmTokens,
       @timestampKey final DateTime? createdAt,
       @timestampKey final DateTime? updatedAt}) = _$FirestoreUserModelImpl;
 
@@ -263,6 +298,8 @@ abstract class _FirestoreUserModel implements FirestoreUserModel {
   String? get name;
   @override
   List<String>? get joinGroupIds;
+  @override
+  List<String>? get fcmTokens;
   @override
   @timestampKey
   DateTime? get createdAt;
