@@ -1,5 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../value_object/notification_permission.dart';
+
 part 'messaging_service.g.dart';
 
 /// DI用 (依存性逆転のためドメイン層に定義)
@@ -9,6 +11,6 @@ MessagingService messagingService(MessagingServiceRef ref) =>
     throw UnimplementedError();
 
 abstract class MessagingService {
-  Future<void> requestPermission();
+  Future<NotificationPermission> requestPermission();
   Future<String?> getToken();
 }
