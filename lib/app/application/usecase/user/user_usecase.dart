@@ -6,8 +6,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import '../../../domain/exception/exceptions.dart';
+import '../../../domain/notification/interface/messaging_service.dart';
 import '../../../domain/service/analytics_service.dart';
-import '../../../domain/service/messaging_service.dart';
 import '../../../domain/user/entity/auth_status.dart';
 import '../../../domain/user/entity/user.dart';
 import '../../../domain/user/interface/user_repository.dart';
