@@ -1,4 +1,4 @@
-import 'package:firebase_messaging_platform_interface/src/types.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/notification/interface/messaging_service.dart';
@@ -26,5 +26,14 @@ class FirebaseMessagingMessagingService implements MessagingService {
       AuthorizationStatus.notDetermined => NotificationPermission.notDetermined,
       AuthorizationStatus.provisional => NotificationPermission.provisional,
     };
+  }
+
+  // TODO(yakitama5): `RemoteMessage`はFirebaseMessageに依存してしまうので変更すること
+  Future<RemoteMessage?> getInitialMessage() =>
+      ref.read(firebaseMessagingProvider).getInitialMessage();
+
+  // TODO(yakitama5): `RemoteMessage`はFirebaseMessageに依存してしまうので変更すること
+  Stream<RemoteMessage> onMessageOpenedApp() {
+    return FirebaseMessaging.onMessageOpenedApp;
   }
 }
