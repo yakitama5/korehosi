@@ -186,7 +186,7 @@ class UserUsecase with RunUsecaseMixin {
     // アプリ内購入情報の状態を更新
     await _appInPurchaseSignIn();
 
-    // TODO(yakitama5): 通知処理をここで呼び出してみる
+    // TODO(yakitama5): サインインではなく、起動時に固定で呼び出すように変更すること
     await ref.read(messagingServiceProvider).requestPermission();
     final token = await ref.read(messagingServiceProvider).getToken();
     logger.d('FCM Token is $token');
