@@ -14,6 +14,7 @@ class OnboardStartPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // TODO(yakitama5): 初期画面に戻れるようにするべき
     return const Scaffold(
       body: SafeArea(
         child: PagePadding(
