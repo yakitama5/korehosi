@@ -275,5 +275,12 @@
             "molecule": {},
             "denominator": {}
         }
+    },
+    "notificationMessageAddItem": "{name}さんがほしいものを追加しました！",
+    "@notificationMessageAddItem": {
+        "context": "message",
+        "placeholders": {
+            "name": {}
+        }
     }
 }

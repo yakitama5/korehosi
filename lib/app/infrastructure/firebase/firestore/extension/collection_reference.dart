@@ -20,4 +20,8 @@ extension FirebaseFirestoreX on FirebaseFirestore {
       groupsRef().doc(groupId).collection('_cpurchases');
   CollectionReference dpurchasesRef(String groupId) =>
       groupsRef().doc(groupId).collection('_dpurchases');
+  CollectionReference messagesRef(String groupId) =>
+      groupsRef().doc(groupId).collection('messages');
+  CollectionReference dmessagesRef(String groupId) =>
+      groupsRef().doc(groupId).collection('_dmessages');
 }

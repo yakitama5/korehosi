@@ -6,12 +6,11 @@ part of 'firebase_messaging.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseMessagingHash() => r'12efd3604ac737ea5a08cfad434a0002f21506c6';
+String _$firebaseMessagingHash() => r'84e98441bb27eb298e02e1c9deda02128c29c467';
 
 /// See also [firebaseMessaging].
 @ProviderFor(firebaseMessaging)
-final firebaseMessagingProvider =
-    AutoDisposeProvider<FirebaseMessaging>.internal(
+final firebaseMessagingProvider = Provider<FirebaseMessaging>.internal(
   firebaseMessaging,
   name: r'firebaseMessagingProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -21,6 +20,6 @@ final firebaseMessagingProvider =
   allTransitiveDependencies: null,
 );
 
-typedef FirebaseMessagingRef = AutoDisposeProviderRef<FirebaseMessaging>;
+typedef FirebaseMessagingRef = ProviderRef<FirebaseMessaging>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
