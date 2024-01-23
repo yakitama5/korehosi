@@ -223,6 +223,7 @@ exports.onCreateMessage = functions
 
       if (token != null) {
         // 通知の内容を作る処理
+        // TODO(yakitama5): `Target`に応じてユーザーを絞り込む必要あり
         const message = {
           notification: {
             title: snap.data().body,
