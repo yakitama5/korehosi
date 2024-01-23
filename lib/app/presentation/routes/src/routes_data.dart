@@ -23,7 +23,6 @@ import '../../pages/user/license_page.dart';
 import '../../pages/user/onboard_form_page.dart';
 import '../../pages/user/onboard_start_page.dart';
 import '../../pages/user/profile_page.dart';
-import 'custom_transition_pages.dart';
 import 'navigator_page.dart';
 
 part 'routes_data.g.dart';
@@ -185,11 +184,8 @@ class AccountLinkRouteData extends GoRouteData {
   static const path = 'account_link';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.slideTransition(
-        context: context,
-        child: const AccountLinkPage(),
-      );
+  Widget build(BuildContext context, GoRouterState state) =>
+      const AccountLinkPage();
 }
 
 class OnboardFormRouteData extends GoRouteData {
@@ -198,11 +194,8 @@ class OnboardFormRouteData extends GoRouteData {
   static const path = '/onboard_form';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.slideTransition(
-        context: context,
-        child: const OnboardFormPage(),
-      );
+  Widget build(BuildContext context, GoRouterState state) =>
+      const OnboardFormPage();
 }
 
 class ItemsRouteData extends GoRouteData {
@@ -222,17 +215,13 @@ class ItemRouteData extends GoRouteData {
   final String itemId;
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.slideTransition(
-        context: context,
-        child: ProviderScope(
-          overrides: [
-            // 欲しい物のIDだけを指定
-            // 明細は依存Providerが勝手に処理してくれる
-            ItemPageProviders.itemIdProvider.overrideWithValue(itemId),
-          ],
-          child: const ItemPage(),
-        ),
+  Widget build(BuildContext context, GoRouterState state) => ProviderScope(
+        overrides: [
+          // 欲しい物のIDだけを指定
+          // 明細は依存Providerが勝手に処理してくれる
+          ItemPageProviders.itemIdProvider.overrideWithValue(itemId),
+        ],
+        child: const ItemPage(),
       );
 }
 
@@ -244,17 +233,13 @@ class PurchaseRouteData extends GoRouteData {
   final String itemId;
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.fullScreenDialogTransition(
-        context: context,
-        child: ProviderScope(
-          overrides: [
-            // 欲しい物のIDだけを指定
-            // 明細は依存Providerが勝手に処理してくれる
-            ItemPageProviders.itemIdProvider.overrideWithValue(itemId),
-          ],
-          child: const PurchasePage(),
-        ),
+  Widget build(BuildContext context, GoRouterState state) => ProviderScope(
+        overrides: [
+          // 欲しい物のIDだけを指定
+          // 明細は依存Providerが勝手に処理してくれる
+          ItemPageProviders.itemIdProvider.overrideWithValue(itemId),
+        ],
+        child: const PurchasePage(),
       );
 }
 
@@ -265,8 +250,7 @@ class ItemCreateRouteData extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.fullScreenDialogTransition(
-        context: context,
+      MaterialPage(
         child: ProviderScope(
           overrides: [
             // 欲しい物のIDだけを指定
@@ -275,6 +259,7 @@ class ItemCreateRouteData extends GoRouteData {
           ],
           child: const ItemEditPage(),
         ),
+        fullscreenDialog: true,
       );
 }
 
@@ -287,8 +272,7 @@ class ItemEditRouteData extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.fullScreenDialogTransition(
-        context: context,
+      MaterialPage(
         child: ProviderScope(
           overrides: [
             // 欲しい物のIDだけを指定
@@ -297,6 +281,7 @@ class ItemEditRouteData extends GoRouteData {
           ],
           child: const ItemEditPage(),
         ),
+        fullscreenDialog: true,
       );
 }
 
@@ -316,11 +301,7 @@ class GroupsRouteData extends GoRouteData {
   static const path = 'groups';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.slideTransition(
-        context: context,
-        child: const GroupsPage(),
-      );
+  Widget build(BuildContext context, GoRouterState state) => const GroupsPage();
 }
 
 class GroupRouteData extends GoRouteData {
@@ -331,15 +312,11 @@ class GroupRouteData extends GoRouteData {
   final String groupId;
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.slideTransition(
-        context: context,
-        child: ProviderScope(
-          overrides: [
-            GroupPageProviders.groupIdProvider.overrideWithValue(groupId),
-          ],
-          child: const GroupPage(),
-        ),
+  Widget build(BuildContext context, GoRouterState state) => ProviderScope(
+        overrides: [
+          GroupPageProviders.groupIdProvider.overrideWithValue(groupId),
+        ],
+        child: const GroupPage(),
       );
 }
 
@@ -349,11 +326,8 @@ class ProfileRouteData extends GoRouteData {
   static const path = 'profile';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.fullScreenDialogTransition(
-        context: context,
-        child: const ProfilePage(),
-      );
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ProfilePage();
 }
 
 class LicenseRouteData extends GoRouteData {
@@ -362,11 +336,8 @@ class LicenseRouteData extends GoRouteData {
   static const path = 'license';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.slideTransition(
-        context: context,
-        child: const MyLincensePage(),
-      );
+  Widget build(BuildContext context, GoRouterState state) =>
+      const MyLincensePage();
 }
 
 class AccountRouteData extends GoRouteData {
@@ -375,11 +346,8 @@ class AccountRouteData extends GoRouteData {
   static const path = 'account';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.slideTransition(
-        context: context,
-        child: const AccountPage(),
-      );
+  Widget build(BuildContext context, GoRouterState state) =>
+      const AccountPage();
 }
 
 class AnalyzeRouteData extends GoRouteData {
@@ -400,11 +368,8 @@ class AnalyzeDetailRouteData extends GoRouteData {
   final int? index;
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      PageTransition.slideTransition(
-        context: context,
-        child: AnalyzeDetailPage(initialIndex: index),
-      );
+  Widget build(BuildContext context, GoRouterState state) =>
+      AnalyzeDetailPage(initialIndex: index);
 }
 
 class ShareLinkRouteData extends GoRouteData {
@@ -433,8 +398,7 @@ class PhotoPreviewRouteData extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return PageTransition.fullScreenDialogTransition(
-      context: context,
+    return MaterialPage(
       child: PhotoViewer(
         imagesPath: $extra ?? [],
         initialIndex: index ?? 0,
@@ -442,6 +406,7 @@ class PhotoPreviewRouteData extends GoRouteData {
           color: Colors.black,
         ),
       ),
+      fullscreenDialog: true,
     );
   }
 }
