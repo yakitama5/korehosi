@@ -74,7 +74,7 @@ class FirebaseMessagingMessagingService implements MessagingService {
     // Firestore用のモデルに変換
     final docModel = FirestoreNotificationMessageModel(
       id: docRef.id,
-      body: '',
+      body: message,
       target: target,
     );
 
