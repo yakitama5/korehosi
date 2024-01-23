@@ -169,7 +169,7 @@ class _$UrlConfigImpl implements _UrlConfig {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UrlConfigImpl &&

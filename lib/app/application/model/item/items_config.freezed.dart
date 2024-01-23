@@ -160,7 +160,7 @@ class _$ItemsConfigImpl implements _ItemsConfig {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ItemsConfigImpl &&

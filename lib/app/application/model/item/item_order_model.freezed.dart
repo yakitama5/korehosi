@@ -117,7 +117,7 @@ class _$ItemOrderModelImpl extends _ItemOrderModel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ItemOrderModelImpl &&
