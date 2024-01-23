@@ -15,7 +15,7 @@ import '../../../application/usecase/item/item_usecase.dart';
 import '../../../application/usecase/item/state/item_page_providers.dart';
 import '../../../application/usecase/item/state/wanter_name_suggestion.dart';
 import '../../components/importer.dart';
-import '../../routes/src/routes_data.dart';
+import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
 import 'components/empty_item_image.dart';

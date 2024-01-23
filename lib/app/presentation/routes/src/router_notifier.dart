@@ -8,7 +8,9 @@ import '../../../application/usecase/item/state/current_group_item_provider.dart
 import '../../../application/usecase/user/state/auth_status_provider.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../utils/logger.dart';
-import 'routes_data.dart';
+import 'base_routes_data.dart';
+import 'item_branch.dart';
+import 'settings_branch.dart';
 
 part 'router_notifier.g.dart';
 
