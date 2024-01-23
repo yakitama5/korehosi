@@ -196,6 +196,77 @@ exports.onWriteUser = functions
       onGroupDelete(event.before);
       break;
     default:
-      // do nothing
+    // do nothing
     }
   });
+
+/**
+ * 【監視処理】
+ * ユーザー情報が変更された場合にグループ内情報へ反映させる.
+ */
+exports.onCreateMessage = functions
+  .region(jpRegion)
+  .firestore
+  .document('groups/{groupId}/messages/{messageId}')
+  .onCreate(async (snap, context) => {
+    // グループ内のユーザー一覧を取得する
+    const groupRef = db.collection('groups').doc(context.params.groupId);
+    const groupSnap = await groupRef.get();
+    const groupData = groupSnap.data();
+    const joinUids = groupData.joinUids;
+    for (const userId of joinUids) {
+      console.log('Send to : ${userId}');
+      const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
+      const userSnap = await userRef.get();
+      const userData = userSnap.data();
+      const token = userData.fcmToken;
+
+      if (token != null) {
+        // 通知の内容を作る処理
+        const message = {
+          notification: {
+            title: snap.data().body,
+            body: snap.data().body,
+          },
+          data: {
+            title: snap.data().body,
+            body: snap.data().body,
+          },
+          android: {
+            notification: {
+              sound: 'default',
+              click_action: 'FLUTTER_NOTIFICATION_CLICK',
+            },
+          },
+          apns: {
+            payload: {
+              aps: {
+                badge: 1,
+                sound: 'default',
+              },
+            },
+          },
+          token: token,
+        };
+
+        pushToDevice(token, message);
+      }
+    }
+  });
+
+/**
+ * 通知処理
+ * @param {String} token FCMトークン
+ * @param {Object} payload 通知ペイロード
+ */
+function pushToDevice(token, payload) {
+  admin.messaging().send(payload)
+    .then((_pushResponse) => {
+      return {
+        text: token,
+      };
+    })
+    .catch((error) => {
+      throw new functions.https.HttpsError('unknown', error.message, error);
+    });
+}
