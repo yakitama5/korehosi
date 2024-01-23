@@ -176,9 +176,9 @@ exports.onWriteUser = functions
       if (!event.before.exists) {
         return 'create';
       } else if (event.after.exists) {
-        'update';
+        return 'update';
       } else {
-        'delete';
+        return 'delete';
       }
     };
 
