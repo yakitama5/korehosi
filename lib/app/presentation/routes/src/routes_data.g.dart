@@ -12,7 +12,6 @@ List<RouteBase> get $appRoutes => [
 
 RouteBase get $baseShellSrouteData => ShellRouteData.$route(
       navigatorKey: BaseShellSrouteData.$navigatorKey,
-      observers: BaseShellSrouteData.$observers,
       factory: $BaseShellSrouteDataExtension._fromState,
       routes: [
         GoRouteData.$route(

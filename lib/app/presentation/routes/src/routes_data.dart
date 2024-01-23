@@ -105,7 +105,6 @@ final GlobalKey<NavigatorState> baseNavigatorKey = GlobalKey<NavigatorState>();
 )
 class BaseShellSrouteData extends ShellRouteData {
   static final GlobalKey<NavigatorState> $navigatorKey = baseNavigatorKey;
-  static final $observers = [HeroController()];
 
   // ルート設定のために定義だけ
   @override
@@ -134,7 +133,6 @@ class BottomNavitorShellRouteData extends StatefulShellRouteData {
   const BottomNavitorShellRouteData();
 
   static final GlobalKey<NavigatorState> $navigatorKey = bottomNavitorKey;
-  static final $observers = [HeroController()];
 
   @override
   Widget builder(
