@@ -14,7 +14,7 @@ import 'item_branch.dart';
 import 'navigator_page.dart';
 import 'settings_branch.dart';
 
-part 'base_routes_data.g.dart';
+part 'routes_data.g.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 

@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../../application/usecase/item/state/item_page_providers.dart';
 import '../../../components/importer.dart';
-import '../../../routes/src/base_routes_data.dart';
+import '../../../routes/src/routes_data.dart';
 import 'empty_item_image.dart';
 import 'item_image_carousel_slider.dart';
 

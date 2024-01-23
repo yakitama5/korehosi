@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'base_routes_data.dart';
+part of 'routes_data.dart';
 
 // **************************************************************************
 // GoRouterGenerator
