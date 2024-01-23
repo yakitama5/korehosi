@@ -97,7 +97,7 @@ exports.joinGroup = functions
 
 /**
  * 【監視処理】
- * 投稿が変更されたタイミングで、タグ情報を最新化する.
+ * ユーザー情報が変更された場合にグループ内情報へ反映させる.
  */
 exports.onWriteUser = functions
   .region(jpRegion)
