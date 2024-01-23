@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../domain/notification/entity/notification_message.dart';
+import '../../../../domain/notification/value_object/notification_target.dart';
 import '../converter/json_key.dart';
 
 part 'firestore_notification_message_model.freezed.dart';
@@ -13,6 +14,7 @@ class FirestoreNotificationMessageModel
   const factory FirestoreNotificationMessageModel({
     required String id,
     required String body,
+    required NotificationTarget target,
     @timestampKey DateTime? createdAt,
     @timestampKey DateTime? updatedAt,
   }) = _FirestoreNotificationMessageModel;
@@ -29,6 +31,7 @@ extension FirestoreNotificationMessageModelX
   NotificationMessage toDomainModel() => NotificationMessage(
         id: id,
         body: body,
+        target: target,
         createdAt: createdAt,
         updatedAt: updatedAt,
       );

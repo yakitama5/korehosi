@@ -1,3 +1,6 @@
+import 'package:family_wish_list/app/application/usecase/user/state/auth_user_provider.dart';
+import 'package:family_wish_list/app/domain/notification/interface/messaging_service.dart';
+import 'package:family_wish_list/app/domain/user/entity/user.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -42,6 +45,8 @@ class ItemUsecase with RunUsecaseMixin {
       execute(
         ref,
         action: () async {
+          final l10n = ref.read(l10nProvider);
+
           // 登録数上限判定
           await _validateItemCount();
 
@@ -76,6 +81,15 @@ class ItemUsecase with RunUsecaseMixin {
                 wishSeason: wishSeason,
                 urls: urls,
                 memo: memo,
+              );
+
+          // 通知処理
+          final createdUserName = await ref.read(
+            authUserProvider.selectAsync((user) => user!.dispName(l10n)),
+          );
+          await ref.read(messagingServiceProvider).sendMessageToAll(
+                groupId: groupId,
+                message: l10n.notificationMessageAddItem(createdUserName),
               );
         },
       );

@@ -11,6 +11,7 @@ _$NotificationMessageImpl _$$NotificationMessageImplFromJson(
     _$NotificationMessageImpl(
       id: json['id'] as String,
       body: json['body'] as String,
+      target: $enumDecode(_$NotificationTargetEnumMap, json['target']),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -24,6 +25,13 @@ Map<String, dynamic> _$$NotificationMessageImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'body': instance.body,
+      'target': _$NotificationTargetEnumMap[instance.target]!,
       'createdAt': instance.createdAt?.toIso8601String(),
       'updatedAt': instance.updatedAt?.toIso8601String(),
     };
+
+const _$NotificationTargetEnumMap = {
+  NotificationTarget.all: 'all',
+  NotificationTarget.adult: 'adult',
+  NotificationTarget.child: 'child',
+};

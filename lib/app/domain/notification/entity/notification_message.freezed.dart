@@ -22,6 +22,7 @@ NotificationMessage _$NotificationMessageFromJson(Map<String, dynamic> json) {
 mixin _$NotificationMessage {
   String get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
+  NotificationTarget get target => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -37,7 +38,12 @@ abstract class $NotificationMessageCopyWith<$Res> {
           NotificationMessage value, $Res Function(NotificationMessage) then) =
       _$NotificationMessageCopyWithImpl<$Res, NotificationMessage>;
   @useResult
-  $Res call({String id, String body, DateTime? createdAt, DateTime? updatedAt});
+  $Res call(
+      {String id,
+      String body,
+      NotificationTarget target,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ class _$NotificationMessageCopyWithImpl<$Res, $Val extends NotificationMessage>
   $Res call({
     Object? id = null,
     Object? body = null,
+    Object? target = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -67,6 +74,10 @@ class _$NotificationMessageCopyWithImpl<$Res, $Val extends NotificationMessage>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
+      target: null == target
+          ? _value.target
+          : target // ignore: cast_nullable_to_non_nullable
+              as NotificationTarget,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -87,7 +98,12 @@ abstract class _$$NotificationMessageImplCopyWith<$Res>
       __$$NotificationMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String body, DateTime? createdAt, DateTime? updatedAt});
+  $Res call(
+      {String id,
+      String body,
+      NotificationTarget target,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -103,6 +119,7 @@ class __$$NotificationMessageImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? body = null,
+    Object? target = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -115,6 +132,10 @@ class __$$NotificationMessageImplCopyWithImpl<$Res>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
+      target: null == target
+          ? _value.target
+          : target // ignore: cast_nullable_to_non_nullable
+              as NotificationTarget,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -131,7 +152,11 @@ class __$$NotificationMessageImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NotificationMessageImpl implements _NotificationMessage {
   const _$NotificationMessageImpl(
-      {required this.id, required this.body, this.createdAt, this.updatedAt});
+      {required this.id,
+      required this.body,
+      required this.target,
+      this.createdAt,
+      this.updatedAt});
 
   factory _$NotificationMessageImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationMessageImplFromJson(json);
@@ -141,13 +166,15 @@ class _$NotificationMessageImpl implements _NotificationMessage {
   @override
   final String body;
   @override
+  final NotificationTarget target;
+  @override
   final DateTime? createdAt;
   @override
   final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'NotificationMessage(id: $id, body: $body, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'NotificationMessage(id: $id, body: $body, target: $target, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -157,6 +184,7 @@ class _$NotificationMessageImpl implements _NotificationMessage {
             other is _$NotificationMessageImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.body, body) || other.body == body) &&
+            (identical(other.target, target) || other.target == target) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -165,7 +193,8 @@ class _$NotificationMessageImpl implements _NotificationMessage {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, body, createdAt, updatedAt);
+  int get hashCode =>
+      Object.hash(runtimeType, id, body, target, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -186,6 +215,7 @@ abstract class _NotificationMessage implements NotificationMessage {
   const factory _NotificationMessage(
       {required final String id,
       required final String body,
+      required final NotificationTarget target,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$NotificationMessageImpl;
 
@@ -196,6 +226,8 @@ abstract class _NotificationMessage implements NotificationMessage {
   String get id;
   @override
   String get body;
+  @override
+  NotificationTarget get target;
   @override
   DateTime? get createdAt;
   @override

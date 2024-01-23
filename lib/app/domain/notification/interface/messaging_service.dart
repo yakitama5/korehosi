@@ -13,4 +13,16 @@ MessagingService messagingService(MessagingServiceRef ref) =>
 abstract class MessagingService {
   Future<NotificationPermission> requestPermission();
   Future<String?> getToken();
+  Future<void> sendMessageToAll({
+    required String groupId,
+    required String message,
+  });
+  Future<void> sendMessageToAdult({
+    required String groupId,
+    required String message,
+  });
+  Future<void> sendMessageToChild({
+    required String groupId,
+    required String message,
+  });
 }
