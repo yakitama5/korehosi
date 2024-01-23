@@ -172,12 +172,18 @@ exports.onWriteUser = functions
       }
     };
 
-    // 判定
-    const eventType = !event.before.exists ?
-      'create' :
-      event.after.exists ?
-        'update' :
+    const toEventType = (event) => {
+      if (!event.before.exists) {
+        return 'create';
+      } else if (event.after.exists) {
+        'update';
+      } else {
         'delete';
+      }
+    };
+
+    // 判定
+    const eventType = toEventType(event);
     console.log(eventType);
 
     switch (eventType) {
@@ -190,6 +196,6 @@ exports.onWriteUser = functions
       onGroupDelete(event.before);
       break;
     default:
-    // do nothing
+      // do nothing
     }
   });
