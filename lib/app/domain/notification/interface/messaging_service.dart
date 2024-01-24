@@ -16,13 +16,16 @@ abstract class MessagingService {
   Future<void> sendMessageToAll({
     required String groupId,
     required String message,
+    required String uid,
   });
   Future<void> sendMessageToAdult({
     required String groupId,
     required String message,
+    required String uid,
   });
   Future<void> sendMessageToChild({
     required String groupId,
     required String message,
+    required String uid,
   });
 }

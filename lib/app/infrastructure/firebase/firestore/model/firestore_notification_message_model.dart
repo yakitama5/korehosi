@@ -15,6 +15,7 @@ class FirestoreNotificationMessageModel
     required String id,
     required String body,
     required NotificationTarget target,
+    required String uid,
     @timestampKey DateTime? createdAt,
     @timestampKey DateTime? updatedAt,
   }) = _FirestoreNotificationMessageModel;
@@ -32,6 +33,7 @@ extension FirestoreNotificationMessageModelX
         id: id,
         body: body,
         target: target,
+        uid: uid,
         createdAt: createdAt,
         updatedAt: updatedAt,
       );

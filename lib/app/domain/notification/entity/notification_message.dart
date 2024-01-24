@@ -11,6 +11,7 @@ class NotificationMessage with _$NotificationMessage {
     required String id,
     required String body,
     required NotificationTarget target,
+    required String uid,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) = _NotificationMessage;

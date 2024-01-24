@@ -35,12 +35,16 @@ class AppListner extends HookConsumerWidget {
     ref.listen(authUserProvider, (previous, next) async {
       // ユーザー情報が存在しなければ何もしない
       final user = next.value;
-      if (user == null) {
+      if (previous?.value != null || user == null) {
         return;
       }
 
-      // FCMTokenが設定されていない場合、通知権限をリクエストする
-      if (user.fcmTokens == null || user.fcmTokens!.isEmpty) {
+      // トークンを取得する
+      final token = await ref.read(messagingServiceProvider).getToken();
+      logger.d('FCM Token is $token');
+
+      // トークンがサーバーに設定されていなければ、トークン設定を行う
+      if (!(user.fcmTokens ?? []).contains(token)) {
         final result =
             await ref.read(messagingServiceProvider).requestPermission();
         switch (result) {
@@ -51,9 +55,6 @@ class AppListner extends HookConsumerWidget {
           case NotificationPermission.authorized:
           case NotificationPermission.provisional:
         }
-
-        final token = await ref.read(messagingServiceProvider).getToken();
-        logger.d('FCM Token is $token');
 
         // 取得したトークンをユーザー情報に設定
         await ref.read(userUsecaseProvider).addToken(fcmToken: token!);

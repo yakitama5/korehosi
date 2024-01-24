@@ -13,6 +13,7 @@ _$FirestoreNotificationMessageModelImpl
           id: json['id'] as String,
           body: json['body'] as String,
           target: $enumDecode(_$NotificationTargetEnumMap, json['target']),
+          uid: json['uid'] as String,
           createdAt: dateFromTimestampValue(json['createdAt']),
           updatedAt: dateFromTimestampValue(json['updatedAt']),
         );
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$FirestoreNotificationMessageModelImplToJson(
       'id': instance.id,
       'body': instance.body,
       'target': _$NotificationTargetEnumMap[instance.target]!,
+      'uid': instance.uid,
       'createdAt': timestampFromDateValue(instance.createdAt),
       'updatedAt': timestampFromDateValue(instance.updatedAt),
     };

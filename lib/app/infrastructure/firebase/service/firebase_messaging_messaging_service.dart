@@ -44,26 +44,30 @@ class FirebaseMessagingMessagingService implements MessagingService {
   Future<void> sendMessageToAdult({
     required String groupId,
     required String message,
+    required String uid,
   }) =>
-      _sendMessage(groupId, message, NotificationTarget.adult);
+      _sendMessage(groupId, message, uid, NotificationTarget.adult);
 
   @override
   Future<void> sendMessageToAll({
     required String groupId,
     required String message,
+    required String uid,
   }) =>
-      _sendMessage(groupId, message, NotificationTarget.all);
+      _sendMessage(groupId, message, uid, NotificationTarget.all);
 
   @override
   Future<void> sendMessageToChild({
     required String groupId,
     required String message,
+    required String uid,
   }) =>
-      _sendMessage(groupId, message, NotificationTarget.child);
+      _sendMessage(groupId, message, uid, NotificationTarget.child);
 
   Future<void> _sendMessage(
     String groupId,
     String message,
+    String uid,
     NotificationTarget target,
   ) {
     // IDが指定されていなければ、新しいドキュメントを取得
@@ -76,6 +80,7 @@ class FirebaseMessagingMessagingService implements MessagingService {
       id: docRef.id,
       body: message,
       target: target,
+      uid: uid,
     );
 
     // 登録

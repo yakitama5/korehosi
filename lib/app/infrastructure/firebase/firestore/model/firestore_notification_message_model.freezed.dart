@@ -24,6 +24,7 @@ mixin _$FirestoreNotificationMessageModel {
   String get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   NotificationTarget get target => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   @timestampKey
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @timestampKey
@@ -47,6 +48,7 @@ abstract class $FirestoreNotificationMessageModelCopyWith<$Res> {
       {String id,
       String body,
       NotificationTarget target,
+      String uid,
       @timestampKey DateTime? createdAt,
       @timestampKey DateTime? updatedAt});
 }
@@ -68,6 +70,7 @@ class _$FirestoreNotificationMessageModelCopyWithImpl<$Res,
     Object? id = null,
     Object? body = null,
     Object? target = null,
+    Object? uid = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -84,6 +87,10 @@ class _$FirestoreNotificationMessageModelCopyWithImpl<$Res,
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as NotificationTarget,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -109,6 +116,7 @@ abstract class _$$FirestoreNotificationMessageModelImplCopyWith<$Res>
       {String id,
       String body,
       NotificationTarget target,
+      String uid,
       @timestampKey DateTime? createdAt,
       @timestampKey DateTime? updatedAt});
 }
@@ -129,6 +137,7 @@ class __$$FirestoreNotificationMessageModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? body = null,
     Object? target = null,
+    Object? uid = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -145,6 +154,10 @@ class __$$FirestoreNotificationMessageModelImplCopyWithImpl<$Res>
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as NotificationTarget,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -165,6 +178,7 @@ class _$FirestoreNotificationMessageModelImpl
       {required this.id,
       required this.body,
       required this.target,
+      required this.uid,
       @timestampKey this.createdAt,
       @timestampKey this.updatedAt});
 
@@ -179,6 +193,8 @@ class _$FirestoreNotificationMessageModelImpl
   @override
   final NotificationTarget target;
   @override
+  final String uid;
+  @override
   @timestampKey
   final DateTime? createdAt;
   @override
@@ -187,7 +203,7 @@ class _$FirestoreNotificationMessageModelImpl
 
   @override
   String toString() {
-    return 'FirestoreNotificationMessageModel(id: $id, body: $body, target: $target, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FirestoreNotificationMessageModel(id: $id, body: $body, target: $target, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -198,6 +214,7 @@ class _$FirestoreNotificationMessageModelImpl
             (identical(other.id, id) || other.id == id) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.target, target) || other.target == target) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -207,7 +224,7 @@ class _$FirestoreNotificationMessageModelImpl
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, body, target, createdAt, updatedAt);
+      Object.hash(runtimeType, id, body, target, uid, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -231,6 +248,7 @@ abstract class _FirestoreNotificationMessageModel
           {required final String id,
           required final String body,
           required final NotificationTarget target,
+          required final String uid,
           @timestampKey final DateTime? createdAt,
           @timestampKey final DateTime? updatedAt}) =
       _$FirestoreNotificationMessageModelImpl;
@@ -245,6 +263,8 @@ abstract class _FirestoreNotificationMessageModel
   String get body;
   @override
   NotificationTarget get target;
+  @override
+  String get uid;
   @override
   @timestampKey
   DateTime? get createdAt;

@@ -84,12 +84,11 @@ class ItemUsecase with RunUsecaseMixin {
               );
 
           // 通知処理
-          final createdUserName = await ref.read(
-            authUserProvider.selectAsync((user) => user!.dispName(l10n)),
-          );
+          final user = ref.read(authUserProvider).value!;
           await ref.read(messagingServiceProvider).sendMessageToAll(
                 groupId: groupId,
-                message: l10n.notificationMessageAddItem(createdUserName),
+                message: l10n.notificationMessageAddItem(user.dispName(l10n)),
+                uid: user.id,
               );
         },
       );
