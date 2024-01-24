@@ -216,14 +216,19 @@ exports.onCreateMessage = functions
     const joinUids = groupData.joinUids;
     for (const userId of joinUids) {
       console.log('Send to : ${userId}');
+
+      // ユーザーが通知対象でなければリトライ
       const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
       const userSnap = await userRef.get();
-      const userData = userSnap.data();
-      const token = userData.fcmToken;
+      const user = userSnap.data();
+      const target = snap.data().target;
+      if (target != 'all' && snap.data().target != user.ageGroup) {
+        continue;
+      }
 
+      // 通知の内容を作る処理
+      const token = user.fcmToken;
       if (token != null) {
-        // 通知の内容を作る処理
-        // TODO(yakitama5): `Target`に応じてユーザーを絞り込む必要あり
         const message = {
           notification: {
             title: snap.data().body,
