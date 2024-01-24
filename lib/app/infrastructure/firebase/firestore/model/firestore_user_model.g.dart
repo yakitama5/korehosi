@@ -15,9 +15,6 @@ _$FirestoreUserModelImpl _$$FirestoreUserModelImplFromJson(
       joinGroupIds: (json['joinGroupIds'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      fcmTokens: (json['fcmTokens'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
       createdAt: dateFromTimestampValue(json['createdAt']),
       updatedAt: dateFromTimestampValue(json['updatedAt']),
     );
@@ -29,7 +26,6 @@ Map<String, dynamic> _$$FirestoreUserModelImplToJson(
       'ageGroup': _$AgeGroupEnumMap[instance.ageGroup]!,
       'name': instance.name,
       'joinGroupIds': instance.joinGroupIds,
-      'fcmTokens': instance.fcmTokens,
       'createdAt': timestampFromDateValue(instance.createdAt),
       'updatedAt': timestampFromDateValue(instance.updatedAt),
     };
