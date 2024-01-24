@@ -6,7 +6,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import '../../../domain/exception/exceptions.dart';
-import '../../../domain/notification/interface/messaging_service.dart';
 import '../../../domain/service/analytics_service.dart';
 import '../../../domain/user/entity/auth_status.dart';
 import '../../../domain/user/entity/user.dart';
@@ -185,11 +184,6 @@ class UserUsecase with RunUsecaseMixin {
 
     // アプリ内購入情報の状態を更新
     await _appInPurchaseSignIn();
-
-    // TODO(yakitama5): サインインではなく、起動時に固定で呼び出すように変更すること
-    await ref.read(messagingServiceProvider).requestPermission();
-    final token = await ref.read(messagingServiceProvider).getToken();
-    logger.d('FCM Token is $token');
   }
 
   /// サインアウト後の処理
