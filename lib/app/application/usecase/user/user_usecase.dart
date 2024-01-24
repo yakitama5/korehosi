@@ -107,19 +107,16 @@ class UserUsecase with RunUsecaseMixin {
     await execute(
       ref,
       action: () async {
+        // TODO(yakitama5): トークンは別コレクションで管理
         // ログイン中のユーザー情報を取得
         final user = await ref.read(authUserProvider.future);
 
         // 更新
         await ref.read(userRepositoryProvider).update(
-          userId: user!.id,
-          ageGroup: user.ageGroup,
-          name: user.name,
-          fcmTokens: [
-            ...?user.fcmTokens,
-            fcmToken,
-          ],
-        );
+              userId: user!.id,
+              ageGroup: user.ageGroup,
+              name: user.name,
+            );
       },
     );
   }

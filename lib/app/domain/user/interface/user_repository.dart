@@ -26,7 +26,6 @@ abstract class UserRepository {
     required String userId,
     required AgeGroup ageGroup,
     String? name,
-    List<String>? fcmTokens,
   });
 
   /// サインアップ および ユーザー/グループモデルの追加
