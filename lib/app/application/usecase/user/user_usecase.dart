@@ -100,6 +100,30 @@ class UserUsecase with RunUsecaseMixin {
     );
   }
 
+  /// トークンの追加
+  Future<void> addToken({
+    required String fcmToken,
+  }) async {
+    await execute(
+      ref,
+      action: () async {
+        // ログイン中のユーザー情報を取得
+        final user = await ref.read(authUserProvider.future);
+
+        // 更新
+        await ref.read(userRepositoryProvider).update(
+          userId: user!.id,
+          ageGroup: user.ageGroup,
+          name: user.name,
+          fcmTokens: [
+            ...?user.fcmTokens,
+            fcmToken,
+          ],
+        );
+      },
+    );
+  }
+
   /// Apple認証
   Future<void> signInWithApple() async {
     await execute(

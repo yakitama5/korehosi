@@ -94,6 +94,7 @@ class FirebaseUserRepository implements UserRepository {
     required String userId,
     required AgeGroup ageGroup,
     String? name,
+    List<String>? fcmTokens,
   }) async {
     // Firestore用のモデルに変換
     final docRef = ref.read(userDocumentRefProvider(userId: userId));
@@ -106,6 +107,7 @@ class FirebaseUserRepository implements UserRepository {
           id: userId,
           ageGroup: ageGroup,
           name: name,
+          fcmTokens: fcmTokens,
         );
 
     // 更新

@@ -1,5 +1,6 @@
 import 'package:family_wish_list/app/application/config/app_config.dart';
 import 'package:family_wish_list/app/application/usecase/user/state/auth_user_provider.dart';
+import 'package:family_wish_list/app/application/usecase/user/user_usecase.dart';
 import 'package:family_wish_list/app/domain/notification/value_object/notification_permission.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,9 @@ class AppListner extends HookConsumerWidget {
 
         final token = await ref.read(messagingServiceProvider).getToken();
         logger.d('FCM Token is $token');
+
+        // 取得したトークンをユーザー情報に設定
+        await ref.read(userUsecaseProvider).addToken(fcmToken: token!);
       }
     });
   }
