@@ -52,7 +52,7 @@ class SharedPreferenceCachedService implements CachedService {
     final shared = await ref.read(sharedPreferencesProvider.future);
     final formatter = DateFormat(_tokenTimestampFormat);
     return shared.setString(
-      _tokenTimestampFormat,
+      _tokenTimestampKey,
       formatter.format(DateTime.now()),
     );
   }
