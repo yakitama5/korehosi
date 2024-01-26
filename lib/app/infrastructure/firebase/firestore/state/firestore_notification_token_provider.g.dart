@@ -7,7 +7,7 @@ part of 'firestore_notification_token_provider.dart';
 // **************************************************************************
 
 String _$notificationTokenCollectionRefHash() =>
-    r'c3b2d31824db852bd7a600057b3216a603ead917';
+    r'f9b61821f599396f78c10349c716933dc77eb533';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,10 +51,10 @@ class NotificationTokenCollectionRefFamily
   ///
   /// Copied from [notificationTokenCollectionRef].
   NotificationTokenCollectionRefProvider call({
-    required String groupId,
+    required String userId,
   }) {
     return NotificationTokenCollectionRefProvider(
-      groupId: groupId,
+      userId: userId,
     );
   }
 
@@ -63,7 +63,7 @@ class NotificationTokenCollectionRefFamily
     covariant NotificationTokenCollectionRefProvider provider,
   ) {
     return call(
-      groupId: provider.groupId,
+      userId: provider.userId,
     );
   }
 
@@ -91,11 +91,11 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
   ///
   /// Copied from [notificationTokenCollectionRef].
   NotificationTokenCollectionRefProvider({
-    required String groupId,
+    required String userId,
   }) : this._internal(
           (ref) => notificationTokenCollectionRef(
             ref as NotificationTokenCollectionRefRef,
-            groupId: groupId,
+            userId: userId,
           ),
           from: notificationTokenCollectionRefProvider,
           name: r'notificationTokenCollectionRefProvider',
@@ -106,7 +106,7 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
           dependencies: NotificationTokenCollectionRefFamily._dependencies,
           allTransitiveDependencies:
               NotificationTokenCollectionRefFamily._allTransitiveDependencies,
-          groupId: groupId,
+          userId: userId,
         );
 
   NotificationTokenCollectionRefProvider._internal(
@@ -116,10 +116,10 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.groupId,
+    required this.userId,
   }) : super.internal();
 
-  final String groupId;
+  final String userId;
 
   @override
   Override overrideWith(
@@ -136,7 +136,7 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        groupId: groupId,
+        userId: userId,
       ),
     );
   }
@@ -150,13 +150,13 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
   @override
   bool operator ==(Object other) {
     return other is NotificationTokenCollectionRefProvider &&
-        other.groupId == groupId;
+        other.userId == userId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, groupId.hashCode);
+    hash = _SystemHash.combine(hash, userId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -164,8 +164,8 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
 
 mixin NotificationTokenCollectionRefRef on AutoDisposeProviderRef<
     CollectionReference<FirestoreNotificationTokenModel>> {
-  /// The parameter `groupId` of this provider.
-  String get groupId;
+  /// The parameter `userId` of this provider.
+  String get userId;
 }
 
 class _NotificationTokenCollectionRefProviderElement
@@ -175,12 +175,12 @@ class _NotificationTokenCollectionRefProviderElement
   _NotificationTokenCollectionRefProviderElement(super.provider);
 
   @override
-  String get groupId =>
-      (origin as NotificationTokenCollectionRefProvider).groupId;
+  String get userId =>
+      (origin as NotificationTokenCollectionRefProvider).userId;
 }
 
 String _$notificationTokenDocumentRefHash() =>
-    r'73fb7939b795df3e11f54ab5182d85099cc43e27';
+    r'a29d8e875ee5d9941f2dcb63db1d5f09584dcc23';
 
 /// 通知FCMトークンドキュメントの参照
 ///
@@ -203,12 +203,12 @@ class NotificationTokenDocumentRefFamily
   ///
   /// Copied from [notificationTokenDocumentRef].
   NotificationTokenDocumentRefProvider call({
-    required String groupId,
-    String? notificationTokenId,
+    required String userId,
+    String? token,
   }) {
     return NotificationTokenDocumentRefProvider(
-      groupId: groupId,
-      notificationTokenId: notificationTokenId,
+      userId: userId,
+      token: token,
     );
   }
 
@@ -217,8 +217,8 @@ class NotificationTokenDocumentRefFamily
     covariant NotificationTokenDocumentRefProvider provider,
   ) {
     return call(
-      groupId: provider.groupId,
-      notificationTokenId: provider.notificationTokenId,
+      userId: provider.userId,
+      token: provider.token,
     );
   }
 
@@ -246,13 +246,13 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
   ///
   /// Copied from [notificationTokenDocumentRef].
   NotificationTokenDocumentRefProvider({
-    required String groupId,
-    String? notificationTokenId,
+    required String userId,
+    String? token,
   }) : this._internal(
           (ref) => notificationTokenDocumentRef(
             ref as NotificationTokenDocumentRefRef,
-            groupId: groupId,
-            notificationTokenId: notificationTokenId,
+            userId: userId,
+            token: token,
           ),
           from: notificationTokenDocumentRefProvider,
           name: r'notificationTokenDocumentRefProvider',
@@ -263,8 +263,8 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
           dependencies: NotificationTokenDocumentRefFamily._dependencies,
           allTransitiveDependencies:
               NotificationTokenDocumentRefFamily._allTransitiveDependencies,
-          groupId: groupId,
-          notificationTokenId: notificationTokenId,
+          userId: userId,
+          token: token,
         );
 
   NotificationTokenDocumentRefProvider._internal(
@@ -274,12 +274,12 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.groupId,
-    required this.notificationTokenId,
+    required this.userId,
+    required this.token,
   }) : super.internal();
 
-  final String groupId;
-  final String? notificationTokenId;
+  final String userId;
+  final String? token;
 
   @override
   Override overrideWith(
@@ -296,8 +296,8 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        groupId: groupId,
-        notificationTokenId: notificationTokenId,
+        userId: userId,
+        token: token,
       ),
     );
   }
@@ -311,15 +311,15 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
   @override
   bool operator ==(Object other) {
     return other is NotificationTokenDocumentRefProvider &&
-        other.groupId == groupId &&
-        other.notificationTokenId == notificationTokenId;
+        other.userId == userId &&
+        other.token == token;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, groupId.hashCode);
-    hash = _SystemHash.combine(hash, notificationTokenId.hashCode);
+    hash = _SystemHash.combine(hash, userId.hashCode);
+    hash = _SystemHash.combine(hash, token.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -327,11 +327,11 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
 
 mixin NotificationTokenDocumentRefRef on AutoDisposeProviderRef<
     DocumentReference<FirestoreNotificationTokenModel>> {
-  /// The parameter `groupId` of this provider.
-  String get groupId;
+  /// The parameter `userId` of this provider.
+  String get userId;
 
-  /// The parameter `notificationTokenId` of this provider.
-  String? get notificationTokenId;
+  /// The parameter `token` of this provider.
+  String? get token;
 }
 
 class _NotificationTokenDocumentRefProviderElement
@@ -341,11 +341,9 @@ class _NotificationTokenDocumentRefProviderElement
   _NotificationTokenDocumentRefProviderElement(super.provider);
 
   @override
-  String get groupId =>
-      (origin as NotificationTokenDocumentRefProvider).groupId;
+  String get userId => (origin as NotificationTokenDocumentRefProvider).userId;
   @override
-  String? get notificationTokenId =>
-      (origin as NotificationTokenDocumentRefProvider).notificationTokenId;
+  String? get token => (origin as NotificationTokenDocumentRefProvider).token;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

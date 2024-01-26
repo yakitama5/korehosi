@@ -13,9 +13,9 @@ part 'firestore_notification_token_provider.g.dart';
 CollectionReference<FirestoreNotificationTokenModel>
     notificationTokenCollectionRef(
   NotificationTokenCollectionRefRef ref, {
-  required String groupId,
+  required String userId,
 }) {
-  return ref.watch(firestoreProvider).fcmTokensRef(groupId).withConverter(
+  return ref.watch(firestoreProvider).fcmTokensRef(userId).withConverter(
         fromFirestore: (snapshot, options) =>
             FirestoreNotificationTokenModel.fromJson(snapshot.data()!),
         toFirestore: (value, options) => {
@@ -33,9 +33,9 @@ CollectionReference<FirestoreNotificationTokenModel>
 @riverpod
 DocumentReference<FirestoreNotificationTokenModel> notificationTokenDocumentRef(
   NotificationTokenDocumentRefRef ref, {
-  required String groupId,
-  String? notificationTokenId,
+  required String userId,
+  String? token,
 }) =>
     ref
-        .watch(notificationTokenCollectionRefProvider(groupId: groupId))
-        .doc(notificationTokenId);
+        .watch(notificationTokenCollectionRefProvider(userId: userId))
+        .doc(token);

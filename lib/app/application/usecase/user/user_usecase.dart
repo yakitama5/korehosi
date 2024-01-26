@@ -7,6 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import '../../../domain/exception/exceptions.dart';
 import '../../../domain/notification/interface/messaging_service.dart';
+import '../../../domain/notification/interface/notification_token_repository.dart';
 import '../../../domain/service/analytics_service.dart';
 import '../../../domain/user/entity/auth_status.dart';
 import '../../../domain/user/entity/user.dart';
@@ -73,6 +74,9 @@ class UserUsecase with RunUsecaseMixin {
               premium: false,
             );
 
+        // FCMトークンを追加
+        await refreshFCMTokenAndCheckPushPermission();
+
         // 認証状態の変更後の処理を行う
         await _onSignedIn();
       },
@@ -96,27 +100,6 @@ class UserUsecase with RunUsecaseMixin {
               userId: userId!,
               name: name,
               ageGroup: ageGroup,
-            );
-      },
-    );
-  }
-
-  /// トークンの追加
-  Future<void> addToken({
-    required String fcmToken,
-  }) async {
-    await execute(
-      ref,
-      action: () async {
-        // TODO(yakitama5): トークンは別コレクションで管理
-        // ログイン中のユーザー情報を取得
-        final user = await ref.read(authUserProvider.future);
-
-        // 更新
-        await ref.read(userRepositoryProvider).update(
-              userId: user!.id,
-              ageGroup: user.ageGroup,
-              name: user.name,
             );
       },
     );
@@ -254,6 +237,7 @@ class UserUsecase with RunUsecaseMixin {
     await ref.read(currentGroupIdProvider.notifier).set(groupId: groupId);
   }
 
+  /// FCMトークンをリフレッシュし、必要に応じて権限確認を行う
   Future<void> refreshFCMTokenAndCheckPushPermission() async {
     // 未ログインであれば処理しない
     final user = ref.read(authStatusProvider).value;
@@ -265,11 +249,20 @@ class UserUsecase with RunUsecaseMixin {
     final service = ref.read(messagingServiceProvider);
     unawaited(service.requestPermission());
 
+    // TODO(yakitama5): トークンのタイムスタンプ更新については定時確認を行うこと
+
     // トークンを取得する
     final token = await service.getToken();
     logger.d('FCM Token is $token');
 
-    // TODO(yakitama5): トークンを保存する
+    // トークンが存在しなければ追加、存在すればタイムスタンプを更新する
+    if (token != null) {
+      unawaited(
+        ref
+            .read(notificationTokenRepositoryProvider)
+            .set(userId: user.uid, token: token),
+      );
+    }
   }
 
   /// Permissionエラーを避けるために、キャッシュしていた取得データをリフレッシュする
