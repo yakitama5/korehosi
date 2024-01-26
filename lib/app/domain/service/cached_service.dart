@@ -22,11 +22,11 @@ abstract class CachedService {
   Future<bool> removeCurrentGroupId();
 
   /// 前回のトークン更新タイムスタンプを取得
-  Future<DateTime?> fetchTokenTimestamp();
+  Future<DateTime?> fetchTokenTimestamp({required String uid});
 
   /// タイムスタンプの更新を行う
-  Future<bool> updateTokenTimestamp();
+  Future<bool> updateTokenTimestamp({required String uid});
 
   /// タイムスタンプの削除を行う
-  Future<bool> removeTokenTimestamp();
+  Future<bool> removeTokenTimestamp({required String uid});
 }

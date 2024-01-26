@@ -6,7 +6,7 @@ part of 'token_timestamp_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tokenTimestampHash() => r'02efdbc3e67d269f7336c7d37a5d365ebc9b5e49';
+String _$tokenTimestampHash() => r'6b2fd15c5b8cc3fd8851ab72144758391820b856';
 
 /// FCMトークンのタイムスタンプを管理するProvider
 ///

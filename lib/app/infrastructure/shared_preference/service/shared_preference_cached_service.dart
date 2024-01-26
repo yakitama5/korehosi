@@ -40,26 +40,26 @@ class SharedPreferenceCachedService implements CachedService {
   }
 
   @override
-  Future<DateTime?> fetchTokenTimestamp() async {
+  Future<DateTime?> fetchTokenTimestamp({required String uid}) async {
     final shared = await ref.read(sharedPreferencesProvider.future);
-    final str = shared.getString(_tokenTimestampKey);
+    final str = shared.getString('${_tokenTimestampKey}_$uid');
     final formatter = DateFormat(_tokenTimestampFormat);
     return str == null ? null : formatter.parse(str);
   }
 
   @override
-  Future<bool> updateTokenTimestamp() async {
+  Future<bool> updateTokenTimestamp({required String uid}) async {
     final shared = await ref.read(sharedPreferencesProvider.future);
     final formatter = DateFormat(_tokenTimestampFormat);
     return shared.setString(
-      _tokenTimestampKey,
+      '${_tokenTimestampKey}_$uid',
       formatter.format(DateTime.now()),
     );
   }
 
   @override
-  Future<bool> removeTokenTimestamp() async {
+  Future<bool> removeTokenTimestamp({required String uid}) async {
     final shared = await ref.read(sharedPreferencesProvider.future);
-    return shared.remove(_currentGroupKey);
+    return shared.remove('${_tokenTimestampKey}_$uid');
   }
 }

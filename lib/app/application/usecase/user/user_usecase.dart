@@ -76,9 +76,6 @@ class UserUsecase with RunUsecaseMixin {
               premium: false,
             );
 
-        // FCMトークンを追加
-        await refreshFCMTokenAndCheckPushPermission();
-
         // 認証状態の変更後の処理を行う
         await _onSignedIn();
       },
@@ -189,6 +186,9 @@ class UserUsecase with RunUsecaseMixin {
     // グループ情報を初期化
     await _initCurrentGroup();
 
+    // FCMトークンを追加
+    await refreshFCMTokenAndCheckPushPermission();
+
     // アプリ内購入情報の状態を更新
     await _appInPurchaseSignIn();
   }
@@ -229,7 +229,7 @@ class UserUsecase with RunUsecaseMixin {
   /// 現在のグループ情報を初期化する
   Future<void> _initCurrentGroup() async {
     // 参加中の先頭グループを設定
-    await Future<void>.delayed(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 200));
     final joinGroupIds = await ref
         .read(authUserProvider.selectAsync((data) => data?.joinGroupIds));
     if (joinGroupIds == null || joinGroupIds.isEmpty) {
@@ -275,7 +275,7 @@ class UserUsecase with RunUsecaseMixin {
           .set(userId: uid, token: token);
 
       // ローカル上にタイムスタンプを設定
-      await ref.read(cachedServiceProvider).updateTokenTimestamp();
+      await ref.read(cachedServiceProvider).updateTokenTimestamp(uid: uid);
     }
   }
 
