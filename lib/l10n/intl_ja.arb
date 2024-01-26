@@ -105,17 +105,38 @@
     "completeDeleteMessage": "削除しました。",
     "completeChangeGroupMessage": "グループを切り替えました。",
     "uploadImage": "写真のアップロード",
-    "lackOfPermission": "権限の不足",
-    "permissionPhotos": "ギャラリーへのアクセス",
-    "permissionCamera": "カメラへのアクセス",
-    "permissionWarnMessage": "{operation}を行うには、{permission}を許可して下さい。",
-    "@permissionWarnMessage": {
+    "lackOfPermission": "{permission}が許可されていません",
+    "@lackOfPermission": {
         "context": "permission",
         "placeholders": {
-            "operation": {},
             "permission": {}
         }
     },
+    "confirmPermissionOffTitle": "{permission}をオフにしますか？",
+    "@confirmPermissionOffTitle": {
+        "context": "permission",
+        "placeholders": {
+            "permission": {}
+        }
+    },
+    "confirmPermissionOffMessage": "設定アプリを開いて{permission}をオフにしてください",
+    "@confirmPermissionOffMessage": {
+        "context": "permission",
+        "placeholders": {
+            "permission": {}
+        }
+    },
+    "permissionPhotos": "ギャラリーへのアクセス",
+    "permissionCamera": "カメラへのアクセス",
+    "permissionPushNotification": "プッシュ通知",
+    "permissionWarnMessage": "設定アプリを開いて{permission}を許可してください",
+    "@permissionWarnMessage": {
+        "context": "permission",
+        "placeholders": {
+            "permission": {}
+        }
+    },
+    "openSettingsApp": "設定アプリを開く",
     "ok": "OK",
     "confirmDiscardChangesTitle": "変更を破棄しますか？",
     "confirmDiscardChangesMessage": "すべての変更は失われます",

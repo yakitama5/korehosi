@@ -11,6 +11,8 @@ const tokyoTimeZone = 'Asia/Tokyo';
 // コレクションパス
 const GROUPS_PATH = 'groups';
 const PARTICIPANTS_PATH = 'participants';
+const USERS_PATH = 'users';
+const TOKENS_PATH = 'fcmTokens';
 
 // 処理内のTimeZone指定
 process.env.TZ = tokyoTimeZone;
@@ -59,7 +61,8 @@ exports.joinGroup = functions
     }
 
     // 参加済チェック
-    const groupSnap = await db.collection('groups').doc(linkData.groupId).get();
+    const groupSnap = await db.collection(GROUPS_PATH)
+      .doc(linkData.groupId).get();
     const groupData = groupSnap.data();
     if (groupData.joinUids.includes(user.uid)) {
       return {
@@ -72,7 +75,7 @@ exports.joinGroup = functions
     const parameters = rcTemplate.parameters;
     const maxGroup = parameters.max_group_count_by_free_plan.defaultValue.value;
 
-    const userRef = db.collection('users').doc(user.uid);
+    const userRef = db.collection(USERS_PATH).doc(user.uid);
     const userDoc = await userRef.get();
     const joinGroupIds = userDoc.data().joinGroupIds;
     if (joinGroupIds.length >= maxGroup) {
@@ -82,7 +85,7 @@ exports.joinGroup = functions
     }
 
     // グループ および ユーザー情報の取得
-    const groupRef = db.collection('groups').doc(linkData.groupId);
+    const groupRef = db.collection(GROUPS_PATH).doc(linkData.groupId);
     db.runTransaction(async (t) => {
       t.update(groupRef, {
         'joinUids': admin.firestore.FieldValue.arrayUnion(user.uid),
@@ -210,7 +213,7 @@ exports.onCreateMessage = functions
   .document('groups/{groupId}/messages/{messageId}')
   .onCreate(async (snap, context) => {
     // グループ内のユーザー一覧を取得する
-    const groupRef = db.collection('groups').doc(context.params.groupId);
+    const groupRef = db.collection(GROUPS_PATH).doc(context.params.groupId);
     const groupSnap = await groupRef.get();
     const groupData = groupSnap.data();
     const joinUids = groupData.joinUids;
@@ -222,9 +225,19 @@ exports.onCreateMessage = functions
       const userSnap = await userRef.get();
       const user = userSnap.data();
       const target = snap.data().target;
-      if (target != 'all' && snap.data().target != user.ageGroup) {
+
+      const isMyOperation = user.id == snap.data().uid;
+      const isTargetGroup = target == 'all' || target == user.ageGroup;
+      if (isMyOperation || !isTargetGroup) {
         continue;
       }
+
+      // トークンを取得して通知を投げる
+      // TODO(yakitama5): トークンをコレクション化したので、ソレに伴った書き方に修正
+      const tokensRef = db.collection(USERS_PATH).doc(user.id)
+        .collection(TOKENS_PATH);
+      const hoge = await tokensRef.get();
+      hoge.docs.forEach();
 
       // 通知の内容を作る処理
       const token = user.fcmToken;

@@ -88,21 +88,23 @@ Future<bool> _request(
   if (status.isGranted) {
     return true;
   } else if (status.isLimited || status.isPermanentlyDenied) {
+    late final String title;
     late final String message;
     switch (permission) {
       case Permission.camera:
-        message =
-            l10n.permissionWarnMessage(l10n.uploadImage, l10n.permissionCamera);
+        title = l10n.lackOfPermission(l10n.permissionCamera);
+        message = l10n.permissionWarnMessage(l10n.permissionCamera);
       case Permission.storage:
       case Permission.photos:
       default:
-        message =
-            l10n.permissionWarnMessage(l10n.uploadImage, l10n.permissionPhotos);
+        title = l10n.lackOfPermission(l10n.permissionPhotos);
+        message = l10n.permissionWarnMessage(l10n.permissionPhotos);
     }
     if (context.mounted) {
+      // TODO(yakitama5): メッセージ表示を共通化したい(プッシュ通知含めて)
       await showAdaptiveOkDialog(
         context,
-        title: l10n.lackOfPermission,
+        title: title,
         message: message,
       );
     }
