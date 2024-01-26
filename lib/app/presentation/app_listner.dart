@@ -1,9 +1,10 @@
+import 'dart:async';
+
 import 'package:family_wish_list/app/application/config/app_config.dart';
-import 'package:family_wish_list/app/application/usecase/user/state/auth_user_provider.dart';
-import 'package:family_wish_list/app/application/usecase/user/user_usecase.dart';
-import 'package:family_wish_list/app/domain/notification/value_object/notification_permission.dart';
+import 'package:family_wish_list/app/application/usecase/user/state/auth_status_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:store_redirect/store_redirect.dart';
 
@@ -32,34 +33,25 @@ class AppListner extends HookConsumerWidget {
   void _notificationPermissionListner(BuildContext context, WidgetRef ref) {
     // TODO(yakitama5): ユーザーにFCMTokenが設定されておらず、ログイン状態であればダイアログ表示？
     // 現在のユーザー情報を取得する
-    ref.listen(authUserProvider, (previous, next) async {
-      // ユーザー情報が存在しなければ何もしない
-      final user = next.value;
-      if (previous?.value != null || user == null) {
-        return;
-      }
+    final authStream = ref.watch(authStatusProvider);
+    useEffect(
+      () {
+        // ignore: unnecessary_statements
+        return () async {
+          final user = authStream.value;
+          if (user != null) {
+            // トークンを取得する
+            final service = ref.read(messagingServiceProvider);
+            final token = await service.getToken();
+            logger.d('FCM Token is $token');
 
-      // トークンを取得する
-      final token = await ref.read(messagingServiceProvider).getToken();
-      logger.d('FCM Token is $token');
-
-      // トークンがサーバーに設定されていなければ、トークン設定を行う
-      if (!(user.fcmTokens ?? []).contains(token)) {
-        final result =
-            await ref.read(messagingServiceProvider).requestPermission();
-        switch (result) {
-          case NotificationPermission.denied:
-          case NotificationPermission.notDetermined:
-            // 許可されない場合は何もしない
-            return;
-          case NotificationPermission.authorized:
-          case NotificationPermission.provisional:
-        }
-
-        // 取得したトークンをユーザー情報に設定
-        await ref.read(userUsecaseProvider).addToken(fcmToken: token!);
-      }
-    });
+            // 権限確認
+            unawaited(service.requestPermission());
+          }
+        };
+      },
+      [authStream],
+    );
   }
 
   /// アプリのバージョンを監視して、バージョン確認ダイアログを表示する

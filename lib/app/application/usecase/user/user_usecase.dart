@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import '../../../domain/exception/exceptions.dart';
+import '../../../domain/notification/interface/messaging_service.dart';
 import '../../../domain/service/analytics_service.dart';
 import '../../../domain/user/entity/auth_status.dart';
 import '../../../domain/user/entity/user.dart';
@@ -251,6 +252,24 @@ class UserUsecase with RunUsecaseMixin {
     }
     final groupId = joinGroupIds.first;
     await ref.read(currentGroupIdProvider.notifier).set(groupId: groupId);
+  }
+
+  Future<void> refreshFCMTokenAndCheckPushPermission() async {
+    // 未ログインであれば処理しない
+    final user = ref.read(authStatusProvider).value;
+    if (user == null) {
+      return;
+    }
+
+    // 権限確認
+    final service = ref.read(messagingServiceProvider);
+    unawaited(service.requestPermission());
+
+    // トークンを取得する
+    final token = await service.getToken();
+    logger.d('FCM Token is $token');
+
+    // TODO(yakitama5): トークンを保存する
   }
 
   /// Permissionエラーを避けるために、キャッシュしていた取得データをリフレッシュする

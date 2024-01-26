@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,6 +23,11 @@ class App extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // アプリ起動時の処理を行う
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(appUsecaseProvider).onLanched();
+    });
+
     // Webは未対応なのでDynamicColorBuilderを避ける
     if (kIsWeb) {
       return _buildApp(context, ref);
