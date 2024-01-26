@@ -47,6 +47,13 @@ class SettingsPage extends HookConsumerWidget {
                 title: Text(l10n.account),
                 onPressed: (context) => _onAccount(context, ref),
               ),
+              // TODO(yakitama5): プッシュ通知の権限を読み取るようにする
+              SettingsTile.switchTile(
+                initialValue: false,
+                onToggle: (value) {},
+                title: const Text('プッシュ通知'),
+                description: const Text('欲しい物が追加された時に通知が飛びます'),
+              ),
             ],
           ),
           SettingsSection(
