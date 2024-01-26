@@ -1,10 +1,17 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/service/cached_service.dart';
 import '../state/shared_preference.dart';
 
 /// 現在のグループIDの保存Key
 const _currentGroupKey = 'current_group_id';
+
+/// FCMトークンの更新タイムスタンプKey
+const _tokenTimestampKey = 'fcm_token_timestamp';
+
+/// FCMトークンタイムスタンプの日付形式
+const _tokenTimestampFormat = 'yyyy-MM-dd';
 
 /// `shared_preference`パッケージを利用したサービスの実装
 class SharedPreferenceCachedService implements CachedService {
@@ -28,6 +35,30 @@ class SharedPreferenceCachedService implements CachedService {
 
   @override
   Future<bool> removeCurrentGroupId() async {
+    final shared = await ref.read(sharedPreferencesProvider.future);
+    return shared.remove(_currentGroupKey);
+  }
+
+  @override
+  Future<DateTime?> fetchTokenTimestamp() async {
+    final shared = await ref.read(sharedPreferencesProvider.future);
+    final str = shared.getString(_tokenTimestampKey);
+    final formatter = DateFormat(_tokenTimestampFormat);
+    return str == null ? null : formatter.parse(str);
+  }
+
+  @override
+  Future<bool> updateTokenTimestamp() async {
+    final shared = await ref.read(sharedPreferencesProvider.future);
+    final formatter = DateFormat(_tokenTimestampFormat);
+    return shared.setString(
+      _tokenTimestampFormat,
+      formatter.format(DateTime.now()),
+    );
+  }
+
+  @override
+  Future<bool> removeTokenTimestamp() async {
     final shared = await ref.read(sharedPreferencesProvider.future);
     return shared.remove(_currentGroupKey);
   }

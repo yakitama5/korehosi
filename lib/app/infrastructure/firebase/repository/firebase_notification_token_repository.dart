@@ -21,11 +21,16 @@ class FirebaseNotificationTokenRepository
     );
 
     // Firestore用のモデルに変換
-    final docModel = FirestoreNotificationTokenModel(
-      token: token,
-    );
+    late final FirestoreNotificationTokenModel model;
+    final snap = await docRef.get();
+    if (snap.exists) {
+      model = snap.data()!.copyWith(
+            token: token,
+          );
+    } else {
+      model = FirestoreNotificationTokenModel(token: token);
+    }
 
-    // 登録
-    return docRef.set(docModel);
+    return docRef.set(model);
   }
 }

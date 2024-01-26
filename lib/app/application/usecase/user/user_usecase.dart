@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:family_wish_list/app/application/usecase/user/state/token_timestamp_provider.dart';
+import 'package:family_wish_list/app/domain/service/cached_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -246,22 +248,34 @@ class UserUsecase with RunUsecaseMixin {
     }
 
     // 権限確認
-    final service = ref.read(messagingServiceProvider);
-    unawaited(service.requestPermission());
+    unawaited(ref.read(messagingServiceProvider).requestPermission());
 
-    // TODO(yakitama5): トークンのタイムスタンプ更新については定時確認を行うこと
+    // トークンのリフレッシュ
+    await refreshFCMToken(user.uid);
+  }
+
+  /// トークンのリフレッシュ
+  Future<void> refreshFCMToken(String uid) async {
+    // 前回取得から30日経過している場合のみ処理する
+    final tokenTimestamp = await ref.read(tokenTimestampProvider.future);
+    final now = DateTime.now();
+    if (tokenTimestamp != null &&
+        now.add(const Duration(days: -30)).isBefore(tokenTimestamp)) {
+      return;
+    }
 
     // トークンを取得する
-    final token = await service.getToken();
+    final token = await ref.read(messagingServiceProvider).getToken();
     logger.d('FCM Token is $token');
 
     // トークンが存在しなければ追加、存在すればタイムスタンプを更新する
     if (token != null) {
-      unawaited(
-        ref
-            .read(notificationTokenRepositoryProvider)
-            .set(userId: user.uid, token: token),
-      );
+      await ref
+          .read(notificationTokenRepositoryProvider)
+          .set(userId: uid, token: token);
+
+      // ローカル上にタイムスタンプを設定
+      await ref.read(cachedServiceProvider).updateTokenTimestamp();
     }
   }
 

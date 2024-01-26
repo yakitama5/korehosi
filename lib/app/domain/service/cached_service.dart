@@ -20,4 +20,13 @@ abstract class CachedService {
 
   /// キャッシュ上に現在のグループIDを削除
   Future<bool> removeCurrentGroupId();
+
+  /// 前回のトークン更新タイムスタンプを取得
+  Future<DateTime?> fetchTokenTimestamp();
+
+  /// タイムスタンプの更新を行う
+  Future<bool> updateTokenTimestamp();
+
+  /// タイムスタンプの削除を行う
+  Future<bool> removeTokenTimestamp();
 }
