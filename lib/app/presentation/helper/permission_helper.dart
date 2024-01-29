@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../application/model/dialog_result.dart';
 import '../../application/state/android_info_provider.dart';
 import '../../application/state/locale_provider.dart';
 import '../components/importer.dart';
@@ -83,34 +84,47 @@ Future<bool> _request(
   Permission permission,
 ) async {
   final status = await permission.request();
-  final l10n = ref.read(l10nProvider);
 
   if (status.isGranted) {
     return true;
   } else if (status.isLimited || status.isPermanentlyDenied) {
-    late final String title;
-    late final String message;
-    switch (permission) {
-      case Permission.camera:
-        title = l10n.lackOfPermission(l10n.permissionCamera);
-        message = l10n.permissionWarnMessage(l10n.permissionCamera);
-      case Permission.storage:
-      case Permission.photos:
-      default:
-        title = l10n.lackOfPermission(l10n.permissionPhotos);
-        message = l10n.permissionWarnMessage(l10n.permissionPhotos);
-    }
     if (context.mounted) {
-      // TODO(yakitama5): メッセージ表示を共通化したい(プッシュ通知含めて)
-      await showAdaptiveOkDialog(
-        context,
-        title: title,
-        message: message,
+      await showPermissionDeinedDialog(
+        context: context,
+        ref: ref,
+        permission: permission,
       );
     }
-    await openAppSettings();
+
     return false;
   } else {
     return false;
+  }
+}
+
+Future<void> showPermissionDeinedDialog({
+  required BuildContext context,
+  required WidgetRef ref,
+  required Permission permission,
+}) async {
+  final l10n = ref.read(l10nProvider);
+  final cont = switch (permission) {
+    Permission.camera => l10n.permissionCamera,
+    Permission.storage || Permission.photos => l10n.permissionPhotos,
+    Permission.notification => l10n.permissionPushNotification,
+    _ => '',
+  };
+
+  // ダイアログを表示
+  final result = await showAdaptiveOkDialog(
+    context,
+    title: l10n.lackOfPermission(cont),
+    message: l10n.permissionWarnMessage(cont),
+    okLabel: l10n.openSettingsApp,
+  );
+
+  // ダイアログの結果に応じて設定アプリを表示
+  if (result == DialogResult.ok) {
+    await openAppSettings();
   }
 }

@@ -60,6 +60,7 @@ class SettingsPage extends HookConsumerWidget {
                   initialValue: snap.data == true,
                   onToggle: (value) async {
                     // 設定アプリから変更を促す
+                    // TODO(yakitama5): OFFも含めて共通化する `permission_helper.dart`
                     late final OkCancelResult result;
                     if (snap.data == true) {
                       result = await showOkCancelAlertDialog(
