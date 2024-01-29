@@ -6,13 +6,17 @@ part 'token_timestamp_provider.g.dart';
 
 /// FCMトークンのタイムスタンプを管理するProvider
 @riverpod
-Future<DateTime?> tokenTimestamp(TokenTimestampRef ref) async {
+Future<DateTime?> tokenTimestamp(
+  TokenTimestampRef ref, {
+  required String token,
+}) async {
   final authStatus = await ref.watch(authStatusProvider.future);
   if (authStatus == null) {
     return null;
   }
 
-  return ref
-      .read(cachedServiceProvider)
-      .fetchTokenTimestamp(uid: authStatus.uid);
+  return ref.read(cachedServiceProvider).fetchTokenTimestamp(
+        uid: authStatus.uid,
+        token: token,
+      );
 }

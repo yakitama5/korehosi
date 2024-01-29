@@ -256,27 +256,31 @@ class UserUsecase with RunUsecaseMixin {
 
   /// トークンのリフレッシュ
   Future<void> refreshFCMToken(String uid) async {
+    // トークンを取得する
+    final token = await ref.read(messagingServiceProvider).getToken();
+    logger.d('FCM Token is $token');
+    if (token == null) {
+      return;
+    }
+
     // 前回取得から30日経過している場合のみ処理する
-    final tokenTimestamp = await ref.read(tokenTimestampProvider.future);
+    final tokenTimestamp =
+        await ref.read(tokenTimestampProvider(token: token).future);
     final now = DateTime.now();
     if (tokenTimestamp != null &&
         now.add(const Duration(days: -30)).isBefore(tokenTimestamp)) {
       return;
     }
 
-    // トークンを取得する
-    final token = await ref.read(messagingServiceProvider).getToken();
-    logger.d('FCM Token is $token');
-
     // トークンが存在しなければ追加、存在すればタイムスタンプを更新する
-    if (token != null) {
-      await ref
-          .read(notificationTokenRepositoryProvider)
-          .set(userId: uid, token: token);
+    await ref
+        .read(notificationTokenRepositoryProvider)
+        .set(userId: uid, token: token);
 
-      // ローカル上にタイムスタンプを設定
-      await ref.read(cachedServiceProvider).updateTokenTimestamp(uid: uid);
-    }
+    // ローカル上にタイムスタンプを設定
+    await ref
+        .read(cachedServiceProvider)
+        .updateTokenTimestamp(uid: uid, token: token);
   }
 
   /// Permissionエラーを避けるために、キャッシュしていた取得データをリフレッシュする

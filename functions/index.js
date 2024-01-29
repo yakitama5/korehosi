@@ -199,7 +199,7 @@ exports.onWriteUser = functions
       onGroupDelete(event.before);
       break;
     default:
-    // do nothing
+      // do nothing
     }
   });
 
@@ -233,43 +233,44 @@ exports.onCreateMessage = functions
       }
 
       // トークンを取得して通知を投げる
-      // TODO(yakitama5): トークンをコレクション化したので、ソレに伴った書き方に修正
       const tokensRef = db.collection(USERS_PATH).doc(user.id)
         .collection(TOKENS_PATH);
-      const hoge = await tokensRef.get();
-      hoge.docs.forEach();
+      const tokensSnap = await tokensRef.get();
+      tokensSnap.docs.forEach((doc) => {
+        const token = doc.data().token;
+        console.log('Send to : ${token}');
 
-      // 通知の内容を作る処理
-      const token = user.fcmToken;
-      if (token != null) {
-        const message = {
-          notification: {
-            title: snap.data().body,
-            body: snap.data().body,
-          },
-          data: {
-            title: snap.data().body,
-            body: snap.data().body,
-          },
-          android: {
+        // 通知の内容を作る処理
+        if (token != null) {
+          const message = {
             notification: {
-              sound: 'default',
-              click_action: 'FLUTTER_NOTIFICATION_CLICK',
+              title: snap.data().body,
+              body: snap.data().body,
             },
-          },
-          apns: {
-            payload: {
-              aps: {
-                badge: 1,
+            data: {
+              title: snap.data().body,
+              body: snap.data().body,
+            },
+            android: {
+              notification: {
                 sound: 'default',
+                click_action: 'FLUTTER_NOTIFICATION_CLICK',
               },
             },
-          },
-          token: token,
-        };
+            apns: {
+              payload: {
+                aps: {
+                  badge: 1,
+                  sound: 'default',
+                },
+              },
+            },
+            token: token,
+          };
 
-        pushToDevice(token, message);
-      }
+          pushToDevice(token, message);
+        }
+      });
     }
   });
 
