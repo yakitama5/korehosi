@@ -218,8 +218,6 @@ exports.onCreateMessage = functions
     const groupData = groupSnap.data();
     const joinUids = groupData.joinUids;
     for (const userId of joinUids) {
-      console.log('Send to : ${userId}');
-
       // ユーザーが通知対象でなければリトライ
       const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
       const userSnap = await userRef.get();
@@ -238,7 +236,6 @@ exports.onCreateMessage = functions
       const tokensSnap = await tokensRef.get();
       tokensSnap.docs.forEach((doc) => {
         const token = doc.data().token;
-        console.log('Send to : ${token}');
 
         // 通知の内容を作る処理
         if (token != null) {
