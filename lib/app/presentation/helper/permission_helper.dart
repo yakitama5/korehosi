@@ -128,3 +128,30 @@ Future<void> showPermissionDeinedDialog({
     await openAppSettings();
   }
 }
+
+Future<void> showPermissionOffDialog({
+  required BuildContext context,
+  required WidgetRef ref,
+  required Permission permission,
+}) async {
+  final l10n = ref.read(l10nProvider);
+  final cont = switch (permission) {
+    Permission.camera => l10n.permissionCamera,
+    Permission.storage || Permission.photos => l10n.permissionPhotos,
+    Permission.notification => l10n.permissionPushNotification,
+    _ => '',
+  };
+
+  // ダイアログを表示
+  final result = await showAdaptiveOkDialog(
+    context,
+    title: l10n.confirmPermissionOffTitle(cont),
+    message: l10n.confirmPermissionOffMessage(cont),
+    okLabel: l10n.openSettingsApp,
+  );
+
+  // ダイアログの結果に応じて設定アプリを表示
+  if (result == DialogResult.ok) {
+    await openAppSettings();
+  }
+}
