@@ -17,6 +17,9 @@ class SettingsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ライフサイクルを検知してリビルドを行う
+    // ref.watch(appLifecycleStateProvider);
+
     final l10n = ref.watch(l10nProvider);
     final trailing = context.themeData.isCupertinoPlatform
         ? const Icon(Icons.arrow_forward_ios_rounded)
