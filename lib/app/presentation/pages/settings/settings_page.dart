@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../application/config/url_config.dart';
+import '../../../application/state/app_lifecycle_state_provider.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../components/importer.dart';
 import '../../helper/permission_helper.dart';
@@ -17,17 +17,18 @@ class SettingsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ライフサイクルを検知してリビルドを行う
-    // ref.watch(appLifecycleStateProvider);
+    // 設定アプリと行き来するため、ライフサイクルを検知してリビルドを行う
+    ref.watch(appLifecycleStateProvider);
 
     final l10n = ref.watch(l10nProvider);
+
+    // プラットフォームに応じたアイコンの出し訳
     final trailing = context.themeData.isCupertinoPlatform
         ? const Icon(Icons.arrow_forward_ios_rounded)
         : null;
 
-    // TODO(yakitama5): アプリのライフサイクルを監視して、バックグラウンドからの復帰時に権限を最新化する？
-    final isNotificationGranted =
-        useState(Permission.notification.status.isGranted);
+    // 通知権限の可否
+    final isNotificationGranted = Permission.notification.status.isGranted;
 
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +36,7 @@ class SettingsPage extends HookConsumerWidget {
         centerTitle: true,
       ),
       body: FutureBuilder(
-        future: isNotificationGranted.value,
+        future: isNotificationGranted,
         builder: (_, snap) => ThemedSettingsList(
           sections: [
             SettingsSection(
