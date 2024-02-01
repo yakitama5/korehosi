@@ -59,6 +59,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="@string/app_web_domain" android:pathPrefix="/share_link" />
             </intent-filter>
+            <!-- FCM -->
+            <intent-filter>
+                <action android:name="ADD_WISH_ITEM_NOTIFICATION_CLICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

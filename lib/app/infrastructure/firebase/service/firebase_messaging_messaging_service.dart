@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/notification/interface/messaging_service.dart';
+import '../../../domain/notification/value_object/notification_event.dart';
 import '../../../domain/notification/value_object/notification_permission.dart';
 import '../../../domain/notification/value_object/notification_target.dart';
 import '../firestore/model/firestore_notification_message_model.dart';
@@ -41,35 +42,14 @@ class FirebaseMessagingMessagingService implements MessagingService {
   }
 
   @override
-  Future<void> sendMessageToAdult({
+  Future<void> sendMessage({
     required String groupId,
-    required String message,
     required String uid,
-  }) =>
-      _sendMessage(groupId, message, uid, NotificationTarget.adult);
-
-  @override
-  Future<void> sendMessageToAll({
-    required String groupId,
     required String message,
-    required String uid,
-  }) =>
-      _sendMessage(groupId, message, uid, NotificationTarget.all);
-
-  @override
-  Future<void> sendMessageToChild({
-    required String groupId,
-    required String message,
-    required String uid,
-  }) =>
-      _sendMessage(groupId, message, uid, NotificationTarget.child);
-
-  Future<void> _sendMessage(
-    String groupId,
-    String message,
-    String uid,
-    NotificationTarget target,
-  ) {
+    required NotificationTarget target,
+    required NotificationEvent event,
+    required String path,
+  }) {
     // IDが指定されていなければ、新しいドキュメントを取得
     final docRef = ref.read(
       notificationMessageDocumentRefProvider(groupId: groupId),
@@ -80,6 +60,8 @@ class FirebaseMessagingMessagingService implements MessagingService {
       id: docRef.id,
       body: message,
       target: target,
+      event: event,
+      path: path,
       uid: uid,
     );
 

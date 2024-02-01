@@ -24,6 +24,9 @@ mixin _$FirestoreNotificationMessageModel {
   String get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   NotificationTarget get target => throw _privateConstructorUsedError;
+  @notificationEventKey
+  NotificationEvent get event => throw _privateConstructorUsedError;
+  String? get path => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   @timestampKey
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -48,6 +51,8 @@ abstract class $FirestoreNotificationMessageModelCopyWith<$Res> {
       {String id,
       String body,
       NotificationTarget target,
+      @notificationEventKey NotificationEvent event,
+      String? path,
       String uid,
       @timestampKey DateTime? createdAt,
       @timestampKey DateTime? updatedAt});
@@ -70,6 +75,8 @@ class _$FirestoreNotificationMessageModelCopyWithImpl<$Res,
     Object? id = null,
     Object? body = null,
     Object? target = null,
+    Object? event = null,
+    Object? path = freezed,
     Object? uid = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -87,6 +94,14 @@ class _$FirestoreNotificationMessageModelCopyWithImpl<$Res,
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as NotificationTarget,
+      event: null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as NotificationEvent,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -116,6 +131,8 @@ abstract class _$$FirestoreNotificationMessageModelImplCopyWith<$Res>
       {String id,
       String body,
       NotificationTarget target,
+      @notificationEventKey NotificationEvent event,
+      String? path,
       String uid,
       @timestampKey DateTime? createdAt,
       @timestampKey DateTime? updatedAt});
@@ -137,6 +154,8 @@ class __$$FirestoreNotificationMessageModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? body = null,
     Object? target = null,
+    Object? event = null,
+    Object? path = freezed,
     Object? uid = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -154,6 +173,14 @@ class __$$FirestoreNotificationMessageModelImplCopyWithImpl<$Res>
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as NotificationTarget,
+      event: null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as NotificationEvent,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -178,6 +205,8 @@ class _$FirestoreNotificationMessageModelImpl
       {required this.id,
       required this.body,
       required this.target,
+      @notificationEventKey required this.event,
+      this.path,
       required this.uid,
       @timestampKey this.createdAt,
       @timestampKey this.updatedAt});
@@ -193,6 +222,11 @@ class _$FirestoreNotificationMessageModelImpl
   @override
   final NotificationTarget target;
   @override
+  @notificationEventKey
+  final NotificationEvent event;
+  @override
+  final String? path;
+  @override
   final String uid;
   @override
   @timestampKey
@@ -203,7 +237,7 @@ class _$FirestoreNotificationMessageModelImpl
 
   @override
   String toString() {
-    return 'FirestoreNotificationMessageModel(id: $id, body: $body, target: $target, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FirestoreNotificationMessageModel(id: $id, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -214,6 +248,8 @@ class _$FirestoreNotificationMessageModelImpl
             (identical(other.id, id) || other.id == id) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.target, target) || other.target == target) &&
+            (identical(other.event, event) || other.event == event) &&
+            (identical(other.path, path) || other.path == path) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -223,8 +259,8 @@ class _$FirestoreNotificationMessageModelImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, body, target, uid, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, body, target, event, path, uid, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -248,6 +284,8 @@ abstract class _FirestoreNotificationMessageModel
           {required final String id,
           required final String body,
           required final NotificationTarget target,
+          @notificationEventKey required final NotificationEvent event,
+          final String? path,
           required final String uid,
           @timestampKey final DateTime? createdAt,
           @timestampKey final DateTime? updatedAt}) =
@@ -263,6 +301,11 @@ abstract class _FirestoreNotificationMessageModel
   String get body;
   @override
   NotificationTarget get target;
+  @override
+  @notificationEventKey
+  NotificationEvent get event;
+  @override
+  String? get path;
   @override
   String get uid;
   @override

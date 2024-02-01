@@ -199,7 +199,7 @@ exports.onWriteUser = functions
       onGroupDelete(event.before);
       break;
     default:
-      // do nothing
+    // do nothing
     }
   });
 
@@ -224,7 +224,8 @@ exports.onCreateMessage = functions
       const user = userSnap.data();
       const target = snap.data().target;
 
-      const isMyOperation = user.id == snap.data().uid;
+      const messageData = snap.data();
+      const isMyOperation = user.id == messageData.uid;
       const isTargetGroup = target == 'all' || target == user.ageGroup;
       if (isMyOperation || !isTargetGroup) {
         continue;
@@ -241,17 +242,16 @@ exports.onCreateMessage = functions
         if (token != null) {
           const message = {
             notification: {
-              title: snap.data().body,
-              body: snap.data().body,
+              title: messageData.body,
+              body: messageData.body,
             },
             data: {
-              title: snap.data().body,
-              body: snap.data().body,
+              path: messageData.path,
             },
             android: {
               notification: {
                 sound: 'default',
-                click_action: 'FLUTTER_NOTIFICATION_CLICK',
+                click_action: messageData.event,
               },
             },
             apns: {

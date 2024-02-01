@@ -1,3 +1,6 @@
+import 'package:family_wish_list/app/domain/notification/value_object/notification_event.dart';
+import 'package:family_wish_list/app/domain/notification/value_object/notification_target.dart';
+import 'package:family_wish_list/app/presentation/routes/importer.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -85,10 +88,13 @@ class ItemUsecase with RunUsecaseMixin {
 
           // 通知処理
           final user = ref.read(authUserProvider).value!;
-          await ref.read(messagingServiceProvider).sendMessageToAll(
+          await ref.read(messagingServiceProvider).sendMessage(
                 groupId: groupId,
                 message: l10n.notificationMessageAddItem(user.dispName(l10n)),
                 uid: user.id,
+                target: NotificationTarget.all,
+                event: NotificationEvent.addWishItem,
+                path: ItemRouteData(itemId).location,
               );
         },
       );

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../value_object/notification_event.dart';
 import '../value_object/notification_target.dart';
 
 part 'notification_message.freezed.dart';
@@ -11,6 +12,8 @@ class NotificationMessage with _$NotificationMessage {
     required String id,
     required String body,
     required NotificationTarget target,
+    required NotificationEvent event,
+    String? path,
     required String uid,
     DateTime? createdAt,
     DateTime? updatedAt,

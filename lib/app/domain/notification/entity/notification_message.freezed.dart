@@ -23,6 +23,8 @@ mixin _$NotificationMessage {
   String get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   NotificationTarget get target => throw _privateConstructorUsedError;
+  NotificationEvent get event => throw _privateConstructorUsedError;
+  String? get path => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
@@ -43,6 +45,8 @@ abstract class $NotificationMessageCopyWith<$Res> {
       {String id,
       String body,
       NotificationTarget target,
+      NotificationEvent event,
+      String? path,
       String uid,
       DateTime? createdAt,
       DateTime? updatedAt});
@@ -64,6 +68,8 @@ class _$NotificationMessageCopyWithImpl<$Res, $Val extends NotificationMessage>
     Object? id = null,
     Object? body = null,
     Object? target = null,
+    Object? event = null,
+    Object? path = freezed,
     Object? uid = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -81,6 +87,14 @@ class _$NotificationMessageCopyWithImpl<$Res, $Val extends NotificationMessage>
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as NotificationTarget,
+      event: null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as NotificationEvent,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -109,6 +123,8 @@ abstract class _$$NotificationMessageImplCopyWith<$Res>
       {String id,
       String body,
       NotificationTarget target,
+      NotificationEvent event,
+      String? path,
       String uid,
       DateTime? createdAt,
       DateTime? updatedAt});
@@ -128,6 +144,8 @@ class __$$NotificationMessageImplCopyWithImpl<$Res>
     Object? id = null,
     Object? body = null,
     Object? target = null,
+    Object? event = null,
+    Object? path = freezed,
     Object? uid = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
@@ -145,6 +163,14 @@ class __$$NotificationMessageImplCopyWithImpl<$Res>
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
               as NotificationTarget,
+      event: null == event
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as NotificationEvent,
+      path: freezed == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -168,6 +194,8 @@ class _$NotificationMessageImpl implements _NotificationMessage {
       {required this.id,
       required this.body,
       required this.target,
+      required this.event,
+      this.path,
       required this.uid,
       this.createdAt,
       this.updatedAt});
@@ -182,6 +210,10 @@ class _$NotificationMessageImpl implements _NotificationMessage {
   @override
   final NotificationTarget target;
   @override
+  final NotificationEvent event;
+  @override
+  final String? path;
+  @override
   final String uid;
   @override
   final DateTime? createdAt;
@@ -190,7 +222,7 @@ class _$NotificationMessageImpl implements _NotificationMessage {
 
   @override
   String toString() {
-    return 'NotificationMessage(id: $id, body: $body, target: $target, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'NotificationMessage(id: $id, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -201,6 +233,8 @@ class _$NotificationMessageImpl implements _NotificationMessage {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.target, target) || other.target == target) &&
+            (identical(other.event, event) || other.event == event) &&
+            (identical(other.path, path) || other.path == path) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -210,8 +244,8 @@ class _$NotificationMessageImpl implements _NotificationMessage {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, body, target, uid, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType, id, body, target, event, path, uid, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -233,6 +267,8 @@ abstract class _NotificationMessage implements NotificationMessage {
       {required final String id,
       required final String body,
       required final NotificationTarget target,
+      required final NotificationEvent event,
+      final String? path,
       required final String uid,
       final DateTime? createdAt,
       final DateTime? updatedAt}) = _$NotificationMessageImpl;
@@ -246,6 +282,10 @@ abstract class _NotificationMessage implements NotificationMessage {
   String get body;
   @override
   NotificationTarget get target;
+  @override
+  NotificationEvent get event;
+  @override
+  String? get path;
   @override
   String get uid;
   @override

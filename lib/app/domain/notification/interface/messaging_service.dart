@@ -1,6 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../value_object/notification_event.dart';
 import '../value_object/notification_permission.dart';
+import '../value_object/notification_target.dart';
 
 part 'messaging_service.g.dart';
 
@@ -15,21 +17,12 @@ abstract class MessagingService {
 
   Future<String?> getToken();
 
-  Future<void> sendMessageToAll({
+  Future<void> sendMessage({
     required String groupId,
-    required String message,
     required String uid,
-  });
-
-  Future<void> sendMessageToAdult({
-    required String groupId,
     required String message,
-    required String uid,
-  });
-
-  Future<void> sendMessageToChild({
-    required String groupId,
-    required String message,
-    required String uid,
+    required NotificationTarget target,
+    required NotificationEvent event,
+    required String path,
   });
 }
