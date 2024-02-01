@@ -74,8 +74,8 @@ class SettingsPage extends HookConsumerWidget {
                       );
                     }
                   },
-                  title: const Text('プッシュ通知'),
-                  description: const Text('グループ内でほしいものが追加された場合に通知が受け取れます'),
+                  title: Text(l10n.pushNotification),
+                  description: Text(l10n.pushNotificationDescription),
                 ),
               ],
             ),

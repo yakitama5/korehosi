@@ -303,5 +303,13 @@
         "placeholders": {
             "name": {}
         }
+    },
+    "pushNotification": "プッシュ通知",
+    "@pushNotification": {
+        "description": "Push notification"
+    },
+    "pushNotificationDescription": "グループ内でほしいものが追加された場合に通知が受け取れます",
+    "@pushNotificationDescription": {
+        "description": "Push notification description"
     }
 }
