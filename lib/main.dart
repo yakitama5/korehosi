@@ -4,7 +4,6 @@ import 'package:family_wish_list/app/domain/notification/interface/notification_
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,13 +47,6 @@ import 'app/presentation/app.dart';
 import 'firebase_options.dart';
 import 'firebase_options_dev.dart' as dev;
 
-/// バックグラウンドメッセージ取得時
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // TODO(yakitama5): インフラ層に移動したい
-  debugPrint('Handling a background message: ${message.messageId}');
-}
-
 void main() async {
   // Flutter Initialize
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,9 +66,6 @@ void main() async {
   await Firebase.initializeApp(
     options: firebaseOptions,
   );
-
-  // FCM のバックグラウンド設定
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   // App Check の初期化
   await FirebaseAppCheck.instance.activate(
