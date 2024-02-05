@@ -1,18 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/notification/entity/notification_message.dart';
+import '../../../../domain/notification/entity/group_message.dart';
 import '../../../../domain/notification/value_object/notification_event.dart';
 import '../../../../domain/notification/value_object/notification_target.dart';
 import '../converter/json_key.dart';
 
-part 'firestore_notification_message_model.freezed.dart';
-part 'firestore_notification_message_model.g.dart';
+part 'firestore_group_message_model.freezed.dart';
+part 'firestore_group_message_model.g.dart';
 
 /// `/message/{messageId}`ドキュメントのモデル
 @freezed
-class FirestoreNotificationMessageModel
-    with _$FirestoreNotificationMessageModel {
-  const factory FirestoreNotificationMessageModel({
+class FirestoreGroupMessageModel with _$FirestoreGroupMessageModel {
+  const factory FirestoreGroupMessageModel({
     required String id,
     required String body,
     required NotificationTarget target,
@@ -21,18 +20,17 @@ class FirestoreNotificationMessageModel
     required String uid,
     @timestampKey DateTime? createdAt,
     @timestampKey DateTime? updatedAt,
-  }) = _FirestoreNotificationMessageModel;
+  }) = _FirestoreGroupMessageModel;
 
-  factory FirestoreNotificationMessageModel.fromJson(
+  factory FirestoreGroupMessageModel.fromJson(
     Map<String, dynamic> json,
   ) =>
-      _$FirestoreNotificationMessageModelFromJson(json);
+      _$FirestoreGroupMessageModelFromJson(json);
 }
 
-extension FirestoreNotificationMessageModelX
-    on FirestoreNotificationMessageModel {
+extension FirestoreGroupMessageModelX on FirestoreGroupMessageModel {
   /// ドメイン層で定義しているエンティティへの変換
-  NotificationMessage toDomainModel() => NotificationMessage(
+  GroupMessage toDomainModel() => GroupMessage(
         id: id,
         body: body,
         target: target,

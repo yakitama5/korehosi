@@ -5,8 +5,8 @@ import '../../../domain/notification/interface/messaging_service.dart';
 import '../../../domain/notification/value_object/notification_event.dart';
 import '../../../domain/notification/value_object/notification_permission.dart';
 import '../../../domain/notification/value_object/notification_target.dart';
-import '../firestore/model/firestore_notification_message_model.dart';
-import '../firestore/state/firestore_notification_message_provider.dart';
+import '../firestore/model/firestore_group_message_model.dart';
+import '../firestore/state/firestore_group_message_provider.dart';
 import '../messaging/state/firebase_messaging.dart';
 
 /// Firebaseを利用したサービスの実装
@@ -52,11 +52,11 @@ class FirebaseMessagingMessagingService implements MessagingService {
   }) {
     // IDが指定されていなければ、新しいドキュメントを取得
     final docRef = ref.read(
-      notificationMessageDocumentRefProvider(groupId: groupId),
+      groupMessageDocumentRefProvider(groupId: groupId),
     );
 
     // Firestore用のモデルに変換
-    final docModel = FirestoreNotificationMessageModel(
+    final docModel = FirestoreGroupMessageModel(
       id: docRef.id,
       body: message,
       target: target,

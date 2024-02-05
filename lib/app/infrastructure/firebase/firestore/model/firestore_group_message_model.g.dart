@@ -1,47 +1,39 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'notification_message.dart';
+part of 'firestore_group_message_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NotificationMessageImpl _$$NotificationMessageImplFromJson(
+_$FirestoreGroupMessageModelImpl _$$FirestoreGroupMessageModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$NotificationMessageImpl(
+    _$FirestoreGroupMessageModelImpl(
       id: json['id'] as String,
       body: json['body'] as String,
       target: $enumDecode(_$NotificationTargetEnumMap, json['target']),
-      event: $enumDecode(_$NotificationEventEnumMap, json['event']),
+      event: notificationEventFromStringValue(json['event']),
       path: json['path'] as String?,
       uid: json['uid'] as String,
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: dateFromTimestampValue(json['createdAt']),
+      updatedAt: dateFromTimestampValue(json['updatedAt']),
     );
 
-Map<String, dynamic> _$$NotificationMessageImplToJson(
-        _$NotificationMessageImpl instance) =>
+Map<String, dynamic> _$$FirestoreGroupMessageModelImplToJson(
+        _$FirestoreGroupMessageModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'body': instance.body,
       'target': _$NotificationTargetEnumMap[instance.target]!,
-      'event': _$NotificationEventEnumMap[instance.event]!,
+      'event': stringFromNotificationEventValue(instance.event),
       'path': instance.path,
       'uid': instance.uid,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': timestampFromDateValue(instance.createdAt),
+      'updatedAt': timestampFromDateValue(instance.updatedAt),
     };
 
 const _$NotificationTargetEnumMap = {
   NotificationTarget.all: 'all',
   NotificationTarget.adult: 'adult',
   NotificationTarget.child: 'child',
-};
-
-const _$NotificationEventEnumMap = {
-  NotificationEvent.addWishItem: 'addWishItem',
 };

@@ -3,21 +3,20 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../firestore/extension/collection_reference.dart';
 import '../constants/columns.dart';
-import '../model/firestore_notification_message_model.dart';
+import '../model/firestore_group_message_model.dart';
 import 'firestore.dart';
 
-part 'firestore_notification_message_provider.g.dart';
+part 'firestore_group_message_provider.g.dart';
 
 /// 通知メッセージコレクションの参照
 @riverpod
-CollectionReference<FirestoreNotificationMessageModel>
-    notificationMessageCollectionRef(
-  NotificationMessageCollectionRefRef ref, {
+CollectionReference<FirestoreGroupMessageModel> groupMessageCollectionRef(
+  GroupMessageCollectionRefRef ref, {
   required String groupId,
 }) {
   return ref.watch(firestoreProvider).messagesRef(groupId).withConverter(
         fromFirestore: (snapshot, options) =>
-            FirestoreNotificationMessageModel.fromJson(snapshot.data()!),
+            FirestoreGroupMessageModel.fromJson(snapshot.data()!),
         toFirestore: (value, options) => {
           ...value.toJson(),
 
@@ -31,12 +30,11 @@ CollectionReference<FirestoreNotificationMessageModel>
 
 /// 通知メッセージドキュメントの参照
 @riverpod
-DocumentReference<FirestoreNotificationMessageModel>
-    notificationMessageDocumentRef(
-  NotificationMessageDocumentRefRef ref, {
+DocumentReference<FirestoreGroupMessageModel> groupMessageDocumentRef(
+  GroupMessageDocumentRefRef ref, {
   required String groupId,
   String? notificationMessageId,
 }) =>
-        ref
-            .watch(notificationMessageCollectionRefProvider(groupId: groupId))
-            .doc(notificationMessageId);
+    ref
+        .watch(groupMessageCollectionRefProvider(groupId: groupId))
+        .doc(notificationMessageId);

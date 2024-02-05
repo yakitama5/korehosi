@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'firestore_notification_message_model.dart';
+part of 'group_message.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,55 +14,48 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FirestoreNotificationMessageModel _$FirestoreNotificationMessageModelFromJson(
-    Map<String, dynamic> json) {
-  return _FirestoreNotificationMessageModel.fromJson(json);
+GroupMessage _$GroupMessageFromJson(Map<String, dynamic> json) {
+  return _GroupMessage.fromJson(json);
 }
 
 /// @nodoc
-mixin _$FirestoreNotificationMessageModel {
+mixin _$GroupMessage {
   String get id => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   NotificationTarget get target => throw _privateConstructorUsedError;
-  @notificationEventKey
   NotificationEvent get event => throw _privateConstructorUsedError;
   String? get path => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
-  @timestampKey
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  @timestampKey
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FirestoreNotificationMessageModelCopyWith<FirestoreNotificationMessageModel>
-      get copyWith => throw _privateConstructorUsedError;
+  $GroupMessageCopyWith<GroupMessage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FirestoreNotificationMessageModelCopyWith<$Res> {
-  factory $FirestoreNotificationMessageModelCopyWith(
-          FirestoreNotificationMessageModel value,
-          $Res Function(FirestoreNotificationMessageModel) then) =
-      _$FirestoreNotificationMessageModelCopyWithImpl<$Res,
-          FirestoreNotificationMessageModel>;
+abstract class $GroupMessageCopyWith<$Res> {
+  factory $GroupMessageCopyWith(
+          GroupMessage value, $Res Function(GroupMessage) then) =
+      _$GroupMessageCopyWithImpl<$Res, GroupMessage>;
   @useResult
   $Res call(
       {String id,
       String body,
       NotificationTarget target,
-      @notificationEventKey NotificationEvent event,
+      NotificationEvent event,
       String? path,
       String uid,
-      @timestampKey DateTime? createdAt,
-      @timestampKey DateTime? updatedAt});
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
-class _$FirestoreNotificationMessageModelCopyWithImpl<$Res,
-        $Val extends FirestoreNotificationMessageModel>
-    implements $FirestoreNotificationMessageModelCopyWith<$Res> {
-  _$FirestoreNotificationMessageModelCopyWithImpl(this._value, this._then);
+class _$GroupMessageCopyWithImpl<$Res, $Val extends GroupMessage>
+    implements $GroupMessageCopyWith<$Res> {
+  _$GroupMessageCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -119,33 +112,30 @@ class _$FirestoreNotificationMessageModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$FirestoreNotificationMessageModelImplCopyWith<$Res>
-    implements $FirestoreNotificationMessageModelCopyWith<$Res> {
-  factory _$$FirestoreNotificationMessageModelImplCopyWith(
-          _$FirestoreNotificationMessageModelImpl value,
-          $Res Function(_$FirestoreNotificationMessageModelImpl) then) =
-      __$$FirestoreNotificationMessageModelImplCopyWithImpl<$Res>;
+abstract class _$$GroupMessageImplCopyWith<$Res>
+    implements $GroupMessageCopyWith<$Res> {
+  factory _$$GroupMessageImplCopyWith(
+          _$GroupMessageImpl value, $Res Function(_$GroupMessageImpl) then) =
+      __$$GroupMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       String body,
       NotificationTarget target,
-      @notificationEventKey NotificationEvent event,
+      NotificationEvent event,
       String? path,
       String uid,
-      @timestampKey DateTime? createdAt,
-      @timestampKey DateTime? updatedAt});
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
-class __$$FirestoreNotificationMessageModelImplCopyWithImpl<$Res>
-    extends _$FirestoreNotificationMessageModelCopyWithImpl<$Res,
-        _$FirestoreNotificationMessageModelImpl>
-    implements _$$FirestoreNotificationMessageModelImplCopyWith<$Res> {
-  __$$FirestoreNotificationMessageModelImplCopyWithImpl(
-      _$FirestoreNotificationMessageModelImpl _value,
-      $Res Function(_$FirestoreNotificationMessageModelImpl) _then)
+class __$$GroupMessageImplCopyWithImpl<$Res>
+    extends _$GroupMessageCopyWithImpl<$Res, _$GroupMessageImpl>
+    implements _$$GroupMessageImplCopyWith<$Res> {
+  __$$GroupMessageImplCopyWithImpl(
+      _$GroupMessageImpl _value, $Res Function(_$GroupMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -160,7 +150,7 @@ class __$$FirestoreNotificationMessageModelImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$FirestoreNotificationMessageModelImpl(
+    return _then(_$GroupMessageImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -199,21 +189,19 @@ class __$$FirestoreNotificationMessageModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$FirestoreNotificationMessageModelImpl
-    implements _FirestoreNotificationMessageModel {
-  const _$FirestoreNotificationMessageModelImpl(
+class _$GroupMessageImpl implements _GroupMessage {
+  const _$GroupMessageImpl(
       {required this.id,
       required this.body,
       required this.target,
-      @notificationEventKey required this.event,
+      required this.event,
       this.path,
       required this.uid,
-      @timestampKey this.createdAt,
-      @timestampKey this.updatedAt});
+      this.createdAt,
+      this.updatedAt});
 
-  factory _$FirestoreNotificationMessageModelImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$FirestoreNotificationMessageModelImplFromJson(json);
+  factory _$GroupMessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GroupMessageImplFromJson(json);
 
   @override
   final String id;
@@ -222,29 +210,26 @@ class _$FirestoreNotificationMessageModelImpl
   @override
   final NotificationTarget target;
   @override
-  @notificationEventKey
   final NotificationEvent event;
   @override
   final String? path;
   @override
   final String uid;
   @override
-  @timestampKey
   final DateTime? createdAt;
   @override
-  @timestampKey
   final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'FirestoreNotificationMessageModel(id: $id, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'GroupMessage(id: $id, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FirestoreNotificationMessageModelImpl &&
+            other is _$GroupMessageImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.target, target) || other.target == target) &&
@@ -265,35 +250,30 @@ class _$FirestoreNotificationMessageModelImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FirestoreNotificationMessageModelImplCopyWith<
-          _$FirestoreNotificationMessageModelImpl>
-      get copyWith => __$$FirestoreNotificationMessageModelImplCopyWithImpl<
-          _$FirestoreNotificationMessageModelImpl>(this, _$identity);
+  _$$GroupMessageImplCopyWith<_$GroupMessageImpl> get copyWith =>
+      __$$GroupMessageImplCopyWithImpl<_$GroupMessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$FirestoreNotificationMessageModelImplToJson(
+    return _$$GroupMessageImplToJson(
       this,
     );
   }
 }
 
-abstract class _FirestoreNotificationMessageModel
-    implements FirestoreNotificationMessageModel {
-  const factory _FirestoreNotificationMessageModel(
-          {required final String id,
-          required final String body,
-          required final NotificationTarget target,
-          @notificationEventKey required final NotificationEvent event,
-          final String? path,
-          required final String uid,
-          @timestampKey final DateTime? createdAt,
-          @timestampKey final DateTime? updatedAt}) =
-      _$FirestoreNotificationMessageModelImpl;
+abstract class _GroupMessage implements GroupMessage {
+  const factory _GroupMessage(
+      {required final String id,
+      required final String body,
+      required final NotificationTarget target,
+      required final NotificationEvent event,
+      final String? path,
+      required final String uid,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$GroupMessageImpl;
 
-  factory _FirestoreNotificationMessageModel.fromJson(
-          Map<String, dynamic> json) =
-      _$FirestoreNotificationMessageModelImpl.fromJson;
+  factory _GroupMessage.fromJson(Map<String, dynamic> json) =
+      _$GroupMessageImpl.fromJson;
 
   @override
   String get id;
@@ -302,21 +282,17 @@ abstract class _FirestoreNotificationMessageModel
   @override
   NotificationTarget get target;
   @override
-  @notificationEventKey
   NotificationEvent get event;
   @override
   String? get path;
   @override
   String get uid;
   @override
-  @timestampKey
   DateTime? get createdAt;
   @override
-  @timestampKey
   DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$FirestoreNotificationMessageModelImplCopyWith<
-          _$FirestoreNotificationMessageModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$GroupMessageImplCopyWith<_$GroupMessageImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
