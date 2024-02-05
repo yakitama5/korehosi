@@ -12,6 +12,7 @@ import '../application/config/breakpoint_config.dart';
 import '../application/model/breakpoint.dart';
 import '../application/state/loading_provider.dart';
 import '../application/state/locale_provider.dart';
+import '../application/state/notification_message_provider.dart';
 import '../application/state/reactive_deep_link_provider.dart';
 import '../application/state/theme_mode_provider.dart';
 import '../application/validator/validation_messages.dart';
@@ -92,6 +93,7 @@ class _AppBaseContainer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // アプリ内共通Providerの監視
     _dynamicLinkLister(context, ref);
+    _notificationLister(context, ref);
 
     return ResponsiveBreakpoints.builder(
       child: Stack(
@@ -126,6 +128,23 @@ class _AppBaseContainer extends HookConsumerWidget {
 
         // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
         ref.read(routerProvider).go(uri.path);
+      },
+    );
+  }
+
+  void _notificationLister(BuildContext context, WidgetRef ref) {
+    // 通知イベント判定
+    ref.listen(
+      notificationMessageProvider,
+      (previous, next) async {
+        final message = next.value;
+        final path = message?.data['path'];
+        if (path == null) {
+          return;
+        }
+
+        // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
+        ref.read(routerProvider).go(path as String);
       },
     );
   }
