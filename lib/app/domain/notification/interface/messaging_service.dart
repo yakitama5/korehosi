@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../entity/notification_message.dart';
 import '../value_object/notification_event.dart';
 import '../value_object/notification_permission.dart';
 import '../value_object/notification_target.dart';
@@ -16,6 +17,10 @@ abstract class MessagingService {
   Future<NotificationPermission> requestPermission();
 
   Future<String?> getToken();
+
+  Future<NotificationMessage?> getInitialMessage();
+
+  Stream<NotificationMessage> onMessageOpenedApp();
 
   Future<void> sendMessage({
     required String groupId,

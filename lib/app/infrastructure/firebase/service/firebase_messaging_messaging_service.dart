@@ -1,6 +1,8 @@
+import 'package:family_wish_list/app/infrastructure/firebase/messaging/extension/remote_message_extension.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../domain/notification/entity/notification_message.dart';
 import '../../../domain/notification/interface/messaging_service.dart';
 import '../../../domain/notification/value_object/notification_event.dart';
 import '../../../domain/notification/value_object/notification_permission.dart';
@@ -32,14 +34,16 @@ class FirebaseMessagingMessagingService implements MessagingService {
     };
   }
 
-  // TODO(yakitama5): `RemoteMessage`はFirebaseMessageに依存してしまうので変更すること
-  Future<RemoteMessage?> getInitialMessage() =>
-      ref.read(firebaseMessagingProvider).getInitialMessage();
+  @override
+  Future<NotificationMessage?> getInitialMessage() => ref
+      .read(firebaseMessagingProvider)
+      .getInitialMessage()
+      .then((value) => value?.toDomainModel());
 
-  // TODO(yakitama5): `RemoteMessage`はFirebaseMessageに依存してしまうので変更すること
-  Stream<RemoteMessage> onMessageOpenedApp() {
-    return FirebaseMessaging.onMessageOpenedApp;
-  }
+  @override
+  Stream<NotificationMessage> onMessageOpenedApp() =>
+      FirebaseMessaging.onMessageOpenedApp
+          .map((event) => event.toDomainModel());
 
   @override
   Future<void> sendMessage({

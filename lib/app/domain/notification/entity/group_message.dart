@@ -6,6 +6,7 @@ import '../value_object/notification_target.dart';
 part 'group_message.freezed.dart';
 part 'group_message.g.dart';
 
+/// グループ内に向けたメッセージ
 @freezed
 class GroupMessage with _$GroupMessage {
   const factory GroupMessage({
