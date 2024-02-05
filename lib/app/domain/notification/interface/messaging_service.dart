@@ -25,7 +25,8 @@ abstract class MessagingService {
   Future<void> sendMessage({
     required String groupId,
     required String uid,
-    required String message,
+    required String title,
+    required String body,
     required NotificationTarget target,
     required NotificationEvent event,
     required String path,

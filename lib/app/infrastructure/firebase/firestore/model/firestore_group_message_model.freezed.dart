@@ -22,6 +22,7 @@ FirestoreGroupMessageModel _$FirestoreGroupMessageModelFromJson(
 /// @nodoc
 mixin _$FirestoreGroupMessageModel {
   String get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   NotificationTarget get target => throw _privateConstructorUsedError;
   @notificationEventKey
@@ -48,6 +49,7 @@ abstract class $FirestoreGroupMessageModelCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String title,
       String body,
       NotificationTarget target,
       @notificationEventKey NotificationEvent event,
@@ -72,6 +74,7 @@ class _$FirestoreGroupMessageModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? id = null,
+    Object? title = null,
     Object? body = null,
     Object? target = null,
     Object? event = null,
@@ -84,6 +87,10 @@ class _$FirestoreGroupMessageModelCopyWithImpl<$Res,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       body: null == body
           ? _value.body
@@ -128,6 +135,7 @@ abstract class _$$FirestoreGroupMessageModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
+      String title,
       String body,
       NotificationTarget target,
       @notificationEventKey NotificationEvent event,
@@ -151,6 +159,7 @@ class __$$FirestoreGroupMessageModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? title = null,
     Object? body = null,
     Object? target = null,
     Object? event = null,
@@ -163,6 +172,10 @@ class __$$FirestoreGroupMessageModelImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       body: null == body
           ? _value.body
@@ -201,6 +214,7 @@ class __$$FirestoreGroupMessageModelImplCopyWithImpl<$Res>
 class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
   const _$FirestoreGroupMessageModelImpl(
       {required this.id,
+      required this.title,
       required this.body,
       required this.target,
       @notificationEventKey required this.event,
@@ -215,6 +229,8 @@ class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
 
   @override
   final String id;
+  @override
+  final String title;
   @override
   final String body;
   @override
@@ -235,7 +251,7 @@ class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
 
   @override
   String toString() {
-    return 'FirestoreGroupMessageModel(id: $id, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FirestoreGroupMessageModel(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -244,6 +260,7 @@ class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
         (other.runtimeType == runtimeType &&
             other is _$FirestoreGroupMessageModelImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.target, target) || other.target == target) &&
             (identical(other.event, event) || other.event == event) &&
@@ -257,8 +274,8 @@ class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, body, target, event, path, uid, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, title, body, target, event,
+      path, uid, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -279,6 +296,7 @@ abstract class _FirestoreGroupMessageModel
     implements FirestoreGroupMessageModel {
   const factory _FirestoreGroupMessageModel(
           {required final String id,
+          required final String title,
           required final String body,
           required final NotificationTarget target,
           @notificationEventKey required final NotificationEvent event,
@@ -293,6 +311,8 @@ abstract class _FirestoreGroupMessageModel
 
   @override
   String get id;
+  @override
+  String get title;
   @override
   String get body;
   @override

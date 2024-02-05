@@ -9,6 +9,7 @@ part of 'group_message.dart';
 _$GroupMessageImpl _$$GroupMessageImplFromJson(Map<String, dynamic> json) =>
     _$GroupMessageImpl(
       id: json['id'] as String,
+      title: json['title'] as String,
       body: json['body'] as String,
       target: $enumDecode(_$NotificationTargetEnumMap, json['target']),
       event: $enumDecode(_$NotificationEventEnumMap, json['event']),
@@ -25,6 +26,7 @@ _$GroupMessageImpl _$$GroupMessageImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$GroupMessageImplToJson(_$GroupMessageImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'title': instance.title,
       'body': instance.body,
       'target': _$NotificationTargetEnumMap[instance.target]!,
       'event': _$NotificationEventEnumMap[instance.event]!,

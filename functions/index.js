@@ -199,7 +199,7 @@ exports.onWriteUser = functions
       onGroupDelete(event.before);
       break;
     default:
-    // do nothing
+      // do nothing
     }
   });
 
@@ -242,7 +242,7 @@ exports.onCreateMessage = functions
         if (token != null) {
           const message = {
             notification: {
-              title: messageData.body,
+              title: messageData.title,
               body: messageData.body,
             },
             data: {

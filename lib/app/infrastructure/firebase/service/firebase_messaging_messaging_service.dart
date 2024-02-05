@@ -49,7 +49,8 @@ class FirebaseMessagingMessagingService implements MessagingService {
   Future<void> sendMessage({
     required String groupId,
     required String uid,
-    required String message,
+    required String title,
+    required String body,
     required NotificationTarget target,
     required NotificationEvent event,
     required String path,
@@ -62,7 +63,8 @@ class FirebaseMessagingMessagingService implements MessagingService {
     // Firestore用のモデルに変換
     final docModel = FirestoreGroupMessageModel(
       id: docRef.id,
-      body: message,
+      title: title,
+      body: body,
       target: target,
       event: event,
       path: path,

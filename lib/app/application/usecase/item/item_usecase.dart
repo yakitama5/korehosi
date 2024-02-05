@@ -90,7 +90,8 @@ class ItemUsecase with RunUsecaseMixin {
           final user = ref.read(authUserProvider).value!;
           await ref.read(messagingServiceProvider).sendMessage(
                 groupId: groupId,
-                message: l10n.notificationMessageAddItem(user.dispName(l10n)),
+                title: l10n.notificationAddItemBody(user.dispName(l10n)),
+                body: l10n.notificationAddItemBody(user.dispName(l10n)),
                 uid: user.id,
                 target: NotificationTarget.all,
                 event: NotificationEvent.addWishItem,

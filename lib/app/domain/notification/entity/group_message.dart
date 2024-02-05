@@ -11,6 +11,7 @@ part 'group_message.g.dart';
 class GroupMessage with _$GroupMessage {
   const factory GroupMessage({
     required String id,
+    required String title,
     required String body,
     required NotificationTarget target,
     required NotificationEvent event,

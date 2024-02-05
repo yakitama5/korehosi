@@ -21,6 +21,7 @@ GroupMessage _$GroupMessageFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GroupMessage {
   String get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
   NotificationTarget get target => throw _privateConstructorUsedError;
   NotificationEvent get event => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $GroupMessageCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String title,
       String body,
       NotificationTarget target,
       NotificationEvent event,
@@ -66,6 +68,7 @@ class _$GroupMessageCopyWithImpl<$Res, $Val extends GroupMessage>
   @override
   $Res call({
     Object? id = null,
+    Object? title = null,
     Object? body = null,
     Object? target = null,
     Object? event = null,
@@ -78,6 +81,10 @@ class _$GroupMessageCopyWithImpl<$Res, $Val extends GroupMessage>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       body: null == body
           ? _value.body
@@ -121,6 +128,7 @@ abstract class _$$GroupMessageImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
+      String title,
       String body,
       NotificationTarget target,
       NotificationEvent event,
@@ -142,6 +150,7 @@ class __$$GroupMessageImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? title = null,
     Object? body = null,
     Object? target = null,
     Object? event = null,
@@ -154,6 +163,10 @@ class __$$GroupMessageImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       body: null == body
           ? _value.body
@@ -192,6 +205,7 @@ class __$$GroupMessageImplCopyWithImpl<$Res>
 class _$GroupMessageImpl implements _GroupMessage {
   const _$GroupMessageImpl(
       {required this.id,
+      required this.title,
       required this.body,
       required this.target,
       required this.event,
@@ -205,6 +219,8 @@ class _$GroupMessageImpl implements _GroupMessage {
 
   @override
   final String id;
+  @override
+  final String title;
   @override
   final String body;
   @override
@@ -222,7 +238,7 @@ class _$GroupMessageImpl implements _GroupMessage {
 
   @override
   String toString() {
-    return 'GroupMessage(id: $id, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'GroupMessage(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -231,6 +247,7 @@ class _$GroupMessageImpl implements _GroupMessage {
         (other.runtimeType == runtimeType &&
             other is _$GroupMessageImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.target, target) || other.target == target) &&
             (identical(other.event, event) || other.event == event) &&
@@ -244,8 +261,8 @@ class _$GroupMessageImpl implements _GroupMessage {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, body, target, event, path, uid, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, title, body, target, event,
+      path, uid, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -264,6 +281,7 @@ class _$GroupMessageImpl implements _GroupMessage {
 abstract class _GroupMessage implements GroupMessage {
   const factory _GroupMessage(
       {required final String id,
+      required final String title,
       required final String body,
       required final NotificationTarget target,
       required final NotificationEvent event,
@@ -277,6 +295,8 @@ abstract class _GroupMessage implements GroupMessage {
 
   @override
   String get id;
+  @override
+  String get title;
   @override
   String get body;
   @override

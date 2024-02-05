@@ -13,6 +13,7 @@ part 'firestore_group_message_model.g.dart';
 class FirestoreGroupMessageModel with _$FirestoreGroupMessageModel {
   const factory FirestoreGroupMessageModel({
     required String id,
+    required String title,
     required String body,
     required NotificationTarget target,
     @notificationEventKey required NotificationEvent event,
@@ -32,6 +33,7 @@ extension FirestoreGroupMessageModelX on FirestoreGroupMessageModel {
   /// ドメイン層で定義しているエンティティへの変換
   GroupMessage toDomainModel() => GroupMessage(
         id: id,
+        title: title,
         body: body,
         target: target,
         event: event,

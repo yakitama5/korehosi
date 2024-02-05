@@ -10,6 +10,7 @@ _$FirestoreGroupMessageModelImpl _$$FirestoreGroupMessageModelImplFromJson(
         Map<String, dynamic> json) =>
     _$FirestoreGroupMessageModelImpl(
       id: json['id'] as String,
+      title: json['title'] as String,
       body: json['body'] as String,
       target: $enumDecode(_$NotificationTargetEnumMap, json['target']),
       event: notificationEventFromStringValue(json['event']),
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$FirestoreGroupMessageModelImplToJson(
         _$FirestoreGroupMessageModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'title': instance.title,
       'body': instance.body,
       'target': _$NotificationTargetEnumMap[instance.target]!,
       'event': stringFromNotificationEventValue(instance.event),
