@@ -5,37 +5,15 @@ const String UHD = '4K';
 
 /// レスポンシブデザインのブレークポイント
 enum AppBreakpoint {
-  mobile,
-  tablet,
-  desktop,
-  uhd,
-}
+  mobile(MOBILE, 0, 450),
+  tablet(TABLET, 451, 900),
+  desktop(DESKTOP, 901, 1920),
+  uhd(UHD, 1921, double.infinity),
+  ;
 
-extension AppBreakpointX on AppBreakpoint {
-  String get name {
-    return switch (this) {
-      AppBreakpoint.mobile => MOBILE,
-      AppBreakpoint.tablet => TABLET,
-      AppBreakpoint.desktop => DESKTOP,
-      AppBreakpoint.uhd => UHD,
-    };
-  }
+  const AppBreakpoint(this.name, this.start, this.end);
 
-  double get start {
-    return switch (this) {
-      AppBreakpoint.mobile => 0,
-      AppBreakpoint.tablet => 451,
-      AppBreakpoint.desktop => 901,
-      AppBreakpoint.uhd => 1921,
-    };
-  }
-
-  double get end {
-    return switch (this) {
-      AppBreakpoint.mobile => 450,
-      AppBreakpoint.tablet => 900,
-      AppBreakpoint.desktop => 1920,
-      AppBreakpoint.uhd => double.infinity,
-    };
-  }
+  final String name;
+  final double start;
+  final double end;
 }
