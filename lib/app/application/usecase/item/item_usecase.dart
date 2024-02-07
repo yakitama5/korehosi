@@ -87,6 +87,7 @@ class ItemUsecase with RunUsecaseMixin {
               );
 
           // 通知処理
+          // TODO(s-takehara): 必須ではないがトランザクション処理を行うこと
           final user = ref.read(authUserProvider).value!;
           await ref.read(messagingServiceProvider).sendMessage(
                 groupId: groupId,
