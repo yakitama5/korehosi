@@ -28,6 +28,7 @@ class SettingsPage extends HookConsumerWidget {
         : null;
 
     // 通知権限の可否
+    // BUG(yakitama5): Androidで権限OFFにした際に再起動がかかってしまう件を対処したい
     final isNotificationGranted = Permission.notification.status.isGranted;
 
     return Scaffold(
