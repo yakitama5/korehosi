@@ -160,8 +160,7 @@ class _ResponsiveWrapper extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return MaxWidthBox(
-      // 現状はタブレットまで対応
-      maxWidth: AppBreakpoint.desktop.end,
+      maxWidth: AppBreakpoint.desktopLarge.end.toDouble(),
       background: Container(color: colorScheme.background),
       child: ResponsiveScaledBox(
         width: ResponsiveValue<double>(
@@ -169,27 +168,27 @@ class _ResponsiveWrapper extends HookConsumerWidget {
           conditionalValues: [
             Condition.equals(
               name: AppBreakpoint.mobile.name,
-              value: AppBreakpoint.mobile.end,
+              value: AppBreakpoint.mobile.value,
             ),
             Condition.between(
-              start: 700,
-              end: AppBreakpoint.tablet.end.toInt(),
-              value: 700,
+              start: AppBreakpoint.tablet.start,
+              end: AppBreakpoint.tablet.end,
+              value: AppBreakpoint.tablet.value,
             ),
             Condition.between(
-              start: AppBreakpoint.tablet.end.toInt(),
-              end: 1200,
-              value: AppBreakpoint.tablet.end,
+              start: AppBreakpoint.desktopSmall.start,
+              end: AppBreakpoint.desktopSmall.end,
+              value: AppBreakpoint.desktopSmall.value,
             ),
             Condition.between(
-              start: 1200,
-              end: 1400,
-              value: 1300,
+              start: AppBreakpoint.desktopMiddle.start,
+              end: AppBreakpoint.desktopMiddle.end,
+              value: AppBreakpoint.desktopMiddle.value,
             ),
             Condition.between(
-              start: 1400,
-              end: AppBreakpoint.desktop.end.toInt(),
-              value: 1600,
+              start: AppBreakpoint.desktopLarge.start,
+              end: AppBreakpoint.desktopLarge.end,
+              value: AppBreakpoint.desktopLarge.value,
             ),
           ],
         ).value,
