@@ -4,6 +4,7 @@ import 'package:responsive_framework/responsive_breakpoints.dart';
 
 const String UHD = '4K';
 
+// TODO(yakitama5): デバイスのブレークポイントでない旨を明記したい または統一したい
 /// レスポンシブデザインのブレークポイント
 enum AppBreakpoint {
   mobile(MOBILE, 0, 450, 450),
