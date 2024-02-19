@@ -235,6 +235,10 @@ exports.onCreateMessage = functions
       const tokensRef = db.collection(USERS_PATH).doc(user.id)
         .collection(TOKENS_PATH);
       const tokensSnap = await tokensRef.get();
+      if (tokensSnap.empty) {
+        continue;
+      }
+
       tokensSnap.docs.forEach((doc) => {
         const token = doc.data().token;
 
