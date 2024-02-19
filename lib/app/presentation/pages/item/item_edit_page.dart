@@ -209,6 +209,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
+    // BUG(yakitama5): メッセージに商品名が入っていない
     return DeleteButton(
       onPressed: () => onDelete(context, ref),
     );
