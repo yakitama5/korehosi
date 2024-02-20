@@ -126,6 +126,20 @@ Firestoreのドキュメント構造は下記の通り
 | Field     | Type      | Description | Sample              |
 | --------- | --------- | ----------- | ------------------- |
 | token     | string    | FCMトークン | XXXX                |
-| uid       | string    | ユーザーID  | XXXX (UUID)         |
 | createdAt | Timestmap | 作成日時    | 1987-12-01 00:00:00 |
 | updatedAt | Timestmap | 更新日時    | 1987-12-01 00:00:00 |
+
+### groups/{groupId}/messages/{messageId}
+
+グループに対する通知メッセージを保持するコレクション
+
+| Field     | Type      | Description          | Sample              |
+| --------- | --------- | -------------------- | ------------------- |
+| id        | string    | サロゲートキー(UUID) | XXXX (UUID)         |
+| title     | string    | 通知タイトル         |                     |
+| body      | string    |                      |                     |
+| event     | string    |                      |                     |
+| target    | string    |                      |                     |
+| createdAt | Timestmap | 作成日時             | 1987-12-01 00:00:00 |
+| updatedAt | Timestmap | 更新日時             | 1987-12-01 00:00:00 |
+
