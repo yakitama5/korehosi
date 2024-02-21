@@ -261,7 +261,7 @@ exports.onCreateMessage = functions
             apns: {
               payload: {
                 aps: {
-                  badge: 1,
+                  // badge: 1,
                   sound: 'default',
                 },
               },
