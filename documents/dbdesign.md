@@ -118,3 +118,28 @@ Firestoreのドキュメント構造は下記の通り
 | validDays | number    | リンクの有効期間(日数) | 3                   |
 | createdAt | Timestmap | 作成日時               | 1987-12-01 00:00:00 |
 | updatedAt | Timestmap | 更新日時               | 1987-12-01 00:00:00 |
+
+### users/{userId}/fcmTokens/{token}
+
+プッシュ通知用のFCMトークンを保持するコレクション
+
+| Field     | Type      | Description | Sample              |
+| --------- | --------- | ----------- | ------------------- |
+| token     | string    | FCMトークン | XXXX                |
+| createdAt | Timestmap | 作成日時    | 1987-12-01 00:00:00 |
+| updatedAt | Timestmap | 更新日時    | 1987-12-01 00:00:00 |
+
+### groups/{groupId}/messages/{messageId}
+
+グループに対する通知メッセージを保持するコレクション
+
+| Field     | Type      | Description          | Sample              |
+| --------- | --------- | -------------------- | ------------------- |
+| id        | string    | サロゲートキー(UUID) | XXXX (UUID)         |
+| title     | string    | 通知タイトル         |                     |
+| body      | string    |                      |                     |
+| event     | string    |                      |                     |
+| target    | string    |                      |                     |
+| createdAt | Timestmap | 作成日時             | 1987-12-01 00:00:00 |
+| updatedAt | Timestmap | 更新日時             | 1987-12-01 00:00:00 |
+

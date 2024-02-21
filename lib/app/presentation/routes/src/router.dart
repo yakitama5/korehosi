@@ -16,6 +16,7 @@ GoRouter router(RouterRef ref) {
     routes: router.routes,
     initialLocation: initialLocation,
     redirect: router.redirect,
+    
     // ログイン状態やデータの変更でredirectを検知するように、`refreshListenable`を設定
     refreshListenable: router,
     // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら復活する

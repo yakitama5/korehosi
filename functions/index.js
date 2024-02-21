@@ -11,6 +11,8 @@ const tokyoTimeZone = 'Asia/Tokyo';
 // コレクションパス
 const GROUPS_PATH = 'groups';
 const PARTICIPANTS_PATH = 'participants';
+const USERS_PATH = 'users';
+const TOKENS_PATH = 'fcmTokens';
 
 // 処理内のTimeZone指定
 process.env.TZ = tokyoTimeZone;
@@ -59,7 +61,8 @@ exports.joinGroup = functions
     }
 
     // 参加済チェック
-    const groupSnap = await db.collection('groups').doc(linkData.groupId).get();
+    const groupSnap = await db.collection(GROUPS_PATH)
+      .doc(linkData.groupId).get();
     const groupData = groupSnap.data();
     if (groupData.joinUids.includes(user.uid)) {
       return {
@@ -72,7 +75,7 @@ exports.joinGroup = functions
     const parameters = rcTemplate.parameters;
     const maxGroup = parameters.max_group_count_by_free_plan.defaultValue.value;
 
-    const userRef = db.collection('users').doc(user.uid);
+    const userRef = db.collection(USERS_PATH).doc(user.uid);
     const userDoc = await userRef.get();
     const joinGroupIds = userDoc.data().joinGroupIds;
     if (joinGroupIds.length >= maxGroup) {
@@ -82,7 +85,7 @@ exports.joinGroup = functions
     }
 
     // グループ および ユーザー情報の取得
-    const groupRef = db.collection('groups').doc(linkData.groupId);
+    const groupRef = db.collection(GROUPS_PATH).doc(linkData.groupId);
     db.runTransaction(async (t) => {
       t.update(groupRef, {
         'joinUids': admin.firestore.FieldValue.arrayUnion(user.uid),
@@ -97,7 +100,7 @@ exports.joinGroup = functions
 
 /**
  * 【監視処理】
- * 投稿が変更されたタイミングで、タグ情報を最新化する.
+ * ユーザー情報が変更された場合にグループ内情報へ反映させる.
  */
 exports.onWriteUser = functions
   .region(jpRegion)
@@ -172,12 +175,18 @@ exports.onWriteUser = functions
       }
     };
 
+    const toEventType = (event) => {
+      if (!event.before.exists) {
+        return 'create';
+      } else if (event.after.exists) {
+        return 'update';
+      } else {
+        return 'delete';
+      }
+    };
+
     // 判定
-    const eventType = !event.before.exists ?
-      'create' :
-      event.after.exists ?
-        'update' :
-        'delete';
+    const eventType = toEventType(event);
     console.log(eventType);
 
     switch (eventType) {
@@ -190,6 +199,95 @@ exports.onWriteUser = functions
       onGroupDelete(event.before);
       break;
     default:
-    // do nothing
+      // do nothing
     }
   });
+
+/**
+ * 【監視処理】
+ * ユーザー情報が変更された場合にグループ内情報へ反映させる.
+ */
+exports.onCreateMessage = functions
+  .region(jpRegion)
+  .firestore
+  .document('groups/{groupId}/messages/{messageId}')
+  .onCreate(async (snap, context) => {
+    // グループ内のユーザー一覧を取得する
+    const groupRef = db.collection(GROUPS_PATH).doc(context.params.groupId);
+    const groupSnap = await groupRef.get();
+    const groupData = groupSnap.data();
+    const joinUids = groupData.joinUids;
+    for (const userId of joinUids) {
+      // ユーザーが通知対象でなければリトライ
+      const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
+      const userSnap = await userRef.get();
+      const user = userSnap.data();
+      const target = snap.data().target;
+
+      const messageData = snap.data();
+      const isMyOperation = user.id == messageData.uid;
+      const isTargetGroup = target == 'all' || target == user.ageGroup;
+      if (isMyOperation || !isTargetGroup) {
+        continue;
+      }
+
+      // トークンを取得して通知を投げる
+      const tokensRef = db.collection(USERS_PATH).doc(user.id)
+        .collection(TOKENS_PATH);
+      const tokensSnap = await tokensRef.get();
+      if (tokensSnap.empty) {
+        continue;
+      }
+
+      tokensSnap.docs.forEach((doc) => {
+        const token = doc.data().token;
+
+        // 通知の内容を作る処理
+        if (token != null) {
+          const message = {
+            notification: {
+              title: messageData.title,
+              body: messageData.body,
+            },
+            data: {
+              path: messageData.path,
+            },
+            android: {
+              notification: {
+                sound: 'default',
+                click_action: messageData.event,
+              },
+            },
+            apns: {
+              payload: {
+                aps: {
+                  badge: 0,
+                  sound: 'default',
+                },
+              },
+            },
+            token: token,
+          };
+
+          pushToDevice(token, message);
+        }
+      });
+    }
+  });
+
+/**
+ * 通知処理
+ * @param {String} token FCMトークン
+ * @param {Object} payload 通知ペイロード
+ */
+function pushToDevice(token, payload) {
+  admin.messaging().send(payload)
+    .then((_pushResponse) => {
+      return {
+        text: token,
+      };
+    })
+    .catch((error) => {
+      throw new functions.https.HttpsError('unknown', error.message, error);
+    });
+}

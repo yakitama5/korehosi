@@ -6,13 +6,19 @@ import 'package:uuid/uuid.dart';
 import '../../../domain/exception/exceptions.dart';
 import '../../../domain/item/entity/item.dart';
 import '../../../domain/item/interface/item_repository.dart';
+import '../../../domain/notification/interface/messaging_service.dart';
+import '../../../domain/notification/value_object/notification_event.dart';
+import '../../../domain/notification/value_object/notification_target.dart';
 import '../../../domain/service/config_service.dart';
 import '../../../domain/service/storage_service.dart';
+import '../../../domain/user/entity/user.dart';
+import '../../../presentation/routes/importer.dart';
 import '../../config/item_image_config.dart';
 import '../../model/item/selected_image_model.dart';
 import '../../state/locale_provider.dart';
 import '../group/state/current_group_provider.dart';
 import '../run_usecase_mixin.dart';
+import '../user/state/auth_user_provider.dart';
 
 part 'item_usecase.g.dart';
 
@@ -42,6 +48,8 @@ class ItemUsecase with RunUsecaseMixin {
       execute(
         ref,
         action: () async {
+          final l10n = ref.read(l10nProvider);
+
           // 登録数上限判定
           await _validateItemCount();
 
@@ -76,6 +84,19 @@ class ItemUsecase with RunUsecaseMixin {
                 wishSeason: wishSeason,
                 urls: urls,
                 memo: memo,
+              );
+
+          // 通知処理
+          // TODO(yaiktama5): 必須ではないがトランザクション処理を行うこと
+          final user = ref.read(authUserProvider).value!;
+          await ref.read(messagingServiceProvider).sendMessage(
+                groupId: groupId,
+                title: l10n.notificationAddItemBody(user.dispName(l10n)),
+                body: name,
+                uid: user.id,
+                target: NotificationTarget.all,
+                event: NotificationEvent.addWishItem,
+                path: ItemRouteData(itemId).location,
               );
         },
       );

@@ -4,11 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../application/state/initial_deep_link_provider.dart';
+import '../../../application/state/initial_notification_provider.dart';
 import '../../../application/usecase/item/state/current_group_item_provider.dart';
 import '../../../application/usecase/user/state/auth_status_provider.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../utils/logger.dart';
+import 'item_branch.dart';
 import 'routes_data.dart';
+import 'settings_branch.dart';
 
 part 'router_notifier.g.dart';
 
@@ -73,6 +76,13 @@ DynamicLink
   - Path:    ${initialLink.path}''');
         return initialLink.path;
       }
+    }
+
+    // プッシュ通知からのアプリ表示を判定
+    final initialMessage =
+        await ref.read(initialNotificationMessageProvider.future);
+    if (initialMessage != null && initialMessage.data['path'] != null) {
+      return initialMessage.data['path'] as String;
     }
 
     // ほしいもの画面場合、パス指定されている項目IDが現在のグループ情報に存在するかを判定

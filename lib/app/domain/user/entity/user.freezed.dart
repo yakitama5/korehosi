@@ -24,6 +24,7 @@ mixin _$User {
   AgeGroup get ageGroup => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   List<String>? get joinGroupIds => throw _privateConstructorUsedError;
+  List<String>? get fcmTokens => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -42,6 +43,7 @@ abstract class $UserCopyWith<$Res> {
       AgeGroup ageGroup,
       String? name,
       List<String>? joinGroupIds,
+      List<String>? fcmTokens,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -63,6 +65,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? ageGroup = null,
     Object? name = freezed,
     Object? joinGroupIds = freezed,
+    Object? fcmTokens = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -82,6 +85,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       joinGroupIds: freezed == joinGroupIds
           ? _value.joinGroupIds
           : joinGroupIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      fcmTokens: freezed == fcmTokens
+          ? _value.fcmTokens
+          : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -107,6 +114,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       AgeGroup ageGroup,
       String? name,
       List<String>? joinGroupIds,
+      List<String>? fcmTokens,
       DateTime createdAt,
       DateTime updatedAt});
 }
@@ -125,6 +133,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? ageGroup = null,
     Object? name = freezed,
     Object? joinGroupIds = freezed,
+    Object? fcmTokens = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -144,6 +153,10 @@ class __$$UserImplCopyWithImpl<$Res>
       joinGroupIds: freezed == joinGroupIds
           ? _value._joinGroupIds
           : joinGroupIds // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      fcmTokens: freezed == fcmTokens
+          ? _value._fcmTokens
+          : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -165,9 +178,11 @@ class _$UserImpl implements _User {
       required this.ageGroup,
       this.name,
       final List<String>? joinGroupIds,
+      final List<String>? fcmTokens,
       required this.createdAt,
       required this.updatedAt})
-      : _joinGroupIds = joinGroupIds;
+      : _joinGroupIds = joinGroupIds,
+        _fcmTokens = fcmTokens;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -188,6 +203,16 @@ class _$UserImpl implements _User {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<String>? _fcmTokens;
+  @override
+  List<String>? get fcmTokens {
+    final value = _fcmTokens;
+    if (value == null) return null;
+    if (_fcmTokens is EqualUnmodifiableListView) return _fcmTokens;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final DateTime createdAt;
   @override
@@ -195,11 +220,11 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, ageGroup: $ageGroup, name: $name, joinGroupIds: $joinGroupIds, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, ageGroup: $ageGroup, name: $name, joinGroupIds: $joinGroupIds, fcmTokens: $fcmTokens, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
@@ -209,6 +234,8 @@ class _$UserImpl implements _User {
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._joinGroupIds, _joinGroupIds) &&
+            const DeepCollectionEquality()
+                .equals(other._fcmTokens, _fcmTokens) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -217,8 +244,15 @@ class _$UserImpl implements _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, ageGroup, name,
-      const DeepCollectionEquality().hash(_joinGroupIds), createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      ageGroup,
+      name,
+      const DeepCollectionEquality().hash(_joinGroupIds),
+      const DeepCollectionEquality().hash(_fcmTokens),
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -240,6 +274,7 @@ abstract class _User implements User {
       required final AgeGroup ageGroup,
       final String? name,
       final List<String>? joinGroupIds,
+      final List<String>? fcmTokens,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$UserImpl;
 
@@ -253,6 +288,8 @@ abstract class _User implements User {
   String? get name;
   @override
   List<String>? get joinGroupIds;
+  @override
+  List<String>? get fcmTokens;
   @override
   DateTime get createdAt;
   @override

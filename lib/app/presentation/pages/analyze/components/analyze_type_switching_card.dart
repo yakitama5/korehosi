@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../domain/analyze/value_object/analyze_typs.dart';
-import '../../../routes/src/routes_data.dart';
+import '../../../routes/importer.dart';
 import 'purchase_gauge_chart_card.dart';
 import 'sum_price_chart_card.dart';
 

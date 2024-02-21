@@ -8,15 +8,15 @@
         "editor.suggest.snippetsPreventQuickSuggestions": false,
         "editor.suggestSelection": "recentlyUsedByPrefix",
         "editor.tabCompletion": "onlySnippets",
-        "editor.wordBasedSuggestions": false,
+        "editor.wordBasedSuggestions": "off",
         "editor.rulers": [
             80
         ],
         "editor.codeActionsOnSave": {
-            "source.fixAll": true,
-            "source.organizeImports": true,
-            "source.addMissingImports": true,
-            "quickfix.insertSemicolon": true
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit",
+            "source.addMissingImports": "explicit",
+            "quickfix.insertSemicolon": "explicit"
         },
     },
     "search.exclude": {

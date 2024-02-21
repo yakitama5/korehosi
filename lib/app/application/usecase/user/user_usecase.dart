@@ -1,28 +1,32 @@
 import 'dart:async';
 
-import 'package:family_wish_list/app/application/config/app_config.dart';
-import 'package:family_wish_list/app/application/model/flavor.dart';
-import 'package:family_wish_list/app/application/usecase/user/state/auth_status_provider.dart';
-import 'package:family_wish_list/app/application/usecase/user/state/group_join_users_provider.dart';
+import 'package:family_wish_list/app/application/usecase/user/state/token_timestamp_provider.dart';
+import 'package:family_wish_list/app/domain/service/cached_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import '../../../domain/exception/exceptions.dart';
+import '../../../domain/notification/interface/messaging_service.dart';
+import '../../../domain/notification/interface/notification_token_repository.dart';
 import '../../../domain/service/analytics_service.dart';
 import '../../../domain/user/entity/auth_status.dart';
 import '../../../domain/user/entity/user.dart';
 import '../../../domain/user/interface/user_repository.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../../utils/logger.dart';
+import '../../config/app_config.dart';
+import '../../model/flavor.dart';
 import '../../state/locale_provider.dart';
 import '../group/state/current_group_id_provider.dart';
 import '../group/state/group_provider.dart';
 import '../item/state/items_provider.dart';
 import '../purchase/state/purchase_provider.dart';
 import '../run_usecase_mixin.dart';
+import 'state/auth_status_provider.dart';
 import 'state/auth_user_provider.dart';
+import 'state/group_join_users_provider.dart';
 import 'state/user_provider.dart';
 
 part 'user_usecase.g.dart';
@@ -182,12 +186,15 @@ class UserUsecase with RunUsecaseMixin {
     // グループ情報を初期化
     await _initCurrentGroup();
 
+    // FCMトークンを追加
+    await refreshFCMTokenAndCheckPushPermission();
+
     // アプリ内購入情報の状態を更新
     await _appInPurchaseSignIn();
   }
 
-  /// サインイン後の処理
-  /// サインアップの際も含める
+  /// サインアウト後の処理
+  /// 退会の際も含める
   Future<void> _onSignedOut() async {
     // アプリ内購入情報の状態を更新
     await _appInPurchaseSignOut();
@@ -222,7 +229,7 @@ class UserUsecase with RunUsecaseMixin {
   /// 現在のグループ情報を初期化する
   Future<void> _initCurrentGroup() async {
     // 参加中の先頭グループを設定
-    await Future<void>.delayed(const Duration(milliseconds: 100));
+    await Future<void>.delayed(const Duration(milliseconds: 200));
     final joinGroupIds = await ref
         .read(authUserProvider.selectAsync((data) => data?.joinGroupIds));
     if (joinGroupIds == null || joinGroupIds.isEmpty) {
@@ -230,6 +237,50 @@ class UserUsecase with RunUsecaseMixin {
     }
     final groupId = joinGroupIds.first;
     await ref.read(currentGroupIdProvider.notifier).set(groupId: groupId);
+  }
+
+  /// FCMトークンをリフレッシュし、必要に応じて権限確認を行う
+  Future<void> refreshFCMTokenAndCheckPushPermission() async {
+    // 未ログインであれば処理しない
+    final user = ref.read(authStatusProvider).value;
+    if (user == null) {
+      return;
+    }
+
+    // 権限確認
+    unawaited(ref.read(messagingServiceProvider).requestPermission());
+
+    // トークンのリフレッシュ
+    await refreshFCMToken(user.uid);
+  }
+
+  /// トークンのリフレッシュ
+  Future<void> refreshFCMToken(String uid) async {
+    // トークンを取得する
+    final token = await ref.read(messagingServiceProvider).getToken();
+    logger.d('FCM Token is $token');
+    if (token == null) {
+      return;
+    }
+
+    // 前回取得から30日経過している場合のみ処理する
+    final tokenTimestamp =
+        await ref.read(tokenTimestampProvider(token: token).future);
+    final now = DateTime.now();
+    if (tokenTimestamp != null &&
+        now.add(const Duration(days: -30)).isBefore(tokenTimestamp)) {
+      return;
+    }
+
+    // トークンが存在しなければ追加、存在すればタイムスタンプを更新する
+    await ref
+        .read(notificationTokenRepositoryProvider)
+        .set(userId: uid, token: token);
+
+    // ローカル上にタイムスタンプを設定
+    await ref
+        .read(cachedServiceProvider)
+        .updateTokenTimestamp(uid: uid, token: token);
   }
 
   /// Permissionエラーを避けるために、キャッシュしていた取得データをリフレッシュする

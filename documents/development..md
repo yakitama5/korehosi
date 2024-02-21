@@ -102,6 +102,7 @@
 
   ```sh
   fvm flutter build appbundle --dart-define-from-file=dart_defines/prod.json
+  fvm flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=dart_defines/prod.json
   ```
 
 

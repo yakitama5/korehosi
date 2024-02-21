@@ -1,41 +1,23 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:responsive_framework/responsive_breakpoints.dart';
 
-// ignore: constant_identifier_names
 const String UHD = '4K';
 
+// TODO(yakitama5): デバイスのブレークポイントでない旨を明記したい または統一したい
 /// レスポンシブデザインのブレークポイント
 enum AppBreakpoint {
-  mobile,
-  tablet,
-  desktop,
-  uhd,
-}
+  mobile(MOBILE, 0, 450, 450),
+  tablet(TABLET, 700, 900, 700),
+  desktopSmall('DESKTOP_SMALL', 901, 1200, 900),
+  desktopMiddle('DESKTOP_MIDDLE', 1201, 1400, 1300),
+  desktopLarge(DESKTOP, 1401, 1920, 1600),
+  ;
 
-extension AppBreakpointX on AppBreakpoint {
-  String get name {
-    return switch (this) {
-      AppBreakpoint.mobile => MOBILE,
-      AppBreakpoint.tablet => TABLET,
-      AppBreakpoint.desktop => DESKTOP,
-      AppBreakpoint.uhd => UHD,
-    };
-  }
+  const AppBreakpoint(this.name, this.start, this.end, this.value);
 
-  double get start {
-    return switch (this) {
-      AppBreakpoint.mobile => 0,
-      AppBreakpoint.tablet => 451,
-      AppBreakpoint.desktop => 901,
-      AppBreakpoint.uhd => 1921,
-    };
-  }
-
-  double get end {
-    return switch (this) {
-      AppBreakpoint.mobile => 450,
-      AppBreakpoint.tablet => 900,
-      AppBreakpoint.desktop => 1920,
-      AppBreakpoint.uhd => double.infinity,
-    };
-  }
+  final String name;
+  final int start;
+  final int end;
+  final double value;
 }

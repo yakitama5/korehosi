@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 
+import 'package:family_wish_list/app/domain/notification/interface/notification_token_repository.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -18,6 +19,7 @@ import 'app/domain/app_info/interface/app_info_service.dart';
 import 'app/domain/device_info/interface/device_info_service.dart';
 import 'app/domain/group/interface/group_repository.dart';
 import 'app/domain/item/interface/item_repository.dart';
+import 'app/domain/notification/interface/messaging_service.dart';
 import 'app/domain/purchase/interface/purchase_repository.dart';
 import 'app/domain/service/analytics_service.dart';
 import 'app/domain/service/cached_service.dart';
@@ -29,11 +31,13 @@ import 'app/infrastructure/device_info_plus/service/device_info_plus_device_info
 import 'app/infrastructure/firebase/app_check/config/app_check_config.dart';
 import 'app/infrastructure/firebase/repository/firebase_group_repository.dart';
 import 'app/infrastructure/firebase/repository/firebase_item_repository.dart';
+import 'app/infrastructure/firebase/repository/firebase_notification_token_repository.dart';
 import 'app/infrastructure/firebase/repository/firebase_purchase_repository.dart';
 import 'app/infrastructure/firebase/repository/firebase_user_repository.dart';
 import 'app/infrastructure/firebase/service/firebase_analytics_service.dart';
 import 'app/infrastructure/firebase/service/firebase_config_service.dart';
 import 'app/infrastructure/firebase/service/firebase_deep_link_service.dart';
+import 'app/infrastructure/firebase/service/firebase_messaging_messaging_service.dart';
 import 'app/infrastructure/firebase/service/firebase_storage_service.dart';
 import 'app/infrastructure/package_info_plus/service/package_info_plus_app_info_service.dart';
 import 'app/infrastructure/revenue_cat/config/revenue_cat_config.dart';
@@ -107,6 +111,10 @@ void main() async {
         configServiceProvider.overrideWith(FirebaseConfigService.new),
         deepLinkServiceProvider.overrideWith(FirebaseDeepLinkService.new),
         analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
+        messagingServiceProvider
+            .overrideWith(FirebaseMessagingMessagingService.new),
+        notificationTokenRepositoryProvider
+            .overrideWith(FirebaseNotificationTokenRepository.new),
         // SharedPreference
         cachedServiceProvider.overrideWith(SharedPreferenceCachedService.new),
         // `package_info_plus`

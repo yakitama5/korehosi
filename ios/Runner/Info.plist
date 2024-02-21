@@ -68,6 +68,13 @@
 	<string>アプリに表示・使用するための写真をライブラリから選択する目的でリクエストします。</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>PermissionGroupNotification</key>
+	<string>アプリからのお知らせを通知する目的でリクエストします。</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

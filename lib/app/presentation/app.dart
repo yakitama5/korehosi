@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,6 +12,7 @@ import '../application/config/breakpoint_config.dart';
 import '../application/model/breakpoint.dart';
 import '../application/state/loading_provider.dart';
 import '../application/state/locale_provider.dart';
+import '../application/state/notification_message_provider.dart';
 import '../application/state/reactive_deep_link_provider.dart';
 import '../application/state/theme_mode_provider.dart';
 import '../application/validator/validation_messages.dart';
@@ -22,6 +24,11 @@ class App extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // アプリ起動時の処理を行う
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(appUsecaseProvider).onLanched();
+    });
+
     // Webは未対応なのでDynamicColorBuilderを避ける
     if (kIsWeb) {
       return _buildApp(context, ref);
@@ -86,6 +93,7 @@ class _AppBaseContainer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // アプリ内共通Providerの監視
     _dynamicLinkLister(context, ref);
+    _notificationLister(context, ref);
 
     return ResponsiveBreakpoints.builder(
       child: Stack(
@@ -123,6 +131,23 @@ class _AppBaseContainer extends HookConsumerWidget {
       },
     );
   }
+
+  void _notificationLister(BuildContext context, WidgetRef ref) {
+    // 通知イベント判定
+    ref.listen(
+      notificationMessageProvider,
+      (previous, next) async {
+        final message = next.value;
+        final path = message?.data['path'];
+        if (path == null) {
+          return;
+        }
+
+        // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
+        ref.read(routerProvider).go(path as String);
+      },
+    );
+  }
 }
 
 class _ResponsiveWrapper extends HookConsumerWidget {
@@ -135,8 +160,7 @@ class _ResponsiveWrapper extends HookConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return MaxWidthBox(
-      // 現状はタブレットまで対応
-      maxWidth: AppBreakpoint.desktop.end,
+      maxWidth: AppBreakpoint.desktopLarge.end.toDouble(),
       background: Container(color: colorScheme.background),
       child: ResponsiveScaledBox(
         width: ResponsiveValue<double>(
@@ -144,27 +168,27 @@ class _ResponsiveWrapper extends HookConsumerWidget {
           conditionalValues: [
             Condition.equals(
               name: AppBreakpoint.mobile.name,
-              value: AppBreakpoint.mobile.end,
+              value: AppBreakpoint.mobile.value,
             ),
             Condition.between(
-              start: 700,
-              end: AppBreakpoint.tablet.end.toInt(),
-              value: 700,
+              start: AppBreakpoint.tablet.start,
+              end: AppBreakpoint.tablet.end,
+              value: AppBreakpoint.tablet.value,
             ),
             Condition.between(
-              start: AppBreakpoint.tablet.end.toInt(),
-              end: 1200,
-              value: AppBreakpoint.tablet.end,
+              start: AppBreakpoint.desktopSmall.start,
+              end: AppBreakpoint.desktopSmall.end,
+              value: AppBreakpoint.desktopSmall.value,
             ),
             Condition.between(
-              start: 1200,
-              end: 1400,
-              value: 1300,
+              start: AppBreakpoint.desktopMiddle.start,
+              end: AppBreakpoint.desktopMiddle.end,
+              value: AppBreakpoint.desktopMiddle.value,
             ),
             Condition.between(
-              start: 1400,
-              end: AppBreakpoint.desktop.end.toInt(),
-              value: 1600,
+              start: AppBreakpoint.desktopLarge.start,
+              end: AppBreakpoint.desktopLarge.end,
+              value: AppBreakpoint.desktopLarge.value,
             ),
           ],
         ).value,
