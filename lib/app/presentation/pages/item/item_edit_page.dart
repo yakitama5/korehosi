@@ -209,7 +209,6 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
-    // BUG(yakitama5): メッセージに商品名が入っていない
     return DeleteButton(
       onPressed: () => onDelete(context, ref),
     );
@@ -218,6 +217,8 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
     final l10n = ref.read(l10nProvider);
+
+    // BUG(yakitama5): メッセージに商品名が入っていない
     final item = ref.read(ItemPageProviders.itemProvider).value;
     final result = await showAdaptiveOkCancelDialog(
       context,
