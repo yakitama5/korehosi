@@ -219,7 +219,10 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     final l10n = ref.read(l10nProvider);
 
     // BUG(yakitama5): メッセージに商品名が入っていない
-    final item = ref.read(ItemPageProviders.itemProvider).value;
+    final item = await ref.read(ItemPageProviders.itemProvider.future);
+    if (!context.mounted) {
+      return;
+    }
     final result = await showAdaptiveOkCancelDialog(
       context,
       title: l10n.deleteConfirmTitle,
