@@ -47,6 +47,7 @@ Podfile.lock
 
 # fvm
 /.fvm/
+.fvmrc
 
 # Testing
 coverage/**
