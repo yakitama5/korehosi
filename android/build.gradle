@@ -1,20 +1,20 @@
-buildscript {
-    ext.kotlin_version = '1.8.0'
-    repositories {
-        google()
-        mavenCentral()
-    }
+// buildscript {
+//     ext.kotlin_version = '1.8.0'
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
 
-    dependencies {
-        // Note: https://zenn.dev/taku_zenn/articles/40142278f3c51c
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:4.3.13'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
-        // <- 自動アップロードのためのパッケージ
-        // classpath "com.github.triplet.gradle:play-publisher:2.6.0"
-    }
-}
+//     dependencies {
+//         // Note: https://zenn.dev/taku_zenn/articles/40142278f3c51c
+//         classpath 'com.android.tools.build:gradle:7.4.2'
+//         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//         classpath 'com.google.gms:google-services:4.3.13'
+//         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
+//         // <- 自動アップロードのためのパッケージ
+//         // classpath "com.github.triplet.gradle:play-publisher:2.6.0"
+//     }
+// }
 
 allprojects {
     repositories {
