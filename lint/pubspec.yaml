@@ -4,7 +4,7 @@ version: 0.0.1
 homepage: https://yakuran.notion.site/Yakuran-f3e102528a1d468994e5db69aeac8279
 
 environment:
-  sdk: '>=3.1.4 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
