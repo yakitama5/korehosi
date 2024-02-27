@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  custom_lint_builder: ^0.5.1
-  custom_lint: ^0.5.1
+  custom_lint_builder: ^0.6.2
+  custom_lint: ^0.6.2
 
 
 dev_dependencies:
