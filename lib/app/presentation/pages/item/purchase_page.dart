@@ -11,7 +11,7 @@ import '../../../application/config/purchase_config.dart';
 import '../../../application/extension/string_extension.dart';
 import '../../../application/model/dialog_result.dart';
 import '../../../application/state/locale_provider.dart';
-import '../../../application/usecase/item/state/item_page_providers.dart';
+import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/purchase/purchase_usecase.dart';
 import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
 import '../../components/importer.dart';
@@ -29,7 +29,7 @@ class PurchasePage extends HookConsumerWidget {
     _listenPageProvider(ref);
 
     final l10n = ref.watch(l10nProvider);
-    final asyncForm = ref.watch(ItemPageProviders.purchaseFormProvider);
+    final asyncForm = ref.watch(ItemDetailProviders.purchaseFormProvider);
 
     return asyncForm.when(
       data: (form) {
@@ -72,10 +72,10 @@ class PurchasePage extends HookConsumerWidget {
   void _listenPageProvider(WidgetRef ref) {
     ref
       ..watch(
-        ItemPageProviders.itemProvider.select((value) => value.value == null),
+        ItemDetailProviders.itemProvider.select((value) => value.value == null),
       )
       ..watch(
-        ItemPageProviders.purchaseProvider
+        ItemDetailProviders.purchaseProvider
             .select((value) => value.value == null),
       );
   }
@@ -154,9 +154,9 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
         form.control(purchaseConfig.buyerNameKey).value as String?;
 
     // 登録 or 更新
-    final itemId = ref.read(ItemPageProviders.itemIdProvider);
+    final itemId = ref.read(ItemDetailProviders.itemIdProvider);
     final isAdd = await ref.read(
-      ItemPageProviders.purchaseProvider.selectAsync((data) => data == null),
+      ItemDetailProviders.purchaseProvider.selectAsync((data) => data == null),
     );
     if (isAdd) {
       await ref.read(purchaseUsecaseProvider).add(
@@ -195,7 +195,8 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // 更新時のみ表示
     final show = ref.watch(
-      ItemPageProviders.purchaseProvider.select((value) => value.value != null),
+      ItemDetailProviders.purchaseProvider
+          .select((value) => value.value != null),
     );
     if (!show) {
       return const SizedBox.shrink();
@@ -226,7 +227,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       context,
       action: () async {
         // 削除
-        final itemId = ref.read(ItemPageProviders.itemIdProvider);
+        final itemId = ref.read(ItemDetailProviders.itemIdProvider);
         await ref.read(purchaseUsecaseProvider).delete(itemId: itemId!);
 
         // 遷移元にポップ

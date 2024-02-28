@@ -12,7 +12,7 @@ import '../../../application/model/dialog_result.dart';
 import '../../../application/model/item/selected_image_model.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
-import '../../../application/usecase/item/state/item_page_providers.dart';
+import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/item/state/wanter_name_suggestion.dart';
 import '../../components/importer.dart';
 import '../../routes/importer.dart';
@@ -29,9 +29,9 @@ class ItemEditPage extends HookConsumerWidget with RouteAware {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
     final isCreate = ref.watch(
-      ItemPageProviders.itemIdProvider.select((value) => value == null),
+      ItemDetailProviders.itemIdProvider.select((value) => value == null),
     );
-    final asyncForm = ref.watch(ItemPageProviders.itemFormProvider);
+    final asyncForm = ref.watch(ItemDetailProviders.itemFormProvider);
 
     return asyncForm.when(
       skipLoadingOnReload: true,
@@ -159,7 +159,7 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
             .toList();
 
         // 保存
-        final itemId = ref.read(ItemPageProviders.itemIdProvider);
+        final itemId = ref.read(ItemDetailProviders.itemIdProvider);
 
         // 登録 or 更新
         final isAdd = itemId == null;
@@ -203,7 +203,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // 更新時のみ表示
     final show = ref.watch(
-      ItemPageProviders.itemIdProvider.select((itemId) => itemId != null),
+      ItemDetailProviders.itemIdProvider.select((itemId) => itemId != null),
     );
     if (!show) {
       return const SizedBox.shrink();
@@ -219,7 +219,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     final l10n = ref.read(l10nProvider);
 
     // BUG(yakitama5): メッセージに商品名が入っていない
-    final item = await ref.read(ItemPageProviders.itemProvider.future);
+    final item = await ref.read(ItemDetailProviders.itemProvider.future);
     if (!context.mounted) {
       return;
     }
@@ -239,7 +239,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     await execute(
       context,
       action: () async {
-        final itemId = ref.read(ItemPageProviders.itemIdProvider);
+        final itemId = ref.read(ItemDetailProviders.itemIdProvider);
         await ref.read(itemUsecaseProvider).delete(itemId: itemId!);
 
         // 一覧画面に戻る
@@ -259,7 +259,7 @@ class _ImageFields extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 画像一覧のキー一覧を取得
-    final controlKeys = ref.watch(ItemPageProviders.imageKeysProvider);
+    final controlKeys = ref.watch(ItemDetailProviders.imageKeysProvider);
 
     return ReactiveFormArray<SelectedImageModel>(
       formArrayName: itemConfig.imagesKey,
@@ -291,9 +291,10 @@ class _ImageField extends HookConsumerWidget {
         onTap: onPressed,
         child: EmptyItemImage(iconData: MdiIcons.imagePlus, radius: radius),
       ),
-      onSelected: ref.read(ItemPageProviders.imageKeysProvider.notifier).add,
-      onDeleted: () =>
-          ref.read(ItemPageProviders.imageKeysProvider.notifier).remove(index),
+      onSelected: ref.read(ItemDetailProviders.imageKeysProvider.notifier).add,
+      onDeleted: () => ref
+          .read(ItemDetailProviders.imageKeysProvider.notifier)
+          .remove(index),
       selectedBuilder: (onPressed, selectedFile) {
         final uploaded = selectedFile.imagePath != null;
         return InkWell(
@@ -394,7 +395,7 @@ class _UrlFields extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
-    final controlKeys = ref.watch(ItemPageProviders.urlKeysProvider);
+    final controlKeys = ref.watch(ItemDetailProviders.urlKeysProvider);
 
     return ReactiveFormArray<String>(
       formArrayName: itemConfig.urlsKey,
@@ -424,7 +425,7 @@ class _UrlAddButton extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
 
     return TextButton.icon(
-      onPressed: ref.read(ItemPageProviders.urlKeysProvider.notifier).add,
+      onPressed: ref.read(ItemDetailProviders.urlKeysProvider.notifier).add,
       icon: const Icon(Icons.add),
       label: Text(l10n.addUrl),
     );

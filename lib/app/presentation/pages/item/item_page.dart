@@ -6,7 +6,7 @@ import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 
 import '../../../application/extension/number_extension.dart';
 import '../../../application/state/locale_provider.dart';
-import '../../../application/usecase/item/state/item_page_providers.dart';
+import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../../domain/purchase/value_object/purchase_status.dart';
@@ -24,7 +24,7 @@ class ItemPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hasItemFuture = ref.watch(
-      ItemPageProviders.itemProvider.selectAsync((data) => data != null),
+      ItemDetailProviders.itemProvider.selectAsync((data) => data != null),
     );
     final l10n = ref.watch(l10nProvider);
     return FutureBuilder(
@@ -84,7 +84,7 @@ class ItemPage extends HookConsumerWidget {
   /// 編集押下
   Future<void> _onEdit(BuildContext context, WidgetRef ref) async {
     // 画面遷移
-    final item = ref.read(ItemPageProviders.itemProvider).value;
+    final item = ref.read(ItemDetailProviders.itemProvider).value;
     ItemEditRouteData(item!.id).go(context);
   }
 }
@@ -96,7 +96,7 @@ class _Title extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final name = ref.watch(
-      ItemPageProviders.itemProvider.select((value) => value.value?.name),
+      ItemDetailProviders.itemProvider.select((value) => value.value?.name),
     );
 
     return Text(name ?? '');
@@ -114,7 +114,7 @@ class _PurchaseStatus extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
 
     final status = ref.watch(
-      ItemPageProviders.purchaseProvider.select((snap) => snap.value.status),
+      ItemDetailProviders.purchaseProvider.select((snap) => snap.value.status),
     );
 
     return Row(
@@ -139,7 +139,8 @@ class _WanterName extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
     final name = ref.watch(
-      ItemPageProviders.itemProvider.select((value) => value.value?.wanterName),
+      ItemDetailProviders.itemProvider
+          .select((value) => value.value?.wanterName),
     );
 
     return TextWithLabel(
@@ -158,7 +159,7 @@ class _WishRank extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
     final textTheme = Theme.of(context).textTheme;
     final wishRank = ref.watch(
-      ItemPageProviders.itemProvider.select((value) => value.value?.wishRank),
+      ItemDetailProviders.itemProvider.select((value) => value.value?.wishRank),
     );
 
     return Column(
@@ -188,7 +189,8 @@ class _WishSeason extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
     final wishSeason = ref.watch(
-      ItemPageProviders.itemProvider.select((value) => value.value?.wishSeason),
+      ItemDetailProviders.itemProvider
+          .select((value) => value.value?.wishSeason),
     );
 
     return TextWithLabel(
@@ -207,7 +209,7 @@ class _Urls extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
     final textTheme = Theme.of(context).textTheme;
     final urls = ref.watch(
-      ItemPageProviders.itemProvider.select((value) => value.value?.urls),
+      ItemDetailProviders.itemProvider.select((value) => value.value?.urls),
     );
 
     // 未設定の場合はダミー要素だけ表示
@@ -245,7 +247,7 @@ class _Memo extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
     final memo = ref.watch(
-      ItemPageProviders.itemProvider.select((value) => value.value?.memo),
+      ItemDetailProviders.itemProvider.select((value) => value.value?.memo),
     );
 
     return TextWithLabel(
@@ -326,7 +328,7 @@ class _Price extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
 
     final price = ref.watch(
-      ItemPageProviders.purchaseProvider.select((snap) => snap.value?.price),
+      ItemDetailProviders.purchaseProvider.select((snap) => snap.value?.price),
     );
 
     return TextWithLabel(
@@ -345,7 +347,8 @@ class _PlanDate extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
 
     final planDate = ref.watch(
-      ItemPageProviders.purchaseProvider.select((snap) => snap.value?.planDate),
+      ItemDetailProviders.purchaseProvider
+          .select((snap) => snap.value?.planDate),
     );
     final formatter = DateFormat.yMMMd(l10n.localeName);
 
@@ -365,7 +368,7 @@ class _SentAt extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
 
     final sentAt = ref.watch(
-      ItemPageProviders.purchaseProvider.select((snap) => snap.value?.sentAt),
+      ItemDetailProviders.purchaseProvider.select((snap) => snap.value?.sentAt),
     );
     final formatter = DateFormat.yMMMd(l10n.localeName);
 
@@ -385,7 +388,7 @@ class _BuyerName extends HookConsumerWidget {
     final l10n = ref.watch(l10nProvider);
 
     final buyerName = ref.watch(
-      ItemPageProviders.purchaseProvider
+      ItemDetailProviders.purchaseProvider
           .select((snap) => snap.value?.buyerName),
     );
 
@@ -404,7 +407,7 @@ class _PurchaseMemo extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
     final memo = ref.watch(
-      ItemPageProviders.purchaseProvider.select((value) => value.value?.memo),
+      ItemDetailProviders.purchaseProvider.select((value) => value.value?.memo),
     );
 
     return TextWithLabel(
@@ -440,7 +443,7 @@ class _Fab extends HookConsumerWidget {
 
   void _onPurchase(BuildContext context, WidgetRef ref) {
     // 画面遷移
-    final itemId = ref.watch(ItemPageProviders.itemIdProvider);
+    final itemId = ref.watch(ItemDetailProviders.itemIdProvider);
     PurchaseRouteData(itemId!).go(context);
   }
 }

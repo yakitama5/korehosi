@@ -13,7 +13,21 @@ import '../../../validator/url_validator.dart';
 import '../../purchase/state/current_group_age_applicable_purchase_provider.dart';
 import 'current_group_item_provider.dart';
 
-part 'item_page_providers.g.dart';
+part 'item_detail_providers.g.dart';
+
+// ignore: avoid_classes_with_only_static_members
+/// 欲しい物の明細を管理するProvider
+/// 明細画面郡で横断して利用する状態を管理する
+/// ID項目などをバケツリレーする運用を避けるため、`overrideWithValue`を用いて状態を引き継ぐ
+class ItemDetailProviders {
+  static final itemIdProvider = _itemIdProvider;
+  static final itemProvider = _itemProvider;
+  static final purchaseProvider = _purchaseProvider;
+  static final itemFormProvider = _itemFormProvider;
+  static final imageKeysProvider = _imageKeysProvider;
+  static final urlKeysProvider = _urlKeysProvider;
+  static final purchaseFormProvider = _purchaseFormProvider;
+}
 
 const _uuid = Uuid();
 
@@ -248,16 +262,4 @@ class _PurchaseForm extends _$PurchaseForm {
       },
     );
   }
-}
-
-// ignore: avoid_classes_with_only_static_members
-/// ほしい物の明細画面内でのみ利用するProvider
-class ItemPageProviders {
-  static final itemIdProvider = _itemIdProvider;
-  static final itemProvider = _itemProvider;
-  static final purchaseProvider = _purchaseProvider;
-  static final itemFormProvider = _itemFormProvider;
-  static final imageKeysProvider = _imageKeysProvider;
-  static final urlKeysProvider = _urlKeysProvider;
-  static final purchaseFormProvider = _purchaseFormProvider;
 }

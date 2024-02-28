@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../../application/usecase/item/state/item_page_providers.dart';
+import '../../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../components/importer.dart';
 import '../../../routes/src/routes_data.dart';
 import 'empty_item_image.dart';
@@ -15,7 +15,8 @@ class DetailItemImages extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final imagesPath = ref.watch(
-      ItemPageProviders.itemProvider.select((value) => value.value?.imagesPath),
+      ItemDetailProviders.itemProvider
+          .select((value) => value.value?.imagesPath),
     );
     return ItemImages(imagesPath: imagesPath);
   }
