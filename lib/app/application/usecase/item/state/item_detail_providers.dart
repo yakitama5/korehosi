@@ -17,7 +17,8 @@ part 'item_detail_providers.g.dart';
 
 // ignore: avoid_classes_with_only_static_members
 /// 欲しい物の明細を管理するProvider
-/// 明細画面郡で横断して利用する状態を管理する
+///
+/// 明細画面郡で横断して利用する状態を管理する<br/>
 /// ID項目などをバケツリレーする運用を避けるため、`overrideWithValue`を用いて状態を引き継ぐ
 class ItemDetailProviders {
   static final itemIdProvider = _itemIdProvider;

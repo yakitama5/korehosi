@@ -8,13 +8,14 @@ import '../../../application/extension/number_extension.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
+import '../../../domain/item/entity/item.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../../domain/purchase/value_object/purchase_status.dart';
+import '../../../domain/user/entity/user.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
-import 'components/detail_item_name.dart';
 import 'components/item_images.dart';
 import 'components/rating_icon.dart';
 
@@ -23,89 +24,132 @@ class ItemPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hasItemFuture = ref.watch(
-      ItemDetailProviders.itemProvider.selectAsync((data) => data != null),
-    );
     final l10n = ref.watch(l10nProvider);
-    return FutureBuilder(
-      future: hasItemFuture,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const SizedBox.shrink();
-        }
+    final authUser = ref.watch(authUserProvider);
+    final item = ref.watch(ItemDetailProviders.itemProvider);
+    final purchase = ref.watch(ItemDetailProviders.purchaseProvider);
 
-        // 存在しない場合は削除済として扱う
-        if (snapshot.data == false) {
-          return ErrorView(l10n.deletedMessage, null);
-        }
+    // 欲しい物と購入情報に応じて判定を行う
+    return switch ((item, purchase, authUser)) {
+      // 欲しい物が見つからない場合は削除された扱い
+      (
+        AsyncData(value: null),
+        AsyncData(value: final _?),
+        AsyncData(value: final _?),
+      ) =>
+        ErrorView(l10n.deletedMessage, null),
 
-        return Scaffold(
-          appBar: AppBar(
-            title: const _Title(),
-            actions: [
-              EditIconButton(
-                onPressed: () => _onEdit(context, ref),
+      // 欲しい物が存在する場合は明細を表示
+      (
+        AsyncData(value: final itemData),
+        AsyncData(value: final purchaseData?),
+        AsyncData(value: final authUser),
+      ) =>
+        _ItemDetailView(
+          item: itemData!,
+          purchase: purchaseData,
+          authUser: authUser!,
+        ),
+
+      // いずれかがエラーの場合はエラー
+      (AsyncError(error: final error, stackTrace: final stackTrace), _, _) ||
+      (_, AsyncError(error: final error, stackTrace: final stackTrace), _) ||
+      (_, _, AsyncError(error: final error, stackTrace: final stackTrace)) =>
+        ErrorView(error, stackTrace),
+
+      // 一瞬なのでローディング中は何も表示しない
+      _ => const SizedBox.shrink(),
+    };
+  }
+}
+
+class _ItemDetailView extends HookConsumerWidget {
+  const _ItemDetailView({
+    required this.item,
+    this.purchase,
+    required this.authUser,
+  });
+
+  final Item item;
+  final Purchase? purchase;
+  final User authUser;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(l10nProvider);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(item.name),
+        actions: [
+          EditIconButton(
+            onPressed: () => _onEdit(context),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: PagePadding(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ItemImages(imagesPath: item.imagesPath),
+              const Gap(8),
+              _PurchaseStatus(
+                purchaseStatus: purchase.status,
               ),
+              const Gap(32),
+              TextWithLabel(
+                item.name,
+                label: l10n.name,
+              ),
+              const Gap(16),
+              TextWithLabel(
+                item.wanterName,
+                label: l10n.wanterName,
+              ),
+              const Gap(16),
+              _WishRank(
+                wishRank: item.wishRank,
+              ),
+              const Gap(16),
+              TextWithLabel(
+                item.wishSeason,
+                label: l10n.wishSeasonLabel,
+              ),
+              const Gap(16),
+              _Urls(
+                urls: item.urls,
+              ),
+              const Gap(16),
+              TextWithLabel(
+                item.memo,
+                label: l10n.memo,
+              ),
+              const Gap(40),
+              _PurchaseInfo(
+                purchase: purchase,
+                user: authUser,
+              ),
+              const Gap(160),
             ],
           ),
-          body: const SingleChildScrollView(
-            child: PagePadding(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DetailItemImages(),
-                  Gap(8),
-                  _PurchaseStatus(),
-                  Gap(32),
-                  DetailItemName(),
-                  Gap(16),
-                  _WanterName(),
-                  Gap(16),
-                  _WishRank(),
-                  Gap(16),
-                  _WishSeason(),
-                  Gap(16),
-                  _Urls(),
-                  Gap(16),
-                  _Memo(),
-                  Gap(40),
-                  _PurchaseInfo(),
-                  Gap(160),
-                ],
-              ),
-            ),
-          ),
-          floatingActionButton: const _Fab(),
-        );
-      },
+        ),
+      ),
+      floatingActionButton: const _Fab(),
     );
   }
 
   /// 編集押下
-  Future<void> _onEdit(BuildContext context, WidgetRef ref) async {
-    // 画面遷移
-    final item = ref.read(ItemDetailProviders.itemProvider).value;
-    ItemEditRouteData(item!.id).go(context);
-  }
-}
-
-/// 画面タイトル
-class _Title extends HookConsumerWidget {
-  const _Title();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final name = ref.watch(
-      ItemDetailProviders.itemProvider.select((value) => value.value?.name),
-    );
-
-    return Text(name ?? '');
-  }
+  ///
+  /// 編集画面に遷移する
+  void _onEdit(BuildContext context) => ItemEditRouteData(item.id).go(context);
 }
 
 /// 購入状況
 class _PurchaseStatus extends HookConsumerWidget {
-  const _PurchaseStatus();
+  const _PurchaseStatus({required this.purchaseStatus});
+
+  final PurchaseStatus purchaseStatus;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -113,17 +157,13 @@ class _PurchaseStatus extends HookConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final l10n = ref.watch(l10nProvider);
 
-    final status = ref.watch(
-      ItemDetailProviders.purchaseProvider.select((snap) => snap.value.status),
-    );
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(status.iconData, color: colorScheme.primary),
+        Icon(purchaseStatus.iconData, color: colorScheme.primary),
         const Gap(8),
         Text(
-          status.localeName(l10n),
+          purchaseStatus.localeName(l10n),
           style: textTheme.bodyLarge,
         ),
       ],
@@ -131,36 +171,16 @@ class _PurchaseStatus extends HookConsumerWidget {
   }
 }
 
-/// 欲しい人の名前
-class _WanterName extends HookConsumerWidget {
-  const _WanterName();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final name = ref.watch(
-      ItemDetailProviders.itemProvider
-          .select((value) => value.value?.wanterName),
-    );
-
-    return TextWithLabel(
-      name,
-      label: l10n.wanterName,
-    );
-  }
-}
-
 /// 欲しい度
 class _WishRank extends HookConsumerWidget {
-  const _WishRank();
+  const _WishRank({this.wishRank});
+
+  final double? wishRank;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
     final textTheme = Theme.of(context).textTheme;
-    final wishRank = ref.watch(
-      ItemDetailProviders.itemProvider.select((value) => value.value?.wishRank),
-    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,39 +201,19 @@ class _WishRank extends HookConsumerWidget {
   }
 }
 
-/// ほしい時期
-class _WishSeason extends HookConsumerWidget {
-  const _WishSeason();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final wishSeason = ref.watch(
-      ItemDetailProviders.itemProvider
-          .select((value) => value.value?.wishSeason),
-    );
-
-    return TextWithLabel(
-      wishSeason,
-      label: l10n.wishSeasonLabel,
-    );
-  }
-}
-
 /// URL一覧
 class _Urls extends HookConsumerWidget {
-  const _Urls();
+  const _Urls({this.urls});
+
+  final List<String>? urls;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(l10nProvider);
     final textTheme = Theme.of(context).textTheme;
-    final urls = ref.watch(
-      ItemDetailProviders.itemProvider.select((value) => value.value?.urls),
-    );
 
     // 未設定の場合はダミー要素だけ表示
-    if (urls == null || urls.isEmpty) {
+    if (urls == null || urls!.isEmpty) {
       return TextWithLabel(null, label: l10n.url);
     }
 
@@ -221,7 +221,7 @@ class _Urls extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(l10n.url, style: textTheme.labelMedium),
-        ...urls.map(
+        ...urls!.map(
           (url) => Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: UrlLink(
@@ -239,40 +239,26 @@ class _Urls extends HookConsumerWidget {
   }
 }
 
-/// メモ
-class _Memo extends HookConsumerWidget {
-  const _Memo();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final memo = ref.watch(
-      ItemDetailProviders.itemProvider.select((value) => value.value?.memo),
-    );
-
-    return TextWithLabel(
-      memo,
-      label: l10n.memo,
-    );
-  }
-}
-
 /// 購入情報
 /// ログインユーザーが子供の場合は表示しない
 class _PurchaseInfo extends HookConsumerWidget {
-  const _PurchaseInfo();
+  const _PurchaseInfo({
+    this.purchase,
+    required this.user,
+  });
+
+  final Purchase? purchase;
+  final User user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 購入情報は子供には表示しない
-    final isChild = ref.watch(
-      authUserProvider
-          .select((value) => value.value?.ageGroup == AgeGroup.child),
-    );
+    final isChild = user.ageGroup == AgeGroup.child;
     if (isChild) {
       return const SizedBox.shrink();
     }
 
+    // TODO(yakitama5): ここからリファクタリングの続き
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

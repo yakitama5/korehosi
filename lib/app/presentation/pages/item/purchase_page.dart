@@ -17,8 +17,6 @@ import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
 import '../../components/importer.dart';
 import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
-import 'components/detail_item_name.dart';
-import 'components/item_images.dart';
 
 class PurchasePage extends HookConsumerWidget {
   const PurchasePage({super.key});
