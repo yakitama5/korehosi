@@ -1,3 +1,22 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+    id "com.google.firebase.crashlytics"
+}
+
+// dart-define-from-file
+def dartDefines = [:];
+if (project.hasProperty('dart-defines')) {
+    dartDefines = dartDefines + project.property('dart-defines')
+        .split(',')
+        .collectEntries { entry ->
+            def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
+            [(pair.first()): pair.last()]
+        }
+}
+
 // android/key.propertiesの読み込み
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
@@ -13,11 +32,6 @@ if (localPropertiesFile.exists()) {
     }
 }
 
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
-}
-
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
     flutterVersionCode = '1'
@@ -31,7 +45,7 @@ if (flutterVersionName == null) {
 // `google-services.json`の環境毎の読み替え
 // Firebase Crashlyticsも対応されたら削除すること
 task selectGoogleServicesJson(type: Copy) {
-    from "src/$flavor/google-services.json"
+    from "src/${dartDefines.flavor}/google-services.json"
     into './'
 }
 tasks.whenTaskAdded { task ->
@@ -40,15 +54,9 @@ tasks.whenTaskAdded { task ->
     }
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'kotlin-android'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
 android {
     namespace "com.yakuran.family_wish_list"
-    compileSdkVersion localProperties.getProperty('flutter.compileSdkVersion').toInteger()
+    compileSdk localProperties.getProperty('flutter.compileSdkVersion').toInteger()
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -65,14 +73,13 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.yakuran.family_wish_list"
-        minSdkVersion 21
+        applicationId "${dartDefines.androidPackageName}"
+        minSdkVersion 24
         targetSdkVersion localProperties.getProperty('flutter.targetSdkVersion').toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        applicationIdSuffix appIdSuffix
-        resValue "string", "app_name", appName
-        resValue "string", "app_web_domain", appWebDomain
+        resValue "string", "app_name", "${dartDefines.appName}"
+        resValue "string", "app_web_domain", "${dartDefines.appWebDomain}"
     }
 
     signingConfigs {
@@ -99,7 +106,8 @@ flutter {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation platform('com.google.firebase:firebase-bom:31.1.1')
-    implementation 'com.google.firebase:firebase-analytics'
+    // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    // implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    // implementation 'com.google.firebase:firebase-analytics-ktx'
 }

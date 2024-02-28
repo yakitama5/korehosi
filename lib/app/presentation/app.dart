@@ -165,6 +165,7 @@ class _ResponsiveWrapper extends HookConsumerWidget {
       child: ResponsiveScaledBox(
         width: ResponsiveValue<double>(
           context,
+          defaultValue: AppBreakpoint.mobile.value,
           conditionalValues: [
             Condition.equals(
               name: AppBreakpoint.mobile.name,

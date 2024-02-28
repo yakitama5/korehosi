@@ -44,9 +44,11 @@ app.*.map.json
 
 # iOS
 Podfile.lock
+**/ios/Flutter/Dart-Defines.xcconfig
 
 # fvm
 /.fvm/
+.fvmrc
 
 # Testing
 coverage/**
@@ -63,3 +65,6 @@ firebase_options.dart
 firebase_options_dev.dart
 firebase_app_id_file.json
 *.rules
+
+# FVM Version Cache
+.fvm/

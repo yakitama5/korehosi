@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 const String UHD = '4K';
 
