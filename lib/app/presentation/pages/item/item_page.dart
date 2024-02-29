@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
@@ -41,14 +42,14 @@ class ItemPage extends HookConsumerWidget {
 
       // 欲しい物が存在する場合は明細を表示
       (
-        AsyncData(value: final itemData),
-        AsyncData(value: final purchaseData?),
-        AsyncData(value: final userData),
+        AsyncData(value: final Item itemData),
+        AsyncData(value: final Purchase? purchaseData),
+        AsyncData(value: final User userData),
       ) =>
         _ItemDetailView(
-          item: itemData!,
+          item: itemData,
           purchase: purchaseData,
-          user: userData!,
+          user: userData,
         ),
 
       // いずれかがエラーの場合はエラー
@@ -63,7 +64,7 @@ class ItemPage extends HookConsumerWidget {
   }
 }
 
-class _ItemDetailView extends StatelessWidget {
+class _ItemDetailView extends HookWidget {
   const _ItemDetailView({
     required this.item,
     this.purchase,
@@ -149,16 +150,16 @@ class _ItemDetailView extends StatelessWidget {
 }
 
 /// 購入状況
-class _PurchaseStatus extends StatelessWidget {
+class _PurchaseStatus extends HookWidget {
   const _PurchaseStatus({required this.purchaseStatus});
 
   final PurchaseStatus purchaseStatus;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final l10n = useL10n();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -175,7 +176,7 @@ class _PurchaseStatus extends StatelessWidget {
 }
 
 /// 欲しい度
-class _WishRank extends StatelessWidget {
+class _WishRank extends HookWidget {
   const _WishRank({this.wishRank});
 
   final double? wishRank;
@@ -205,7 +206,7 @@ class _WishRank extends StatelessWidget {
 }
 
 /// URL一覧
-class _Urls extends StatelessWidget {
+class _Urls extends HookWidget {
   const _Urls({this.urls});
 
   final List<String>? urls;
@@ -244,7 +245,7 @@ class _Urls extends StatelessWidget {
 
 /// 購入情報
 /// ログインユーザーが子供の場合は表示しない
-class _PurchaseInfo extends StatelessWidget {
+class _PurchaseInfo extends HookWidget {
   const _PurchaseInfo({
     this.purchase,
     required this.user,
@@ -298,7 +299,7 @@ class _PurchaseInfo extends StatelessWidget {
 }
 
 /// 購入情報のタイトル
-class _PurchaseInfoTitle extends StatelessWidget {
+class _PurchaseInfoTitle extends HookWidget {
   const _PurchaseInfoTitle();
 
   @override
