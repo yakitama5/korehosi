@@ -35,8 +35,8 @@ class ItemPage extends HookConsumerWidget {
       // 欲しい物が見つからない場合は削除された扱い
       (
         AsyncData(value: null),
-        AsyncData(value: final _?),
-        AsyncData(value: final _?),
+        AsyncData(value: final _),
+        AsyncData(value: final _),
       ) =>
         ErrorView(l10n.deletedMessage, null),
 
