@@ -2,6 +2,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 /// URL形式のバリデーション
 class UrlValidator extends Validator<dynamic> {
+  const UrlValidator() : super();
+
   static const validatorKey = 'url_pattern';
 
   @override
