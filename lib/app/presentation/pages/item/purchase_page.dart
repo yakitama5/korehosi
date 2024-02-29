@@ -101,9 +101,9 @@ class _Form extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DetailItemImages(),
+                // DetailItemImages(),
                 Gap(16),
-                DetailItemName(),
+                // DetailItemName(),
                 Gap(16),
                 _SurpriseField(),
                 Gap(16),
