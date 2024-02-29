@@ -69,6 +69,7 @@ dependencies:
   reactive_date_time_picker: ^3.0.0
   reactive_flutter_rating_bar: ^2.0.0
   reactive_forms: ^16.1.1
+  reactive_forms_annotations: ^4.3.0
   reactive_image_picker: ^5.0.0
   # プルリクが取り込まれるまでの一時的な対応
   reactive_raw_autocomplete:
@@ -105,6 +106,7 @@ dev_dependencies:
     path: ./lint
   mocktail: ^1.0.3
   pedantic_mono: ^1.26.0
+  reactive_forms_generator: ^4.5.2
   riverpod_generator: ^2.3.11
 
 flutter:
