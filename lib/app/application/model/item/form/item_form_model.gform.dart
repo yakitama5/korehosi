@@ -227,8 +227,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
   List<String>? get _urlsValue =>
       urlsControl?.value?.whereType<String>().toList() ?? [];
 
-  List<SelectedImageModel>? get _imagesValue =>
-      imagesControl?.value?.whereType<SelectedImageModel>().toList() ?? [];
+  List<SelectedImageModel?>? get _imagesValue =>
+      imagesControl?.value?.whereType<SelectedImageModel?>().toList() ?? [];
 
   bool get containsName {
     try {
@@ -558,7 +558,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
   }
 
   void imagesValueUpdate(
-    List<SelectedImageModel>? value, {
+    List<SelectedImageModel?>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -621,7 +621,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
   }
 
   void imagesValuePatch(
-    List<SelectedImageModel>? value, {
+    List<SelectedImageModel?>? value, {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
@@ -690,7 +690,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
           value: value, updateParent: updateParent, emitEvent: emitEvent);
 
   void imagesValueReset(
-    List<SelectedImageModel>? value, {
+    List<SelectedImageModel?>? value, {
     bool updateParent = true,
     bool emitEvent = true,
     bool removeFocus = false,
@@ -894,7 +894,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
   }
 
   void addImagesItem(
-    SelectedImageModel value, {
+    SelectedImageModel? value, {
     List<AsyncValidator<dynamic>>? asyncValidators,
     List<Validator<dynamic>>? validators,
     int? asyncValidatorsDebounceTime,

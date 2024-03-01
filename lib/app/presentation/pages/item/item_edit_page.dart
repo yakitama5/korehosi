@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:family_wish_list/app/application/model/item/form/item_form_model.dart';
+import 'package:family_wish_list/app/utils/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -9,10 +10,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../application/config/item_config.dart';
 import '../../../application/model/dialog_result.dart';
+import '../../../application/model/form_array_widget_keys.dart';
 import '../../../application/model/item/selected_image_model.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
@@ -27,8 +28,6 @@ import '../presentation_mixin.dart';
 import 'components/empty_item_image.dart';
 import 'components/item_image_carousel_slider.dart';
 import 'components/rating_icon.dart';
-
-const _uuid = Uuid();
 
 class ItemEditPage extends HookConsumerWidget with RouteAware {
   const ItemEditPage({super.key});
@@ -66,7 +65,8 @@ class _ItemForm extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = useL10n();
-    final urlWidgetKeys = useState<List<String>>([]);
+    final urlWidgetKeys = useState(const FormArrayWidgetKeys([]));
+    final imageWidgetKeys = useState(const FormArrayWidgetKeys([]));
 
     // TODO(yakitama5): Generatorに書き換えていく
     return ItemFormModelFormBuilder(
@@ -89,7 +89,19 @@ class _ItemForm extends HookConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // const _ImageFields(),
+                    _ImageFields(
+                      imageWidgetKeys: imageWidgetKeys.value.keys,
+                      onSelected: (i) {
+                        imageWidgetKeys.value =
+                            imageWidgetKeys.value.add(generatUuid());
+                        formModel.addImagesItem(null);
+                      },
+                      onDeleted: (i) {
+                        imageWidgetKeys.value =
+                            imageWidgetKeys.value.removeAt(i);
+                        formModel.imagesControl?.removeAt(i);
+                      },
+                    ),
                     const Gap(16),
                     const _NameField(),
                     const Gap(16),
@@ -98,13 +110,11 @@ class _ItemForm extends HookConsumerWidget {
                     const Gap(64),
                     const _WishSeasonField(),
                     const Gap(16),
-                    _UrlFields(urlWidgetKeys: urlWidgetKeys.value),
+                    _UrlFields(urlWidgetKeys: urlWidgetKeys.value.keys),
                     _UrlAddButton(
                       onAdd: () {
-                        urlWidgetKeys.value = [
-                          ...urlWidgetKeys.value,
-                          _uuid.v8(),
-                        ];
+                        urlWidgetKeys.value =
+                            urlWidgetKeys.value.add(generatUuid());
                         formModel.addUrlsItem('');
                       },
                     ),
@@ -290,7 +300,16 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
 /// 欲しい物の画像一覧
 class _ImageFields extends HookConsumerWidget {
-  const _ImageFields();
+  const _ImageFields({
+    required this.imageWidgetKeys,
+    required this.onSelected,
+    required this.onDeleted,
+  });
+
+  final void Function(int index) onSelected;
+  final void Function(int index) onDeleted;
+
+  final List<String> imageWidgetKeys;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -298,50 +317,39 @@ class _ImageFields extends HookConsumerWidget {
 
     return ReactiveFormArray<SelectedImageModel>(
       formArray: formModel.imagesControl,
-      builder: (context, formArray, child) => ItemImageCarouselSlider(
-        items: formArray.controls
-            .mapIndexed(
-              (index, key) =>
-                  _ImageField(index: index, formKey: 'Image_$index'),
-            )
-            .toList(),
-      ),
-    );
-  }
-}
+      builder: (context, formArray, child) {
+        final radius = BorderRadius.circular(16);
 
-/// 欲しい物の画像
-class _ImageField extends HookConsumerWidget {
-  const _ImageField({required this.index, required this.formKey});
-
-  final int index;
-  final String formKey;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final radius = BorderRadius.circular(16);
-
-    return ReactiveImagePicker(
-      key: ValueKey(key),
-      formControlName: '$index',
-      inputBuilder: (onPressed) => InkWell(
-        borderRadius: radius,
-        onTap: onPressed,
-        child: EmptyItemImage(iconData: MdiIcons.imagePlus, radius: radius),
-      ),
-      onSelected: ref.read(ItemDetailProviders.imageKeysProvider.notifier).add,
-      onDeleted: () => ref
-          .read(ItemDetailProviders.imageKeysProvider.notifier)
-          .remove(index),
-      selectedBuilder: (onPressed, selectedFile) {
-        final uploaded = selectedFile.imagePath != null;
-        return InkWell(
-          borderRadius: radius,
-          onTap: onPressed,
-          // ファイル種別に応じてWidgetを切り替える
-          child: uploaded
-              ? StorageImage(imagePath: selectedFile.imagePath)
-              : XFileImage(xFile: selectedFile.uploadFile!),
+        return ItemImageCarouselSlider(
+          items: formArray.controls
+              .mapIndexed(
+                (i, key) => ReactiveImagePicker(
+                  key: ValueKey(imageWidgetKeys[i]),
+                  formControlName: '$i',
+                  inputBuilder: (onPressed) => InkWell(
+                    borderRadius: radius,
+                    onTap: onPressed,
+                    child: EmptyItemImage(
+                      iconData: MdiIcons.imagePlus,
+                      radius: radius,
+                    ),
+                  ),
+                  onSelected: () => onSelected(i),
+                  onDeleted: () => onDeleted(i),
+                  selectedBuilder: (onPressed, selectedFile) {
+                    final uploaded = selectedFile.imagePath != null;
+                    return InkWell(
+                      borderRadius: radius,
+                      onTap: onPressed,
+                      // ファイル種別に応じてWidgetを切り替える
+                      child: uploaded
+                          ? StorageImage(imagePath: selectedFile.imagePath)
+                          : XFileImage(xFile: selectedFile.uploadFile!),
+                    );
+                  },
+                ),
+              )
+              .toList(),
         );
       },
     );

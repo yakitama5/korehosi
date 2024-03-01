@@ -25,7 +25,7 @@ class ItemFormModel {
     @RfArray() this.images,
   });
 
-  final List<SelectedImageModel>? images;
+  final List<SelectedImageModel?>? images;
   final String? name;
   final String? wanterName;
   final double? wishRank;
