@@ -103,7 +103,7 @@ class _ItemForm extends _$ItemForm {
               (url) => FormControlWithKey<String>(
                 value: url,
                 key: _uuid.v4(),
-                validators: [UrlValidator()],
+                validators: [const UrlValidator()],
               ),
             )
             .toList(),
@@ -115,7 +115,7 @@ class _ItemForm extends _$ItemForm {
                 value:
                     path != null ? SelectedImageModel(imagePath: path) : null,
                 key: _uuid.v4(),
-                validators: [UrlValidator()],
+                validators: [const UrlValidator()],
               ),
             )
             .toList(),
@@ -226,7 +226,7 @@ class _UrlKeys extends _$UrlKeys {
     const uuid = Uuid();
     final newControl = FormControlWithKey<String>(
       key: uuid.v4(),
-      validators: [UrlValidator()],
+      validators: [const UrlValidator()],
     );
     ref
         .read(

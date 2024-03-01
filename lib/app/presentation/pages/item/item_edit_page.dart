@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:family_wish_list/app/application/model/item/form/item_form_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -65,45 +66,57 @@ class _ItemForm extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = useL10n();
+    final urlWidgetKeys = useState<List<String>>([]);
 
     // TODO(yakitama5): Generatorに書き換えていく
     return ItemFormModelFormBuilder(
       model: _createModel(),
-      builder: (context, formModel, child) => UnfocusOnTap(
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(titleData ?? ''),
-            actions: [
-              const _Submit(),
-              const Gap(8),
-              if (item != null) const _DeleteButton(),
-            ],
-          ),
-          body: const SingleChildScrollView(
-            child: PagePadding(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _ImageFields(),
-                  Gap(16),
-                  _NameField(),
-                  Gap(16),
-                  _WanterNameField(),
-                  _WishRankField(),
-                  Gap(64),
-                  _WishSeasonField(),
-                  Gap(16),
-                  _UrlFields(),
-                  _UrlAddButton(),
-                  Gap(16),
-                  _MemoField(),
-                ],
+      builder: (context, formModel, child) => PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) => _onWillPopScope(context, l10n, didPop),
+        child: UnfocusOnTap(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(titleData ?? ''),
+              actions: [
+                const _Submit(),
+                const Gap(8),
+                if (item != null) const _DeleteButton(),
+              ],
+            ),
+            body: SingleChildScrollView(
+              child: PagePadding(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // const _ImageFields(),
+                    const Gap(16),
+                    const _NameField(),
+                    const Gap(16),
+                    const _WanterNameField(),
+                    const _WishRankField(),
+                    const Gap(64),
+                    const _WishSeasonField(),
+                    const Gap(16),
+                    _UrlFields(urlWidgetKeys: urlWidgetKeys.value),
+                    _UrlAddButton(
+                      onAdd: () {
+                        urlWidgetKeys.value = [
+                          ...urlWidgetKeys.value,
+                          _uuid.v8(),
+                        ];
+                        formModel.addUrlsItem('');
+                      },
+                    ),
+                    const Gap(16),
+                    const _MemoField(),
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
-      onWillPop: () => _onWillPopScope(context, l10n),
     );
   }
 
@@ -121,16 +134,22 @@ class _ItemForm extends HookConsumerWidget {
             .toList(),
       );
 
-  Future<bool> _onWillPopScope(
+  Future<void> _onWillPopScope(
     BuildContext context,
     L10n l10n,
+    bool didPop,
   ) async {
+    if (didPop) {
+      return;
+    }
+
     // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら変更する
     // NavigationBarを検知出来ないのは一旦保留
     // 内容が変更されていなければ閉じる
     final dirty = ReactiveItemFormModelForm.of(context)?.form.dirty;
-    if (dirty == false) {
-      return true;
+    if (dirty != true) {
+      context.pop();
+      return;
     }
 
     // ダイアログを表示して確認
@@ -144,9 +163,10 @@ class _ItemForm extends HookConsumerWidget {
 
     // 破棄が選ばれたら画面を閉じる
     if (result == DialogResult.ok) {
-      return true;
+      if (context.mounted) {
+        context.pop();
+      }
     }
-    return false;
   }
 }
 
@@ -272,14 +292,16 @@ class _ImageFields extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 画像一覧のキー一覧を取得
-    final controlKeys = ref.watch(ItemDetailProviders.imageKeysProvider);
+    final formModel = ReactiveItemFormModelForm.of(context)!;
 
     return ReactiveFormArray<SelectedImageModel>(
-      formArrayName: itemConfig.imagesKey,
+      formArray: formModel.imagesControl,
       builder: (context, formArray, child) => ItemImageCarouselSlider(
-        items: controlKeys
-            .mapIndexed((index, key) => _ImageField(index: index, formKey: key))
+        items: formArray.controls
+            .mapIndexed(
+              (index, key) =>
+                  _ImageField(index: index, formKey: 'Image_$index'),
+            )
             .toList(),
       ),
     );
@@ -333,7 +355,7 @@ class _NameField extends HookConsumerWidget {
     final l10n = useL10n();
 
     return ReactiveOutlinedTextField<String>(
-      formControlName: itemConfig.nameKey,
+      formControlName: ItemFormModelForm.nameControlName,
       labelText: l10n.merchandiseName,
       maxLength: itemConfig.maxNameLength,
       isRequired: true,
@@ -358,7 +380,7 @@ class _WanterNameField extends HookConsumerWidget {
         .toList();
 
     return ReactiveOutlinedRawAutocomplete(
-      formControlName: itemConfig.wanterNameKey,
+      formControlName: ItemFormModelForm.wanterNameControlName,
       labelText: l10n.wanterName,
       maxLength: itemConfig.maxWanterNameLength,
       options: userNames ?? [],
@@ -374,7 +396,7 @@ class _WishRankField extends HookConsumerWidget {
     final l10n = useL10n();
 
     return ReactiveRatingBarBuilder<double>(
-      formControlName: itemConfig.wishRankKey,
+      formControlName: ItemFormModelForm.wishRankControlName,
       decoration: InputDecoration(
         label: Text(l10n.wishRank),
         border: InputBorder.none,
@@ -395,7 +417,7 @@ class _WishSeasonField extends HookConsumerWidget {
     final l10n = useL10n();
 
     return ReactiveOutlinedTextField<String>(
-      formControlName: itemConfig.wishSeasonKey,
+      formControlName: ItemFormModelForm.wishSeasonControlName,
       labelText: l10n.wishSeasonLabel,
       hintText: l10n.wishSeasonHint,
       maxLength: itemConfig.maxWishSeasonLength,
@@ -404,42 +426,41 @@ class _WishSeasonField extends HookConsumerWidget {
 }
 
 class _UrlFields extends HookConsumerWidget {
-  const _UrlFields();
+  const _UrlFields({required this.urlWidgetKeys});
+
+  final List<String> urlWidgetKeys;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = useL10n();
-    final controlKeys = ref.watch(ItemDetailProviders.urlKeysProvider);
+    final formModel = ReactiveItemFormModelForm.of(context)!;
 
-    return ReactiveFormArray<String>(
-      formArrayName: itemConfig.urlsKey,
-      builder: (context, formArray, child) => Column(
-        children: controlKeys
-            .mapIndexed(
-              (index, key) => ReactiveOutlinedTextField<String>(
-                key: ValueKey(key),
-                formControlName: '$index',
-                labelText: l10n.url,
-                maxLength: itemConfig.maxUrlLength,
-                textInputType: TextInputType.url,
-                counterText: '',
-              ),
-            )
-            .toList(),
+    return ReactiveItemFormModelFormArrayBuilder(
+      formControl: formModel.urlsControl,
+      itemBuilder: (context, i, item, formModel) =>
+          ReactiveOutlinedTextField<String>(
+        key: ValueKey(urlWidgetKeys[i]),
+        formControlName: '$i',
+        labelText: l10n.url,
+        maxLength: itemConfig.maxUrlLength,
+        textInputType: TextInputType.url,
+        counterText: '',
       ),
     );
   }
 }
 
 class _UrlAddButton extends HookConsumerWidget {
-  const _UrlAddButton();
+  const _UrlAddButton({required this.onAdd});
+
+  final void Function() onAdd;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = useL10n();
 
     return TextButton.icon(
-      onPressed: ref.read(ItemDetailProviders.urlKeysProvider.notifier).add,
+      onPressed: onAdd,
       icon: const Icon(Icons.add),
       label: Text(l10n.addUrl),
     );
@@ -454,7 +475,7 @@ class _MemoField extends HookConsumerWidget {
     final l10n = useL10n();
 
     return ReactiveOutlinedTextField<String>(
-      formControlName: itemConfig.memoKey,
+      formControlName: ItemFormModelForm.memoControlName,
       labelText: l10n.memo,
       maxLines: 5,
       maxLength: itemConfig.maxMemoLength,
