@@ -7,7 +7,9 @@ class FormArrayWidgetKeys with _$FormArrayWidgetKeys {
   const factory FormArrayWidgetKeys(
     List<String> keys,
   ) = _FormArrayWidgetKeys;
+}
 
+extension FormArrayWidgetKeysX on FormArrayWidgetKeys {
   FormArrayWidgetKeys add(String key) => FormArrayWidgetKeys([...keys, key]);
   FormArrayWidgetKeys remove(String key) =>
       FormArrayWidgetKeys([...keys]..remove(key));
