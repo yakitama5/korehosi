@@ -139,6 +139,8 @@ class _ItemForm extends HookConsumerWidget {
     L10n l10n,
     bool didPop,
   ) async {
+    // Notes: 移行ガイドに沿って変更
+    // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
     if (didPop) {
       return;
     }
