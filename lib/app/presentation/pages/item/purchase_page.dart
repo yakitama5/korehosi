@@ -9,6 +9,7 @@ import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/config/purchase_config.dart';
+import '../../../application/extension/number_extension.dart';
 import '../../../application/extension/string_extension.dart';
 import '../../../application/model/dialog_result.dart';
 import '../../../application/model/purchase/purchase_form_model.dart';
@@ -67,6 +68,7 @@ class _PurchaseForm extends HookConsumerWidget {
     final l10n = useL10n();
 
     return PurchaseFormModelFormBuilder(
+      model: _createModel(),
       builder: (context, formModel, child) => PopScope(
         canPop: false,
         onPopInvoked: (didPop) => _onWillPopScope(context, l10n, didPop),
@@ -112,6 +114,16 @@ class _PurchaseForm extends HookConsumerWidget {
       ),
     );
   }
+
+  /// FormGroupを生成する
+  PurchaseFormModel _createModel() => PurchaseFormModel(
+        price: purchase?.price?.formatComma(),
+        buyerName: purchase?.buyerName,
+        surprise: purchase?.surprise ?? true,
+        planDate: purchase?.planDate,
+        sentAt: purchase?.sentAt,
+        memo: purchase?.memo,
+      );
 
   Future<void> _onWillPopScope(
     BuildContext context,
