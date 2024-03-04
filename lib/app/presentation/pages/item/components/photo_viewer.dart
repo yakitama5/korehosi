@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 import '../../../components/importer.dart';
 
-class PhotoViewer extends StatefulWidget {
+class PhotoViewer extends HookWidget {
   PhotoViewer({
     super.key,
     this.loadingBuilder,
@@ -27,25 +28,12 @@ class PhotoViewer extends StatefulWidget {
   final Axis scrollDirection;
 
   @override
-  State<StatefulWidget> createState() {
-    return _GalleryPhotoViewWrapperState();
-  }
-}
-
-class _GalleryPhotoViewWrapperState extends State<PhotoViewer> {
-  late int currentIndex = widget.initialIndex;
-
-  void onPageChanged(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final currentIndex = useState(initialIndex);
+
     return Scaffold(
       body: Container(
-        decoration: widget.backgroundDecoration,
+        decoration: backgroundDecoration,
         constraints: BoxConstraints.expand(
           height: MediaQuery.of(context).size.height,
         ),
@@ -55,12 +43,12 @@ class _GalleryPhotoViewWrapperState extends State<PhotoViewer> {
             PhotoViewGallery.builder(
               scrollPhysics: const BouncingScrollPhysics(),
               builder: _buildItem,
-              itemCount: widget.imagesPath.length,
-              loadingBuilder: widget.loadingBuilder,
-              backgroundDecoration: widget.backgroundDecoration,
-              pageController: widget.pageController,
-              onPageChanged: onPageChanged,
-              scrollDirection: widget.scrollDirection,
+              itemCount: imagesPath.length,
+              loadingBuilder: loadingBuilder,
+              backgroundDecoration: backgroundDecoration,
+              pageController: pageController,
+              onPageChanged: (i) => currentIndex.value = i,
+              scrollDirection: scrollDirection,
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -86,7 +74,7 @@ class _GalleryPhotoViewWrapperState extends State<PhotoViewer> {
   }
 
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
-    final imagePath = widget.imagesPath[index];
+    final imagePath = imagesPath[index];
     return PhotoViewGalleryPageOptions.customChild(
       child: StorageImage(imagePath: imagePath),
       initialScale: PhotoViewComputedScale.contained,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../theme/importer.dart';
 
-class EmptyItemImage extends HookConsumerWidget {
+class EmptyItemImage extends StatelessWidget {
   const EmptyItemImage({
     super.key,
     this.radius,
@@ -14,7 +13,7 @@ class EmptyItemImage extends HookConsumerWidget {
   final IconData? iconData;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final colorScheme = context.colorScheme;
 
     return Ink(

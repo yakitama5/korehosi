@@ -1,17 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../components/importer.dart';
 
-class ItemImageCarouselSlider extends HookConsumerWidget {
+class ItemImageCarouselSlider extends StatelessWidget {
   const ItemImageCarouselSlider({super.key, this.items});
 
   final List<Widget>? items;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     // 画像サイズを16:9になるように自動調整する
     final viewportFraction = ResponsiveValue(
       context,

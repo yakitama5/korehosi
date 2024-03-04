@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../application/config/items_config.dart';
 import '../../../../application/model/item/item_order_key.dart';
 import '../../../../application/model/item/item_order_model.dart';
 import '../../../../application/model/order.dart';
-import '../../../../application/state/locale_provider.dart';
 import '../../../components/importer.dart';
+import '../../../hooks/use_l10n.dart';
 
-/// (モーダル専用)並び替えの種類
-final _orderKeyProvider = StateProvider.autoDispose<ItemOrderKey>(
-  (ref) => itemsConfig.defaultOrder.key,
-);
-
-///(モーダル専用)昇順/降順
-final _sortOrderProvider = StateProvider.autoDispose<SortOrder>(
-  (ref) => itemsConfig.defaultOrder.sortOrder,
-);
-
-class ItemOrderSelectorBottomSheet extends HookConsumerWidget {
+class ItemOrderSelectorBottomSheet extends HookWidget {
   const ItemOrderSelectorBottomSheet({super.key, required this.initial});
 
   static Future<ItemOrderModel?> show({
@@ -36,22 +27,38 @@ class ItemOrderSelectorBottomSheet extends HookConsumerWidget {
   final ItemOrderModel initial;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
+    final orderKey = useState(itemsConfig.defaultOrder.key);
+    final sortOrder = useState(itemsConfig.defaultOrder.sortOrder);
 
     return BottomSheetColumn(
       titleData: l10n.sortOrder,
-      children: const [
-        _OrderKeySegmentedButton(),
-        Gap(16),
-        _SortOrderSegmentedButton(),
-        Gap(8),
+      children: [
+        _OrderKeySegmentedButton(
+          value: orderKey.value,
+          onSelectionChanged: (v) => orderKey.value = v.first,
+        ),
+        const Gap(16),
+        _SortOrderSegmentedButton(
+          value: sortOrder.value,
+          onSelectionChanged: (v) => sortOrder.value = v.first,
+        ),
+        const Gap(8),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            _CancelButton(),
-            Gap(8),
-            _ApplyButton(),
+            const _CancelButton(),
+            const Gap(8),
+            _ApplyButton(
+              // 呼び出し元に選択値を返却
+              onPressed: () => context.pop(
+                ItemOrderModel(
+                  key: orderKey.value,
+                  sortOrder: sortOrder.value,
+                ),
+              ),
+            ),
           ],
         ),
       ],
@@ -59,18 +66,22 @@ class ItemOrderSelectorBottomSheet extends HookConsumerWidget {
   }
 }
 
-class _OrderKeySegmentedButton extends HookConsumerWidget {
-  const _OrderKeySegmentedButton();
+class _OrderKeySegmentedButton extends HookWidget {
+  const _OrderKeySegmentedButton({
+    required this.onSelectionChanged,
+    required this.value,
+  });
+
+  final void Function(Set<ItemOrderKey> v) onSelectionChanged;
+  final ItemOrderKey value;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final orderKey = ref.watch(_orderKeyProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ExpandWidthContainer(
       child: SegmentedButton<ItemOrderKey>(
-        onSelectionChanged: (v) =>
-            ref.read(_orderKeyProvider.notifier).update((state) => v.first),
+        onSelectionChanged: onSelectionChanged,
         segments: ItemOrderKey.values
             .map(
               (e) => ButtonSegment<ItemOrderKey>(
@@ -79,25 +90,28 @@ class _OrderKeySegmentedButton extends HookConsumerWidget {
               ),
             )
             .toList(),
-        selected: {orderKey},
+        selected: {value},
       ),
     );
   }
 }
 
-class _SortOrderSegmentedButton extends HookConsumerWidget {
-  const _SortOrderSegmentedButton();
+class _SortOrderSegmentedButton extends HookWidget {
+  const _SortOrderSegmentedButton({
+    required this.onSelectionChanged,
+    required this.value,
+  });
+
+  final void Function(Set<SortOrder> v) onSelectionChanged;
+  final SortOrder value;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final sortOrder = ref.watch(_sortOrderProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ExpandWidthContainer(
       child: SegmentedButton<SortOrder>(
-        onSelectionChanged: (v) {
-          ref.read(_sortOrderProvider.notifier).update((state) => v.first);
-        },
+        onSelectionChanged: onSelectionChanged,
         segments: SortOrder.values
             .map(
               (e) => ButtonSegment<SortOrder>(
@@ -106,38 +120,34 @@ class _SortOrderSegmentedButton extends HookConsumerWidget {
               ),
             )
             .toList(),
-        selected: {sortOrder},
+        selected: {value},
       ),
     );
   }
 }
 
-class _ApplyButton extends HookConsumerWidget {
-  const _ApplyButton();
+class _ApplyButton extends HookWidget {
+  const _ApplyButton({required this.onPressed});
+
+  final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return FilledButton.tonal(
-      onPressed: () {
-        final result = ItemOrderModel(
-          key: ref.read(_orderKeyProvider),
-          sortOrder: ref.read(_sortOrderProvider),
-        );
-        Navigator.pop(context, result);
-      },
+      onPressed: onPressed,
       child: Text(l10n.apply),
     );
   }
 }
 
-class _CancelButton extends HookConsumerWidget {
+class _CancelButton extends HookWidget {
   const _CancelButton();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return TextButton(
       onPressed: () {

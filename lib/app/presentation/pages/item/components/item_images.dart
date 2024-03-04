@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../components/importer.dart';
@@ -9,7 +8,7 @@ import 'empty_item_image.dart';
 import 'item_image_carousel_slider.dart';
 
 /// 欲しい物の画像一覧
-class ItemImages extends HookConsumerWidget {
+class ItemImages extends StatelessWidget {
   const ItemImages({
     super.key,
     required this.imagesPath,
@@ -18,7 +17,7 @@ class ItemImages extends HookConsumerWidget {
   final List<String>? imagesPath;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final isEmpty = imagesPath == null || imagesPath!.isEmpty;
 
     return ItemImageCarouselSlider(

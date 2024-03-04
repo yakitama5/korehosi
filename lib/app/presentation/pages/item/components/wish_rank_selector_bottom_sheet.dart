@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../application/state/locale_provider.dart';
 import '../../../components/importer.dart';
+import '../../../hooks/use_l10n.dart';
 import 'rating_icon.dart';
 
-final _wishRankProvider = StateProvider<double?>((ref) {
-  throw UnimplementedError();
-});
-
-class WishRankSelectorBottomSheet extends HookConsumerWidget {
+class WishRankSelectorBottomSheet extends HookWidget {
   const WishRankSelectorBottomSheet({super.key, required this.initial});
 
   static Future<double?> show({
@@ -28,93 +25,75 @@ class WishRankSelectorBottomSheet extends HookConsumerWidget {
   final double? initial;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
+    final wishRank = useState(initial ?? 0);
 
-    return ProviderScope(
-      overrides: [_wishRankProvider.overrideWith((ref) => initial)],
-      child: BottomSheetColumn(
-        titleData: l10n.wishRank,
-        children: const [
-          _RatingBar(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              _CancelButton(),
-              Gap(8),
-              _ResetButton(),
-              Gap(8),
-              _ApplyButton(),
-            ],
-          ),
-        ],
-      ),
+    return BottomSheetColumn(
+      titleData: l10n.wishRank,
+      children: [
+        RatingBar.builder(
+          initialRating: wishRank.value,
+          allowHalfRating: true,
+          itemBuilder: (context, index) => const RatingIcon(),
+          onRatingUpdate: (value) => wishRank.value = value,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const _CancelButton(),
+            const Gap(8),
+            const _ResetButton(),
+            const Gap(8),
+            _ApplyButton(
+              onPressed: () => context.pop(wishRank.value),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
 
-class _RatingBar extends HookConsumerWidget {
-  const _RatingBar();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final initial = ref.watch(_wishRankProvider);
-
-    return RatingBar.builder(
-      initialRating: initial ?? 0,
-      allowHalfRating: true,
-      itemBuilder: (context, index) => const RatingIcon(),
-      onRatingUpdate: (value) =>
-          ref.read(_wishRankProvider.notifier).update((state) => value),
-    );
-  }
-}
-
-class _CancelButton extends HookConsumerWidget {
+class _CancelButton extends HookWidget {
   const _CancelButton();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return TextButton(
-      onPressed: () {
-        Navigator.pop(context);
-      },
+      onPressed: () => context.pop(),
       child: Text(l10n.cancel),
     );
   }
 }
 
-class _ResetButton extends HookConsumerWidget {
+class _ResetButton extends HookWidget {
   const _ResetButton();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return TextButton(
-      onPressed: () {
-        // ignore: prefer_int_literals
-        Navigator.pop<double>(context, -1);
-      },
+      onPressed: () => context.pop<double>(-1),
       child: Text(l10n.reset),
     );
   }
 }
 
-class _ApplyButton extends HookConsumerWidget {
-  const _ApplyButton();
+class _ApplyButton extends HookWidget {
+  const _ApplyButton({required this.onPressed});
+
+  final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return FilledButton.tonal(
-      onPressed: () {
-        final result = ref.read(_wishRankProvider);
-        Navigator.pop(context, result);
-      },
+      onPressed: onPressed,
       child: Text(l10n.apply),
     );
   }
