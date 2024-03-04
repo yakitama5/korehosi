@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:family_wish_list/app/application/model/item/form/item_form_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
@@ -11,6 +10,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/config/item_config.dart';
 import '../../../application/model/dialog_result.dart';
+import '../../../application/model/item/form/item_form_model.dart';
 import '../../../application/model/item/selected_image_model.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
@@ -61,12 +61,8 @@ class _ItemForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = _createModel();
     final l10n = useL10n();
-
-    /// 動的フォームのWidgetについて、
-    /// 項目の削除を行った際にKey指定がないと削除された項目内に設定されていた表示上消えない
-    /// そのため、動的フォームWidgetについては重複なしのKeyを管理する
+    final model = _createModel();
 
     // TODO(yakitama5): Generatorに書き換えていく
     return ItemFormModelFormBuilder(
@@ -130,8 +126,8 @@ class _ItemForm extends HookConsumerWidget {
         wanterName: item?.wanterName,
         wishSeason: item?.wishSeason,
         memo: item?.memo,
-        // TODO(yakitama5): NULL or 空の場合だけどうにかしたい...
-        urls: item?.urls,
+        // 最低1つの要素を表示
+        urls: (item?.urls?.isEmpty ?? true) ? [''] : item?.urls,
         images: [
           // 新規アップロード用に項目を+1定義
           ...item?.imagesPath
