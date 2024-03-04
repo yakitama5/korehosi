@@ -65,6 +65,10 @@ class _ItemForm extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = useL10n();
+
+    /// 動的フォームのWidgetについて、
+    /// 項目の削除を行った際にKey指定がないと削除された項目内に設定されていた表示上消えない
+    /// そのため、動的フォームWidgetについては重複なしのKeyを管理する
     final urlWidgetKeys = useState(const FormArrayWidgetKeys([]));
     final imageWidgetKeys = useState(const FormArrayWidgetKeys([]));
 
