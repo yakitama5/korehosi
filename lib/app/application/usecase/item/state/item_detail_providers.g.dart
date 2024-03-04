@@ -61,25 +61,5 @@ final _purchaseProvider = AutoDisposeFutureProvider<Purchase?>.internal(
 );
 
 typedef _PurchaseRef = AutoDisposeFutureProviderRef<Purchase?>;
-String _$purchaseFormHash() => r'8ceead9b8573bcd03c59bb2f2fde80e1548b5b3f';
-
-/// 購入情報の入力フォーム
-///
-/// Copied from [_PurchaseForm].
-@ProviderFor(_PurchaseForm)
-final _purchaseFormProvider =
-    AutoDisposeAsyncNotifierProvider<_PurchaseForm, FormGroup>.internal(
-  _PurchaseForm.new,
-  name: r'_purchaseFormProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$purchaseFormHash,
-  dependencies: <ProviderOrFamily>[_purchaseProvider],
-  allTransitiveDependencies: <ProviderOrFamily>{
-    _purchaseProvider,
-    ...?_purchaseProvider.allTransitiveDependencies
-  },
-);
-
-typedef _$PurchaseForm = AutoDisposeAsyncNotifier<FormGroup>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

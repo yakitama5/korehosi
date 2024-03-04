@@ -3,8 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/item/entity/item.dart';
 import '../../../../domain/purchase/entity/purchase.dart';
-import '../../../config/purchase_config.dart';
-import '../../../extension/number_extension.dart';
 import '../../purchase/state/current_group_age_applicable_purchase_provider.dart';
 import 'current_group_item_provider.dart';
 
@@ -19,7 +17,6 @@ class ItemDetailProviders {
   static final itemIdProvider = _itemIdProvider;
   static final itemProvider = _itemProvider;
   static final purchaseProvider = _purchaseProvider;
-  static final purchaseFormProvider = _purchaseFormProvider;
 }
 
 /// 明細画面の欲しい物ID
@@ -49,30 +46,4 @@ Future<Purchase?> _purchase(_PurchaseRef ref) async {
 
   return ref
       .watch(currentGroupAgeApplicablePurchaseProvider(itemId: itemId).future);
-}
-
-/// 購入情報の入力フォーム
-@Riverpod(dependencies: [_purchase])
-class _PurchaseForm extends _$PurchaseForm {
-  @override
-  FutureOr<FormGroup> build() async {
-    final initial = await ref.read(_purchaseProvider.future);
-
-    return FormGroup(
-      {
-        // 金額はカンマ表示を行うためにStringとして定義 (データは数値型)
-        purchaseConfig.priceKey:
-            FormControl<String>(value: initial?.price?.formatComma()),
-        purchaseConfig.planDataKey:
-            FormControl<DateTime>(value: initial?.planDate),
-        purchaseConfig.buyerNameKey:
-            FormControl<String>(value: initial?.buyerName),
-        purchaseConfig.surpriseKey: FormControl<bool>(
-          value: initial?.surprise ?? purchaseConfig.initialSurprise,
-        ),
-        purchaseConfig.sentAtKey: FormControl<DateTime>(value: initial?.sentAt),
-        purchaseConfig.memoKey: FormControl<String>(value: initial?.memo),
-      },
-    );
-  }
 }

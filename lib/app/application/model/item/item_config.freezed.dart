@@ -16,14 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ItemConfig {
-  double get initialWishRank => throw _privateConstructorUsedError;
-  String get nameKey => throw _privateConstructorUsedError;
-  String get imagesKey => throw _privateConstructorUsedError;
-  String get wanterNameKey => throw _privateConstructorUsedError;
-  String get wishRankKey => throw _privateConstructorUsedError;
-  String get wishSeasonKey => throw _privateConstructorUsedError;
-  String get urlsKey => throw _privateConstructorUsedError;
-  String get memoKey => throw _privateConstructorUsedError;
   int get maxNameLength => throw _privateConstructorUsedError;
   int get maxWanterNameLength => throw _privateConstructorUsedError;
   int get maxWishSeasonLength => throw _privateConstructorUsedError;
@@ -42,15 +34,7 @@ abstract class $ItemConfigCopyWith<$Res> {
       _$ItemConfigCopyWithImpl<$Res, ItemConfig>;
   @useResult
   $Res call(
-      {double initialWishRank,
-      String nameKey,
-      String imagesKey,
-      String wanterNameKey,
-      String wishRankKey,
-      String wishSeasonKey,
-      String urlsKey,
-      String memoKey,
-      int maxNameLength,
+      {int maxNameLength,
       int maxWanterNameLength,
       int maxWishSeasonLength,
       int maxUrlLength,
@@ -70,14 +54,6 @@ class _$ItemConfigCopyWithImpl<$Res, $Val extends ItemConfig>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? initialWishRank = null,
-    Object? nameKey = null,
-    Object? imagesKey = null,
-    Object? wanterNameKey = null,
-    Object? wishRankKey = null,
-    Object? wishSeasonKey = null,
-    Object? urlsKey = null,
-    Object? memoKey = null,
     Object? maxNameLength = null,
     Object? maxWanterNameLength = null,
     Object? maxWishSeasonLength = null,
@@ -85,38 +61,6 @@ class _$ItemConfigCopyWithImpl<$Res, $Val extends ItemConfig>
     Object? maxMemoLength = null,
   }) {
     return _then(_value.copyWith(
-      initialWishRank: null == initialWishRank
-          ? _value.initialWishRank
-          : initialWishRank // ignore: cast_nullable_to_non_nullable
-              as double,
-      nameKey: null == nameKey
-          ? _value.nameKey
-          : nameKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      imagesKey: null == imagesKey
-          ? _value.imagesKey
-          : imagesKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      wanterNameKey: null == wanterNameKey
-          ? _value.wanterNameKey
-          : wanterNameKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      wishRankKey: null == wishRankKey
-          ? _value.wishRankKey
-          : wishRankKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      wishSeasonKey: null == wishSeasonKey
-          ? _value.wishSeasonKey
-          : wishSeasonKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      urlsKey: null == urlsKey
-          ? _value.urlsKey
-          : urlsKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      memoKey: null == memoKey
-          ? _value.memoKey
-          : memoKey // ignore: cast_nullable_to_non_nullable
-              as String,
       maxNameLength: null == maxNameLength
           ? _value.maxNameLength
           : maxNameLength // ignore: cast_nullable_to_non_nullable
@@ -150,15 +94,7 @@ abstract class _$$ItemConfigImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {double initialWishRank,
-      String nameKey,
-      String imagesKey,
-      String wanterNameKey,
-      String wishRankKey,
-      String wishSeasonKey,
-      String urlsKey,
-      String memoKey,
-      int maxNameLength,
+      {int maxNameLength,
       int maxWanterNameLength,
       int maxWishSeasonLength,
       int maxUrlLength,
@@ -176,14 +112,6 @@ class __$$ItemConfigImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? initialWishRank = null,
-    Object? nameKey = null,
-    Object? imagesKey = null,
-    Object? wanterNameKey = null,
-    Object? wishRankKey = null,
-    Object? wishSeasonKey = null,
-    Object? urlsKey = null,
-    Object? memoKey = null,
     Object? maxNameLength = null,
     Object? maxWanterNameLength = null,
     Object? maxWishSeasonLength = null,
@@ -191,38 +119,6 @@ class __$$ItemConfigImplCopyWithImpl<$Res>
     Object? maxMemoLength = null,
   }) {
     return _then(_$ItemConfigImpl(
-      initialWishRank: null == initialWishRank
-          ? _value.initialWishRank
-          : initialWishRank // ignore: cast_nullable_to_non_nullable
-              as double,
-      nameKey: null == nameKey
-          ? _value.nameKey
-          : nameKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      imagesKey: null == imagesKey
-          ? _value.imagesKey
-          : imagesKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      wanterNameKey: null == wanterNameKey
-          ? _value.wanterNameKey
-          : wanterNameKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      wishRankKey: null == wishRankKey
-          ? _value.wishRankKey
-          : wishRankKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      wishSeasonKey: null == wishSeasonKey
-          ? _value.wishSeasonKey
-          : wishSeasonKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      urlsKey: null == urlsKey
-          ? _value.urlsKey
-          : urlsKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      memoKey: null == memoKey
-          ? _value.memoKey
-          : memoKey // ignore: cast_nullable_to_non_nullable
-              as String,
       maxNameLength: null == maxNameLength
           ? _value.maxNameLength
           : maxNameLength // ignore: cast_nullable_to_non_nullable
@@ -251,36 +147,12 @@ class __$$ItemConfigImplCopyWithImpl<$Res>
 
 class _$ItemConfigImpl implements _ItemConfig {
   const _$ItemConfigImpl(
-      {required this.initialWishRank,
-      required this.nameKey,
-      required this.imagesKey,
-      required this.wanterNameKey,
-      required this.wishRankKey,
-      required this.wishSeasonKey,
-      required this.urlsKey,
-      required this.memoKey,
-      required this.maxNameLength,
+      {required this.maxNameLength,
       required this.maxWanterNameLength,
       required this.maxWishSeasonLength,
       required this.maxUrlLength,
       required this.maxMemoLength});
 
-  @override
-  final double initialWishRank;
-  @override
-  final String nameKey;
-  @override
-  final String imagesKey;
-  @override
-  final String wanterNameKey;
-  @override
-  final String wishRankKey;
-  @override
-  final String wishSeasonKey;
-  @override
-  final String urlsKey;
-  @override
-  final String memoKey;
   @override
   final int maxNameLength;
   @override
@@ -294,7 +166,7 @@ class _$ItemConfigImpl implements _ItemConfig {
 
   @override
   String toString() {
-    return 'ItemConfig(initialWishRank: $initialWishRank, nameKey: $nameKey, imagesKey: $imagesKey, wanterNameKey: $wanterNameKey, wishRankKey: $wishRankKey, wishSeasonKey: $wishSeasonKey, urlsKey: $urlsKey, memoKey: $memoKey, maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength)';
+    return 'ItemConfig(maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength)';
   }
 
   @override
@@ -302,19 +174,6 @@ class _$ItemConfigImpl implements _ItemConfig {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ItemConfigImpl &&
-            (identical(other.initialWishRank, initialWishRank) ||
-                other.initialWishRank == initialWishRank) &&
-            (identical(other.nameKey, nameKey) || other.nameKey == nameKey) &&
-            (identical(other.imagesKey, imagesKey) ||
-                other.imagesKey == imagesKey) &&
-            (identical(other.wanterNameKey, wanterNameKey) ||
-                other.wanterNameKey == wanterNameKey) &&
-            (identical(other.wishRankKey, wishRankKey) ||
-                other.wishRankKey == wishRankKey) &&
-            (identical(other.wishSeasonKey, wishSeasonKey) ||
-                other.wishSeasonKey == wishSeasonKey) &&
-            (identical(other.urlsKey, urlsKey) || other.urlsKey == urlsKey) &&
-            (identical(other.memoKey, memoKey) || other.memoKey == memoKey) &&
             (identical(other.maxNameLength, maxNameLength) ||
                 other.maxNameLength == maxNameLength) &&
             (identical(other.maxWanterNameLength, maxWanterNameLength) ||
@@ -328,21 +187,8 @@ class _$ItemConfigImpl implements _ItemConfig {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      initialWishRank,
-      nameKey,
-      imagesKey,
-      wanterNameKey,
-      wishRankKey,
-      wishSeasonKey,
-      urlsKey,
-      memoKey,
-      maxNameLength,
-      maxWanterNameLength,
-      maxWishSeasonLength,
-      maxUrlLength,
-      maxMemoLength);
+  int get hashCode => Object.hash(runtimeType, maxNameLength,
+      maxWanterNameLength, maxWishSeasonLength, maxUrlLength, maxMemoLength);
 
   @JsonKey(ignore: true)
   @override
@@ -353,36 +199,12 @@ class _$ItemConfigImpl implements _ItemConfig {
 
 abstract class _ItemConfig implements ItemConfig {
   const factory _ItemConfig(
-      {required final double initialWishRank,
-      required final String nameKey,
-      required final String imagesKey,
-      required final String wanterNameKey,
-      required final String wishRankKey,
-      required final String wishSeasonKey,
-      required final String urlsKey,
-      required final String memoKey,
-      required final int maxNameLength,
+      {required final int maxNameLength,
       required final int maxWanterNameLength,
       required final int maxWishSeasonLength,
       required final int maxUrlLength,
       required final int maxMemoLength}) = _$ItemConfigImpl;
 
-  @override
-  double get initialWishRank;
-  @override
-  String get nameKey;
-  @override
-  String get imagesKey;
-  @override
-  String get wanterNameKey;
-  @override
-  String get wishRankKey;
-  @override
-  String get wishSeasonKey;
-  @override
-  String get urlsKey;
-  @override
-  String get memoKey;
   @override
   int get maxNameLength;
   @override

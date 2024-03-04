@@ -10,7 +10,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/config/item_config.dart';
 import '../../../application/model/dialog_result.dart';
-import '../../../application/model/item/form/item_form_model.dart';
+import '../../../application/model/item/item_form_model.dart';
 import '../../../application/model/item/selected_image_model.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
@@ -64,7 +64,6 @@ class _ItemForm extends HookConsumerWidget {
     final l10n = useL10n();
     final model = _createModel();
 
-    // TODO(yakitama5): Generatorに書き換えていく
     return ItemFormModelFormBuilder(
       model: model,
       builder: (context, formModel, child) => PopScope(
@@ -85,14 +84,7 @@ class _ItemForm extends HookConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _ImageFields(
-                      onSelected: (i) {
-                        formModel.addImagesItem(null);
-                      },
-                      onDeleted: (i) {
-                        formModel.imagesControl?.removeAt(i);
-                      },
-                    ),
+                    const _ImageFields(),
                     const Gap(16),
                     const _NameField(),
                     const Gap(16),
@@ -295,13 +287,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
 /// 欲しい物の画像一覧
 class _ImageFields extends HookConsumerWidget {
-  const _ImageFields({
-    required this.onSelected,
-    required this.onDeleted,
-  });
-
-  final void Function(int index) onSelected;
-  final void Function(int index) onDeleted;
+  const _ImageFields();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -326,8 +312,8 @@ class _ImageFields extends HookConsumerWidget {
                       radius: radius,
                     ),
                   ),
-                  onSelected: () => onSelected(i),
-                  onDeleted: () => onDeleted(i),
+                  onSelected: () => formModel.addImagesItem(null),
+                  onDeleted: () => formModel.imagesControl?.removeAt(i),
                   selectedBuilder: (onPressed, selectedFile) {
                     final uploaded = selectedFile.imagePath != null;
                     return InkWell(

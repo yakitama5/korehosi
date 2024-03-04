@@ -3,7 +3,7 @@
 import 'package:family_wish_list/app/application/validator/url_validator.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
-import '../selected_image_model.dart';
+import 'selected_image_model.dart';
 
 part 'item_form_model.gform.dart';
 

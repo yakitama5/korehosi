@@ -16,13 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PurchaseConfig {
-  bool get initialSurprise => throw _privateConstructorUsedError;
-  String get priceKey => throw _privateConstructorUsedError;
-  String get planDataKey => throw _privateConstructorUsedError;
-  String get buyerNameKey => throw _privateConstructorUsedError;
-  String get surpriseKey => throw _privateConstructorUsedError;
-  String get sentAtKey => throw _privateConstructorUsedError;
-  String get memoKey => throw _privateConstructorUsedError;
   int get maxPriceLength => throw _privateConstructorUsedError;
   int get maxBuyerNameLength => throw _privateConstructorUsedError;
   int get maxMemoLength => throw _privateConstructorUsedError;
@@ -38,17 +31,7 @@ abstract class $PurchaseConfigCopyWith<$Res> {
           PurchaseConfig value, $Res Function(PurchaseConfig) then) =
       _$PurchaseConfigCopyWithImpl<$Res, PurchaseConfig>;
   @useResult
-  $Res call(
-      {bool initialSurprise,
-      String priceKey,
-      String planDataKey,
-      String buyerNameKey,
-      String surpriseKey,
-      String sentAtKey,
-      String memoKey,
-      int maxPriceLength,
-      int maxBuyerNameLength,
-      int maxMemoLength});
+  $Res call({int maxPriceLength, int maxBuyerNameLength, int maxMemoLength});
 }
 
 /// @nodoc
@@ -64,46 +47,11 @@ class _$PurchaseConfigCopyWithImpl<$Res, $Val extends PurchaseConfig>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? initialSurprise = null,
-    Object? priceKey = null,
-    Object? planDataKey = null,
-    Object? buyerNameKey = null,
-    Object? surpriseKey = null,
-    Object? sentAtKey = null,
-    Object? memoKey = null,
     Object? maxPriceLength = null,
     Object? maxBuyerNameLength = null,
     Object? maxMemoLength = null,
   }) {
     return _then(_value.copyWith(
-      initialSurprise: null == initialSurprise
-          ? _value.initialSurprise
-          : initialSurprise // ignore: cast_nullable_to_non_nullable
-              as bool,
-      priceKey: null == priceKey
-          ? _value.priceKey
-          : priceKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      planDataKey: null == planDataKey
-          ? _value.planDataKey
-          : planDataKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      buyerNameKey: null == buyerNameKey
-          ? _value.buyerNameKey
-          : buyerNameKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      surpriseKey: null == surpriseKey
-          ? _value.surpriseKey
-          : surpriseKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      sentAtKey: null == sentAtKey
-          ? _value.sentAtKey
-          : sentAtKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      memoKey: null == memoKey
-          ? _value.memoKey
-          : memoKey // ignore: cast_nullable_to_non_nullable
-              as String,
       maxPriceLength: null == maxPriceLength
           ? _value.maxPriceLength
           : maxPriceLength // ignore: cast_nullable_to_non_nullable
@@ -128,17 +76,7 @@ abstract class _$$PurchaseConfigImplCopyWith<$Res>
       __$$PurchaseConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {bool initialSurprise,
-      String priceKey,
-      String planDataKey,
-      String buyerNameKey,
-      String surpriseKey,
-      String sentAtKey,
-      String memoKey,
-      int maxPriceLength,
-      int maxBuyerNameLength,
-      int maxMemoLength});
+  $Res call({int maxPriceLength, int maxBuyerNameLength, int maxMemoLength});
 }
 
 /// @nodoc
@@ -152,46 +90,11 @@ class __$$PurchaseConfigImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? initialSurprise = null,
-    Object? priceKey = null,
-    Object? planDataKey = null,
-    Object? buyerNameKey = null,
-    Object? surpriseKey = null,
-    Object? sentAtKey = null,
-    Object? memoKey = null,
     Object? maxPriceLength = null,
     Object? maxBuyerNameLength = null,
     Object? maxMemoLength = null,
   }) {
     return _then(_$PurchaseConfigImpl(
-      initialSurprise: null == initialSurprise
-          ? _value.initialSurprise
-          : initialSurprise // ignore: cast_nullable_to_non_nullable
-              as bool,
-      priceKey: null == priceKey
-          ? _value.priceKey
-          : priceKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      planDataKey: null == planDataKey
-          ? _value.planDataKey
-          : planDataKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      buyerNameKey: null == buyerNameKey
-          ? _value.buyerNameKey
-          : buyerNameKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      surpriseKey: null == surpriseKey
-          ? _value.surpriseKey
-          : surpriseKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      sentAtKey: null == sentAtKey
-          ? _value.sentAtKey
-          : sentAtKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      memoKey: null == memoKey
-          ? _value.memoKey
-          : memoKey // ignore: cast_nullable_to_non_nullable
-              as String,
       maxPriceLength: null == maxPriceLength
           ? _value.maxPriceLength
           : maxPriceLength // ignore: cast_nullable_to_non_nullable
@@ -212,31 +115,10 @@ class __$$PurchaseConfigImplCopyWithImpl<$Res>
 
 class _$PurchaseConfigImpl implements _PurchaseConfig {
   const _$PurchaseConfigImpl(
-      {required this.initialSurprise,
-      required this.priceKey,
-      required this.planDataKey,
-      required this.buyerNameKey,
-      required this.surpriseKey,
-      required this.sentAtKey,
-      required this.memoKey,
-      required this.maxPriceLength,
+      {required this.maxPriceLength,
       required this.maxBuyerNameLength,
       required this.maxMemoLength});
 
-  @override
-  final bool initialSurprise;
-  @override
-  final String priceKey;
-  @override
-  final String planDataKey;
-  @override
-  final String buyerNameKey;
-  @override
-  final String surpriseKey;
-  @override
-  final String sentAtKey;
-  @override
-  final String memoKey;
   @override
   final int maxPriceLength;
   @override
@@ -246,7 +128,7 @@ class _$PurchaseConfigImpl implements _PurchaseConfig {
 
   @override
   String toString() {
-    return 'PurchaseConfig(initialSurprise: $initialSurprise, priceKey: $priceKey, planDataKey: $planDataKey, buyerNameKey: $buyerNameKey, surpriseKey: $surpriseKey, sentAtKey: $sentAtKey, memoKey: $memoKey, maxPriceLength: $maxPriceLength, maxBuyerNameLength: $maxBuyerNameLength, maxMemoLength: $maxMemoLength)';
+    return 'PurchaseConfig(maxPriceLength: $maxPriceLength, maxBuyerNameLength: $maxBuyerNameLength, maxMemoLength: $maxMemoLength)';
   }
 
   @override
@@ -254,19 +136,6 @@ class _$PurchaseConfigImpl implements _PurchaseConfig {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PurchaseConfigImpl &&
-            (identical(other.initialSurprise, initialSurprise) ||
-                other.initialSurprise == initialSurprise) &&
-            (identical(other.priceKey, priceKey) ||
-                other.priceKey == priceKey) &&
-            (identical(other.planDataKey, planDataKey) ||
-                other.planDataKey == planDataKey) &&
-            (identical(other.buyerNameKey, buyerNameKey) ||
-                other.buyerNameKey == buyerNameKey) &&
-            (identical(other.surpriseKey, surpriseKey) ||
-                other.surpriseKey == surpriseKey) &&
-            (identical(other.sentAtKey, sentAtKey) ||
-                other.sentAtKey == sentAtKey) &&
-            (identical(other.memoKey, memoKey) || other.memoKey == memoKey) &&
             (identical(other.maxPriceLength, maxPriceLength) ||
                 other.maxPriceLength == maxPriceLength) &&
             (identical(other.maxBuyerNameLength, maxBuyerNameLength) ||
@@ -277,17 +146,7 @@ class _$PurchaseConfigImpl implements _PurchaseConfig {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      initialSurprise,
-      priceKey,
-      planDataKey,
-      buyerNameKey,
-      surpriseKey,
-      sentAtKey,
-      memoKey,
-      maxPriceLength,
-      maxBuyerNameLength,
-      maxMemoLength);
+      runtimeType, maxPriceLength, maxBuyerNameLength, maxMemoLength);
 
   @JsonKey(ignore: true)
   @override
@@ -299,31 +158,10 @@ class _$PurchaseConfigImpl implements _PurchaseConfig {
 
 abstract class _PurchaseConfig implements PurchaseConfig {
   const factory _PurchaseConfig(
-      {required final bool initialSurprise,
-      required final String priceKey,
-      required final String planDataKey,
-      required final String buyerNameKey,
-      required final String surpriseKey,
-      required final String sentAtKey,
-      required final String memoKey,
-      required final int maxPriceLength,
+      {required final int maxPriceLength,
       required final int maxBuyerNameLength,
       required final int maxMemoLength}) = _$PurchaseConfigImpl;
 
-  @override
-  bool get initialSurprise;
-  @override
-  String get priceKey;
-  @override
-  String get planDataKey;
-  @override
-  String get buyerNameKey;
-  @override
-  String get surpriseKey;
-  @override
-  String get sentAtKey;
-  @override
-  String get memoKey;
   @override
   int get maxPriceLength;
   @override
