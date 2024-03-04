@@ -64,6 +64,7 @@ class _ItemForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final model = _createModel();
     final l10n = useL10n();
 
     /// 動的フォームのWidgetについて、
@@ -74,7 +75,7 @@ class _ItemForm extends HookConsumerWidget {
 
     // TODO(yakitama5): Generatorに書き換えていく
     return ItemFormModelFormBuilder(
-      model: _createModel(),
+      model: model,
       builder: (context, formModel, child) => PopScope(
         canPop: false,
         onPopInvoked: (didPop) => _onWillPopScope(context, l10n, didPop),
@@ -141,11 +142,17 @@ class _ItemForm extends HookConsumerWidget {
         wanterName: item?.wanterName,
         wishSeason: item?.wishSeason,
         memo: item?.memo,
+        // TODO(yakitama5): NULL or 空の場合だけどうにかしたい...
         urls: item?.urls,
-        // 画像はアップロード済のものと分けて管理するためモデルに変換
-        images: item?.imagesPath
-            ?.map((path) => SelectedImageModel(imagePath: path))
-            .toList(),
+        images: [
+          // 新規アップロード用に項目を+1定義
+          ...item?.imagesPath
+                  // 画像はアップロード済のものと分けて管理するためモデルに変換
+                  ?.map((path) => SelectedImageModel(imagePath: path))
+                  .toList() ??
+              [],
+          null,
+        ],
       );
 
   Future<void> _onWillPopScope(
