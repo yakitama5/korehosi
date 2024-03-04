@@ -1,9 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:family_wish_list/app/application/model/item/form/item_form_model.dart';
-import 'package:family_wish_list/app/utils/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,7 +11,6 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/config/item_config.dart';
 import '../../../application/model/dialog_result.dart';
-import '../../../application/model/form_array_widget_keys.dart';
 import '../../../application/model/item/selected_image_model.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
@@ -70,8 +67,6 @@ class _ItemForm extends HookConsumerWidget {
     /// 動的フォームのWidgetについて、
     /// 項目の削除を行った際にKey指定がないと削除された項目内に設定されていた表示上消えない
     /// そのため、動的フォームWidgetについては重複なしのKeyを管理する
-    final urlWidgetKeys = useState(const FormArrayWidgetKeys([]));
-    final imageWidgetKeys = useState(const FormArrayWidgetKeys([]));
 
     // TODO(yakitama5): Generatorに書き換えていく
     return ItemFormModelFormBuilder(
@@ -95,15 +90,10 @@ class _ItemForm extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _ImageFields(
-                      imageWidgetKeys: imageWidgetKeys.value.keys,
                       onSelected: (i) {
-                        imageWidgetKeys.value =
-                            imageWidgetKeys.value.add(generatUuid());
                         formModel.addImagesItem(null);
                       },
                       onDeleted: (i) {
-                        imageWidgetKeys.value =
-                            imageWidgetKeys.value.removeAt(i);
                         formModel.imagesControl?.removeAt(i);
                       },
                     ),
@@ -115,11 +105,9 @@ class _ItemForm extends HookConsumerWidget {
                     const Gap(64),
                     const _WishSeasonField(),
                     const Gap(16),
-                    _UrlFields(urlWidgetKeys: urlWidgetKeys.value.keys),
+                    const _UrlFields(),
                     _UrlAddButton(
                       onAdd: () {
-                        urlWidgetKeys.value =
-                            urlWidgetKeys.value.add(generatUuid());
                         formModel.addUrlsItem('');
                       },
                     ),
@@ -312,15 +300,12 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 /// 欲しい物の画像一覧
 class _ImageFields extends HookConsumerWidget {
   const _ImageFields({
-    required this.imageWidgetKeys,
     required this.onSelected,
     required this.onDeleted,
   });
 
   final void Function(int index) onSelected;
   final void Function(int index) onDeleted;
-
-  final List<String> imageWidgetKeys;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -335,7 +320,7 @@ class _ImageFields extends HookConsumerWidget {
           items: formArray.controls
               .mapIndexed(
                 (i, key) => ReactiveImagePicker(
-                  key: ValueKey(imageWidgetKeys[i]),
+                  key: ObjectKey(formArray.control('$i')),
                   formControlName: '$i',
                   inputBuilder: (onPressed) => InkWell(
                     borderRadius: radius,
@@ -447,9 +432,7 @@ class _WishSeasonField extends HookConsumerWidget {
 }
 
 class _UrlFields extends HookConsumerWidget {
-  const _UrlFields({required this.urlWidgetKeys});
-
-  final List<String> urlWidgetKeys;
+  const _UrlFields();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -460,7 +443,7 @@ class _UrlFields extends HookConsumerWidget {
       formControl: formModel.urlsControl,
       itemBuilder: (context, i, item, formModel) =>
           ReactiveOutlinedTextField<String>(
-        key: ValueKey(urlWidgetKeys[i]),
+        key: ObjectKey(formModel.urlsControl?.control('$i')),
         formControlName: '$i',
         labelText: l10n.url,
         maxLength: itemConfig.maxUrlLength,
