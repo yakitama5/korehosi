@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:family_wish_list/app/application/model/item/item_order_model.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -9,6 +9,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../application/config/items_config.dart';
 import '../../../application/model/dialog_result.dart';
+import '../../../application/model/item/item_order_key.dart';
+import '../../../application/model/item/item_order_model.dart';
+import '../../../application/model/order.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/group/group_usecase.dart';
 import '../../../application/usecase/group/state/current_group_provider.dart';
@@ -128,6 +131,9 @@ class _SliverBody extends HookConsumerWidget {
     final currentGroup = ref.watch(currentGroupProvider);
 
     return switch ((currentGroup, items, purchases)) {
+      // グループが未選択であればグループ選択表示
+      (AsyncData(value: null), _, _) => const _SliverNotGroupView(),
+
       // グループが選択されていれば一覧を表示
       // `skipLoadingOnReload:true`を想定するため`AsyncValue(hasValue: true)`で判定
       (
@@ -139,10 +145,10 @@ class _SliverBody extends HookConsumerWidget {
           currentGroup: groupData,
           items: itemsData,
           purchases: purchasesData,
+          itemOrder: itemOrder,
+          purchaseStatus: purchaseStatus,
+          wishRank: wishRank,
         ),
-
-      // グループが未選択であればグループ選択表示
-      (AsyncData(value: null), _, _) => const _SliverNotGroupView(),
 
       // いずれかがエラーの場合はエラー表示
       (AsyncError(error: final error, stackTrace: final stackTrace), _, _) ||
@@ -191,11 +197,11 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
   }
 }
 
-class _SliverNotGroupView extends HookConsumerWidget {
+class _SliverNotGroupView extends StatelessWidget {
   const _SliverNotGroupView();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return const SliverFillRemaining(
       hasScrollBody: false,
       child: NotGroupView(),
@@ -203,24 +209,29 @@ class _SliverNotGroupView extends HookConsumerWidget {
   }
 }
 
-class _ItemListView extends HookConsumerWidget {
+class _ItemListView extends HookWidget {
   const _ItemListView({
     required this.items,
     required this.purchases,
     required this.currentGroup,
+    this.wishRank,
+    required this.itemOrder,
+    required this.purchaseStatus,
   });
 
   final List<Item> items;
   final List<Purchase> purchases;
   final Group currentGroup;
+  final double? wishRank;
+  final ItemOrderModel itemOrder;
+  final Set<PurchaseStatus> purchaseStatus;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = useL10n();
+    final filterdItems = _filterItems();
 
-    // TODO(yakitama5): 欲しい物の絞り込みが必要
-
-    if (items.isEmpty) {
+    if (filterdItems.isEmpty) {
       return SliverFillRemaining(
         hasScrollBody: false,
         child: ListEmptyView(
@@ -232,15 +243,60 @@ class _ItemListView extends HookConsumerWidget {
     return SliverPadding(
       padding: const EdgeInsets.only(bottom: 120),
       sliver: SliverList.separated(
-        itemCount: items.length,
-        itemBuilder: (context, index) => _ListTile(items[index]),
+        itemCount: filterdItems.length,
+        itemBuilder: (context, index) => _ListTile(filterdItems[index]),
         separatorBuilder: (context, index) => const Divider(),
       ),
     );
   }
+
+  List<Item> _filterItems() {
+    final purchaseMap =
+        Map.fromIterables(purchases.map((e) => e.id), purchases);
+
+    // 絞り込み + ソート
+    return items.where((item) {
+      // ステータスによる絞り込み
+      final isMatch = purchaseStatus.map((s) {
+        final purchase = purchaseMap[item.id];
+        final status = purchase.status;
+        return status == s;
+      }).reduce((v, e) => v || e);
+      if (!isMatch) {
+        return false;
+      }
+
+      // 欲しい度による絞り込み
+      // 未満を弾く
+      if (wishRank != null && item.wishRank < wishRank!) {
+        return false;
+      }
+
+      return true;
+    }).sorted(
+      (a, b) {
+        late final Item source;
+        late final Item target;
+        if (itemOrder.sortOrder == SortOrder.asc) {
+          source = a;
+          target = b;
+        } else {
+          source = b;
+          target = a;
+        }
+
+        return switch (itemOrder.key) {
+          ItemOrderKey.name => source.name.compareTo(target.name),
+          ItemOrderKey.wishRank => source.wishRank.compareTo(target.wishRank),
+          ItemOrderKey.createdAt =>
+            source.createdAt.compareTo(target.createdAt),
+        };
+      },
+    ).toList();
+  }
 }
 
-class _ItemOrderChip extends HookConsumerWidget {
+class _ItemOrderChip extends HookWidget {
   const _ItemOrderChip({
     required this.value,
     required this.onChanged,
@@ -250,7 +306,7 @@ class _ItemOrderChip extends HookConsumerWidget {
   final void Function(ItemOrderModel v) onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = useL10n();
 
     return LeadingIconInputChip(
@@ -276,7 +332,7 @@ class _ItemOrderChip extends HookConsumerWidget {
   }
 }
 
-class _PurchaseStatusChip extends HookConsumerWidget {
+class _PurchaseStatusChip extends HookWidget {
   const _PurchaseStatusChip({
     required this.value,
     required this.onChanged,
@@ -286,7 +342,7 @@ class _PurchaseStatusChip extends HookConsumerWidget {
   final void Function(Set<PurchaseStatus> v) onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = useL10n();
 
     final dispName = value.isEmpty
@@ -316,7 +372,7 @@ class _PurchaseStatusChip extends HookConsumerWidget {
   }
 }
 
-class _WishRankChip extends HookConsumerWidget {
+class _WishRankChip extends HookWidget {
   const _WishRankChip({
     required this.value,
     required this.onChanged,
@@ -326,7 +382,7 @@ class _WishRankChip extends HookConsumerWidget {
   final void Function(double? v) onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = useL10n();
     final selected = value != null;
 

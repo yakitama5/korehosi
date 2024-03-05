@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../application/config/items_config.dart';
 import '../../../../application/model/item/item_order_key.dart';
 import '../../../../application/model/item/item_order_model.dart';
 import '../../../../application/model/order.dart';
@@ -29,8 +28,8 @@ class ItemOrderSelectorBottomSheet extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = useL10n();
-    final orderKey = useState(itemsConfig.defaultOrder.key);
-    final sortOrder = useState(itemsConfig.defaultOrder.sortOrder);
+    final orderKey = useState(initial.key);
+    final sortOrder = useState(initial.sortOrder);
 
     return BottomSheetColumn(
       titleData: l10n.sortOrder,
