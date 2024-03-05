@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:family_wish_list/app/application/state/locale_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
@@ -232,7 +233,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
-    final l10n = useL10n();
+    final l10n = ref.read(l10nProvider);
     final result = await showAdaptiveOkCancelDialog(
       context,
       title: l10n.deleteConfirmTitle,

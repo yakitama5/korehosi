@@ -148,9 +148,9 @@ class _SliverBody extends HookConsumerWidget {
       // グループが選択されていれば一覧を表示
       // `skipLoadingOnReload:true`を想定するため`AsyncValue(hasValue: true)`で判定
       (
-        AsyncValue(value: final Group groupData, hasValue: true),
-        AsyncValue(value: final List<Item> itemsData, hasValue: true),
-        AsyncValue(value: final List<Purchase> purchasesData, hasValue: true)
+        AsyncData(value: final Group groupData),
+        AsyncData(value: final List<Item> itemsData),
+        AsyncData(value: final List<Purchase> purchasesData)
       ) =>
         _ItemListView(
           currentGroup: groupData,
