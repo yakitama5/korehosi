@@ -206,27 +206,28 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
         // 登録 or 更新
         final itemId = ref.read(ItemDetailProviders.itemIdProvider);
         final isAdd = itemId == null;
+        final usecase = ref.read(itemUsecaseProvider);
         if (isAdd) {
-          await ref.read(itemUsecaseProvider).add(
-                selectedImages: selectedImages,
-                name: name!,
-                wanterName: wanterName,
-                wishRank: wishRank!,
-                wishSeason: wishSeason,
-                urls: urls,
-                memo: memo,
-              );
+          await usecase.add(
+            selectedImages: selectedImages,
+            name: name!,
+            wanterName: wanterName,
+            wishRank: wishRank!,
+            wishSeason: wishSeason,
+            urls: urls,
+            memo: memo,
+          );
         } else {
-          await ref.read(itemUsecaseProvider).update(
-                itemId: itemId,
-                selectedImages: selectedImages,
-                name: name!,
-                wanterName: wanterName,
-                wishRank: wishRank!,
-                wishSeason: wishSeason,
-                urls: urls,
-                memo: memo,
-              );
+          await usecase.update(
+            itemId: itemId,
+            selectedImages: selectedImages,
+            name: name!,
+            wanterName: wanterName,
+            wishRank: wishRank!,
+            wishSeason: wishSeason,
+            urls: urls,
+            memo: memo,
+          );
         }
 
         // 遷移元にポップ
@@ -251,7 +252,6 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     // 削除確認
     final l10n = ref.read(l10nProvider);
 
-    // BUG(yakitama5): メッセージに商品名が入っていない
     final item = await ref.read(ItemDetailProviders.itemProvider.future);
     if (!context.mounted) {
       return;

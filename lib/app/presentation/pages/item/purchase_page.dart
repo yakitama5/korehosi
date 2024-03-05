@@ -13,7 +13,6 @@ import '../../../application/extension/number_extension.dart';
 import '../../../application/extension/string_extension.dart';
 import '../../../application/model/dialog_result.dart';
 import '../../../application/model/purchase/purchase_form_model.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/purchase/purchase_usecase.dart';
 import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
@@ -192,26 +191,27 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
     final isAdd = await ref.read(
       ItemDetailProviders.purchaseProvider.selectAsync((data) => data == null),
     );
+    final usecase = ref.read(purchaseUsecaseProvider);
     if (isAdd) {
-      await ref.read(purchaseUsecaseProvider).add(
-            itemId: itemId!,
-            price: price?.parseCurrency().toInt(),
-            buyerName: buyerName,
-            planDate: planDate,
-            surprise: surprise,
-            sentAt: sentAt,
-            memo: memo,
-          );
+      await usecase.add(
+        itemId: itemId!,
+        price: price?.parseCurrency().toInt(),
+        buyerName: buyerName,
+        planDate: planDate,
+        surprise: surprise,
+        sentAt: sentAt,
+        memo: memo,
+      );
     } else {
-      await ref.read(purchaseUsecaseProvider).update(
-            itemId: itemId!,
-            price: price?.parseCurrency().toInt(),
-            buyerName: buyerName,
-            planDate: planDate,
-            surprise: surprise,
-            sentAt: sentAt,
-            memo: memo,
-          );
+      await usecase.update(
+        itemId: itemId!,
+        price: price?.parseCurrency().toInt(),
+        buyerName: buyerName,
+        planDate: planDate,
+        surprise: surprise,
+        sentAt: sentAt,
+        memo: memo,
+      );
     }
 
     // 遷移元にポップ
@@ -232,7 +232,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
-    final l10n = ref.read(l10nProvider);
+    final l10n = useL10n();
     final result = await showAdaptiveOkCancelDialog(
       context,
       title: l10n.deleteConfirmTitle,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
@@ -12,7 +13,6 @@ import '../../../application/model/dialog_result.dart';
 import '../../../application/model/item/item_order_key.dart';
 import '../../../application/model/item/item_order_model.dart';
 import '../../../application/model/order.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/group/group_usecase.dart';
 import '../../../application/usecase/group/state/current_group_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
@@ -96,7 +96,7 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
           /// 8の倍数ではないが、文字列が含まれるため許容
           expandWidth: 181,
           duration: const Duration(milliseconds: 150),
-          onPressed: () => _onAdd(context, ref),
+          onPressed: () => _onAdd(context, ref, l10n),
           icon: const Icon(Icons.add),
           label: Text(l10n.addWishList),
           controller: scrollController,
@@ -105,10 +105,21 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  void _onAdd(BuildContext context, WidgetRef ref) {
-    // TODO(yakitama5): グループ未選択であればダイアログを表示して戻す
-    // 画面遷移
-    const ItemCreateRouteData().go(context);
+  Future<void> _onAdd(BuildContext context, WidgetRef ref, L10n l10n) async {
+    final currentGroup = await ref.read(currentGroupProvider.future);
+
+    if (!context.mounted) {
+      return;
+    }
+    if (currentGroup != null) {
+      const ItemCreateRouteData().go(context);
+    }
+
+    await showAdaptiveOkDialog(
+      context,
+      title: l10n.notSelectedGroupDialogTitle,
+      message: l10n.notSelectedGroupDialogMessage,
+    );
   }
 }
 
@@ -172,12 +183,12 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
 
     return IconButton(
       icon: const Icon(Icons.account_circle),
-      onPressed: () => onAccount(context, ref),
+      onPressed: () => onAccount(context, ref, l10n),
       tooltip: l10n.account,
     );
   }
 
-  Future<void> onAccount(BuildContext context, WidgetRef ref) async {
+  Future<void> onAccount(BuildContext context, WidgetRef ref, L10n l10n) async {
     // ダイアログで選択
     final groupId = await showAdaptiveAccountDialog(context);
     if (groupId == null) {
@@ -186,7 +197,6 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
 
     // 選択結果に応じてグループを切り替える
     if (context.mounted) {
-      final l10n = ref.read(l10nProvider);
       await execute(
         context,
         action: () async =>
@@ -432,9 +442,9 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
         children: [
           SlidableAction(
             onPressed: (_) async {
-              final res = await confirmDismiss(context, ref);
+              final res = await confirmDismiss(context, ref, l10n);
               if (res && context.mounted) {
-                await onDelete(context, ref);
+                await onDelete(context, ref, l10n);
               }
             },
             backgroundColor: colorScheme.error,
@@ -460,9 +470,12 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  Future<bool> confirmDismiss(BuildContext context, WidgetRef ref) async {
+  Future<bool> confirmDismiss(
+    BuildContext context,
+    WidgetRef ref,
+    L10n l10n,
+  ) async {
     // ダイアログの表示
-    final l10n = ref.read(l10nProvider);
     final result = await showAdaptiveOkCancelDialog(
       context,
       title: l10n.deleteConfirmTitle,
@@ -471,8 +484,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
     return result == DialogResult.ok;
   }
 
-  Future<void> onDelete(BuildContext context, WidgetRef ref) async {
-    final l10n = ref.read(l10nProvider);
+  Future<void> onDelete(BuildContext context, WidgetRef ref, L10n l10n) async {
     await execute(
       context,
       action: () => ref.read(itemUsecaseProvider).delete(itemId: item.id),
