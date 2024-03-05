@@ -1,4 +1,3 @@
-import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/item/entity/item.dart';
@@ -10,23 +9,22 @@ part 'item_detail_providers.g.dart';
 
 // ignore: avoid_classes_with_only_static_members
 /// 欲しい物の明細を管理するProvider
-///
-/// 明細画面郡で横断して利用する状態を管理する<br/>
-/// ID項目などをバケツリレーする運用を避けるため、`overrideWithValue`を用いて状態を引き継ぐ
+/// 明細を表示する画面郡で横断して利用する状態を管理する
+/// IDを管理するProviderを `override`することを前提に処理を組む
 class ItemDetailProviders {
-  static final itemIdProvider = _itemIdProvider;
-  static final itemProvider = _itemProvider;
-  static final purchaseProvider = _purchaseProvider;
+  static AutoDisposeProvider<String?> get itemIdProvider => _itemIdProvider;
+  static AutoDisposeFutureProvider<Item?> get itemProvider => _itemProvider;
+  static AutoDisposeFutureProvider<Purchase?> get purchaseProvider =>
+      _purchaseProvider;
 }
 
-/// 明細画面の欲しい物ID
-/// 新規 or 更新の判定に利用するため、IDだけを切り出し
+/// 明細表示対象となる欲しい物のIDを管理するProvider
+/// `override`前提の利用を強制する
 @riverpod
-String? _itemId(_ItemIdRef ref) =>
-    // 画面遷移時に `override` することを前提に利用
-    throw UnimplementedError();
+String? _itemId(_ItemIdRef ref) => throw UnimplementedError();
 
-/// 明細画面の欲しい物
+/// 明細表示対象となる欲しい物のEntityを管理するProvider
+/// `_itemIdProvider`に依存する
 @Riverpod(dependencies: [_itemId])
 Future<Item?> _item(_ItemRef ref) async {
   final itemId = ref.watch(_itemIdProvider);
@@ -36,7 +34,8 @@ Future<Item?> _item(_ItemRef ref) async {
   return ref.watch(currentGroupItemProvider(itemId: itemId).future);
 }
 
-/// 明細画面の購入情報
+/// 明細表示対象となる欲しい物に属する購入情報のEntityを管理するProvider
+/// `_itemIdProvider`に依存する
 @Riverpod(dependencies: [_itemId])
 Future<Purchase?> _purchase(_PurchaseRef ref) async {
   final itemId = ref.watch(_itemIdProvider);

@@ -8,8 +8,8 @@ part of 'item_detail_providers.dart';
 
 String _$itemIdHash() => r'42a86b52949c2f92e6439e0241e4e7fee52d4438';
 
-/// 明細画面の欲しい物ID
-/// 新規 or 更新の判定に利用するため、IDだけを切り出し
+/// 明細表示対象となる欲しい物のIDを管理するProvider
+/// `override`前提の利用を強制する
 ///
 /// Copied from [_itemId].
 @ProviderFor(_itemId)
@@ -25,7 +25,8 @@ final _itemIdProvider = AutoDisposeProvider<String?>.internal(
 typedef _ItemIdRef = AutoDisposeProviderRef<String?>;
 String _$itemHash() => r'08b429d55ec789eada55275734667e0124bcec1c';
 
-/// 明細画面の欲しい物
+/// 明細表示対象となる欲しい物のEntityを管理するProvider
+/// `_itemIdProvider`に依存する
 ///
 /// Copied from [_item].
 @ProviderFor(_item)
@@ -44,7 +45,8 @@ final _itemProvider = AutoDisposeFutureProvider<Item?>.internal(
 typedef _ItemRef = AutoDisposeFutureProviderRef<Item?>;
 String _$purchaseHash() => r'9c281248b302951779d25a55255ff4b983b6e03c';
 
-/// 明細画面の購入情報
+/// 明細表示対象となる欲しい物に属する購入情報のEntityを管理するProvider
+/// `_itemIdProvider`に依存する
 ///
 /// Copied from [_purchase].
 @ProviderFor(_purchase)
