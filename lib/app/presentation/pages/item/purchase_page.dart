@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:family_wish_list/app/application/state/locale_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
@@ -14,6 +13,7 @@ import '../../../application/extension/number_extension.dart';
 import '../../../application/extension/string_extension.dart';
 import '../../../application/model/dialog_result.dart';
 import '../../../application/model/purchase/purchase_form_model.dart';
+import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/purchase/purchase_usecase.dart';
 import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
