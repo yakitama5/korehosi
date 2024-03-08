@@ -8,12 +8,12 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/config/user_config.dart';
 import '../../../application/state/introduction_screen_key_provider.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/user/onboard_usecase.dart';
 import '../../../application/usecase/user/state/user_form_provider.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
+import '../../hooks/use_l10n.dart';
 import '../../theme/importer.dart';
 import '../presentation_mixin.dart';
 import 'components/age_group_field.dart';
@@ -24,7 +24,7 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
     final form = ref.watch(userFormProvider).value;
     final introKey = ref.watch(introductionScreenKeyProvider);
 
@@ -62,7 +62,7 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
   }
 
   PageViewModel _buildStartPage(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return _buildPageModel(
       context: context,
@@ -80,7 +80,7 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
   }
 
   PageViewModel _buildProfilePage(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return _buildPageModel(
       context: context,
@@ -100,7 +100,7 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
   }
 
   PageViewModel _buildConfirmPage(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return _buildPageModel(
       context: context,
