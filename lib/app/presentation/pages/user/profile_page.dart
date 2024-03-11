@@ -6,11 +6,11 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/config/user_config.dart';
 import '../../../application/model/dialog_result.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/user/state/user_form_provider.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
+import '../../hooks/use_l10n.dart';
 import '../presentation_mixin.dart';
 import 'components/age_group_field.dart';
 import 'components/user_name_field.dart';
@@ -20,7 +20,9 @@ class ProfilePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
+
+    // TODO(yakitama5): Modelに書き換えること (初期値設定あり)
     final asyncForm = ref.watch(userFormProvider);
 
     return asyncForm.maybeWhen(
@@ -65,7 +67,7 @@ class _Form extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return UnfocusOnTap(
       child: Scaffold(
@@ -97,7 +99,7 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return Padding(
       padding: const EdgeInsets.only(right: 8),
