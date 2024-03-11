@@ -25,7 +25,6 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const model = UserFormModel();
-
     final l10n = useL10n();
 
     return UserFormModelFormBuilder(
@@ -39,9 +38,9 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
           child: IntroductionScreen(
             key: introKey,
             pages: [
-              _createStartPageVM(context, l10n),
-              _createProfilePageVM(context, l10n),
-              _createConfirmPageVM(context, ref, l10n),
+              _createStartPageVM(context),
+              _createProfilePageVM(context),
+              _createConfirmPageVM(context, ref),
             ],
             freeze: true,
             showBackButton: true,
@@ -56,10 +55,9 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  PageViewModel _createStartPageVM(
-    BuildContext context,
-    L10n l10n,
-  ) {
+  PageViewModel _createStartPageVM(BuildContext context) {
+    final l10n = L10n.of(context)!;
+
     return _createPageVM(
       context,
       imagePath: Assets.images.onboardGift,
@@ -75,31 +73,28 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  PageViewModel _createProfilePageVM(
-    BuildContext context,
-    L10n l10n,
-  ) =>
-      _createPageVM(
-        context,
-        imagePath: Assets.images.onboardProfile,
-        title: l10n.questionAgeGroup,
-        children: [
-          const UserNameField(),
-          const Gap(8),
-          const AgeGroupField(),
-          const Gap(32),
-          _FormFilledButton(
-            onPressed: () => introKey.currentState?.next(),
-            label: l10n.next,
-          ),
-        ],
-      );
+  PageViewModel _createProfilePageVM(BuildContext context) {
+    final l10n = L10n.of(context)!;
 
-  PageViewModel _createConfirmPageVM(
-    BuildContext context,
-    WidgetRef ref,
-    L10n l10n,
-  ) {
+    return _createPageVM(
+      context,
+      imagePath: Assets.images.onboardProfile,
+      title: l10n.questionAgeGroup,
+      children: [
+        const UserNameField(),
+        const Gap(8),
+        const AgeGroupField(),
+        const Gap(32),
+        _FormFilledButton(
+          onPressed: () => introKey.currentState?.next(),
+          label: l10n.next,
+        ),
+      ],
+    );
+  }
+
+  PageViewModel _createConfirmPageVM(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context)!;
     final formModel = ReactiveUserFormModelForm.of(context)!;
 
     return _createPageVM(
