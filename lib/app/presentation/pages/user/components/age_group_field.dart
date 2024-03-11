@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../application/config/user_config.dart';
-import '../../../../application/state/locale_provider.dart';
+import '../../../../application/model/user/user_form_model.dart';
 import '../../../components/src/reactive_segmented_button.dart';
+import '../../../hooks/use_l10n.dart';
 
-class AgeGroupField extends HookConsumerWidget {
+class AgeGroupField extends HookWidget {
   const AgeGroupField({
     super.key,
     this.fieldKey,
@@ -14,12 +14,11 @@ class AgeGroupField extends HookConsumerWidget {
   final Key? fieldKey;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ReactiveSegmentedButton(
-      key: fieldKey,
-      formControlName: userConfig.ageGroupKey,
+      formControlName: UserFormModelForm.ageGroupControlName,
       labelText: l10n.ageGroup,
     );
   }

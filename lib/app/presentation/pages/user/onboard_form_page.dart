@@ -1,13 +1,12 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../application/config/user_config.dart';
 import '../../../application/model/user/user_form_model.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../../domain/user/value_object/age_group.dart';
@@ -19,14 +18,15 @@ import 'components/age_group_field.dart';
 import 'components/user_name_field.dart';
 
 class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
-  const OnboardFormPage({super.key});
+  OnboardFormPage({super.key});
+
+  final introKey = GlobalKey<IntroductionScreenState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const model = UserFormModel();
 
     final l10n = useL10n();
-    final introKey = useState(GlobalKey<IntroductionScreenState>());
 
     return UserFormModelFormBuilder(
       model: model,
@@ -37,11 +37,11 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
             PagePadding(),
           ],
           child: IntroductionScreen(
-            key: introKey.value,
+            key: introKey,
             pages: [
-              _buildStartPage(introKey.value.currentState),
-              _buildProfilePage(introKey.value.currentState),
-              _buildConfirmPage(ref),
+              _createStartPageVM(context, l10n),
+              _createProfilePageVM(context, l10n),
+              _createConfirmPageVM(context, ref, l10n),
             ],
             freeze: true,
             showBackButton: true,
@@ -56,53 +56,60 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  PageViewModel _buildStartPage(IntroductionScreenState? screenState) {
-    final l10n = useL10n();
-
-    return _buildPageModel(
+  PageViewModel _createStartPageVM(
+    BuildContext context,
+    L10n l10n,
+  ) {
+    return _createPageVM(
+      context,
       imagePath: Assets.images.onboardGift,
       title: l10n.onboardStartTitle,
       children: [
         Text(l10n.onboardStartMessage),
         const Gap(16),
         _FormFilledButton(
-          onPressed: () => screenState?.next(),
+          onPressed: () => introKey.currentState?.next(),
           label: l10n.next,
         ),
       ],
     );
   }
 
-  PageViewModel _buildProfilePage(IntroductionScreenState? screenState) {
-    final l10n = useL10n();
+  PageViewModel _createProfilePageVM(
+    BuildContext context,
+    L10n l10n,
+  ) =>
+      _createPageVM(
+        context,
+        imagePath: Assets.images.onboardProfile,
+        title: l10n.questionAgeGroup,
+        children: [
+          const UserNameField(),
+          const Gap(8),
+          const AgeGroupField(),
+          const Gap(32),
+          _FormFilledButton(
+            onPressed: () => introKey.currentState?.next(),
+            label: l10n.next,
+          ),
+        ],
+      );
 
-    return _buildPageModel(
-      imagePath: Assets.images.onboardProfile,
-      title: l10n.questionAgeGroup,
-      children: [
-        const UserNameField(),
-        const Gap(8),
-        const AgeGroupField(),
-        const Gap(32),
-        _FormFilledButton(
-          onPressed: () => screenState?.next(),
-          label: l10n.next,
-        ),
-      ],
-    );
-  }
+  PageViewModel _createConfirmPageVM(
+    BuildContext context,
+    WidgetRef ref,
+    L10n l10n,
+  ) {
+    final formModel = ReactiveUserFormModelForm.of(context)!;
 
-  PageViewModel _buildConfirmPage(WidgetRef ref) {
-    final l10n = useL10n();
-    final context = useContext();
-
-    return _buildPageModel(
+    return _createPageVM(
+      context,
       imagePath: Assets.images.onboardDone,
       titleWidget: const SizedBox.shrink(),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ReactiveValueListenableBuilder<AgeGroup>(
-          formControlName: userConfig.ageGroupKey,
+          formControl: formModel.ageGroupControl,
           builder: (context, control, child) => TextWithLabel(
             control.value?.getLocaleName(l10n),
             label: l10n.ageGroup,
@@ -110,7 +117,7 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
         ),
         const Gap(8),
         ReactiveValueListenableBuilder<String>(
-          formControlName: userConfig.nameKey,
+          formControl: formModel.nameControl,
           builder: (context, control, child) =>
               TextWithLabel(control.value, label: l10n.name),
         ),
@@ -123,14 +130,15 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  PageViewModel _buildPageModel({
+  PageViewModel _createPageVM(
+    BuildContext context, {
     required String imagePath,
     String? title,
     Widget? titleWidget,
     required List<Widget> children,
     CrossAxisAlignment? crossAxisAlignment,
   }) {
-    final colorScheme = useContext().colorScheme;
+    final colorScheme = context.colorScheme;
     final replaceColors = [
       ...svgReplaceColorsPrimary.map((c) => (c, colorScheme.primary)),
       ...svgReplaceColorsPrimaryContainer
