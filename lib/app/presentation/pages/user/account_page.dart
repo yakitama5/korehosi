@@ -1,3 +1,5 @@
+import 'package:family_wish_list/app/presentation/hooks/use_l10n.dart';
+import 'package:family_wish_list/app/presentation/pages/error/components/error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -16,21 +18,20 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
-    final authStatusValue = ref.watch(authStatusProvider).value;
-
     final trailing = context.themeData.isCupertinoPlatform
         ? const Icon(Icons.arrow_forward_ios_rounded)
         : null;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.account),
-      ),
-      body: NullSafetyBuilder(
-        object: authStatusValue,
-        builder: (authStatus) => ThemedSettingsList(
+    final authStatus = ref.watch(authStatusProvider);
+
+    return authStatus.when(
+      data: (data) => Scaffold(
+        appBar: AppBar(
+          title: Text(l10n.account),
+        ),
+        body: ThemedSettingsList(
           sections: [
             SettingsSection(
               title: Text(l10n.accountLink),
@@ -38,7 +39,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
                 SettingsTile.switchTile(
                   leading: const GoogleIcon(),
                   title: Text(l10n.google),
-                  initialValue: authStatus.linkedGoogle,
+                  initialValue: data?.linkedGoogle,
                   onToggle: (value) => _onToggleGoogle(context, ref, value),
                 ),
                 SettingsTile.switchTile(
@@ -47,7 +48,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
                     color: colorScheme.onBackground,
                   ),
                   title: Text(l10n.apple),
-                  initialValue: authStatus.linkedApple,
+                  initialValue: data?.linkedApple,
                   onToggle: (value) => _onToggleApple(context, ref, value),
                 ),
               ],
@@ -56,7 +57,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
               title: Text(l10n.other),
               tiles: [
                 // 連携していないユーザーはログアウトしても復帰できないので退会オンリー
-                if (!authStatus.isAnonymous)
+                if (data?.isAnonymous == true)
                   SettingsTile.navigation(
                     leading: const Icon(Icons.logout),
                     trailing: trailing,
@@ -74,6 +75,8 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
           ],
         ),
       ),
+      error: ErrorView.new,
+      loading: CircularProgressIndicator.new,
     );
   }
 
@@ -85,11 +88,10 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
       execute(
         context,
         action: () {
-          if (value) {
-            return ref.read(userUsecaseProvider).signInWithGoogle();
-          } else {
-            return ref.read(userUsecaseProvider).unlinkWithGoogle();
-          }
+          final usecase = ref.read(userUsecaseProvider);
+          return value
+              ? usecase.signInWithGoogle()
+              : usecase.unlinkWithGoogle();
         },
       );
 
@@ -101,11 +103,8 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
       execute(
         context,
         action: () {
-          if (value) {
-            return ref.read(userUsecaseProvider).signInWithApple();
-          } else {
-            return ref.read(userUsecaseProvider).unlinkWithApple();
-          }
+          final usecase = ref.read(userUsecaseProvider);
+          return value ? usecase.signInWithApple() : usecase.unlinkWithApple();
         },
       );
 
