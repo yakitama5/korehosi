@@ -1,5 +1,3 @@
-import 'package:family_wish_list/app/presentation/hooks/use_l10n.dart';
-import 'package:family_wish_list/app/presentation/pages/error/components/error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -10,7 +8,9 @@ import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/user/state/auth_status_provider.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../components/importer.dart';
+import '../../hooks/use_l10n.dart';
 import '../../theme/importer.dart';
+import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
 
 class AccountPage extends HookConsumerWidget with PresentationMixin {
