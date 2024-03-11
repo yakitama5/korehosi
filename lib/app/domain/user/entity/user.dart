@@ -14,7 +14,6 @@ class User with _$User {
     required AgeGroup ageGroup,
     String? name,
     List<String>? joinGroupIds,
-    List<String>? fcmTokens,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _User;

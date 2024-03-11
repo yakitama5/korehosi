@@ -1,5 +1,6 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -7,9 +8,7 @@ import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/config/user_config.dart';
-import '../../../application/state/introduction_screen_key_provider.dart';
-import '../../../application/usecase/user/onboard_usecase.dart';
-import '../../../application/usecase/user/state/user_form_provider.dart';
+import '../../../application/model/user/user_form_model.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
@@ -24,29 +23,25 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const model = UserFormModel();
+
     final l10n = useL10n();
-    final form = ref.watch(userFormProvider).value;
-    final introKey = ref.watch(introductionScreenKeyProvider);
+    final introKey = useState(GlobalKey<IntroductionScreenState>());
 
-    // 一瞬なのでローディング表示は行わない
-    if (form == null) {
-      return const SizedBox.shrink();
-    }
-
-    return ReactiveForm(
-      formGroup: form,
-      child: Scaffold(
+    return UserFormModelFormBuilder(
+      model: model,
+      builder: (context, formModel, _) => Scaffold(
         body: Nested(
           children: const [
             UnfocusOnTap(),
             PagePadding(),
           ],
           child: IntroductionScreen(
-            key: introKey,
+            key: introKey.value,
             pages: [
-              _buildStartPage(context, ref),
-              _buildProfilePage(context, ref),
-              _buildConfirmPage(context, ref),
+              _buildStartPage(introKey.value.currentState),
+              _buildProfilePage(introKey.value.currentState),
+              _buildConfirmPage(ref),
             ],
             freeze: true,
             showBackButton: true,
@@ -61,29 +56,27 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  PageViewModel _buildStartPage(BuildContext context, WidgetRef ref) {
+  PageViewModel _buildStartPage(IntroductionScreenState? screenState) {
     final l10n = useL10n();
 
     return _buildPageModel(
-      context: context,
       imagePath: Assets.images.onboardGift,
       title: l10n.onboardStartTitle,
       children: [
         Text(l10n.onboardStartMessage),
         const Gap(16),
         _FormFilledButton(
-          onPressed: ref.read(onboardUsecaseProvider).next,
+          onPressed: () => screenState?.next(),
           label: l10n.next,
         ),
       ],
     );
   }
 
-  PageViewModel _buildProfilePage(BuildContext context, WidgetRef ref) {
+  PageViewModel _buildProfilePage(IntroductionScreenState? screenState) {
     final l10n = useL10n();
 
     return _buildPageModel(
-      context: context,
       imagePath: Assets.images.onboardProfile,
       title: l10n.questionAgeGroup,
       children: [
@@ -92,18 +85,18 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
         const AgeGroupField(),
         const Gap(32),
         _FormFilledButton(
-          onPressed: ref.read(onboardUsecaseProvider).next,
+          onPressed: () => screenState?.next(),
           label: l10n.next,
         ),
       ],
     );
   }
 
-  PageViewModel _buildConfirmPage(BuildContext context, WidgetRef ref) {
+  PageViewModel _buildConfirmPage(WidgetRef ref) {
     final l10n = useL10n();
+    final context = useContext();
 
     return _buildPageModel(
-      context: context,
       imagePath: Assets.images.onboardDone,
       titleWidget: const SizedBox.shrink(),
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,14 +124,13 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
   }
 
   PageViewModel _buildPageModel({
-    required BuildContext context,
     required String imagePath,
     String? title,
     Widget? titleWidget,
     required List<Widget> children,
     CrossAxisAlignment? crossAxisAlignment,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = useContext().colorScheme;
     final replaceColors = [
       ...svgReplaceColorsPrimary.map((c) => (c, colorScheme.primary)),
       ...svgReplaceColorsPrimaryContainer
@@ -168,10 +160,9 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
       // 画面遷移はリダイレクト処理で行う
       action: () async {
         // 画面の入力内容を取得
-        final form = await ref.read(userFormProvider.future);
-        final name = form.controls[userConfig.nameKey]?.value as String?;
-        final ageGroup =
-            form.controls[userConfig.ageGroupKey]?.value as AgeGroup?;
+        final formModel = ReactiveUserFormModelForm.of(context)!;
+        final name = formModel.nameControl?.value;
+        final ageGroup = formModel.ageGroupControl.value;
 
         // 登録
         await ref.read(userUsecaseProvider).signUp(
