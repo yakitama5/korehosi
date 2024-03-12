@@ -14,11 +14,12 @@ import '../../../application/model/dialog_result.dart';
 import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/group/group_usecase.dart';
 import '../../../application/usecase/group/state/current_group_id_provider.dart';
-import '../../../application/usecase/group/state/group_page_providers.dart';
+import '../../../application/usecase/group/state/group_detail_providers.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../domain/user/entity/user.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
+import '../../hooks/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import '../item/components/list_loader_view.dart';
@@ -31,17 +32,15 @@ class GroupPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncGroup = ref.watch(GroupPageProviders.groupProvider);
-    final asyncUsers = ref.watch(GroupPageProviders.usersProvider);
+    final l10n = useL10n();
     final scrollController = useScrollController();
-    final l10n = ref.watch(l10nProvider);
 
-    return asyncGroup.maybeWhen(
-      // 一瞬なので何も表示しない
-      orElse: () => const SizedBox.shrink(),
+    final group = ref.watch(GroupDetailProviders.groupProvider);
+
+    return group.when(
       skipLoadingOnReload: true,
-      data: (group) {
-        if (group == null) {
+      data: (groupData) {
+        if (groupData == null) {
           return ErrorView(l10n.deletedMessage, null);
         }
 
@@ -52,9 +51,9 @@ class GroupPage extends HookConsumerWidget {
               slivers: [
                 SliverAppBar(
                   title: PremiumPrefixContainer(
-                    premium: group.premium,
+                    premium: groupData.premium,
                     child: Text(
-                      group.name,
+                      groupData.name,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -66,30 +65,44 @@ class GroupPage extends HookConsumerWidget {
                   ],
                 ),
                 const _PremiumPlanButton(),
-                asyncUsers.when(
-                  // 画面のちらつきを抑えるため、フィルターやリアルタイム反映はローディングを挟まない
-                  skipLoadingOnReload: true,
-                  data: (users) => SliverPadding(
-                    padding: const EdgeInsets.only(bottom: 120),
-                    sliver: SliverList.separated(
-                      itemCount: users.length,
-                      itemBuilder: (context, index) => _ListTile(users[index]),
-                      separatorBuilder: (context, index) => const Divider(),
-                    ),
-                  ),
-                  error: (error, stackTrace) => SliverFillRemaining(
-                    child: ErrorView(error, stackTrace),
-                  ),
-                  loading: () => const SliverFillRemaining(
-                    child: ListLoaderView(),
-                  ),
-                ),
+                const _SliverBody(),
               ],
             ),
           ),
           floatingActionButton: const _Fab(),
         );
       },
+      error: ErrorView.new,
+      // 一瞬なので何も表示しない
+      loading: () => const SizedBox.shrink(),
+    );
+  }
+}
+
+class _SliverBody extends HookConsumerWidget {
+  const _SliverBody();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final users = ref.watch(GroupDetailProviders.usersProvider);
+
+    return users.when(
+      // 画面のちらつきを抑えるため、フィルターやリアルタイム反映はローディングを挟まない
+      skipLoadingOnReload: true,
+      data: (usersData) => SliverPadding(
+        padding: const EdgeInsets.only(bottom: 120),
+        sliver: SliverList.separated(
+          itemCount: usersData.length,
+          itemBuilder: (context, index) => _ListTile(usersData[index]),
+          separatorBuilder: (context, index) => const Divider(),
+        ),
+      ),
+      error: (error, stackTrace) => SliverFillRemaining(
+        child: ErrorView(error, stackTrace),
+      ),
+      loading: () => const SliverFillRemaining(
+        child: ListLoaderView(),
+      ),
     );
   }
 }
@@ -101,11 +114,11 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // Web以外のプラットフォームで参加済でないユーザーに表示
     final premiumed = ref.watch(
-      GroupPageProviders.groupProvider
+      GroupDetailProviders.groupProvider
           .select((value) => value.value?.premium == true),
     );
 
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return SliverVisibility(
       visible: !premiumed && !kIsWeb,
@@ -124,7 +137,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onPremium(BuildContext context, WidgetRef ref) async {
     final l10n = ref.read(l10nProvider);
-    final group = await ref.read(GroupPageProviders.groupProvider.future);
+    final group = await ref.read(GroupDetailProviders.groupProvider.future);
     if (group == null && context.mounted) {
       ErrorSnackBar.show(
         ScaffoldMessenger.of(context),
@@ -196,7 +209,7 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return FloatingActionButton.extended(
       onPressed: () => onShare(context, ref),
@@ -210,7 +223,7 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
     await execute(
       context,
       action: () async {
-        final group = await ref.read(GroupPageProviders.groupProvider.future);
+        final group = await ref.read(GroupDetailProviders.groupProvider.future);
         final url = await ref.read(groupUsecaseProvider).buildShareLink(
               groupId: group!.id,
               locationBuilder: (shareLinkId) =>
@@ -230,14 +243,14 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
   }
 }
 
-class _ListTile extends HookConsumerWidget {
+class _ListTile extends HookWidget {
   const _ListTile(this.user);
 
   final User user;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ListTile(
       title: Text(
@@ -263,12 +276,12 @@ class _SelectButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // 表示中のグループの場合はボタンを表示しない
     final currentGroupId = ref.watch(currentGroupIdProvider).value;
-    final groupId = ref.watch(GroupPageProviders.groupIdProvider);
+    final groupId = ref.watch(GroupDetailProviders.groupIdProvider);
     if (currentGroupId == groupId) {
       return const SizedBox.shrink();
     }
 
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return IconButton(
       onPressed: () => onSelect(context, ref),
@@ -279,7 +292,7 @@ class _SelectButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onSelect(BuildContext context, WidgetRef ref) async {
     // カレント情報を更新するだけ
-    final groupId = ref.watch(GroupPageProviders.groupIdProvider);
+    final groupId = ref.watch(GroupDetailProviders.groupIdProvider);
     if (groupId == null) {
       return;
     }
@@ -300,7 +313,7 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return IconButton(
       onPressed: () => onEdit(context, ref),
@@ -314,7 +327,7 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
       context,
       action: () async {
         // 初期値の取得
-        final prev = await ref.read(GroupPageProviders.groupProvider.future);
+        final prev = await ref.read(GroupDetailProviders.groupProvider.future);
         if (!context.mounted) {
           return;
         }
@@ -350,7 +363,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // 作成者のみ表示
     final ownerUserId = ref.watch(
-      GroupPageProviders.groupProvider
+      GroupDetailProviders.groupProvider
           .select((asyncValue) => asyncValue.value?.ownerUid),
     );
     final userId =
@@ -359,7 +372,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () => onDelete(context, ref),
@@ -374,7 +387,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
     final l10n = ref.read(l10nProvider);
-    final group = ref.read(GroupPageProviders.groupProvider).value;
+    final group = ref.read(GroupDetailProviders.groupProvider).value;
     final result = await showAdaptiveOkCancelDialog(
       context,
       title: l10n.deleteConfirmTitle,
@@ -408,7 +421,7 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // 参加者のみ表示
     final ownerUserId = ref.watch(
-      GroupPageProviders.groupProvider
+      GroupDetailProviders.groupProvider
           .select((asyncValue) => asyncValue.value?.ownerUid),
     );
     final userId =
@@ -417,7 +430,7 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () => onLeave(context, ref),
@@ -432,7 +445,7 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
   Future<void> onLeave(BuildContext context, WidgetRef ref) async {
     // 離脱確認
     final l10n = ref.read(l10nProvider);
-    final group = ref.read(GroupPageProviders.groupProvider).value;
+    final group = ref.read(GroupDetailProviders.groupProvider).value;
     final result = await showAdaptiveOkCancelDialog(
       context,
       title: l10n.leaveConfirmTitle,
