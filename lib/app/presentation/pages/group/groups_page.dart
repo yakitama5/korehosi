@@ -44,7 +44,7 @@ class GroupsPage extends HookWidget {
                 ),
               ],
             ),
-            const _ListBody(),
+            const _SliverBody(),
           ],
         ),
       ),
@@ -62,8 +62,8 @@ class GroupsPage extends HookWidget {
   }
 }
 
-class _ListBody extends HookConsumerWidget {
-  const _ListBody();
+class _SliverBody extends HookConsumerWidget {
+  const _SliverBody();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
