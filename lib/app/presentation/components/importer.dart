@@ -15,6 +15,7 @@ export 'src/itemized_text.dart';
 export 'src/label_icon_button.dart';
 export 'src/page_padding.dart';
 export 'src/reactive_cupertino_text_field.dart';
+export 'src/reactive_form_dirty_confirm_pop_scope.dart';
 export 'src/reactive_image_picker.dart';
 export 'src/reactive_outlined_text_field.dart';
 export 'src/reactive_segmented_button.dart';

@@ -18,7 +18,6 @@ import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/item/state/wanter_name_suggestion.dart';
 import '../../../domain/item/entity/item.dart';
 import '../../components/importer.dart';
-import '../../components/src/reactive_form_dirty_confirm_pop_scope.dart';
 import '../../hooks/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
