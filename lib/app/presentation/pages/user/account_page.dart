@@ -1,3 +1,4 @@
+import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -19,8 +20,8 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = useL10n();
-    final colorScheme = Theme.of(context).colorScheme;
-    final trailing = context.themeData.isCupertinoPlatform
+    final colorScheme = useColorScheme();
+    final trailing = useTheme().isCupertinoPlatform
         ? const Icon(Icons.arrow_forward_ios_rounded)
         : null;
 

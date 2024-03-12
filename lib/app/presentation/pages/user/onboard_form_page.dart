@@ -133,7 +133,7 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
     required List<Widget> children,
     CrossAxisAlignment? crossAxisAlignment,
   }) {
-    final colorScheme = context.colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
     final replaceColors = [
       ...svgReplaceColorsPrimary.map((c) => (c, colorScheme.primary)),
       ...svgReplaceColorsPrimaryContainer

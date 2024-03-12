@@ -1,3 +1,4 @@
+import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -95,7 +96,7 @@ class _AdaptiveTextField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeData = context.themeData;
+    final themeData = useTheme();
     if (themeData.isCupertinoPlatform) {
       return _CupertinoTextField(
         isRequired: isRequired,

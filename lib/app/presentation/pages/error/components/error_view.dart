@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../../domain/exception/exceptions.dart';
+import '../../../hooks/use_theme.dart';
 
-class ErrorView extends StatelessWidget {
+class ErrorView extends HookWidget {
   const ErrorView(this.error, this.stackTrace, {super.key});
 
   final Object error;
@@ -13,8 +15,8 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = useTextTheme();
+    final colorScheme = useColorScheme();
 
     return SafeArea(
       child: Column(

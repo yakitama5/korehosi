@@ -1,3 +1,4 @@
+import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -63,8 +64,8 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = context.colorScheme;
-    final textTheme = context.textTheme;
+    final colorScheme = useColorScheme();
+    final textTheme = useTextTheme();
     final range = ref.watch(monthlySumPriceChartRangeProvider);
     final l10n = ref.watch(l10nProvider);
 

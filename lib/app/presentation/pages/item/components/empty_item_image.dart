@@ -1,8 +1,8 @@
+import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../theme/importer.dart';
-
-class EmptyItemImage extends StatelessWidget {
+class EmptyItemImage extends HookWidget {
   const EmptyItemImage({
     super.key,
     this.radius,
@@ -14,7 +14,7 @@ class EmptyItemImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = context.colorScheme;
+    final colorScheme = useColorScheme();
 
     return Ink(
       height: double.infinity,

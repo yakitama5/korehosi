@@ -1,3 +1,4 @@
+import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -22,7 +23,7 @@ class SettingsPage extends HookConsumerWidget {
     final l10n = useL10n();
 
     // プラットフォームに応じたアイコンの出し訳
-    final trailing = context.themeData.isCupertinoPlatform
+    final trailing = useTheme().isCupertinoPlatform
         ? const Icon(Icons.arrow_forward_ios_rounded)
         : null;
 
