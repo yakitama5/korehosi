@@ -5,10 +5,10 @@ import 'package:settings_ui/settings_ui.dart';
 
 import '../../../application/config/url_config.dart';
 import '../../../application/state/app_lifecycle_state_provider.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../components/importer.dart';
 import '../../helper/permission_helper.dart';
 import '../../helper/url_launcher_helper.dart';
+import '../../hooks/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../../theme/importer.dart';
 
@@ -19,8 +19,7 @@ class SettingsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // 設定アプリと行き来するため、ライフサイクルを検知してリビルドを行う
     ref.watch(appLifecycleStateProvider);
-
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     // プラットフォームに応じたアイコンの出し訳
     final trailing = context.themeData.isCupertinoPlatform
