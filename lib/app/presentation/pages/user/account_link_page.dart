@@ -7,7 +7,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../components/importer.dart';
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../theme/importer.dart';
 import '../presentation_mixin.dart';
 

@@ -7,7 +7,7 @@ import '../../../../application/model/item/item_order_key.dart';
 import '../../../../application/model/item/item_order_model.dart';
 import '../../../../application/model/order.dart';
 import '../../../components/importer.dart';
-import '../../../hooks/use_l10n.dart';
+import '../../../hooks/src/use_l10n.dart';
 
 class ItemOrderSelectorBottomSheet extends HookWidget {
   const ItemOrderSelectorBottomSheet({super.key, required this.initial});

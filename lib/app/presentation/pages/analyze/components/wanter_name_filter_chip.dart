@@ -2,10 +2,10 @@ import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../application/state/locale_provider.dart';
 import '../../../../application/usecase/analyze/state/wanter_filter_notifier_provider.dart';
 import '../../../../application/usecase/item/state/wanter_name_suggestion.dart';
 import '../../../components/importer.dart';
+import '../../../hooks/importer.dart';
 
 /// 欲しい人の`FilterChip`
 class WanterNameFilterChip extends HookConsumerWidget {
@@ -16,11 +16,12 @@ class WanterNameFilterChip extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectName = ref.watch(wanterFilterNotifierProvider);
-    final selected = selectName != null;
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
     final defaultTitle = l10n.wanterNameChipTitle;
     final allLabel = l10n.all;
+
+    final selectName = ref.watch(wanterFilterNotifierProvider);
+    final selected = selectName != null;
 
     return LeadingIconInputChip(
       label: Text(

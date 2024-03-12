@@ -1,4 +1,4 @@
-import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
+import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -9,7 +9,7 @@ import '../../../application/state/app_lifecycle_state_provider.dart';
 import '../../components/importer.dart';
 import '../../helper/permission_helper.dart';
 import '../../helper/url_launcher_helper.dart';
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../../theme/importer.dart';
 

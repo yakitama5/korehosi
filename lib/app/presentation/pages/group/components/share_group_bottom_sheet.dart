@@ -14,6 +14,7 @@ import 'package:uuid/uuid.dart';
 import '../../../../application/state/locale_provider.dart';
 import '../../../../application/usecase/group/group_share_usecase.dart';
 import '../../../components/importer.dart';
+import '../../../hooks/importer.dart';
 import '../../presentation_mixin.dart';
 
 class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
@@ -44,8 +45,8 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final theme = Theme.of(context);
+    final l10n = useL10n();
+    final theme = useTheme();
 
     return BottomSheetColumn(
       children: [

@@ -3,12 +3,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../application/state/locale_provider.dart';
 import '../../../../application/usecase/group/state/current_group_provider.dart';
 import '../../../../application/usecase/group/state/join_groups_provider.dart';
 import '../../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../../domain/user/entity/user.dart';
 import '../../../../domain/user/value_object/age_group.dart';
+import '../../../hooks/importer.dart';
 import '../../../routes/importer.dart';
 import 'premium_icon_container.dart';
 
@@ -33,9 +33,10 @@ class AndroidAccountDialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final l10n = useL10n();
+    final textTheme = useTextTheme();
+    final colorScheme = useColorScheme();
+
     final asyncGroups = ref.watch(joinGroupsProvider);
     final user = ref.watch(authUserProvider).value;
     final selectValue = useState(

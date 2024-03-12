@@ -19,7 +19,7 @@ import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../domain/user/entity/user.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import '../item/components/list_loader_view.dart';

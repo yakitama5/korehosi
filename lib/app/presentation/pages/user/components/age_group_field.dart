@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../application/model/user/user_form_model.dart';
 import '../../../components/src/reactive_segmented_button.dart';
-import '../../../hooks/use_l10n.dart';
+import '../../../hooks/src/use_l10n.dart';
 
 class AgeGroupField extends HookWidget {
   const AgeGroupField({

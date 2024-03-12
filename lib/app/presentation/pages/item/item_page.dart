@@ -14,7 +14,7 @@ import '../../../domain/user/entity/user.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
 import '../../components/src/date_text_with_label.dart';
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import 'components/item_images.dart';

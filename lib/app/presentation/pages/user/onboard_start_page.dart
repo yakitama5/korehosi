@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 
 import '../../../application/config/url_config.dart';
 import '../../components/importer.dart';
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../../theme/importer.dart';
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:reactive_cupertino_text_field/reactive_cupertino_text_field.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../application/state/locale_provider.dart';
 import '../../../application/validator/validation_messages.dart';
+import '../../hooks/importer.dart';
 
-class ReactiveCupertinoDialogTextField<T> extends HookConsumerWidget {
+class ReactiveCupertinoDialogTextField<T> extends HookWidget {
   const ReactiveCupertinoDialogTextField({
     super.key,
     this.labelText,
@@ -39,9 +39,9 @@ class ReactiveCupertinoDialogTextField<T> extends HookConsumerWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final colorScheme = Theme.of(context).colorScheme;
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
+    final colorScheme = useColorScheme();
 
     return ReactiveValueListenableBuilder(
       formControlName: formControlName,

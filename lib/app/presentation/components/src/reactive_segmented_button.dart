@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../application/state/locale_provider.dart';
 import '../../../domain/user/value_object/age_group.dart';
+import '../../hooks/importer.dart';
 import 'expand_width_container.dart';
 
 class ReactiveSegmentedButton extends ReactiveFormField<AgeGroup, AgeGroup> {
@@ -21,16 +21,16 @@ class ReactiveSegmentedButton extends ReactiveFormField<AgeGroup, AgeGroup> {
         );
 }
 
-class _Form extends HookConsumerWidget {
+class _Form extends HookWidget {
   const _Form(this.field, this.labelText);
 
   final ReactiveFormFieldState<AgeGroup, AgeGroup> field;
   final String? labelText;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final theme = Theme.of(context);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
+    final theme = useTheme();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

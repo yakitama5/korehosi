@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../components/importer.dart';
-import '../../../hooks/use_l10n.dart';
+import '../../../hooks/src/use_l10n.dart';
 import 'rating_icon.dart';
 
 class WishRankSelectorBottomSheet extends HookWidget {

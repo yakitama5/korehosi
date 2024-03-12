@@ -1,4 +1,4 @@
-import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
+import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';

@@ -1,9 +1,9 @@
-import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../../application/state/locale_provider.dart';
+import '../../../hooks/importer.dart';
 import '../../../theme/importer.dart';
 import '../reactive_cupertino_text_field.dart';
 import '../reactive_outlined_text_field.dart';
@@ -12,7 +12,7 @@ import 'adaptive_action.dart';
 const _textKey = 'name';
 
 /// 「OK or Cancel」をアクションに持つ文字列入力用のダイアログ
-class TextDialog extends HookConsumerWidget {
+class TextDialog extends HookWidget {
   const TextDialog({
     super.key,
     this.title,
@@ -33,8 +33,8 @@ class TextDialog extends HookConsumerWidget {
   final bool isRequired;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ReactiveFormBuilder(
       form: () => FormGroup({
@@ -59,7 +59,7 @@ class TextDialog extends HookConsumerWidget {
           ),
           AdaptiveAction(
             child: Text(okLabel ?? l10n.ok),
-            onPressed: () => _onOk(context, ref, formGroup),
+            onPressed: () => _onOk(context, formGroup),
           ),
         ],
       ),
@@ -68,7 +68,6 @@ class TextDialog extends HookConsumerWidget {
 
   Future<void> _onOk(
     BuildContext context,
-    WidgetRef ref,
     FormGroup form,
   ) async {
     // 入力チェックNGの場合は処理不要

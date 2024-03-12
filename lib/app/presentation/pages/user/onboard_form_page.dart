@@ -11,7 +11,7 @@ import '../../../application/model/user/user_form_model.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../theme/importer.dart';
 import '../presentation_mixin.dart';
 import 'components/age_group_field.dart';

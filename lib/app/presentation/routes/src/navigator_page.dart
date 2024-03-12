@@ -4,8 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../application/state/locale_provider.dart';
 import '../../../application/state/theme_mode_provider.dart';
+import '../../hooks/importer.dart';
 import 'branch_switcher.dart';
 
 class NavigatorPage extends StatelessWidget {
@@ -127,9 +127,10 @@ class _ThemeModeButton extends HookConsumerWidget {
   const _ThemeModeButton();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
+    final theme = useTheme();
+    final brightness = theme.brightness;
 
-    final brightness = Theme.of(context).brightness;
     late final IconData iconData;
     late final ThemeMode themeMode;
     late final String tooltip;

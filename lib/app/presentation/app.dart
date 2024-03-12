@@ -1,9 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
-import 'package:family_wish_list/app/presentation/hooks/use_theme.dart';
+import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -17,6 +18,7 @@ import '../application/state/notification_message_provider.dart';
 import '../application/state/reactive_deep_link_provider.dart';
 import '../application/state/theme_mode_provider.dart';
 import '../application/validator/validation_messages.dart';
+import 'hooks/src/use_l10n.dart';
 import 'routes/importer.dart';
 import 'theme/importer.dart';
 
@@ -206,14 +208,14 @@ class _ResponsiveWrapper extends HookConsumerWidget {
   }
 }
 
-class _ReactiveFormWrapper extends HookConsumerWidget {
+class _ReactiveFormWrapper extends HookWidget {
   const _ReactiveFormWrapper(this.child);
 
   final Widget? child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ReactiveFormConfig(
       validationMessages: {

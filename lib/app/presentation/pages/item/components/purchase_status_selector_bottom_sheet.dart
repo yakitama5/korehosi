@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../domain/purchase/value_object/purchase_status.dart';
 import '../../../components/importer.dart';
-import '../../../hooks/use_l10n.dart';
+import '../../../hooks/src/use_l10n.dart';
 
 class PurchaseStatusSelectorBottomSheet extends HookWidget {
   const PurchaseStatusSelectorBottomSheet({super.key, required this.initial});

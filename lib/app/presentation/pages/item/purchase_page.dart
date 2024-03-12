@@ -20,7 +20,7 @@ import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
 import '../../../domain/item/entity/item.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../components/importer.dart';
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
 import 'components/item_images.dart';

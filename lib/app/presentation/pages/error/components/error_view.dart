@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../../domain/exception/exceptions.dart';
-import '../../../hooks/use_theme.dart';
+import '../../../hooks/src/use_theme.dart';
 
 class ErrorView extends HookWidget {
   const ErrorView(this.error, this.stackTrace, {super.key});

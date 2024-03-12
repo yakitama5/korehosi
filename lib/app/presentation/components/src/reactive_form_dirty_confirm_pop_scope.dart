@@ -5,7 +5,7 @@ import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/model/dialog_result.dart';
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import 'adaptive_dialog.dart';
 
 class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import 'text_with_label.dart';
 
 class DateTextWithLabel extends HookConsumerWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../application/state/locale_provider.dart';
+import '../../hooks/importer.dart';
 
 class ItemizedText extends StatelessWidget {
   const ItemizedText(this.texts, {super.key});
@@ -20,14 +20,15 @@ class ItemizedText extends StatelessWidget {
   }
 }
 
-class _ItemizedTextRow extends HookConsumerWidget {
+class _ItemizedTextRow extends HookWidget {
   const _ItemizedTextRow(this.text, {super.key});
 
   final Text text;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

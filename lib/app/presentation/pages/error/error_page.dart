@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../hooks/use_l10n.dart';
+import '../../hooks/src/use_l10n.dart';
 import 'components/error_view.dart';
 
 class ErrorPage extends HookWidget {
