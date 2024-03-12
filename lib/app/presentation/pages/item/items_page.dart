@@ -113,6 +113,7 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
     }
     if (currentGroup != null) {
       const ItemCreateRouteData().go(context);
+      return;
     }
 
     await showAdaptiveOkDialog(
