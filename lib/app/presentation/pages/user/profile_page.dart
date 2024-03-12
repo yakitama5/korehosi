@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import 'package:nested/nested.dart';
 
-import '../../../application/config/user_config.dart';
-import '../../../application/model/dialog_result.dart';
-import '../../../application/usecase/user/state/user_form_provider.dart';
+import '../../../application/model/user/user_form_model.dart';
+import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../application/usecase/user/user_usecase.dart';
-import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
+import '../../components/src/reactive_form_dirty_confirm_pop_scope.dart';
 import '../../hooks/use_l10n.dart';
+import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
 import 'components/age_group_field.dart';
 import 'components/user_name_field.dart';
@@ -20,56 +21,38 @@ class ProfilePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
+    final user = ref.watch(authUserProvider);
 
-    // TODO(yakitama5): Modelに書き換えること (初期値設定あり)
-    final asyncForm = ref.watch(userFormProvider);
-
-    return asyncForm.maybeWhen(
-      orElse: SizedBox.shrink,
-      data: (form) {
-        return ReactiveForm(
-          formGroup: form,
-          onWillPop: () async {
-            // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら変更する
-            /// https://github.com/flutter/flutter/issues/112196
-            /// NavigationBarを検知出来ないのは一旦保留
-
-            if (!form.dirty) {
-              // 内容が変更されていなければ閉じる
-              return true;
-            }
-
-            // ダイアログを表示して確認
-            final result = await showAdaptiveOkCancelDialog(
-              context,
-              title: l10n.confirmDiscardChangesTitle,
-              message: l10n.confirmDiscardChangesMessage,
-              okLabel: l10n.discard,
-              cancelLabel: l10n.notDiscard,
-            );
-
-            // 破棄が選ばれたら画面を閉じる
-            if (result == DialogResult.ok) {
-              return true;
-            }
-            return false;
-          },
-          child: const _Form(),
-        );
-      },
+    return user.when(
+      skipLoadingOnRefresh: true,
+      skipLoadingOnReload: true,
+      data: (data) => data == null
+          ? const CircularProgressIndicator()
+          : UserFormModelFormBuilder(
+              model: UserFormModel(
+                name: data.name,
+                ageGroup: data.ageGroup,
+              ),
+              builder: (context, formModel, child) => const _Form(),
+            ),
+      error: ErrorView.new,
+      loading: CircularProgressIndicator.new,
     );
   }
 }
 
-class _Form extends HookConsumerWidget {
+class _Form extends HookWidget {
   const _Form();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = useL10n();
 
-    return UnfocusOnTap(
+    return Nested(
+      children: const [
+        ReactiveFormDirtyConfirmPopScope(),
+        UnfocusOnTap(),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: Text(l10n.profile),
@@ -115,15 +98,14 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
       context,
       action: () async {
         // 画面の入力内容を取得
-        final form = await ref.read(userFormProvider.future);
-        final name = form.controls[userConfig.nameKey]?.value as String?;
-        final ageGroup =
-            form.controls[userConfig.ageGroupKey]?.value as AgeGroup?;
+        final formModel = ReactiveUserFormModelForm.of(context)!;
+        final name = formModel.nameControl?.value;
+        final ageGroup = formModel.ageGroupControl.value!;
 
         // 登録
         await ref.read(userUsecaseProvider).update(
               name: name,
-              ageGroup: ageGroup!,
+              ageGroup: ageGroup,
             );
 
         // 遷移元へ

@@ -1,10 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:nested/nested.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -18,6 +18,7 @@ import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/item/state/wanter_name_suggestion.dart';
 import '../../../domain/item/entity/item.dart';
 import '../../components/importer.dart';
+import '../../components/src/reactive_form_dirty_confirm_pop_scope.dart';
 import '../../hooks/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
@@ -61,48 +62,47 @@ class _ItemForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final model = _createModel();
 
     return ItemFormModelFormBuilder(
       model: model,
-      builder: (context, formModel, child) => PopScope(
-        canPop: false,
-        onPopInvoked: (didPop) => _onWillPopScope(context, l10n, didPop),
-        child: UnfocusOnTap(
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(titleData ?? ''),
-              actions: [
-                const _Submit(),
-                const Gap(8),
-                if (item != null) const _DeleteButton(),
-              ],
-            ),
-            body: SingleChildScrollView(
-              child: PagePadding(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const _ImageFields(),
-                    const Gap(16),
-                    const _NameField(),
-                    const Gap(16),
-                    const _WanterNameField(),
-                    const _WishRankField(),
-                    const Gap(64),
-                    const _WishSeasonField(),
-                    const Gap(16),
-                    const _UrlFields(),
-                    _UrlAddButton(
-                      onAdd: () {
-                        formModel.addUrlsItem('');
-                      },
-                    ),
-                    const Gap(16),
-                    const _MemoField(),
-                  ],
-                ),
+      builder: (context, formModel, child) => Nested(
+        children: const [
+          ReactiveFormDirtyConfirmPopScope(),
+          UnfocusOnTap(),
+        ],
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(titleData ?? ''),
+            actions: [
+              const _Submit(),
+              const Gap(8),
+              if (item != null) const _DeleteButton(),
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: PagePadding(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _ImageFields(),
+                  const Gap(16),
+                  const _NameField(),
+                  const Gap(16),
+                  const _WanterNameField(),
+                  const _WishRankField(),
+                  const Gap(64),
+                  const _WishSeasonField(),
+                  const Gap(16),
+                  const _UrlFields(),
+                  _UrlAddButton(
+                    onAdd: () {
+                      formModel.addUrlsItem('');
+                    },
+                  ),
+                  const Gap(16),
+                  const _MemoField(),
+                ],
               ),
             ),
           ),
@@ -130,43 +130,6 @@ class _ItemForm extends HookConsumerWidget {
           null,
         ],
       );
-
-  Future<void> _onWillPopScope(
-    BuildContext context,
-    L10n l10n,
-    bool didPop,
-  ) async {
-    // Notes: 移行ガイドに沿って変更
-    // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
-    if (didPop) {
-      return;
-    }
-
-    // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら変更する
-    // NavigationBarを検知出来ないのは一旦保留
-    // 内容が変更されていなければ閉じる
-    final dirty = ReactiveItemFormModelForm.of(context)?.form.dirty;
-    if (dirty != true) {
-      context.pop();
-      return;
-    }
-
-    // ダイアログを表示して確認
-    final result = await showAdaptiveOkCancelDialog(
-      context,
-      title: l10n.confirmDiscardChangesTitle,
-      message: l10n.confirmDiscardChangesMessage,
-      okLabel: l10n.discard,
-      cancelLabel: l10n.notDiscard,
-    );
-
-    // 破棄が選ばれたら画面を閉じる
-    if (result == DialogResult.ok) {
-      if (context.mounted) {
-        context.pop();
-      }
-    }
-  }
 }
 
 /// 保存ボタン
