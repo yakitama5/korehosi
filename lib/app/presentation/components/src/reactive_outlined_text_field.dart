@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_raw_autocomplete/reactive_raw_autocomplete.dart';
 
-import '../../../application/state/locale_provider.dart';
+import '../../hooks/importer.dart';
 
 class ReactiveOutlinedRawAutocomplete
     extends ReactiveFormField<String, String> {
@@ -30,7 +30,7 @@ class ReactiveOutlinedRawAutocomplete
         );
 }
 
-class _ReactiveOutlinedRawAutocomplete extends HookConsumerWidget {
+class _ReactiveOutlinedRawAutocomplete extends StatelessWidget {
   const _ReactiveOutlinedRawAutocomplete({
     super.key,
     required this.formControlName,
@@ -46,7 +46,7 @@ class _ReactiveOutlinedRawAutocomplete extends HookConsumerWidget {
   final ReactiveFormFieldState<String, String> field;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return ReactiveRawAutocomplete<String, String>(
       formControlName: formControlName,
 
@@ -153,7 +153,7 @@ class ReactiveOutlinedTextField<T> extends ReactiveFormField<T, T> {
         );
 }
 
-class _ReactiveOutlinedTextField<T> extends HookConsumerWidget {
+class _ReactiveOutlinedTextField<T> extends HookWidget {
   const _ReactiveOutlinedTextField({
     super.key,
     required this.formControlName,
@@ -188,8 +188,8 @@ class _ReactiveOutlinedTextField<T> extends HookConsumerWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ReactiveTextField<T>(
       formControlName: formControlName,

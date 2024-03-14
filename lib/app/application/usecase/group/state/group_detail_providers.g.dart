@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'group_page_providers.dart';
+part of 'group_detail_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -8,8 +8,8 @@ part of 'group_page_providers.dart';
 
 String _$groupIdHash() => r'378df480add4a63c1d6d4fb5a39ffda52b4e49f4';
 
-/// グループ画面のグループID
-/// 新規 or 更新の判定に利用するため、IDだけを切り出し
+/// 明細表示対象となるグループのIDを管理するProvider
+/// `override`前提の利用を強制する
 ///
 /// Copied from [_groupId].
 @ProviderFor(_groupId)
@@ -25,7 +25,8 @@ final _groupIdProvider = AutoDisposeProvider<String?>.internal(
 typedef _GroupIdRef = AutoDisposeProviderRef<String?>;
 String _$groupHash() => r'f44748c6ffd3d886c6d025b6124af0ca65018a9a';
 
-/// グループ画面に表示するグループ
+/// 明細表示対象となるグループのEntityを管理するProvider
+/// `_groupIdProvider`に依存する
 ///
 /// Copied from [_group].
 @ProviderFor(_group)
@@ -44,7 +45,8 @@ final _groupProvider = AutoDisposeFutureProvider<Group?>.internal(
 typedef _GroupRef = AutoDisposeFutureProviderRef<Group?>;
 String _$usersHash() => r'243e0b2cada55fa7c77a16cf144ce23941fa87fb';
 
-/// グループに参加中のユーザー
+/// グループに参加中のユーザーを管理するProvider
+/// `_groupIdProvider`に依存する
 ///
 /// Copied from [_users].
 @ProviderFor(_users)

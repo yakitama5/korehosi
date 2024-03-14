@@ -1,21 +1,22 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../components/importer.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../theme/importer.dart';
 import '../presentation_mixin.dart';
 
-class AccountLinkPage extends HookConsumerWidget {
+class AccountLinkPage extends HookWidget {
   const AccountLinkPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.accountLink)),
@@ -43,11 +44,11 @@ class AccountLinkPage extends HookConsumerWidget {
   }
 }
 
-class _Image extends HookConsumerWidget {
+class _Image extends HookWidget {
   const _Image();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ConstrainedMobileBox(
@@ -63,13 +64,13 @@ class _Image extends HookConsumerWidget {
   }
 }
 
-class _Caption extends HookConsumerWidget {
+class _Caption extends HookWidget {
   const _Caption();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return ExpandWidthContainer(
       child: Column(
@@ -95,7 +96,7 @@ class _GoogleSignInButton extends HookConsumerWidget with PresentationMixin {
   const _GoogleSignInButton();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return ConstrainedTabletBox(
       child: ExpandWidthContainer(
@@ -121,7 +122,7 @@ class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return ConstrainedTabletBox(
       child: ExpandWidthContainer(

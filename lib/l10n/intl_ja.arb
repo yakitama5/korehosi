@@ -169,6 +169,14 @@
             "group": {}
         }
     },
+    "notSelectedGroupDialogTitle": "グループが選択されていません",
+    "@notSelectedGroupDialogTitle": {
+        "description": "Not selected group dialog title"
+    },
+    "notSelectedGroupDialogMessage": "グループを選択してからほしいものを追加して下さい",
+    "@notSelectedGroupDialogMessage": {
+        "description": "Not selected group dialog message"
+    },
     "purchaseInfoTitle": "購入/購入予定情報",
     "purchaseInfoCaption": "以降の内容はグループ内の大人にだけ表示されます",
     "price": "金額",

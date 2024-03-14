@@ -5,10 +5,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/extension/date_time_extension.dart';
 import '../../../../application/extension/number_extension.dart';
-import '../../../../application/state/locale_provider.dart';
 import '../../../../application/usecase/analyze/state/buyed_sum_price.dart';
 import '../../../../application/usecase/analyze/state/monthly_sum_price_chart_range_provider.dart';
 import '../../../../application/usecase/analyze/state/monthly_sum_price_chart_spots_provider.dart';
+import '../../../hooks/importer.dart';
 import '../../../theme/importer.dart';
 import 'chart_card.dart';
 
@@ -20,8 +20,9 @@ class SumPriceChartCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final textTheme = Theme.of(context).textTheme;
+    final l10n = useL10n();
+    final textTheme = useTextTheme();
+
     final price = ref.watch(buyedSumPriceProvider).value;
     final currencyPrice = price?.formatCurrency(locale: l10n.localeName);
     final spots = ref.watch(monthlySumPriceChartSpotsProvider).value;
@@ -63,10 +64,10 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = context.colorScheme;
-    final textTheme = context.textTheme;
+    final colorScheme = useColorScheme();
+    final textTheme = useTextTheme();
     final range = ref.watch(monthlySumPriceChartRangeProvider);
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return Stack(
       children: [
@@ -172,7 +173,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
 
   /// グラフ右側のラベル郡を生成する.
   AxisTitles buildRightTitles(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
     final textTheme = Theme.of(context).textTheme;
 
     return AxisTitles(
@@ -198,7 +199,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
 
   /// グラフ下側のラベル郡を生成する.
   AxisTitles buildBottomTitles(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
     final textTheme = Theme.of(context).textTheme;
     final now = DateTime.now();
 

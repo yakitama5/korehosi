@@ -9,6 +9,7 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
+    - "**/*.gform.dart"
     - "**/firebase_options*.dart"
     - "*/.github/workflows/flutter_*.yaml"
     - "*/functions/*.js"

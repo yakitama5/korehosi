@@ -1780,6 +1780,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "16.1.1"
+  reactive_forms_annotations:
+    dependency: "direct main"
+    description:
+      name: reactive_forms_annotations
+      sha256: "864485c4c5b0acae6eb1f6ee9c2e7ef04532a3055d8af3903b356f5a9eb3594d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.0"
+  reactive_forms_generator:
+    dependency: "direct dev"
+    description:
+      name: reactive_forms_generator
+      sha256: fca44d20a67c8901f30b1f26dc239fa3f6afe199e025d65472e467652ca8602f
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.2"
   reactive_image_picker:
     dependency: "direct main"
     description:

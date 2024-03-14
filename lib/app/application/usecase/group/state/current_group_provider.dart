@@ -7,7 +7,7 @@ import 'group_provider.dart';
 part 'current_group_provider.g.dart';
 
 /// 現在のグループ情報
-@riverpod
+@Riverpod(keepAlive: true)
 Future<Group?> currentGroup(CurrentGroupRef ref) async {
   // 選択されていなければ、`Null`を返却
   final groupId = await ref.watch(currentGroupIdProvider.future);

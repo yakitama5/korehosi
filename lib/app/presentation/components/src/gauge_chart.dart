@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../application/state/locale_provider.dart';
+import '../../hooks/importer.dart';
 import '../../theme/importer.dart';
 
-class GaugeChart extends HookConsumerWidget {
+class GaugeChart extends HookWidget {
   const GaugeChart({
     super.key,
     required this.value,
@@ -18,13 +18,13 @@ class GaugeChart extends HookConsumerWidget {
   final Color? color;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     // HACK(yakitama5): fl_chartで対応されたら変更
     // https://github.com/imaNNeo/fl_chart/issues/199
 
-    final l10n = ref.watch(l10nProvider);
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
+    final l10n = useL10n();
+    final textTheme = useTextTheme();
+    final colorScheme = useColorScheme();
 
     return Stack(
       alignment: Alignment.center,

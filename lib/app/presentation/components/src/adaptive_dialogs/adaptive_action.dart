@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:nested/nested.dart';
+
+import '../../../hooks/importer.dart';
 
 /// アダプティブダイアログで利用するアクション
 /// プラットフォームに応じたアダプティブレイアウトを提供
@@ -14,23 +17,20 @@ class AdaptiveAction extends SingleChildStatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget buildWithChild(BuildContext context, Widget? child) {
-    final theme = Theme.of(context);
-    switch (theme.platform) {
-      case TargetPlatform.android:
-      case TargetPlatform.fuchsia:
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-        return TextButton(
-          onPressed: onPressed,
-          child: child ?? const SizedBox.shrink(),
-        );
-      case TargetPlatform.iOS:
-      case TargetPlatform.macOS:
-        return CupertinoDialogAction(
-          onPressed: onPressed,
-          child: child ?? const SizedBox.shrink(),
-        );
-    }
-  }
+  Widget buildWithChild(BuildContext context, Widget? child) => HookBuilder(
+        builder: (context) => switch (useTheme().platform) {
+          TargetPlatform.android ||
+          TargetPlatform.fuchsia ||
+          TargetPlatform.linux ||
+          TargetPlatform.windows =>
+            TextButton(
+              onPressed: onPressed,
+              child: child ?? const SizedBox.shrink(),
+            ),
+          TargetPlatform.iOS || TargetPlatform.macOS => CupertinoDialogAction(
+              onPressed: onPressed,
+              child: child ?? const SizedBox.shrink(),
+            ),
+        },
+      );
 }

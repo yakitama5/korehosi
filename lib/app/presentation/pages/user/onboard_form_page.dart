@@ -1,41 +1,35 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../application/config/user_config.dart';
-import '../../../application/state/introduction_screen_key_provider.dart';
-import '../../../application/state/locale_provider.dart';
-import '../../../application/usecase/user/onboard_usecase.dart';
-import '../../../application/usecase/user/state/user_form_provider.dart';
+import '../../../application/model/user/user_form_model.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../theme/importer.dart';
 import '../presentation_mixin.dart';
 import 'components/age_group_field.dart';
 import 'components/user_name_field.dart';
 
 class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
-  const OnboardFormPage({super.key});
+  OnboardFormPage({super.key});
+
+  final introKey = GlobalKey<IntroductionScreenState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-    final form = ref.watch(userFormProvider).value;
-    final introKey = ref.watch(introductionScreenKeyProvider);
+    const model = UserFormModel();
+    final l10n = useL10n();
 
-    // 一瞬なのでローディング表示は行わない
-    if (form == null) {
-      return const SizedBox.shrink();
-    }
-
-    return ReactiveForm(
-      formGroup: form,
-      child: Scaffold(
+    return UserFormModelFormBuilder(
+      model: model,
+      builder: (context, formModel, _) => Scaffold(
         body: Nested(
           children: const [
             UnfocusOnTap(),
@@ -44,9 +38,9 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
           child: IntroductionScreen(
             key: introKey,
             pages: [
-              _buildStartPage(context, ref),
-              _buildProfilePage(context, ref),
-              _buildConfirmPage(context, ref),
+              _createStartPageVM(context),
+              _createProfilePageVM(context),
+              _createConfirmPageVM(context, ref),
             ],
             freeze: true,
             showBackButton: true,
@@ -61,29 +55,29 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  PageViewModel _buildStartPage(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  PageViewModel _createStartPageVM(BuildContext context) {
+    final l10n = L10n.of(context)!;
 
-    return _buildPageModel(
-      context: context,
+    return _createPageVM(
+      context,
       imagePath: Assets.images.onboardGift,
       title: l10n.onboardStartTitle,
       children: [
         Text(l10n.onboardStartMessage),
         const Gap(16),
         _FormFilledButton(
-          onPressed: ref.read(onboardUsecaseProvider).next,
+          onPressed: () => introKey.currentState?.next(),
           label: l10n.next,
         ),
       ],
     );
   }
 
-  PageViewModel _buildProfilePage(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  PageViewModel _createProfilePageVM(BuildContext context) {
+    final l10n = L10n.of(context)!;
 
-    return _buildPageModel(
-      context: context,
+    return _createPageVM(
+      context,
       imagePath: Assets.images.onboardProfile,
       title: l10n.questionAgeGroup,
       children: [
@@ -92,24 +86,25 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
         const AgeGroupField(),
         const Gap(32),
         _FormFilledButton(
-          onPressed: ref.read(onboardUsecaseProvider).next,
+          onPressed: () => introKey.currentState?.next(),
           label: l10n.next,
         ),
       ],
     );
   }
 
-  PageViewModel _buildConfirmPage(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  PageViewModel _createConfirmPageVM(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context)!;
+    final formModel = ReactiveUserFormModelForm.of(context)!;
 
-    return _buildPageModel(
-      context: context,
+    return _createPageVM(
+      context,
       imagePath: Assets.images.onboardDone,
       titleWidget: const SizedBox.shrink(),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ReactiveValueListenableBuilder<AgeGroup>(
-          formControlName: userConfig.ageGroupKey,
+          formControl: formModel.ageGroupControl,
           builder: (context, control, child) => TextWithLabel(
             control.value?.getLocaleName(l10n),
             label: l10n.ageGroup,
@@ -117,7 +112,7 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
         ),
         const Gap(8),
         ReactiveValueListenableBuilder<String>(
-          formControlName: userConfig.nameKey,
+          formControl: formModel.nameControl,
           builder: (context, control, child) =>
               TextWithLabel(control.value, label: l10n.name),
         ),
@@ -130,8 +125,8 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  PageViewModel _buildPageModel({
-    required BuildContext context,
+  PageViewModel _createPageVM(
+    BuildContext context, {
     required String imagePath,
     String? title,
     Widget? titleWidget,
@@ -168,10 +163,9 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
       // 画面遷移はリダイレクト処理で行う
       action: () async {
         // 画面の入力内容を取得
-        final form = await ref.read(userFormProvider.future);
-        final name = form.controls[userConfig.nameKey]?.value as String?;
-        final ageGroup =
-            form.controls[userConfig.ageGroupKey]?.value as AgeGroup?;
+        final formModel = ReactiveUserFormModelForm.of(context)!;
+        final name = formModel.nameControl?.value;
+        final ageGroup = formModel.ageGroupControl.value;
 
         // 登録
         await ref.read(userUsecaseProvider).signUp(

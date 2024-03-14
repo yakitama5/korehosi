@@ -2,10 +2,10 @@ import 'package:family_wish_list/app/application/usecase/analyze/state/analyze_s
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../application/state/locale_provider.dart';
 import '../../../../application/usecase/analyze/state/analyze_buyed_count_provider.dart';
 import '../../../../application/usecase/analyze/state/buyed_rate_provider.dart';
 import '../../../components/importer.dart';
+import '../../../hooks/importer.dart';
 import 'chart_card.dart';
 
 /// 購入率を表すCard
@@ -16,7 +16,8 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
+
     final percent = ref.watch(buyedRateProvider).value;
     // 一瞬なのでローディング表示は行わない
     if (percent == null) {
@@ -46,7 +47,7 @@ class _BuyedItemCount extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
     final count = ref.watch(analyzeBuyedCountProvider).value;
     final totalCount = ref.watch(
       analyzeSourceItemsProvider.select((value) => value.value?.length),

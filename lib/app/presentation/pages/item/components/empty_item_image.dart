@@ -1,9 +1,8 @@
+import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../theme/importer.dart';
-
-class EmptyItemImage extends HookConsumerWidget {
+class EmptyItemImage extends HookWidget {
   const EmptyItemImage({
     super.key,
     this.radius,
@@ -14,8 +13,8 @@ class EmptyItemImage extends HookConsumerWidget {
   final IconData? iconData;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = context.colorScheme;
+  Widget build(BuildContext context) {
+    final colorScheme = useColorScheme();
 
     return Ink(
       height: double.infinity,

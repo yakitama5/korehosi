@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../application/usecase/group/state/group_page_providers.dart';
+import '../../../application/usecase/group/state/group_detail_providers.dart';
 import '../../pages/group/group_page.dart';
 import '../../pages/group/groups_page.dart';
 import '../../pages/settings/settings_page.dart';
@@ -67,7 +67,7 @@ class GroupRouteData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) => ProviderScope(
         overrides: [
-          GroupPageProviders.groupIdProvider.overrideWithValue(groupId),
+          GroupDetailProviders.groupIdProvider.overrideWithValue(groupId),
         ],
         child: const GroupPage(),
       );

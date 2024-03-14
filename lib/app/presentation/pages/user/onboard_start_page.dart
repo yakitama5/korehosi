@@ -1,19 +1,19 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../application/config/url_config.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../components/importer.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../../theme/importer.dart';
 
-class OnboardStartPage extends HookConsumerWidget {
+class OnboardStartPage extends HookWidget {
   const OnboardStartPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     // TODO(yakitama5): 初期画面に戻れるようにするべき
     return const Scaffold(
       body: SafeArea(
@@ -57,12 +57,12 @@ class _WelcomeImage extends StatelessWidget {
   }
 }
 
-class _StartButton extends HookConsumerWidget {
+class _StartButton extends HookWidget {
   const _StartButton();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
@@ -90,11 +90,11 @@ class _StartButton extends HookConsumerWidget {
   }
 }
 
-class _AccountLinkButton extends HookConsumerWidget {
+class _AccountLinkButton extends HookWidget {
   const _AccountLinkButton();
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ConstrainedTabletBox(
       child: ExpandWidthContainer(
@@ -111,12 +111,12 @@ class _AccountLinkButton extends HookConsumerWidget {
   }
 }
 
-class _Links extends HookConsumerWidget {
+class _Links extends HookWidget {
   const _Links();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return Column(
       children: [

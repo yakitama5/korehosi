@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../application/state/locale_provider.dart';
+import '../../hooks/src/use_l10n.dart';
 import 'components/error_view.dart';
 
-class ErrorPage extends HookConsumerWidget {
+class ErrorPage extends HookWidget {
   const ErrorPage({super.key, this.exception});
 
   final Exception? exception;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return SafeArea(
       child: Scaffold(

@@ -1,21 +1,29 @@
+import 'dart:async';
+
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../application/config/items_config.dart';
 import '../../../application/model/dialog_result.dart';
-import '../../../application/state/locale_provider.dart';
+import '../../../application/model/item/item_order_key.dart';
+import '../../../application/model/item/item_order_model.dart';
+import '../../../application/model/order.dart';
 import '../../../application/usecase/group/group_usecase.dart';
-import '../../../application/usecase/group/state/has_current_group_provider.dart';
+import '../../../application/usecase/group/state/current_group_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
-import '../../../application/usecase/item/state/filterd_items_provider.dart';
-import '../../../application/usecase/item/state/items_filter_purchase_status_provider.dart';
-import '../../../application/usecase/item/state/items_filter_wish_rank_provider.dart';
-import '../../../application/usecase/item/state/items_order_provider.dart';
+import '../../../application/usecase/item/state/current_group_items_provider.dart';
+import '../../../application/usecase/purchase/state/current_group_age_applicable_purchases_provider.dart';
+import '../../../domain/group/entity/group.dart';
 import '../../../domain/item/entity/item.dart';
+import '../../../domain/purchase/entity/purchase.dart';
 import '../../../domain/purchase/value_object/purchase_status.dart';
 import '../../components/importer.dart';
+import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import '../group/components/account_dialog.dart';
@@ -32,9 +40,13 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
+
+    // ephemeral state
     final scrollController = useScrollController();
-    final asyncJoinedGroup = ref.watch(hasCurrentGroupProvider);
+    final itemOrder = useState(itemsConfig.defaultOrder);
+    final wishRank = useState(itemsConfig.defaultWishRank);
+    final purchaseStatus = useState(itemsConfig.defaultPurchaseStatus);
 
     return SafeArea(
       // CustomScrollViewでAppBarを動的に作成するため、上に対するSafeareaを設定しない
@@ -51,51 +63,117 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
               ),
               SliverPersistentHeader(
                 delegate: SliverChipsDelegate(
-                  chips: const [
-                    _ItemOrderChip(),
-                    Gap(8),
-                    _PurchaseStatusChip(),
-                    Gap(8),
-                    _WishRankChip(),
+                  chips: [
+                    _ItemOrderChip(
+                      value: itemOrder.value,
+                      onChanged: (v) => itemOrder.value = v,
+                    ),
+                    const Gap(8),
+                    _PurchaseStatusChip(
+                      value: purchaseStatus.value,
+                      onChanged: (v) => purchaseStatus.value = v,
+                    ),
+                    const Gap(8),
+                    _WishRankChip(
+                      value: wishRank.value,
+                      onChanged: (v) => wishRank.value = v,
+                    ),
                   ],
                   safeAreaPadding: MediaQuery.paddingOf(context),
                 ),
                 pinned: true,
               ),
-              asyncJoinedGroup.when(
-                skipLoadingOnReload: true,
-                skipError: true,
-                data: (joinedGroup) => joinedGroup
-                    ? const _ItemListView()
-                    : const _SliverNotGroupView(),
-                error: SliverErrorView.new,
-                // 一瞬なのでローディング表示しない
-                loading: () => const SliverFillRemaining(
-                  child: SizedBox.shrink(),
-                ),
+              _SliverBody(
+                itemOrder: itemOrder.value,
+                purchaseStatus: purchaseStatus.value,
+                wishRank: wishRank.value,
               ),
             ],
           ),
         ),
-        floatingActionButton: asyncJoinedGroup.valueOrNull == true
-            ? AnimatedSwitcherFab(
-                // HACK(yakitama5):固定値にするしかない？
-                /// 8の倍数ではないが、文字列が含まれるため許容
-                expandWidth: 181,
-                duration: const Duration(milliseconds: 150),
-                onPressed: () => _onAdd(context, ref),
-                icon: const Icon(Icons.add),
-                label: Text(l10n.addWishList),
-                controller: scrollController,
-              )
-            : null,
+        floatingActionButton: AnimatedSwitcherFab(
+          // HACK(yakitama5):固定値にするしかない？
+          /// 8の倍数ではないが、文字列が含まれるため許容
+          expandWidth: 181,
+          duration: const Duration(milliseconds: 150),
+          onPressed: () => _onAdd(context, ref, l10n),
+          icon: const Icon(Icons.add),
+          label: Text(l10n.addWishList),
+          controller: scrollController,
+        ),
       ),
     );
   }
 
-  void _onAdd(BuildContext context, WidgetRef ref) {
-    // 画面遷移
-    const ItemCreateRouteData().go(context);
+  Future<void> _onAdd(BuildContext context, WidgetRef ref, L10n l10n) async {
+    final currentGroup = await ref.read(currentGroupProvider.future);
+
+    if (!context.mounted) {
+      return;
+    }
+    if (currentGroup != null) {
+      const ItemCreateRouteData().go(context);
+      return;
+    }
+
+    await showAdaptiveOkDialog(
+      context,
+      title: l10n.notSelectedGroupDialogTitle,
+      message: l10n.notSelectedGroupDialogMessage,
+    );
+  }
+}
+
+class _SliverBody extends HookConsumerWidget {
+  const _SliverBody({
+    this.wishRank,
+    required this.itemOrder,
+    required this.purchaseStatus,
+  });
+
+  final double? wishRank;
+  final ItemOrderModel itemOrder;
+  final Set<PurchaseStatus> purchaseStatus;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // app state
+    final items = ref.watch(currentGroupItemsProvider);
+    final purchases = ref.watch(currentGroupAgeApplicablePurchasesProvider);
+    final currentGroup = ref.watch(currentGroupProvider);
+
+    return switch ((currentGroup, items, purchases)) {
+      // グループが未選択であればグループ選択表示
+      (AsyncValue(value: null, hasValue: true), _, _) =>
+        const _SliverNotGroupView(),
+
+      // グループが選択されていれば一覧を表示
+      // `skipLoadingOnReload:true`を想定するため`AsyncValue(hasValue: true)`で判定
+      (
+        AsyncValue(value: final Group groupData, hasValue: true),
+        AsyncValue(value: final List<Item> itemsData, hasValue: true),
+        AsyncValue(value: final List<Purchase> purchasesData, hasValue: true)
+      ) =>
+        _ItemListView(
+          currentGroup: groupData,
+          items: itemsData,
+          purchases: purchasesData,
+          itemOrder: itemOrder,
+          purchaseStatus: purchaseStatus,
+          wishRank: wishRank,
+        ),
+
+      // いずれかがエラーの場合はエラー表示
+      (AsyncError(error: final error, stackTrace: final stackTrace), _, _) ||
+      (_, AsyncError(error: final error, stackTrace: final stackTrace), _) ||
+      (_, _, AsyncError(error: final error, stackTrace: final stackTrace)) =>
+        SliverErrorView(error, stackTrace),
+
+      // ローディング
+      _ => const SliverFillRemaining(
+          child: ListLoaderView(),
+        ),
+    };
   }
 }
 
@@ -103,16 +181,16 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
   const _AccountButton();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+    final l10n = useL10n();
 
     return IconButton(
       icon: const Icon(Icons.account_circle),
-      onPressed: () => onAccount(context, ref),
+      onPressed: () => onAccount(context, ref, l10n),
       tooltip: l10n.account,
     );
   }
 
-  Future<void> onAccount(BuildContext context, WidgetRef ref) async {
+  Future<void> onAccount(BuildContext context, WidgetRef ref, L10n l10n) async {
     // ダイアログで選択
     final groupId = await showAdaptiveAccountDialog(context);
     if (groupId == null) {
@@ -121,7 +199,6 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
 
     // 選択結果に応じてグループを切り替える
     if (context.mounted) {
-      final l10n = ref.read(l10nProvider);
       await execute(
         context,
         action: () async =>
@@ -132,11 +209,11 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
   }
 }
 
-class _SliverNotGroupView extends HookConsumerWidget {
+class _SliverNotGroupView extends StatelessWidget {
   const _SliverNotGroupView();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return const SliverFillRemaining(
       hasScrollBody: false,
       child: NotGroupView(),
@@ -144,155 +221,207 @@ class _SliverNotGroupView extends HookConsumerWidget {
   }
 }
 
-class _ItemListView extends HookConsumerWidget {
-  const _ItemListView();
+class _ItemListView extends HookWidget {
+  const _ItemListView({
+    required this.items,
+    required this.purchases,
+    required this.currentGroup,
+    this.wishRank,
+    required this.itemOrder,
+    required this.purchaseStatus,
+  });
+
+  final List<Item> items;
+  final List<Purchase> purchases;
+  final Group currentGroup;
+  final double? wishRank;
+  final ItemOrderModel itemOrder;
+  final Set<PurchaseStatus> purchaseStatus;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final asyncItems = ref.watch(filterdItemsProvider);
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
+    final filterdItems = _filterItems();
 
-    return asyncItems.when(
-      // 画面のちらつきを抑えるため、フィルターやリアルタイム反映はローディングを挟まない
-      skipLoadingOnReload: true,
-      skipError: true,
-      data: (items) {
-        if (items.isEmpty) {
-          return SliverFillRemaining(
-            hasScrollBody: false,
-            child: ListEmptyView(
-              message: l10n.searchEmptyMessage(l10n.wishList),
-            ),
-          );
-        }
+    if (filterdItems.isEmpty) {
+      return SliverFillRemaining(
+        hasScrollBody: false,
+        child: ListEmptyView(
+          message: l10n.searchEmptyMessage(l10n.wishList),
+        ),
+      );
+    }
 
-        return SliverPadding(
-          padding: const EdgeInsets.only(bottom: 120),
-          sliver: SliverList.separated(
-            itemCount: items.length,
-            itemBuilder: (context, index) => _ListTile(items[index]),
-            separatorBuilder: (context, index) => const Divider(),
-          ),
-        );
-      },
-      error: SliverErrorView.new,
-      loading: () => const SliverFillRemaining(
-        child: ListLoaderView(),
+    return SliverPadding(
+      padding: const EdgeInsets.only(bottom: 120),
+      sliver: SliverList.separated(
+        itemCount: filterdItems.length,
+        itemBuilder: (context, index) => _ListTile(filterdItems[index]),
+        separatorBuilder: (context, index) => const Divider(),
       ),
     );
   }
+
+  List<Item> _filterItems() {
+    final purchaseMap =
+        Map.fromIterables(purchases.map((e) => e.id), purchases);
+
+    // 絞り込み + ソート
+    return items.where((item) {
+      // ステータスによる絞り込み
+      final isMatch = purchaseStatus.map((s) {
+        final purchase = purchaseMap[item.id];
+        final status = purchase.status;
+        return status == s;
+      }).reduce((v, e) => v || e);
+      if (!isMatch) {
+        return false;
+      }
+
+      // 欲しい度による絞り込み
+      // 未満を弾く
+      if (wishRank != null && item.wishRank < wishRank!) {
+        return false;
+      }
+
+      return true;
+    }).sorted(
+      (a, b) {
+        late final Item source;
+        late final Item target;
+        if (itemOrder.sortOrder == SortOrder.asc) {
+          source = a;
+          target = b;
+        } else {
+          source = b;
+          target = a;
+        }
+
+        return switch (itemOrder.key) {
+          ItemOrderKey.name => source.name.compareTo(target.name),
+          ItemOrderKey.wishRank => source.wishRank.compareTo(target.wishRank),
+          ItemOrderKey.createdAt =>
+            source.createdAt.compareTo(target.createdAt),
+        };
+      },
+    ).toList();
+  }
 }
 
-class _ItemOrderChip extends HookConsumerWidget {
-  const _ItemOrderChip();
+class _ItemOrderChip extends HookWidget {
+  const _ItemOrderChip({
+    required this.value,
+    required this.onChanged,
+  });
+
+  final ItemOrderModel value;
+  final void Function(ItemOrderModel v) onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-
-    final itemOrder = ref.watch(itemsOrderProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return LeadingIconInputChip(
-      label: Text(itemOrder.localeName(l10n)),
-      iconData: itemOrder.iconData,
-      onPressed: () => onPressed(context, ref),
+      label: Text(value.localeName(l10n)),
+      iconData: value.iconData,
+      onPressed: () async {
+        // BottomSheetの表示
+        final result = await ItemOrderSelectorBottomSheet.show(
+          context: context,
+          useSafeArea: true,
+          initial: value,
+        );
+
+        // 反映
+        if (result != null) {
+          onChanged(result);
+        }
+      },
       // `itemOrder` は未選択がありえないので、`true`固定
       selected: true,
       showCheckmark: false,
     );
   }
-
-  Future<void> onPressed(BuildContext context, WidgetRef ref) async {
-    // BottomSheetの表示
-    final itemOrder = ref.read(itemsOrderProvider.notifier);
-    final result = await ItemOrderSelectorBottomSheet.show(
-      context: context,
-      useSafeArea: true,
-      initial: itemOrder.state,
-    );
-
-    // 反映
-    if (result != null) {
-      itemOrder.update((state) => result);
-    }
-  }
 }
 
-class _PurchaseStatusChip extends HookConsumerWidget {
-  const _PurchaseStatusChip();
+class _PurchaseStatusChip extends HookWidget {
+  const _PurchaseStatusChip({
+    required this.value,
+    required this.onChanged,
+  });
+
+  final Set<PurchaseStatus> value;
+  final void Function(Set<PurchaseStatus> v) onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
-    final selected = ref.watch(itemsFilterPurchaseStatusProvider);
-    final dispName = selected.isEmpty
+    final dispName = value.isEmpty
         ? l10n.status
-        : selected.length > 1
-            ? l10n.selectNumberText(selected.length)
-            : selected.first.localeName(l10n);
+        : value.length > 1
+            ? l10n.selectNumberText(value.length)
+            : value.first.localeName(l10n);
 
     return LeadingIconInputChip(
       label: Text(dispName),
       iconData: Icons.arrow_drop_down,
-      onPressed: () => onPressed(context, ref),
-      selected: selected.isNotEmpty,
-      showCheckmark: selected.isNotEmpty,
-    );
-  }
+      onPressed: () async {
+        // BottomSheetの表示
+        final result = await PurchaseStatusSelectorBottomSheet.show(
+          context: context,
+          initial: value,
+        );
 
-  Future<void> onPressed(BuildContext context, WidgetRef ref) async {
-    // BottomSheetの表示
-    final purchaseStatus = ref.read(itemsFilterPurchaseStatusProvider.notifier);
-    final result = await PurchaseStatusSelectorBottomSheet.show(
-      context: context,
-      initial: purchaseStatus.state,
+        // 反映
+        if (result != null) {
+          onChanged(result);
+        }
+      },
+      selected: value.isNotEmpty,
+      showCheckmark: value.isNotEmpty,
     );
-
-    // 反映
-    if (result != null) {
-      purchaseStatus.update((state) => result);
-    }
   }
 }
 
-class _WishRankChip extends HookConsumerWidget {
-  const _WishRankChip();
+class _WishRankChip extends HookWidget {
+  const _WishRankChip({
+    required this.value,
+    required this.onChanged,
+  });
+
+  final double? value;
+  final void Function(double? v) onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
-
-    final wishRank = ref.watch(itemsFilterWishRankProvider);
-    final selected = wishRank != null;
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
+    final selected = value != null;
 
     return LeadingIconInputChip(
       label: selected
-          ? Text('${l10n.star}${wishRank.toStringAsFixed(1)}')
+          ? Text('${l10n.star}${value?.toStringAsFixed(1)}')
           : Text(l10n.wishRank),
       iconData: Icons.arrow_drop_down,
-      onPressed: () => onPressed(context, ref),
+      onPressed: () async {
+        // BottomSheetの表示
+        final result = await WishRankSelectorBottomSheet.show(
+          context: context,
+          initial: value,
+        );
+
+        // 反映
+        if (result == null) {
+          // do nothing
+        } else if (result < 0) {
+          onChanged(null);
+        } else {
+          onChanged(result);
+        }
+      },
       selected: selected,
       showCheckmark: selected,
     );
-  }
-
-  Future<void> onPressed(BuildContext context, WidgetRef ref) async {
-    // BottomSheetの表示
-    final wishRank = ref.read(itemsFilterWishRankProvider.notifier);
-    final result = await WishRankSelectorBottomSheet.show(
-      context: context,
-      initial: wishRank.state,
-    );
-
-    // 反映
-    if (result == null) {
-      // do nothing
-    } else if (result < 0) {
-      wishRank.update((state) => null);
-    } else {
-      wishRank.update((state) => result);
-    }
   }
 }
 
@@ -303,9 +432,9 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = useL10n();
     final firstImagePath = item.imagesPath?.firstOrNull;
     final colorScheme = Theme.of(context).colorScheme;
-    final l10n = ref.watch(l10nProvider);
 
     return Slidable(
       key: ValueKey(item.id),
@@ -315,9 +444,9 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
         children: [
           SlidableAction(
             onPressed: (_) async {
-              final res = await confirmDismiss(context, ref);
+              final res = await confirmDismiss(context, ref, l10n);
               if (res && context.mounted) {
-                await onDelete(context, ref);
+                await onDelete(context, ref, l10n);
               }
             },
             backgroundColor: colorScheme.error,
@@ -343,9 +472,12 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  Future<bool> confirmDismiss(BuildContext context, WidgetRef ref) async {
+  Future<bool> confirmDismiss(
+    BuildContext context,
+    WidgetRef ref,
+    L10n l10n,
+  ) async {
     // ダイアログの表示
-    final l10n = ref.read(l10nProvider);
     final result = await showAdaptiveOkCancelDialog(
       context,
       title: l10n.deleteConfirmTitle,
@@ -354,8 +486,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
     return result == DialogResult.ok;
   }
 
-  Future<void> onDelete(BuildContext context, WidgetRef ref) async {
-    final l10n = ref.read(l10nProvider);
+  Future<void> onDelete(BuildContext context, WidgetRef ref, L10n l10n) async {
     await execute(
       context,
       action: () => ref.read(itemUsecaseProvider).delete(itemId: item.id),

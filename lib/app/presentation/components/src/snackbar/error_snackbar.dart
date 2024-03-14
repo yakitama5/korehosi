@@ -1,4 +1,3 @@
-import 'package:family_wish_list/app/presentation/theme/importer.dart';
 import 'package:flutter/material.dart';
 
 /// 処理失敗(エラー)用のスナックバー
@@ -7,10 +6,10 @@ class ErrorSnackBar extends SnackBar {
       : super(
           content: Text(
             message,
-            style: TextStyle(color: context.colorScheme.onError),
+            style: TextStyle(color: Theme.of(context).colorScheme.onError),
           ),
-          backgroundColor: context.colorScheme.error,
-          closeIconColor: context.colorScheme.onError,
+          backgroundColor: Theme.of(context).colorScheme.error,
+          closeIconColor: Theme.of(context).colorScheme.onError,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../application/state/locale_provider.dart';
+import '../../hooks/src/use_l10n.dart';
 
 /// 編集用のアイコンボタン
-class EditIconButton extends HookConsumerWidget {
+class EditIconButton extends HookWidget {
   const EditIconButton({super.key, required this.onPressed});
 
   final VoidCallback? onPressed;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return IconButton(
       onPressed: onPressed,

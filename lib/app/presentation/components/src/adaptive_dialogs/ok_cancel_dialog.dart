@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../application/model/dialog_result.dart';
-import '../../../../application/state/locale_provider.dart';
+import '../../../hooks/importer.dart';
 import 'adaptive_action.dart';
 
 /// 「OK or Cancel」をアクションに持つダイアログ
-class OkCancelDialog extends HookConsumerWidget {
+class OkCancelDialog extends HookWidget {
   const OkCancelDialog({
     super.key,
     this.title,
@@ -21,8 +21,8 @@ class OkCancelDialog extends HookConsumerWidget {
   final String? cancelLabel;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return AlertDialog.adaptive(
       title: Text(title ?? ''),

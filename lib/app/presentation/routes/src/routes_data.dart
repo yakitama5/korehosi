@@ -120,8 +120,7 @@ class OnboardFormRouteData extends GoRouteData {
   static const path = '/onboard_form';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const OnboardFormPage();
+  Widget build(BuildContext context, GoRouterState state) => OnboardFormPage();
 }
 
 class ShareLinkRouteData extends GoRouteData {

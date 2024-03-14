@@ -1,8 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
+import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -16,6 +18,7 @@ import '../application/state/notification_message_provider.dart';
 import '../application/state/reactive_deep_link_provider.dart';
 import '../application/state/theme_mode_provider.dart';
 import '../application/validator/validation_messages.dart';
+import 'hooks/src/use_l10n.dart';
 import 'routes/importer.dart';
 import 'theme/importer.dart';
 
@@ -29,59 +32,65 @@ class App extends HookConsumerWidget {
       ref.read(appUsecaseProvider).onLanched();
     });
 
-    // Webは未対応なのでDynamicColorBuilderを避ける
-    if (kIsWeb) {
-      return _buildApp(context, ref);
-    } else {
-      // Material3対応
-      // Note: https://pub.dev/packages/dynamic_color
-      return DynamicColorBuilder(
-        builder: (lightDynamic, darkDynamic) =>
-            _buildApp(context, ref, lightDynamic, darkDynamic),
-      );
-    }
-  }
+    final themeData = useTheme();
 
-  MaterialApp _buildApp(
-    BuildContext context,
-    WidgetRef ref, [
-    ColorScheme? lightDynamic,
-    ColorScheme? darkDynamic,
-  ]) {
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(themeModeNotifierProvider);
-    final themeData = context.themeData;
 
-    return MaterialApp.router(
-      title: appConfig.appName,
-      builder: (context, child) => _AppBaseContainer(child: child),
-      routerDelegate: router.routerDelegate,
-      routeInformationParser: router.routeInformationParser,
-      routeInformationProvider: router.routeInformationProvider,
-      theme:
-          createThemeData(themeData.platform, Brightness.light, lightDynamic),
-      darkTheme:
-          createThemeData(themeData.platform, Brightness.dark, darkDynamic),
-      themeMode: themeMode,
-      localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
-      debugShowCheckedModeBanner: false,
-      // アプリ全体のスクロール制御を変更
-      scrollBehavior: ScrollConfiguration.of(context)
-          .copyWith(physics: const BouncingScrollPhysics()),
-      localeResolutionCallback: (locale, supportedLocales) {
-        // ロケールの変更を通知
-        if (locale != null) {
-          WidgetsBinding.instance.addPostFrameCallback(
-            (_) => ref
-                .read(l10nProvider.notifier)
-                .update((state) => lookupL10n(locale)),
-          );
-        }
-        return locale;
-      },
+    // Material3対応
+    // Note: https://pub.dev/packages/dynamic_color
+    return _SafetyDynamicColorBuilder(
+      builder: (lightDynamic, darkDynamic) => MaterialApp.router(
+        title: appConfig.appName,
+        builder: (context, child) => _AppBaseContainer(child: child),
+        routerDelegate: router.routerDelegate,
+        routeInformationParser: router.routeInformationParser,
+        routeInformationProvider: router.routeInformationProvider,
+        theme: createThemeData(
+          themeData.platform,
+          Brightness.light,
+          lightDynamic,
+        ),
+        darkTheme:
+            createThemeData(themeData.platform, Brightness.dark, darkDynamic),
+        themeMode: themeMode,
+        localizationsDelegates: L10n.localizationsDelegates,
+        supportedLocales: L10n.supportedLocales,
+        debugShowCheckedModeBanner: false,
+        // アプリ全体のスクロール制御を変更
+        scrollBehavior: ScrollConfiguration.of(context)
+            .copyWith(physics: const BouncingScrollPhysics()),
+        localeResolutionCallback: (locale, supportedLocales) {
+          // ロケールの変更を通知
+          if (locale != null) {
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) => ref
+                  .read(l10nProvider.notifier)
+                  .update((state) => lookupL10n(locale)),
+            );
+          }
+          return locale;
+        },
+      ),
     );
   }
+}
+
+class _SafetyDynamicColorBuilder extends StatelessWidget {
+  const _SafetyDynamicColorBuilder({required this.builder});
+
+  final Widget Function(
+    ColorScheme? lightDynamic,
+    ColorScheme? darkDynamic,
+  ) builder;
+
+  @override
+  Widget build(BuildContext context) => kIsWeb
+      // Webは未対応なのでDynamicColorBuilderを避ける
+      ? builder(null, null)
+      : DynamicColorBuilder(
+          builder: builder,
+        );
 }
 
 class _AppBaseContainer extends HookConsumerWidget {
@@ -199,14 +208,14 @@ class _ResponsiveWrapper extends HookConsumerWidget {
   }
 }
 
-class _ReactiveFormWrapper extends HookConsumerWidget {
+class _ReactiveFormWrapper extends HookWidget {
   const _ReactiveFormWrapper(this.child);
 
   final Widget? child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(l10nProvider);
+  Widget build(BuildContext context) {
+    final l10n = useL10n();
 
     return ReactiveFormConfig(
       validationMessages: {
