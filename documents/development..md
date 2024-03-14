@@ -60,8 +60,6 @@
    }
    ```
 
-   
-
 #### 🔒機密情報 (.env)
 
 1. 下記の形式で`scripts/env/`配下に`.env`, `.env.dev` を作成する
@@ -79,8 +77,6 @@
    ```sh
    fvm flutter pub run build_runner build --build-filter 'lib/env/*.dart'
    ```
-
-
 
 #### AppStoreリリース用
 
@@ -104,8 +100,6 @@
   fvm flutter build appbundle --dart-define-from-file=dart_defines/prod.json
   fvm flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=dart_defines/prod.json
   ```
-
-
 
 ## 📋開発中に多用するコマンド
 
@@ -152,4 +146,3 @@
    ```sh
    firebase deploy --only hosting
    ```
-
