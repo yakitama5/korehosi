@@ -61,10 +61,8 @@ class _ItemForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = _createModel();
-
     return ItemFormModelFormBuilder(
-      model: model,
+      model: _createModel(),
       builder: (context, formModel, child) => Nested(
         children: const [
           ReactiveFormDirtyConfirmPopScope(),
@@ -111,24 +109,27 @@ class _ItemForm extends HookConsumerWidget {
   }
 
   /// FormGroupを生成する
-  ItemFormModel _createModel() => ItemFormModel(
-        name: item?.name,
-        wishRank: item?.wishRank,
-        wanterName: item?.wanterName,
-        wishSeason: item?.wishSeason,
-        memo: item?.memo,
-        // 最低1つの要素を表示
-        urls: (item?.urls?.isEmpty ?? true) ? [''] : item?.urls,
-        images: [
-          // 新規アップロード用に項目を+1定義
-          ...item?.imagesPath
-                  // 画像はアップロード済のものと分けて管理するためモデルに変換
-                  ?.map((path) => SelectedImageModel(imagePath: path))
-                  .toList() ??
-              [],
-          null,
-        ],
-      );
+  ItemFormModel _createModel() {
+    return ItemFormModel(
+      name: item?.name,
+      // HACK(yakitama5): 初期値設定をモデル定義側に統一したい
+      wishRank: item?.wishRank ?? 0.0,
+      wanterName: item?.wanterName,
+      wishSeason: item?.wishSeason,
+      memo: item?.memo,
+      // 最低1つの要素を表示
+      urls: (item?.urls?.isEmpty ?? true) ? [''] : item?.urls,
+      images: [
+        // 新規アップロード用に項目を+1定義
+        ...item?.imagesPath
+                // 画像はアップロード済のものと分けて管理するためモデルに変換
+                ?.map((path) => SelectedImageModel(imagePath: path))
+                .toList() ??
+            [],
+        null,
+      ],
+    );
+  }
 }
 
 /// 保存ボタン
