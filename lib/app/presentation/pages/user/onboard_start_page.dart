@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 
 import '../../../application/config/url_config.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
+import '../../hooks/importer.dart';
 import '../../routes/importer.dart';
 import '../../theme/importer.dart';
 
@@ -37,12 +37,12 @@ class OnboardStartPage extends HookWidget {
   }
 }
 
-class _WelcomeImage extends StatelessWidget {
+class _WelcomeImage extends HookWidget {
   const _WelcomeImage();
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = useColorScheme();
 
     return ConstrainedMobileBox(
       child: ImageAspectRatio(
@@ -63,8 +63,8 @@ class _StartButton extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = useL10n();
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = useColorScheme();
+    final textTheme = useTextTheme();
 
     return Column(
       children: [
