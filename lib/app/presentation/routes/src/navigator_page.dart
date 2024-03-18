@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../application/state/theme_mode_provider.dart';
 import '../../hooks/importer.dart';
 
-class NavigatorPage extends StatelessWidget {
+class NavigatorPage extends HookWidget {
   const NavigatorPage({
     super.key,
     required this.navigationShell,
@@ -17,25 +17,8 @@ class NavigatorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _MobileNavigator(navigationShell);
-  }
-}
+    final l10n = useL10n();
 
-class _MobileNavigator extends HookConsumerWidget {
-  const _MobileNavigator(this.navigationShell);
-
-  final StatefulNavigationShell navigationShell;
-
-  void _onDestinationSelected(int index) {
-    navigationShell.goBranch(
-      index,
-      initialLocation: index == navigationShell.currentIndex,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = L10n.of(context)!;
     final tabs = [
       NavigationDestination(
         icon: const Icon(Icons.shopping_bag_outlined),
@@ -116,6 +99,13 @@ class _MobileNavigator extends HookConsumerWidget {
           Breakpoints.large: SlotLayoutConfig.empty(),
         },
       ),
+    );
+  }
+
+  void _onDestinationSelected(int index) {
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
     );
   }
 }
