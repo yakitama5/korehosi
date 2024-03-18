@@ -1,11 +1,12 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
-import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
+import 'package:family_wish_list/app/presentation/hooks/importer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -18,7 +19,6 @@ import '../application/state/notification_message_provider.dart';
 import '../application/state/reactive_deep_link_provider.dart';
 import '../application/state/theme_mode_provider.dart';
 import '../application/validator/validation_messages.dart';
-import 'hooks/src/use_l10n.dart';
 import 'routes/importer.dart';
 import 'theme/importer.dart';
 
@@ -42,7 +42,9 @@ class App extends HookConsumerWidget {
     return _SafetyDynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) => MaterialApp.router(
         title: appConfig.appName,
-        builder: (context, child) => _AppBaseContainer(child: child),
+        builder: (context, child) => _AppListener(
+          child: _AppBaseContainer(child: child),
+        ),
         routerDelegate: router.routerDelegate,
         routeInformationParser: router.routeInformationParser,
         routeInformationProvider: router.routeInformationProvider,
@@ -93,29 +95,23 @@ class _SafetyDynamicColorBuilder extends StatelessWidget {
         );
 }
 
-class _AppBaseContainer extends HookConsumerWidget {
-  const _AppBaseContainer({required this.child});
-
-  final Widget? child;
+class _AppListener extends SingleChildStatelessWidget {
+  const _AppListener({required super.child});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // アプリ内共通Providerの監視
-    _dynamicLinkLister(context, ref);
-    _notificationLister(context, ref);
+  Widget buildWithChild(BuildContext context, Widget? child) {
+    return Consumer(
+      builder: (context, ref, child) {
+        // アプリ内共通Providerの監視
+        _dynamicLinkLister(context, ref);
+        _notificationLister(context, ref);
 
-    return ResponsiveBreakpoints.builder(
-      child: Stack(
-        children: [
-          // HACK(yakitama5): SingleChildStatelssWidgetに変更したほうがきれい
-          _ReactiveFormWrapper(_ResponsiveWrapper(child)),
-          // 全画面共通のローディング表示
-          const _GlobalIndicator(),
-          // 画面遷移の検知
-          const RouteObserverContainer(),
-        ],
-      ),
-      breakpoints: breakpoints,
+        if (child == null) {
+          return const SizedBox.shrink();
+        }
+
+        return child;
+      },
     );
   }
 
@@ -159,74 +155,101 @@ class _AppBaseContainer extends HookConsumerWidget {
   }
 }
 
-class _ResponsiveWrapper extends HookConsumerWidget {
-  const _ResponsiveWrapper(this.child);
-
-  final Widget? child;
+class _AppBaseContainer extends SingleChildStatelessWidget {
+  const _AppBaseContainer({required super.child});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return MaxWidthBox(
-      maxWidth: AppBreakpoint.desktopLarge.end.toDouble(),
-      background: Container(color: colorScheme.background),
-      child: ResponsiveScaledBox(
-        width: ResponsiveValue<double>(
-          context,
-          defaultValue: AppBreakpoint.mobile.value,
-          conditionalValues: [
-            Condition.equals(
-              name: AppBreakpoint.mobile.name,
-              value: AppBreakpoint.mobile.value,
-            ),
-            Condition.between(
-              start: AppBreakpoint.tablet.start,
-              end: AppBreakpoint.tablet.end,
-              value: AppBreakpoint.tablet.value,
-            ),
-            Condition.between(
-              start: AppBreakpoint.desktopSmall.start,
-              end: AppBreakpoint.desktopSmall.end,
-              value: AppBreakpoint.desktopSmall.value,
-            ),
-            Condition.between(
-              start: AppBreakpoint.desktopMiddle.start,
-              end: AppBreakpoint.desktopMiddle.end,
-              value: AppBreakpoint.desktopMiddle.value,
-            ),
-            Condition.between(
-              start: AppBreakpoint.desktopLarge.start,
-              end: AppBreakpoint.desktopLarge.end,
-              value: AppBreakpoint.desktopLarge.value,
-            ),
-          ],
-        ).value,
-        child: child ?? const SizedBox.shrink(),
+  Widget buildWithChild(BuildContext context, Widget? child) {
+    return ResponsiveBreakpoints.builder(
+      child: Stack(
+        children: [
+          Nested(
+            children: const [
+              ReactiveFormWrapper(),
+              ResponsiveWrapper(),
+            ],
+            child: child,
+          ),
+          // 全画面共通のローディング表示
+          const _GlobalIndicator(),
+          // 画面遷移の検知
+          const RouteObserverContainer(),
+        ],
       ),
+      breakpoints: breakpoints,
     );
   }
 }
 
-class _ReactiveFormWrapper extends HookWidget {
-  const _ReactiveFormWrapper(this.child);
-
-  final Widget? child;
+class ResponsiveWrapper extends SingleChildStatelessWidget {
+  const ResponsiveWrapper({super.key, super.child});
 
   @override
-  Widget build(BuildContext context) {
-    final l10n = useL10n();
+  Widget buildWithChild(BuildContext context, Widget? child) => HookBuilder(
+        builder: (context) {
+          final colorScheme = useColorScheme();
 
-    return ReactiveFormConfig(
-      validationMessages: {
-        /// エラーメッセージの共通定義
-        ValidationMessage.required: (error) => l10n.validErrorMessageRequired,
-        CustomValidationMessage.url: (error) =>
-            l10n.validErrorMessageUrlPattern,
-      },
-      child: child ?? const SizedBox.shrink(),
-    );
-  }
+          return MaxWidthBox(
+            maxWidth: AppBreakpoint.desktopLarge.end.toDouble(),
+            background: Container(color: colorScheme.background),
+            child: ResponsiveScaledBox(
+              width: ResponsiveValue<double>(
+                context,
+                defaultValue: AppBreakpoint.mobile.value,
+                conditionalValues: [
+                  Condition.equals(
+                    name: AppBreakpoint.mobile.name,
+                    value: AppBreakpoint.mobile.value,
+                  ),
+                  Condition.between(
+                    start: AppBreakpoint.tablet.start,
+                    end: AppBreakpoint.tablet.end,
+                    value: AppBreakpoint.tablet.value,
+                  ),
+                  Condition.between(
+                    start: AppBreakpoint.desktopSmall.start,
+                    end: AppBreakpoint.desktopSmall.end,
+                    value: AppBreakpoint.desktopSmall.value,
+                  ),
+                  Condition.between(
+                    start: AppBreakpoint.desktopMiddle.start,
+                    end: AppBreakpoint.desktopMiddle.end,
+                    value: AppBreakpoint.desktopMiddle.value,
+                  ),
+                  Condition.between(
+                    start: AppBreakpoint.desktopLarge.start,
+                    end: AppBreakpoint.desktopLarge.end,
+                    value: AppBreakpoint.desktopLarge.value,
+                  ),
+                ],
+              ).value,
+              child: child ?? const SizedBox.shrink(),
+            ),
+          );
+        },
+      );
+}
+
+class ReactiveFormWrapper extends SingleChildStatelessWidget {
+  const ReactiveFormWrapper({super.key, super.child});
+
+  @override
+  Widget buildWithChild(BuildContext context, Widget? child) => HookBuilder(
+        builder: (context) {
+          final l10n = useL10n();
+
+          return ReactiveFormConfig(
+            validationMessages: {
+              /// エラーメッセージの共通定義
+              ValidationMessage.required: (error) =>
+                  l10n.validErrorMessageRequired,
+              CustomValidationMessage.url: (error) =>
+                  l10n.validErrorMessageUrlPattern,
+            },
+            child: child ?? const SizedBox.shrink(),
+          );
+        },
+      );
 }
 
 class _GlobalIndicator extends HookConsumerWidget {

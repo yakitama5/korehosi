@@ -122,6 +122,9 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/icons/CustomIcons.ttf
+    - family: Murecho
+      fonts:
+        - asset: assets/fonts/Murecho-VariableFont_wght.ttf
 
 # App Icon
 flutter_launcher_icons:
