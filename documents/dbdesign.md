@@ -142,4 +142,3 @@ Firestoreのドキュメント構造は下記の通り
 | target    | string    |                      |                     |
 | createdAt | Timestmap | 作成日時             | 1987-12-01 00:00:00 |
 | updatedAt | Timestmap | 更新日時             | 1987-12-01 00:00:00 |
-

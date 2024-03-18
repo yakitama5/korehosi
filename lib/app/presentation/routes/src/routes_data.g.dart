@@ -42,8 +42,6 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
         ),
         StatefulShellRouteData.$route(
           restorationScopeId: BottomNavitorShellRouteData.$restorationScopeId,
-          navigatorContainerBuilder:
-              BottomNavitorShellRouteData.$navigatorContainerBuilder,
           factory: $BottomNavitorShellRouteDataExtension._fromState,
           branches: [
             StatefulShellBranchData.$branch(
