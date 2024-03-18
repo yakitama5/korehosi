@@ -40,9 +40,8 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     // ephemeral state
+    final l10n = useL10n();
     final scrollController = useScrollController();
     final itemOrder = useState(itemsConfig.defaultOrder);
     final wishRank = useState(itemsConfig.defaultWishRank);

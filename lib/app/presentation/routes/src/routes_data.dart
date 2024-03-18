@@ -77,21 +77,12 @@ class BottomNavitorShellRouteData extends StatefulShellRouteData {
     GoRouterState state,
     StatefulNavigationShell navigationShell,
   ) {
-    return navigationShell;
+    return NavigatorPage(
+      navigationShell: navigationShell,
+    );
   }
 
   static const String $restorationScopeId = 'app_router';
-
-  static Widget $navigatorContainerBuilder(
-    BuildContext context,
-    StatefulNavigationShell navigationShell,
-    List<Widget> children,
-  ) {
-    return NavigatorPage(
-      navigationShell: navigationShell,
-      children: children,
-    );
-  }
 }
 
 class OnboardStartRouteData extends GoRouteData {

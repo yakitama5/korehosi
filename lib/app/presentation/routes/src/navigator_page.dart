@@ -6,28 +6,24 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../application/state/theme_mode_provider.dart';
 import '../../hooks/importer.dart';
-import 'branch_switcher.dart';
 
 class NavigatorPage extends StatelessWidget {
   const NavigatorPage({
     super.key,
-    required this.children,
     required this.navigationShell,
   });
 
-  final List<Widget> children;
   final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
-    return _MobileNavigator(children, navigationShell);
+    return _MobileNavigator(navigationShell);
   }
 }
 
 class _MobileNavigator extends HookConsumerWidget {
-  const _MobileNavigator(this.children, this.navigationShell);
+  const _MobileNavigator(this.navigationShell);
 
-  final List<Widget> children;
   final StatefulNavigationShell navigationShell;
 
   void _onDestinationSelected(int index) {
@@ -82,10 +78,11 @@ class _MobileNavigator extends HookConsumerWidget {
         config: <Breakpoint, SlotLayoutConfig>{
           Breakpoints.standard: SlotLayout.from(
             key: const Key('Body'),
-            builder: (_) => BranchSwitcher(
-              currentIndex: navigationShell.currentIndex,
-              children: children,
-            ),
+            // builder: (_) => BranchSwitcher(
+            //   currentIndex: navigationShell.currentIndex,
+            //   children: children,
+            // ),
+            builder: (_) => navigationShell,
           ),
         },
       ),
