@@ -101,6 +101,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.4.7
   go_router_builder: ^2.4.1
+  golden_toolkit: ^0.15.0
   google_sign_in_mocks: ^0.3.0
   lint:
     path: ./lint
