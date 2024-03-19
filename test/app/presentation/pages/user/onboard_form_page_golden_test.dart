@@ -7,7 +7,7 @@ import '../../../../test_utils/importer.dart';
 const _pageLength = 3;
 
 void main() {
-  testGoldens('オンボード入力', (WidgetTester tester) async {
+  testGoldens('オンボード', (WidgetTester tester) async {
     for (var i = 0; i < _pageLength; i++) {
       // `IntroductionScreenState`をGlobalKeyで行う都合上、`multiScreenGolden`を利用
       // Note: https://github.com/eBay/flutter_glove_box/issues/132
@@ -18,7 +18,7 @@ void main() {
           ),
         ),
       );
-      await multiScreenGolden(tester, 'Page.${i + 1}');
+      await multiScreenGolden(tester, 'Onboard - P.${i + 1}');
     }
   });
 }

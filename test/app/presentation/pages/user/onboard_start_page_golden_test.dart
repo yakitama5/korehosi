@@ -14,6 +14,6 @@ void main() {
     await tester.pumpDeviceBuilder(builder);
 
     //マスターのスクリーンショットと同じかテストする
-    await screenMatchesGolden(tester, 'OnboardStartPage');
+    await screenMatchesGolden(tester, 'WelcomePage');
   });
 }
