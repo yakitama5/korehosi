@@ -14,8 +14,9 @@ jobs:
   flutter_test:
     # if: ${{ false }}
     name: Test
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # GoldenTestの差異を埋めるため、Windowsで実施
+    runs-on: windows-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v3
