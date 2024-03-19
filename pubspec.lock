@@ -1812,15 +1812,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  reactive_raw_autocomplete:
-    dependency: "direct main"
-    description:
-      path: "packages/reactive_raw_autocomplete"
-      ref: HEAD
-      resolved-ref: "9268b4d6bff39027426e191d131d1aed509ff5b5"
-      url: "https://github.com/yakitama5/reactive_forms_widgets"
-    source: git
-    version: "2.0.1"
   recase:
     dependency: transitive
     description:
