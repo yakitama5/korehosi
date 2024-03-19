@@ -14,16 +14,18 @@ jobs:
   flutter_test:
     # if: ${{ false }}
     name: Test
-    # GoldenTestの差異を埋めるため、Windowsで実施
+    # runs-on: ubuntu-latest
     runs-on: windows-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Create dart-define
+        shell: powershell
         run: |
-          mkdir dart_defines
-          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
+          mkdir -p dart_defines
+          [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String(${{ secrets.DART_DEFINE_JSON }})) > dart_defines/prod.json
+        # echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
       - name: Create Firebase Conf
         run: |
           echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
