@@ -9,12 +9,11 @@ import '../../hooks/importer.dart';
 import '../../routes/importer.dart';
 import '../../theme/importer.dart';
 
-class OnboardStartPage extends HookWidget {
-  const OnboardStartPage({super.key});
+class WelcomePage extends HookWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO(yakitama5): 初期画面に戻れるようにするべき
     return const Scaffold(
       body: SafeArea(
         child: PagePadding(

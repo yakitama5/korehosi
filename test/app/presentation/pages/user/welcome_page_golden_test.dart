@@ -1,4 +1,4 @@
-import 'package:family_wish_list/app/presentation/pages/user/onboard_start_page.dart';
+import 'package:family_wish_list/app/presentation/pages/user/welcome_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
@@ -8,7 +8,7 @@ void main() {
   testGoldens('ウェルカムページ', (WidgetTester tester) async {
     final builder = DeviceBuilder()
       ..addScenario(
-        widget: testableWidget(const OnboardStartPage()),
+        widget: testableWidget(const WelcomePage()),
       );
 
     await tester.pumpDeviceBuilder(builder);
