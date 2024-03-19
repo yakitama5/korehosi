@@ -74,7 +74,7 @@ dependencies:
   # プルリクが取り込まれるまでの一時的な対応
   reactive_raw_autocomplete:
     git:
-      url: https://github.com/yakitama5/reactive_forms_widgets
+      url: https://github.com/artflutter/reactive_forms_widgets
       path: packages/reactive_raw_autocomplete
   responsive_framework: ^1.4.0
   riverpod_annotation: ^2.3.4
