@@ -1,3 +1,331 @@
 {
-    "@@locale": "en"
+    "@@locale": "en",
+    "start": "Start",
+    "firstTime": "Click here if you are a first time user.",
+    "accountLink": "Account Linkage",
+    "contactUs": "Contact Us",
+    "termOfService": "Terms of Use",
+    "privacyPolicy": "Privacy Policy",
+    "accountLinkDescTitle": "By linking your account, you will be able to use the following features",
+    "accountLinkDescBodyCloudBackup": "Data backup to the cloud",
+    "accountLinkDescBodyMultiDevice": "Simultaneous use on multiple terminals",
+    "accountLinkDescBodyDataSend": "Data transfer due to device change",
+    "onboardStartTitle": "Introduction.",
+    "onboardStartMessage": "Register your profile first!",
+    "questionAgeGroup": "What about you?",
+    "questionSex": "Gender.",
+    "questionName": "What is your name?",
+    "questionNameCapiton": "or Nickname",
+    "questionConfirm": "Is it correct?",
+    "selectChild": "Children (Please buy)",
+    "selectAdult": "Adult (I want to buy it for you)",
+    "selectMan": "man's man",
+    "selectWoman": "woman",
+    "selectNeither": "Neither.",
+    "nameLabel": "Name or Nickname",
+    "name": "Name",
+    "next": "Next.",
+    "back": "return",
+    "prev": "Previous",
+    "skip": "skip",
+    "sexMan": "man's man",
+    "sexWoman": "woman",
+    "sexNeither": "Neither.",
+    "ageGroupChild": "children",
+    "ageGroupAdult": "adult",
+    "ageGroup": "age-group",
+    "sex": "gender",
+    "unset": "<Unset",
+    "requiredIcon": "*",
+    "requiredHelper": "*Required fields",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithApple": "Sign in with Apple",
+    "wishList": "wanted article",
+    "analyze": "quid pro quo",
+    "settings": "posing (a problem)",
+    "addWishList": "Add what you want",
+    "orderKeyName": "Name",
+    "orderKeyWishRank": "degree of desirability",
+    "orderKeyCreatedAt": "creation-day",
+    "orderKeyUpdatedAt": "update date",
+    "sortOrder": "sort",
+    "sortOrderAsc": "ascending-order",
+    "sortOrderDesc": "descending-order",
+    "status": "status",
+    "wishRank": "degree of desirability",
+    "cancel": "cancel",
+    "reset": "reset",
+    "apply": "adoption",
+    "notPurchased": "unpurchased",
+    "purchasePlan": "Planned purchases",
+    "purchased": "already bought",
+    "all": "all",
+    "noName": "nameless",
+    "groupInitialNameSuffix": " group of",
+    "unexpectedErrorMessage": "An unexpected error has occurred.",
+    "searchEmptyMessage": "{item}could not be found.",
+    "@searchEmptyMessage": {
+        "placeholders": {
+            "item": {
+                "description": "item name",
+                "type": "String"
+            }
+        }
+    },
+    "merchandiseName": "trade (brand) name",
+    "save": "preservation",
+    "editPageTitle": "{item}Edit the",
+    "@editPageTitle": {
+        "placeholders": {
+            "item": {
+                "description": "item name",
+                "type": "String"
+            }
+        }
+    },
+    "createPageTitle": "{item}Create a",
+    "@createeditPageTitle": {
+        "placeholders": {
+            "item": {
+                "description": "item name",
+                "type": "String"
+            }
+        }
+    },
+    "wishSeasonLabel": "When do you want it?",
+    "wishSeasonHint": "Examples: Christmas, birthdays",
+    "url": "uniform resouce locator",
+    "addUrl": "Add URL",
+    "memo": "memo",
+    "shoot": "take a picture",
+    "chooseFromLibrary": "Select an image from the library",
+    "star": "star",
+    "delete": "deletion",
+    "deletedMessage": "Deleted.",
+    "completeDeleteMessage": "Deleted.",
+    "completeChangeGroupMessage": "Switched groups.",
+    "uploadImage": "Upload Photo",
+    "lackOfPermission": "{permission}is not allowed",
+    "@lackOfPermission": {
+        "context": "permission",
+        "placeholders": {
+            "permission": {}
+        }
+    },
+    "confirmPermissionOffTitle": "{permission}to be turned off?",
+    "@confirmPermissionOffTitle": {
+        "context": "permission",
+        "placeholders": {
+            "permission": {}
+        }
+    },
+    "confirmPermissionOffMessage": "Open the Settings app and turn{permission} and turn off the",
+    "@confirmPermissionOffMessage": {
+        "context": "permission",
+        "placeholders": {
+            "permission": {}
+        }
+    },
+    "permissionPhotos": "Gallery Access",
+    "permissionCamera": "Access to the camera",
+    "permissionPushNotification": "push notification",
+    "permissionWarnMessage": "Open the Settings app and{permission} Allow the",
+    "@permissionWarnMessage": {
+        "context": "permission",
+        "placeholders": {
+            "permission": {}
+        }
+    },
+    "openSettingsApp": "Open the Settings application",
+    "ok": "OK",
+    "confirmDiscardChangesTitle": "Discard changes?",
+    "confirmDiscardChangesMessage": "All changes will be lost",
+    "discard": "discard",
+    "notDiscard": "not to be discarded",
+    "validErrorMessageRequired": "Please fill in the required fields",
+    "validErrorMessageUrlPattern": "Please enter the correct URL format",
+    "edit": "editing",
+    "purchaseOrpurchasePlan": "Purchase/plan to purchase",
+    "deleteConfirmTitle": "Confirmation of deletion",
+    "deleteCofirmMessage": "Do you want to delete \"{item} Do you want to delete \"?",
+    "@deleteCofirmMessage": {
+        "context": "message",
+        "placeholders": {
+            "item": {}
+        }
+    },
+    "deleteGroupCofirmMessage": "Do you want to delete \"{name} Do you want to delete \"? \\All the wants registered in the ߋn group will be deleted. \\ɑnThis operation cannot be undone.",
+    "@deleteGroupCofirmMessage": {
+        "context": "message",
+        "placeholders": {
+            "name": {}
+        }
+    },
+    "leaveConfirmTitle": "Confirmation of withdrawal",
+    "leaveCofirmMessage": "Do you want to leave the{group} Do you wish to leave the",
+    "@leaveCofirmMessage": {
+        "context": "message",
+        "placeholders": {
+            "group": {}
+        }
+    },
+    "notSelectedGroupDialogTitle": "No group selected",
+    "@notSelectedGroupDialogTitle": {
+        "description": "Not selected group dialog title"
+    },
+    "notSelectedGroupDialogMessage": "Please select a group and then add what you want",
+    "@notSelectedGroupDialogMessage": {
+        "description": "Not selected group dialog message"
+    },
+    "purchaseInfoTitle": "Purchase/Purchase Information",
+    "purchaseInfoCaption": "Subsequent content will only be visible to adults in the group",
+    "price": "Amount of money",
+    "purchasePlanDateTime": "Expected Date of Purchase",
+    "yenMark": "¥",
+    "surprise": "surprise",
+    "surpriseCaption": "I don't want my kids to know what's going on.",
+    "purchasePlanDateTimeCaption": "Enter \"To be purchased\".",
+    "sentAtCaption": "Entering the information will make it \"Purchased\".",
+    "sentAt": "Date given",
+    "authErrorMessage": "An authentication error has occurred. \\Please log in after a few moments.",
+    "account": "account",
+    "profile": "Profile",
+    "group": "group (usu. of people)",
+    "help": "help",
+    "developperTwitter": "Developer X (formerly Twitter)",
+    "license": "License",
+    "error": "error",
+    "urlErrorMessageCanNotOpen": "Could not open URL. \\Please contact us if this occurs frequently.",
+    "joinGroup": "Participating Groups",
+    "share": "share",
+    "copy": "copy",
+    "shareCaption": "Share and invite members!",
+    "groupShareText": "{user}from{group} You have been invited to \\You can join the Wishlist group by clicking the URL below or scanning the QR code.{url}",
+    "@groupShareText": {
+        "context": "share-dialog",
+        "placeholders": {
+            "user": {},
+            "group": {},
+            "url": {}
+        }
+    },
+    "copied": "Copied.",
+    "saved": "Saved in.",
+    "groupName": "Group Name",
+    "deleteErrorMessageRequiredExists": "You cannot delete all the groups you have created. \\You must have at least one group.",
+    "deleteErrorMessagePermission": "You are not authorized to delete.",
+    "shareGroupHelpTitle": "Share/join groups",
+    "shareGroupHelpMessage": "Please \"Share\" from the [Share Group] group.",
+    "addGroup": "Add Group",
+    "other": "Other",
+    "logout": "logout",
+    "deleteAccount": "withdrawal from a group",
+    "google": "Google (WWW search engine)",
+    "apple": "Apple",
+    "notJoinedGroupMessage": "You do not belong to any group. \\Please create a group or join a group to which you have been invited.",
+    "deletedUser": "<Deleted User>.",
+    "selectNumberText": "{length}selecting an option (from a test case, e.g. litmus test)",
+    "@selectNumberText": {
+        "context": "select",
+        "placeholders": {
+            "length": {}
+        }
+    },
+    "authErrorMessageNotExistsProvider": "The account must be linked to one or more external accounts.",
+    "authErrorMessagAlreadyInUse": "This account has already been linked. \\Please use another account or log out once and link it.",
+    "bullet": "interpoint (interword separation)",
+    "notUseAnalytics": "Currently, the look-back function is not available.",
+    "analyticsFeatureTitle": "The following functions are available in the Reflection function.",
+    "priceAnalytics": "Change in Amount",
+    "purchaseUserAnalytics": "Percentage of people who bought",
+    "purchasedAnalytics": "Percentage of purchases made",
+    "analyticsPublishPlan": "We will release it before the developer's child starts kindergarten.",
+    "deleteAccountConfirmTitle": "Confirmation of withdrawal from membership",
+    "deleteAccountConfirmMessage": "Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.",
+    "joinedGroupTitle": "Join Group",
+    "joinedGroupMessage": "I joined the group.",
+    "joinGroupErrorMessageInvalidShareLink": "The invitation link is incorrect.",
+    "joinGroupErrorMessageJoinedGroup": "I have already participated.",
+    "joinGroupErrorMessageInvalidDate": "Invitation link has expired.",
+    "joinGroupErrorMessageNotAuth": "An authentication error has occurred.",
+    "joinGroupErrorMessageLimitOver": "The maximum number of participants (5) in the group has been reached.",
+    "leave": "withdrawal",
+    "select": "selection",
+    "wanterName": "Who do you want?",
+    "wanterNameChipTitle": "people who want something",
+    "businessErrorMessageOverItemCount": "You have reached your registration limit. \\Please delete your ዄn-purchased items or change to a premium plan.",
+    "updateAppTitle": "App Update",
+    "updateAppMessage": "The latest version of the application has been released. \\Would you like to go to the 팀n store?",
+    "goStore": "Go to Store",
+    "buyerName": "Purchased by",
+    "howToUse": "treatment",
+    "joinPremiumGroup": "Release the limit on the number of want registrations.",
+    "joinedPremiumGroup": "The limit on the number of want registrations has been released. (Unlimited)",
+    "itemPurchase": "Purchase Products",
+    "itemLimitReleaseMessage": "Purchasing an item will release the restrictions on the items you want to be able to register in the group you are viewing. \\You can purchase up to 30 items for the free version.\\nPrice:³³){price} ({term} )",
+    "@itemLimitReleaseMessage": {
+        "context": "message",
+        "placeholders": {
+            "term": {},
+            "price": {}
+        }
+    },
+    "purchaseOkLabel": "Purchase (¥){price} )",
+    "@purchaseOkLabel": {
+        "context": "message",
+        "placeholders": {
+            "price": {}
+        }
+    },
+    "lifeful": "indefinite",
+    "darkMode": "dark mode",
+    "lightMode": "light mode",
+    "purchaseRate": "Purchase rate",
+    "purchaseRateAndPlan": "Purchase rate (including planned)",
+    "formatPercent": "{num}%",
+    "@formatPercent": {
+        "context": "message",
+        "placeholders": {
+            "num": {}
+        }
+    },
+    "purchasePrice": "Purchase price",
+    "formatMonth": "{month}month",
+    "@formatMonth": {
+        "context": "message",
+        "placeholders": {
+            "month": {}
+        }
+    },
+    "formatFraction": "{molecule}/{denominator}",
+    "@formatFraction": {
+        "context": "message",
+        "placeholders": {
+            "molecule": {},
+            "denominator": {}
+        }
+    },
+    "notificationAddItemTitle": "{name}added what you want!",
+    "@notificationAddItemTitle": {
+        "description": "Notification add item title",
+        "context": "message",
+        "placeholders": {
+            "name": {}
+        }
+    },
+    "notificationAddItemBody": "{name}added what you want!",
+    "@notificationAddItemBody": {
+        "context": "message",
+        "placeholders": {
+            "name": {}
+        }
+    },
+    "pushNotification": "push notification",
+    "@pushNotification": {
+        "description": "Push notification"
+    },
+    "pushNotificationDescription": "Receive notifications when new items you want are added to the group",
+    "@pushNotificationDescription": {
+        "description": "Push notification description"
+    }
 }

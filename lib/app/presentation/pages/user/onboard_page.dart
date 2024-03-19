@@ -17,10 +17,11 @@ import '../presentation_mixin.dart';
 import 'components/age_group_field.dart';
 import 'components/user_name_field.dart';
 
-class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
-  OnboardFormPage({super.key});
+class OnboardPage extends HookConsumerWidget with PresentationMixin {
+  OnboardPage({super.key, this.initialPage = 0});
 
   final introKey = GlobalKey<IntroductionScreenState>();
+  final int initialPage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,6 +38,7 @@ class OnboardFormPage extends HookConsumerWidget with PresentationMixin {
           ],
           child: IntroductionScreen(
             key: introKey,
+            initialPage: initialPage,
             pages: [
               _createStartPageVM(context),
               _createProfilePageVM(context),

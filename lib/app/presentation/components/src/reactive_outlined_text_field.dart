@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_raw_autocomplete/reactive_raw_autocomplete.dart';
 
 import '../../hooks/importer.dart';
+import 'my_reactive_raw_autocomplete.dart';
 
 class ReactiveOutlinedRawAutocomplete
     extends ReactiveFormField<String, String> {
@@ -47,7 +47,7 @@ class _ReactiveOutlinedRawAutocomplete extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ReactiveRawAutocomplete<String, String>(
+    return MyReactiveRawAutocomplete<String, String>(
       formControlName: formControlName,
 
       // 直接入力された値を反映するため、`viewDataTypeFromTextEditingValue`を指定

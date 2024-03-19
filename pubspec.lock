@@ -1077,6 +1077,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
+  golden_toolkit:
+    dependency: "direct dev"
+    description:
+      name: golden_toolkit
+      sha256: "8f74adab33154fe7b731395782797021f97d2edc52f7bfb85ff4f1b5c4a215f0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.0"
   google_fonts:
     dependency: "direct main"
     description:
@@ -1804,15 +1812,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  reactive_raw_autocomplete:
-    dependency: "direct main"
-    description:
-      path: "packages/reactive_raw_autocomplete"
-      ref: HEAD
-      resolved-ref: "9268b4d6bff39027426e191d131d1aed509ff5b5"
-      url: "https://github.com/yakitama5/reactive_forms_widgets"
-    source: git
-    version: "2.0.1"
   recase:
     dependency: transitive
     description:

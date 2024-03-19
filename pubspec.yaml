@@ -71,11 +71,6 @@ dependencies:
   reactive_forms: ^16.1.1
   reactive_forms_annotations: ^4.3.0
   reactive_image_picker: ^5.0.0
-  # プルリクが取り込まれるまでの一時的な対応
-  reactive_raw_autocomplete:
-    git:
-      url: https://github.com/yakitama5/reactive_forms_widgets
-      path: packages/reactive_raw_autocomplete
   responsive_framework: ^1.4.0
   riverpod_annotation: ^2.3.4
   settings_ui: ^2.0.2
@@ -101,6 +96,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.4.7
   go_router_builder: ^2.4.1
+  golden_toolkit: ^0.15.0
   google_sign_in_mocks: ^0.3.0
   lint:
     path: ./lint
@@ -121,6 +117,9 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/icons/CustomIcons.ttf
+    - family: Murecho
+      fonts:
+        - asset: assets/fonts/Murecho-VariableFont_wght.ttf
 
 # App Icon
 flutter_launcher_icons:
