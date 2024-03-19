@@ -25,7 +25,7 @@ jobs:
         shell: powershell
         run: |
           mkdir -p dart_defines
-          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(${{ secrets.DART_DEFINE_JSON }})) > dart_defines/prod.json
+          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('${{ secrets.DART_DEFINE_JSON }}')) > dart_defines/prod.json
         # echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
       - name: Create Firebase Conf
         run: |
