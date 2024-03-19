@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../hooks/importer.dart';
-import '../my_reactive_raw_autocomplete.dart';
+import 'my_reactive_raw_autocomplete.dart';
 
 class ReactiveOutlinedRawAutocomplete
     extends ReactiveFormField<String, String> {
