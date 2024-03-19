@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Create dart-define
         run: |
-          mkdir -p dart_defines
+          mkdir dart_defines
           echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
       - name: Create Firebase Conf
         run: |
