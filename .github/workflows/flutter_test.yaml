@@ -25,17 +25,17 @@ jobs:
         shell: powershell
         run: |
           mkdir dart_defines
-          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('${{ secrets.DART_DEFINE_JSON }}')) > dart_defines/prod.json
+          [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.DART_DEFINE_JSON }}')) > dart_defines/prod.json
         # mkdir -p dart_defines
         # echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
       - name: Create Firebase Conf
         run: |
-          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('${{ secrets.FIREBASE_OPTIONS }}')) > lib/firebase_options.dart
-          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('${{ secrets.FIREBASE_OPTIONS_DEV }}')) > lib/firebase_options_dev.dart
+          [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.FIREBASE_OPTIONS }}')) > lib/firebase_options.dart
+          [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.FIREBASE_OPTIONS_DEV }}')) > lib/firebase_options_dev.dart
           mkdir android/app/src/prod/
-          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('${{ secrets.GOOGLE_SERVICES_JSON }}')) > android/app/src/prod/google-services.json
+          [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.GOOGLE_SERVICES_JSON }}')) > android/app/src/prod/google-services.json
           mkdir ios/prod/
-          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('${{ secrets.GOOGLE_INFO_PLIST }}')) > ios/prod/GoogleService-Info.plist
+          [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.GOOGLE_INFO_PLIST }}')) > ios/prod/GoogleService-Info.plist
         # echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
         # echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > lib/firebase_options_dev.dart
         # mkdir -p android/app/src/prod/
@@ -46,8 +46,8 @@ jobs:
         run: |
           mkdir scripts
           mkdir scripts/env
-          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('${{ secrets.ENV_FILE }}')) > scripts/env/.env
-          [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes('${{ secrets.DEV_ENV_FILE }}')) > scripts/env/.env.dev
+          [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.ENV_FILE }}')) > scripts/env/.env
+          [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.DEV_ENV_FILE }}')) > scripts/env/.env.dev
         # mkdir -p scripts
         # mkdir -p scripts/env
         # echo -n  | base64 -d > 
