@@ -9,16 +9,20 @@ import '../../../domain/item/interface/item_repository.dart';
 import '../../../domain/notification/interface/messaging_service.dart';
 import '../../../domain/notification/value_object/notification_event.dart';
 import '../../../domain/notification/value_object/notification_target.dart';
+import '../../../domain/purchase/value_object/purchase_status.dart';
 import '../../../domain/service/config_service.dart';
 import '../../../domain/service/storage_service.dart';
 import '../../../domain/user/entity/user.dart';
 import '../../../presentation/routes/importer.dart';
 import '../../config/item_image_config.dart';
+import '../../model/item/item_order_model.dart';
 import '../../model/item/selected_image_model.dart';
 import '../../state/locale_provider.dart';
 import '../group/state/current_group_provider.dart';
+import '../purchase/state/current_group_age_applicable_purchases_provider.dart';
 import '../run_usecase_mixin.dart';
 import '../user/state/auth_user_provider.dart';
+import 'state/current_group_items_provider.dart';
 
 part 'item_usecase.g.dart';
 
@@ -34,6 +38,19 @@ class ItemUsecase with RunUsecaseMixin {
   /// 欲しい物一覧の取得
   Stream<List<Item>> fetchAll({required String groupId}) =>
       ref.read(itemRepositoryProvider).fetchByGroupId(groupId: groupId);
+
+  /// 欲しい物一覧の取得
+  Stream<List<Item>> fetch({
+    required String groupId,
+    required ItemOrderModel itemOrderModel,
+    double? wishRank,
+    required Set<PurchaseStatus> purchaseStatus,
+  }) {
+    final items = ref.read(currentGroupItemsProvider);
+    final purchases = ref.read(currentGroupAgeApplicablePurchasesProvider);
+
+    return const Stream.empty();
+  }
 
   /// 欲しい物の追加
   Future<void> add({
