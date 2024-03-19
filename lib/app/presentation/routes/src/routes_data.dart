@@ -7,7 +7,7 @@ import '../../app_listner.dart';
 import '../../pages/group/share_link_page.dart';
 import '../../pages/item/components/photo_viewer.dart';
 import '../../pages/user/account_link_page.dart';
-import '../../pages/user/onboard_form_page.dart';
+import '../../pages/user/onboard_page.dart';
 import '../../pages/user/welcome_page.dart';
 import 'analyze_branch.dart';
 import 'item_branch.dart';
@@ -111,7 +111,7 @@ class OnboardFormRouteData extends GoRouteData {
   static const path = '/onboard_form';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => OnboardFormPage();
+  Widget build(BuildContext context, GoRouterState state) => OnboardPage();
 }
 
 class ShareLinkRouteData extends GoRouteData {

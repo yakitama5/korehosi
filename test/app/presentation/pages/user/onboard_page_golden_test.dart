@@ -1,4 +1,4 @@
-import 'package:family_wish_list/app/presentation/pages/user/onboard_form_page.dart';
+import 'package:family_wish_list/app/presentation/pages/user/onboard_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
@@ -13,7 +13,7 @@ void main() {
       // Note: https://github.com/eBay/flutter_glove_box/issues/132
       await tester.pumpWidget(
         testableWidget(
-          OnboardFormPage(
+          OnboardPage(
             initialPage: i,
           ),
         ),
