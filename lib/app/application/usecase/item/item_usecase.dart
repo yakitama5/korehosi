@@ -46,6 +46,7 @@ class ItemUsecase with RunUsecaseMixin {
     double? wishRank,
     required Set<PurchaseStatus> purchaseStatus,
   }) {
+    // Firestoreの利用料を削減するため、データを全取得しクライアントのみで絞り込み/並び替えを行う
     final items = ref.read(currentGroupItemsProvider);
     final purchases = ref.read(currentGroupAgeApplicablePurchasesProvider);
 
