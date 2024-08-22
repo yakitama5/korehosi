@@ -1,41 +1,40 @@
 {
-    "java.configuration.updateBuildConfiguration": "disabled",
-    "git.autofetch": true,
-    "[dart]": {
-        "editor.formatOnSave": true,
-        "editor.formatOnType": true,
-        "editor.selectionHighlight": false,
-        "editor.suggest.snippetsPreventQuickSuggestions": false,
-        "editor.suggestSelection": "recentlyUsedByPrefix",
-        "editor.tabCompletion": "onlySnippets",
-        "editor.wordBasedSuggestions": "off",
-        "editor.rulers": [
-            80
-        ],
-        "editor.codeActionsOnSave": {
-            "source.fixAll": "explicit",
-            "source.organizeImports": "explicit",
-            "source.addMissingImports": "explicit",
-            "quickfix.insertSemicolon": "explicit"
-        },
-    },
-    "search.exclude": {
-        "**/.fvm": true,
-        "**/*.freezed.dart": true,
-        "**/*.g.dart": true
-    },
-    "files.watcherExclude": {
-        "**/.fvm": true
-    },
-    "explorer.fileNesting.enabled": true,
-    "explorer.fileNesting.expand": false,
-    "explorer.fileNesting.patterns": {
-        "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, template.iml, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml, flutter_launcher_icons-*.yaml, flutter_native_splash.yaml, lefthook.yaml, Makefile",
-        "firebase.json": ".firebaserc, firestore.rules, firestore.indexes.json,storage.rules, remoteconfig.template.json",
-        ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
-        "readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
-        "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).gform.dart"
-    },
-    // FVMを使うならこれ
-    "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "git.autofetch": true,
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "recentlyUsedByPrefix",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off",
+    "editor.rulers": [
+      80
+    ],
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit",
+      "source.addMissingImports": "explicit",
+      "quickfix.insertSemicolon": "explicit"
+    }
+  },
+  "search.exclude": {
+    "**/.fvm": true,
+    "**/*.freezed.dart": true,
+    "**/*.g.dart": true
+  },
+  "files.watcherExclude": {
+    "**/.fvm": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, template.iml, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml, flutter_launcher_icons-*.yaml, flutter_native_splash.yaml, lefthook.yaml, Makefile",
+    "firebase.json": ".firebaserc, firestore.rules, firestore.indexes.json,storage.rules, remoteconfig.template.json",
+    ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
+    "readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
+    "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).gform.dart"
+  },
+  "dart.flutterSdkPath": ".fvm/versions/3.24.0"
 }

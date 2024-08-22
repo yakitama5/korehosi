@@ -8,102 +8,102 @@ environment:
   sdk: ">=3.3.0 <4.0.0"
 
 dependencies:
-  adaptive_dialog: ^2.1.0
-  cached_network_image: ^3.3.1
-  carousel_slider: ^4.2.1
-  cloud_firestore: ^4.15.5
-  cloud_functions: ^4.6.5
-  collection: ^1.18.0
-  device_info_plus: ^9.1.2
-  dynamic_color: ^1.6.9
-  envied: ^0.5.3
-  firebase_analytics: ^10.8.6
-  firebase_app_check: ^0.2.1+14
-  firebase_auth: ^4.17.5
-  firebase_core: ^2.25.4
-  firebase_crashlytics: ^3.4.15
-  firebase_dynamic_links: ^5.4.14
-  firebase_messaging: ^14.7.16
-  firebase_remote_config: ^4.3.14
-  firebase_storage: ^11.6.6
-  fl_chart: ^0.66.2
+  adaptive_dialog:
+  cached_network_image:
+  carousel_slider:
+  cloud_firestore:
+  cloud_functions:
+  collection:
+  device_info_plus:
+  dynamic_color:
+  envied:
+  firebase_analytics:
+  firebase_app_check:
+  firebase_auth:
+  firebase_core:
+  firebase_crashlytics:
+  firebase_dynamic_links:
+  firebase_messaging:
+  firebase_remote_config:
+  firebase_storage:
+  fl_chart:
   flutter:
     sdk: flutter
-  flutter_adaptive_scaffold: ^0.1.8
-  flutter_cache_manager: ^3.3.1
-  flutter_hooks: ^0.20.5
-  flutter_image_compress: ^2.1.0
-  flutter_local_notifications: ^16.3.2
+  flutter_adaptive_scaffold:
+  flutter_cache_manager:
+  flutter_hooks:
+  flutter_image_compress:
+  flutter_local_notifications:
   flutter_localizations:
     sdk: flutter
-  flutter_rating_bar: ^4.0.1
-  flutter_slidable: ^3.0.1
-  flutter_svg: ^2.0.10+1
+  flutter_rating_bar:
+  flutter_slidable:
+  flutter_svg:
   flutter_web_plugins:
     sdk: flutter
-  freezed_annotation: ^2.4.1
-  gap: ^3.0.1
-  gauge_indicator: ^0.4.3
-  go_router: ^13.2.0
-  google_fonts: ^6.1.0
-  google_sign_in: ^6.2.1
-  hooks_riverpod: ^2.4.10
-  image_gallery_saver: ^2.0.3
-  image_picker: ^1.0.7
-  intl: ^0.18.1
-  introduction_screen: ^3.1.12
-  json_serializable: ^6.7.1
-  logger: ^2.0.2+1
-  lottie: ^3.1.0
-  material_color_utilities: ^0.8.0
-  material_design_icons_flutter: ^7.0.7296
-  nested: ^1.0.0
-  package_info_plus: ^5.0.1
-  path_provider: ^2.1.2
-  pattern_formatter: ^3.0.0
-  permission_handler: ^11.3.0
-  photo_view: ^0.14.0
-  purchases_flutter: ^6.21.1
-  qr_flutter: ^4.1.0
-  reactive_cupertino_text_field: ^2.0.0
-  reactive_date_time_picker: ^3.0.0
-  reactive_flutter_rating_bar: ^2.0.0
-  reactive_forms: ^16.1.1
-  reactive_forms_annotations: ^4.3.0
-  reactive_image_picker: ^5.0.0
-  responsive_framework: ^1.4.0
-  riverpod_annotation: ^2.3.4
-  settings_ui: ^2.0.2
-  share_plus: ^7.2.2
-  shared_preferences: ^2.2.2
-  shimmer: ^3.0.0
-  store_redirect: ^2.0.1
-  url_launcher: ^6.2.5
-  uuid: ^4.3.3
-  version: ^3.0.2
+  freezed_annotation:
+  gap:
+  gauge_indicator:
+  go_router:
+  google_fonts:
+  google_sign_in:
+  hooks_riverpod:
+  image_gallery_saver:
+  image_picker:
+  intl:
+  introduction_screen:
+  json_serializable:
+  logger:
+  lottie:
+  material_color_utilities:
+  material_design_icons_flutter:
+  nested:
+  package_info_plus:
+  path_provider:
+  pattern_formatter:
+  permission_handler:
+  photo_view:
+  purchases_flutter:
+  qr_flutter:
+  reactive_cupertino_text_field:
+  reactive_date_time_picker:
+  reactive_flutter_rating_bar:
+  reactive_forms:
+  reactive_forms_annotations:
+  reactive_image_picker:
+  responsive_framework:
+  riverpod_annotation:
+  settings_ui:
+  share_plus:
+  shared_preferences:
+  shimmer:
+  store_redirect:
+  url_launcher:
+  uuid:
+  version:
 
 dev_dependencies:
-  build_runner: ^2.4.8
-  custom_lint: ^0.6.2
-  envied_generator: ^0.5.3
-  fake_cloud_firestore: ^2.4.8
-  firebase_auth_mocks: ^0.13.0
-  firebase_storage_mocks: ^0.6.1
-  flutter_gen_runner: ^5.4.0
-  flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^3.0.1
+  build_runner:
+  custom_lint:
+  envied_generator:
+  fake_cloud_firestore:
+  firebase_auth_mocks:
+  firebase_storage_mocks:
+  flutter_gen_runner:
+  flutter_launcher_icons:
+  flutter_lints:
   flutter_test:
     sdk: flutter
-  freezed: ^2.4.7
-  go_router_builder: ^2.4.1
-  golden_toolkit: ^0.15.0
-  google_sign_in_mocks: ^0.3.0
+  freezed:
+  go_router_builder:
+  golden_toolkit:
+  google_sign_in_mocks:
   lint:
     path: ./lint
-  mocktail: ^1.0.3
-  pedantic_mono: ^1.26.0
-  reactive_forms_generator: ^4.5.2
-  riverpod_generator: ^2.3.11
+  mocktail:
+  pedantic_mono:
+  reactive_forms_generator:
+  riverpod_generator:
 
 flutter:
   generate: true
