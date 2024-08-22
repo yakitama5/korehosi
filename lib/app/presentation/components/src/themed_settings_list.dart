@@ -25,11 +25,11 @@ class ThemedSettingsList extends HookConsumerWidget {
     return SettingsList(
       sections: sections,
       lightTheme: SettingsThemeData(
-        settingsListBackground: colorScheme.background,
+        settingsListBackground: colorScheme.surface,
         titleTextColor: colorScheme.primary,
       ),
       darkTheme: SettingsThemeData(
-        settingsListBackground: colorScheme.background,
+        settingsListBackground: colorScheme.surface,
         titleTextColor: colorScheme.primary,
       ),
       physics: physics,

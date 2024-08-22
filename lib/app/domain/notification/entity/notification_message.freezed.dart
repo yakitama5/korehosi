@@ -27,8 +27,12 @@ mixin _$NotificationMessage {
   String? get messageId => throw _privateConstructorUsedError;
   String? get messageType => throw _privateConstructorUsedError;
 
+  /// Serializes this NotificationMessage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NotificationMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NotificationMessageCopyWith<NotificationMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$NotificationMessageCopyWithImpl<$Res, $Val extends NotificationMessage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NotificationMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$NotificationMessageImplCopyWithImpl<$Res>
       $Res Function(_$NotificationMessageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NotificationMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -217,12 +225,14 @@ class _$NotificationMessageImpl implements _NotificationMessage {
                 other.messageType == messageType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, senderId, category,
       const DeepCollectionEquality().hash(_data), from, messageId, messageType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NotificationMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NotificationMessageImplCopyWith<_$NotificationMessageImpl> get copyWith =>
@@ -261,8 +271,11 @@ abstract class _NotificationMessage implements NotificationMessage {
   String? get messageId;
   @override
   String? get messageType;
+
+  /// Create a copy of NotificationMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NotificationMessageImplCopyWith<_$NotificationMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -31,8 +31,12 @@ mixin _$FirestoreGroupModel {
   @timestampKey
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this FirestoreGroupModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FirestoreGroupModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FirestoreGroupModelCopyWith<FirestoreGroupModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$FirestoreGroupModelCopyWithImpl<$Res, $Val extends FirestoreGroupModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FirestoreGroupModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,6 +146,8 @@ class __$$FirestoreGroupModelImplCopyWithImpl<$Res>
       $Res Function(_$FirestoreGroupModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FirestoreGroupModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -255,7 +263,7 @@ class _$FirestoreGroupModelImpl implements _FirestoreGroupModel {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -268,7 +276,9 @@ class _$FirestoreGroupModelImpl implements _FirestoreGroupModel {
       createdAt,
       updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FirestoreGroupModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FirestoreGroupModelImplCopyWith<_$FirestoreGroupModelImpl> get copyWith =>
@@ -315,8 +325,11 @@ abstract class _FirestoreGroupModel implements FirestoreGroupModel {
   @override
   @timestampKey
   DateTime? get updatedAt;
+
+  /// Create a copy of FirestoreGroupModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FirestoreGroupModelImplCopyWith<_$FirestoreGroupModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,4 +12,7 @@ class FontFamily {
 
   /// Font family: CustomIcons
   static const String customIcons = 'CustomIcons';
+
+  /// Font family: Murecho
+  static const String murecho = 'Murecho';
 }

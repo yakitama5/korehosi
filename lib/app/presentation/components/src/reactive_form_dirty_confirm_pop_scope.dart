@@ -26,7 +26,7 @@ class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {
 
         return PopScope(
           canPop: false,
-          onPopInvoked: (didPop) async {
+          onPopInvokedWithResult: (didPop, result) async {
             // Notes: 移行ガイドに沿って変更
             // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
             if (didPop) {

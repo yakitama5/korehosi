@@ -22,7 +22,9 @@ mixin _$ShareLink {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShareLink
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ShareLinkCopyWith<ShareLink> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +52,8 @@ class _$ShareLinkCopyWithImpl<$Res, $Val extends ShareLink>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ShareLink
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,6 +112,8 @@ class __$$ShareLinkImplCopyWithImpl<$Res>
       _$ShareLinkImpl _value, $Res Function(_$ShareLinkImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ShareLink
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -187,7 +193,9 @@ class _$ShareLinkImpl implements _ShareLink {
   int get hashCode =>
       Object.hash(runtimeType, id, groupId, validDays, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShareLink
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ShareLinkImplCopyWith<_$ShareLinkImpl> get copyWith =>
@@ -212,8 +220,11 @@ abstract class _ShareLink implements ShareLink {
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
+
+  /// Create a copy of ShareLink
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ShareLinkImplCopyWith<_$ShareLinkImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

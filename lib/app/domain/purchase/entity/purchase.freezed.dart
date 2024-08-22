@@ -31,8 +31,12 @@ mixin _$Purchase {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this Purchase to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PurchaseCopyWith<Purchase> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,6 +69,8 @@ class _$PurchaseCopyWithImpl<$Res, $Val extends Purchase>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,6 +159,8 @@ class __$$PurchaseImplCopyWithImpl<$Res>
       _$PurchaseImpl _value, $Res Function(_$PurchaseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -278,12 +286,14 @@ class _$PurchaseImpl implements _Purchase {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, price, buyerName, planDate,
       surprise, sentAt, memo, uid, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PurchaseImplCopyWith<_$PurchaseImpl> get copyWith =>
@@ -333,8 +343,11 @@ abstract class _Purchase implements Purchase {
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
+
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PurchaseImplCopyWith<_$PurchaseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

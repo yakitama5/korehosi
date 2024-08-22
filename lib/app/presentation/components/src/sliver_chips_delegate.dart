@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/importer.dart';
-
 class SliverChipsDelegate extends SliverPersistentHeaderDelegate {
   const SliverChipsDelegate({
     required this.chips,
@@ -31,7 +29,7 @@ class SliverChipsDelegate extends SliverPersistentHeaderDelegate {
 
         final barColor = shrinkOffset > 0
             ? colorScheme.surfaceContainer
-            : colorScheme.background;
+            : colorScheme.surface;
 
         return Container(
           alignment: Alignment.bottomLeft,

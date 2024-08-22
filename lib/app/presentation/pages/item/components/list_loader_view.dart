@@ -26,7 +26,7 @@ class ListLoaderView extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       child: Shimmer.fromColors(
         baseColor: colorScheme.primaryContainer.withAlpha(50),
-        highlightColor: colorScheme.background,
+        highlightColor: colorScheme.surface,
         period: const Duration(milliseconds: 2000),
         child: ListView.separated(
           shrinkWrap: true,

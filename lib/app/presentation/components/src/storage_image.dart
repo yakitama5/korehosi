@@ -51,7 +51,7 @@ class _LoadingWidget extends HookConsumerWidget {
 
     return Shimmer.fromColors(
       baseColor: colorScheme.primaryContainer.withAlpha(50),
-      highlightColor: colorScheme.background,
+      highlightColor: colorScheme.surface,
       period: const Duration(milliseconds: 2000),
       child: const SizedBox.expand(
         // 何色でもいい(色指定さえあればいい)

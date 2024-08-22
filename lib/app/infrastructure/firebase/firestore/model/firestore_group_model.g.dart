@@ -14,7 +14,7 @@ _$FirestoreGroupModelImpl _$$FirestoreGroupModelImplFromJson(
       joinUids:
           (json['joinUids'] as List<dynamic>).map((e) => e as String).toList(),
       ownerUid: json['ownerUid'] as String,
-      itemCount: json['itemCount'] as int?,
+      itemCount: (json['itemCount'] as num?)?.toInt(),
       premium: json['premium'] as bool,
       createdAt: dateFromTimestampValue(json['createdAt']),
       updatedAt: dateFromTimestampValue(json['updatedAt']),

@@ -9,7 +9,7 @@ part of 'purchase.dart';
 _$PurchaseImpl _$$PurchaseImplFromJson(Map<String, dynamic> json) =>
     _$PurchaseImpl(
       id: json['id'] as String,
-      price: json['price'] as int?,
+      price: (json['price'] as num?)?.toInt(),
       buyerName: json['buyerName'] as String?,
       planDate: json['planDate'] == null
           ? null

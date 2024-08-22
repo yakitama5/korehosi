@@ -64,7 +64,7 @@ class ReactiveCupertinoDialogTextField<T> extends HookWidget {
           maxLength: maxLength,
           keyboardType: textInputType,
           inputFormatters: inputFormatters,
-          style: TextStyle(color: colorScheme.onBackground),
+          style: TextStyle(color: colorScheme.onSurface),
         );
       },
     );

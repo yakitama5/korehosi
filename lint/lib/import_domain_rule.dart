@@ -1,5 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
@@ -33,7 +31,7 @@ class ImportDomainRule extends DartLintRule {
       if (dependentOnPresentation ||
           dependentOnApplication ||
           dependentOnInfrastructure) {
-        reporter.reportErrorForNode(_code, node, []);
+        reporter.atNode(node, _code);
       }
     });
   }

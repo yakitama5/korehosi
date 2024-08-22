@@ -71,7 +71,8 @@ class _PurchaseForm extends HookConsumerWidget {
       model: _createModel(),
       builder: (context, formModel, child) => PopScope(
         canPop: false,
-        onPopInvoked: (didPop) => _onWillPopScope(context, l10n, didPop),
+        onPopInvokedWithResult: (didPop, result) =>
+            _onWillPopScope(context, l10n, didPop),
         child: UnfocusOnTap(
           child: Scaffold(
             appBar: AppBar(

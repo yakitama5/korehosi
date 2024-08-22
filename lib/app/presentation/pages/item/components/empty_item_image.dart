@@ -20,7 +20,7 @@ class EmptyItemImage extends HookWidget {
       height: double.infinity,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: colorScheme.surfaceVariant,
+        color: colorScheme.surfaceContainerHighest,
         borderRadius: radius,
       ),
       child: Icon(iconData, size: 48),

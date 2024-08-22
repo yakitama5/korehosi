@@ -130,7 +130,7 @@ class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
           onPressed: () => _onSignInWithApple(context, ref),
           icon: Icon(
             MdiIcons.apple,
-            color: colorScheme.onBackground,
+            color: colorScheme.onSurface,
           ),
           label: Text(l10n.signInWithApple),
         ),

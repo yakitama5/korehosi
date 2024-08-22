@@ -55,7 +55,7 @@ class FilledCard extends SingleChildStatelessWidget {
     return Card(
       clipBehavior: Clip.hardEdge,
       elevation: 0,
-      color: Theme.of(context).colorScheme.surfaceVariant,
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
       child: InkWell(
         onTap: _onTap,
         onLongPress: _onLongPress,

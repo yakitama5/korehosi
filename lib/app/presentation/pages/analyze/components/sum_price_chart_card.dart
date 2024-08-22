@@ -9,7 +9,6 @@ import '../../../../application/usecase/analyze/state/buyed_sum_price.dart';
 import '../../../../application/usecase/analyze/state/monthly_sum_price_chart_range_provider.dart';
 import '../../../../application/usecase/analyze/state/monthly_sum_price_chart_spots_provider.dart';
 import '../../../hooks/importer.dart';
-import '../../../theme/importer.dart';
 import 'chart_card.dart';
 
 /// 購入金額の合計を表すCard
@@ -121,7 +120,8 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
               // Tooltip周り
               lineTouchData: LineTouchData(
                 touchTooltipData: LineTouchTooltipData(
-                  tooltipBgColor: colorScheme.surfaceVariant,
+                  getTooltipColor: (group) =>
+                      colorScheme.surfaceContainerHighest,
                   tooltipRoundedRadius: 12,
                   getTooltipItems: (touchedSpots) => touchedSpots
                       .map(

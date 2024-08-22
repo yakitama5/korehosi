@@ -3,7 +3,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
 
 import '../../hooks/importer.dart';
-import '../../theme/importer.dart';
 
 class GaugeChart extends HookWidget {
   const GaugeChart({

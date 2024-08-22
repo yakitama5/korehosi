@@ -54,14 +54,17 @@ class ReactivePurchaseFormModelForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final PurchaseFormModelForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static PurchaseFormModelForm? of(
     BuildContext context, {
@@ -86,8 +89,9 @@ class ReactivePurchaseFormModelForm extends StatelessWidget {
     return PurchaseFormModelFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -107,7 +111,8 @@ class PurchaseFormModelFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -116,7 +121,9 @@ class PurchaseFormModelFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
           BuildContext context, PurchaseFormModelForm formModel, Widget? child)
@@ -168,10 +175,12 @@ class _PurchaseFormModelFormBuilderState
     return ReactivePurchaseFormModelForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -201,6 +210,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String priceControlPath() => pathBuilder(priceControlName);
 
@@ -280,17 +291,17 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
-  Object? get priceErrors => priceControl?.errors;
+  Map<String, Object>? get priceErrors => priceControl?.errors;
 
-  Object? get buyerNameErrors => buyerNameControl?.errors;
+  Map<String, Object>? get buyerNameErrors => buyerNameControl?.errors;
 
-  Object? get planDateErrors => planDateControl?.errors;
+  Map<String, Object>? get planDateErrors => planDateControl?.errors;
 
-  Object? get surpriseErrors => surpriseControl.errors;
+  Map<String, Object> get surpriseErrors => surpriseControl.errors;
 
-  Object? get sentAtErrors => sentAtControl?.errors;
+  Map<String, Object>? get sentAtErrors => sentAtControl?.errors;
 
-  Object? get memoErrors => memoControl?.errors;
+  Map<String, Object>? get memoErrors => memoControl?.errors;
 
   void get priceFocus => form.focus(priceControlPath());
 
@@ -735,7 +746,9 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
 
   @override
   PurchaseFormModel get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'PurchaseFormModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -747,6 +760,38 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
         surprise: _surpriseValue,
         sentAt: _sentAtValue,
         memo: _memoValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -840,7 +885,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
           disabled: false);
 }
 
-class ReactivePurchaseFormModelFormArrayBuilder<T> extends StatelessWidget {
+class ReactivePurchaseFormModelFormArrayBuilder<
+    ReactivePurchaseFormModelFormArrayBuilderT> extends StatelessWidget {
   const ReactivePurchaseFormModelFormArrayBuilder({
     Key? key,
     this.control,
@@ -851,16 +897,19 @@ class ReactivePurchaseFormModelFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactivePurchaseFormModelFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(PurchaseFormModelForm formModel)? control;
+  final FormArray<ReactivePurchaseFormModelFormArrayBuilderT>? Function(
+      PurchaseFormModelForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       PurchaseFormModelForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, PurchaseFormModelForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactivePurchaseFormModelFormArrayBuilderT? item,
+      PurchaseFormModelForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -870,7 +919,7 @@ class ReactivePurchaseFormModelFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactivePurchaseFormModelFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -901,7 +950,8 @@ class ReactivePurchaseFormModelFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactivePurchaseFormModelFormFormGroupArrayBuilder<T>
+class ReactivePurchaseFormModelFormFormGroupArrayBuilder<
+        ReactivePurchaseFormModelFormFormGroupArrayBuilderT>
     extends StatelessWidget {
   const ReactivePurchaseFormModelFormFormGroupArrayBuilder({
     Key? key,
@@ -913,17 +963,21 @@ class ReactivePurchaseFormModelFormFormGroupArrayBuilder<T>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactivePurchaseFormModelFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      PurchaseFormModelForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactivePurchaseFormModelFormFormGroupArrayBuilderT>>
+      Function(PurchaseFormModelForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       PurchaseFormModelForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, PurchaseFormModelForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactivePurchaseFormModelFormFormGroupArrayBuilderT? item,
+      PurchaseFormModelForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -938,7 +992,8 @@ class ReactivePurchaseFormModelFormFormGroupArrayBuilder<T>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactivePurchaseFormModelFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,
