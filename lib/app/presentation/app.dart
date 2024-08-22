@@ -91,8 +91,65 @@ class _SafetyDynamicColorBuilder extends StatelessWidget {
       // Webは未対応なのでDynamicColorBuilderを避ける
       ? builder(null, null)
       : DynamicColorBuilder(
-          builder: builder,
+          builder: (lightDynamic, darkDynamic) {
+            // パッケージ対応されるまで最新のColorSchemeに合わせて編集
+            // Notes: https://github.com/material-foundation/flutter-packages/issues/582
+            if (lightDynamic == null || darkDynamic == null) {
+              return builder(null, null);
+            }
+
+            final result =
+                _generateDynamicColourSchemes(lightDynamic, darkDynamic);
+            return builder(result.$1, result.$2);
+          },
         );
+
+  (ColorScheme light, ColorScheme dark) _generateDynamicColourSchemes(
+    ColorScheme lightDynamic,
+    ColorScheme darkDynamic,
+  ) {
+    final lightBase = ColorScheme.fromSeed(seedColor: lightDynamic.primary);
+    final darkBase = ColorScheme.fromSeed(
+      seedColor: darkDynamic.primary,
+      brightness: Brightness.dark,
+    );
+
+    final lightAdditionalColours = _extractAdditionalColours(lightBase);
+    final darkAdditionalColours = _extractAdditionalColours(darkBase);
+
+    final lightScheme =
+        _insertAdditionalColours(lightBase, lightAdditionalColours);
+    final darkScheme =
+        _insertAdditionalColours(darkBase, darkAdditionalColours);
+
+    return (lightScheme.harmonized(), darkScheme.harmonized());
+  }
+
+  List<Color> _extractAdditionalColours(ColorScheme scheme) => [
+        scheme.surface,
+        scheme.surfaceDim,
+        scheme.surfaceBright,
+        scheme.surfaceContainerLowest,
+        scheme.surfaceContainerLow,
+        scheme.surfaceContainer,
+        scheme.surfaceContainerHigh,
+        scheme.surfaceContainerHighest,
+      ];
+
+  ColorScheme _insertAdditionalColours(
+    ColorScheme scheme,
+    List<Color> additionalColours,
+  ) =>
+      scheme.copyWith(
+        surface: additionalColours[0],
+        surfaceDim: additionalColours[1],
+        surfaceBright: additionalColours[2],
+        surfaceContainerLowest: additionalColours[3],
+        surfaceContainerLow: additionalColours[4],
+        surfaceContainer: additionalColours[5],
+        surfaceContainerHigh: additionalColours[6],
+        surfaceContainerHighest: additionalColours[7],
+      );
 }
 
 class _AppListener extends SingleChildStatelessWidget {
@@ -101,6 +158,7 @@ class _AppListener extends SingleChildStatelessWidget {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
     return Consumer(
+      child: child,
       builder: (context, ref, child) {
         // アプリ内共通Providerの監視
         _dynamicLinkLister(context, ref);
