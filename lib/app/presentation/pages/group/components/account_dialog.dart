@@ -25,7 +25,6 @@ Future<String?> showAdaptiveAccountDialog(
       context: context,
       // TODO(yakitama5): iOS版を用意 (アダプティブ対応)
       builder: (context) => const AndroidAccountDialog(),
-      useSafeArea: true,
     );
 
 class AndroidAccountDialog extends HookConsumerWidget {

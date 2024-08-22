@@ -10,7 +10,7 @@ _$FirestorePurchaseModelImpl _$$FirestorePurchaseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$FirestorePurchaseModelImpl(
       id: json['id'] as String,
-      price: json['price'] as int?,
+      price: (json['price'] as num?)?.toInt(),
       buyerName: json['buyerName'] as String?,
       planDate: dateFromTimestampValue(json['planDate']),
       surprise: json['surprise'] as bool,

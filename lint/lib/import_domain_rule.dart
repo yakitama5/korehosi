@@ -33,7 +33,7 @@ class ImportDomainRule extends DartLintRule {
       if (dependentOnPresentation ||
           dependentOnApplication ||
           dependentOnInfrastructure) {
-        reporter.reportErrorForNode(_code, node, []);
+        reporter.atNode(node, _code);
       }
     });
   }

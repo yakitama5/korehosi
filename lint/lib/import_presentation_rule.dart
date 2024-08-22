@@ -29,7 +29,7 @@ class ImportPresentationRule extends DartLintRule {
       final dependentOnInfrastructure =
           uri?.contains(infrastructurePath) == true;
       if (dependentOnInfrastructure) {
-        reporter.reportErrorForNode(_code, node, []);
+        reporter.atNode(node, _code);
       }
     });
   }

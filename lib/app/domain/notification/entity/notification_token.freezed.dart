@@ -24,8 +24,12 @@ mixin _$NotificationToken {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this NotificationToken to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NotificationTokenCopyWith<NotificationToken> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$NotificationTokenCopyWithImpl<$Res, $Val extends NotificationToken>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$NotificationTokenImplCopyWithImpl<$Res>
       $Res Function(_$NotificationTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,11 +157,13 @@ class _$NotificationTokenImpl implements _NotificationToken {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, token, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NotificationTokenImplCopyWith<_$NotificationTokenImpl> get copyWith =>
@@ -183,8 +193,11 @@ abstract class _NotificationToken implements NotificationToken {
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
+
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NotificationTokenImplCopyWith<_$NotificationTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

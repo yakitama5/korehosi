@@ -52,14 +52,17 @@ class ReactiveUserFormModelForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final UserFormModelForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static UserFormModelForm? of(
     BuildContext context, {
@@ -84,8 +87,9 @@ class ReactiveUserFormModelForm extends StatelessWidget {
     return UserFormModelFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -105,7 +109,8 @@ class UserFormModelFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -114,7 +119,9 @@ class UserFormModelFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, UserFormModelForm formModel, Widget? child) builder;
@@ -164,10 +171,12 @@ class _UserFormModelFormBuilderState extends State<UserFormModelFormBuilder> {
     return ReactiveUserFormModelForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -189,6 +198,8 @@ class UserFormModelForm implements FormModel<UserFormModel> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String nameControlPath() => pathBuilder(nameControlName);
 
@@ -216,9 +227,9 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     }
   }
 
-  Object? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl?.errors;
 
-  Object? get ageGroupErrors => ageGroupControl.errors;
+  Map<String, Object> get ageGroupErrors => ageGroupControl.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 
@@ -351,12 +362,46 @@ class UserFormModelForm implements FormModel<UserFormModel> {
 
   @override
   UserFormModel get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'UserFormModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
     }
     return UserFormModel(name: _nameValue, ageGroup: _ageGroupValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -421,7 +466,8 @@ class UserFormModelForm implements FormModel<UserFormModel> {
           disabled: false);
 }
 
-class ReactiveUserFormModelFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveUserFormModelFormArrayBuilder<
+    ReactiveUserFormModelFormArrayBuilderT> extends StatelessWidget {
   const ReactiveUserFormModelFormArrayBuilder({
     Key? key,
     this.control,
@@ -432,16 +478,19 @@ class ReactiveUserFormModelFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveUserFormModelFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(UserFormModelForm formModel)? control;
+  final FormArray<ReactiveUserFormModelFormArrayBuilderT>? Function(
+      UserFormModelForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       UserFormModelForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, UserFormModelForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveUserFormModelFormArrayBuilderT? item,
+      UserFormModelForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -451,7 +500,7 @@ class ReactiveUserFormModelFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveUserFormModelFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -482,8 +531,8 @@ class ReactiveUserFormModelFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveUserFormModelFormFormGroupArrayBuilder<T>
-    extends StatelessWidget {
+class ReactiveUserFormModelFormFormGroupArrayBuilder<
+    ReactiveUserFormModelFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveUserFormModelFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -494,17 +543,21 @@ class ReactiveUserFormModelFormFormGroupArrayBuilder<T>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveUserFormModelFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      UserFormModelForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveUserFormModelFormFormGroupArrayBuilderT>>
+      Function(UserFormModelForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       UserFormModelForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, UserFormModelForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveUserFormModelFormFormGroupArrayBuilderT? item,
+      UserFormModelForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -519,7 +572,8 @@ class ReactiveUserFormModelFormFormGroupArrayBuilder<T>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactiveUserFormModelFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

@@ -11,7 +11,7 @@ _$FirestoreShareLinkModelImpl _$$FirestoreShareLinkModelImplFromJson(
     _$FirestoreShareLinkModelImpl(
       id: json['id'] as String,
       groupId: json['groupId'] as String,
-      validDays: json['validDays'] as int,
+      validDays: (json['validDays'] as num).toInt(),
       createdAt: dateFromTimestampValue(json['createdAt']),
       updatedAt: dateFromTimestampValue(json['updatedAt']),
     );

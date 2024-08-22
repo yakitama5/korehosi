@@ -52,14 +52,17 @@ class ReactiveItemFormModelForm extends StatelessWidget {
     Key? key,
     required this.form,
     required this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
   }) : super(key: key);
 
   final Widget child;
 
   final ItemFormModelForm form;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   static ItemFormModelForm? of(
     BuildContext context, {
@@ -84,8 +87,9 @@ class ReactiveItemFormModelForm extends StatelessWidget {
     return ItemFormModelFormInheritedStreamer(
       form: form,
       stream: form.form.statusChanged,
-      child: WillPopScope(
-        onWillPop: onWillPop,
+      child: ReactiveFormPopScope(
+        canPop: canPop,
+        onPopInvoked: onPopInvoked,
         child: child,
       ),
     );
@@ -105,7 +109,8 @@ class ItemFormModelFormBuilder extends StatefulWidget {
     Key? key,
     this.model,
     this.child,
-    this.onWillPop,
+    this.canPop,
+    this.onPopInvoked,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -114,7 +119,9 @@ class ItemFormModelFormBuilder extends StatefulWidget {
 
   final Widget? child;
 
-  final WillPopCallback? onWillPop;
+  final bool Function(FormGroup formGroup)? canPop;
+
+  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
 
   final Widget Function(
       BuildContext context, ItemFormModelForm formModel, Widget? child) builder;
@@ -164,10 +171,12 @@ class _ItemFormModelFormBuilderState extends State<ItemFormModelFormBuilder> {
     return ReactiveItemFormModelForm(
       key: ObjectKey(_formModel),
       form: _formModel,
-      onWillPop: widget.onWillPop,
+      // canPop: widget.canPop,
+      // onPopInvoked: widget.onPopInvoked,
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
-        onWillPop: widget.onWillPop,
+        canPop: widget.canPop,
+        onPopInvoked: widget.onPopInvoked,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -199,6 +208,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
   final FormGroup form;
 
   final String? path;
+
+  final Map<String, bool> _disabled = {};
 
   String nameControlPath() => pathBuilder(nameControlName);
 
@@ -293,19 +304,19 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
-  Object? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl?.errors;
 
-  Object? get wanterNameErrors => wanterNameControl?.errors;
+  Map<String, Object>? get wanterNameErrors => wanterNameControl?.errors;
 
-  Object? get wishRankErrors => wishRankControl?.errors;
+  Map<String, Object>? get wishRankErrors => wishRankControl?.errors;
 
-  Object? get wishSeasonErrors => wishSeasonControl?.errors;
+  Map<String, Object>? get wishSeasonErrors => wishSeasonControl?.errors;
 
-  Object? get memoErrors => memoControl?.errors;
+  Map<String, Object>? get memoErrors => memoControl?.errors;
 
-  Object? get urlsErrors => urlsControl?.errors;
+  Map<String, Object>? get urlsErrors => urlsControl?.errors;
 
-  Object? get imagesErrors => imagesControl?.errors;
+  Map<String, Object>? get imagesErrors => imagesControl?.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 
@@ -935,7 +946,9 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
 
   @override
   ItemFormModel get model {
-    if (!currentForm.valid) {
+    final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
+
+    if (!isValid) {
       debugPrintStack(
           label:
               '[${path ?? 'ItemFormModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
@@ -948,6 +961,38 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
         memo: _memoValue,
         urls: _urlsValue,
         images: _imagesValue);
+  }
+
+  @override
+  void toggleDisabled({
+    bool updateParent = true,
+    bool emitEvent = true,
+  }) {
+    final currentFormInstance = currentForm;
+
+    if (currentFormInstance is! FormGroup) {
+      return;
+    }
+
+    if (_disabled.isEmpty) {
+      currentFormInstance.controls.forEach((key, control) {
+        _disabled[key] = control.disabled;
+      });
+
+      currentForm.markAsDisabled(
+          updateParent: updateParent, emitEvent: emitEvent);
+    } else {
+      currentFormInstance.controls.forEach((key, control) {
+        if (_disabled[key] == false) {
+          currentFormInstance.controls[key]?.markAsEnabled(
+            updateParent: updateParent,
+            emitEvent: emitEvent,
+          );
+        }
+
+        _disabled.remove(key);
+      });
+    }
   }
 
   @override
@@ -1061,7 +1106,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
           disabled: false);
 }
 
-class ReactiveItemFormModelFormArrayBuilder<T> extends StatelessWidget {
+class ReactiveItemFormModelFormArrayBuilder<
+    ReactiveItemFormModelFormArrayBuilderT> extends StatelessWidget {
   const ReactiveItemFormModelFormArrayBuilder({
     Key? key,
     this.control,
@@ -1072,16 +1118,19 @@ class ReactiveItemFormModelFormArrayBuilder<T> extends StatelessWidget {
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final FormArray<T>? formControl;
+  final FormArray<ReactiveItemFormModelFormArrayBuilderT>? formControl;
 
-  final FormArray<T>? Function(ItemFormModelForm formModel)? control;
+  final FormArray<ReactiveItemFormModelFormArrayBuilderT>? Function(
+      ItemFormModelForm formModel)? control;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       ItemFormModelForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, ItemFormModelForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveItemFormModelFormArrayBuilderT? item,
+      ItemFormModelForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1091,7 +1140,7 @@ class ReactiveItemFormModelFormArrayBuilder<T> extends StatelessWidget {
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<T>(
+    return ReactiveFormArray<ReactiveItemFormModelFormArrayBuilderT>(
       formArray: formControl ?? control?.call(formModel),
       builder: (context, formArray, child) {
         final values = formArray.controls.map((e) => e.value).toList();
@@ -1122,8 +1171,8 @@ class ReactiveItemFormModelFormArrayBuilder<T> extends StatelessWidget {
   }
 }
 
-class ReactiveItemFormModelFormFormGroupArrayBuilder<T>
-    extends StatelessWidget {
+class ReactiveItemFormModelFormFormGroupArrayBuilder<
+    ReactiveItemFormModelFormFormGroupArrayBuilderT> extends StatelessWidget {
   const ReactiveItemFormModelFormFormGroupArrayBuilder({
     Key? key,
     this.extended,
@@ -1134,17 +1183,21 @@ class ReactiveItemFormModelFormFormGroupArrayBuilder<T>
             "You have to specify `control` or `formControl`!"),
         super(key: key);
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>>? extended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+      List<ReactiveItemFormModelFormFormGroupArrayBuilderT>>? extended;
 
-  final ExtendedControl<List<Map<String, Object?>?>, List<T>> Function(
-      ItemFormModelForm formModel)? getExtended;
+  final ExtendedControl<List<Map<String, Object?>?>,
+          List<ReactiveItemFormModelFormFormGroupArrayBuilderT>>
+      Function(ItemFormModelForm formModel)? getExtended;
 
   final Widget Function(BuildContext context, List<Widget> itemList,
       ItemFormModelForm formModel)? builder;
 
   final Widget Function(
-          BuildContext context, int i, T? item, ItemFormModelForm formModel)
-      itemBuilder;
+      BuildContext context,
+      int i,
+      ReactiveItemFormModelFormFormGroupArrayBuilderT? item,
+      ItemFormModelForm formModel) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -1159,7 +1212,8 @@ class ReactiveItemFormModelFormFormGroupArrayBuilder<T>
     return StreamBuilder<List<Map<String, Object?>?>?>(
       stream: value.control.valueChanges,
       builder: (context, snapshot) {
-        final itemList = (value.value() ?? <T>[])
+        final itemList = (value.value() ??
+                <ReactiveItemFormModelFormFormGroupArrayBuilderT>[])
             .asMap()
             .map((i, item) => MapEntry(
                   i,

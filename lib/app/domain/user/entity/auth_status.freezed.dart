@@ -25,8 +25,12 @@ mixin _$AuthStatus {
   bool get linkedGoogle => throw _privateConstructorUsedError;
   bool get linkedApple => throw _privateConstructorUsedError;
 
+  /// Serializes this AuthStatus to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AuthStatusCopyWith<AuthStatus> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$AuthStatusCopyWithImpl<$Res, $Val extends AuthStatus>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AuthStatus
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +106,8 @@ class __$$AuthStatusImplCopyWithImpl<$Res>
       _$AuthStatusImpl _value, $Res Function(_$AuthStatusImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthStatus
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -169,12 +177,14 @@ class _$AuthStatusImpl implements _AuthStatus {
                 other.linkedApple == linkedApple));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, uid, isAnonymous, linkedGoogle, linkedApple);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthStatus
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthStatusImplCopyWith<_$AuthStatusImpl> get copyWith =>
@@ -206,8 +216,11 @@ abstract class _AuthStatus implements AuthStatus {
   bool get linkedGoogle;
   @override
   bool get linkedApple;
+
+  /// Create a copy of AuthStatus
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthStatusImplCopyWith<_$AuthStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
