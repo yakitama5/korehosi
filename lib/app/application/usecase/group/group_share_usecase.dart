@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -65,7 +65,7 @@ class GroupShareUsecase with RunUsecaseMixin {
           final bytes = await xFile.readAsBytes();
 
           // 画像の保存
-          await ImageGallerySaver.saveImage(bytes);
+          await ImageGallerySaverPlus.saveImage(bytes);
         },
         disableLoading: true,
       );

@@ -48,7 +48,7 @@ dependencies:
   google_fonts:
   google_sign_in:
   hooks_riverpod:
-  image_gallery_saver:
+  image_gallery_saver_plus:
   image_picker:
   intl:
   introduction_screen:
