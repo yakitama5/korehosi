@@ -7,7 +7,7 @@ part of 'firestore_group_message_provider.dart';
 // **************************************************************************
 
 String _$groupMessageCollectionRefHash() =>
-    r'e361677548cd00d41e947501d9e88069fe907621';
+    r'9113fe0dccbbcebf1c399cebf7da62236625a82d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -161,6 +161,8 @@ class GroupMessageCollectionRefProvider extends AutoDisposeProvider<
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GroupMessageCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestoreGroupMessageModel>> {
   /// The parameter `groupId` of this provider.
@@ -178,7 +180,7 @@ class _GroupMessageCollectionRefProviderElement
 }
 
 String _$groupMessageDocumentRefHash() =>
-    r'6f8d0fd01702182325b50ca1cd94f2d3453f5847';
+    r'fa7ad07a5090a44adaa2fc46fa74f364a22657ec';
 
 /// 通知メッセージドキュメントの参照
 ///
@@ -322,6 +324,8 @@ class GroupMessageDocumentRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GroupMessageDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreGroupMessageModel>> {
   /// The parameter `groupId` of this provider.
@@ -344,4 +348,4 @@ class _GroupMessageDocumentRefProviderElement
       (origin as GroupMessageDocumentRefProvider).notificationMessageId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

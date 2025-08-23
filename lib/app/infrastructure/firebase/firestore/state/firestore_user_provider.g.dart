@@ -6,7 +6,7 @@ part of 'firestore_user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userCollectionRefHash() => r'6f64e7e38206313b5a27c18257d0d5cba50206f9';
+String _$userCollectionRefHash() => r'b914316f3a8f5df31dd2bc6fe88a87a3cb29739b';
 
 /// ユーザーコレクションの参照
 ///
@@ -23,9 +23,11 @@ final userCollectionRefProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef UserCollectionRefRef
     = AutoDisposeProviderRef<CollectionReference<FirestoreUserModel>>;
-String _$userDocumentRefHash() => r'779cfc17f7e2149d988e73f0d19678662e6ec1a0';
+String _$userDocumentRefHash() => r'7b43f3c7454b7d1e9ab09dc23d4ec344b1bd31bc';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -177,6 +179,8 @@ class UserDocumentRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin UserDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreUserModel>> {
   /// The parameter `userId` of this provider.
@@ -192,4 +196,4 @@ class _UserDocumentRefProviderElement
   String? get userId => (origin as UserDocumentRefProvider).userId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

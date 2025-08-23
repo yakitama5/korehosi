@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../firestore/extension/collection_reference.dart';
@@ -11,7 +12,7 @@ part 'firestore_child_view_purchase_provider.g.dart';
 /// (子供参照用)購入情報コレクションの参照
 @riverpod
 CollectionReference<FirestorePurchaseModel> cpurchaseCollectionRef(
-  CpurchaseCollectionRefRef ref, {
+  Ref ref, {
   required String groupId,
 }) {
   return ref.watch(firestoreProvider).cpurchasesRef(groupId).withConverter(
@@ -31,7 +32,7 @@ CollectionReference<FirestorePurchaseModel> cpurchaseCollectionRef(
 /// (子供参照用)購入情報ドキュメントの参照
 @riverpod
 DocumentReference<FirestorePurchaseModel> cpurchaseDocumentRef(
-  CpurchaseDocumentRefRef ref, {
+  Ref ref, {
   required String groupId,
   String? purchaseId,
 }) =>

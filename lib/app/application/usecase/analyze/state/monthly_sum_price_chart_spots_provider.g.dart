@@ -7,7 +7,7 @@ part of 'monthly_sum_price_chart_spots_provider.dart';
 // **************************************************************************
 
 String _$monthlySumPriceChartSpotsHash() =>
-    r'b127b3c01be24abaefb729e026bc8ca9ba898d42';
+    r'a3ee17e1f9567d8ebbd0bd5c1d4569b072cf435d';
 
 /// 分析で利用する月別の購入金額のグラフデータを管理
 ///
@@ -24,7 +24,9 @@ final monthlySumPriceChartSpotsProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef MonthlySumPriceChartSpotsRef
     = AutoDisposeFutureProviderRef<List<FlSpot>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

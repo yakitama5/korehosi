@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../firestore/extension/collection_reference.dart';
@@ -11,7 +12,7 @@ part 'firestore_deleted_item_provider.g.dart';
 /// 削除済欲しい物コレクションの参照
 @riverpod
 CollectionReference<FirestoreItemModel> ditemCollectionRef(
-  DitemCollectionRefRef ref, {
+  Ref ref, {
   required String groupId,
 }) {
   return ref.watch(firestoreProvider).ditemsRef(groupId).withConverter(
@@ -31,7 +32,7 @@ CollectionReference<FirestoreItemModel> ditemCollectionRef(
 /// 欲しい物ドキュメントの参照
 @riverpod
 DocumentReference<FirestoreItemModel> ditemDocumentRef(
-  DitemDocumentRefRef ref, {
+  Ref ref, {
   required String groupId,
   String? itemId,
 }) =>

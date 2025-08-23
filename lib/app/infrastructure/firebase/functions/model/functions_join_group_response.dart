@@ -5,7 +5,7 @@ part 'functions_join_group_response.g.dart';
 
 /// `joinGroup`ファンクションのレスポンス定義
 @freezed
-class FunctionsJoinGroupResponse with _$FunctionsJoinGroupResponse {
+abstract class FunctionsJoinGroupResponse with _$FunctionsJoinGroupResponse {
   const factory FunctionsJoinGroupResponse({
     String? errorCode,
   }) = _FunctionsJoinGroupResponse;

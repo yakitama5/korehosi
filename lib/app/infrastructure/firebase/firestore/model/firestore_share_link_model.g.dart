@@ -6,9 +6,9 @@ part of 'firestore_share_link_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FirestoreShareLinkModelImpl _$$FirestoreShareLinkModelImplFromJson(
+_FirestoreShareLinkModel _$FirestoreShareLinkModelFromJson(
         Map<String, dynamic> json) =>
-    _$FirestoreShareLinkModelImpl(
+    _FirestoreShareLinkModel(
       id: json['id'] as String,
       groupId: json['groupId'] as String,
       validDays: (json['validDays'] as num).toInt(),
@@ -16,8 +16,8 @@ _$FirestoreShareLinkModelImpl _$$FirestoreShareLinkModelImplFromJson(
       updatedAt: dateFromTimestampValue(json['updatedAt']),
     );
 
-Map<String, dynamic> _$$FirestoreShareLinkModelImplToJson(
-        _$FirestoreShareLinkModelImpl instance) =>
+Map<String, dynamic> _$FirestoreShareLinkModelToJson(
+        _FirestoreShareLinkModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'groupId': instance.groupId,

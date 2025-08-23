@@ -8,7 +8,7 @@ part 'firestore_item_model.g.dart';
 
 /// `/groups/{groupId}/items/{itemId}`ドキュメントのモデル
 @freezed
-class FirestoreItemModel with _$FirestoreItemModel {
+abstract class FirestoreItemModel with _$FirestoreItemModel {
   const factory FirestoreItemModel({
     required String id,
     List<String>? imagesPath,

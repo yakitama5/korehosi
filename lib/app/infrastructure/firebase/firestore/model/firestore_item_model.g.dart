@@ -6,9 +6,8 @@ part of 'firestore_item_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FirestoreItemModelImpl _$$FirestoreItemModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$FirestoreItemModelImpl(
+_FirestoreItemModel _$FirestoreItemModelFromJson(Map<String, dynamic> json) =>
+    _FirestoreItemModel(
       id: json['id'] as String,
       imagesPath: (json['imagesPath'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -23,8 +22,7 @@ _$FirestoreItemModelImpl _$$FirestoreItemModelImplFromJson(
       updatedAt: dateFromTimestampValue(json['updatedAt']),
     );
 
-Map<String, dynamic> _$$FirestoreItemModelImplToJson(
-        _$FirestoreItemModelImpl instance) =>
+Map<String, dynamic> _$FirestoreItemModelToJson(_FirestoreItemModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'imagesPath': instance.imagesPath,

@@ -7,7 +7,7 @@ part of 'firestore_share_link_provider.dart';
 // **************************************************************************
 
 String _$shareLinkCollectionRefHash() =>
-    r'c50d417657fe0e8b4701cc25daa3d4bc07bb7f80';
+    r'68d5d2e44f51bc05645ad4989943886dae9fe47d';
 
 /// グループ共有リンクコレクションの参照
 ///
@@ -24,10 +24,12 @@ final shareLinkCollectionRefProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ShareLinkCollectionRefRef
     = AutoDisposeProviderRef<CollectionReference<FirestoreShareLinkModel>>;
 String _$shareLinkDocumentRefHash() =>
-    r'c3fbd7d74b1a1651f7e7b2be76a8f4bb1c05dc80';
+    r'478b824de60435fad7d9a94683b199bd7b16bedd';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -181,6 +183,8 @@ class ShareLinkDocumentRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ShareLinkDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreShareLinkModel>> {
   /// The parameter `shareLinkId` of this provider.
@@ -196,4 +200,4 @@ class _ShareLinkDocumentRefProviderElement extends AutoDisposeProviderElement<
       (origin as ShareLinkDocumentRefProvider).shareLinkId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

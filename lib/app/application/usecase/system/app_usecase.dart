@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'app_usecase.g.dart';
 
 @riverpod
-AppUsecase appUsecase(AppUsecaseRef ref) => AppUsecase(ref);
+AppUsecase appUsecase(Ref ref) => AppUsecase(ref);
 
 /// アプリ共通のユースケース
 class AppUsecase with RunUsecaseMixin {

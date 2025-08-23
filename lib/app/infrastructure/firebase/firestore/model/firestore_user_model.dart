@@ -9,7 +9,7 @@ part 'firestore_user_model.g.dart';
 
 /// `/users/{userId}`ドキュメントのモデル
 @freezed
-class FirestoreUserModel with _$FirestoreUserModel {
+abstract class FirestoreUserModel with _$FirestoreUserModel {
   const factory FirestoreUserModel({
     required String id,
     required AgeGroup ageGroup,

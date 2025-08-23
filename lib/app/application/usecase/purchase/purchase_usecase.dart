@@ -11,7 +11,7 @@ import '../user/state/auth_user_provider.dart';
 part 'purchase_usecase.g.dart';
 
 @riverpod
-PurchaseUsecase purchaseUsecase(PurchaseUsecaseRef ref) => PurchaseUsecase(ref);
+PurchaseUsecase purchaseUsecase(Ref ref) => PurchaseUsecase(ref);
 
 /// ほしい物の購入情報に関するユースケース
 class PurchaseUsecase with RunUsecaseMixin {

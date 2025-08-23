@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../firestore/extension/collection_reference.dart';
@@ -11,7 +12,7 @@ part 'firestore_deleted_purchase_provider.g.dart';
 /// 削除済購入情報コレクションの参照
 @riverpod
 CollectionReference<FirestorePurchaseModel> dpurchaseCollectionRef(
-  DpurchaseCollectionRefRef ref, {
+  Ref ref, {
   required String groupId,
 }) {
   return ref.watch(firestoreProvider).dpurchasesRef(groupId).withConverter(
@@ -31,7 +32,7 @@ CollectionReference<FirestorePurchaseModel> dpurchaseCollectionRef(
 /// 購入情報ドキュメントの参照
 @riverpod
 DocumentReference<FirestorePurchaseModel> dpurchaseDocumentRef(
-  DpurchaseDocumentRefRef ref, {
+  Ref ref, {
   required String groupId,
   String? purchaseId,
 }) =>

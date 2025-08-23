@@ -6,7 +6,7 @@ part of 'item_detail_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemIdHash() => r'42a86b52949c2f92e6439e0241e4e7fee52d4438';
+String _$itemIdHash() => r'a3ee906db5df5a1aac622eba5ecbfb6c33a332b2';
 
 /// 明細表示対象となる欲しい物のIDを管理するProvider
 /// `override`前提の利用を強制する
@@ -22,8 +22,10 @@ final _itemIdProvider = AutoDisposeProvider<String?>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef _ItemIdRef = AutoDisposeProviderRef<String?>;
-String _$itemHash() => r'08b429d55ec789eada55275734667e0124bcec1c';
+String _$itemHash() => r'eeb8aba393b91ebd02124be9914a963969cf61af';
 
 /// 明細表示対象となる欲しい物のEntityを管理するProvider
 /// `_itemIdProvider`に依存する
@@ -42,8 +44,10 @@ final _itemProvider = AutoDisposeFutureProvider<Item?>.internal(
   },
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef _ItemRef = AutoDisposeFutureProviderRef<Item?>;
-String _$purchaseHash() => r'9c281248b302951779d25a55255ff4b983b6e03c';
+String _$purchaseHash() => r'448fb7ae5ce01766c90e3ebaffc2c1bfe855bebb';
 
 /// 明細表示対象となる欲しい物に属する購入情報のEntityを管理するProvider
 /// `_itemIdProvider`に依存する
@@ -62,6 +66,8 @@ final _purchaseProvider = AutoDisposeFutureProvider<Purchase?>.internal(
   },
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef _PurchaseRef = AutoDisposeFutureProviderRef<Purchase?>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,128 +9,69 @@ part of 'purchase.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Purchase _$PurchaseFromJson(Map<String, dynamic> json) {
-  return _Purchase.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Purchase {
-  String get id => throw _privateConstructorUsedError;
-  int? get price => throw _privateConstructorUsedError;
-  String? get buyerName => throw _privateConstructorUsedError;
-  DateTime? get planDate => throw _privateConstructorUsedError;
-  bool get surprise => throw _privateConstructorUsedError;
-  DateTime? get sentAt => throw _privateConstructorUsedError;
-  String? get memo => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  String get id;
+  int? get price;
+  String? get buyerName;
+  DateTime? get planDate;
+  bool get surprise;
+  DateTime? get sentAt;
+  String? get memo;
+  String get uid;
+  DateTime get createdAt;
+  DateTime get updatedAt;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PurchaseCopyWith<Purchase> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PurchaseCopyWith<$Res> {
-  factory $PurchaseCopyWith(Purchase value, $Res Function(Purchase) then) =
-      _$PurchaseCopyWithImpl<$Res, Purchase>;
-  @useResult
-  $Res call(
-      {String id,
-      int? price,
-      String? buyerName,
-      DateTime? planDate,
-      bool surprise,
-      DateTime? sentAt,
-      String? memo,
-      String uid,
-      DateTime createdAt,
-      DateTime updatedAt});
-}
-
-/// @nodoc
-class _$PurchaseCopyWithImpl<$Res, $Val extends Purchase>
-    implements $PurchaseCopyWith<$Res> {
-  _$PurchaseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $PurchaseCopyWith<Purchase> get copyWith =>
+      _$PurchaseCopyWithImpl<Purchase>(this as Purchase, _$identity);
+
+  /// Serializes this Purchase to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? price = freezed,
-    Object? buyerName = freezed,
-    Object? planDate = freezed,
-    Object? surprise = null,
-    Object? sentAt = freezed,
-    Object? memo = freezed,
-    Object? uid = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: freezed == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
-      buyerName: freezed == buyerName
-          ? _value.buyerName
-          : buyerName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      planDate: freezed == planDate
-          ? _value.planDate
-          : planDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      surprise: null == surprise
-          ? _value.surprise
-          : surprise // ignore: cast_nullable_to_non_nullable
-              as bool,
-      sentAt: freezed == sentAt
-          ? _value.sentAt
-          : sentAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      memo: freezed == memo
-          ? _value.memo
-          : memo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Purchase &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.buyerName, buyerName) ||
+                other.buyerName == buyerName) &&
+            (identical(other.planDate, planDate) ||
+                other.planDate == planDate) &&
+            (identical(other.surprise, surprise) ||
+                other.surprise == surprise) &&
+            (identical(other.sentAt, sentAt) || other.sentAt == sentAt) &&
+            (identical(other.memo, memo) || other.memo == memo) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, price, buyerName, planDate,
+      surprise, sentAt, memo, uid, createdAt, updatedAt);
+
+  @override
+  String toString() {
+    return 'Purchase(id: $id, price: $price, buyerName: $buyerName, planDate: $planDate, surprise: $surprise, sentAt: $sentAt, memo: $memo, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
 /// @nodoc
-abstract class _$$PurchaseImplCopyWith<$Res>
-    implements $PurchaseCopyWith<$Res> {
-  factory _$$PurchaseImplCopyWith(
-          _$PurchaseImpl value, $Res Function(_$PurchaseImpl) then) =
-      __$$PurchaseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PurchaseCopyWith<$Res> {
+  factory $PurchaseCopyWith(Purchase value, $Res Function(Purchase) _then) =
+      _$PurchaseCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -146,13 +87,14 @@ abstract class _$$PurchaseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PurchaseImplCopyWithImpl<$Res>
-    extends _$PurchaseCopyWithImpl<$Res, _$PurchaseImpl>
-    implements _$$PurchaseImplCopyWith<$Res> {
-  __$$PurchaseImplCopyWithImpl(
-      _$PurchaseImpl _value, $Res Function(_$PurchaseImpl) _then)
-      : super(_value, _then);
+class _$PurchaseCopyWithImpl<$Res> implements $PurchaseCopyWith<$Res> {
+  _$PurchaseCopyWithImpl(this._self, this._then);
 
+  final Purchase _self;
+  final $Res Function(Purchase) _then;
+
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -167,55 +109,275 @@ class __$$PurchaseImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$PurchaseImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       price: freezed == price
-          ? _value.price
+          ? _self.price
           : price // ignore: cast_nullable_to_non_nullable
               as int?,
       buyerName: freezed == buyerName
-          ? _value.buyerName
+          ? _self.buyerName
           : buyerName // ignore: cast_nullable_to_non_nullable
               as String?,
       planDate: freezed == planDate
-          ? _value.planDate
+          ? _self.planDate
           : planDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       surprise: null == surprise
-          ? _value.surprise
+          ? _self.surprise
           : surprise // ignore: cast_nullable_to_non_nullable
               as bool,
       sentAt: freezed == sentAt
-          ? _value.sentAt
+          ? _self.sentAt
           : sentAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       memo: freezed == memo
-          ? _value.memo
+          ? _self.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String?,
       uid: null == uid
-          ? _value.uid
+          ? _self.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updatedAt: null == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [Purchase].
+extension PurchasePatterns on Purchase {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Purchase value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Purchase() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Purchase value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Purchase():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Purchase value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Purchase() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            int? price,
+            String? buyerName,
+            DateTime? planDate,
+            bool surprise,
+            DateTime? sentAt,
+            String? memo,
+            String uid,
+            DateTime createdAt,
+            DateTime updatedAt)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Purchase() when $default != null:
+        return $default(
+            _that.id,
+            _that.price,
+            _that.buyerName,
+            _that.planDate,
+            _that.surprise,
+            _that.sentAt,
+            _that.memo,
+            _that.uid,
+            _that.createdAt,
+            _that.updatedAt);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            int? price,
+            String? buyerName,
+            DateTime? planDate,
+            bool surprise,
+            DateTime? sentAt,
+            String? memo,
+            String uid,
+            DateTime createdAt,
+            DateTime updatedAt)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Purchase():
+        return $default(
+            _that.id,
+            _that.price,
+            _that.buyerName,
+            _that.planDate,
+            _that.surprise,
+            _that.sentAt,
+            _that.memo,
+            _that.uid,
+            _that.createdAt,
+            _that.updatedAt);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            int? price,
+            String? buyerName,
+            DateTime? planDate,
+            bool surprise,
+            DateTime? sentAt,
+            String? memo,
+            String uid,
+            DateTime createdAt,
+            DateTime updatedAt)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Purchase() when $default != null:
+        return $default(
+            _that.id,
+            _that.price,
+            _that.buyerName,
+            _that.planDate,
+            _that.surprise,
+            _that.sentAt,
+            _that.memo,
+            _that.uid,
+            _that.createdAt,
+            _that.updatedAt);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$PurchaseImpl implements _Purchase {
-  const _$PurchaseImpl(
+class _Purchase implements Purchase {
+  const _Purchase(
       {required this.id,
       this.price,
       this.buyerName,
@@ -226,9 +388,8 @@ class _$PurchaseImpl implements _Purchase {
       required this.uid,
       required this.createdAt,
       required this.updatedAt});
-
-  factory _$PurchaseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PurchaseImplFromJson(json);
+  factory _Purchase.fromJson(Map<String, dynamic> json) =>
+      _$PurchaseFromJson(json);
 
   @override
   final String id;
@@ -251,16 +412,26 @@ class _$PurchaseImpl implements _Purchase {
   @override
   final DateTime updatedAt;
 
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Purchase(id: $id, price: $price, buyerName: $buyerName, planDate: $planDate, surprise: $surprise, sentAt: $sentAt, memo: $memo, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PurchaseCopyWith<_Purchase> get copyWith =>
+      __$PurchaseCopyWithImpl<_Purchase>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PurchaseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PurchaseImpl &&
+            other is _Purchase &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.buyerName, buyerName) ||
@@ -278,63 +449,103 @@ class _$PurchaseImpl implements _Purchase {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, price, buyerName, planDate,
       surprise, sentAt, memo, uid, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PurchaseImplCopyWith<_$PurchaseImpl> get copyWith =>
-      __$$PurchaseImplCopyWithImpl<_$PurchaseImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PurchaseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Purchase(id: $id, price: $price, buyerName: $buyerName, planDate: $planDate, surprise: $surprise, sentAt: $sentAt, memo: $memo, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _Purchase implements Purchase {
-  const factory _Purchase(
-      {required final String id,
-      final int? price,
-      final String? buyerName,
-      final DateTime? planDate,
-      required final bool surprise,
-      final DateTime? sentAt,
-      final String? memo,
-      required final String uid,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$PurchaseImpl;
-
-  factory _Purchase.fromJson(Map<String, dynamic> json) =
-      _$PurchaseImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$PurchaseCopyWith<$Res>
+    implements $PurchaseCopyWith<$Res> {
+  factory _$PurchaseCopyWith(_Purchase value, $Res Function(_Purchase) _then) =
+      __$PurchaseCopyWithImpl;
   @override
-  String get id;
-  @override
-  int? get price;
-  @override
-  String? get buyerName;
-  @override
-  DateTime? get planDate;
-  @override
-  bool get surprise;
-  @override
-  DateTime? get sentAt;
-  @override
-  String? get memo;
-  @override
-  String get uid;
-  @override
-  DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$PurchaseImplCopyWith<_$PurchaseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {String id,
+      int? price,
+      String? buyerName,
+      DateTime? planDate,
+      bool surprise,
+      DateTime? sentAt,
+      String? memo,
+      String uid,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
+
+/// @nodoc
+class __$PurchaseCopyWithImpl<$Res> implements _$PurchaseCopyWith<$Res> {
+  __$PurchaseCopyWithImpl(this._self, this._then);
+
+  final _Purchase _self;
+  final $Res Function(_Purchase) _then;
+
+  /// Create a copy of Purchase
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? price = freezed,
+    Object? buyerName = freezed,
+    Object? planDate = freezed,
+    Object? surprise = null,
+    Object? sentAt = freezed,
+    Object? memo = freezed,
+    Object? uid = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+  }) {
+    return _then(_Purchase(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      price: freezed == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+      buyerName: freezed == buyerName
+          ? _self.buyerName
+          : buyerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      planDate: freezed == planDate
+          ? _self.planDate
+          : planDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      surprise: null == surprise
+          ? _self.surprise
+          : surprise // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sentAt: freezed == sentAt
+          ? _self.sentAt
+          : sentAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      memo: freezed == memo
+          ? _self.memo
+          : memo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+// dart format on

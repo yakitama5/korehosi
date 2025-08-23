@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,28 +9,53 @@ part of 'items_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ItemsConfig {
-  ItemOrderModel get defaultOrder => throw _privateConstructorUsedError;
-  Set<PurchaseStatus> get defaultPurchaseStatus =>
-      throw _privateConstructorUsedError;
-  double? get defaultWishRank => throw _privateConstructorUsedError;
+  ItemOrderModel get defaultOrder;
+  Set<PurchaseStatus> get defaultPurchaseStatus;
+  double? get defaultWishRank;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ItemsConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ItemsConfigCopyWith<ItemsConfig> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ItemsConfigCopyWithImpl<ItemsConfig>(this as ItemsConfig, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ItemsConfig &&
+            (identical(other.defaultOrder, defaultOrder) ||
+                other.defaultOrder == defaultOrder) &&
+            const DeepCollectionEquality()
+                .equals(other.defaultPurchaseStatus, defaultPurchaseStatus) &&
+            (identical(other.defaultWishRank, defaultWishRank) ||
+                other.defaultWishRank == defaultWishRank));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      defaultOrder,
+      const DeepCollectionEquality().hash(defaultPurchaseStatus),
+      defaultWishRank);
+
+  @override
+  String toString() {
+    return 'ItemsConfig(defaultOrder: $defaultOrder, defaultPurchaseStatus: $defaultPurchaseStatus, defaultWishRank: $defaultWishRank)';
+  }
 }
 
 /// @nodoc
-abstract class $ItemsConfigCopyWith<$Res> {
+abstract mixin class $ItemsConfigCopyWith<$Res> {
   factory $ItemsConfigCopyWith(
-          ItemsConfig value, $Res Function(ItemsConfig) then) =
-      _$ItemsConfigCopyWithImpl<$Res, ItemsConfig>;
+          ItemsConfig value, $Res Function(ItemsConfig) _then) =
+      _$ItemsConfigCopyWithImpl;
   @useResult
   $Res call(
       {ItemOrderModel defaultOrder,
@@ -41,15 +66,14 @@ abstract class $ItemsConfigCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ItemsConfigCopyWithImpl<$Res, $Val extends ItemsConfig>
-    implements $ItemsConfigCopyWith<$Res> {
-  _$ItemsConfigCopyWithImpl(this._value, this._then);
+class _$ItemsConfigCopyWithImpl<$Res> implements $ItemsConfigCopyWith<$Res> {
+  _$ItemsConfigCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ItemsConfig _self;
+  final $Res Function(ItemsConfig) _then;
 
+  /// Create a copy of ItemsConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -57,84 +81,203 @@ class _$ItemsConfigCopyWithImpl<$Res, $Val extends ItemsConfig>
     Object? defaultPurchaseStatus = null,
     Object? defaultWishRank = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       defaultOrder: null == defaultOrder
-          ? _value.defaultOrder
+          ? _self.defaultOrder
           : defaultOrder // ignore: cast_nullable_to_non_nullable
               as ItemOrderModel,
       defaultPurchaseStatus: null == defaultPurchaseStatus
-          ? _value.defaultPurchaseStatus
+          ? _self.defaultPurchaseStatus
           : defaultPurchaseStatus // ignore: cast_nullable_to_non_nullable
               as Set<PurchaseStatus>,
       defaultWishRank: freezed == defaultWishRank
-          ? _value.defaultWishRank
-          : defaultWishRank // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ItemOrderModelCopyWith<$Res> get defaultOrder {
-    return $ItemOrderModelCopyWith<$Res>(_value.defaultOrder, (value) {
-      return _then(_value.copyWith(defaultOrder: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$ItemsConfigImplCopyWith<$Res>
-    implements $ItemsConfigCopyWith<$Res> {
-  factory _$$ItemsConfigImplCopyWith(
-          _$ItemsConfigImpl value, $Res Function(_$ItemsConfigImpl) then) =
-      __$$ItemsConfigImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {ItemOrderModel defaultOrder,
-      Set<PurchaseStatus> defaultPurchaseStatus,
-      double? defaultWishRank});
-
-  @override
-  $ItemOrderModelCopyWith<$Res> get defaultOrder;
-}
-
-/// @nodoc
-class __$$ItemsConfigImplCopyWithImpl<$Res>
-    extends _$ItemsConfigCopyWithImpl<$Res, _$ItemsConfigImpl>
-    implements _$$ItemsConfigImplCopyWith<$Res> {
-  __$$ItemsConfigImplCopyWithImpl(
-      _$ItemsConfigImpl _value, $Res Function(_$ItemsConfigImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? defaultOrder = null,
-    Object? defaultPurchaseStatus = null,
-    Object? defaultWishRank = freezed,
-  }) {
-    return _then(_$ItemsConfigImpl(
-      defaultOrder: null == defaultOrder
-          ? _value.defaultOrder
-          : defaultOrder // ignore: cast_nullable_to_non_nullable
-              as ItemOrderModel,
-      defaultPurchaseStatus: null == defaultPurchaseStatus
-          ? _value._defaultPurchaseStatus
-          : defaultPurchaseStatus // ignore: cast_nullable_to_non_nullable
-              as Set<PurchaseStatus>,
-      defaultWishRank: freezed == defaultWishRank
-          ? _value.defaultWishRank
+          ? _self.defaultWishRank
           : defaultWishRank // ignore: cast_nullable_to_non_nullable
               as double?,
     ));
   }
+
+  /// Create a copy of ItemsConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ItemOrderModelCopyWith<$Res> get defaultOrder {
+    return $ItemOrderModelCopyWith<$Res>(_self.defaultOrder, (value) {
+      return _then(_self.copyWith(defaultOrder: value));
+    });
+  }
+}
+
+/// Adds pattern-matching-related methods to [ItemsConfig].
+extension ItemsConfigPatterns on ItemsConfig {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ItemsConfig value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ItemsConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ItemsConfig value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemsConfig():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ItemsConfig value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemsConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(ItemOrderModel defaultOrder,
+            Set<PurchaseStatus> defaultPurchaseStatus, double? defaultWishRank)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ItemsConfig() when $default != null:
+        return $default(_that.defaultOrder, _that.defaultPurchaseStatus,
+            _that.defaultWishRank);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(ItemOrderModel defaultOrder,
+            Set<PurchaseStatus> defaultPurchaseStatus, double? defaultWishRank)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemsConfig():
+        return $default(_that.defaultOrder, _that.defaultPurchaseStatus,
+            _that.defaultWishRank);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(ItemOrderModel defaultOrder,
+            Set<PurchaseStatus> defaultPurchaseStatus, double? defaultWishRank)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemsConfig() when $default != null:
+        return $default(_that.defaultOrder, _that.defaultPurchaseStatus,
+            _that.defaultWishRank);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
 
-class _$ItemsConfigImpl implements _ItemsConfig {
-  const _$ItemsConfigImpl(
+class _ItemsConfig implements ItemsConfig {
+  const _ItemsConfig(
       {required this.defaultOrder,
       required final Set<PurchaseStatus> defaultPurchaseStatus,
       this.defaultWishRank})
@@ -154,16 +297,19 @@ class _$ItemsConfigImpl implements _ItemsConfig {
   @override
   final double? defaultWishRank;
 
+  /// Create a copy of ItemsConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ItemsConfig(defaultOrder: $defaultOrder, defaultPurchaseStatus: $defaultPurchaseStatus, defaultWishRank: $defaultWishRank)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ItemsConfigCopyWith<_ItemsConfig> get copyWith =>
+      __$ItemsConfigCopyWithImpl<_ItemsConfig>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ItemsConfigImpl &&
+            other is _ItemsConfig &&
             (identical(other.defaultOrder, defaultOrder) ||
                 other.defaultOrder == defaultOrder) &&
             const DeepCollectionEquality()
@@ -179,27 +325,70 @@ class _$ItemsConfigImpl implements _ItemsConfig {
       const DeepCollectionEquality().hash(_defaultPurchaseStatus),
       defaultWishRank);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'ItemsConfig(defaultOrder: $defaultOrder, defaultPurchaseStatus: $defaultPurchaseStatus, defaultWishRank: $defaultWishRank)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ItemsConfigCopyWith<$Res>
+    implements $ItemsConfigCopyWith<$Res> {
+  factory _$ItemsConfigCopyWith(
+          _ItemsConfig value, $Res Function(_ItemsConfig) _then) =
+      __$ItemsConfigCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {ItemOrderModel defaultOrder,
+      Set<PurchaseStatus> defaultPurchaseStatus,
+      double? defaultWishRank});
+
+  @override
+  $ItemOrderModelCopyWith<$Res> get defaultOrder;
+}
+
+/// @nodoc
+class __$ItemsConfigCopyWithImpl<$Res> implements _$ItemsConfigCopyWith<$Res> {
+  __$ItemsConfigCopyWithImpl(this._self, this._then);
+
+  final _ItemsConfig _self;
+  final $Res Function(_ItemsConfig) _then;
+
+  /// Create a copy of ItemsConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$ItemsConfigImplCopyWith<_$ItemsConfigImpl> get copyWith =>
-      __$$ItemsConfigImplCopyWithImpl<_$ItemsConfigImpl>(this, _$identity);
+  $Res call({
+    Object? defaultOrder = null,
+    Object? defaultPurchaseStatus = null,
+    Object? defaultWishRank = freezed,
+  }) {
+    return _then(_ItemsConfig(
+      defaultOrder: null == defaultOrder
+          ? _self.defaultOrder
+          : defaultOrder // ignore: cast_nullable_to_non_nullable
+              as ItemOrderModel,
+      defaultPurchaseStatus: null == defaultPurchaseStatus
+          ? _self._defaultPurchaseStatus
+          : defaultPurchaseStatus // ignore: cast_nullable_to_non_nullable
+              as Set<PurchaseStatus>,
+      defaultWishRank: freezed == defaultWishRank
+          ? _self.defaultWishRank
+          : defaultWishRank // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
+  }
+
+  /// Create a copy of ItemsConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ItemOrderModelCopyWith<$Res> get defaultOrder {
+    return $ItemOrderModelCopyWith<$Res>(_self.defaultOrder, (value) {
+      return _then(_self.copyWith(defaultOrder: value));
+    });
+  }
 }
 
-abstract class _ItemsConfig implements ItemsConfig {
-  const factory _ItemsConfig(
-      {required final ItemOrderModel defaultOrder,
-      required final Set<PurchaseStatus> defaultPurchaseStatus,
-      final double? defaultWishRank}) = _$ItemsConfigImpl;
-
-  @override
-  ItemOrderModel get defaultOrder;
-  @override
-  Set<PurchaseStatus> get defaultPurchaseStatus;
-  @override
-  double? get defaultWishRank;
-  @override
-  @JsonKey(ignore: true)
-  _$$ItemsConfigImplCopyWith<_$ItemsConfigImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

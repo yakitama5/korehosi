@@ -6,9 +6,8 @@ part of 'firestore_group_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FirestoreGroupModelImpl _$$FirestoreGroupModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$FirestoreGroupModelImpl(
+_FirestoreGroupModel _$FirestoreGroupModelFromJson(Map<String, dynamic> json) =>
+    _FirestoreGroupModel(
       id: json['id'] as String,
       name: json['name'] as String,
       joinUids:
@@ -20,8 +19,8 @@ _$FirestoreGroupModelImpl _$$FirestoreGroupModelImplFromJson(
       updatedAt: dateFromTimestampValue(json['updatedAt']),
     );
 
-Map<String, dynamic> _$$FirestoreGroupModelImplToJson(
-        _$FirestoreGroupModelImpl instance) =>
+Map<String, dynamic> _$FirestoreGroupModelToJson(
+        _FirestoreGroupModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

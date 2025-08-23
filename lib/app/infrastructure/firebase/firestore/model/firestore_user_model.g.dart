@@ -6,9 +6,8 @@ part of 'firestore_user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FirestoreUserModelImpl _$$FirestoreUserModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$FirestoreUserModelImpl(
+_FirestoreUserModel _$FirestoreUserModelFromJson(Map<String, dynamic> json) =>
+    _FirestoreUserModel(
       id: json['id'] as String,
       ageGroup: $enumDecode(_$AgeGroupEnumMap, json['ageGroup']),
       name: json['name'] as String?,
@@ -19,8 +18,7 @@ _$FirestoreUserModelImpl _$$FirestoreUserModelImplFromJson(
       updatedAt: dateFromTimestampValue(json['updatedAt']),
     );
 
-Map<String, dynamic> _$$FirestoreUserModelImplToJson(
-        _$FirestoreUserModelImpl instance) =>
+Map<String, dynamic> _$FirestoreUserModelToJson(_FirestoreUserModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'ageGroup': _$AgeGroupEnumMap[instance.ageGroup]!,

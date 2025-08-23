@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+part of 'routes_data.dart';
 
-import '../../pages/analyze/analyze_detail_page.dart';
-import '../../pages/analyze/analyze_page.dart';
-
-final _navigatorKey = GlobalKey<NavigatorState>(debugLabel: 'ANALYZE');
+final _analyzeNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'ANALYZE');
 
 const analyzeBranch = TypedStatefulShellBranch<BranchAnalyzeData>(
   routes: [
@@ -23,10 +19,10 @@ class BranchAnalyzeData extends StatefulShellBranchData {
   const BranchAnalyzeData();
 }
 
-class AnalyzeRouteData extends GoRouteData {
+class AnalyzeRouteData extends GoRouteData with _$AnalyzeRouteData {
   const AnalyzeRouteData();
 
-  static final GlobalKey<NavigatorState> $navigatorKey = _navigatorKey;
+  static final GlobalKey<NavigatorState> $navigatorKey = _analyzeNavigatorKey;
   static const path = '/analyze';
 
   @override
@@ -34,7 +30,7 @@ class AnalyzeRouteData extends GoRouteData {
       const AnalyzePage();
 }
 
-class AnalyzeDetailRouteData extends GoRouteData {
+class AnalyzeDetailRouteData extends GoRouteData with _$AnalyzeDetailRouteData {
   const AnalyzeDetailRouteData({this.index});
 
   static const path = 'analyze_detail';

@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/analyze/entity/monthly_sum_price.dart';
@@ -10,7 +11,7 @@ part 'monthly_sum_price_provider.dart.g.dart';
 /// 月間合計購入金額
 @riverpod
 Future<Map<DateTime, MonthlySumPrice>> monthlySumPrice(
-  MonthlySumPriceRef ref,
+  Ref ref,
 ) async {
   // 購入済の購入情報を取得
   final buyedPurchases = await ref.watch(analyzeBuyedPurchasesProvider.future);

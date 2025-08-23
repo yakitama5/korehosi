@@ -6,7 +6,7 @@ part of 'join_groups_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$joinGroupsHash() => r'591d89a638c18d898c7436ac85f3a2931f176c4d';
+String _$joinGroupsHash() => r'5af4e8c7fed5250aa60734dec23ed314e858e3d8';
 
 /// 認証ユーザーの参加グループの一覧
 ///
@@ -21,6 +21,8 @@ final joinGroupsProvider = AutoDisposeFutureProvider<List<Group>?>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef JoinGroupsRef = AutoDisposeFutureProviderRef<List<Group>?>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

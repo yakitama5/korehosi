@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/purchase/entity/purchase.dart';
@@ -9,7 +10,7 @@ part 'child_view_purchase_provider.g.dart';
 /// データの参照頻度を減らすため、`keepAlive`を指定
 @Riverpod(keepAlive: true)
 Stream<Purchase?> childViewPurchase(
-  ChildViewPurchaseRef ref, {
+  Ref ref, {
   required String groupId,
   required String itemId,
 }) {

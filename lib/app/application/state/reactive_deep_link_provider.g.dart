@@ -6,7 +6,7 @@ part of 'reactive_deep_link_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$reactiveDeepLinkHash() => r'8242f1acf387e1f3efdb6db12b463e1031bbdaaf';
+String _$reactiveDeepLinkHash() => r'f1dbb9585b645b14412a8346f13e38302bf7882b';
 
 /// ディープリンク(購読)
 ///
@@ -22,6 +22,8 @@ final reactiveDeepLinkProvider = AutoDisposeStreamProvider<Uri>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ReactiveDeepLinkRef = AutoDisposeStreamProviderRef<Uri>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,89 +9,67 @@ part of 'notification_token.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-NotificationToken _$NotificationTokenFromJson(Map<String, dynamic> json) {
-  return _NotificationToken.fromJson(json);
-}
 
 /// @nodoc
 mixin _$NotificationToken {
-  String get token => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  String get token;
+  DateTime get createdAt;
+  DateTime get updatedAt;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $NotificationTokenCopyWith<NotificationToken> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $NotificationTokenCopyWith<$Res> {
-  factory $NotificationTokenCopyWith(
-          NotificationToken value, $Res Function(NotificationToken) then) =
-      _$NotificationTokenCopyWithImpl<$Res, NotificationToken>;
-  @useResult
-  $Res call({String token, DateTime createdAt, DateTime updatedAt});
-}
-
-/// @nodoc
-class _$NotificationTokenCopyWithImpl<$Res, $Val extends NotificationToken>
-    implements $NotificationTokenCopyWith<$Res> {
-  _$NotificationTokenCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $NotificationTokenCopyWith<NotificationToken> get copyWith =>
+      _$NotificationTokenCopyWithImpl<NotificationToken>(
+          this as NotificationToken, _$identity);
+
+  /// Serializes this NotificationToken to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? token = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NotificationToken &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, token, createdAt, updatedAt);
+
+  @override
+  String toString() {
+    return 'NotificationToken(token: $token, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
 /// @nodoc
-abstract class _$$NotificationTokenImplCopyWith<$Res>
-    implements $NotificationTokenCopyWith<$Res> {
-  factory _$$NotificationTokenImplCopyWith(_$NotificationTokenImpl value,
-          $Res Function(_$NotificationTokenImpl) then) =
-      __$$NotificationTokenImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $NotificationTokenCopyWith<$Res> {
+  factory $NotificationTokenCopyWith(
+          NotificationToken value, $Res Function(NotificationToken) _then) =
+      _$NotificationTokenCopyWithImpl;
   @useResult
   $Res call({String token, DateTime createdAt, DateTime updatedAt});
 }
 
 /// @nodoc
-class __$$NotificationTokenImplCopyWithImpl<$Res>
-    extends _$NotificationTokenCopyWithImpl<$Res, _$NotificationTokenImpl>
-    implements _$$NotificationTokenImplCopyWith<$Res> {
-  __$$NotificationTokenImplCopyWithImpl(_$NotificationTokenImpl _value,
-      $Res Function(_$NotificationTokenImpl) _then)
-      : super(_value, _then);
+class _$NotificationTokenCopyWithImpl<$Res>
+    implements $NotificationTokenCopyWith<$Res> {
+  _$NotificationTokenCopyWithImpl(this._self, this._then);
 
+  final NotificationToken _self;
+  final $Res Function(NotificationToken) _then;
+
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,31 +77,190 @@ class __$$NotificationTokenImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$NotificationTokenImpl(
+    return _then(_self.copyWith(
       token: null == token
-          ? _value.token
+          ? _self.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       updatedAt: null == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [NotificationToken].
+extension NotificationTokenPatterns on NotificationToken {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_NotificationToken value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _NotificationToken() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_NotificationToken value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _NotificationToken():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_NotificationToken value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _NotificationToken() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String token, DateTime createdAt, DateTime updatedAt)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _NotificationToken() when $default != null:
+        return $default(_that.token, _that.createdAt, _that.updatedAt);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String token, DateTime createdAt, DateTime updatedAt)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _NotificationToken():
+        return $default(_that.token, _that.createdAt, _that.updatedAt);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String token, DateTime createdAt, DateTime updatedAt)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _NotificationToken() when $default != null:
+        return $default(_that.token, _that.createdAt, _that.updatedAt);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$NotificationTokenImpl implements _NotificationToken {
-  const _$NotificationTokenImpl(
+class _NotificationToken implements NotificationToken {
+  const _NotificationToken(
       {required this.token, required this.createdAt, required this.updatedAt});
-
-  factory _$NotificationTokenImpl.fromJson(Map<String, dynamic> json) =>
-      _$$NotificationTokenImplFromJson(json);
+  factory _NotificationToken.fromJson(Map<String, dynamic> json) =>
+      _$NotificationTokenFromJson(json);
 
   @override
   final String token;
@@ -132,16 +269,26 @@ class _$NotificationTokenImpl implements _NotificationToken {
   @override
   final DateTime updatedAt;
 
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'NotificationToken(token: $token, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$NotificationTokenCopyWith<_NotificationToken> get copyWith =>
+      __$NotificationTokenCopyWithImpl<_NotificationToken>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$NotificationTokenToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NotificationTokenImpl &&
+            other is _NotificationToken &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -149,42 +296,59 @@ class _$NotificationTokenImpl implements _NotificationToken {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, token, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$NotificationTokenImplCopyWith<_$NotificationTokenImpl> get copyWith =>
-      __$$NotificationTokenImplCopyWithImpl<_$NotificationTokenImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$NotificationTokenImplToJson(
-      this,
-    );
+  String toString() {
+    return 'NotificationToken(token: $token, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _NotificationToken implements NotificationToken {
-  const factory _NotificationToken(
-      {required final String token,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$NotificationTokenImpl;
-
-  factory _NotificationToken.fromJson(Map<String, dynamic> json) =
-      _$NotificationTokenImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$NotificationTokenCopyWith<$Res>
+    implements $NotificationTokenCopyWith<$Res> {
+  factory _$NotificationTokenCopyWith(
+          _NotificationToken value, $Res Function(_NotificationToken) _then) =
+      __$NotificationTokenCopyWithImpl;
   @override
-  String get token;
-  @override
-  DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$NotificationTokenImplCopyWith<_$NotificationTokenImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({String token, DateTime createdAt, DateTime updatedAt});
 }
+
+/// @nodoc
+class __$NotificationTokenCopyWithImpl<$Res>
+    implements _$NotificationTokenCopyWith<$Res> {
+  __$NotificationTokenCopyWithImpl(this._self, this._then);
+
+  final _NotificationToken _self;
+  final $Res Function(_NotificationToken) _then;
+
+  /// Create a copy of NotificationToken
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? token = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+  }) {
+    return _then(_NotificationToken(
+      token: null == token
+          ? _self.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+// dart format on

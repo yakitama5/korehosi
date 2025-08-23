@@ -6,7 +6,7 @@ part of 'revenue_cat_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$revenueCatHash() => r'5220991195c1de8380e4546038121320fb301d05';
+String _$revenueCatHash() => r'64a8dbd147f658788bd0ed4052b58fffa25eb6f5';
 
 /// RevenueCat
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -22,6 +22,8 @@ final revenueCatProvider = Provider<Purchases>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef RevenueCatRef = ProviderRef<Purchases>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

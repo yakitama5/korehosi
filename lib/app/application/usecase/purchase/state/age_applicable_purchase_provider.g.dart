@@ -7,7 +7,7 @@ part of 'age_applicable_purchase_provider.dart';
 // **************************************************************************
 
 String _$ageApplicablePurchaseHash() =>
-    r'e27019a463a00b9ac9c97670221bc86a4ff03aad';
+    r'21e3a6c13f1f26ad3f4f2c8f93f802f5bd2070ff';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -168,6 +168,8 @@ class AgeApplicablePurchaseProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin AgeApplicablePurchaseRef on AutoDisposeFutureProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
   String get groupId;
@@ -187,4 +189,4 @@ class _AgeApplicablePurchaseProviderElement
   String get itemId => (origin as AgeApplicablePurchaseProvider).itemId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

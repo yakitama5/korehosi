@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_lifecycle_state_provider.g.dart';
 
 /// アプリのライフサイクルを監視するProvider
 @Riverpod(keepAlive: true)
-AppLifecycleState appLifecycleState(AppLifecycleStateRef ref) {
-  final observer = _AppLifecycleObserver((value) => ref.state = value);
+AppLifecycleState appLifecycleState(Ref ref) {
+  final observer = _AppLifecycleObserver((value) {
+    // TODO すぐやる
+    // ref.state = value;
+  });
 
   final binding = WidgetsBinding.instance..addObserver(observer);
   ref.onDispose(() => binding.removeObserver(observer));

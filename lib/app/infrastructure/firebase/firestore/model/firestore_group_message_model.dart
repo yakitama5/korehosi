@@ -10,7 +10,7 @@ part 'firestore_group_message_model.g.dart';
 
 /// `/message/{messageId}`ドキュメントのモデル
 @freezed
-class FirestoreGroupMessageModel with _$FirestoreGroupMessageModel {
+abstract class FirestoreGroupMessageModel with _$FirestoreGroupMessageModel {
   const factory FirestoreGroupMessageModel({
     required String id,
     required String title,

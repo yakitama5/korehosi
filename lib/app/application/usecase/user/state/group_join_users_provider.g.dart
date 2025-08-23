@@ -6,7 +6,7 @@ part of 'group_join_users_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupJoinUsersHash() => r'a4f9707bb964fe2b11c05daee0e47b2779381c18';
+String _$groupJoinUsersHash() => r'3f58d912439ca7f5d3b56b646e5ac397fbafabba';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -160,6 +160,8 @@ class GroupJoinUsersProvider extends StreamProvider<List<User>> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GroupJoinUsersRef on StreamProviderRef<List<User>> {
   /// The parameter `groupId` of this provider.
   String get groupId;
@@ -173,4 +175,4 @@ class _GroupJoinUsersProviderElement extends StreamProviderElement<List<User>>
   String get groupId => (origin as GroupJoinUsersProvider).groupId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

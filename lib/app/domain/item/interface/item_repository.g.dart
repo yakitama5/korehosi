@@ -6,7 +6,7 @@ part of 'item_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemRepositoryHash() => r'356a77fe5c707150874ac7224e17e6ae101c50dd';
+String _$itemRepositoryHash() => r'eaecfe61ddebe6b5b05667d6f863d5a0b3aef741';
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 ///
@@ -22,6 +22,8 @@ final itemRepositoryProvider = Provider<ItemRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ItemRepositoryRef = ProviderRef<ItemRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../firestore/extension/collection_reference.dart';
@@ -11,7 +12,7 @@ part 'firestore_deleted_group_message_provider.g.dart';
 /// 削除済通知メッセージコレクションの参照
 @riverpod
 CollectionReference<FirestoreGroupMessageModel> dgroupMessageCollectionRef(
-  DgroupMessageCollectionRefRef ref, {
+  Ref ref, {
   required String groupId,
 }) {
   return ref.watch(firestoreProvider).dmessagesRef(groupId).withConverter(
@@ -31,7 +32,7 @@ CollectionReference<FirestoreGroupMessageModel> dgroupMessageCollectionRef(
 /// 削除済通知メッセージドキュメントの参照
 @riverpod
 DocumentReference<FirestoreGroupMessageModel> dgroupMessageDocumentRef(
-  DgroupMessageDocumentRefRef ref, {
+  Ref ref, {
   required String groupId,
   String? dnotificationMessageId,
 }) =>

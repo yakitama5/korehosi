@@ -6,7 +6,7 @@ part of 'theme_mode_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$themeModeHash() => r'deb3ce62d7066560f4398dc69de42272657844b7';
+String _$themeModeHash() => r'7acb39d2a93b7ece7ac9759b2682ba2c81b82900';
 
 /// テーマ
 ///
@@ -21,6 +21,8 @@ final themeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ThemeModeRef = AutoDisposeProviderRef<ThemeMode>;
 String _$themeModeNotifierHash() => r'4c177e8251e8efeb415135958f02fd0733b8dbb3';
 
@@ -41,4 +43,4 @@ final themeModeNotifierProvider =
 
 typedef _$ThemeModeNotifier = AutoDisposeNotifier<ThemeMode>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

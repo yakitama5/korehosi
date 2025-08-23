@@ -6,7 +6,7 @@ part of 'user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userHash() => r'76ce02a88a3cf2545db60e0e467737ed74f941cd';
+String _$userHash() => r'24ce11c2326fd6ae0b5a30ccdf5fad723e3a2bdc';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -157,6 +157,8 @@ class UserProvider extends StreamProvider<User?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin UserRef on StreamProviderRef<User?> {
   /// The parameter `userId` of this provider.
   String get userId;
@@ -169,4 +171,4 @@ class _UserProviderElement extends StreamProviderElement<User?> with UserRef {
   String get userId => (origin as UserProvider).userId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -4,7 +4,7 @@ part 'app_info.freezed.dart';
 
 /// アプリ情報
 @freezed
-class AppInfo with _$AppInfo {
+abstract class AppInfo with _$AppInfo {
   const factory AppInfo({
     required String appName,
     required String packageName,

@@ -7,7 +7,7 @@ part of 'purchase_repository.dart';
 // **************************************************************************
 
 String _$purchaseRepositoryHash() =>
-    r'7e358e440b9e68f0f489f89d8863fece94b024fa';
+    r'62205b5e1e2b812a71b6f32008b411e8a3ed5322';
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 ///
@@ -23,6 +23,8 @@ final purchaseRepositoryProvider = Provider<PurchaseRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef PurchaseRepositoryRef = ProviderRef<PurchaseRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

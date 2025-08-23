@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/user/entity/user.dart';
@@ -9,7 +10,7 @@ part 'current_group_join_users_provider.g.dart';
 /// 現在のグループに所属しているユーザー一覧
 @riverpod
 Future<List<User>> currentGroupJoinUsers(
-  CurrentGroupJoinUsersRef ref,
+  Ref ref,
 ) async {
   // 選択中のグループに所属しているユーザーIDを取得
   final groupId =

@@ -6,9 +6,9 @@ part of 'firestore_purchase_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FirestorePurchaseModelImpl _$$FirestorePurchaseModelImplFromJson(
+_FirestorePurchaseModel _$FirestorePurchaseModelFromJson(
         Map<String, dynamic> json) =>
-    _$FirestorePurchaseModelImpl(
+    _FirestorePurchaseModel(
       id: json['id'] as String,
       price: (json['price'] as num?)?.toInt(),
       buyerName: json['buyerName'] as String?,
@@ -21,8 +21,8 @@ _$FirestorePurchaseModelImpl _$$FirestorePurchaseModelImplFromJson(
       updatedAt: dateFromTimestampValue(json['updatedAt']),
     );
 
-Map<String, dynamic> _$$FirestorePurchaseModelImplToJson(
-        _$FirestorePurchaseModelImpl instance) =>
+Map<String, dynamic> _$FirestorePurchaseModelToJson(
+        _FirestorePurchaseModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'price': instance.price,

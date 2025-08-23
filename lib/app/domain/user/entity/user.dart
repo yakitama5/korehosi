@@ -8,7 +8,7 @@ part 'user.g.dart';
 
 /// ユーザー
 @freezed
-class User with _$User {
+abstract class User with _$User {
   const factory User({
     required String id,
     required AgeGroup ageGroup,

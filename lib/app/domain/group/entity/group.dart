@@ -5,7 +5,7 @@ part 'group.g.dart';
 
 /// グループ
 @freezed
-class Group with _$Group {
+abstract class Group with _$Group {
   const factory Group({
     required String id,
     required String name,

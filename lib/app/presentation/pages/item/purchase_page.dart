@@ -181,11 +181,11 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
 
     // 入力内容の取得
     final surprise = formModel.surpriseControl.value!;
-    final price = formModel.priceControl?.value;
-    final planDate = formModel.planDateControl?.value;
-    final sentAt = formModel.sentAtControl?.value;
-    final memo = formModel.memoControl?.value;
-    final buyerName = formModel.buyerNameControl?.value;
+    final price = formModel.priceControl.value;
+    final planDate = formModel.planDateControl.value;
+    final sentAt = formModel.sentAtControl.value;
+    final memo = formModel.memoControl.value;
+    final buyerName = formModel.buyerNameControl.value;
 
     // 登録 or 更新
     final itemId = ref.read(ItemDetailProviders.itemIdProvider);
@@ -273,7 +273,7 @@ class _SurpriseField extends HookConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final formModel = ReactivePurchaseFormModelForm.of(context)!;
 
-    return ReactiveSwitchListTile.adaptative(
+    return ReactiveSwitchListTile.adaptive(
       formControl: formModel.surpriseControl,
       contentPadding: EdgeInsets.zero,
       title: Column(

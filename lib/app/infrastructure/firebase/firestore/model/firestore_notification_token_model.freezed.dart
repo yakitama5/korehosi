@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,87 +9,57 @@ part of 'firestore_notification_token_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-FirestoreNotificationTokenModel _$FirestoreNotificationTokenModelFromJson(
-    Map<String, dynamic> json) {
-  return _FirestoreNotificationTokenModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$FirestoreNotificationTokenModel {
-  String get token => throw _privateConstructorUsedError;
+  String get token;
   @timestampKey
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
   @timestampKey
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $FirestoreNotificationTokenModelCopyWith<FirestoreNotificationTokenModel>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FirestoreNotificationTokenModelCopyWith<$Res> {
-  factory $FirestoreNotificationTokenModelCopyWith(
-          FirestoreNotificationTokenModel value,
-          $Res Function(FirestoreNotificationTokenModel) then) =
-      _$FirestoreNotificationTokenModelCopyWithImpl<$Res,
-          FirestoreNotificationTokenModel>;
-  @useResult
-  $Res call(
-      {String token,
-      @timestampKey DateTime? createdAt,
-      @timestampKey DateTime? updatedAt});
-}
-
-/// @nodoc
-class _$FirestoreNotificationTokenModelCopyWithImpl<$Res,
-        $Val extends FirestoreNotificationTokenModel>
-    implements $FirestoreNotificationTokenModelCopyWith<$Res> {
-  _$FirestoreNotificationTokenModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of FirestoreNotificationTokenModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $FirestoreNotificationTokenModelCopyWith<FirestoreNotificationTokenModel>
+      get copyWith => _$FirestoreNotificationTokenModelCopyWithImpl<
+              FirestoreNotificationTokenModel>(
+          this as FirestoreNotificationTokenModel, _$identity);
+
+  /// Serializes this FirestoreNotificationTokenModel to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? token = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FirestoreNotificationTokenModel &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, token, createdAt, updatedAt);
+
+  @override
+  String toString() {
+    return 'FirestoreNotificationTokenModel(token: $token, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
 /// @nodoc
-abstract class _$$FirestoreNotificationTokenModelImplCopyWith<$Res>
-    implements $FirestoreNotificationTokenModelCopyWith<$Res> {
-  factory _$$FirestoreNotificationTokenModelImplCopyWith(
-          _$FirestoreNotificationTokenModelImpl value,
-          $Res Function(_$FirestoreNotificationTokenModelImpl) then) =
-      __$$FirestoreNotificationTokenModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $FirestoreNotificationTokenModelCopyWith<$Res> {
+  factory $FirestoreNotificationTokenModelCopyWith(
+          FirestoreNotificationTokenModel value,
+          $Res Function(FirestoreNotificationTokenModel) _then) =
+      _$FirestoreNotificationTokenModelCopyWithImpl;
   @useResult
   $Res call(
       {String token,
@@ -98,15 +68,15 @@ abstract class _$$FirestoreNotificationTokenModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$FirestoreNotificationTokenModelImplCopyWithImpl<$Res>
-    extends _$FirestoreNotificationTokenModelCopyWithImpl<$Res,
-        _$FirestoreNotificationTokenModelImpl>
-    implements _$$FirestoreNotificationTokenModelImplCopyWith<$Res> {
-  __$$FirestoreNotificationTokenModelImplCopyWithImpl(
-      _$FirestoreNotificationTokenModelImpl _value,
-      $Res Function(_$FirestoreNotificationTokenModelImpl) _then)
-      : super(_value, _then);
+class _$FirestoreNotificationTokenModelCopyWithImpl<$Res>
+    implements $FirestoreNotificationTokenModelCopyWith<$Res> {
+  _$FirestoreNotificationTokenModelCopyWithImpl(this._self, this._then);
 
+  final FirestoreNotificationTokenModel _self;
+  final $Res Function(FirestoreNotificationTokenModel) _then;
+
+  /// Create a copy of FirestoreNotificationTokenModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,35 +84,198 @@ class __$$FirestoreNotificationTokenModelImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$FirestoreNotificationTokenModelImpl(
+    return _then(_self.copyWith(
       token: null == token
-          ? _value.token
+          ? _self.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [FirestoreNotificationTokenModel].
+extension FirestoreNotificationTokenModelPatterns
+    on FirestoreNotificationTokenModel {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_FirestoreNotificationTokenModel value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreNotificationTokenModel() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_FirestoreNotificationTokenModel value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreNotificationTokenModel():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_FirestoreNotificationTokenModel value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreNotificationTokenModel() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String token, @timestampKey DateTime? createdAt,
+            @timestampKey DateTime? updatedAt)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreNotificationTokenModel() when $default != null:
+        return $default(_that.token, _that.createdAt, _that.updatedAt);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String token, @timestampKey DateTime? createdAt,
+            @timestampKey DateTime? updatedAt)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreNotificationTokenModel():
+        return $default(_that.token, _that.createdAt, _that.updatedAt);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String token, @timestampKey DateTime? createdAt,
+            @timestampKey DateTime? updatedAt)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreNotificationTokenModel() when $default != null:
+        return $default(_that.token, _that.createdAt, _that.updatedAt);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$FirestoreNotificationTokenModelImpl
-    implements _FirestoreNotificationTokenModel {
-  const _$FirestoreNotificationTokenModelImpl(
+class _FirestoreNotificationTokenModel
+    implements FirestoreNotificationTokenModel {
+  const _FirestoreNotificationTokenModel(
       {required this.token,
       @timestampKey this.createdAt,
       @timestampKey this.updatedAt});
-
-  factory _$FirestoreNotificationTokenModelImpl.fromJson(
+  factory _FirestoreNotificationTokenModel.fromJson(
           Map<String, dynamic> json) =>
-      _$$FirestoreNotificationTokenModelImplFromJson(json);
+      _$FirestoreNotificationTokenModelFromJson(json);
 
   @override
   final String token;
@@ -153,16 +286,27 @@ class _$FirestoreNotificationTokenModelImpl
   @timestampKey
   final DateTime? updatedAt;
 
+  /// Create a copy of FirestoreNotificationTokenModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'FirestoreNotificationTokenModel(token: $token, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$FirestoreNotificationTokenModelCopyWith<_FirestoreNotificationTokenModel>
+      get copyWith => __$FirestoreNotificationTokenModelCopyWithImpl<
+          _FirestoreNotificationTokenModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FirestoreNotificationTokenModelToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FirestoreNotificationTokenModelImpl &&
+            other is _FirestoreNotificationTokenModel &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -170,48 +314,63 @@ class _$FirestoreNotificationTokenModelImpl
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, token, createdAt, updatedAt);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$FirestoreNotificationTokenModelImplCopyWith<
-          _$FirestoreNotificationTokenModelImpl>
-      get copyWith => __$$FirestoreNotificationTokenModelImplCopyWithImpl<
-          _$FirestoreNotificationTokenModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FirestoreNotificationTokenModelImplToJson(
-      this,
-    );
+  String toString() {
+    return 'FirestoreNotificationTokenModel(token: $token, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _FirestoreNotificationTokenModel
-    implements FirestoreNotificationTokenModel {
-  const factory _FirestoreNotificationTokenModel(
-          {required final String token,
-          @timestampKey final DateTime? createdAt,
-          @timestampKey final DateTime? updatedAt}) =
-      _$FirestoreNotificationTokenModelImpl;
-
-  factory _FirestoreNotificationTokenModel.fromJson(Map<String, dynamic> json) =
-      _$FirestoreNotificationTokenModelImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$FirestoreNotificationTokenModelCopyWith<$Res>
+    implements $FirestoreNotificationTokenModelCopyWith<$Res> {
+  factory _$FirestoreNotificationTokenModelCopyWith(
+          _FirestoreNotificationTokenModel value,
+          $Res Function(_FirestoreNotificationTokenModel) _then) =
+      __$FirestoreNotificationTokenModelCopyWithImpl;
   @override
-  String get token;
-  @override
-  @timestampKey
-  DateTime? get createdAt;
-  @override
-  @timestampKey
-  DateTime? get updatedAt;
-  @override
-  @JsonKey(ignore: true)
-  _$$FirestoreNotificationTokenModelImplCopyWith<
-          _$FirestoreNotificationTokenModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {String token,
+      @timestampKey DateTime? createdAt,
+      @timestampKey DateTime? updatedAt});
 }
+
+/// @nodoc
+class __$FirestoreNotificationTokenModelCopyWithImpl<$Res>
+    implements _$FirestoreNotificationTokenModelCopyWith<$Res> {
+  __$FirestoreNotificationTokenModelCopyWithImpl(this._self, this._then);
+
+  final _FirestoreNotificationTokenModel _self;
+  final $Res Function(_FirestoreNotificationTokenModel) _then;
+
+  /// Create a copy of FirestoreNotificationTokenModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? token = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_FirestoreNotificationTokenModel(
+      token: null == token
+          ? _self.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
+}
+
+// dart format on

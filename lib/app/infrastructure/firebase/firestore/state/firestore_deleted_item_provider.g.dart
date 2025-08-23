@@ -7,7 +7,7 @@ part of 'firestore_deleted_item_provider.dart';
 // **************************************************************************
 
 String _$ditemCollectionRefHash() =>
-    r'beb4cf7ae7ffe2bf64c97a3044d89b95aa0e41df';
+    r'9d384be616c3e7442fd5e7ddba43e95936dc6ab5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -160,6 +160,8 @@ class DitemCollectionRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin DitemCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestoreItemModel>> {
   /// The parameter `groupId` of this provider.
@@ -175,7 +177,7 @@ class _DitemCollectionRefProviderElement
   String get groupId => (origin as DitemCollectionRefProvider).groupId;
 }
 
-String _$ditemDocumentRefHash() => r'746bfc113418407f93261f52ed6fa61af4021e71';
+String _$ditemDocumentRefHash() => r'1fe72886ae563a8f8a7fcac224f2b80832004872';
 
 /// 欲しい物ドキュメントの参照
 ///
@@ -318,6 +320,8 @@ class DitemDocumentRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin DitemDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreItemModel>> {
   /// The parameter `groupId` of this provider.
@@ -338,4 +342,4 @@ class _DitemDocumentRefProviderElement
   String? get itemId => (origin as DitemDocumentRefProvider).itemId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

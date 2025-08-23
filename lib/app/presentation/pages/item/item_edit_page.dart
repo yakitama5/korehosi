@@ -152,16 +152,16 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
         }
 
         // 入力値を取得
-        final name = formModel.nameControl?.value;
-        final wanterName = formModel.wanterNameControl?.value;
-        final wishRank = formModel.wishRankControl?.value;
-        final wishSeason = formModel.wishSeasonControl?.value;
-        final urls = formModel.urlsControl?.controls
+        final name = formModel.nameControl.value;
+        final wanterName = formModel.wanterNameControl.value;
+        final wishRank = formModel.wishRankControl.value;
+        final wishSeason = formModel.wishSeasonControl.value;
+        final urls = formModel.urlsControl.controls
             .map((e) => e.value)
             .nonNulls
             .toList();
-        final memo = formModel.memoControl?.value;
-        final selectedImages = formModel.imagesControl?.controls
+        final memo = formModel.memoControl.value;
+        final selectedImages = formModel.imagesControl.controls
             .map((e) => e.value)
             .nonNulls
             .toList();
@@ -276,7 +276,7 @@ class _ImageFields extends HookConsumerWidget {
                     ),
                   ),
                   onSelected: () => formModel.addImagesItem(null),
-                  onDeleted: () => formModel.imagesControl?.removeAt(i),
+                  onDeleted: () => formModel.imagesControl.removeAt(i),
                   selectedBuilder: (onPressed, selectedFile) {
                     final uploaded = selectedFile.imagePath != null;
                     return InkWell(
@@ -386,9 +386,9 @@ class _UrlFields extends HookConsumerWidget {
 
     return ReactiveItemFormModelFormArrayBuilder(
       formControl: formModel.urlsControl,
-      itemBuilder: (context, i, item, formModel) =>
+      itemBuilder: (_, i, __, ___, formModel) =>
           ReactiveOutlinedTextField<String>(
-        key: ObjectKey(formModel.urlsControl?.control('$i')),
+        key: ObjectKey(formModel.urlsControl.control('$i')),
         formControlName: '$i',
         labelText: l10n.url,
         maxLength: itemConfig.maxUrlLength,

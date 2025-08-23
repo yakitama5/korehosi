@@ -6,8 +6,7 @@ part of 'purchase.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PurchaseImpl _$$PurchaseImplFromJson(Map<String, dynamic> json) =>
-    _$PurchaseImpl(
+_Purchase _$PurchaseFromJson(Map<String, dynamic> json) => _Purchase(
       id: json['id'] as String,
       price: (json['price'] as num?)?.toInt(),
       buyerName: json['buyerName'] as String?,
@@ -24,8 +23,7 @@ _$PurchaseImpl _$$PurchaseImplFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$PurchaseImplToJson(_$PurchaseImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PurchaseToJson(_Purchase instance) => <String, dynamic>{
       'id': instance.id,
       'price': instance.price,
       'buyerName': instance.buyerName,

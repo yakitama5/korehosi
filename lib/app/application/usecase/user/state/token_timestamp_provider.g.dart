@@ -6,7 +6,7 @@ part of 'token_timestamp_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tokenTimestampHash() => r'c90de04c67aa96a5e6b8140db65b515a48b37949';
+String _$tokenTimestampHash() => r'401ed0b1e2f6e12b7ed85acb93aeb49cbc931bed';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -154,6 +154,8 @@ class TokenTimestampProvider extends AutoDisposeFutureProvider<DateTime?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin TokenTimestampRef on AutoDisposeFutureProviderRef<DateTime?> {
   /// The parameter `token` of this provider.
   String get token;
@@ -167,4 +169,4 @@ class _TokenTimestampProviderElement
   String get token => (origin as TokenTimestampProvider).token;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

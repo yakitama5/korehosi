@@ -6,8 +6,8 @@ part of 'group_message.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GroupMessageImpl _$$GroupMessageImplFromJson(Map<String, dynamic> json) =>
-    _$GroupMessageImpl(
+_GroupMessage _$GroupMessageFromJson(Map<String, dynamic> json) =>
+    _GroupMessage(
       id: json['id'] as String,
       title: json['title'] as String,
       body: json['body'] as String,
@@ -23,7 +23,7 @@ _$GroupMessageImpl _$$GroupMessageImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$GroupMessageImplToJson(_$GroupMessageImpl instance) =>
+Map<String, dynamic> _$GroupMessageToJson(_GroupMessage instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

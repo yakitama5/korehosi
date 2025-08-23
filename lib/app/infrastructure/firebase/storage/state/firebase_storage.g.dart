@@ -6,7 +6,7 @@ part of 'firebase_storage.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseStorageHash() => r'9b239ccbfd0ef129cc8465924f751c6af8cb3563';
+String _$firebaseStorageHash() => r'4d34fbbd82ac849c74805e19a05079afa5e20cad';
 
 /// Firebase Storage
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -23,6 +23,8 @@ final firebaseStorageProvider = Provider<FirebaseStorage>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FirebaseStorageRef = ProviderRef<FirebaseStorage>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

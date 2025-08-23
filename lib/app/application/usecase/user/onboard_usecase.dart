@@ -7,7 +7,7 @@ import '../run_usecase_mixin.dart';
 part 'onboard_usecase.g.dart';
 
 @riverpod
-OnboardUsecase onboardUsecase(OnboardUsecaseRef ref) => OnboardUsecase(ref);
+OnboardUsecase onboardUsecase(Ref ref) => OnboardUsecase(ref);
 
 /// オンボード(チュートリアル)に関するユースケース
 class OnboardUsecase with RunUsecaseMixin {

@@ -6,7 +6,7 @@ part 'app_config.freezed.dart';
 
 /// アプリ共通の設定
 @freezed
-class AppConfig with _$AppConfig {
+abstract class AppConfig with _$AppConfig {
   const factory AppConfig({
     required Flavor flavor,
     required String appName,

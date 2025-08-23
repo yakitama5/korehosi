@@ -1,4 +1,5 @@
 import 'package:family_wish_list/app/application/usecase/analyze/state/wanter_filter_notifier_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/item/entity/item.dart';
@@ -8,7 +9,7 @@ part 'analyze_source_items_provider.dart.g.dart';
 
 /// ふりかえりで利用する欲しい物
 @riverpod
-Future<List<Item>> analyzeSourceItems(AnalyzeSourceItemsRef ref) {
+Future<List<Item>> analyzeSourceItems(Ref ref) {
   // フィルタの内容で絞り込む
   final wanterName = ref.watch(wanterFilterNotifierProvider);
   return ref.watch(

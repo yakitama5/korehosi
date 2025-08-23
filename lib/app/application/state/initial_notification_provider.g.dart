@@ -7,7 +7,7 @@ part of 'initial_notification_provider.dart';
 // **************************************************************************
 
 String _$initialNotificationMessageHash() =>
-    r'c92fd1c1bcec5e685602447d9c12d5b3701c67ef';
+    r'6ffaf54a22aea31a1770af7e4a9c76755804e086';
 
 /// プッシュ通知でアプリを表示した際の初期メッセージ
 ///
@@ -24,7 +24,9 @@ final initialNotificationMessageProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef InitialNotificationMessageRef
     = AutoDisposeFutureProviderRef<NotificationMessage?>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

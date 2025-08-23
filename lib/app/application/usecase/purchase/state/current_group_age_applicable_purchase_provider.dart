@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/purchase/entity/purchase.dart';
@@ -9,7 +10,7 @@ part 'current_group_age_applicable_purchase_provider.g.dart';
 /// グループ内の年齢に応じた購入情報
 @riverpod
 Future<Purchase?> currentGroupAgeApplicablePurchase(
-  CurrentGroupAgeApplicablePurchaseRef ref, {
+  Ref ref, {
   required String itemId,
 }) async {
   // 現在のグループ情報を取得

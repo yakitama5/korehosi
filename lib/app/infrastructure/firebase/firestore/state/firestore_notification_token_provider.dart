@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../firestore/extension/collection_reference.dart';
@@ -12,7 +13,7 @@ part 'firestore_notification_token_provider.g.dart';
 @riverpod
 CollectionReference<FirestoreNotificationTokenModel>
     notificationTokenCollectionRef(
-  NotificationTokenCollectionRefRef ref, {
+  Ref ref, {
   required String userId,
 }) {
   return ref.watch(firestoreProvider).fcmTokensRef(userId).withConverter(
@@ -32,7 +33,7 @@ CollectionReference<FirestoreNotificationTokenModel>
 /// 通知FCMトークンドキュメントの参照
 @riverpod
 DocumentReference<FirestoreNotificationTokenModel> notificationTokenDocumentRef(
-  NotificationTokenDocumentRefRef ref, {
+  Ref ref, {
   required String userId,
   String? token,
 }) =>

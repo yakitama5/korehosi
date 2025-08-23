@@ -166,7 +166,7 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
       action: () async {
         // 画面の入力内容を取得
         final formModel = ReactiveUserFormModelForm.of(context)!;
-        final name = formModel.nameControl?.value;
+        final name = formModel.nameControl.value;
         final ageGroup = formModel.ageGroupControl.value;
 
         // 登録

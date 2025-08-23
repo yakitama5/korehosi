@@ -12,8 +12,7 @@ import '../user/state/auth_user_provider.dart';
 part 'group_share_usecase.g.dart';
 
 @riverpod
-GroupShareUsecase groupShareUsecase(GroupShareUsecaseRef ref) =>
-    GroupShareUsecase(ref);
+GroupShareUsecase groupShareUsecase(Ref ref) => GroupShareUsecase(ref);
 
 /// グループの共有に関するユースケース
 class GroupShareUsecase with RunUsecaseMixin {
@@ -49,7 +48,8 @@ class GroupShareUsecase with RunUsecaseMixin {
           final shareText = await _createShareText(shareUrl, groupName);
 
           // シェア
-          await Share.shareXFiles([xFile], text: shareText);
+          await SharePlus.instance
+              .share(ShareParams(files: [xFile], text: shareText));
         },
         disableLoading: true,
       );

@@ -4,7 +4,7 @@ part 'url_config.freezed.dart';
 
 /// WebページなどのURL一覧
 @freezed
-class UrlConfig with _$UrlConfig {
+abstract class UrlConfig with _$UrlConfig {
   const factory UrlConfig({
     required String contactUs,
     required String privacyPolicyJa,

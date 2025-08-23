@@ -1,12 +1,13 @@
 import 'package:family_wish_list/app/application/usecase/analyze/state/analyze_buyed_count_provider.dart';
 import 'package:family_wish_list/app/application/usecase/analyze/state/analyze_source_items_provider.dart.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'buyed_rate_provider.g.dart';
 
 /// 購入率
 @riverpod
-Future<double> buyedRate(BuyedRateRef ref) async {
+Future<double> buyedRate(Ref ref) async {
   // 購入済の欲しい物に絞り込む
   final asyncAllItemsCount = ref
       .watch(analyzeSourceItemsProvider.selectAsync((items) => items.length));

@@ -249,7 +249,7 @@ class ResponsiveWrapper extends SingleChildStatelessWidget {
 
           return MaxWidthBox(
             maxWidth: AppBreakpoint.desktopLarge.end.toDouble(),
-            background: Container(color: colorScheme.surface),
+            backgroundColor: colorScheme.surface,
             child: ResponsiveScaledBox(
               width: ResponsiveValue<double>(
                 context,

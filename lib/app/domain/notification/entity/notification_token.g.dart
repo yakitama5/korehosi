@@ -6,16 +6,14 @@ part of 'notification_token.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$NotificationTokenImpl _$$NotificationTokenImplFromJson(
-        Map<String, dynamic> json) =>
-    _$NotificationTokenImpl(
+_NotificationToken _$NotificationTokenFromJson(Map<String, dynamic> json) =>
+    _NotificationToken(
       token: json['token'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$NotificationTokenImplToJson(
-        _$NotificationTokenImpl instance) =>
+Map<String, dynamic> _$NotificationTokenToJson(_NotificationToken instance) =>
     <String, dynamic>{
       'token': instance.token,
       'createdAt': instance.createdAt.toIso8601String(),

@@ -6,7 +6,7 @@ part of 'group_detail_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupIdHash() => r'378df480add4a63c1d6d4fb5a39ffda52b4e49f4';
+String _$groupIdHash() => r'18532e7c3bcce2f437bdcf124bbc0f90b500a3d6';
 
 /// 明細表示対象となるグループのIDを管理するProvider
 /// `override`前提の利用を強制する
@@ -22,8 +22,10 @@ final _groupIdProvider = AutoDisposeProvider<String?>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef _GroupIdRef = AutoDisposeProviderRef<String?>;
-String _$groupHash() => r'f44748c6ffd3d886c6d025b6124af0ca65018a9a';
+String _$groupHash() => r'9b114a42e29290d0b7a315739e99b593c7c97459';
 
 /// 明細表示対象となるグループのEntityを管理するProvider
 /// `_groupIdProvider`に依存する
@@ -42,8 +44,10 @@ final _groupProvider = AutoDisposeFutureProvider<Group?>.internal(
   },
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef _GroupRef = AutoDisposeFutureProviderRef<Group?>;
-String _$usersHash() => r'243e0b2cada55fa7c77a16cf144ce23941fa87fb';
+String _$usersHash() => r'1126ddf7f0389aa77d2fe672898b83152e37335b';
 
 /// グループに参加中のユーザーを管理するProvider
 /// `_groupIdProvider`に依存する
@@ -62,6 +66,8 @@ final _usersProvider = AutoDisposeFutureProvider<List<User>>.internal(
   },
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef _UsersRef = AutoDisposeFutureProviderRef<List<User>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,16 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+part of 'routes_data.dart';
 
-import '../../../application/usecase/group/state/group_detail_providers.dart';
-import '../../pages/group/group_page.dart';
-import '../../pages/group/groups_page.dart';
-import '../../pages/settings/settings_page.dart';
-import '../../pages/user/account_page.dart';
-import '../../pages/user/license_page.dart';
-import '../../pages/user/profile_page.dart';
-
-final _navigatorKey = GlobalKey<NavigatorState>(debugLabel: 'SETTINGS');
+final _settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'SETTINGS');
 
 const settingsBranch = TypedStatefulShellBranch<BranchSettingsData>(
   routes: [
@@ -37,10 +27,10 @@ class BranchSettingsData extends StatefulShellBranchData {
   const BranchSettingsData();
 }
 
-class SettingsRouteData extends GoRouteData {
+class SettingsRouteData extends GoRouteData with _$SettingsRouteData {
   const SettingsRouteData();
 
-  static final GlobalKey<NavigatorState> $navigatorKey = _navigatorKey;
+  static final GlobalKey<NavigatorState> $navigatorKey = _settingsNavigatorKey;
   static const path = '/settings';
 
   @override
@@ -48,7 +38,7 @@ class SettingsRouteData extends GoRouteData {
       const SettingsPage();
 }
 
-class GroupsRouteData extends GoRouteData {
+class GroupsRouteData extends GoRouteData with _$GroupsRouteData {
   const GroupsRouteData();
 
   static const path = 'groups';
@@ -57,7 +47,7 @@ class GroupsRouteData extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => const GroupsPage();
 }
 
-class GroupRouteData extends GoRouteData {
+class GroupRouteData extends GoRouteData with _$GroupRouteData {
   const GroupRouteData(this.groupId);
 
   static const path = 'group/:groupId';
@@ -73,7 +63,7 @@ class GroupRouteData extends GoRouteData {
       );
 }
 
-class ProfileRouteData extends GoRouteData {
+class ProfileRouteData extends GoRouteData with _$ProfileRouteData {
   const ProfileRouteData();
 
   static const path = 'profile';
@@ -83,7 +73,7 @@ class ProfileRouteData extends GoRouteData {
       const ProfilePage();
 }
 
-class LicenseRouteData extends GoRouteData {
+class LicenseRouteData extends GoRouteData with _$LicenseRouteData {
   const LicenseRouteData();
 
   static const path = 'license';
@@ -93,7 +83,7 @@ class LicenseRouteData extends GoRouteData {
       const MyLincensePage();
 }
 
-class AccountRouteData extends GoRouteData {
+class AccountRouteData extends GoRouteData with _$AccountRouteData {
   const AccountRouteData();
 
   static const path = 'account';

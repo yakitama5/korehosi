@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../firestore/extension/collection_reference.dart';
@@ -11,7 +12,7 @@ part 'firestore_deleted_group_provider.g.dart';
 /// グループコレクションの参照
 @riverpod
 CollectionReference<FirestoreGroupModel> dgroupCollectionRef(
-  DgroupCollectionRefRef ref,
+  Ref ref,
 ) {
   return ref.watch(firestoreProvider).dgroupsRef().withConverter(
         fromFirestore: (snapshot, options) =>
@@ -30,7 +31,7 @@ CollectionReference<FirestoreGroupModel> dgroupCollectionRef(
 /// グループドキュメントの参照
 @riverpod
 DocumentReference<FirestoreGroupModel> dgroupDocumentRef(
-  DgroupDocumentRefRef ref, {
+  Ref ref, {
   String? groupId,
 }) =>
     ref.watch(dgroupCollectionRefProvider).doc(groupId);

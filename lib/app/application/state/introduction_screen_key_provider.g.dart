@@ -7,7 +7,7 @@ part of 'introduction_screen_key_provider.dart';
 // **************************************************************************
 
 String _$introductionScreenKeyHash() =>
-    r'0816cf5adf1cf301f2af6e13acdb3d37a7af93da';
+    r'2eafc6db10d8247fc5d976667d09ad9115e9218d';
 
 /// オンボード時のページキー
 ///
@@ -24,7 +24,9 @@ final introductionScreenKeyProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef IntroductionScreenKeyRef
     = AutoDisposeProviderRef<GlobalKey<IntroductionScreenState>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

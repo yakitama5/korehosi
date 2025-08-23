@@ -7,7 +7,7 @@ part of 'firestore_deleted_group_message_provider.dart';
 // **************************************************************************
 
 String _$dgroupMessageCollectionRefHash() =>
-    r'95f2c80b59a598fc4c323cf6dbd875ccd2a2af4b';
+    r'4a7836c3de8bc165d96d3551572c37321f96d62d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -161,6 +161,8 @@ class DgroupMessageCollectionRefProvider extends AutoDisposeProvider<
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin DgroupMessageCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestoreGroupMessageModel>> {
   /// The parameter `groupId` of this provider.
@@ -178,7 +180,7 @@ class _DgroupMessageCollectionRefProviderElement
 }
 
 String _$dgroupMessageDocumentRefHash() =>
-    r'97c7e0c0fc78ad2f90d607b9611ef3ad15423e23';
+    r'80976af009830b4e51651bb520da017c9d7d2079';
 
 /// 削除済通知メッセージドキュメントの参照
 ///
@@ -322,6 +324,8 @@ class DgroupMessageDocumentRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin DgroupMessageDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreGroupMessageModel>> {
   /// The parameter `groupId` of this provider.
@@ -344,4 +348,4 @@ class _DgroupMessageDocumentRefProviderElement
       (origin as DgroupMessageDocumentRefProvider).dnotificationMessageId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

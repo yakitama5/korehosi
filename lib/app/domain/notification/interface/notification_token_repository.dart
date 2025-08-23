@@ -1,5 +1,6 @@
 // ignore_for_file: one_member_abstracts
 
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'notification_token_repository.g.dart';
@@ -7,7 +8,7 @@ part 'notification_token_repository.g.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 @Riverpod(keepAlive: true)
 NotificationTokenRepository notificationTokenRepository(
-  NotificationTokenRepositoryRef ref,
+  Ref ref,
 ) =>
     // アプリ起動時 or テスト時に `override` することを前提に利用
     throw UnimplementedError();

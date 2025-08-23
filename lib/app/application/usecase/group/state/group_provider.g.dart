@@ -6,7 +6,7 @@ part of 'group_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupHash() => r'2099576dcd879bc2d6d6cb20e85b53329091f072';
+String _$groupHash() => r'93c7aa03923752a4cf891c58cd39dda4883045ee';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -159,6 +159,8 @@ class GroupProvider extends StreamProvider<Group?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GroupRef on StreamProviderRef<Group?> {
   /// The parameter `groupId` of this provider.
   String get groupId;
@@ -172,4 +174,4 @@ class _GroupProviderElement extends StreamProviderElement<Group?>
   String get groupId => (origin as GroupProvider).groupId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

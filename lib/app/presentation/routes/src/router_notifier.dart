@@ -9,9 +9,7 @@ import '../../../application/usecase/item/state/current_group_item_provider.dart
 import '../../../application/usecase/user/state/auth_status_provider.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../utils/logger.dart';
-import 'item_branch.dart';
 import 'routes_data.dart';
-import 'settings_branch.dart';
 
 part 'router_notifier.g.dart';
 
@@ -23,7 +21,7 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
 
   @override
   Future<void> build() async {
-    ref.listenSelf((previous, next) {
+    listenSelf((previous, next) {
       if (state.isLoading) {
         return;
       }

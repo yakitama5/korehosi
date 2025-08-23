@@ -4,7 +4,7 @@ part 'group_config.freezed.dart';
 
 /// グループの設定
 @freezed
-class GroupConfig with _$GroupConfig {
+abstract class GroupConfig with _$GroupConfig {
   const factory GroupConfig({
     required bool initialPremium,
     required int initialItemCount,

@@ -5,7 +5,7 @@ part 'selected_image_model.freezed.dart';
 
 /// 画像選択時のモデル
 @freezed
-class SelectedImageModel with _$SelectedImageModel {
+abstract class SelectedImageModel with _$SelectedImageModel {
   // どちらか片方は必ず値を設定することを保証する
   @Assert('imagePath != null || uploadFile != null')
   const factory SelectedImageModel({

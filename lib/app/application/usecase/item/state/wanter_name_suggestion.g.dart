@@ -7,7 +7,7 @@ part of 'wanter_name_suggestion.dart';
 // **************************************************************************
 
 String _$wanterNameSuggestionHash() =>
-    r'f50edfaab8c89527cdbfb4d27d959f6e2d326372';
+    r'775613f61e4761c1c7010da36834934467e29735';
 
 /// 欲しい人のサジェストリスト
 /// 対象は「だれがほしい？」に入力したことのある人 + 現在のグループ内のユーザー
@@ -25,6 +25,8 @@ final wanterNameSuggestionProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef WanterNameSuggestionRef = AutoDisposeFutureProviderRef<List<String>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

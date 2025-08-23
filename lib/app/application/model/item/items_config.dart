@@ -7,7 +7,7 @@ part 'items_config.freezed.dart';
 
 /// ほしい物の設定
 @freezed
-class ItemsConfig with _$ItemsConfig {
+abstract class ItemsConfig with _$ItemsConfig {
   const factory ItemsConfig({
     required ItemOrderModel defaultOrder,
     required Set<PurchaseStatus> defaultPurchaseStatus,
