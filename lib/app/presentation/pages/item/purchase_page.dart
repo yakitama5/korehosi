@@ -1,7 +1,6 @@
 import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
@@ -141,7 +140,9 @@ class _PurchaseForm extends HookConsumerWidget {
     // 内容が変更されていなければ閉じる
     final dirty = ReactivePurchaseFormModelForm.of(context)?.form.dirty;
     if (dirty != true) {
-      context.pop();
+      Navigator.pop(
+        context,
+      );
       return;
     }
 
@@ -157,7 +158,9 @@ class _PurchaseForm extends HookConsumerWidget {
     // 破棄が選ばれたら画面を閉じる
     if (result == DialogResult.ok) {
       if (context.mounted) {
-        context.pop();
+        Navigator.pop(
+          context,
+        );
       }
     }
   }
@@ -217,7 +220,9 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
 
     // 遷移元にポップ
     if (context.mounted) {
-      context.pop();
+      Navigator.pop(
+        context,
+      );
     }
   }
 }
@@ -256,7 +261,9 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
         // 遷移元にポップ
         if (context.mounted) {
-          context.pop();
+          Navigator.pop(
+            context,
+          );
         }
       },
     );

@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -407,7 +406,9 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
         await ref.read(groupUsecaseProvider).delete(groupId: group!.id);
 
         if (context.mounted) {
-          context.pop();
+          Navigator.pop(
+            context,
+          );
         }
       },
     );
@@ -464,7 +465,9 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
         await ref.read(groupUsecaseProvider).leave(groupId: group!.id);
 
         if (context.mounted) {
-          context.pop();
+          Navigator.pop(
+            context,
+          );
         }
       },
     );
