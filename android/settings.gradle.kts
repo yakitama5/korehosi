@@ -21,6 +21,12 @@ plugins {
     id("dev.flutter.flutter-plugin-loader") version "1.0.0"
     id("com.android.application") version "8.9.1" apply false
     id("org.jetbrains.kotlin.android") version "2.1.0" apply false
+
+    // Add: Firebase
+    id("com.google.gms.google-services") version "4.4.3" apply false
+    id("com.google.firebase.crashlytics") version "3.0.6" apply false
+    // Add: local_notifications
+    // id("com.android.tools.desugar_jdk_libs") version "2.1.4" apply false
 }
 
 include(":app")
