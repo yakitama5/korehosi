@@ -22,12 +22,8 @@ JoinGroupRequest _$JoinGroupRequestFromJson(Map<String, dynamic> json) {
 mixin _$JoinGroupRequest {
   String get shareLinkId => throw _privateConstructorUsedError;
 
-  /// Serializes this JoinGroupRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of JoinGroupRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $JoinGroupRequestCopyWith<JoinGroupRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,8 +47,6 @@ class _$JoinGroupRequestCopyWithImpl<$Res, $Val extends JoinGroupRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of JoinGroupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,8 +80,6 @@ class __$$JoinGroupRequestImplCopyWithImpl<$Res>
       $Res Function(_$JoinGroupRequestImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of JoinGroupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,13 +119,11 @@ class _$JoinGroupRequestImpl implements _JoinGroupRequest {
                 other.shareLinkId == shareLinkId));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, shareLinkId);
 
-  /// Create a copy of JoinGroupRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$JoinGroupRequestImplCopyWith<_$JoinGroupRequestImpl> get copyWith =>
@@ -157,11 +147,8 @@ abstract class _JoinGroupRequest implements JoinGroupRequest {
 
   @override
   String get shareLinkId;
-
-  /// Create a copy of JoinGroupRequest
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$JoinGroupRequestImplCopyWith<_$JoinGroupRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

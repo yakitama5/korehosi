@@ -20,9 +20,7 @@ mixin _$ItemImageConfig {
   int get minHeight => throw _privateConstructorUsedError;
   int get quality => throw _privateConstructorUsedError;
 
-  /// Create a copy of ItemImageConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ItemImageConfigCopyWith<ItemImageConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,8 +44,6 @@ class _$ItemImageConfigCopyWithImpl<$Res, $Val extends ItemImageConfig>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ItemImageConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,8 +87,6 @@ class __$$ItemImageConfigImplCopyWithImpl<$Res>
       _$ItemImageConfigImpl _value, $Res Function(_$ItemImageConfigImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ItemImageConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,9 +144,7 @@ class _$ItemImageConfigImpl implements _ItemImageConfig {
   @override
   int get hashCode => Object.hash(runtimeType, minWidth, minHeight, quality);
 
-  /// Create a copy of ItemImageConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemImageConfigImplCopyWith<_$ItemImageConfigImpl> get copyWith =>
@@ -172,11 +164,8 @@ abstract class _ItemImageConfig implements ItemImageConfig {
   int get minHeight;
   @override
   int get quality;
-
-  /// Create a copy of ItemImageConfig
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ItemImageConfigImplCopyWith<_$ItemImageConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -23,9 +23,7 @@ mixin _$AndroidVersion {
   String get release => throw _privateConstructorUsedError;
   int get sdkInt => throw _privateConstructorUsedError;
 
-  /// Create a copy of AndroidVersion
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AndroidVersionCopyWith<AndroidVersion> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,8 +53,6 @@ class _$AndroidVersionCopyWithImpl<$Res, $Val extends AndroidVersion>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AndroidVersion
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -121,8 +117,6 @@ class __$$AndroidVersionImplCopyWithImpl<$Res>
       _$AndroidVersionImpl _value, $Res Function(_$AndroidVersionImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AndroidVersion
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -211,9 +205,7 @@ class _$AndroidVersionImpl implements _AndroidVersion {
   int get hashCode => Object.hash(runtimeType, baseOS, codename, incremental,
       previewSdkInt, release, sdkInt);
 
-  /// Create a copy of AndroidVersion
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AndroidVersionImplCopyWith<_$AndroidVersionImpl> get copyWith =>
@@ -242,11 +234,8 @@ abstract class _AndroidVersion implements AndroidVersion {
   String get release;
   @override
   int get sdkInt;
-
-  /// Create a copy of AndroidVersion
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AndroidVersionImplCopyWith<_$AndroidVersionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

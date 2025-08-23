@@ -21,9 +21,7 @@ mixin _$ItemsConfig {
       throw _privateConstructorUsedError;
   double? get defaultWishRank => throw _privateConstructorUsedError;
 
-  /// Create a copy of ItemsConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ItemsConfigCopyWith<ItemsConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,8 +50,6 @@ class _$ItemsConfigCopyWithImpl<$Res, $Val extends ItemsConfig>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ItemsConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -77,8 +73,6 @@ class _$ItemsConfigCopyWithImpl<$Res, $Val extends ItemsConfig>
     ) as $Val);
   }
 
-  /// Create a copy of ItemsConfig
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ItemOrderModelCopyWith<$Res> get defaultOrder {
@@ -113,8 +107,6 @@ class __$$ItemsConfigImplCopyWithImpl<$Res>
       _$ItemsConfigImpl _value, $Res Function(_$ItemsConfigImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ItemsConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -187,9 +179,7 @@ class _$ItemsConfigImpl implements _ItemsConfig {
       const DeepCollectionEquality().hash(_defaultPurchaseStatus),
       defaultWishRank);
 
-  /// Create a copy of ItemsConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemsConfigImplCopyWith<_$ItemsConfigImpl> get copyWith =>
@@ -208,11 +198,8 @@ abstract class _ItemsConfig implements ItemsConfig {
   Set<PurchaseStatus> get defaultPurchaseStatus;
   @override
   double? get defaultWishRank;
-
-  /// Create a copy of ItemsConfig
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ItemsConfigImplCopyWith<_$ItemsConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

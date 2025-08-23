@@ -23,9 +23,7 @@ mixin _$AppConfig {
   String get appStoreId => throw _privateConstructorUsedError;
   String get webUrl => throw _privateConstructorUsedError;
 
-  /// Create a copy of AppConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AppConfigCopyWith<AppConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,8 +52,6 @@ class _$AppConfigCopyWithImpl<$Res, $Val extends AppConfig>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AppConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,8 +116,6 @@ class __$$AppConfigImplCopyWithImpl<$Res>
       _$AppConfigImpl _value, $Res Function(_$AppConfigImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AppConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,9 +204,7 @@ class _$AppConfigImpl implements _AppConfig {
   int get hashCode => Object.hash(
       runtimeType, flavor, appName, packageName, bundleId, appStoreId, webUrl);
 
-  /// Create a copy of AppConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AppConfigImplCopyWith<_$AppConfigImpl> get copyWith =>
@@ -240,11 +232,8 @@ abstract class _AppConfig implements AppConfig {
   String get appStoreId;
   @override
   String get webUrl;
-
-  /// Create a copy of AppConfig
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AppConfigImplCopyWith<_$AppConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

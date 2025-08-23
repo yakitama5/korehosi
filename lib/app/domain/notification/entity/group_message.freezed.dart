@@ -30,12 +30,8 @@ mixin _$GroupMessage {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this GroupMessage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of GroupMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GroupMessageCopyWith<GroupMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -68,8 +64,6 @@ class _$GroupMessageCopyWithImpl<$Res, $Val extends GroupMessage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GroupMessage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,8 +146,6 @@ class __$$GroupMessageImplCopyWithImpl<$Res>
       _$GroupMessageImpl _value, $Res Function(_$GroupMessageImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GroupMessage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -267,14 +259,12 @@ class _$GroupMessageImpl implements _GroupMessage {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, body, target, event,
       path, uid, createdAt, updatedAt);
 
-  /// Create a copy of GroupMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GroupMessageImplCopyWith<_$GroupMessageImpl> get copyWith =>
@@ -321,11 +311,8 @@ abstract class _GroupMessage implements GroupMessage {
   DateTime? get createdAt;
   @override
   DateTime? get updatedAt;
-
-  /// Create a copy of GroupMessage
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GroupMessageImplCopyWith<_$GroupMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

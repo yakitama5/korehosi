@@ -22,9 +22,7 @@ mixin _$ItemConfig {
   int get maxUrlLength => throw _privateConstructorUsedError;
   int get maxMemoLength => throw _privateConstructorUsedError;
 
-  /// Create a copy of ItemConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ItemConfigCopyWith<ItemConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,8 +51,6 @@ class _$ItemConfigCopyWithImpl<$Res, $Val extends ItemConfig>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of ItemConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,8 +109,6 @@ class __$$ItemConfigImplCopyWithImpl<$Res>
       _$ItemConfigImpl _value, $Res Function(_$ItemConfigImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of ItemConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,9 +190,7 @@ class _$ItemConfigImpl implements _ItemConfig {
   int get hashCode => Object.hash(runtimeType, maxNameLength,
       maxWanterNameLength, maxWishSeasonLength, maxUrlLength, maxMemoLength);
 
-  /// Create a copy of ItemConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemConfigImplCopyWith<_$ItemConfigImpl> get copyWith =>
@@ -223,11 +215,8 @@ abstract class _ItemConfig implements ItemConfig {
   int get maxUrlLength;
   @override
   int get maxMemoLength;
-
-  /// Create a copy of ItemConfig
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ItemConfigImplCopyWith<_$ItemConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

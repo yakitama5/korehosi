@@ -20,9 +20,7 @@ mixin _$AndroidInfo {
   String get brand => throw _privateConstructorUsedError;
   String get device => throw _privateConstructorUsedError;
 
-  /// Create a copy of AndroidInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $AndroidInfoCopyWith<AndroidInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,8 +46,6 @@ class _$AndroidInfoCopyWithImpl<$Res, $Val extends AndroidInfo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AndroidInfo
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -73,8 +69,6 @@ class _$AndroidInfoCopyWithImpl<$Res, $Val extends AndroidInfo>
     ) as $Val);
   }
 
-  /// Create a copy of AndroidInfo
-  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AndroidVersionCopyWith<$Res> get version {
@@ -106,8 +100,6 @@ class __$$AndroidInfoImplCopyWithImpl<$Res>
       _$AndroidInfoImpl _value, $Res Function(_$AndroidInfoImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AndroidInfo
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -163,9 +155,7 @@ class _$AndroidInfoImpl implements _AndroidInfo {
   @override
   int get hashCode => Object.hash(runtimeType, version, brand, device);
 
-  /// Create a copy of AndroidInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$AndroidInfoImplCopyWith<_$AndroidInfoImpl> get copyWith =>
@@ -184,11 +174,8 @@ abstract class _AndroidInfo implements AndroidInfo {
   String get brand;
   @override
   String get device;
-
-  /// Create a copy of AndroidInfo
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$AndroidInfoImplCopyWith<_$AndroidInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -20,9 +20,7 @@ mixin _$GroupConfig {
   int get initialItemCount => throw _privateConstructorUsedError;
   int get validDays => throw _privateConstructorUsedError;
 
-  /// Create a copy of GroupConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $GroupConfigCopyWith<GroupConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,8 +44,6 @@ class _$GroupConfigCopyWithImpl<$Res, $Val extends GroupConfig>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of GroupConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,8 +87,6 @@ class __$$GroupConfigImplCopyWithImpl<$Res>
       _$GroupConfigImpl _value, $Res Function(_$GroupConfigImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of GroupConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,9 +148,7 @@ class _$GroupConfigImpl implements _GroupConfig {
   int get hashCode =>
       Object.hash(runtimeType, initialPremium, initialItemCount, validDays);
 
-  /// Create a copy of GroupConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GroupConfigImplCopyWith<_$GroupConfigImpl> get copyWith =>
@@ -175,11 +167,8 @@ abstract class _GroupConfig implements GroupConfig {
   int get initialItemCount;
   @override
   int get validDays;
-
-  /// Create a copy of GroupConfig
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$GroupConfigImplCopyWith<_$GroupConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

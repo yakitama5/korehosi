@@ -27,12 +27,8 @@ mixin _$FirestoreNotificationTokenModel {
   @timestampKey
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this FirestoreNotificationTokenModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of FirestoreNotificationTokenModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $FirestoreNotificationTokenModelCopyWith<FirestoreNotificationTokenModel>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -62,8 +58,6 @@ class _$FirestoreNotificationTokenModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of FirestoreNotificationTokenModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,8 +107,6 @@ class __$$FirestoreNotificationTokenModelImplCopyWithImpl<$Res>
       $Res Function(_$FirestoreNotificationTokenModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of FirestoreNotificationTokenModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -178,13 +170,11 @@ class _$FirestoreNotificationTokenModelImpl
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, token, createdAt, updatedAt);
 
-  /// Create a copy of FirestoreNotificationTokenModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$FirestoreNotificationTokenModelImplCopyWith<
@@ -219,11 +209,8 @@ abstract class _FirestoreNotificationTokenModel
   @override
   @timestampKey
   DateTime? get updatedAt;
-
-  /// Create a copy of FirestoreNotificationTokenModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$FirestoreNotificationTokenModelImplCopyWith<
           _$FirestoreNotificationTokenModelImpl>
       get copyWith => throw _privateConstructorUsedError;

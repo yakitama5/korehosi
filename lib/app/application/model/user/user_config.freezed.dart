@@ -21,9 +21,7 @@ mixin _$UserConfig {
   String get ageGroupKey => throw _privateConstructorUsedError;
   int get maxNameLength => throw _privateConstructorUsedError;
 
-  /// Create a copy of UserConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UserConfigCopyWith<UserConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,8 +49,6 @@ class _$UserConfigCopyWithImpl<$Res, $Val extends UserConfig>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -105,8 +101,6 @@ class __$$UserConfigImplCopyWithImpl<$Res>
       _$UserConfigImpl _value, $Res Function(_$UserConfigImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of UserConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -177,9 +171,7 @@ class _$UserConfigImpl implements _UserConfig {
   int get hashCode => Object.hash(
       runtimeType, initialAgeGroup, nameKey, ageGroupKey, maxNameLength);
 
-  /// Create a copy of UserConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UserConfigImplCopyWith<_$UserConfigImpl> get copyWith =>
@@ -201,11 +193,8 @@ abstract class _UserConfig implements UserConfig {
   String get ageGroupKey;
   @override
   int get maxNameLength;
-
-  /// Create a copy of UserConfig
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UserConfigImplCopyWith<_$UserConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

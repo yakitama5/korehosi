@@ -34,12 +34,8 @@ mixin _$FirestoreGroupMessageModel {
   @timestampKey
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this FirestoreGroupMessageModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of FirestoreGroupMessageModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $FirestoreGroupMessageModelCopyWith<FirestoreGroupMessageModel>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -74,8 +70,6 @@ class _$FirestoreGroupMessageModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of FirestoreGroupMessageModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -161,8 +155,6 @@ class __$$FirestoreGroupMessageModelImplCopyWithImpl<$Res>
       $Res Function(_$FirestoreGroupMessageModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of FirestoreGroupMessageModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -280,14 +272,12 @@ class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, body, target, event,
       path, uid, createdAt, updatedAt);
 
-  /// Create a copy of FirestoreGroupMessageModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$FirestoreGroupMessageModelImplCopyWith<_$FirestoreGroupMessageModelImpl>
@@ -340,11 +330,8 @@ abstract class _FirestoreGroupMessageModel
   @override
   @timestampKey
   DateTime? get updatedAt;
-
-  /// Create a copy of FirestoreGroupMessageModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$FirestoreGroupMessageModelImplCopyWith<_$FirestoreGroupMessageModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

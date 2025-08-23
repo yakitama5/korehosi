@@ -19,9 +19,7 @@ mixin _$SelectedImageModel {
   String? get imagePath => throw _privateConstructorUsedError;
   XFile? get uploadFile => throw _privateConstructorUsedError;
 
-  /// Create a copy of SelectedImageModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $SelectedImageModelCopyWith<SelectedImageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,8 +43,6 @@ class _$SelectedImageModelCopyWithImpl<$Res, $Val extends SelectedImageModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of SelectedImageModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,8 +81,6 @@ class __$$SelectedImageModelImplCopyWithImpl<$Res>
       $Res Function(_$SelectedImageModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of SelectedImageModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -136,9 +130,7 @@ class _$SelectedImageModelImpl implements _SelectedImageModel {
   @override
   int get hashCode => Object.hash(runtimeType, imagePath, uploadFile);
 
-  /// Create a copy of SelectedImageModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$SelectedImageModelImplCopyWith<_$SelectedImageModelImpl> get copyWith =>
@@ -155,11 +147,8 @@ abstract class _SelectedImageModel implements SelectedImageModel {
   String? get imagePath;
   @override
   XFile? get uploadFile;
-
-  /// Create a copy of SelectedImageModel
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$SelectedImageModelImplCopyWith<_$SelectedImageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
