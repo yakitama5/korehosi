@@ -158,12 +158,12 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
         final wishSeason = formModel.wishSeasonControl?.value;
         final urls = formModel.urlsControl?.controls
             .map((e) => e.value)
-            .whereNotNull()
+            .nonNulls
             .toList();
         final memo = formModel.memoControl?.value;
         final selectedImages = formModel.imagesControl?.controls
             .map((e) => e.value)
-            .whereNotNull()
+            .nonNulls
             .toList();
 
         // 登録 or 更新
@@ -325,7 +325,7 @@ class _WanterNameField extends HookConsumerWidget {
     final userNames = ref
         .watch(wanterNameSuggestionProvider)
         .value
-        ?.whereNotNull()
+        ?.nonNulls
         // 重複の削除
         .toSet()
         .toList();

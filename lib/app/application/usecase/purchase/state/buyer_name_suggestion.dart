@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:family_wish_list/app/application/usecase/purchase/state/current_group_age_applicable_purchases_provider.dart';
 import 'package:family_wish_list/app/application/usecase/user/state/current_group_join_users_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -14,16 +13,14 @@ Future<List<String>> buyerNameSuggestion(BuyerNameSuggestionRef ref) async {
     currentGroupAgeApplicablePurchasesProvider.future.select(
       (purchases) async => (await purchases)
           .map((e) => e.buyerName)
-          .whereNotNull()
+          .nonNulls
           .where((e) => e.isNotEmpty),
     ),
   );
   final currentGroupUserNames = ref.watch(
     currentGroupJoinUsersProvider.future.select(
-      (users) async => (await users)
-          .map((e) => e.name)
-          .whereNotNull()
-          .where((e) => e.isNotEmpty),
+      (users) async =>
+          (await users).map((e) => e.name).nonNulls.where((e) => e.isNotEmpty),
     ),
   );
 

@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../user/state/current_group_join_users_provider.dart';
@@ -15,16 +14,14 @@ Future<List<String>> wanterNameSuggestion(WanterNameSuggestionRef ref) async {
     currentGroupItemsProvider.future.select(
       (items) async => (await items)
           .map((e) => e.wanterName)
-          .whereNotNull()
+          .nonNulls
           .where((e) => e.isNotEmpty),
     ),
   );
   final currentGroupUserNames = ref.watch(
     currentGroupJoinUsersProvider.future.select(
-      (users) async => (await users)
-          .map((e) => e.name)
-          .whereNotNull()
-          .where((e) => e.isNotEmpty),
+      (users) async =>
+          (await users).map((e) => e.name).nonNulls.where((e) => e.isNotEmpty),
     ),
   );
 

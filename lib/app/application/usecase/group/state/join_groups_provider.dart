@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/group/entity/group.dart';
@@ -21,5 +20,5 @@ Future<List<Group>?> joinGroups(JoinGroupsRef ref) async {
   final asyncGroups = joinGroupIds
       .map((groupId) async => ref.watch(groupProvider(groupId: groupId).future))
       .toList();
-  return (await Future.wait(asyncGroups)).whereNotNull().toList();
+  return (await Future.wait(asyncGroups)).nonNulls.toList();
 }

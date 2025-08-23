@@ -23,7 +23,7 @@ Future<Map<DateTime, MonthlySumPrice>> monthlySumPrice(
 
       // モデルに変換
       .map((key, value) {
-    final sumPrice = value.map((p) => p.price).whereNotNull().sum;
+    final sumPrice = value.map((p) => p.price).nonNulls.sum;
     return MapEntry(
       key,
       MonthlySumPrice(

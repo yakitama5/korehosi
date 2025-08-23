@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/purchase/entity/purchase.dart';
@@ -24,5 +23,5 @@ Future<List<Purchase>> currentGroupAgeApplicablePurchases(
       currentGroupAgeApplicablePurchaseProvider(itemId: itemId).future,
     ),
   );
-  return (await Future.wait(asyncPurchases)).whereNotNull().toList();
+  return (await Future.wait(asyncPurchases)).nonNulls.toList();
 }

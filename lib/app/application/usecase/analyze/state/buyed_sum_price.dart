@@ -12,5 +12,5 @@ Future<int> buyedSumPrice(BuyedSumPriceRef ref) async {
   final buyedPurchases = await ref.watch(analyzeBuyedPurchasesProvider.future);
 
   // 金額を合計する
-  return buyedPurchases.map((e) => e.price).whereNotNull().sum;
+  return buyedPurchases.map((e) => e.price).nonNulls.sum;
 }

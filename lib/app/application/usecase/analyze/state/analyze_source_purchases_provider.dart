@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:family_wish_list/app/application/usecase/analyze/state/analyze_source_items_provider.dart.dart';
 import 'package:family_wish_list/app/application/usecase/analyze/state/buyer_filter_notifier_provider.dart';
 import 'package:family_wish_list/app/application/usecase/purchase/state/current_group_age_applicable_purchase_provider.dart';
@@ -19,7 +18,7 @@ Future<List<Purchase>> analyzeSourcePurchases(
     (e) async => ref
         .watch(currentGroupAgeApplicablePurchaseProvider(itemId: e.id).future),
   );
-  final purchases = (await Future.wait(asyncPurchases)).whereNotNull();
+  final purchases = (await Future.wait(asyncPurchases)).nonNulls;
 
   return purchases.where((e) {
     return buyerName == null || e.buyerName == buyerName;

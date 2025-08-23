@@ -1,6 +1,5 @@
-import 'package:collection/collection.dart';
+import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -366,8 +365,7 @@ class _BuyerNameField extends HookConsumerWidget {
     final l10n = useL10n();
 
     final names = ref.watch(buyerNameSuggestionProvider).value;
-    final userNames = names
-        ?.whereNotNull()
+    final userNames = names?.nonNulls
         // 重複の削除
         .toSet()
         .toList();
