@@ -1,5 +1,5 @@
+import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../order.dart';

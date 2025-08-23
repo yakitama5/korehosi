@@ -1,9 +1,9 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
 import 'package:family_wish_list/app/presentation/hooks/importer.dart';
+import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
