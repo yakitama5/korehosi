@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/usecase/group/state/current_group_provider.dart';
@@ -107,7 +106,7 @@ class AndroidAccountDialog extends HookConsumerWidget {
           TextButton(
             onPressed: selectValue.value == null
                 ? null
-                : () => context.pop(selectValue.value),
+                : () => Navigator.pop(context, selectValue.value),
             child: Text(l10n.ok),
           ),
         ],
