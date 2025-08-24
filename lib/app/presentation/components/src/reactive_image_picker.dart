@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -182,18 +183,18 @@ class _SourceSelectBottomSheet extends HookConsumerWidget {
           ListTile(
             leading: const Icon(Icons.add_a_photo),
             title: Text(l10n.shoot),
-            onTap: () => Navigator.pop(context, _EditSource.camera),
+            onTap: () => context.pop(_EditSource.camera),
           ),
         ListTile(
           leading: const Icon(Icons.photo_library),
           title: Text(l10n.chooseFromLibrary),
-          onTap: () => Navigator.pop(context, _EditSource.gallery),
+          onTap: () => context.pop(_EditSource.gallery),
         ),
         if (showDelete == true)
           ListTile(
             leading: const Icon(Icons.delete),
             title: Text(l10n.delete),
-            onTap: () => Navigator.pop(context, _EditSource.delete),
+            onTap: () => context.pop(_EditSource.delete),
           ),
       ],
     );

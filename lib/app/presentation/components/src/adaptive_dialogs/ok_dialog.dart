@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../application/model/dialog_result.dart';
 import '../../../hooks/importer.dart';
@@ -31,7 +32,7 @@ class OkDialog extends HookWidget {
       actions: [
         AdaptiveAction(
           child: Text(okLabel ?? l10n.ok),
-          onPressed: () => Navigator.pop(context, DialogResult.ok),
+          onPressed: () => context.pop(DialogResult.ok),
         ),
       ],
     );
