@@ -29,7 +29,6 @@ dependencies:
   fl_chart: any
   flutter:
     sdk: flutter
-  flutter_adaptive_scaffold: any
   flutter_cache_manager: any
   flutter_hooks: any
   flutter_image_compress: any
