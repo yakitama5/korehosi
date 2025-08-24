@@ -46,7 +46,7 @@ class WishRankSelectorBottomSheet extends HookWidget {
             const _ResetButton(),
             const Gap(8),
             _ApplyButton(
-              onPressed: () => Navigator.pop(context, wishRank.value),
+              onPressed: () => context.pop(wishRank.value),
             ),
           ],
         ),
