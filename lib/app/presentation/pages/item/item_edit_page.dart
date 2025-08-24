@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
@@ -194,9 +195,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
 
         // 遷移元にポップ
         if (context.mounted) {
-          Navigator.pop(
-            context,
-          );
+          context.pop();
         }
       },
     );

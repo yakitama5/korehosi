@@ -52,9 +52,7 @@ class PurchaseStatusSelectorBottomSheet extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             TextButton(
-              onPressed: () => Navigator.pop(
-                context,
-              ),
+              onPressed: () => context.pop(),
               child: Text(l10n.cancel),
             ),
             const Gap(8),

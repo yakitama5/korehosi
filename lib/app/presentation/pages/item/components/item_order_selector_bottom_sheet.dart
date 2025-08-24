@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../application/model/item/item_order_key.dart';
 import '../../../../application/model/item/item_order_model.dart';
@@ -50,8 +51,7 @@ class ItemOrderSelectorBottomSheet extends HookWidget {
             const Gap(8),
             _ApplyButton(
               // 呼び出し元に選択値を返却
-              onPressed: () => Navigator.pop(
-                context,
+              onPressed: () => context.pop(
                 ItemOrderModel(
                   key: orderKey.value,
                   sortOrder: sortOrder.value,

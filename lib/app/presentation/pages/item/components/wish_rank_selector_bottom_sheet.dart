@@ -63,9 +63,7 @@ class _CancelButton extends HookWidget {
     final l10n = useL10n();
 
     return TextButton(
-      onPressed: () => Navigator.pop(
-        context,
-      ),
+      onPressed: () => context.pop(),
       child: Text(l10n.cancel),
     );
   }

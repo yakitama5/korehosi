@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -25,7 +26,6 @@ class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {
 
         return PopScope(
           canPop: false,
-          // onPopInvoked: (didPop) async {
           onPopInvokedWithResult: (didPop, result) async {
             // Notes: 移行ガイドに沿って変更
             // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
@@ -38,10 +38,7 @@ class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {
             // 内容が変更されていなければ閉じる
             final dirty = ReactiveForm.of(context)?.dirty;
             if (dirty != true) {
-              // Navigator.of(context).pop();
-              Navigator.pop(
-                context,
-              );
+              context.pop();
               return;
             }
 
@@ -57,10 +54,7 @@ class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {
             // 破棄が選ばれたら画面を閉じる
             if (result == DialogResult.ok) {
               if (context.mounted) {
-                Navigator.pop(
-                  context,
-                );
-                // Navigator.of(context).pop();
+                context.pop();
               }
             }
           },
