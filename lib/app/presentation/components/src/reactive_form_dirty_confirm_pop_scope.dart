@@ -32,14 +32,14 @@ class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {
               return;
             }
 
-            // final navigator = Navigator.of(context);
+            final navigator = Navigator.of(context);
 
             // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら変更する
             // NavigationBarを検知出来ないのは一旦保留
             // 内容が変更されていなければ閉じる
             final dirty = ReactiveForm.of(context)?.dirty;
             if (dirty != true) {
-              Navigator.of(context).pop();
+              navigator.pop();
               return;
             }
 
@@ -53,9 +53,7 @@ class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {
 
             // 破棄が選ばれたら画面を閉じる
             if (result == DialogResult.ok) {
-              if (context.mounted) {
-                Navigator.of(context).pop();
-              }
+              navigator.pop();
             }
           },
           child: child,
