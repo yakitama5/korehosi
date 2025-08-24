@@ -14,7 +14,6 @@ dependencies:
   cloud_firestore: any
   cloud_functions: any
   collection: any
-  custom_adaptive_scaffold: ^2.0.2
   device_info_plus: any
   dynamic_color: any
   envied: any

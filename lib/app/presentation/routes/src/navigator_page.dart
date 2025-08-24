@@ -1,5 +1,5 @@
+import 'package:custom_adaptive_scaffold/custom_adaptive_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -90,6 +90,7 @@ class NavigatorPage extends HookWidget {
             key: const Key('Bottom Navigation Small'),
             inAnimation: AdaptiveScaffold.bottomToTop,
             outAnimation: AdaptiveScaffold.topToBottom,
+            // builder: (_) => AdaptiveScaffold.standardBottomNavigationBar(
             builder: (_) => AdaptiveScaffold.standardBottomNavigationBar(
               destinations: tabs,
               currentIndex: navigationShell.currentIndex,
