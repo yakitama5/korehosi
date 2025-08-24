@@ -24,7 +24,7 @@ plugins {
 
     // Add: Firebase
     id("com.google.gms.google-services") version "4.4.3" apply false
-    id("com.google.firebase.crashlytics") version "3.0.6" apply false
+    id("com.google.firebase.crashlytics") version "2.9.9" apply false
     // Add: local_notifications
     // id("com.android.tools.desugar_jdk_libs") version "2.1.4" apply false
 }
