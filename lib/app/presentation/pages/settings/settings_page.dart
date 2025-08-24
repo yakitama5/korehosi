@@ -1,3 +1,4 @@
+import 'package:family_wish_list/app/presentation/components/src/app_lifecycle_builder.dart';
 import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -5,7 +6,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import '../../../application/config/url_config.dart';
-import '../../../application/state/app_lifecycle_state_provider.dart';
 import '../../components/importer.dart';
 import '../../helper/permission_helper.dart';
 import '../../helper/url_launcher_helper.dart';
@@ -18,109 +18,112 @@ class SettingsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 設定アプリと行き来するため、ライフサイクルを検知してリビルドを行う
-    ref.watch(appLifecycleStateProvider);
     final l10n = useL10n();
 
-    // プラットフォームに応じたアイコンの出し訳
-    final trailing = useTheme().isCupertinoPlatform
-        ? const Icon(Icons.arrow_forward_ios_rounded)
-        : null;
+    // 設定アプリと行き来するため、ライフサイクルを検知してリビルドを行う
+    return AppLifecycleBuilder(
+      builder: (context, state) {
+        // プラットフォームに応じたアイコンの出し訳
+        final trailing = useTheme().isCupertinoPlatform
+            ? const Icon(Icons.arrow_forward_ios_rounded)
+            : null;
 
-    // 通知権限の可否
-    // BUG(yakitama5): Androidで権限OFFにした際に再起動がかかってしまう件を対処したい
-    final isNotificationGranted = Permission.notification.status.isGranted;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.settings),
-        centerTitle: true,
-      ),
-      body: FutureBuilder(
-        future: isNotificationGranted,
-        builder: (_, snap) => ThemedSettingsList(
-          sections: [
-            SettingsSection(
-              title: Text(l10n.account),
-              tiles: [
-                SettingsTile.navigation(
-                  leading: const Icon(Icons.person),
-                  trailing: trailing,
-                  title: Text(l10n.profile),
-                  onPressed: (context) => _onProfile(context, ref),
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(Icons.group),
-                  trailing: trailing,
-                  title: Text(l10n.group),
-                  onPressed: (context) => _onGroup(context, ref),
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(Icons.link),
-                  trailing: trailing,
+        // 通知権限の可否
+        // BUG(yakitama5): Androidで権限OFFにした際に再起動がかかってしまう件を対処したい
+        final isNotificationGranted = Permission.notification.status.isGranted;
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(l10n.settings),
+            centerTitle: true,
+          ),
+          body: FutureBuilder(
+            future: isNotificationGranted,
+            builder: (_, snap) => ThemedSettingsList(
+              sections: [
+                SettingsSection(
                   title: Text(l10n.account),
-                  onPressed: (context) => _onAccount(context, ref),
+                  tiles: [
+                    SettingsTile.navigation(
+                      leading: const Icon(Icons.person),
+                      trailing: trailing,
+                      title: Text(l10n.profile),
+                      onPressed: (context) => _onProfile(context, ref),
+                    ),
+                    SettingsTile.navigation(
+                      leading: const Icon(Icons.group),
+                      trailing: trailing,
+                      title: Text(l10n.group),
+                      onPressed: (context) => _onGroup(context, ref),
+                    ),
+                    SettingsTile.navigation(
+                      leading: const Icon(Icons.link),
+                      trailing: trailing,
+                      title: Text(l10n.account),
+                      onPressed: (context) => _onAccount(context, ref),
+                    ),
+                    SettingsTile.switchTile(
+                      initialValue: snap.data == true,
+                      onToggle: (value) async {
+                        // 設定アプリから変更を促す
+                        if (snap.data == true) {
+                          await showPermissionOffDialog(
+                            context: context,
+                            ref: ref,
+                            permission: Permission.notification,
+                          );
+                        } else {
+                          await showPermissionDeinedDialog(
+                            context: context,
+                            ref: ref,
+                            permission: Permission.notification,
+                          );
+                        }
+                      },
+                      title: Text(l10n.pushNotification),
+                      description: Text(l10n.pushNotificationDescription),
+                    ),
+                  ],
                 ),
-                SettingsTile.switchTile(
-                  initialValue: snap.data == true,
-                  onToggle: (value) async {
-                    // 設定アプリから変更を促す
-                    if (snap.data == true) {
-                      await showPermissionOffDialog(
-                        context: context,
-                        ref: ref,
-                        permission: Permission.notification,
-                      );
-                    } else {
-                      await showPermissionDeinedDialog(
-                        context: context,
-                        ref: ref,
-                        permission: Permission.notification,
-                      );
-                    }
-                  },
-                  title: Text(l10n.pushNotification),
-                  description: Text(l10n.pushNotificationDescription),
+                SettingsSection(
+                  title: Text(l10n.help),
+                  tiles: [
+                    SettingsTile.navigation(
+                      leading: const Icon(CustomIcons.beginner),
+                      trailing: trailing,
+                      title: Text(l10n.howToUse),
+                      onPressed: (context) => _onHowToUse(context, ref),
+                    ),
+                    SettingsTile.navigation(
+                      leading: const Icon(Icons.help),
+                      trailing: trailing,
+                      title: Text(l10n.contactUs),
+                      onPressed: (context) => _onContactUs(context, ref),
+                    ),
+                    SettingsTile.navigation(
+                      leading: const Icon(CustomIcons.x_twitter),
+                      trailing: trailing,
+                      title: Text(l10n.developperTwitter),
+                      onPressed: (context) =>
+                          _onDevelopperTwitter(context, ref),
+                    ),
+                    SettingsTile.navigation(
+                      leading: const Icon(Icons.lock),
+                      trailing: trailing,
+                      title: Text(l10n.privacyPolicy),
+                      onPressed: (context) => _onPrivacyPolicy(context, ref),
+                    ),
+                    SettingsTile.navigation(
+                      trailing: trailing,
+                      title: Text(l10n.license),
+                      onPressed: (context) => _onLicense(context, ref),
+                    ),
+                  ],
                 ),
               ],
             ),
-            SettingsSection(
-              title: Text(l10n.help),
-              tiles: [
-                SettingsTile.navigation(
-                  leading: const Icon(CustomIcons.beginner),
-                  trailing: trailing,
-                  title: Text(l10n.howToUse),
-                  onPressed: (context) => _onHowToUse(context, ref),
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(Icons.help),
-                  trailing: trailing,
-                  title: Text(l10n.contactUs),
-                  onPressed: (context) => _onContactUs(context, ref),
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(CustomIcons.x_twitter),
-                  trailing: trailing,
-                  title: Text(l10n.developperTwitter),
-                  onPressed: (context) => _onDevelopperTwitter(context, ref),
-                ),
-                SettingsTile.navigation(
-                  leading: const Icon(Icons.lock),
-                  trailing: trailing,
-                  title: Text(l10n.privacyPolicy),
-                  onPressed: (context) => _onPrivacyPolicy(context, ref),
-                ),
-                SettingsTile.navigation(
-                  trailing: trailing,
-                  title: Text(l10n.license),
-                  onPressed: (context) => _onLicense(context, ref),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
