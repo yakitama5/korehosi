@@ -32,7 +32,7 @@ jobs:
         run: |
           [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.FIREBASE_OPTIONS }}')) > lib/firebase_options.dart
           [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.FIREBASE_OPTIONS_DEV }}')) > lib/firebase_options_dev.dart
-          mkdir android/app/src/prod/
+        # mkdir android/app/src/prod/
           [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.GOOGLE_SERVICES_JSON }}')) > android/app/src/prod/google-services.json
           mkdir ios/prod/
           [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('${{ secrets.GOOGLE_INFO_PLIST }}')) > ios/prod/GoogleService-Info.plist
