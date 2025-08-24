@@ -8,7 +8,7 @@ part 'app_lifecycle_state_provider.g.dart';
 @Riverpod(keepAlive: true)
 AppLifecycleState appLifecycleState(Ref ref) {
   final observer = _AppLifecycleObserver((value) {
-    // TODO すぐやる
+    // TODO(yakitama5): すぐやる
     // ref.state = value;
   });
 
