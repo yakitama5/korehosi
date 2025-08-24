@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'purchase_form_model.dart';
 
@@ -55,7 +55,7 @@ class ReactivePurchaseFormModelForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -64,7 +64,8 @@ class ReactivePurchaseFormModelForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static PurchaseFormModelForm? of(
     BuildContext context, {
@@ -91,7 +92,7 @@ class ReactivePurchaseFormModelForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -112,7 +113,7 @@ class PurchaseFormModelFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -123,7 +124,8 @@ class PurchaseFormModelFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
           BuildContext context, PurchaseFormModelForm formModel, Widget? child)
@@ -141,6 +143,8 @@ class _PurchaseFormModelFormBuilderState
     extends State<PurchaseFormModelFormBuilder> {
   late PurchaseFormModelForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel = PurchaseFormModelForm(
@@ -151,6 +155,34 @@ class _PurchaseFormModelFormBuilderState
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logPurchaseFormModelForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -167,6 +199,7 @@ class _PurchaseFormModelFormBuilderState
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -180,7 +213,7 @@ class _PurchaseFormModelFormBuilderState
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -189,7 +222,10 @@ class _PurchaseFormModelFormBuilderState
   }
 }
 
-class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
+final _logPurchaseFormModelForm = Logger.detached('PurchaseFormModelForm');
+
+class PurchaseFormModelForm
+    implements FormModel<PurchaseFormModel, PurchaseFormModel> {
   PurchaseFormModelForm(
     this.form,
     this.path,
@@ -225,18 +261,32 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
 
   String memoControlPath() => pathBuilder(memoControlName);
 
-  String? get _priceValue => priceControl?.value;
+  String? get _priceValue => priceControl.value;
 
-  String? get _buyerNameValue => buyerNameControl?.value;
+  String? get _buyerNameValue => buyerNameControl.value;
 
-  DateTime? get _planDateValue => planDateControl?.value;
+  DateTime? get _planDateValue => planDateControl.value;
 
-  bool get _surpriseValue => surpriseControl.value as bool;
+  bool get _surpriseValue => surpriseControl.value ?? true;
 
-  DateTime? get _sentAtValue => sentAtControl?.value;
+  DateTime? get _sentAtValue => sentAtControl.value;
 
-  String? get _memoValue => memoControl?.value;
+  String? get _memoValue => memoControl.value;
 
+  String? get _priceRawValue => priceControl.value;
+
+  String? get _buyerNameRawValue => buyerNameControl.value;
+
+  DateTime? get _planDateRawValue => planDateControl.value;
+
+  bool get _surpriseRawValue => surpriseControl.value ?? true;
+
+  DateTime? get _sentAtRawValue => sentAtControl.value;
+
+  String? get _memoRawValue => memoControl.value;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPrice {
     try {
       form.control(priceControlPath());
@@ -246,6 +296,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsBuyerName {
     try {
       form.control(buyerNameControlPath());
@@ -255,6 +307,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsPlanDate {
     try {
       form.control(planDateControlPath());
@@ -264,6 +318,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSurprise {
     try {
       form.control(surpriseControlPath());
@@ -273,6 +329,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsSentAt {
     try {
       form.control(sentAtControlPath());
@@ -282,6 +340,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMemo {
     try {
       form.control(memoControlPath());
@@ -291,17 +351,17 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
-  Map<String, Object>? get priceErrors => priceControl?.errors;
+  Map<String, Object>? get priceErrors => priceControl.errors;
 
-  Map<String, Object>? get buyerNameErrors => buyerNameControl?.errors;
+  Map<String, Object>? get buyerNameErrors => buyerNameControl.errors;
 
-  Map<String, Object>? get planDateErrors => planDateControl?.errors;
+  Map<String, Object>? get planDateErrors => planDateControl.errors;
 
   Map<String, Object> get surpriseErrors => surpriseControl.errors;
 
-  Map<String, Object>? get sentAtErrors => sentAtControl?.errors;
+  Map<String, Object>? get sentAtErrors => sentAtControl.errors;
 
-  Map<String, Object>? get memoErrors => memoControl?.errors;
+  Map<String, Object>? get memoErrors => memoControl.errors;
 
   void get priceFocus => form.focus(priceControlPath());
 
@@ -315,6 +375,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
 
   void get memoFocus => form.focus(memoControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void priceRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -341,6 +403,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void buyerNameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -367,6 +431,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void planDateRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -393,6 +459,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void sentAtRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -419,6 +487,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void memoRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -450,7 +520,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    priceControl?.updateValue(value,
+    priceControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -459,7 +529,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    buyerNameControl?.updateValue(value,
+    buyerNameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -468,7 +538,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    planDateControl?.updateValue(value,
+    planDateControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -486,7 +556,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    sentAtControl?.updateValue(value,
+    sentAtControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -495,7 +565,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    memoControl?.updateValue(value,
+    memoControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -504,7 +574,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    priceControl?.patchValue(value,
+    priceControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -513,7 +583,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    buyerNameControl?.patchValue(value,
+    buyerNameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -522,7 +592,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    planDateControl?.patchValue(value,
+    planDateControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -540,7 +610,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    sentAtControl?.patchValue(value,
+    sentAtControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -549,7 +619,7 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    memoControl?.patchValue(value,
+    memoControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -560,8 +630,13 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      priceControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      priceControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void buyerNameValueReset(
     String? value, {
@@ -570,8 +645,13 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      buyerNameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      buyerNameControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void planDateValueReset(
     DateTime? value, {
@@ -580,8 +660,13 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      planDateControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      planDateControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void surpriseValueReset(
     bool value, {
@@ -591,7 +676,12 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool? disabled,
   }) =>
       surpriseControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void sentAtValueReset(
     DateTime? value, {
@@ -600,8 +690,13 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      sentAtControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      sentAtControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void memoValueReset(
     String? value, {
@@ -610,31 +705,31 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      memoControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      memoControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
-  FormControl<String>? get priceControl => containsPrice
-      ? form.control(priceControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get priceControl =>
+      form.control(priceControlPath()) as FormControl<String>;
 
-  FormControl<String>? get buyerNameControl => containsBuyerName
-      ? form.control(buyerNameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get buyerNameControl =>
+      form.control(buyerNameControlPath()) as FormControl<String>;
 
-  FormControl<DateTime>? get planDateControl => containsPlanDate
-      ? form.control(planDateControlPath()) as FormControl<DateTime>?
-      : null;
+  FormControl<DateTime> get planDateControl =>
+      form.control(planDateControlPath()) as FormControl<DateTime>;
 
   FormControl<bool> get surpriseControl =>
       form.control(surpriseControlPath()) as FormControl<bool>;
 
-  FormControl<DateTime>? get sentAtControl => containsSentAt
-      ? form.control(sentAtControlPath()) as FormControl<DateTime>?
-      : null;
+  FormControl<DateTime> get sentAtControl =>
+      form.control(sentAtControlPath()) as FormControl<DateTime>;
 
-  FormControl<String>? get memoControl => containsMemo
-      ? form.control(memoControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get memoControl =>
+      form.control(memoControlPath()) as FormControl<String>;
 
   void priceSetDisabled(
     bool disabled, {
@@ -642,12 +737,12 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      priceControl?.markAsDisabled(
+      priceControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      priceControl?.markAsEnabled(
+      priceControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -660,12 +755,12 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      buyerNameControl?.markAsDisabled(
+      buyerNameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      buyerNameControl?.markAsEnabled(
+      buyerNameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -678,12 +773,12 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      planDateControl?.markAsDisabled(
+      planDateControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      planDateControl?.markAsEnabled(
+      planDateControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -714,12 +809,12 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      sentAtControl?.markAsDisabled(
+      sentAtControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      sentAtControl?.markAsEnabled(
+      sentAtControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -732,12 +827,12 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      memoControl?.markAsDisabled(
+      memoControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      memoControl?.markAsEnabled(
+      memoControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -749,9 +844,11 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'PurchaseFormModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logPurchaseFormModelForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return PurchaseFormModel(
         price: _priceValue,
@@ -760,6 +857,17 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
         surprise: _surpriseValue,
         sentAt: _sentAtValue,
         memo: _memoValue);
+  }
+
+  @override
+  PurchaseFormModel get rawModel {
+    return PurchaseFormModel(
+        price: _priceRawValue,
+        buyerName: _buyerNameRawValue,
+        planDate: _planDateRawValue,
+        surprise: _surpriseRawValue,
+        sentAt: _sentAtRawValue,
+        memo: _memoRawValue);
   }
 
   @override
@@ -795,6 +903,18 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
   }
 
   @override
+  bool equalsTo(PurchaseFormModel? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      PurchaseFormModelForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(PurchaseFormModel model) onValid,
     void Function()? onNotValid,
@@ -803,6 +923,8 @@ class PurchaseFormModelForm implements FormModel<PurchaseFormModel> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logPurchaseFormModelForm.info('Errors');
+      _logPurchaseFormModelForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -893,6 +1015,8 @@ class ReactivePurchaseFormModelFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
   })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
@@ -908,8 +1032,15 @@ class ReactivePurchaseFormModelFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactivePurchaseFormModelFormArrayBuilderT> control,
       ReactivePurchaseFormModelFormArrayBuilderT? item,
       PurchaseFormModelForm formModel) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactivePurchaseFormModelFormArrayBuilderT> control)?
+      controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -919,33 +1050,109 @@ class ReactivePurchaseFormModelFormArrayBuilder<
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactivePurchaseFormModelFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.map((e) => e.value).toList();
-        final itemList = values
-            .asMap()
-            .map((i, item) {
-              return MapEntry(
-                i,
-                itemBuilder(
-                  context,
-                  i,
-                  item,
-                  formModel,
-                ),
-              );
-            })
-            .values
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<
+        ReactivePurchaseFormModelFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
+    );
+  }
+}
+
+class ReactivePurchaseFormModelFormArrayBuilder2<
+    ReactivePurchaseFormModelFormArrayBuilderT> extends StatelessWidget {
+  const ReactivePurchaseFormModelFormArrayBuilder2({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<ReactivePurchaseFormModelFormArrayBuilderT>? formControl;
+
+  final FormArray<ReactivePurchaseFormModelFormArrayBuilderT>? Function(
+      PurchaseFormModelForm formModel)? control;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        PurchaseFormModelForm formModel
+      }) params)? builder;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactivePurchaseFormModelFormArrayBuilderT> control,
+        ReactivePurchaseFormModelFormArrayBuilderT? item,
+        PurchaseFormModelForm formModel
+      }) params) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactivePurchaseFormModelFormArrayBuilderT> control)?
+      controlFilter;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactivePurchaseFormModelForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
+
+    return ReactiveFormArrayItemBuilder<
+        ReactivePurchaseFormModelFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }

@@ -8,7 +8,7 @@ part 'firestore_purchase_model.g.dart';
 
 /// `/groups/{groupId}/purchases/{purchaseId}`ドキュメントのモデル
 @freezed
-class FirestorePurchaseModel with _$FirestorePurchaseModel {
+abstract class FirestorePurchaseModel with _$FirestorePurchaseModel {
   const factory FirestorePurchaseModel({
     required String id,
     int? price,

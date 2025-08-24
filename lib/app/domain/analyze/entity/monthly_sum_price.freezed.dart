@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,137 +9,28 @@ part of 'monthly_sum_price.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MonthlySumPrice {
-  DateTime get yearMonth => throw _privateConstructorUsedError;
-  int get sumPrice => throw _privateConstructorUsedError;
-  int get count => throw _privateConstructorUsedError;
+  DateTime get yearMonth;
+  int get sumPrice;
+  int get count;
 
   /// Create a copy of MonthlySumPrice
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $MonthlySumPriceCopyWith<MonthlySumPrice> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $MonthlySumPriceCopyWith<$Res> {
-  factory $MonthlySumPriceCopyWith(
-          MonthlySumPrice value, $Res Function(MonthlySumPrice) then) =
-      _$MonthlySumPriceCopyWithImpl<$Res, MonthlySumPrice>;
-  @useResult
-  $Res call({DateTime yearMonth, int sumPrice, int count});
-}
-
-/// @nodoc
-class _$MonthlySumPriceCopyWithImpl<$Res, $Val extends MonthlySumPrice>
-    implements $MonthlySumPriceCopyWith<$Res> {
-  _$MonthlySumPriceCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of MonthlySumPrice
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? yearMonth = null,
-    Object? sumPrice = null,
-    Object? count = null,
-  }) {
-    return _then(_value.copyWith(
-      yearMonth: null == yearMonth
-          ? _value.yearMonth
-          : yearMonth // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      sumPrice: null == sumPrice
-          ? _value.sumPrice
-          : sumPrice // ignore: cast_nullable_to_non_nullable
-              as int,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$MonthlySumPriceImplCopyWith<$Res>
-    implements $MonthlySumPriceCopyWith<$Res> {
-  factory _$$MonthlySumPriceImplCopyWith(_$MonthlySumPriceImpl value,
-          $Res Function(_$MonthlySumPriceImpl) then) =
-      __$$MonthlySumPriceImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({DateTime yearMonth, int sumPrice, int count});
-}
-
-/// @nodoc
-class __$$MonthlySumPriceImplCopyWithImpl<$Res>
-    extends _$MonthlySumPriceCopyWithImpl<$Res, _$MonthlySumPriceImpl>
-    implements _$$MonthlySumPriceImplCopyWith<$Res> {
-  __$$MonthlySumPriceImplCopyWithImpl(
-      _$MonthlySumPriceImpl _value, $Res Function(_$MonthlySumPriceImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MonthlySumPrice
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? yearMonth = null,
-    Object? sumPrice = null,
-    Object? count = null,
-  }) {
-    return _then(_$MonthlySumPriceImpl(
-      yearMonth: null == yearMonth
-          ? _value.yearMonth
-          : yearMonth // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      sumPrice: null == sumPrice
-          ? _value.sumPrice
-          : sumPrice // ignore: cast_nullable_to_non_nullable
-              as int,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$MonthlySumPriceImpl implements _MonthlySumPrice {
-  const _$MonthlySumPriceImpl(
-      {required this.yearMonth, required this.sumPrice, required this.count});
-
-  @override
-  final DateTime yearMonth;
-  @override
-  final int sumPrice;
-  @override
-  final int count;
-
-  @override
-  String toString() {
-    return 'MonthlySumPrice(yearMonth: $yearMonth, sumPrice: $sumPrice, count: $count)';
-  }
+      _$MonthlySumPriceCopyWithImpl<MonthlySumPrice>(
+          this as MonthlySumPrice, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MonthlySumPriceImpl &&
+            other is MonthlySumPrice &&
             (identical(other.yearMonth, yearMonth) ||
                 other.yearMonth == yearMonth) &&
             (identical(other.sumPrice, sumPrice) ||
@@ -150,33 +41,297 @@ class _$MonthlySumPriceImpl implements _MonthlySumPrice {
   @override
   int get hashCode => Object.hash(runtimeType, yearMonth, sumPrice, count);
 
+  @override
+  String toString() {
+    return 'MonthlySumPrice(yearMonth: $yearMonth, sumPrice: $sumPrice, count: $count)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $MonthlySumPriceCopyWith<$Res> {
+  factory $MonthlySumPriceCopyWith(
+          MonthlySumPrice value, $Res Function(MonthlySumPrice) _then) =
+      _$MonthlySumPriceCopyWithImpl;
+  @useResult
+  $Res call({DateTime yearMonth, int sumPrice, int count});
+}
+
+/// @nodoc
+class _$MonthlySumPriceCopyWithImpl<$Res>
+    implements $MonthlySumPriceCopyWith<$Res> {
+  _$MonthlySumPriceCopyWithImpl(this._self, this._then);
+
+  final MonthlySumPrice _self;
+  final $Res Function(MonthlySumPrice) _then;
+
   /// Create a copy of MonthlySumPrice
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? yearMonth = null,
+    Object? sumPrice = null,
+    Object? count = null,
+  }) {
+    return _then(_self.copyWith(
+      yearMonth: null == yearMonth
+          ? _self.yearMonth
+          : yearMonth // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      sumPrice: null == sumPrice
+          ? _self.sumPrice
+          : sumPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      count: null == count
+          ? _self.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [MonthlySumPrice].
+extension MonthlySumPricePatterns on MonthlySumPrice {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_MonthlySumPrice value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _MonthlySumPrice() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_MonthlySumPrice value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MonthlySumPrice():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_MonthlySumPrice value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MonthlySumPrice() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(DateTime yearMonth, int sumPrice, int count)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _MonthlySumPrice() when $default != null:
+        return $default(_that.yearMonth, _that.sumPrice, _that.count);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(DateTime yearMonth, int sumPrice, int count) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MonthlySumPrice():
+        return $default(_that.yearMonth, _that.sumPrice, _that.count);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(DateTime yearMonth, int sumPrice, int count)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _MonthlySumPrice() when $default != null:
+        return $default(_that.yearMonth, _that.sumPrice, _that.count);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+
+class _MonthlySumPrice implements MonthlySumPrice {
+  const _MonthlySumPrice(
+      {required this.yearMonth, required this.sumPrice, required this.count});
+
+  @override
+  final DateTime yearMonth;
+  @override
+  final int sumPrice;
+  @override
+  final int count;
+
+  /// Create a copy of MonthlySumPrice
+  /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$MonthlySumPriceCopyWith<_MonthlySumPrice> get copyWith =>
+      __$MonthlySumPriceCopyWithImpl<_MonthlySumPrice>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _MonthlySumPrice &&
+            (identical(other.yearMonth, yearMonth) ||
+                other.yearMonth == yearMonth) &&
+            (identical(other.sumPrice, sumPrice) ||
+                other.sumPrice == sumPrice) &&
+            (identical(other.count, count) || other.count == count));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, yearMonth, sumPrice, count);
+
+  @override
+  String toString() {
+    return 'MonthlySumPrice(yearMonth: $yearMonth, sumPrice: $sumPrice, count: $count)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$MonthlySumPriceCopyWith<$Res>
+    implements $MonthlySumPriceCopyWith<$Res> {
+  factory _$MonthlySumPriceCopyWith(
+          _MonthlySumPrice value, $Res Function(_MonthlySumPrice) _then) =
+      __$MonthlySumPriceCopyWithImpl;
+  @override
+  @useResult
+  $Res call({DateTime yearMonth, int sumPrice, int count});
+}
+
+/// @nodoc
+class __$MonthlySumPriceCopyWithImpl<$Res>
+    implements _$MonthlySumPriceCopyWith<$Res> {
+  __$MonthlySumPriceCopyWithImpl(this._self, this._then);
+
+  final _MonthlySumPrice _self;
+  final $Res Function(_MonthlySumPrice) _then;
+
+  /// Create a copy of MonthlySumPrice
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$MonthlySumPriceImplCopyWith<_$MonthlySumPriceImpl> get copyWith =>
-      __$$MonthlySumPriceImplCopyWithImpl<_$MonthlySumPriceImpl>(
-          this, _$identity);
+  $Res call({
+    Object? yearMonth = null,
+    Object? sumPrice = null,
+    Object? count = null,
+  }) {
+    return _then(_MonthlySumPrice(
+      yearMonth: null == yearMonth
+          ? _self.yearMonth
+          : yearMonth // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      sumPrice: null == sumPrice
+          ? _self.sumPrice
+          : sumPrice // ignore: cast_nullable_to_non_nullable
+              as int,
+      count: null == count
+          ? _self.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
-abstract class _MonthlySumPrice implements MonthlySumPrice {
-  const factory _MonthlySumPrice(
-      {required final DateTime yearMonth,
-      required final int sumPrice,
-      required final int count}) = _$MonthlySumPriceImpl;
-
-  @override
-  DateTime get yearMonth;
-  @override
-  int get sumPrice;
-  @override
-  int get count;
-
-  /// Create a copy of MonthlySumPrice
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MonthlySumPriceImplCopyWith<_$MonthlySumPriceImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_form_model.dart';
 
@@ -53,7 +53,7 @@ class ReactiveUserFormModelForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -62,7 +62,8 @@ class ReactiveUserFormModelForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static UserFormModelForm? of(
     BuildContext context, {
@@ -89,7 +90,7 @@ class ReactiveUserFormModelForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -110,7 +111,7 @@ class UserFormModelFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -121,7 +122,8 @@ class UserFormModelFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
       BuildContext context, UserFormModelForm formModel, Widget? child) builder;
@@ -137,6 +139,8 @@ class UserFormModelFormBuilder extends StatefulWidget {
 class _UserFormModelFormBuilderState extends State<UserFormModelFormBuilder> {
   late UserFormModelForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -147,6 +151,34 @@ class _UserFormModelFormBuilderState extends State<UserFormModelFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logUserFormModelForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -163,6 +195,7 @@ class _UserFormModelFormBuilderState extends State<UserFormModelFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -176,7 +209,7 @@ class _UserFormModelFormBuilderState extends State<UserFormModelFormBuilder> {
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -185,7 +218,9 @@ class _UserFormModelFormBuilderState extends State<UserFormModelFormBuilder> {
   }
 }
 
-class UserFormModelForm implements FormModel<UserFormModel> {
+final _logUserFormModelForm = Logger.detached('UserFormModelForm');
+
+class UserFormModelForm implements FormModel<UserFormModel, UserFormModel> {
   UserFormModelForm(
     this.form,
     this.path,
@@ -205,10 +240,16 @@ class UserFormModelForm implements FormModel<UserFormModel> {
 
   String ageGroupControlPath() => pathBuilder(ageGroupControlName);
 
-  String? get _nameValue => nameControl?.value;
+  String? get _nameValue => nameControl.value;
 
-  AgeGroup get _ageGroupValue => ageGroupControl.value as AgeGroup;
+  AgeGroup get _ageGroupValue => ageGroupControl.value ?? AgeGroup.child;
 
+  String? get _nameRawValue => nameControl.value;
+
+  AgeGroup get _ageGroupRawValue => ageGroupControl.value ?? AgeGroup.child;
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -218,6 +259,8 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsAgeGroup {
     try {
       form.control(ageGroupControlPath());
@@ -227,7 +270,7 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     }
   }
 
-  Map<String, Object>? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl.errors;
 
   Map<String, Object> get ageGroupErrors => ageGroupControl.errors;
 
@@ -235,6 +278,8 @@ class UserFormModelForm implements FormModel<UserFormModel> {
 
   void get ageGroupFocus => form.focus(ageGroupControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -266,7 +311,7 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.updateValue(value,
+    nameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -284,7 +329,7 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.patchValue(value,
+    nameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -304,8 +349,13 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      nameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      nameControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void ageGroupValueReset(
     AgeGroup value, {
@@ -315,11 +365,15 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     bool? disabled,
   }) =>
       ageGroupControl.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
-  FormControl<String>? get nameControl => containsName
-      ? form.control(nameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
 
   FormControl<AgeGroup> get ageGroupControl =>
       form.control(ageGroupControlPath()) as FormControl<AgeGroup>;
@@ -330,12 +384,12 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      nameControl?.markAsDisabled(
+      nameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      nameControl?.markAsEnabled(
+      nameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -365,11 +419,18 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'UserFormModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logUserFormModelForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return UserFormModel(name: _nameValue, ageGroup: _ageGroupValue);
+  }
+
+  @override
+  UserFormModel get rawModel {
+    return UserFormModel(name: _nameRawValue, ageGroup: _ageGroupRawValue);
   }
 
   @override
@@ -405,6 +466,18 @@ class UserFormModelForm implements FormModel<UserFormModel> {
   }
 
   @override
+  bool equalsTo(UserFormModel? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      UserFormModelForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(UserFormModel model) onValid,
     void Function()? onNotValid,
@@ -413,6 +486,8 @@ class UserFormModelForm implements FormModel<UserFormModel> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logUserFormModelForm.info('Errors');
+      _logUserFormModelForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -474,6 +549,8 @@ class ReactiveUserFormModelFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
   })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
@@ -489,8 +566,15 @@ class ReactiveUserFormModelFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveUserFormModelFormArrayBuilderT> control,
       ReactiveUserFormModelFormArrayBuilderT? item,
       UserFormModelForm formModel) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveUserFormModelFormArrayBuilderT> control)?
+      controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -500,33 +584,107 @@ class ReactiveUserFormModelFormArrayBuilder<
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveUserFormModelFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.map((e) => e.value).toList();
-        final itemList = values
-            .asMap()
-            .map((i, item) {
-              return MapEntry(
-                i,
-                itemBuilder(
-                  context,
-                  i,
-                  item,
-                  formModel,
-                ),
-              );
-            })
-            .values
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveUserFormModelFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
+    );
+  }
+}
+
+class ReactiveUserFormModelFormArrayBuilder2<
+    ReactiveUserFormModelFormArrayBuilderT> extends StatelessWidget {
+  const ReactiveUserFormModelFormArrayBuilder2({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<ReactiveUserFormModelFormArrayBuilderT>? formControl;
+
+  final FormArray<ReactiveUserFormModelFormArrayBuilderT>? Function(
+      UserFormModelForm formModel)? control;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        UserFormModelForm formModel
+      }) params)? builder;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactiveUserFormModelFormArrayBuilderT> control,
+        ReactiveUserFormModelFormArrayBuilderT? item,
+        UserFormModelForm formModel
+      }) params) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveUserFormModelFormArrayBuilderT> control)?
+      controlFilter;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveUserFormModelForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
+
+    return ReactiveFormArrayItemBuilder<ReactiveUserFormModelFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }

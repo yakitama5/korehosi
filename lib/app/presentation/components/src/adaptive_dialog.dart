@@ -11,9 +11,11 @@ Future<DialogResult?> showAdaptiveOkDialog(
   String? title,
   String? message,
   String? okLabel,
+  bool useRootNavigator = true,
 }) =>
     showAdaptiveDialog<DialogResult>(
       context: context,
+      useRootNavigator: useRootNavigator,
       builder: (context) => OkDialog(
         icon: icon,
         title: title,
@@ -28,9 +30,11 @@ Future<DialogResult?> showAdaptiveOkCancelDialog(
   String? message,
   String? okLabel,
   String? cancelLabel,
+  bool useRootNavigator = true,
 }) =>
     showAdaptiveDialog<DialogResult>(
       context: context,
+      useRootNavigator: useRootNavigator,
       builder: (context) => OkCancelDialog(
         title: title,
         message: message,
@@ -48,9 +52,11 @@ Future<String?> showAdaptiveTextDialog(
   String? labelText,
   bool isRequired = false,
   int? maxLength,
+  bool useRootNavigator = true,
 }) =>
     showAdaptiveDialog(
       context: context,
+      useRootNavigator: useRootNavigator,
       builder: (context) => TextDialog(
         title: title,
         okLabel: okLabel,

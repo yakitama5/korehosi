@@ -6,7 +6,7 @@ part of 'purchase_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchaseHash() => r'426774c0b49638460af6eb6ff69603b9347d9896';
+String _$purchaseHash() => r'e512a62242c81b3913a2ebb03884e2ac2e27ccba';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -171,6 +171,8 @@ class PurchaseProvider extends StreamProvider<Purchase?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin PurchaseRef on StreamProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
   String get groupId;
@@ -189,4 +191,4 @@ class _PurchaseProviderElement extends StreamProviderElement<Purchase?>
   String get itemId => (origin as PurchaseProvider).itemId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

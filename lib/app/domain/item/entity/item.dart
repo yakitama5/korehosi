@@ -5,7 +5,7 @@ part 'item.g.dart';
 
 /// ほしい物
 @freezed
-class Item with _$Item {
+abstract class Item with _$Item {
   const factory Item({
     required String id,
     List<String>? imagesPath,

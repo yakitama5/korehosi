@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/item/entity/item.dart';
@@ -21,12 +22,12 @@ class ItemDetailProviders {
 /// 明細表示対象となる欲しい物のIDを管理するProvider
 /// `override`前提の利用を強制する
 @riverpod
-String? _itemId(_ItemIdRef ref) => throw UnimplementedError();
+String? _itemId(Ref ref) => throw UnimplementedError();
 
 /// 明細表示対象となる欲しい物のEntityを管理するProvider
 /// `_itemIdProvider`に依存する
 @Riverpod(dependencies: [_itemId])
-Future<Item?> _item(_ItemRef ref) async {
+Future<Item?> _item(Ref ref) async {
   final itemId = ref.watch(_itemIdProvider);
   if (itemId == null) {
     return null;
@@ -37,7 +38,7 @@ Future<Item?> _item(_ItemRef ref) async {
 /// 明細表示対象となる欲しい物に属する購入情報のEntityを管理するProvider
 /// `_itemIdProvider`に依存する
 @Riverpod(dependencies: [_itemId])
-Future<Purchase?> _purchase(_PurchaseRef ref) async {
+Future<Purchase?> _purchase(Ref ref) async {
   final itemId = ref.watch(_itemIdProvider);
   if (itemId == null) {
     return null;

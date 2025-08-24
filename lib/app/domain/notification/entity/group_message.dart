@@ -8,7 +8,7 @@ part 'group_message.g.dart';
 
 /// グループ内に向けたメッセージ
 @freezed
-class GroupMessage with _$GroupMessage {
+abstract class GroupMessage with _$GroupMessage {
   const factory GroupMessage({
     required String id,
     required String title,

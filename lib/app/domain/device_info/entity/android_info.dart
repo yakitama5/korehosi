@@ -6,7 +6,7 @@ part 'android_info.freezed.dart';
 
 /// Androidの端末情報
 @freezed
-class AndroidInfo with _$AndroidInfo {
+abstract class AndroidInfo with _$AndroidInfo {
   const factory AndroidInfo({
     required AndroidVersion version,
     required String brand,

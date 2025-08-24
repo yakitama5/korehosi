@@ -7,7 +7,7 @@ part of 'notification_token_repository.dart';
 // **************************************************************************
 
 String _$notificationTokenRepositoryHash() =>
-    r'd219860a8b5f99ef59f5b3df6aaeb47994a1ae0b';
+    r'c1c4598d30645e724caa8d60d19c8c4c38022e5d';
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 ///
@@ -24,7 +24,9 @@ final notificationTokenRepositoryProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef NotificationTokenRepositoryRef
     = ProviderRef<NotificationTokenRepository>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

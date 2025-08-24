@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -385,6 +384,8 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   }
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
+    final navigator = Navigator.of(context);
+
     // 削除確認
     final l10n = ref.read(l10nProvider);
     final group = ref.read(GroupDetailProviders.groupProvider).value;
@@ -406,9 +407,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       action: () async {
         await ref.read(groupUsecaseProvider).delete(groupId: group!.id);
 
-        if (context.mounted) {
-          context.pop();
-        }
+        navigator.pop();
       },
     );
   }
@@ -443,6 +442,8 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
   }
 
   Future<void> onLeave(BuildContext context, WidgetRef ref) async {
+    final navigator = Navigator.of(context);
+
     // 離脱確認
     final l10n = ref.read(l10nProvider);
     final group = ref.read(GroupDetailProviders.groupProvider).value;
@@ -463,9 +464,7 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
       action: () async {
         await ref.read(groupUsecaseProvider).leave(groupId: group!.id);
 
-        if (context.mounted) {
-          context.pop();
-        }
+        navigator.pop();
       },
     );
   }

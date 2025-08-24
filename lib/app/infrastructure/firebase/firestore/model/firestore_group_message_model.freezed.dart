@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,135 +9,70 @@ part of 'firestore_group_message_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-FirestoreGroupMessageModel _$FirestoreGroupMessageModelFromJson(
-    Map<String, dynamic> json) {
-  return _FirestoreGroupMessageModel.fromJson(json);
-}
 
 /// @nodoc
 mixin _$FirestoreGroupMessageModel {
-  String get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get body => throw _privateConstructorUsedError;
-  NotificationTarget get target => throw _privateConstructorUsedError;
+  String get id;
+  String get title;
+  String get body;
+  NotificationTarget get target;
   @notificationEventKey
-  NotificationEvent get event => throw _privateConstructorUsedError;
-  String? get path => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
+  NotificationEvent get event;
+  String? get path;
+  String get uid;
   @timestampKey
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
   @timestampKey
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
-
-  /// Serializes this FirestoreGroupMessageModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  DateTime? get updatedAt;
 
   /// Create a copy of FirestoreGroupMessageModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $FirestoreGroupMessageModelCopyWith<FirestoreGroupMessageModel>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FirestoreGroupMessageModelCopyWith<$Res> {
-  factory $FirestoreGroupMessageModelCopyWith(FirestoreGroupMessageModel value,
-          $Res Function(FirestoreGroupMessageModel) then) =
-      _$FirestoreGroupMessageModelCopyWithImpl<$Res,
-          FirestoreGroupMessageModel>;
-  @useResult
-  $Res call(
-      {String id,
-      String title,
-      String body,
-      NotificationTarget target,
-      @notificationEventKey NotificationEvent event,
-      String? path,
-      String uid,
-      @timestampKey DateTime? createdAt,
-      @timestampKey DateTime? updatedAt});
-}
-
-/// @nodoc
-class _$FirestoreGroupMessageModelCopyWithImpl<$Res,
-        $Val extends FirestoreGroupMessageModel>
-    implements $FirestoreGroupMessageModelCopyWith<$Res> {
-  _$FirestoreGroupMessageModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of FirestoreGroupMessageModel
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $FirestoreGroupMessageModelCopyWith<FirestoreGroupMessageModel>
+      get copyWith =>
+          _$FirestoreGroupMessageModelCopyWithImpl<FirestoreGroupMessageModel>(
+              this as FirestoreGroupMessageModel, _$identity);
+
+  /// Serializes this FirestoreGroupMessageModel to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? title = null,
-    Object? body = null,
-    Object? target = null,
-    Object? event = null,
-    Object? path = freezed,
-    Object? uid = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      body: null == body
-          ? _value.body
-          : body // ignore: cast_nullable_to_non_nullable
-              as String,
-      target: null == target
-          ? _value.target
-          : target // ignore: cast_nullable_to_non_nullable
-              as NotificationTarget,
-      event: null == event
-          ? _value.event
-          : event // ignore: cast_nullable_to_non_nullable
-              as NotificationEvent,
-      path: freezed == path
-          ? _value.path
-          : path // ignore: cast_nullable_to_non_nullable
-              as String?,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FirestoreGroupMessageModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.target, target) || other.target == target) &&
+            (identical(other.event, event) || other.event == event) &&
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, title, body, target, event,
+      path, uid, createdAt, updatedAt);
+
+  @override
+  String toString() {
+    return 'FirestoreGroupMessageModel(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
 /// @nodoc
-abstract class _$$FirestoreGroupMessageModelImplCopyWith<$Res>
-    implements $FirestoreGroupMessageModelCopyWith<$Res> {
-  factory _$$FirestoreGroupMessageModelImplCopyWith(
-          _$FirestoreGroupMessageModelImpl value,
-          $Res Function(_$FirestoreGroupMessageModelImpl) then) =
-      __$$FirestoreGroupMessageModelImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $FirestoreGroupMessageModelCopyWith<$Res> {
+  factory $FirestoreGroupMessageModelCopyWith(FirestoreGroupMessageModel value,
+          $Res Function(FirestoreGroupMessageModel) _then) =
+      _$FirestoreGroupMessageModelCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -152,14 +87,12 @@ abstract class _$$FirestoreGroupMessageModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$FirestoreGroupMessageModelImplCopyWithImpl<$Res>
-    extends _$FirestoreGroupMessageModelCopyWithImpl<$Res,
-        _$FirestoreGroupMessageModelImpl>
-    implements _$$FirestoreGroupMessageModelImplCopyWith<$Res> {
-  __$$FirestoreGroupMessageModelImplCopyWithImpl(
-      _$FirestoreGroupMessageModelImpl _value,
-      $Res Function(_$FirestoreGroupMessageModelImpl) _then)
-      : super(_value, _then);
+class _$FirestoreGroupMessageModelCopyWithImpl<$Res>
+    implements $FirestoreGroupMessageModelCopyWith<$Res> {
+  _$FirestoreGroupMessageModelCopyWithImpl(this._self, this._then);
+
+  final FirestoreGroupMessageModel _self;
+  final $Res Function(FirestoreGroupMessageModel) _then;
 
   /// Create a copy of FirestoreGroupMessageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -176,51 +109,265 @@ class __$$FirestoreGroupMessageModelImplCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$FirestoreGroupMessageModelImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
-          ? _value.title
+          ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
       body: null == body
-          ? _value.body
+          ? _self.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
       target: null == target
-          ? _value.target
+          ? _self.target
           : target // ignore: cast_nullable_to_non_nullable
               as NotificationTarget,
       event: null == event
-          ? _value.event
+          ? _self.event
           : event // ignore: cast_nullable_to_non_nullable
               as NotificationEvent,
       path: freezed == path
-          ? _value.path
+          ? _self.path
           : path // ignore: cast_nullable_to_non_nullable
               as String?,
       uid: null == uid
-          ? _value.uid
+          ? _self.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [FirestoreGroupMessageModel].
+extension FirestoreGroupMessageModelPatterns on FirestoreGroupMessageModel {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_FirestoreGroupMessageModel value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreGroupMessageModel() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_FirestoreGroupMessageModel value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreGroupMessageModel():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_FirestoreGroupMessageModel value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreGroupMessageModel() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String title,
+            String body,
+            NotificationTarget target,
+            @notificationEventKey NotificationEvent event,
+            String? path,
+            String uid,
+            @timestampKey DateTime? createdAt,
+            @timestampKey DateTime? updatedAt)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreGroupMessageModel() when $default != null:
+        return $default(
+            _that.id,
+            _that.title,
+            _that.body,
+            _that.target,
+            _that.event,
+            _that.path,
+            _that.uid,
+            _that.createdAt,
+            _that.updatedAt);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String title,
+            String body,
+            NotificationTarget target,
+            @notificationEventKey NotificationEvent event,
+            String? path,
+            String uid,
+            @timestampKey DateTime? createdAt,
+            @timestampKey DateTime? updatedAt)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreGroupMessageModel():
+        return $default(
+            _that.id,
+            _that.title,
+            _that.body,
+            _that.target,
+            _that.event,
+            _that.path,
+            _that.uid,
+            _that.createdAt,
+            _that.updatedAt);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            String title,
+            String body,
+            NotificationTarget target,
+            @notificationEventKey NotificationEvent event,
+            String? path,
+            String uid,
+            @timestampKey DateTime? createdAt,
+            @timestampKey DateTime? updatedAt)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _FirestoreGroupMessageModel() when $default != null:
+        return $default(
+            _that.id,
+            _that.title,
+            _that.body,
+            _that.target,
+            _that.event,
+            _that.path,
+            _that.uid,
+            _that.createdAt,
+            _that.updatedAt);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
-  const _$FirestoreGroupMessageModelImpl(
+class _FirestoreGroupMessageModel implements FirestoreGroupMessageModel {
+  const _FirestoreGroupMessageModel(
       {required this.id,
       required this.title,
       required this.body,
@@ -230,10 +377,8 @@ class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
       required this.uid,
       @timestampKey this.createdAt,
       @timestampKey this.updatedAt});
-
-  factory _$FirestoreGroupMessageModelImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$FirestoreGroupMessageModelImplFromJson(json);
+  factory _FirestoreGroupMessageModel.fromJson(Map<String, dynamic> json) =>
+      _$FirestoreGroupMessageModelFromJson(json);
 
   @override
   final String id;
@@ -257,16 +402,27 @@ class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
   @timestampKey
   final DateTime? updatedAt;
 
+  /// Create a copy of FirestoreGroupMessageModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'FirestoreGroupMessageModel(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$FirestoreGroupMessageModelCopyWith<_FirestoreGroupMessageModel>
+      get copyWith => __$FirestoreGroupMessageModelCopyWithImpl<
+          _FirestoreGroupMessageModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FirestoreGroupMessageModelToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FirestoreGroupMessageModelImpl &&
+            other is _FirestoreGroupMessageModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.body, body) || other.body == body) &&
@@ -285,66 +441,95 @@ class _$FirestoreGroupMessageModelImpl implements _FirestoreGroupMessageModel {
   int get hashCode => Object.hash(runtimeType, id, title, body, target, event,
       path, uid, createdAt, updatedAt);
 
-  /// Create a copy of FirestoreGroupMessageModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$FirestoreGroupMessageModelImplCopyWith<_$FirestoreGroupMessageModelImpl>
-      get copyWith => __$$FirestoreGroupMessageModelImplCopyWithImpl<
-          _$FirestoreGroupMessageModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FirestoreGroupMessageModelImplToJson(
-      this,
-    );
+  String toString() {
+    return 'FirestoreGroupMessageModel(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
 
-abstract class _FirestoreGroupMessageModel
-    implements FirestoreGroupMessageModel {
-  const factory _FirestoreGroupMessageModel(
-          {required final String id,
-          required final String title,
-          required final String body,
-          required final NotificationTarget target,
-          @notificationEventKey required final NotificationEvent event,
-          final String? path,
-          required final String uid,
-          @timestampKey final DateTime? createdAt,
-          @timestampKey final DateTime? updatedAt}) =
-      _$FirestoreGroupMessageModelImpl;
+/// @nodoc
+abstract mixin class _$FirestoreGroupMessageModelCopyWith<$Res>
+    implements $FirestoreGroupMessageModelCopyWith<$Res> {
+  factory _$FirestoreGroupMessageModelCopyWith(
+          _FirestoreGroupMessageModel value,
+          $Res Function(_FirestoreGroupMessageModel) _then) =
+      __$FirestoreGroupMessageModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String title,
+      String body,
+      NotificationTarget target,
+      @notificationEventKey NotificationEvent event,
+      String? path,
+      String uid,
+      @timestampKey DateTime? createdAt,
+      @timestampKey DateTime? updatedAt});
+}
 
-  factory _FirestoreGroupMessageModel.fromJson(Map<String, dynamic> json) =
-      _$FirestoreGroupMessageModelImpl.fromJson;
+/// @nodoc
+class __$FirestoreGroupMessageModelCopyWithImpl<$Res>
+    implements _$FirestoreGroupMessageModelCopyWith<$Res> {
+  __$FirestoreGroupMessageModelCopyWithImpl(this._self, this._then);
 
-  @override
-  String get id;
-  @override
-  String get title;
-  @override
-  String get body;
-  @override
-  NotificationTarget get target;
-  @override
-  @notificationEventKey
-  NotificationEvent get event;
-  @override
-  String? get path;
-  @override
-  String get uid;
-  @override
-  @timestampKey
-  DateTime? get createdAt;
-  @override
-  @timestampKey
-  DateTime? get updatedAt;
+  final _FirestoreGroupMessageModel _self;
+  final $Res Function(_FirestoreGroupMessageModel) _then;
 
   /// Create a copy of FirestoreGroupMessageModel
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FirestoreGroupMessageModelImplCopyWith<_$FirestoreGroupMessageModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? title = null,
+    Object? body = null,
+    Object? target = null,
+    Object? event = null,
+    Object? path = freezed,
+    Object? uid = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_FirestoreGroupMessageModel(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: null == title
+          ? _self.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: null == body
+          ? _self.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      target: null == target
+          ? _self.target
+          : target // ignore: cast_nullable_to_non_nullable
+              as NotificationTarget,
+      event: null == event
+          ? _self.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as NotificationEvent,
+      path: freezed == path
+          ? _self.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String?,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+    ));
+  }
 }
+
+// dart format on

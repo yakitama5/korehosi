@@ -122,7 +122,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
                 touchTooltipData: LineTouchTooltipData(
                   getTooltipColor: (group) =>
                       colorScheme.surfaceContainerHighest,
-                  tooltipRoundedRadius: 12,
+                  tooltipBorderRadius: BorderRadius.circular(12),
                   getTooltipItems: (touchedSpots) => touchedSpots
                       .map(
                         (e) => LineTooltipItem(
@@ -186,7 +186,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
           );
 
           return SideTitleWidget(
-            axisSide: meta.axisSide,
+            meta: meta,
             child: Text(
               currency,
               style: textTheme.labelMedium,
@@ -212,7 +212,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
           // 現在日付からの差分を求めて、年月を割り出す
           final dt = now.addMonth(index.toInt());
           return SideTitleWidget(
-            axisSide: meta.axisSide,
+            meta: meta,
             child: Text(
               l10n.formatMonth(dt.month),
               style: textTheme.labelLarge,

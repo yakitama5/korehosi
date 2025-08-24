@@ -58,7 +58,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
               title: Text(l10n.other),
               tiles: [
                 // 連携していないユーザーはログアウトしても復帰できないので退会オンリー
-                if (data?.isAnonymous == true)
+                if (data?.isAnonymous != true)
                   SettingsTile.navigation(
                     leading: const Icon(Icons.logout),
                     trailing: trailing,

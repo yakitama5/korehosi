@@ -2,19 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../application/usecase/group/state/group_detail_providers.dart';
 import '../../../application/usecase/group/state/share_link_page_providers.dart';
+import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../app_listner.dart';
+import '../../pages/analyze/analyze_detail_page.dart';
+import '../../pages/analyze/analyze_page.dart';
+import '../../pages/group/group_page.dart';
+import '../../pages/group/groups_page.dart';
 import '../../pages/group/share_link_page.dart';
 import '../../pages/item/components/photo_viewer.dart';
+import '../../pages/item/item_edit_page.dart';
+import '../../pages/item/item_page.dart';
+import '../../pages/item/items_page.dart';
+import '../../pages/item/purchase_page.dart';
+import '../../pages/settings/settings_page.dart';
 import '../../pages/user/account_link_page.dart';
+import '../../pages/user/account_page.dart';
+import '../../pages/user/license_page.dart';
 import '../../pages/user/onboard_page.dart';
+import '../../pages/user/profile_page.dart';
 import '../../pages/user/welcome_page.dart';
-import 'analyze_branch.dart';
-import 'item_branch.dart';
 import 'navigator_page.dart';
-import 'settings_branch.dart';
 
+part 'analyze_branch.dart';
+part 'item_branch.dart';
 part 'routes_data.g.dart';
+part 'settings_branch.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -48,7 +62,7 @@ class BaseShellSrouteData extends ShellRouteData {
       AppListner(navigator);
 }
 
-class RootRouteData extends GoRouteData {
+class RootRouteData extends GoRouteData with _$RootRouteData {
   const RootRouteData();
 
   static const path = '/';
@@ -85,7 +99,7 @@ class BottomNavitorShellRouteData extends StatefulShellRouteData {
   static const String $restorationScopeId = 'app_router';
 }
 
-class OnboardStartRouteData extends GoRouteData {
+class OnboardStartRouteData extends GoRouteData with _$OnboardStartRouteData {
   const OnboardStartRouteData();
 
   static const path = '/start';
@@ -95,7 +109,7 @@ class OnboardStartRouteData extends GoRouteData {
       const WelcomePage();
 }
 
-class AccountLinkRouteData extends GoRouteData {
+class AccountLinkRouteData extends GoRouteData with _$AccountLinkRouteData {
   const AccountLinkRouteData();
 
   static const path = 'account_link';
@@ -105,7 +119,7 @@ class AccountLinkRouteData extends GoRouteData {
       const AccountLinkPage();
 }
 
-class OnboardFormRouteData extends GoRouteData {
+class OnboardFormRouteData extends GoRouteData with _$OnboardFormRouteData {
   const OnboardFormRouteData();
 
   static const path = '/onboard_form';
@@ -114,7 +128,7 @@ class OnboardFormRouteData extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => OnboardPage();
 }
 
-class ShareLinkRouteData extends GoRouteData {
+class ShareLinkRouteData extends GoRouteData with _$ShareLinkRouteData {
   const ShareLinkRouteData(this.shareLinkId);
 
   static const path = '/share_link/:shareLinkId';
@@ -130,7 +144,7 @@ class ShareLinkRouteData extends GoRouteData {
       );
 }
 
-class PhotoPreviewRouteData extends GoRouteData {
+class PhotoPreviewRouteData extends GoRouteData with _$PhotoPreviewRouteData {
   const PhotoPreviewRouteData({this.index, this.$extra});
 
   static const path = '/preview';

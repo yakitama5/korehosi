@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/item/entity/item.dart';
@@ -9,7 +10,7 @@ part 'current_group_item_provider.g.dart';
 /// 現在のグループ内の欲しい物
 @riverpod
 Future<Item?> currentGroupItem(
-  CurrentGroupItemRef ref, {
+  Ref ref, {
   required String itemId,
 }) {
   return ref.watch(

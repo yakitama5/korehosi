@@ -6,7 +6,7 @@ part of 'item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ItemImpl _$$ItemImplFromJson(Map<String, dynamic> json) => _$ItemImpl(
+_Item _$ItemFromJson(Map<String, dynamic> json) => _Item(
       id: json['id'] as String,
       imagesPath: (json['imagesPath'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -21,8 +21,7 @@ _$ItemImpl _$$ItemImplFromJson(Map<String, dynamic> json) => _$ItemImpl(
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$ItemImplToJson(_$ItemImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ItemToJson(_Item instance) => <String, dynamic>{
       'id': instance.id,
       'imagesPath': instance.imagesPath,
       'name': instance.name,

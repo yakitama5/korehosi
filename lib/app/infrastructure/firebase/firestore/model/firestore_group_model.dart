@@ -8,7 +8,7 @@ part 'firestore_group_model.g.dart';
 
 /// `/groups/{groupId}`ドキュメントのモデル
 @freezed
-class FirestoreGroupModel with _$FirestoreGroupModel {
+abstract class FirestoreGroupModel with _$FirestoreGroupModel {
   const factory FirestoreGroupModel({
     required String id,
     required String name,

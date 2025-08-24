@@ -7,7 +7,7 @@ part of 'current_group_join_users_provider.dart';
 // **************************************************************************
 
 String _$currentGroupJoinUsersHash() =>
-    r'ddcc98d4f27b360ce07e496ec187e8b34ff1c286';
+    r'4acaa26be394a0a5d990cdbe551109f69cc05b3c';
 
 /// 現在のグループに所属しているユーザー一覧
 ///
@@ -24,6 +24,8 @@ final currentGroupJoinUsersProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CurrentGroupJoinUsersRef = AutoDisposeFutureProviderRef<List<User>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

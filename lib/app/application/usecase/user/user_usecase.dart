@@ -32,7 +32,7 @@ import 'state/user_provider.dart';
 part 'user_usecase.g.dart';
 
 @riverpod
-UserUsecase userUsecase(UserUsecaseRef ref) => UserUsecase(ref);
+UserUsecase userUsecase(Ref ref) => UserUsecase(ref);
 
 /// ユーザーに関するユースケース
 class UserUsecase with RunUsecaseMixin {

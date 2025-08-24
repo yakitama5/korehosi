@@ -50,12 +50,12 @@ class SvgAssetImage extends StatelessWidget {
   }
 
   String toColorUpperCode(Color color) {
-    final hexa = color.value.toRadixString(16).toUpperCase();
+    final hexa = color.toARGB32().toRadixString(16).toUpperCase();
     return '#${hexa.substring(hexa.length - 6, hexa.length).padLeft(6, '0')}';
   }
 
   String toColorLowerCode(Color color) {
-    final hexa = color.value.toRadixString(16).toLowerCase();
+    final hexa = color.toARGB32().toRadixString(16).toLowerCase();
     return '#${hexa.substring(hexa.length - 6, hexa.length).padLeft(6, '0')}';
   }
 }

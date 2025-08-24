@@ -1,8 +1,8 @@
 import 'package:family_wish_list/app/application/config/breakpoint_config.dart';
 import 'package:family_wish_list/app/presentation/app.dart';
 import 'package:family_wish_list/app/presentation/theme/src/color_schemes.g.dart';
+import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:responsive_framework/responsive_framework.dart';

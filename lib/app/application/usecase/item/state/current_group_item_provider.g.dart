@@ -6,7 +6,7 @@ part of 'current_group_item_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentGroupItemHash() => r'c875e9d278ee39f6eb7667b955e7ca90d7fd2bb3';
+String _$currentGroupItemHash() => r'65307d81fe65498afd0a68a7c96d7ee862d6c0d4';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -154,6 +154,8 @@ class CurrentGroupItemProvider extends AutoDisposeFutureProvider<Item?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin CurrentGroupItemRef on AutoDisposeFutureProviderRef<Item?> {
   /// The parameter `itemId` of this provider.
   String get itemId;
@@ -167,4 +169,4 @@ class _CurrentGroupItemProviderElement
   String get itemId => (origin as CurrentGroupItemProvider).itemId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

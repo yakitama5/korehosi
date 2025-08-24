@@ -5,7 +5,7 @@ part 'notification_message.g.dart';
 
 /// 通知メッセージ
 @freezed
-class NotificationMessage with _$NotificationMessage {
+abstract class NotificationMessage with _$NotificationMessage {
   const factory NotificationMessage({
     String? senderId,
     String? category,

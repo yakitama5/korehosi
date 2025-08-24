@@ -6,7 +6,7 @@ part of 'config_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$configServiceHash() => r'7f3597cb53ff43e390cd72fe71db52f8180ac0f8';
+String _$configServiceHash() => r'ab51148270e55d4f57d1c1a59f2f89dc13c0ce7c';
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 ///
@@ -22,6 +22,8 @@ final configServiceProvider = Provider<ConfigService>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ConfigServiceRef = ProviderRef<ConfigService>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

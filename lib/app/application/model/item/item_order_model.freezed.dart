@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,124 +9,27 @@ part of 'item_order_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ItemOrderModel {
-  ItemOrderKey get key => throw _privateConstructorUsedError;
-  SortOrder get sortOrder => throw _privateConstructorUsedError;
+  ItemOrderKey get key;
+  SortOrder get sortOrder;
 
   /// Create a copy of ItemOrderModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ItemOrderModelCopyWith<ItemOrderModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ItemOrderModelCopyWith<$Res> {
-  factory $ItemOrderModelCopyWith(
-          ItemOrderModel value, $Res Function(ItemOrderModel) then) =
-      _$ItemOrderModelCopyWithImpl<$Res, ItemOrderModel>;
-  @useResult
-  $Res call({ItemOrderKey key, SortOrder sortOrder});
-}
-
-/// @nodoc
-class _$ItemOrderModelCopyWithImpl<$Res, $Val extends ItemOrderModel>
-    implements $ItemOrderModelCopyWith<$Res> {
-  _$ItemOrderModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ItemOrderModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? key = null,
-    Object? sortOrder = null,
-  }) {
-    return _then(_value.copyWith(
-      key: null == key
-          ? _value.key
-          : key // ignore: cast_nullable_to_non_nullable
-              as ItemOrderKey,
-      sortOrder: null == sortOrder
-          ? _value.sortOrder
-          : sortOrder // ignore: cast_nullable_to_non_nullable
-              as SortOrder,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ItemOrderModelImplCopyWith<$Res>
-    implements $ItemOrderModelCopyWith<$Res> {
-  factory _$$ItemOrderModelImplCopyWith(_$ItemOrderModelImpl value,
-          $Res Function(_$ItemOrderModelImpl) then) =
-      __$$ItemOrderModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({ItemOrderKey key, SortOrder sortOrder});
-}
-
-/// @nodoc
-class __$$ItemOrderModelImplCopyWithImpl<$Res>
-    extends _$ItemOrderModelCopyWithImpl<$Res, _$ItemOrderModelImpl>
-    implements _$$ItemOrderModelImplCopyWith<$Res> {
-  __$$ItemOrderModelImplCopyWithImpl(
-      _$ItemOrderModelImpl _value, $Res Function(_$ItemOrderModelImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ItemOrderModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? key = null,
-    Object? sortOrder = null,
-  }) {
-    return _then(_$ItemOrderModelImpl(
-      key: null == key
-          ? _value.key
-          : key // ignore: cast_nullable_to_non_nullable
-              as ItemOrderKey,
-      sortOrder: null == sortOrder
-          ? _value.sortOrder
-          : sortOrder // ignore: cast_nullable_to_non_nullable
-              as SortOrder,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ItemOrderModelImpl extends _ItemOrderModel {
-  const _$ItemOrderModelImpl({required this.key, required this.sortOrder})
-      : super._();
-
-  @override
-  final ItemOrderKey key;
-  @override
-  final SortOrder sortOrder;
-
-  @override
-  String toString() {
-    return 'ItemOrderModel(key: $key, sortOrder: $sortOrder)';
-  }
+      _$ItemOrderModelCopyWithImpl<ItemOrderModel>(
+          this as ItemOrderModel, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ItemOrderModelImpl &&
+            other is ItemOrderModel &&
             (identical(other.key, key) || other.key == key) &&
             (identical(other.sortOrder, sortOrder) ||
                 other.sortOrder == sortOrder));
@@ -135,31 +38,283 @@ class _$ItemOrderModelImpl extends _ItemOrderModel {
   @override
   int get hashCode => Object.hash(runtimeType, key, sortOrder);
 
+  @override
+  String toString() {
+    return 'ItemOrderModel(key: $key, sortOrder: $sortOrder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ItemOrderModelCopyWith<$Res> {
+  factory $ItemOrderModelCopyWith(
+          ItemOrderModel value, $Res Function(ItemOrderModel) _then) =
+      _$ItemOrderModelCopyWithImpl;
+  @useResult
+  $Res call({ItemOrderKey key, SortOrder sortOrder});
+}
+
+/// @nodoc
+class _$ItemOrderModelCopyWithImpl<$Res>
+    implements $ItemOrderModelCopyWith<$Res> {
+  _$ItemOrderModelCopyWithImpl(this._self, this._then);
+
+  final ItemOrderModel _self;
+  final $Res Function(ItemOrderModel) _then;
+
   /// Create a copy of ItemOrderModel
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? key = null,
+    Object? sortOrder = null,
+  }) {
+    return _then(_self.copyWith(
+      key: null == key
+          ? _self.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as ItemOrderKey,
+      sortOrder: null == sortOrder
+          ? _self.sortOrder
+          : sortOrder // ignore: cast_nullable_to_non_nullable
+              as SortOrder,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [ItemOrderModel].
+extension ItemOrderModelPatterns on ItemOrderModel {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ItemOrderModel value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ItemOrderModel() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ItemOrderModel value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemOrderModel():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ItemOrderModel value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemOrderModel() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(ItemOrderKey key, SortOrder sortOrder)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ItemOrderModel() when $default != null:
+        return $default(_that.key, _that.sortOrder);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(ItemOrderKey key, SortOrder sortOrder) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemOrderModel():
+        return $default(_that.key, _that.sortOrder);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(ItemOrderKey key, SortOrder sortOrder)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ItemOrderModel() when $default != null:
+        return $default(_that.key, _that.sortOrder);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+
+class _ItemOrderModel extends ItemOrderModel {
+  const _ItemOrderModel({required this.key, required this.sortOrder})
+      : super._();
+
+  @override
+  final ItemOrderKey key;
+  @override
+  final SortOrder sortOrder;
+
+  /// Create a copy of ItemOrderModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ItemOrderModelCopyWith<_ItemOrderModel> get copyWith =>
+      __$ItemOrderModelCopyWithImpl<_ItemOrderModel>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ItemOrderModel &&
+            (identical(other.key, key) || other.key == key) &&
+            (identical(other.sortOrder, sortOrder) ||
+                other.sortOrder == sortOrder));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, key, sortOrder);
+
+  @override
+  String toString() {
+    return 'ItemOrderModel(key: $key, sortOrder: $sortOrder)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ItemOrderModelCopyWith<$Res>
+    implements $ItemOrderModelCopyWith<$Res> {
+  factory _$ItemOrderModelCopyWith(
+          _ItemOrderModel value, $Res Function(_ItemOrderModel) _then) =
+      __$ItemOrderModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call({ItemOrderKey key, SortOrder sortOrder});
+}
+
+/// @nodoc
+class __$ItemOrderModelCopyWithImpl<$Res>
+    implements _$ItemOrderModelCopyWith<$Res> {
+  __$ItemOrderModelCopyWithImpl(this._self, this._then);
+
+  final _ItemOrderModel _self;
+  final $Res Function(_ItemOrderModel) _then;
+
+  /// Create a copy of ItemOrderModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$ItemOrderModelImplCopyWith<_$ItemOrderModelImpl> get copyWith =>
-      __$$ItemOrderModelImplCopyWithImpl<_$ItemOrderModelImpl>(
-          this, _$identity);
+  $Res call({
+    Object? key = null,
+    Object? sortOrder = null,
+  }) {
+    return _then(_ItemOrderModel(
+      key: null == key
+          ? _self.key
+          : key // ignore: cast_nullable_to_non_nullable
+              as ItemOrderKey,
+      sortOrder: null == sortOrder
+          ? _self.sortOrder
+          : sortOrder // ignore: cast_nullable_to_non_nullable
+              as SortOrder,
+    ));
+  }
 }
 
-abstract class _ItemOrderModel extends ItemOrderModel {
-  const factory _ItemOrderModel(
-      {required final ItemOrderKey key,
-      required final SortOrder sortOrder}) = _$ItemOrderModelImpl;
-  const _ItemOrderModel._() : super._();
-
-  @override
-  ItemOrderKey get key;
-  @override
-  SortOrder get sortOrder;
-
-  /// Create a copy of ItemOrderModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ItemOrderModelImplCopyWith<_$ItemOrderModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

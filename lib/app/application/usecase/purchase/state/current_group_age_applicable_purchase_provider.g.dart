@@ -7,7 +7,7 @@ part of 'current_group_age_applicable_purchase_provider.dart';
 // **************************************************************************
 
 String _$currentGroupAgeApplicablePurchaseHash() =>
-    r'cad62d9944d0d20673f97c0b407a27c0fa43fe29';
+    r'0f336c7f25c815e2106131a9b012073e8fcd4db4';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -160,6 +160,8 @@ class CurrentGroupAgeApplicablePurchaseProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin CurrentGroupAgeApplicablePurchaseRef
     on AutoDisposeFutureProviderRef<Purchase?> {
   /// The parameter `itemId` of this provider.
@@ -176,4 +178,4 @@ class _CurrentGroupAgeApplicablePurchaseProviderElement
       (origin as CurrentGroupAgeApplicablePurchaseProvider).itemId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -4,7 +4,7 @@ part 'item_config.freezed.dart';
 
 /// ほしい物の設定
 @freezed
-class ItemConfig with _$ItemConfig {
+abstract class ItemConfig with _$ItemConfig {
   const factory ItemConfig({
     required int maxNameLength,
     required int maxWanterNameLength,

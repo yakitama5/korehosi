@@ -7,7 +7,7 @@ part of 'firestore_purchase_provider.dart';
 // **************************************************************************
 
 String _$purchaseCollectionRefHash() =>
-    r'4d5c9438bc06643487ce77b0505b2ec755732176';
+    r'61dd7b371a5ee9611e0651a6daaec964f303a673';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -160,6 +160,8 @@ class PurchaseCollectionRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin PurchaseCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestorePurchaseModel>> {
   /// The parameter `groupId` of this provider.
@@ -175,7 +177,7 @@ class _PurchaseCollectionRefProviderElement extends AutoDisposeProviderElement<
 }
 
 String _$purchaseDocumentRefHash() =>
-    r'71cf6a53b7189b3a5f59f9412599029b310c12dd';
+    r'1804bf6edbef75d2f6d4ef5fcc6e46e659c3cf43';
 
 /// 購入情報ドキュメントの参照
 ///
@@ -319,6 +321,8 @@ class PurchaseDocumentRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin PurchaseDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestorePurchaseModel>> {
   /// The parameter `groupId` of this provider.
@@ -338,4 +342,4 @@ class _PurchaseDocumentRefProviderElement extends AutoDisposeProviderElement<
   String? get purchaseId => (origin as PurchaseDocumentRefProvider).purchaseId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

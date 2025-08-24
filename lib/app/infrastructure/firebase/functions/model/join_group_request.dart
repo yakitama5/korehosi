@@ -5,7 +5,7 @@ part 'join_group_request.g.dart';
 
 /// `joinGroup`ファンクションのリクエスト定義
 @freezed
-class JoinGroupRequest with _$JoinGroupRequest {
+abstract class JoinGroupRequest with _$JoinGroupRequest {
   const factory JoinGroupRequest({
     required String shareLinkId,
   }) = _JoinGroupRequest;

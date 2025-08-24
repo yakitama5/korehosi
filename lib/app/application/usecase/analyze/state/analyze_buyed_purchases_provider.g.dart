@@ -7,7 +7,7 @@ part of 'analyze_buyed_purchases_provider.dart';
 // **************************************************************************
 
 String _$analyzeBuyedPurchasesHash() =>
-    r'07ca63e174e24f5b1ab2a343f2aae607656b6a19';
+    r'25f6848415d0d3d07d5865dd29d94b230e040cd2';
 
 /// 購入済の購入情報
 ///
@@ -24,6 +24,8 @@ final analyzeBuyedPurchasesProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AnalyzeBuyedPurchasesRef = AutoDisposeFutureProviderRef<List<Purchase>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

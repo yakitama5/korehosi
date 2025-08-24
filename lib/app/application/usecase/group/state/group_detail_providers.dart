@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/group/entity/group.dart';
@@ -21,12 +22,12 @@ class GroupDetailProviders {
 /// 明細表示対象となるグループのIDを管理するProvider
 /// `override`前提の利用を強制する
 @riverpod
-String? _groupId(_GroupIdRef ref) => throw UnimplementedError();
+String? _groupId(Ref ref) => throw UnimplementedError();
 
 /// 明細表示対象となるグループのEntityを管理するProvider
 /// `_groupIdProvider`に依存する
 @Riverpod(dependencies: [_groupId])
-Future<Group?> _group(_GroupRef ref) async {
+Future<Group?> _group(Ref ref) async {
   final groupId = ref.watch(_groupIdProvider);
   if (groupId == null) {
     return null;
@@ -37,7 +38,7 @@ Future<Group?> _group(_GroupRef ref) async {
 /// グループに参加中のユーザーを管理するProvider
 /// `_groupIdProvider`に依存する
 @Riverpod(dependencies: [_groupId])
-Future<List<User>> _users(_UsersRef ref) async {
+Future<List<User>> _users(Ref ref) async {
   final groupId = ref.watch(_groupIdProvider);
   if (groupId == null) {
     return [];

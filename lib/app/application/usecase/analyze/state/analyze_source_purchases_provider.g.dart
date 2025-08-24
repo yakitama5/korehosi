@@ -7,7 +7,7 @@ part of 'analyze_source_purchases_provider.dart';
 // **************************************************************************
 
 String _$analyzeSourcePurchasesHash() =>
-    r'9ebd5eb997fcb50c12b2037e37bd7e8d7c466b3c';
+    r'dc4705a812f2cb714db9853c1f0ad94dc48bbee6';
 
 /// See also [analyzeSourcePurchases].
 @ProviderFor(analyzeSourcePurchases)
@@ -22,7 +22,9 @@ final analyzeSourcePurchasesProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AnalyzeSourcePurchasesRef
     = AutoDisposeFutureProviderRef<List<Purchase>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

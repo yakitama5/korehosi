@@ -5,7 +5,7 @@ part 'notification_token.g.dart';
 
 /// プッシュ通知用のトークン
 @freezed
-class NotificationToken with _$NotificationToken {
+abstract class NotificationToken with _$NotificationToken {
   const factory NotificationToken({
     required String token,
     required DateTime createdAt,

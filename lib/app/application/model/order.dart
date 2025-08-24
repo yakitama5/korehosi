@@ -1,4 +1,4 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:family_wish_list/l10n/app_localizations.dart';
 
 /// 並び順 (昇順 or 降順)
 enum SortOrder {

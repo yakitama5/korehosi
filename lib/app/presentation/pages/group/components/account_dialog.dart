@@ -80,16 +80,18 @@ class AndroidAccountDialog extends HookConsumerWidget {
               itemCount: groups?.length ?? 0,
               itemBuilder: (context, i) {
                 final group = groups![i];
-                return RadioListTile<String>(
-                  title: PremiumPrefixContainer(
-                    premium: group.premium,
-                    child: Text(group.name),
-                  ),
-                  value: group.id,
+                return RadioGroup<String>(
                   groupValue: selectValue.value,
                   onChanged: (String? value) {
                     selectValue.value = value;
                   },
+                  child: RadioListTile(
+                    title: PremiumPrefixContainer(
+                      premium: group.premium,
+                      child: Text(group.name),
+                    ),
+                    value: group.id,
+                  ),
                 );
               },
               separatorBuilder: (context, index) => const Divider(),

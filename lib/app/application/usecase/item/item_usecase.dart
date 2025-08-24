@@ -23,7 +23,7 @@ import '../user/state/auth_user_provider.dart';
 part 'item_usecase.g.dart';
 
 @riverpod
-ItemUsecase itemUsecase(ItemUsecaseRef ref) => ItemUsecase(ref);
+ItemUsecase itemUsecase(Ref ref) => ItemUsecase(ref);
 
 /// ほしい物に関するユースケース
 class ItemUsecase with RunUsecaseMixin {

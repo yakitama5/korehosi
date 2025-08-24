@@ -48,8 +48,8 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
     }
 
     final purchaserInfo = await Purchases.purchasePackage(package);
-    if (purchaserInfo
-            .entitlements.all[_limitedReleasePlanEntitlementKey]?.isActive !=
+    if (purchaserInfo.customerInfo.entitlements
+            .all[_limitedReleasePlanEntitlementKey]?.isActive !=
         true) {
       throw BusinessException('Not active');
     }

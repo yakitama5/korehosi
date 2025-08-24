@@ -6,14 +6,12 @@ part of 'join_group_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$JoinGroupRequestImpl _$$JoinGroupRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$JoinGroupRequestImpl(
+_JoinGroupRequest _$JoinGroupRequestFromJson(Map<String, dynamic> json) =>
+    _JoinGroupRequest(
       shareLinkId: json['shareLinkId'] as String,
     );
 
-Map<String, dynamic> _$$JoinGroupRequestImplToJson(
-        _$JoinGroupRequestImpl instance) =>
+Map<String, dynamic> _$JoinGroupRequestToJson(_JoinGroupRequest instance) =>
     <String, dynamic>{
       'shareLinkId': instance.shareLinkId,
     };

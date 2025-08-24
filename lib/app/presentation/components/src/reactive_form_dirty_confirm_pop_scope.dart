@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -33,29 +32,28 @@ class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {
               return;
             }
 
+            final navigator = Navigator.of(context);
+
             // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら変更する
             // NavigationBarを検知出来ないのは一旦保留
             // 内容が変更されていなければ閉じる
             final dirty = ReactiveForm.of(context)?.dirty;
             if (dirty != true) {
-              context.pop();
+              navigator.pop();
               return;
             }
 
             // ダイアログを表示して確認
-            final result = await showAdaptiveOkCancelDialog(
-              context,
-              title: l10n.confirmDiscardChangesTitle,
-              message: l10n.confirmDiscardChangesMessage,
-              okLabel: l10n.discard,
-              cancelLabel: l10n.notDiscard,
-            );
+            final result = await showAdaptiveOkCancelDialog(context,
+                title: l10n.confirmDiscardChangesTitle,
+                message: l10n.confirmDiscardChangesMessage,
+                okLabel: l10n.discard,
+                cancelLabel: l10n.notDiscard,
+                useRootNavigator: false);
 
             // 破棄が選ばれたら画面を閉じる
             if (result == DialogResult.ok) {
-              if (context.mounted) {
-                context.pop();
-              }
+              navigator.pop();
             }
           },
           child: child,

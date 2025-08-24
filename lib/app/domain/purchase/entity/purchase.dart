@@ -7,7 +7,7 @@ part 'purchase.g.dart';
 
 /// ほしい物の購入情報
 @freezed
-class Purchase with _$Purchase {
+abstract class Purchase with _$Purchase {
   const factory Purchase({
     required String id,
     int? price,

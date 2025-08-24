@@ -6,7 +6,7 @@ part of 'app_info_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appInfoServiceHash() => r'd61229429dcb67586f0d2f468c25c751c49d387e';
+String _$appInfoServiceHash() => r'3ccdaca8d89a6a73d106bd294356bb032f0e25a5';
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 ///
@@ -22,6 +22,8 @@ final appInfoServiceProvider = Provider<AppInfoService>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AppInfoServiceRef = ProviderRef<AppInfoService>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -12,8 +12,7 @@ import '../user/state/auth_user_provider.dart';
 part 'group_share_usecase.g.dart';
 
 @riverpod
-GroupShareUsecase groupShareUsecase(GroupShareUsecaseRef ref) =>
-    GroupShareUsecase(ref);
+GroupShareUsecase groupShareUsecase(Ref ref) => GroupShareUsecase(ref);
 
 /// グループの共有に関するユースケース
 class GroupShareUsecase with RunUsecaseMixin {
@@ -49,7 +48,8 @@ class GroupShareUsecase with RunUsecaseMixin {
           final shareText = await _createShareText(shareUrl, groupName);
 
           // シェア
-          await Share.shareXFiles([xFile], text: shareText);
+          await SharePlus.instance
+              .share(ShareParams(files: [xFile], text: shareText));
         },
         disableLoading: true,
       );
@@ -65,7 +65,7 @@ class GroupShareUsecase with RunUsecaseMixin {
           final bytes = await xFile.readAsBytes();
 
           // 画像の保存
-          await ImageGallerySaver.saveImage(bytes);
+          await ImageGallerySaverPlus.saveImage(bytes);
         },
         disableLoading: true,
       );

@@ -1,3 +1,4 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/purchase/entity/purchase.dart';
@@ -11,7 +12,7 @@ part 'age_applicable_purchase_provider.g.dart';
 /// 年齢に応じた購入情報
 @riverpod
 Future<Purchase?> ageApplicablePurchase(
-  AgeApplicablePurchaseRef ref, {
+  Ref ref, {
   required String groupId,
   required String itemId,
 }) async {

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,99 +9,55 @@ part of 'app_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AppConfig {
-  Flavor get flavor => throw _privateConstructorUsedError;
-  String get appName => throw _privateConstructorUsedError;
-  String get packageName => throw _privateConstructorUsedError;
-  String get bundleId => throw _privateConstructorUsedError;
-  String get appStoreId => throw _privateConstructorUsedError;
-  String get webUrl => throw _privateConstructorUsedError;
+  Flavor get flavor;
+  String get appName;
+  String get packageName;
+  String get bundleId;
+  String get appStoreId;
+  String get webUrl;
 
   /// Create a copy of AppConfig
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppConfigCopyWith<AppConfig> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AppConfigCopyWith<$Res> {
-  factory $AppConfigCopyWith(AppConfig value, $Res Function(AppConfig) then) =
-      _$AppConfigCopyWithImpl<$Res, AppConfig>;
-  @useResult
-  $Res call(
-      {Flavor flavor,
-      String appName,
-      String packageName,
-      String bundleId,
-      String appStoreId,
-      String webUrl});
-}
-
-/// @nodoc
-class _$AppConfigCopyWithImpl<$Res, $Val extends AppConfig>
-    implements $AppConfigCopyWith<$Res> {
-  _$AppConfigCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AppConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AppConfigCopyWith<AppConfig> get copyWith =>
+      _$AppConfigCopyWithImpl<AppConfig>(this as AppConfig, _$identity);
+
   @override
-  $Res call({
-    Object? flavor = null,
-    Object? appName = null,
-    Object? packageName = null,
-    Object? bundleId = null,
-    Object? appStoreId = null,
-    Object? webUrl = null,
-  }) {
-    return _then(_value.copyWith(
-      flavor: null == flavor
-          ? _value.flavor
-          : flavor // ignore: cast_nullable_to_non_nullable
-              as Flavor,
-      appName: null == appName
-          ? _value.appName
-          : appName // ignore: cast_nullable_to_non_nullable
-              as String,
-      packageName: null == packageName
-          ? _value.packageName
-          : packageName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bundleId: null == bundleId
-          ? _value.bundleId
-          : bundleId // ignore: cast_nullable_to_non_nullable
-              as String,
-      appStoreId: null == appStoreId
-          ? _value.appStoreId
-          : appStoreId // ignore: cast_nullable_to_non_nullable
-              as String,
-      webUrl: null == webUrl
-          ? _value.webUrl
-          : webUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AppConfig &&
+            (identical(other.flavor, flavor) || other.flavor == flavor) &&
+            (identical(other.appName, appName) || other.appName == appName) &&
+            (identical(other.packageName, packageName) ||
+                other.packageName == packageName) &&
+            (identical(other.bundleId, bundleId) ||
+                other.bundleId == bundleId) &&
+            (identical(other.appStoreId, appStoreId) ||
+                other.appStoreId == appStoreId) &&
+            (identical(other.webUrl, webUrl) || other.webUrl == webUrl));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, flavor, appName, packageName, bundleId, appStoreId, webUrl);
+
+  @override
+  String toString() {
+    return 'AppConfig(flavor: $flavor, appName: $appName, packageName: $packageName, bundleId: $bundleId, appStoreId: $appStoreId, webUrl: $webUrl)';
   }
 }
 
 /// @nodoc
-abstract class _$$AppConfigImplCopyWith<$Res>
-    implements $AppConfigCopyWith<$Res> {
-  factory _$$AppConfigImplCopyWith(
-          _$AppConfigImpl value, $Res Function(_$AppConfigImpl) then) =
-      __$$AppConfigImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AppConfigCopyWith<$Res> {
+  factory $AppConfigCopyWith(AppConfig value, $Res Function(AppConfig) _then) =
+      _$AppConfigCopyWithImpl;
   @useResult
   $Res call(
       {Flavor flavor,
@@ -113,12 +69,11 @@ abstract class _$$AppConfigImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$AppConfigImplCopyWithImpl<$Res>
-    extends _$AppConfigCopyWithImpl<$Res, _$AppConfigImpl>
-    implements _$$AppConfigImplCopyWith<$Res> {
-  __$$AppConfigImplCopyWithImpl(
-      _$AppConfigImpl _value, $Res Function(_$AppConfigImpl) _then)
-      : super(_value, _then);
+class _$AppConfigCopyWithImpl<$Res> implements $AppConfigCopyWith<$Res> {
+  _$AppConfigCopyWithImpl(this._self, this._then);
+
+  final AppConfig _self;
+  final $Res Function(AppConfig) _then;
 
   /// Create a copy of AppConfig
   /// with the given fields replaced by the non-null parameter values.
@@ -132,39 +87,205 @@ class __$$AppConfigImplCopyWithImpl<$Res>
     Object? appStoreId = null,
     Object? webUrl = null,
   }) {
-    return _then(_$AppConfigImpl(
+    return _then(_self.copyWith(
       flavor: null == flavor
-          ? _value.flavor
+          ? _self.flavor
           : flavor // ignore: cast_nullable_to_non_nullable
               as Flavor,
       appName: null == appName
-          ? _value.appName
+          ? _self.appName
           : appName // ignore: cast_nullable_to_non_nullable
               as String,
       packageName: null == packageName
-          ? _value.packageName
+          ? _self.packageName
           : packageName // ignore: cast_nullable_to_non_nullable
               as String,
       bundleId: null == bundleId
-          ? _value.bundleId
+          ? _self.bundleId
           : bundleId // ignore: cast_nullable_to_non_nullable
               as String,
       appStoreId: null == appStoreId
-          ? _value.appStoreId
+          ? _self.appStoreId
           : appStoreId // ignore: cast_nullable_to_non_nullable
               as String,
       webUrl: null == webUrl
-          ? _value.webUrl
+          ? _self.webUrl
           : webUrl // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [AppConfig].
+extension AppConfigPatterns on AppConfig {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AppConfig value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AppConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AppConfig value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppConfig():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AppConfig value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(Flavor flavor, String appName, String packageName,
+            String bundleId, String appStoreId, String webUrl)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AppConfig() when $default != null:
+        return $default(_that.flavor, _that.appName, _that.packageName,
+            _that.bundleId, _that.appStoreId, _that.webUrl);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(Flavor flavor, String appName, String packageName,
+            String bundleId, String appStoreId, String webUrl)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppConfig():
+        return $default(_that.flavor, _that.appName, _that.packageName,
+            _that.bundleId, _that.appStoreId, _that.webUrl);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(Flavor flavor, String appName, String packageName,
+            String bundleId, String appStoreId, String webUrl)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppConfig() when $default != null:
+        return $default(_that.flavor, _that.appName, _that.packageName,
+            _that.bundleId, _that.appStoreId, _that.webUrl);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$AppConfigImpl implements _AppConfig {
-  const _$AppConfigImpl(
+class _AppConfig implements AppConfig {
+  const _AppConfig(
       {required this.flavor,
       required this.appName,
       required this.packageName,
@@ -185,16 +306,19 @@ class _$AppConfigImpl implements _AppConfig {
   @override
   final String webUrl;
 
+  /// Create a copy of AppConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AppConfig(flavor: $flavor, appName: $appName, packageName: $packageName, bundleId: $bundleId, appStoreId: $appStoreId, webUrl: $webUrl)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AppConfigCopyWith<_AppConfig> get copyWith =>
+      __$AppConfigCopyWithImpl<_AppConfig>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AppConfigImpl &&
+            other is _AppConfig &&
             (identical(other.flavor, flavor) || other.flavor == flavor) &&
             (identical(other.appName, appName) || other.appName == appName) &&
             (identical(other.packageName, packageName) ||
@@ -210,41 +334,75 @@ class _$AppConfigImpl implements _AppConfig {
   int get hashCode => Object.hash(
       runtimeType, flavor, appName, packageName, bundleId, appStoreId, webUrl);
 
+  @override
+  String toString() {
+    return 'AppConfig(flavor: $flavor, appName: $appName, packageName: $packageName, bundleId: $bundleId, appStoreId: $appStoreId, webUrl: $webUrl)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AppConfigCopyWith<$Res>
+    implements $AppConfigCopyWith<$Res> {
+  factory _$AppConfigCopyWith(
+          _AppConfig value, $Res Function(_AppConfig) _then) =
+      __$AppConfigCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Flavor flavor,
+      String appName,
+      String packageName,
+      String bundleId,
+      String appStoreId,
+      String webUrl});
+}
+
+/// @nodoc
+class __$AppConfigCopyWithImpl<$Res> implements _$AppConfigCopyWith<$Res> {
+  __$AppConfigCopyWithImpl(this._self, this._then);
+
+  final _AppConfig _self;
+  final $Res Function(_AppConfig) _then;
+
   /// Create a copy of AppConfig
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AppConfigImplCopyWith<_$AppConfigImpl> get copyWith =>
-      __$$AppConfigImplCopyWithImpl<_$AppConfigImpl>(this, _$identity);
+  $Res call({
+    Object? flavor = null,
+    Object? appName = null,
+    Object? packageName = null,
+    Object? bundleId = null,
+    Object? appStoreId = null,
+    Object? webUrl = null,
+  }) {
+    return _then(_AppConfig(
+      flavor: null == flavor
+          ? _self.flavor
+          : flavor // ignore: cast_nullable_to_non_nullable
+              as Flavor,
+      appName: null == appName
+          ? _self.appName
+          : appName // ignore: cast_nullable_to_non_nullable
+              as String,
+      packageName: null == packageName
+          ? _self.packageName
+          : packageName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bundleId: null == bundleId
+          ? _self.bundleId
+          : bundleId // ignore: cast_nullable_to_non_nullable
+              as String,
+      appStoreId: null == appStoreId
+          ? _self.appStoreId
+          : appStoreId // ignore: cast_nullable_to_non_nullable
+              as String,
+      webUrl: null == webUrl
+          ? _self.webUrl
+          : webUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
-abstract class _AppConfig implements AppConfig {
-  const factory _AppConfig(
-      {required final Flavor flavor,
-      required final String appName,
-      required final String packageName,
-      required final String bundleId,
-      required final String appStoreId,
-      required final String webUrl}) = _$AppConfigImpl;
-
-  @override
-  Flavor get flavor;
-  @override
-  String get appName;
-  @override
-  String get packageName;
-  @override
-  String get bundleId;
-  @override
-  String get appStoreId;
-  @override
-  String get webUrl;
-
-  /// Create a copy of AppConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppConfigImplCopyWith<_$AppConfigImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

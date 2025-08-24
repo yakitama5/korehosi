@@ -76,7 +76,7 @@ class MyReactiveRawAutocomplete<T, V extends Object>
     ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
     ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
     this.onControllerInit,
-    bool scribbleEnabled = true,
+    bool stylusHandwritingEnabled = true,
     bool enableIMEPersonalizedLearning = true,
   }) : super(
           builder: (field) {
@@ -172,7 +172,7 @@ class MyReactiveRawAutocomplete<T, V extends Object>
                       selectionControls: selectionControls,
                       selectionHeightStyle: selectionHeightStyle,
                       selectionWidthStyle: selectionWidthStyle,
-                      scribbleEnabled: scribbleEnabled,
+                      stylusHandwritingEnabled: stylusHandwritingEnabled,
                       enableIMEPersonalizedLearning:
                           enableIMEPersonalizedLearning,
                     );

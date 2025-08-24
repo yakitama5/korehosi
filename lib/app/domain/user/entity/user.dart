@@ -1,4 +1,4 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../value_object/age_group.dart';
@@ -8,7 +8,7 @@ part 'user.g.dart';
 
 /// ユーザー
 @freezed
-class User with _$User {
+abstract class User with _$User {
   const factory User({
     required String id,
     required AgeGroup ageGroup,

@@ -6,7 +6,7 @@ part of 'auth_user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authUserHash() => r'f83eedeefec66633e0474c6f74d3718a9d6b8e81';
+String _$authUserHash() => r'df4af207839d28c017692189fce47b42e80502f5';
 
 /// 認証済のユーザー
 /// データの参照頻度を減らすため、`keepAlive`を指定
@@ -22,6 +22,8 @@ final authUserProvider = FutureProvider<User?>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AuthUserRef = FutureProviderRef<User?>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

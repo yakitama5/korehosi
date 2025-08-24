@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 
@@ -98,8 +97,10 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
       action: () async {
         // 画面の入力内容を取得
         final formModel = ReactiveUserFormModelForm.of(context)!;
-        final name = formModel.nameControl?.value;
+        final name = formModel.nameControl.value;
         final ageGroup = formModel.ageGroupControl.value!;
+
+        final navigator = Navigator.of(context);
 
         // 登録
         await ref.read(userUsecaseProvider).update(
@@ -108,9 +109,7 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
             );
 
         // 遷移元へ
-        if (context.mounted) {
-          context.pop();
-        }
+        navigator.pop();
       },
     );
   }

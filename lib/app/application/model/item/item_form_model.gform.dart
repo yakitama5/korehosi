@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file:
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'item_form_model.dart';
 
@@ -53,7 +53,7 @@ class ReactiveItemFormModelForm extends StatelessWidget {
     required this.form,
     required this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
   }) : super(key: key);
 
   final Widget child;
@@ -62,7 +62,8 @@ class ReactiveItemFormModelForm extends StatelessWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   static ItemFormModelForm? of(
     BuildContext context, {
@@ -89,7 +90,7 @@ class ReactiveItemFormModelForm extends StatelessWidget {
       stream: form.form.statusChanged,
       child: ReactiveFormPopScope(
         canPop: canPop,
-        onPopInvoked: onPopInvoked,
+        onPopInvokedWithResult: onPopInvokedWithResult,
         child: child,
       ),
     );
@@ -110,7 +111,7 @@ class ItemFormModelFormBuilder extends StatefulWidget {
     this.model,
     this.child,
     this.canPop,
-    this.onPopInvoked,
+    this.onPopInvokedWithResult,
     required this.builder,
     this.initState,
   }) : super(key: key);
@@ -121,7 +122,8 @@ class ItemFormModelFormBuilder extends StatefulWidget {
 
   final bool Function(FormGroup formGroup)? canPop;
 
-  final void Function(FormGroup formGroup, bool didPop)? onPopInvoked;
+  final ReactiveFormPopInvokedWithResultCallback<dynamic>?
+      onPopInvokedWithResult;
 
   final Widget Function(
       BuildContext context, ItemFormModelForm formModel, Widget? child) builder;
@@ -137,6 +139,8 @@ class ItemFormModelFormBuilder extends StatefulWidget {
 class _ItemFormModelFormBuilderState extends State<ItemFormModelFormBuilder> {
   late ItemFormModelForm _formModel;
 
+  StreamSubscription<LogRecord>? _logSubscription;
+
   @override
   void initState() {
     _formModel =
@@ -147,6 +151,34 @@ class _ItemFormModelFormBuilderState extends State<ItemFormModelFormBuilder> {
     }
 
     widget.initState?.call(context, _formModel);
+
+    _logSubscription = _logItemFormModelForm.onRecord.listen((LogRecord e) {
+      // use `dumpErrorToConsole` for severe messages to ensure that severe
+      // exceptions are formatted consistently with other Flutter examples and
+      // avoids printing duplicate exceptions
+      if (e.level >= Level.SEVERE) {
+        final Object? error = e.error;
+        FlutterError.dumpErrorToConsole(
+          FlutterErrorDetails(
+            exception: error is Exception ? error : Exception(error),
+            stack: e.stackTrace,
+            library: e.loggerName,
+            context: ErrorDescription(e.message),
+          ),
+        );
+      } else {
+        log(
+          e.message,
+          time: e.time,
+          sequenceNumber: e.sequenceNumber,
+          level: e.level.value,
+          name: e.loggerName,
+          zone: e.zone,
+          error: e.error,
+          stackTrace: e.stackTrace,
+        );
+      }
+    });
 
     super.initState();
   }
@@ -163,6 +195,7 @@ class _ItemFormModelFormBuilderState extends State<ItemFormModelFormBuilder> {
   @override
   void dispose() {
     _formModel.form.dispose();
+    _logSubscription?.cancel();
     super.dispose();
   }
 
@@ -176,7 +209,7 @@ class _ItemFormModelFormBuilderState extends State<ItemFormModelFormBuilder> {
       child: ReactiveFormBuilder(
         form: () => _formModel.form,
         canPop: widget.canPop,
-        onPopInvoked: widget.onPopInvoked,
+        onPopInvokedWithResult: widget.onPopInvokedWithResult,
         builder: (context, formGroup, child) =>
             widget.builder(context, _formModel, widget.child),
         child: widget.child,
@@ -185,7 +218,9 @@ class _ItemFormModelFormBuilderState extends State<ItemFormModelFormBuilder> {
   }
 }
 
-class ItemFormModelForm implements FormModel<ItemFormModel> {
+final _logItemFormModelForm = Logger.detached('ItemFormModelForm');
+
+class ItemFormModelForm implements FormModel<ItemFormModel, ItemFormModel> {
   ItemFormModelForm(
     this.form,
     this.path,
@@ -225,22 +260,40 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
 
   String imagesControlPath() => pathBuilder(imagesControlName);
 
-  String? get _nameValue => nameControl?.value;
+  String? get _nameValue => nameControl.value;
 
-  String? get _wanterNameValue => wanterNameControl?.value;
+  String? get _wanterNameValue => wanterNameControl.value;
 
-  double? get _wishRankValue => wishRankControl?.value;
+  double? get _wishRankValue => wishRankControl.value;
 
-  String? get _wishSeasonValue => wishSeasonControl?.value;
+  String? get _wishSeasonValue => wishSeasonControl.value;
 
-  String? get _memoValue => memoControl?.value;
+  String? get _memoValue => memoControl.value;
 
   List<String>? get _urlsValue =>
-      urlsControl?.value?.whereType<String>().toList() ?? [];
+      urlsControl.rawValue.whereType<String>().toList();
 
   List<SelectedImageModel?>? get _imagesValue =>
-      imagesControl?.value?.whereType<SelectedImageModel?>().toList() ?? [];
+      imagesControl.rawValue.whereType<SelectedImageModel?>().toList();
 
+  String? get _nameRawValue => nameControl.value;
+
+  String? get _wanterNameRawValue => wanterNameControl.value;
+
+  double? get _wishRankRawValue => wishRankControl.value;
+
+  String? get _wishSeasonRawValue => wishSeasonControl.value;
+
+  String? get _memoRawValue => memoControl.value;
+
+  List<String>? get _urlsRawValue =>
+      urlsControl.rawValue.whereType<String>().toList();
+
+  List<SelectedImageModel?>? get _imagesRawValue =>
+      imagesControl.rawValue.whereType<SelectedImageModel?>().toList();
+
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsName {
     try {
       form.control(nameControlPath());
@@ -250,6 +303,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsWanterName {
     try {
       form.control(wanterNameControlPath());
@@ -259,6 +314,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsWishRank {
     try {
       form.control(wishRankControlPath());
@@ -268,6 +325,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsWishSeason {
     try {
       form.control(wishSeasonControlPath());
@@ -277,6 +336,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsMemo {
     try {
       form.control(memoControlPath());
@@ -286,6 +347,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsUrls {
     try {
       form.control(urlsControlPath());
@@ -295,6 +358,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form and ensures at startup that all controls are present inside the form so we do not need this additional step')
   bool get containsImages {
     try {
       form.control(imagesControlPath());
@@ -304,19 +369,19 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
-  Map<String, Object>? get nameErrors => nameControl?.errors;
+  Map<String, Object>? get nameErrors => nameControl.errors;
 
-  Map<String, Object>? get wanterNameErrors => wanterNameControl?.errors;
+  Map<String, Object>? get wanterNameErrors => wanterNameControl.errors;
 
-  Map<String, Object>? get wishRankErrors => wishRankControl?.errors;
+  Map<String, Object>? get wishRankErrors => wishRankControl.errors;
 
-  Map<String, Object>? get wishSeasonErrors => wishSeasonControl?.errors;
+  Map<String, Object>? get wishSeasonErrors => wishSeasonControl.errors;
 
-  Map<String, Object>? get memoErrors => memoControl?.errors;
+  Map<String, Object>? get memoErrors => memoControl.errors;
 
-  Map<String, Object>? get urlsErrors => urlsControl?.errors;
+  Map<String, Object>? get urlsErrors => urlsControl.errors;
 
-  Map<String, Object>? get imagesErrors => imagesControl?.errors;
+  Map<String, Object>? get imagesErrors => imagesControl.errors;
 
   void get nameFocus => form.focus(nameControlPath());
 
@@ -332,6 +397,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
 
   void get imagesFocus => form.focus(imagesControlPath());
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void nameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -358,6 +425,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void wanterNameRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -384,6 +453,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void wishRankRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -410,6 +481,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void wishSeasonRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -436,6 +509,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void memoRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -462,6 +537,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void urlsRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -488,6 +565,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     }
   }
 
+  @Deprecated(
+      'Generator completely wraps the form so manual fields removal could lead to unexpected crashes')
   void imagesRemove({
     bool updateParent = true,
     bool emitEvent = true,
@@ -519,7 +598,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.updateValue(value,
+    nameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -528,7 +607,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    wanterNameControl?.updateValue(value,
+    wanterNameControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -537,7 +616,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    wishRankControl?.updateValue(value,
+    wishRankControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -546,7 +625,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    wishSeasonControl?.updateValue(value,
+    wishSeasonControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -555,7 +634,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    memoControl?.updateValue(value,
+    memoControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -564,7 +643,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    urlsControl?.updateValue(value,
+    urlsControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -573,7 +652,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    imagesControl?.updateValue(value,
+    imagesControl.updateValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -582,7 +661,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    nameControl?.patchValue(value,
+    nameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -591,7 +670,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    wanterNameControl?.patchValue(value,
+    wanterNameControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -600,7 +679,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    wishRankControl?.patchValue(value,
+    wishRankControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -609,7 +688,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    wishSeasonControl?.patchValue(value,
+    wishSeasonControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -618,7 +697,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    memoControl?.patchValue(value,
+    memoControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -627,7 +706,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    urlsControl?.patchValue(value,
+    urlsControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -636,7 +715,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool updateParent = true,
     bool emitEvent = true,
   }) {
-    imagesControl?.patchValue(value,
+    imagesControl.patchValue(value,
         updateParent: updateParent, emitEvent: emitEvent);
   }
 
@@ -647,8 +726,13 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      nameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      nameControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void wanterNameValueReset(
     String? value, {
@@ -657,8 +741,13 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      wanterNameControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      wanterNameControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void wishRankValueReset(
     double? value, {
@@ -667,8 +756,13 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      wishRankControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      wishRankControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void wishSeasonValueReset(
     String? value, {
@@ -677,8 +771,13 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      wishSeasonControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      wishSeasonControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void memoValueReset(
     String? value, {
@@ -687,8 +786,13 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      memoControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      memoControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void urlsValueReset(
     List<String>? value, {
@@ -697,8 +801,13 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      urlsControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      urlsControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
   void imagesValueReset(
     List<SelectedImageModel?>? value, {
@@ -707,36 +816,40 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool removeFocus = false,
     bool? disabled,
   }) =>
-      imagesControl?.reset(
-          value: value, updateParent: updateParent, emitEvent: emitEvent);
+      imagesControl.reset(
+        value: value,
+        updateParent: updateParent,
+        emitEvent: emitEvent,
+        removeFocus: removeFocus,
+        disabled: disabled,
+      );
 
-  FormControl<String>? get nameControl => containsName
-      ? form.control(nameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get nameControl =>
+      form.control(nameControlPath()) as FormControl<String>;
 
-  FormControl<String>? get wanterNameControl => containsWanterName
-      ? form.control(wanterNameControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get wanterNameControl =>
+      form.control(wanterNameControlPath()) as FormControl<String>;
 
-  FormControl<double>? get wishRankControl => containsWishRank
-      ? form.control(wishRankControlPath()) as FormControl<double>?
-      : null;
+  FormControl<double> get wishRankControl =>
+      form.control(wishRankControlPath()) as FormControl<double>;
 
-  FormControl<String>? get wishSeasonControl => containsWishSeason
-      ? form.control(wishSeasonControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get wishSeasonControl =>
+      form.control(wishSeasonControlPath()) as FormControl<String>;
 
-  FormControl<String>? get memoControl => containsMemo
-      ? form.control(memoControlPath()) as FormControl<String>?
-      : null;
+  FormControl<String> get memoControl =>
+      form.control(memoControlPath()) as FormControl<String>;
 
-  FormArray<String>? get urlsControl => containsUrls
-      ? form.control(urlsControlPath()) as FormArray<String>?
-      : null;
+  FormArray<String> get urlsControl =>
+      form.control(urlsControlPath()) as FormArray<String>;
 
-  FormArray<SelectedImageModel>? get imagesControl => containsImages
-      ? form.control(imagesControlPath()) as FormArray<SelectedImageModel>?
-      : null;
+  FormArray<SelectedImageModel> get imagesControl =>
+      form.control(imagesControlPath()) as FormArray<SelectedImageModel>;
+
+  List<FormControl<String>?> get urlsControlControls =>
+      urlsControl.controls.cast<FormControl<String>?>();
+
+  List<FormControl<SelectedImageModel>?> get imagesControlControls =>
+      imagesControl.controls.cast<FormControl<SelectedImageModel>?>();
 
   void nameSetDisabled(
     bool disabled, {
@@ -744,12 +857,12 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      nameControl?.markAsDisabled(
+      nameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      nameControl?.markAsEnabled(
+      nameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -762,12 +875,12 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      wanterNameControl?.markAsDisabled(
+      wanterNameControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      wanterNameControl?.markAsEnabled(
+      wanterNameControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -780,12 +893,12 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      wishRankControl?.markAsDisabled(
+      wishRankControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      wishRankControl?.markAsEnabled(
+      wishRankControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -798,12 +911,12 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      wishSeasonControl?.markAsDisabled(
+      wishSeasonControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      wishSeasonControl?.markAsEnabled(
+      wishSeasonControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -816,12 +929,12 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      memoControl?.markAsDisabled(
+      memoControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      memoControl?.markAsEnabled(
+      memoControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -834,12 +947,12 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      urlsControl?.markAsDisabled(
+      urlsControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      urlsControl?.markAsEnabled(
+      urlsControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -852,12 +965,12 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     bool emitEvent = true,
   }) {
     if (disabled) {
-      imagesControl?.markAsDisabled(
+      imagesControl.markAsDisabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
     } else {
-      imagesControl?.markAsEnabled(
+      imagesControl.markAsEnabled(
         updateParent: updateParent,
         emitEvent: emitEvent,
       );
@@ -895,7 +1008,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
         break;
     }
 
-    urlsControl?.add(FormControl<String>(
+    urlsControl.add(FormControl<String>(
       value: value,
       validators: resultingValidators,
       asyncValidators: resultingAsyncValidators,
@@ -935,7 +1048,7 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
         break;
     }
 
-    imagesControl?.add(FormControl<SelectedImageModel>(
+    imagesControl.add(FormControl<SelectedImageModel>(
       value: value,
       validators: resultingValidators,
       asyncValidators: resultingAsyncValidators,
@@ -949,9 +1062,11 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     final isValid = !currentForm.hasErrors && currentForm.errors.isEmpty;
 
     if (!isValid) {
-      debugPrintStack(
-          label:
-              '[${path ?? 'ItemFormModelForm'}]\n┗━ Avoid calling `model` on invalid form. Possible exceptions for non-nullable fields which should be guarded by `required` validator.');
+      _logItemFormModelForm.warning(
+        'Avoid calling `model` on invalid form.Possible exceptions for non-nullable fields which should be guarded by `required` validator.',
+        null,
+        StackTrace.current,
+      );
     }
     return ItemFormModel(
         name: _nameValue,
@@ -961,6 +1076,18 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
         memo: _memoValue,
         urls: _urlsValue,
         images: _imagesValue);
+  }
+
+  @override
+  ItemFormModel get rawModel {
+    return ItemFormModel(
+        name: _nameRawValue,
+        wanterName: _wanterNameRawValue,
+        wishRank: _wishRankRawValue,
+        wishSeason: _wishSeasonRawValue,
+        memo: _memoRawValue,
+        urls: _urlsRawValue,
+        images: _imagesRawValue);
   }
 
   @override
@@ -996,6 +1123,18 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
   }
 
   @override
+  bool equalsTo(ItemFormModel? other) {
+    final currentForm = this.currentForm;
+
+    return const DeepCollectionEquality().equals(
+      currentForm is FormControlCollection<dynamic>
+          ? currentForm.rawValue
+          : currentForm.value,
+      ItemFormModelForm.formElements(other).rawValue,
+    );
+  }
+
+  @override
   void submit({
     required void Function(ItemFormModel model) onValid,
     void Function()? onNotValid,
@@ -1004,6 +1143,8 @@ class ItemFormModelForm implements FormModel<ItemFormModel> {
     if (currentForm.valid) {
       onValid(model);
     } else {
+      _logItemFormModelForm.info('Errors');
+      _logItemFormModelForm.info('┗━━ ${form.errors}');
       onNotValid?.call();
     }
   }
@@ -1114,6 +1255,8 @@ class ReactiveItemFormModelFormArrayBuilder<
     this.formControl,
     this.builder,
     required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
   })  : assert(control != null || formControl != null,
             "You have to specify `control` or `formControl`!"),
         super(key: key);
@@ -1129,8 +1272,15 @@ class ReactiveItemFormModelFormArrayBuilder<
   final Widget Function(
       BuildContext context,
       int i,
+      FormControl<ReactiveItemFormModelFormArrayBuilderT> control,
       ReactiveItemFormModelFormArrayBuilderT? item,
       ItemFormModelForm formModel) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveItemFormModelFormArrayBuilderT> control)?
+      controlFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -1140,33 +1290,107 @@ class ReactiveItemFormModelFormArrayBuilder<
       throw FormControlParentNotFoundException(this);
     }
 
-    return ReactiveFormArray<ReactiveItemFormModelFormArrayBuilderT>(
-      formArray: formControl ?? control?.call(formModel),
-      builder: (context, formArray, child) {
-        final values = formArray.controls.map((e) => e.value).toList();
-        final itemList = values
-            .asMap()
-            .map((i, item) {
-              return MapEntry(
-                i,
-                itemBuilder(
-                  context,
-                  i,
-                  item,
-                  formModel,
-                ),
-              );
-            })
-            .values
-            .toList();
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
 
-        return builder?.call(
-              context,
-              itemList,
-              formModel,
-            ) ??
-            Column(children: itemList);
-      },
+    return ReactiveFormArrayItemBuilder<ReactiveItemFormModelFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder(
+                context,
+                itemList,
+                formModel,
+              )
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder(context, i, control, item, formModel),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
+    );
+  }
+}
+
+class ReactiveItemFormModelFormArrayBuilder2<
+    ReactiveItemFormModelFormArrayBuilderT> extends StatelessWidget {
+  const ReactiveItemFormModelFormArrayBuilder2({
+    Key? key,
+    this.control,
+    this.formControl,
+    this.builder,
+    required this.itemBuilder,
+    this.emptyBuilder,
+    this.controlFilter,
+  })  : assert(control != null || formControl != null,
+            "You have to specify `control` or `formControl`!"),
+        super(key: key);
+
+  final FormArray<ReactiveItemFormModelFormArrayBuilderT>? formControl;
+
+  final FormArray<ReactiveItemFormModelFormArrayBuilderT>? Function(
+      ItemFormModelForm formModel)? control;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        List<Widget> itemList,
+        ItemFormModelForm formModel
+      }) params)? builder;
+
+  final Widget Function(
+      ({
+        BuildContext context,
+        int i,
+        FormControl<ReactiveItemFormModelFormArrayBuilderT> control,
+        ReactiveItemFormModelFormArrayBuilderT? item,
+        ItemFormModelForm formModel
+      }) params) itemBuilder;
+
+  final Widget Function(BuildContext context)? emptyBuilder;
+
+  final bool Function(
+          FormControl<ReactiveItemFormModelFormArrayBuilderT> control)?
+      controlFilter;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveItemFormModelForm.of(context);
+
+    if (formModel == null) {
+      throw FormControlParentNotFoundException(this);
+    }
+
+    final builder = this.builder;
+    final itemBuilder = this.itemBuilder;
+
+    return ReactiveFormArrayItemBuilder<ReactiveItemFormModelFormArrayBuilderT>(
+      formControl: formControl ?? control?.call(formModel),
+      builder: builder != null
+          ? (context, itemList) => builder((
+                context: context,
+                itemList: itemList,
+                formModel: formModel,
+              ))
+          : null,
+      itemBuilder: (
+        context,
+        i,
+        control,
+        item,
+      ) =>
+          itemBuilder((
+        context: context,
+        i: i,
+        control: control,
+        item: item,
+        formModel: formModel
+      )),
+      emptyBuilder: emptyBuilder,
+      controlFilter: controlFilter,
     );
   }
 }

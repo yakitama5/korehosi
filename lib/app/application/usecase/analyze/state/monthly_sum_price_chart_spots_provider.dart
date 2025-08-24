@@ -1,4 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../extension/date_time_extension.dart';
@@ -11,7 +12,7 @@ part 'monthly_sum_price_chart_spots_provider.g.dart';
 /// 分析で利用する月別の購入金額のグラフデータを管理
 @riverpod
 Future<List<FlSpot>> monthlySumPriceChartSpots(
-  MonthlySumPriceChartSpotsRef ref,
+  Ref ref,
 ) async {
   // グラフ用データを取得
   final data = await ref.watch(monthlySumPriceProvider.future);

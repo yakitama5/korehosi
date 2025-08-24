@@ -5,7 +5,7 @@ part 'auth_status.g.dart';
 
 /// 認証状態
 @freezed
-class AuthStatus with _$AuthStatus {
+abstract class AuthStatus with _$AuthStatus {
   const factory AuthStatus({
     required String uid,
     required bool isAnonymous,

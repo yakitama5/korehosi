@@ -6,7 +6,7 @@ part of 'firebase_functions.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseFunctionsHash() => r'e58635202b6557883a85badcd0ef4ecee6afd4bc';
+String _$firebaseFunctionsHash() => r'3c986d4d43427f37786a729442cd1a430c787a91';
 
 /// Firebase Functions
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -24,6 +24,8 @@ final firebaseFunctionsProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FirebaseFunctionsRef = AutoDisposeProviderRef<FirebaseFunctions>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

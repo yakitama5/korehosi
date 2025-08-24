@@ -8,7 +8,8 @@ part 'firestore_notification_token_model.g.dart';
 
 /// `/token/{tokenId}`ドキュメントのモデル
 @freezed
-class FirestoreNotificationTokenModel with _$FirestoreNotificationTokenModel {
+abstract class FirestoreNotificationTokenModel
+    with _$FirestoreNotificationTokenModel {
   const factory FirestoreNotificationTokenModel({
     required String token,
     @timestampKey DateTime? createdAt,

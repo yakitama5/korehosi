@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,92 +9,61 @@ part of 'app_info.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AppInfo {
-  String get appName => throw _privateConstructorUsedError;
-  String get packageName => throw _privateConstructorUsedError;
-  String get version => throw _privateConstructorUsedError;
-  String get buildNumber => throw _privateConstructorUsedError;
+  String get appName;
+  String get packageName;
+  String get version;
+  String get buildNumber;
 
   /// Create a copy of AppInfo
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AppInfoCopyWith<AppInfo> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AppInfoCopyWith<$Res> {
-  factory $AppInfoCopyWith(AppInfo value, $Res Function(AppInfo) then) =
-      _$AppInfoCopyWithImpl<$Res, AppInfo>;
-  @useResult
-  $Res call(
-      {String appName, String packageName, String version, String buildNumber});
-}
-
-/// @nodoc
-class _$AppInfoCopyWithImpl<$Res, $Val extends AppInfo>
-    implements $AppInfoCopyWith<$Res> {
-  _$AppInfoCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AppInfo
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AppInfoCopyWith<AppInfo> get copyWith =>
+      _$AppInfoCopyWithImpl<AppInfo>(this as AppInfo, _$identity);
+
   @override
-  $Res call({
-    Object? appName = null,
-    Object? packageName = null,
-    Object? version = null,
-    Object? buildNumber = null,
-  }) {
-    return _then(_value.copyWith(
-      appName: null == appName
-          ? _value.appName
-          : appName // ignore: cast_nullable_to_non_nullable
-              as String,
-      packageName: null == packageName
-          ? _value.packageName
-          : packageName // ignore: cast_nullable_to_non_nullable
-              as String,
-      version: null == version
-          ? _value.version
-          : version // ignore: cast_nullable_to_non_nullable
-              as String,
-      buildNumber: null == buildNumber
-          ? _value.buildNumber
-          : buildNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AppInfo &&
+            (identical(other.appName, appName) || other.appName == appName) &&
+            (identical(other.packageName, packageName) ||
+                other.packageName == packageName) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.buildNumber, buildNumber) ||
+                other.buildNumber == buildNumber));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, appName, packageName, version, buildNumber);
+
+  @override
+  String toString() {
+    return 'AppInfo(appName: $appName, packageName: $packageName, version: $version, buildNumber: $buildNumber)';
   }
 }
 
 /// @nodoc
-abstract class _$$AppInfoImplCopyWith<$Res> implements $AppInfoCopyWith<$Res> {
-  factory _$$AppInfoImplCopyWith(
-          _$AppInfoImpl value, $Res Function(_$AppInfoImpl) then) =
-      __$$AppInfoImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AppInfoCopyWith<$Res> {
+  factory $AppInfoCopyWith(AppInfo value, $Res Function(AppInfo) _then) =
+      _$AppInfoCopyWithImpl;
   @useResult
   $Res call(
       {String appName, String packageName, String version, String buildNumber});
 }
 
 /// @nodoc
-class __$$AppInfoImplCopyWithImpl<$Res>
-    extends _$AppInfoCopyWithImpl<$Res, _$AppInfoImpl>
-    implements _$$AppInfoImplCopyWith<$Res> {
-  __$$AppInfoImplCopyWithImpl(
-      _$AppInfoImpl _value, $Res Function(_$AppInfoImpl) _then)
-      : super(_value, _then);
+class _$AppInfoCopyWithImpl<$Res> implements $AppInfoCopyWith<$Res> {
+  _$AppInfoCopyWithImpl(this._self, this._then);
+
+  final AppInfo _self;
+  final $Res Function(AppInfo) _then;
 
   /// Create a copy of AppInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -106,31 +75,197 @@ class __$$AppInfoImplCopyWithImpl<$Res>
     Object? version = null,
     Object? buildNumber = null,
   }) {
-    return _then(_$AppInfoImpl(
+    return _then(_self.copyWith(
       appName: null == appName
-          ? _value.appName
+          ? _self.appName
           : appName // ignore: cast_nullable_to_non_nullable
               as String,
       packageName: null == packageName
-          ? _value.packageName
+          ? _self.packageName
           : packageName // ignore: cast_nullable_to_non_nullable
               as String,
       version: null == version
-          ? _value.version
+          ? _self.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
       buildNumber: null == buildNumber
-          ? _value.buildNumber
+          ? _self.buildNumber
           : buildNumber // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [AppInfo].
+extension AppInfoPatterns on AppInfo {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AppInfo value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AppInfo() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AppInfo value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppInfo():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AppInfo value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppInfo() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String appName, String packageName, String version,
+            String buildNumber)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AppInfo() when $default != null:
+        return $default(
+            _that.appName, _that.packageName, _that.version, _that.buildNumber);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String appName, String packageName, String version,
+            String buildNumber)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppInfo():
+        return $default(
+            _that.appName, _that.packageName, _that.version, _that.buildNumber);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String appName, String packageName, String version,
+            String buildNumber)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AppInfo() when $default != null:
+        return $default(
+            _that.appName, _that.packageName, _that.version, _that.buildNumber);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$AppInfoImpl implements _AppInfo {
-  const _$AppInfoImpl(
+class _AppInfo implements AppInfo {
+  const _AppInfo(
       {required this.appName,
       required this.packageName,
       required this.version,
@@ -145,16 +280,19 @@ class _$AppInfoImpl implements _AppInfo {
   @override
   final String buildNumber;
 
+  /// Create a copy of AppInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AppInfo(appName: $appName, packageName: $packageName, version: $version, buildNumber: $buildNumber)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AppInfoCopyWith<_AppInfo> get copyWith =>
+      __$AppInfoCopyWithImpl<_AppInfo>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AppInfoImpl &&
+            other is _AppInfo &&
             (identical(other.appName, appName) || other.appName == appName) &&
             (identical(other.packageName, packageName) ||
                 other.packageName == packageName) &&
@@ -167,35 +305,58 @@ class _$AppInfoImpl implements _AppInfo {
   int get hashCode =>
       Object.hash(runtimeType, appName, packageName, version, buildNumber);
 
+  @override
+  String toString() {
+    return 'AppInfo(appName: $appName, packageName: $packageName, version: $version, buildNumber: $buildNumber)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AppInfoCopyWith<$Res> implements $AppInfoCopyWith<$Res> {
+  factory _$AppInfoCopyWith(_AppInfo value, $Res Function(_AppInfo) _then) =
+      __$AppInfoCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String appName, String packageName, String version, String buildNumber});
+}
+
+/// @nodoc
+class __$AppInfoCopyWithImpl<$Res> implements _$AppInfoCopyWith<$Res> {
+  __$AppInfoCopyWithImpl(this._self, this._then);
+
+  final _AppInfo _self;
+  final $Res Function(_AppInfo) _then;
+
   /// Create a copy of AppInfo
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AppInfoImplCopyWith<_$AppInfoImpl> get copyWith =>
-      __$$AppInfoImplCopyWithImpl<_$AppInfoImpl>(this, _$identity);
+  $Res call({
+    Object? appName = null,
+    Object? packageName = null,
+    Object? version = null,
+    Object? buildNumber = null,
+  }) {
+    return _then(_AppInfo(
+      appName: null == appName
+          ? _self.appName
+          : appName // ignore: cast_nullable_to_non_nullable
+              as String,
+      packageName: null == packageName
+          ? _self.packageName
+          : packageName // ignore: cast_nullable_to_non_nullable
+              as String,
+      version: null == version
+          ? _self.version
+          : version // ignore: cast_nullable_to_non_nullable
+              as String,
+      buildNumber: null == buildNumber
+          ? _self.buildNumber
+          : buildNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
-abstract class _AppInfo implements AppInfo {
-  const factory _AppInfo(
-      {required final String appName,
-      required final String packageName,
-      required final String version,
-      required final String buildNumber}) = _$AppInfoImpl;
-
-  @override
-  String get appName;
-  @override
-  String get packageName;
-  @override
-  String get version;
-  @override
-  String get buildNumber;
-
-  /// Create a copy of AppInfo
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AppInfoImplCopyWith<_$AppInfoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

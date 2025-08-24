@@ -1,4 +1,4 @@
-import 'package:collection/collection.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/purchase/entity/purchase.dart';
@@ -10,7 +10,7 @@ part 'current_group_age_applicable_purchases_provider.g.dart';
 /// グループ内の購入情報
 @riverpod
 Future<List<Purchase>> currentGroupAgeApplicablePurchases(
-  CurrentGroupAgeApplicablePurchasesRef ref,
+  Ref ref,
 ) async {
   // 表示中のグループ内の欲しい物のID一覧を取得
   final itemIds = await ref.watch(
@@ -24,5 +24,5 @@ Future<List<Purchase>> currentGroupAgeApplicablePurchases(
       currentGroupAgeApplicablePurchaseProvider(itemId: itemId).future,
     ),
   );
-  return (await Future.wait(asyncPurchases)).whereNotNull().toList();
+  return (await Future.wait(asyncPurchases)).nonNulls.toList();
 }

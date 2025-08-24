@@ -7,7 +7,7 @@ part of 'firestore_group_provider.dart';
 // **************************************************************************
 
 String _$groupCollectionRefHash() =>
-    r'93f5f8de12892712ef629be18e92341f2ec90b9a';
+    r'725c990f2dc83e9d36812a680c50c2c35844471c';
 
 /// グループコレクションの参照
 ///
@@ -24,9 +24,11 @@ final groupCollectionRefProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef GroupCollectionRefRef
     = AutoDisposeProviderRef<CollectionReference<FirestoreGroupModel>>;
-String _$groupDocumentRefHash() => r'e46f9dc1cd9136cc372b0973f51e56e24ef5153b';
+String _$groupDocumentRefHash() => r'e0084394835c4e1ee873a6e281b6ea3b32c561b6';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -179,6 +181,8 @@ class GroupDocumentRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GroupDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreGroupModel>> {
   /// The parameter `groupId` of this provider.
@@ -194,4 +198,4 @@ class _GroupDocumentRefProviderElement
   String? get groupId => (origin as GroupDocumentRefProvider).groupId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

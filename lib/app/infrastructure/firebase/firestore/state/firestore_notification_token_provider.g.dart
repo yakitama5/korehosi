@@ -7,7 +7,7 @@ part of 'firestore_notification_token_provider.dart';
 // **************************************************************************
 
 String _$notificationTokenCollectionRefHash() =>
-    r'f9b61821f599396f78c10349c716933dc77eb533';
+    r'697d1c61f6fae706c1805c9d40c0640767800f7f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -162,6 +162,8 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin NotificationTokenCollectionRefRef on AutoDisposeProviderRef<
     CollectionReference<FirestoreNotificationTokenModel>> {
   /// The parameter `userId` of this provider.
@@ -180,7 +182,7 @@ class _NotificationTokenCollectionRefProviderElement
 }
 
 String _$notificationTokenDocumentRefHash() =>
-    r'a29d8e875ee5d9941f2dcb63db1d5f09584dcc23';
+    r'baabc9e00325872694a06f7f40be3042ba904049';
 
 /// 通知FCMトークンドキュメントの参照
 ///
@@ -325,6 +327,8 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin NotificationTokenDocumentRefRef on AutoDisposeProviderRef<
     DocumentReference<FirestoreNotificationTokenModel>> {
   /// The parameter `userId` of this provider.
@@ -346,4 +350,4 @@ class _NotificationTokenDocumentRefProviderElement
   String? get token => (origin as NotificationTokenDocumentRefProvider).token;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -19,7 +19,7 @@ import 'state/group_provider.dart';
 part 'group_usecase.g.dart';
 
 @riverpod
-GroupUsecase groupUsecase(GroupUsecaseRef ref) => GroupUsecase(ref);
+GroupUsecase groupUsecase(Ref ref) => GroupUsecase(ref);
 
 typedef LocationBuilder = String Function(String shareLinkId);
 

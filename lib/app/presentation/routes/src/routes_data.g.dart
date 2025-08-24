@@ -16,29 +16,29 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
       routes: [
         GoRouteData.$route(
           path: '/',
-          factory: $RootRouteDataExtension._fromState,
+          factory: _$RootRouteData._fromState,
         ),
         GoRouteData.$route(
           path: '/start',
-          factory: $OnboardStartRouteDataExtension._fromState,
+          factory: _$OnboardStartRouteData._fromState,
           routes: [
             GoRouteData.$route(
               path: 'account_link',
-              factory: $AccountLinkRouteDataExtension._fromState,
+              factory: _$AccountLinkRouteData._fromState,
             ),
           ],
         ),
         GoRouteData.$route(
           path: '/share_link/:shareLinkId',
-          factory: $ShareLinkRouteDataExtension._fromState,
+          factory: _$ShareLinkRouteData._fromState,
         ),
         GoRouteData.$route(
           path: '/preview',
-          factory: $PhotoPreviewRouteDataExtension._fromState,
+          factory: _$PhotoPreviewRouteData._fromState,
         ),
         GoRouteData.$route(
           path: '/onboard_form',
-          factory: $OnboardFormRouteDataExtension._fromState,
+          factory: _$OnboardFormRouteData._fromState,
         ),
         StatefulShellRouteData.$route(
           restorationScopeId: BottomNavitorShellRouteData.$restorationScopeId,
@@ -48,25 +48,25 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
               routes: [
                 GoRouteData.$route(
                   path: '/items',
-                  factory: $ItemsRouteDataExtension._fromState,
+                  factory: _$ItemsRouteData._fromState,
                   routes: [
                     GoRouteData.$route(
                       path: 'item/:itemId',
-                      factory: $ItemRouteDataExtension._fromState,
+                      factory: _$ItemRouteData._fromState,
                       routes: [
                         GoRouteData.$route(
                           path: 'edit',
-                          factory: $ItemEditRouteDataExtension._fromState,
+                          factory: _$ItemEditRouteData._fromState,
                         ),
                         GoRouteData.$route(
                           path: 'purchase',
-                          factory: $PurchaseRouteDataExtension._fromState,
+                          factory: _$PurchaseRouteData._fromState,
                         ),
                       ],
                     ),
                     GoRouteData.$route(
                       path: 'edit',
-                      factory: $ItemCreateRouteDataExtension._fromState,
+                      factory: _$ItemCreateRouteData._fromState,
                     ),
                   ],
                 ),
@@ -76,11 +76,11 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
               routes: [
                 GoRouteData.$route(
                   path: '/analyze',
-                  factory: $AnalyzeRouteDataExtension._fromState,
+                  factory: _$AnalyzeRouteData._fromState,
                   routes: [
                     GoRouteData.$route(
                       path: 'analyze_detail',
-                      factory: $AnalyzeDetailRouteDataExtension._fromState,
+                      factory: _$AnalyzeDetailRouteData._fromState,
                     ),
                   ],
                 ),
@@ -90,29 +90,29 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
               routes: [
                 GoRouteData.$route(
                   path: '/settings',
-                  factory: $SettingsRouteDataExtension._fromState,
+                  factory: _$SettingsRouteData._fromState,
                   routes: [
                     GoRouteData.$route(
                       path: 'groups',
-                      factory: $GroupsRouteDataExtension._fromState,
+                      factory: _$GroupsRouteData._fromState,
                       routes: [
                         GoRouteData.$route(
                           path: 'group/:groupId',
-                          factory: $GroupRouteDataExtension._fromState,
+                          factory: _$GroupRouteData._fromState,
                         ),
                       ],
                     ),
                     GoRouteData.$route(
                       path: 'profile',
-                      factory: $ProfileRouteDataExtension._fromState,
+                      factory: _$ProfileRouteData._fromState,
                     ),
                     GoRouteData.$route(
                       path: 'account',
-                      factory: $AccountRouteDataExtension._fromState,
+                      factory: _$AccountRouteData._fromState,
                     ),
                     GoRouteData.$route(
                       path: 'license',
-                      factory: $LicenseRouteDataExtension._fromState,
+                      factory: _$LicenseRouteData._fromState,
                     ),
                   ],
                 ),
@@ -128,120 +128,155 @@ extension $BaseShellSrouteDataExtension on BaseShellSrouteData {
       BaseShellSrouteData();
 }
 
-extension $RootRouteDataExtension on RootRouteData {
+mixin _$RootRouteData on GoRouteData {
   static RootRouteData _fromState(GoRouterState state) => const RootRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $OnboardStartRouteDataExtension on OnboardStartRouteData {
+mixin _$OnboardStartRouteData on GoRouteData {
   static OnboardStartRouteData _fromState(GoRouterState state) =>
       const OnboardStartRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/start',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $AccountLinkRouteDataExtension on AccountLinkRouteData {
+mixin _$AccountLinkRouteData on GoRouteData {
   static AccountLinkRouteData _fromState(GoRouterState state) =>
       const AccountLinkRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/start/account_link',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ShareLinkRouteDataExtension on ShareLinkRouteData {
+mixin _$ShareLinkRouteData on GoRouteData {
   static ShareLinkRouteData _fromState(GoRouterState state) =>
       ShareLinkRouteData(
         state.pathParameters['shareLinkId']!,
       );
 
+  ShareLinkRouteData get _self => this as ShareLinkRouteData;
+
+  @override
   String get location => GoRouteData.$location(
-        '/share_link/${Uri.encodeComponent(shareLinkId)}',
+        '/share_link/${Uri.encodeComponent(_self.shareLinkId)}',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $PhotoPreviewRouteDataExtension on PhotoPreviewRouteData {
+mixin _$PhotoPreviewRouteData on GoRouteData {
   static PhotoPreviewRouteData _fromState(GoRouterState state) =>
       PhotoPreviewRouteData(
-        index: _$convertMapValue('index', state.uri.queryParameters, int.parse),
+        index:
+            _$convertMapValue('index', state.uri.queryParameters, int.tryParse),
         $extra: state.extra as List<String>?,
       );
 
+  PhotoPreviewRouteData get _self => this as PhotoPreviewRouteData;
+
+  @override
   String get location => GoRouteData.$location(
         '/preview',
         queryParams: {
-          if (index != null) 'index': index!.toString(),
+          if (_self.index != null) 'index': _self.index!.toString(),
         },
       );
 
-  void go(BuildContext context) => context.go(location, extra: $extra);
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
 
+  @override
   Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: $extra);
+      context.push<T>(location, extra: _self.$extra);
 
+  @override
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: $extra);
+      context.pushReplacement(location, extra: _self.$extra);
 
+  @override
   void replace(BuildContext context) =>
-      context.replace(location, extra: $extra);
+      context.replace(location, extra: _self.$extra);
 }
 
-extension $OnboardFormRouteDataExtension on OnboardFormRouteData {
+mixin _$OnboardFormRouteData on GoRouteData {
   static OnboardFormRouteData _fromState(GoRouterState state) =>
       const OnboardFormRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/onboard_form',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
@@ -250,253 +285,329 @@ extension $BottomNavitorShellRouteDataExtension on BottomNavitorShellRouteData {
       const BottomNavitorShellRouteData();
 }
 
-extension $ItemsRouteDataExtension on ItemsRouteData {
+mixin _$ItemsRouteData on GoRouteData {
   static ItemsRouteData _fromState(GoRouterState state) =>
       const ItemsRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/items',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ItemRouteDataExtension on ItemRouteData {
+mixin _$ItemRouteData on GoRouteData {
   static ItemRouteData _fromState(GoRouterState state) => ItemRouteData(
         state.pathParameters['itemId']!,
       );
 
+  ItemRouteData get _self => this as ItemRouteData;
+
+  @override
   String get location => GoRouteData.$location(
-        '/items/item/${Uri.encodeComponent(itemId)}',
+        '/items/item/${Uri.encodeComponent(_self.itemId)}',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ItemEditRouteDataExtension on ItemEditRouteData {
+mixin _$ItemEditRouteData on GoRouteData {
   static ItemEditRouteData _fromState(GoRouterState state) => ItemEditRouteData(
         state.pathParameters['itemId']!,
       );
 
+  ItemEditRouteData get _self => this as ItemEditRouteData;
+
+  @override
   String get location => GoRouteData.$location(
-        '/items/item/${Uri.encodeComponent(itemId)}/edit',
+        '/items/item/${Uri.encodeComponent(_self.itemId)}/edit',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $PurchaseRouteDataExtension on PurchaseRouteData {
+mixin _$PurchaseRouteData on GoRouteData {
   static PurchaseRouteData _fromState(GoRouterState state) => PurchaseRouteData(
         state.pathParameters['itemId']!,
       );
 
+  PurchaseRouteData get _self => this as PurchaseRouteData;
+
+  @override
   String get location => GoRouteData.$location(
-        '/items/item/${Uri.encodeComponent(itemId)}/purchase',
+        '/items/item/${Uri.encodeComponent(_self.itemId)}/purchase',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ItemCreateRouteDataExtension on ItemCreateRouteData {
+mixin _$ItemCreateRouteData on GoRouteData {
   static ItemCreateRouteData _fromState(GoRouterState state) =>
       const ItemCreateRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/items/edit',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $AnalyzeRouteDataExtension on AnalyzeRouteData {
+mixin _$AnalyzeRouteData on GoRouteData {
   static AnalyzeRouteData _fromState(GoRouterState state) =>
       const AnalyzeRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/analyze',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $AnalyzeDetailRouteDataExtension on AnalyzeDetailRouteData {
+mixin _$AnalyzeDetailRouteData on GoRouteData {
   static AnalyzeDetailRouteData _fromState(GoRouterState state) =>
       AnalyzeDetailRouteData(
-        index: _$convertMapValue('index', state.uri.queryParameters, int.parse),
+        index:
+            _$convertMapValue('index', state.uri.queryParameters, int.tryParse),
       );
 
+  AnalyzeDetailRouteData get _self => this as AnalyzeDetailRouteData;
+
+  @override
   String get location => GoRouteData.$location(
         '/analyze/analyze_detail',
         queryParams: {
-          if (index != null) 'index': index!.toString(),
+          if (_self.index != null) 'index': _self.index!.toString(),
         },
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $SettingsRouteDataExtension on SettingsRouteData {
+mixin _$SettingsRouteData on GoRouteData {
   static SettingsRouteData _fromState(GoRouterState state) =>
       const SettingsRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/settings',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $GroupsRouteDataExtension on GroupsRouteData {
+mixin _$GroupsRouteData on GoRouteData {
   static GroupsRouteData _fromState(GoRouterState state) =>
       const GroupsRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/settings/groups',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $GroupRouteDataExtension on GroupRouteData {
+mixin _$GroupRouteData on GoRouteData {
   static GroupRouteData _fromState(GoRouterState state) => GroupRouteData(
         state.pathParameters['groupId']!,
       );
 
+  GroupRouteData get _self => this as GroupRouteData;
+
+  @override
   String get location => GoRouteData.$location(
-        '/settings/groups/group/${Uri.encodeComponent(groupId)}',
+        '/settings/groups/group/${Uri.encodeComponent(_self.groupId)}',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ProfileRouteDataExtension on ProfileRouteData {
+mixin _$ProfileRouteData on GoRouteData {
   static ProfileRouteData _fromState(GoRouterState state) =>
       const ProfileRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/settings/profile',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $AccountRouteDataExtension on AccountRouteData {
+mixin _$AccountRouteData on GoRouteData {
   static AccountRouteData _fromState(GoRouterState state) =>
       const AccountRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/settings/account',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $LicenseRouteDataExtension on LicenseRouteData {
+mixin _$LicenseRouteData on GoRouteData {
   static LicenseRouteData _fromState(GoRouterState state) =>
       const LicenseRouteData();
 
+  @override
   String get location => GoRouteData.$location(
         '/settings/license',
       );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
 T? _$convertMapValue<T>(
   String key,
   Map<String, String> map,
-  T Function(String) converter,
+  T? Function(String) converter,
 ) {
   final value = map[key];
   return value == null ? null : converter(value);

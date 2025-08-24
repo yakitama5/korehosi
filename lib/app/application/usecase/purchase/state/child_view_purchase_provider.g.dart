@@ -6,7 +6,7 @@ part of 'child_view_purchase_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$childViewPurchaseHash() => r'7ad872a50e851092ea0c8a5e494b6419604ce93d';
+String _$childViewPurchaseHash() => r'29ce6a92a2e613c992d65f72961f75fdeb8127b7';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -172,6 +172,8 @@ class ChildViewPurchaseProvider extends StreamProvider<Purchase?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ChildViewPurchaseRef on StreamProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
   String get groupId;
@@ -190,4 +192,4 @@ class _ChildViewPurchaseProviderElement extends StreamProviderElement<Purchase?>
   String get itemId => (origin as ChildViewPurchaseProvider).itemId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

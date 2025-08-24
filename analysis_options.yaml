@@ -13,6 +13,7 @@ analyzer:
     - "**/firebase_options*.dart"
     - "*/.github/workflows/flutter_*.yaml"
     - "*/functions/*.js"
+    - "analysis_options.yaml"
   errors:
     invalid_annotation_target: ignore
     todo: ignore

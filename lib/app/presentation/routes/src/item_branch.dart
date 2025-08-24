@@ -1,14 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+part of 'routes_data.dart';
 
-import '../../../application/usecase/item/state/item_detail_providers.dart';
-import '../../pages/item/item_edit_page.dart';
-import '../../pages/item/item_page.dart';
-import '../../pages/item/items_page.dart';
-import '../../pages/item/purchase_page.dart';
-
-final _navigatorKey = GlobalKey<NavigatorState>(debugLabel: 'ITEM');
+final _itemNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'ITEM');
 
 const itemBranch = TypedStatefulShellBranch<BranchItemsData>(
   routes: [
@@ -38,17 +30,17 @@ class BranchItemsData extends StatefulShellBranchData {
   const BranchItemsData();
 }
 
-class ItemsRouteData extends GoRouteData {
+class ItemsRouteData extends GoRouteData with _$ItemsRouteData {
   const ItemsRouteData();
 
-  static final GlobalKey<NavigatorState> $navigatorKey = _navigatorKey;
+  static final GlobalKey<NavigatorState> $navigatorKey = _itemNavigatorKey;
   static const path = '/items';
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const ItemsPage();
 }
 
-class ItemRouteData extends GoRouteData {
+class ItemRouteData extends GoRouteData with _$ItemRouteData {
   const ItemRouteData(this.itemId);
 
   static const path = 'item/:itemId';
@@ -66,7 +58,7 @@ class ItemRouteData extends GoRouteData {
       );
 }
 
-class PurchaseRouteData extends GoRouteData {
+class PurchaseRouteData extends GoRouteData with _$PurchaseRouteData {
   const PurchaseRouteData(this.itemId);
 
   static const path = 'purchase';
@@ -84,7 +76,7 @@ class PurchaseRouteData extends GoRouteData {
       );
 }
 
-class ItemCreateRouteData extends GoRouteData {
+class ItemCreateRouteData extends GoRouteData with _$ItemCreateRouteData {
   const ItemCreateRouteData();
 
   static const path = 'edit';
@@ -104,7 +96,7 @@ class ItemCreateRouteData extends GoRouteData {
       );
 }
 
-class ItemEditRouteData extends GoRouteData {
+class ItemEditRouteData extends GoRouteData with _$ItemEditRouteData {
   const ItemEditRouteData(this.itemId);
 
   static const path = 'edit';

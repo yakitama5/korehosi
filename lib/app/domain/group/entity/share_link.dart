@@ -4,7 +4,7 @@ part 'share_link.freezed.dart';
 
 /// グループの共有リンク
 @freezed
-class ShareLink with _$ShareLink {
+abstract class ShareLink with _$ShareLink {
   const factory ShareLink({
     required String id,
     required String groupId,

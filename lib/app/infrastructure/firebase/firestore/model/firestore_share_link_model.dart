@@ -8,7 +8,7 @@ part 'firestore_share_link_model.g.dart';
 
 /// `/shareLinks/{shareLinkId}`ドキュメントのモデル
 @freezed
-class FirestoreShareLinkModel with _$FirestoreShareLinkModel {
+abstract class FirestoreShareLinkModel with _$FirestoreShareLinkModel {
   const factory FirestoreShareLinkModel({
     required String id,
     required String groupId,

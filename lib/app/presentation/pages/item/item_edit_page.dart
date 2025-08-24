@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
@@ -151,19 +150,21 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
           return;
         }
 
+        final navigator = Navigator.of(context);
+
         // 入力値を取得
-        final name = formModel.nameControl?.value;
-        final wanterName = formModel.wanterNameControl?.value;
-        final wishRank = formModel.wishRankControl?.value;
-        final wishSeason = formModel.wishSeasonControl?.value;
-        final urls = formModel.urlsControl?.controls
+        final name = formModel.nameControl.value;
+        final wanterName = formModel.wanterNameControl.value;
+        final wishRank = formModel.wishRankControl.value;
+        final wishSeason = formModel.wishSeasonControl.value;
+        final urls = formModel.urlsControl.controls
             .map((e) => e.value)
-            .whereNotNull()
+            .nonNulls
             .toList();
-        final memo = formModel.memoControl?.value;
-        final selectedImages = formModel.imagesControl?.controls
+        final memo = formModel.memoControl.value;
+        final selectedImages = formModel.imagesControl.controls
             .map((e) => e.value)
-            .whereNotNull()
+            .nonNulls
             .toList();
 
         // 登録 or 更新
@@ -194,9 +195,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
         }
 
         // 遷移元にポップ
-        if (context.mounted) {
-          context.pop();
-        }
+        navigator.pop();
       },
     );
   }
@@ -276,7 +275,7 @@ class _ImageFields extends HookConsumerWidget {
                     ),
                   ),
                   onSelected: () => formModel.addImagesItem(null),
-                  onDeleted: () => formModel.imagesControl?.removeAt(i),
+                  onDeleted: () => formModel.imagesControl.removeAt(i),
                   selectedBuilder: (onPressed, selectedFile) {
                     final uploaded = selectedFile.imagePath != null;
                     return InkWell(
@@ -325,7 +324,7 @@ class _WanterNameField extends HookConsumerWidget {
     final userNames = ref
         .watch(wanterNameSuggestionProvider)
         .value
-        ?.whereNotNull()
+        ?.nonNulls
         // 重複の削除
         .toSet()
         .toList();
@@ -386,9 +385,9 @@ class _UrlFields extends HookConsumerWidget {
 
     return ReactiveItemFormModelFormArrayBuilder(
       formControl: formModel.urlsControl,
-      itemBuilder: (context, i, item, formModel) =>
+      itemBuilder: (_, i, __, ___, formModel) =>
           ReactiveOutlinedTextField<String>(
-        key: ObjectKey(formModel.urlsControl?.control('$i')),
+        key: ObjectKey(formModel.urlsControl.control('$i')),
         formControlName: '$i',
         labelText: l10n.url,
         maxLength: itemConfig.maxUrlLength,

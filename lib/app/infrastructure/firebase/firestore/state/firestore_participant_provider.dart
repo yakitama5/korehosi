@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../firestore/extension/collection_reference.dart';
@@ -11,7 +12,7 @@ part 'firestore_participant_provider.g.dart';
 /// グループ参加者コレクションの参照
 @riverpod
 CollectionReference<FirestoreUserModel> participantCollectionRef(
-  ParticipantCollectionRefRef ref, {
+  Ref ref, {
   required String groupId,
 }) {
   return ref.watch(firestoreProvider).participantsRef(groupId).withConverter(
@@ -31,7 +32,7 @@ CollectionReference<FirestoreUserModel> participantCollectionRef(
 /// グループ参加者ドキュメントの参照
 @riverpod
 DocumentReference<FirestoreUserModel> participantDocumentRef(
-  ParticipantDocumentRefRef ref, {
+  Ref ref, {
   required String groupId,
   String? participantId,
 }) =>

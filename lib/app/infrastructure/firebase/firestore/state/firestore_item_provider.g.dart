@@ -6,7 +6,7 @@ part of 'firestore_item_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemCollectionRefHash() => r'e500b5654df38059b124cf0c40964cf5721b6d2b';
+String _$itemCollectionRefHash() => r'7469411ecb44a0f8c3c9fc47bcc5474aa0ca9042';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -159,6 +159,8 @@ class ItemCollectionRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ItemCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestoreItemModel>> {
   /// The parameter `groupId` of this provider.
@@ -174,7 +176,7 @@ class _ItemCollectionRefProviderElement
   String get groupId => (origin as ItemCollectionRefProvider).groupId;
 }
 
-String _$itemDocumentRefHash() => r'1beb439f3790d204330378123e37fca4f549030b';
+String _$itemDocumentRefHash() => r'1c580cff3356afb7bd69d7917314fe9a8aa3f3de';
 
 /// 欲しい物ドキュメントの参照
 ///
@@ -317,6 +319,8 @@ class ItemDocumentRefProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin ItemDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreItemModel>> {
   /// The parameter `groupId` of this provider.
@@ -337,4 +341,4 @@ class _ItemDocumentRefProviderElement
   String? get itemId => (origin as ItemDocumentRefProvider).itemId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
