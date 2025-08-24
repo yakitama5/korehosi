@@ -1,24 +1,25 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:family_wish_list/app/presentation/pages/user/onboard_page.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 
 import '../../../../test_utils/importer.dart';
-
-const _pageLength = 3;
+import '../../../../test_utils/src/device_size.dart';
 
 void main() {
-  testGoldens('オンボード', (WidgetTester tester) async {
-    for (var i = 0; i < _pageLength; i++) {
-      // `IntroductionScreenState`をGlobalKeyで行う都合上、`multiScreenGolden`を利用
-      // Note: https://github.com/eBay/flutter_glove_box/issues/132
-      await tester.pumpWidget(
-        testableWidget(
-          OnboardPage(
-            initialPage: i,
-          ),
-        ),
+  group('Onboard', () {
+    goldenTest('Page1', fileName: 'Page1', builder: () {
+      return GoldenTestGroup(
+        children: DeviceSize.values
+            .map((device) => GoldenTestScenario(
+                name: device.name,
+                constraints: device.constraints,
+                child: testableWidget(
+                  OnboardPage(
+                    initialPage: 0,
+                  ),
+                )))
+            .toList(),
       );
-      await multiScreenGolden(tester, 'Onboard - P.${i + 1}');
-    }
+    });
   });
 }

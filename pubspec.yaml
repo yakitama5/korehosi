@@ -83,7 +83,8 @@ dependencies:
   version: any
 
 dev_dependencies:
-  build_runner:  any
+  alchemist: ^0.12.1
+  build_runner: any
   custom_lint: any
   envied_generator: any
   fake_cloud_firestore: any
@@ -94,9 +95,8 @@ dev_dependencies:
   flutter_lints: any
   flutter_test:
     sdk: flutter
-  freezed: 
+  freezed: null
   go_router_builder: any
-  golden_toolkit: any
   google_sign_in_mocks: any
   lint:
     path: ./lint
