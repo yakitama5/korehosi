@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
@@ -151,6 +150,8 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
           return;
         }
 
+        final navigator = Navigator.of(context);
+
         // 入力値を取得
         final name = formModel.nameControl.value;
         final wanterName = formModel.wanterNameControl.value;
@@ -194,9 +195,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
         }
 
         // 遷移元にポップ
-        if (context.mounted) {
-          context.pop();
-        }
+        navigator.pop();
       },
     );
   }

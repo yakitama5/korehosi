@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../components/importer.dart';
 import '../../../hooks/src/use_l10n.dart';
@@ -46,7 +45,7 @@ class WishRankSelectorBottomSheet extends HookWidget {
             const _ResetButton(),
             const Gap(8),
             _ApplyButton(
-              onPressed: () => context.pop(wishRank.value),
+              onPressed: () => Navigator.of(context).pop(wishRank.value),
             ),
           ],
         ),
@@ -63,7 +62,7 @@ class _CancelButton extends HookWidget {
     final l10n = useL10n();
 
     return TextButton(
-      onPressed: () => context.pop(),
+      onPressed: () => Navigator.of(context).pop(),
       child: Text(l10n.cancel),
     );
   }
@@ -77,7 +76,7 @@ class _ResetButton extends HookWidget {
     final l10n = useL10n();
 
     return TextButton(
-      onPressed: () => context.pop<double>(-1),
+      onPressed: () => Navigator.of(context).pop<double>(-1),
       child: Text(l10n.reset),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
@@ -136,12 +135,14 @@ class _PurchaseForm extends HookConsumerWidget {
       return;
     }
 
+    final navigator = Navigator.of(context);
+
     // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら変更する
     // NavigationBarを検知出来ないのは一旦保留
     // 内容が変更されていなければ閉じる
     final dirty = ReactivePurchaseFormModelForm.of(context)?.form.dirty;
     if (dirty != true) {
-      context.pop();
+      navigator.pop();
       return;
     }
 
@@ -156,9 +157,7 @@ class _PurchaseForm extends HookConsumerWidget {
 
     // 破棄が選ばれたら画面を閉じる
     if (result == DialogResult.ok) {
-      if (context.mounted) {
-        context.pop();
-      }
+      navigator.pop();
     }
   }
 }
@@ -178,6 +177,8 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
       formModel.form.markAllAsTouched();
       return;
     }
+
+    final navigator = Navigator.of(context);
 
     // 入力内容の取得
     final surprise = formModel.surpriseControl.value!;
@@ -216,9 +217,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
     }
 
     // 遷移元にポップ
-    if (context.mounted) {
-      context.pop();
-    }
+    navigator.pop();
   }
 }
 
@@ -250,14 +249,14 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     await execute(
       context,
       action: () async {
+        final navigator = Navigator.of(context);
+
         // 削除
         final itemId = ref.read(ItemDetailProviders.itemIdProvider);
         await ref.read(purchaseUsecaseProvider).delete(itemId: itemId!);
 
         // 遷移元にポップ
-        if (context.mounted) {
-          context.pop();
-        }
+        navigator.pop();
       },
     );
   }
