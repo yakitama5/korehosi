@@ -1,5 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
+import 'package:family_wish_list/app/presentation/components/src/responsive_auto_scale_box.dart';
 import 'package:family_wish_list/app/presentation/hooks/importer.dart';
 import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:flutter/foundation.dart';
@@ -8,11 +9,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 import '../application/config/app_config.dart';
-import '../application/config/breakpoint_config.dart';
-import '../application/model/breakpoint.dart';
 import '../application/state/loading_provider.dart';
 import '../application/state/locale_provider.dart';
 import '../application/state/notification_message_provider.dart';
@@ -218,74 +216,22 @@ class _AppBaseContainer extends SingleChildStatelessWidget {
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
-    return ResponsiveBreakpoints.builder(
+    return Nested(
+      children: const [
+        ReactiveFormWrapper(),
+        ResponsiveAutoScaleBox(),
+      ],
       child: Stack(
         children: [
-          Nested(
-            children: const [
-              ReactiveFormWrapper(),
-              ResponsiveWrapper(),
-            ],
-            child: child,
-          ),
+          child ?? const SizedBox.shrink(),
           // 全画面共通のローディング表示
           const _GlobalIndicator(),
           // 画面遷移の検知
           const RouteObserverContainer(),
         ],
       ),
-      breakpoints: breakpoints,
     );
   }
-}
-
-class ResponsiveWrapper extends SingleChildStatelessWidget {
-  const ResponsiveWrapper({super.key, super.child});
-
-  @override
-  Widget buildWithChild(BuildContext context, Widget? child) => HookBuilder(
-        builder: (context) {
-          final colorScheme = useColorScheme();
-
-          return MaxWidthBox(
-            maxWidth: AppBreakpoint.desktopLarge.end.toDouble(),
-            backgroundColor: colorScheme.surface,
-            child: ResponsiveScaledBox(
-              width: ResponsiveValue<double>(
-                context,
-                defaultValue: AppBreakpoint.mobile.value,
-                conditionalValues: [
-                  Condition.equals(
-                    name: AppBreakpoint.mobile.name,
-                    value: AppBreakpoint.mobile.value,
-                  ),
-                  Condition.between(
-                    start: AppBreakpoint.tablet.start,
-                    end: AppBreakpoint.tablet.end,
-                    value: AppBreakpoint.tablet.value,
-                  ),
-                  Condition.between(
-                    start: AppBreakpoint.desktopSmall.start,
-                    end: AppBreakpoint.desktopSmall.end,
-                    value: AppBreakpoint.desktopSmall.value,
-                  ),
-                  Condition.between(
-                    start: AppBreakpoint.desktopMiddle.start,
-                    end: AppBreakpoint.desktopMiddle.end,
-                    value: AppBreakpoint.desktopMiddle.value,
-                  ),
-                  Condition.between(
-                    start: AppBreakpoint.desktopLarge.start,
-                    end: AppBreakpoint.desktopLarge.end,
-                    value: AppBreakpoint.desktopLarge.value,
-                  ),
-                ],
-              ).value,
-              child: child ?? const SizedBox.shrink(),
-            ),
-          );
-        },
-      );
 }
 
 class ReactiveFormWrapper extends SingleChildStatelessWidget {
