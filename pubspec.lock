@@ -689,22 +689,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.8.10"
-  firebase_dynamic_links:
-    dependency: "direct main"
-    description:
-      name: firebase_dynamic_links
-      sha256: "8bc938fe0cd3bc0e2071204f8f57388e1d3c5fe295f468c4d4e7a342e07b76b8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.10"
-  firebase_dynamic_links_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_dynamic_links_platform_interface
-      sha256: e2a772270f54bf03c28706f73e5bc01465b43f2367e1a0bf339df24dde82928f
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.7+10"
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -806,6 +790,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_branch_sdk:
+    dependency: "direct main"
+    description:
+      name: flutter_branch_sdk
+      sha256: "1f8e63464abcd7255aa372b659e057dfbe3c93443ab6320b68e52698bebb50fa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.6.0"
   flutter_cache_manager:
     dependency: "direct main"
     description:
