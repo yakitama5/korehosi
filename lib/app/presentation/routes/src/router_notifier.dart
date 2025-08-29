@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../application/state/initial_deep_link_provider.dart';
 import '../../../application/state/initial_notification_provider.dart';
 import '../../../application/usecase/item/state/current_group_item_provider.dart';
 import '../../../application/usecase/user/state/auth_status_provider.dart';
@@ -59,20 +57,6 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
         return const OnboardFormRouteData().location;
       } else if (isSplash || isNotAuthLocations) {
         return const ItemsRouteData().location;
-      }
-    }
-
-    // WebはDynamicLinksが未対応のため除外する
-    if (!kIsWeb) {
-      // DynamicLinks判定 (起動時)
-      final initialLink = await ref.watch(initialDeepLinkProvider.future);
-      if (initialLink != null) {
-        // 指定された画面へ
-        logger.d('''
-DynamicLink
-  - Link:    $initialLink
-  - Path:    ${initialLink.path}''');
-        return initialLink.path;
       }
     }
 

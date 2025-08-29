@@ -182,8 +182,12 @@ class _AppListener extends SingleChildStatelessWidget {
       reactiveDeepLinkProvider,
       (previous, next) async {
         // URLがなければスルー
+        if (!next.hasValue) {
+          return;
+        }
+
         final uri = next.value;
-        if (uri == null) {
+        if (uri == null || uri.path.isEmpty) {
           return;
         }
 

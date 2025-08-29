@@ -1,12 +1,14 @@
 import 'dart:io' as io;
 
 import 'package:family_wish_list/app/domain/notification/interface/notification_token_repository.dart';
+import 'package:family_wish_list/app/infrastructure/branch/service/branch_deep_link_service.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
@@ -36,7 +38,6 @@ import 'app/infrastructure/firebase/repository/firebase_purchase_repository.dart
 import 'app/infrastructure/firebase/repository/firebase_user_repository.dart';
 import 'app/infrastructure/firebase/service/firebase_analytics_service.dart';
 import 'app/infrastructure/firebase/service/firebase_config_service.dart';
-import 'app/infrastructure/firebase/service/firebase_deep_link_service.dart';
 import 'app/infrastructure/firebase/service/firebase_messaging_messaging_service.dart';
 import 'app/infrastructure/firebase/service/firebase_storage_service.dart';
 import 'app/infrastructure/package_info_plus/service/package_info_plus_app_info_service.dart';
@@ -85,6 +86,12 @@ void main() async {
   // RevenueCat
   await initPlatformState();
 
+  // branch (deep link)
+  await FlutterBranchSdk.init(
+      enableLogging: true, branchAttributionLevel: BranchAttributionLevel.FULL);
+  FlutterBranchSdk.setConsumerProtectionAttributionLevel(
+      BranchAttributionLevel.FULL);
+
   // WebのURLから "#" を削除
   usePathUrlStrategy();
 
@@ -109,7 +116,7 @@ void main() async {
         purchaseRepositoryProvider.overrideWith(FirebasePurchaseRepository.new),
         storageServiceProvider.overrideWith(FirebaseStorageService.new),
         configServiceProvider.overrideWith(FirebaseConfigService.new),
-        deepLinkServiceProvider.overrideWith(FirebaseDeepLinkService.new),
+        deepLinkServiceProvider.overrideWith(BranchDeepLinkService.new),
         analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
         messagingServiceProvider
             .overrideWith(FirebaseMessagingMessagingService.new),
