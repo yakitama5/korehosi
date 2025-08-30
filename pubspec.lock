@@ -1540,6 +1540,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  nilts:
+    dependency: "direct dev"
+    description:
+      name: nilts
+      sha256: ff8f963a66fe9460d43e802a76fbcbe9e5f63f92e2dea000b0725babddb2ff2d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.23.1"
+  nilts_core:
+    dependency: transitive
+    description:
+      name: nilts_core
+      sha256: ccd8f5e1e69e9e3abe1b15ae28ec36836ba990ea2869adf1538f0279f1c2dd3f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
   octo_image:
     dependency: transitive
     description:
