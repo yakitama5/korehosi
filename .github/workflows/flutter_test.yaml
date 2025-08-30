@@ -43,8 +43,27 @@ jobs:
       # セットアップ
       # - name: Setup Config Files
       #   uses: ./.github/actions/setup-config-files
-      - name: Setup Application Runtime
-        uses: ./.github/actions/setup-application-runtime
+      # - name: Setup Application Runtime
+      #   uses: ./.github/actions/setup-application-runtime
+
+      # https://github.com/kuhnroyal/flutter-fvm-config-action
+      - uses: actions/checkout@v4
+      - uses: kuhnroyal/flutter-fvm-config-action/setup@v3
+
+      # NOTE: 後述の melosコマンドが実行できないためPATHを通します。
+      # PUB_CACHE: $HOME/.pub-cache に設定
+      - name: Export PUB_CACHE
+        run: |
+          echo "PUB_CACHE=$HOME/.pub-cache" >> "$GITHUB_ENV"
+          echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+        shell: bash
+
+      - name: Setup melos
+        run: |
+          MELOS_VERSION=$(cat pubspec.lock | yq ".packages.melos.version" -r)
+          dart pub global activate melos $MELOS_VERSION
+          melos bootstrap
+        shell: bash
 
       # 実行
       - run: melos bs
