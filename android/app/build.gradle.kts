@@ -81,7 +81,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         resValue("string", "app_name", dartDefines["appName"] ?: "")
-        resValue("string", "android_scheme", dartDefines["androidScheme"] ?: "")
+        resValue("string", "deeplink_scheme", dartDefines["deeplinkScheme"] ?: "")
         resValue("string", "branch_test_mode", dartDefines["branchTestMode"] ?: "false")
     }
     

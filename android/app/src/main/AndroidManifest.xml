@@ -57,7 +57,7 @@
             <intent-filter>
 				<!-- If utilizing $deeplink_path please explicitly declare your hosts, or utilize a wildcard(*) -->
 				<!-- REPLACE `android:scheme` with your Android URI scheme -->
-				<data android:scheme="@string/android_scheme" android:host="open" />
+				<data android:scheme="@string/deeplink_scheme" android:host="open" />
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />

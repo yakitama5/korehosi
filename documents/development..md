@@ -52,7 +52,7 @@
        "appIdSuffix": ".dev",
        "appWebUrl": "https://XXXXX.com",
        "androidPackageName": "com.example.xxxxx.dev",
-       "androidScheme": "myapp.dev://",
+       "deeplinkScheme": "myapp.dev://",
        "iosBundleId": "com.example.xxxxx.dev",
        "reversedClientId": "xxxxx",
        "appStoreId": "xxxxx"
