@@ -29,10 +29,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_branch_sdk: ^8.6.0
-  flutter_cache_manager: any
   flutter_hooks: any
   flutter_image_compress: any
-  flutter_local_notifications: any
   flutter_localizations:
     sdk: flutter
   flutter_rating_bar: any
@@ -102,6 +100,7 @@ dev_dependencies:
   lint:
     path: ./lint
   mocktail: any
+  nilts: ^0.23.1
   pedantic_mono: any
   reactive_forms_generator: any
   riverpod_generator: any
