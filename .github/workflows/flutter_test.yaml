@@ -16,7 +16,7 @@ jobs:
     steps:
       # チェックアウト
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 設定ファイルの配置
       - name: Create dart-define
@@ -47,7 +47,6 @@ jobs:
       #   uses: ./.github/actions/setup-application-runtime
 
       # https://github.com/kuhnroyal/flutter-fvm-config-action
-      - uses: actions/checkout@v4
       - uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       - name: Setup flutter
         uses: subosito/flutter-action@1c5eb12d812966ca84680edc38353a0851c8fd56 # v2.14.0
