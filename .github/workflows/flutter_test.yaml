@@ -21,7 +21,7 @@ jobs:
       # セットアップ
       - name: Setup Config Files
         uses: ./.github/actions/setup-config-files
-        with: # Set the secret as an input
+        env: # Set the secret as an input
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
           FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
