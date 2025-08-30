@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
@@ -5,7 +6,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../domain/user/entity/user.dart';
-import '../../state/locale_provider.dart';
 import '../run_usecase_mixin.dart';
 import '../user/state/auth_user_provider.dart';
 
@@ -72,14 +72,13 @@ class GroupShareUsecase with RunUsecaseMixin {
 
   /// 招待用のテキストを生成
   Future<String> _createShareText(String shareUrl, String groupName) async {
-    final l10n = ref.read(l10nProvider);
-    final userName = await ref
-        .read(authUserProvider.selectAsync((user) => user.dispName(l10n)));
+    final userName =
+        await ref.read(authUserProvider.selectAsync((user) => user.dispName));
 
-    return l10n.groupShareText(
-      userName,
-      groupName,
-      shareUrl,
+    return i18n.app.groupShareText(
+      user: userName,
+      group: groupName,
+      url: shareUrl,
     );
   }
 }

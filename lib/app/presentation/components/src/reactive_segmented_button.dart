@@ -29,7 +29,6 @@ class _Form extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final theme = useTheme();
 
     return Column(
@@ -46,7 +45,7 @@ class _Form extends HookWidget {
             segments: AgeGroup.values
                 .map(
                   (e) => ButtonSegment<AgeGroup>(
-                    label: Text(e.getLocaleName(l10n)),
+                    label: Text(e.localeName),
                     value: e,
                   ),
                 )

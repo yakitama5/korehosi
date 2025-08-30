@@ -1,8 +1,7 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../application/state/locale_provider.dart';
 import '../components/importer.dart';
 
 /// URL文字列に遷移する
@@ -11,13 +10,10 @@ Future<bool> lanchUrlStringSafety(
   String url, {
   String? secondUrl,
 }) async {
-  final ref = ProviderScope.containerOf(context);
-  final l10n = ref.read(l10nProvider);
-
   Future<void> showDialog() => showAdaptiveOkDialog(
         context,
-        title: l10n.error,
-        message: l10n.urlErrorMessageCanNotOpen,
+        title: i18n.app.error,
+        message: i18n.app.urlErrorMessageCanNotOpen,
       );
 
   if (await canLaunchUrlString(url)) {

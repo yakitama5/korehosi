@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -14,7 +15,6 @@ import '../../../domain/user/entity/user.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
 import '../../components/src/date_text_with_label.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import 'components/item_images.dart';
@@ -25,7 +25,6 @@ class ItemPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final user = ref.watch(authUserProvider);
     final item = ref.watch(ItemDetailProviders.itemProvider);
     final purchase = ref.watch(ItemDetailProviders.purchaseProvider);
@@ -38,7 +37,7 @@ class ItemPage extends HookConsumerWidget {
         AsyncData(value: final _),
         AsyncData(value: final _),
       ) =>
-        ErrorView(l10n.deletedMessage, null),
+        ErrorView(i18n.app.deletedMessage, null),
 
       // 欲しい物が存在する場合は明細を表示
       (
@@ -77,8 +76,6 @@ class _ItemDetailView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(item.name),
@@ -101,12 +98,12 @@ class _ItemDetailView extends HookWidget {
               const Gap(32),
               TextWithLabel(
                 item.name,
-                label: l10n.name,
+                label: i18n.app.name,
               ),
               const Gap(16),
               TextWithLabel(
                 item.wanterName,
-                label: l10n.wanterName,
+                label: i18n.app.wanterName,
               ),
               const Gap(16),
               _WishRank(
@@ -115,7 +112,7 @@ class _ItemDetailView extends HookWidget {
               const Gap(16),
               TextWithLabel(
                 item.wishSeason,
-                label: l10n.wishSeasonLabel,
+                label: i18n.app.wishSeasonLabel,
               ),
               const Gap(16),
               _Urls(
@@ -124,7 +121,7 @@ class _ItemDetailView extends HookWidget {
               const Gap(16),
               TextWithLabel(
                 item.memo,
-                label: l10n.memo,
+                label: i18n.app.memo,
               ),
               const Gap(40),
               _PurchaseInfo(
@@ -157,7 +154,6 @@ class _PurchaseStatus extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
@@ -167,7 +163,7 @@ class _PurchaseStatus extends HookWidget {
         Icon(purchaseStatus.iconData, color: colorScheme.primary),
         const Gap(8),
         Text(
-          purchaseStatus.localeName(l10n),
+          purchaseStatus.localeName,
           style: textTheme.bodyLarge,
         ),
       ],
@@ -183,14 +179,13 @@ class _WishRank extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final textTheme = Theme.of(context).textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.wishRank,
+          i18n.app.wishRank,
           style: textTheme.labelMedium,
         ),
         RatingBar.builder(
@@ -213,18 +208,17 @@ class _Urls extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final textTheme = Theme.of(context).textTheme;
 
     // 未設定の場合はダミー要素だけ表示
     if (urls == null || urls!.isEmpty) {
-      return TextWithLabel(null, label: l10n.url);
+      return TextWithLabel(null, label: i18n.app.url);
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.url, style: textTheme.labelMedium),
+        Text(i18n.app.url, style: textTheme.labelMedium),
         ...urls!.map(
           (url) => Padding(
             padding: const EdgeInsets.only(bottom: 8),
@@ -256,7 +250,6 @@ class _PurchaseInfo extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final isChild = user.ageGroup == AgeGroup.child;
 
     // 購入情報は子供には表示しない
@@ -270,28 +263,29 @@ class _PurchaseInfo extends HookWidget {
         const _PurchaseInfoTitle(),
         const Gap(16),
         TextWithLabel(
-          purchase?.price?.formatCurrency(locale: l10n.localeName),
-          label: l10n.price,
+          purchase?.price?.formatCurrency(
+              locale: AppLocaleUtils.findDeviceLocale().languageCode),
+          label: i18n.app.price,
         ),
         const Gap(16),
         DateTextWithLabel(
           dateTime: purchase?.planDate,
-          label: l10n.purchasePlanDateTime,
+          label: i18n.app.purchasePlanDateTime,
         ),
         const Gap(16),
         DateTextWithLabel(
           dateTime: purchase?.sentAt,
-          label: l10n.sentAt,
+          label: i18n.app.sentAt,
         ),
         const Gap(16),
         TextWithLabel(
           purchase?.buyerName,
-          label: l10n.buyerName,
+          label: i18n.app.buyerName,
         ),
         const Gap(16),
         TextWithLabel(
           purchase?.memo,
-          label: l10n.memo,
+          label: i18n.app.memo,
         ),
       ],
     );
@@ -304,7 +298,6 @@ class _PurchaseInfoTitle extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -312,11 +305,11 @@ class _PurchaseInfoTitle extends HookWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.purchaseInfoTitle,
+          i18n.app.purchaseInfoTitle,
           style: textTheme.titleMedium,
         ),
         Text(
-          l10n.purchaseInfoCaption,
+          i18n.app.purchaseInfoCaption,
           style: textTheme.labelMedium
               ?.copyWith(color: colorScheme.onSurfaceVariant),
         ),
@@ -339,7 +332,6 @@ class _PurchaseFab extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final isChild = user.ageGroup == AgeGroup.child;
 
     // 子供の場合はボタンを非表示
@@ -350,7 +342,7 @@ class _PurchaseFab extends HookConsumerWidget {
     return FloatingActionButton.extended(
       onPressed: () => _onPurchase(context),
       icon: const Icon(Icons.shopping_bag),
-      label: Text(l10n.purchaseOrpurchasePlan),
+      label: Text(i18n.app.purchaseOrpurchasePlan),
     );
   }
 

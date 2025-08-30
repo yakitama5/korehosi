@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -34,8 +35,6 @@ class TextDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return ReactiveFormBuilder(
       form: () => FormGroup({
         _textKey: FormControl<String>(
@@ -54,11 +53,11 @@ class TextDialog extends HookWidget {
         ),
         actions: [
           AdaptiveAction(
-            child: Text(cancelLabel ?? l10n.cancel),
+            child: Text(cancelLabel ?? i18n.app.cancel),
             onPressed: () => Navigator.pop(context),
           ),
           AdaptiveAction(
-            child: Text(okLabel ?? l10n.ok),
+            child: Text(okLabel ?? i18n.app.ok),
             onPressed: () => _onOk(context, formGroup),
           ),
         ],

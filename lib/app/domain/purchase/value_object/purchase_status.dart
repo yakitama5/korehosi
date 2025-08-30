@@ -1,33 +1,21 @@
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 
 /// 欲しい物の購入状況
 enum PurchaseStatus {
   notPurchased,
   purchasePlan,
-  purchased,
-}
+  purchased;
 
-extension PurchaseStatusX on PurchaseStatus {
-  String localeName(L10n l10n) {
-    switch (this) {
-      case PurchaseStatus.notPurchased:
-        return l10n.notPurchased;
-      case PurchaseStatus.purchasePlan:
-        return l10n.purchasePlan;
-      case PurchaseStatus.purchased:
-        return l10n.purchased;
-    }
-  }
+  String get localeName => switch (this) {
+        PurchaseStatus.notPurchased => i18n.app.notPurchased,
+        PurchaseStatus.purchasePlan => i18n.app.purchasePlan,
+        PurchaseStatus.purchased => i18n.app.purchased,
+      };
 
-  IconData get iconData {
-    switch (this) {
-      case PurchaseStatus.notPurchased:
-        return Icons.remove_shopping_cart_outlined;
-      case PurchaseStatus.purchasePlan:
-        return Icons.shopping_cart_outlined;
-      case PurchaseStatus.purchased:
-        return Icons.shopping_cart;
-    }
-  }
+  IconData get iconData => switch (this) {
+        PurchaseStatus.notPurchased => Icons.remove_shopping_cart_outlined,
+        PurchaseStatus.purchasePlan => Icons.shopping_cart_outlined,
+        PurchaseStatus.purchased => Icons.shopping_cart,
+      };
 }

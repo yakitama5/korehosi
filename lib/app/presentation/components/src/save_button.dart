@@ -1,7 +1,6 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
-import '../../hooks/importer.dart';
 
 /// 保存ボタン
 class SaveButton extends HookWidget {
@@ -10,11 +9,9 @@ class SaveButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return FilledButton(
       onPressed: onPressesd,
-      child: Text(l10n.save),
+      child: Text(i18n.app.save),
     );
   }
 }

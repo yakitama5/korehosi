@@ -1,4 +1,4 @@
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,14 +11,12 @@ import '../../../application/extension/number_extension.dart';
 import '../../../application/extension/string_extension.dart';
 import '../../../application/model/dialog_result.dart';
 import '../../../application/model/purchase/purchase_form_model.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/purchase/purchase_usecase.dart';
 import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
 import '../../../domain/item/entity/item.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
 import 'components/item_images.dart';
@@ -63,18 +61,16 @@ class _PurchaseForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return PurchaseFormModelFormBuilder(
       model: _createModel(),
       builder: (context, formModel, child) => PopScope(
         canPop: false,
         onPopInvokedWithResult: (didPop, result) =>
-            _onWillPopScope(context, l10n, didPop),
+            _onWillPopScope(context, didPop),
         child: UnfocusOnTap(
           child: Scaffold(
             appBar: AppBar(
-              title: Text(l10n.purchaseOrpurchasePlan),
+              title: Text(i18n.app.purchaseOrpurchasePlan),
               actions: [
                 const _Submit(),
                 const Gap(8),
@@ -90,7 +86,7 @@ class _PurchaseForm extends HookConsumerWidget {
                     const Gap(16),
                     TextWithLabel(
                       item.name,
-                      label: l10n.name,
+                      label: i18n.app.name,
                     ),
                     const Gap(16),
                     const _SurpriseField(),
@@ -126,7 +122,6 @@ class _PurchaseForm extends HookConsumerWidget {
 
   Future<void> _onWillPopScope(
     BuildContext context,
-    L10n l10n,
     bool didPop,
   ) async {
     // Notes: 移行ガイドに沿って変更
@@ -149,10 +144,10 @@ class _PurchaseForm extends HookConsumerWidget {
     // ダイアログを表示して確認
     final result = await showAdaptiveOkCancelDialog(
       context,
-      title: l10n.confirmDiscardChangesTitle,
-      message: l10n.confirmDiscardChangesMessage,
-      okLabel: l10n.discard,
-      cancelLabel: l10n.notDiscard,
+      title: i18n.app.confirmDiscardChangesTitle,
+      message: i18n.app.confirmDiscardChangesMessage,
+      okLabel: i18n.app.discard,
+      cancelLabel: i18n.app.notDiscard,
     );
 
     // 破棄が選ばれたら画面を閉じる
@@ -232,11 +227,10 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
-    final l10n = ref.read(l10nProvider);
     final result = await showAdaptiveOkCancelDialog(
       context,
-      title: l10n.deleteConfirmTitle,
-      message: l10n.deleteCofirmMessage(l10n.purchaseInfoTitle),
+      title: i18n.app.deleteConfirmTitle,
+      message: i18n.app.deleteCofirmMessage(item: i18n.app.purchaseInfoTitle),
     );
     if (result != DialogResult.ok) {
       return;
@@ -268,7 +262,6 @@ class _SurpriseField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final textTheme = Theme.of(context).textTheme;
     final formModel = ReactivePurchaseFormModelForm.of(context)!;
 
@@ -278,9 +271,9 @@ class _SurpriseField extends HookConsumerWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l10n.surprise),
+          Text(i18n.app.surprise),
           Text(
-            l10n.surpriseCaption,
+            i18n.app.surpriseCaption,
             style: textTheme.labelMedium,
           ),
         ],
@@ -295,14 +288,12 @@ class _PriceField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ReactiveOutlinedTextField<String>(
       formControlName: PurchaseFormModelForm.priceControlName,
-      labelText: l10n.price,
+      labelText: i18n.app.price,
       maxLength: purchaseConfig.maxPriceLength,
       textInputType: TextInputType.number,
-      prefixText: l10n.yenMark,
+      prefixText: i18n.app.yenMark,
       // 金額はカンマ区切りで整形する
       inputFormatters: [
         ThousandsFormatter(),
@@ -317,17 +308,15 @@ class _PurchaseDateField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ReactiveDateTimePicker(
       formControlName: PurchaseFormModelForm.planDateControlName,
-      fieldLabelText: l10n.purchasePlanDateTime,
+      fieldLabelText: i18n.app.purchasePlanDateTime,
       keyboardType: TextInputType.datetime,
       decoration: InputDecoration(
-        labelText: l10n.purchasePlanDateTime,
+        labelText: i18n.app.purchasePlanDateTime,
         border: const OutlineInputBorder(),
         suffixIcon: const Icon(Icons.calendar_today),
-        helperText: l10n.purchasePlanDateTimeCaption,
+        helperText: i18n.app.purchasePlanDateTimeCaption,
       ),
     );
   }
@@ -339,17 +328,15 @@ class _SentAtField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ReactiveDateTimePicker(
       formControlName: PurchaseFormModelForm.sentAtControlName,
-      fieldLabelText: l10n.sentAt,
+      fieldLabelText: i18n.app.sentAt,
       keyboardType: TextInputType.datetime,
       decoration: InputDecoration(
-        labelText: l10n.sentAt,
+        labelText: i18n.app.sentAt,
         border: const OutlineInputBorder(),
         suffixIcon: const Icon(Icons.calendar_today),
-        helperText: l10n.sentAtCaption,
+        helperText: i18n.app.sentAtCaption,
       ),
     );
   }
@@ -361,8 +348,6 @@ class _BuyerNameField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     final names = ref.watch(buyerNameSuggestionProvider).value;
     final userNames = names?.nonNulls
         // 重複の削除
@@ -371,7 +356,7 @@ class _BuyerNameField extends HookConsumerWidget {
 
     return ReactiveOutlinedRawAutocomplete(
       formControlName: PurchaseFormModelForm.buyerNameControlName,
-      labelText: l10n.buyerName,
+      labelText: i18n.app.buyerName,
       maxLength: purchaseConfig.maxBuyerNameLength,
       options: userNames ?? [],
     );
@@ -383,11 +368,9 @@ class _MemoField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ReactiveOutlinedTextField<String>(
       formControlName: PurchaseFormModelForm.memoControlName,
-      labelText: l10n.memo,
+      labelText: i18n.app.memo,
       maxLines: 5,
       maxLength: purchaseConfig.maxMemoLength,
     );

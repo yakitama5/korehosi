@@ -1,11 +1,11 @@
 import 'package:family_wish_list/app/application/usecase/analyze/state/analyze_source_items_provider.dart.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/usecase/analyze/state/analyze_buyed_count_provider.dart';
 import '../../../../application/usecase/analyze/state/buyed_rate_provider.dart';
 import '../../../components/importer.dart';
-import '../../../hooks/importer.dart';
 import 'chart_card.dart';
 
 /// 購入率を表すCard
@@ -16,8 +16,6 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     final percent = ref.watch(buyedRateProvider).value;
     // 一瞬なのでローディング表示は行わない
     if (percent == null) {
@@ -25,7 +23,7 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
     }
 
     return ChartCard(
-      title: l10n.purchaseRate,
+      title: i18n.app.purchaseRate,
       iconData: Icons.pie_chart,
       onTap: onTap,
       child: Row(
@@ -47,7 +45,6 @@ class _BuyedItemCount extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final count = ref.watch(analyzeBuyedCountProvider).value;
     final totalCount = ref.watch(
       analyzeSourceItemsProvider.select((value) => value.value?.length),
@@ -64,11 +61,11 @@ class _BuyedItemCount extends HookConsumerWidget {
           color: Theme.of(context).colorScheme.secondary,
         ),
         Text(
-          l10n.formatFraction(count, totalCount),
+          i18n.app.formatFraction(molecule: count, denominator: totalCount),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         Text(
-          l10n.purchased,
+          i18n.app.purchased,
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),

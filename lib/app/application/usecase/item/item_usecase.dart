@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -15,7 +16,6 @@ import '../../../domain/user/entity/user.dart';
 import '../../../presentation/routes/importer.dart';
 import '../../config/item_image_config.dart';
 import '../../model/item/selected_image_model.dart';
-import '../../state/locale_provider.dart';
 import '../group/state/current_group_provider.dart';
 import '../run_usecase_mixin.dart';
 import '../user/state/auth_user_provider.dart';
@@ -48,8 +48,6 @@ class ItemUsecase with RunUsecaseMixin {
       execute(
         ref,
         action: () async {
-          final l10n = ref.read(l10nProvider);
-
           // 登録数上限判定
           await _validateItemCount();
 
@@ -91,7 +89,7 @@ class ItemUsecase with RunUsecaseMixin {
           final user = ref.read(authUserProvider).value!;
           await ref.read(messagingServiceProvider).sendMessage(
                 groupId: groupId,
-                title: l10n.notificationAddItemBody(user.dispName(l10n)),
+                title: i18n.app.notificationAddItemBody(name: user.dispName),
                 body: name,
                 uid: user.id,
                 target: NotificationTarget.all,
@@ -166,7 +164,6 @@ class ItemUsecase with RunUsecaseMixin {
 
   /// 欲しい物の登録数上限を検証
   Future<void> _validateItemCount() async {
-    final l10n = ref.read(l10nProvider);
     final group = await ref.read(currentGroupProvider.future);
     final maxCount = await ref.read(configServiceProvider).fetchMaxItemCount();
 
@@ -175,7 +172,7 @@ class ItemUsecase with RunUsecaseMixin {
         group?.itemCount != null && group!.itemCount! >= maxCount;
 
     if (!isPremium && overItemCount) {
-      throw BusinessException(l10n.businessErrorMessageOverItemCount);
+      throw BusinessException(i18n.app.businessErrorMessageOverItemCount);
     }
   }
 

@@ -1,9 +1,9 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../hooks/importer.dart';
 import 'my_reactive_raw_autocomplete.dart';
 
 class ReactiveOutlinedRawAutocomplete
@@ -189,8 +189,6 @@ class _ReactiveOutlinedTextField<T> extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return ReactiveTextField<T>(
       formControlName: formControlName,
       autofocus: autofocus,
@@ -201,12 +199,12 @@ class _ReactiveOutlinedTextField<T> extends HookWidget {
       keyboardType: textInputType,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
-        labelText: '$labelText${isRequired ? l10n.requiredIcon : ''}',
+        labelText: '$labelText${isRequired ? i18n.app.requiredIcon : ''}',
         prefixText: prefixText,
         hintText: hintText,
         counterText: counterText,
         alignLabelWithHint: true,
-        helperText: isRequired ? l10n.requiredHelper : '',
+        helperText: isRequired ? i18n.app.requiredHelper : '',
         border: const OutlineInputBorder(),
         suffixIcon: field.errorText?.isNotEmpty == true
             ? Icon(

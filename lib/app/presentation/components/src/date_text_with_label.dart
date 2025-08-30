@@ -1,8 +1,8 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../hooks/src/use_l10n.dart';
 import 'text_with_label.dart';
 
 class DateTextWithLabel extends HookConsumerWidget {
@@ -16,8 +16,8 @@ class DateTextWithLabel extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-    final formatter = DateFormat.yMMMd(l10n.localeName);
+    final formatter =
+        DateFormat.yMMMd(AppLocaleUtils.findDeviceLocale().languageCode);
 
     return TextWithLabel(
       dateTime != null ? formatter.format(dateTime!) : null,

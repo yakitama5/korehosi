@@ -1,4 +1,4 @@
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -8,21 +8,14 @@ import '../order.dart';
 enum ItemOrderKey {
   name,
   wishRank,
-  createdAt,
-}
+  createdAt;
 
-extension ItemOrderX on ItemOrderKey {
   /// 言語別の表示名
-  String localeName(L10n l10n) {
-    switch (this) {
-      case ItemOrderKey.name:
-        return l10n.orderKeyName;
-      case ItemOrderKey.wishRank:
-        return l10n.orderKeyWishRank;
-      case ItemOrderKey.createdAt:
-        return l10n.orderKeyCreatedAt;
-    }
-  }
+  String get localeName => switch (this) {
+        ItemOrderKey.name => i18n.app.orderKeyName,
+        ItemOrderKey.wishRank => i18n.app.orderKeyWishRank,
+        ItemOrderKey.createdAt => i18n.app.orderKeyCreatedAt,
+      };
 
   /// アイコン
   IconData iconData(SortOrder type) {

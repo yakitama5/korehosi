@@ -1,5 +1,5 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,7 +11,6 @@ import '../../../application/model/user/user_form_model.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../../theme/importer.dart';
 import '../presentation_mixin.dart';
 import 'components/age_group_field.dart';
@@ -26,7 +25,6 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const model = UserFormModel();
-    final l10n = useL10n();
 
     return UserFormModelFormBuilder(
       model: model,
@@ -46,9 +44,9 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
             ],
             freeze: true,
             showBackButton: true,
-            back: Text(l10n.back),
-            next: Text(l10n.next),
-            done: Text(l10n.start),
+            back: Text(i18n.app.back),
+            next: Text(i18n.app.next),
+            done: Text(i18n.app.start),
             onDone: () => _onDone(context, ref),
             safeAreaList: const [true, true, true, true],
           ),
@@ -58,30 +56,26 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
   }
 
   PageViewModel _createStartPageVM(BuildContext context) {
-    final l10n = L10n.of(context)!;
-
     return _createPageVM(
       context,
       imagePath: Assets.images.onboardGift,
-      title: l10n.onboardStartTitle,
+      title: i18n.app.onboardStartTitle,
       children: [
-        Text(l10n.onboardStartMessage),
+        Text(i18n.app.onboardStartMessage),
         const Gap(16),
         _FormFilledButton(
           onPressed: () => introKey.currentState?.next(),
-          label: l10n.next,
+          label: i18n.app.next,
         ),
       ],
     );
   }
 
   PageViewModel _createProfilePageVM(BuildContext context) {
-    final l10n = L10n.of(context)!;
-
     return _createPageVM(
       context,
       imagePath: Assets.images.onboardProfile,
-      title: l10n.questionAgeGroup,
+      title: i18n.app.questionAgeGroup,
       children: [
         const UserNameField(),
         const Gap(8),
@@ -89,14 +83,13 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
         const Gap(32),
         _FormFilledButton(
           onPressed: () => introKey.currentState?.next(),
-          label: l10n.next,
+          label: i18n.app.next,
         ),
       ],
     );
   }
 
   PageViewModel _createConfirmPageVM(BuildContext context, WidgetRef ref) {
-    final l10n = L10n.of(context)!;
     final formModel = ReactiveUserFormModelForm.of(context)!;
 
     return _createPageVM(
@@ -108,20 +101,20 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
         ReactiveValueListenableBuilder<AgeGroup>(
           formControl: formModel.ageGroupControl,
           builder: (context, control, child) => TextWithLabel(
-            control.value?.getLocaleName(l10n),
-            label: l10n.ageGroup,
+            control.value?.localeName,
+            label: i18n.app.ageGroup,
           ),
         ),
         const Gap(8),
         ReactiveValueListenableBuilder<String>(
           formControl: formModel.nameControl,
           builder: (context, control, child) =>
-              TextWithLabel(control.value, label: l10n.name),
+              TextWithLabel(control.value, label: i18n.app.name),
         ),
         const Gap(8),
         _FormFilledButton(
           onPressed: () => _onDone(context, ref),
-          label: l10n.start,
+          label: i18n.app.start,
         ),
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -17,23 +18,21 @@ class NavigatorPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     final navigationItems = [
       _NavigationItem(
         icon: const Icon(Icons.shopping_bag_outlined),
         selectedIcon: const Icon(Icons.shopping_bag),
-        label: l10n.wishList,
+        label: i18n.app.wishList,
       ),
       _NavigationItem(
         icon: const Icon(Icons.analytics_outlined),
         selectedIcon: const Icon(Icons.analytics),
-        label: l10n.analyze,
+        label: i18n.app.analyze,
       ),
       _NavigationItem(
         icon: const Icon(Icons.settings_outlined),
         selectedIcon: const Icon(Icons.settings),
-        label: l10n.settings,
+        label: i18n.app.settings,
       ),
     ];
 
@@ -143,7 +142,6 @@ class _ThemeModeButton extends HookConsumerWidget {
   const _ThemeModeButton();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final theme = useTheme();
     final brightness = theme.brightness;
 
@@ -154,11 +152,11 @@ class _ThemeModeButton extends HookConsumerWidget {
       case Brightness.light:
         iconData = Icons.dark_mode;
         themeMode = ThemeMode.dark;
-        tooltip = l10n.darkMode;
+        tooltip = i18n.app.darkMode;
       case Brightness.dark:
         iconData = Icons.light_mode;
         themeMode = ThemeMode.light;
-        tooltip = l10n.lightMode;
+        tooltip = i18n.app.lightMode;
     }
 
     return Padding(

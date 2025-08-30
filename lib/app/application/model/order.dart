@@ -1,19 +1,13 @@
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 
 /// 並び順 (昇順 or 降順)
 enum SortOrder {
   asc,
-  desc,
-}
+  desc;
 
-extension SortOrderX on SortOrder {
   /// 表示名
-  String localeName(L10n l10n) {
-    switch (this) {
-      case SortOrder.asc:
-        return l10n.sortOrderAsc;
-      case SortOrder.desc:
-        return l10n.sortOrderDesc;
-    }
-  }
+  String get description => switch (this) {
+        SortOrder.asc => i18n.app.sortOrderAsc,
+        SortOrder.desc => i18n.app.sortOrderDesc
+      };
 }

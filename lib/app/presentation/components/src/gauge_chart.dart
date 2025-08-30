@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
@@ -21,7 +22,6 @@ class GaugeChart extends HookWidget {
     // HACK(yakitama5): fl_chartで対応されたら変更
     // https://github.com/imaNNeo/fl_chart/issues/199
 
-    final l10n = useL10n();
     final textTheme = useTextTheme();
     final colorScheme = useColorScheme();
 
@@ -57,7 +57,7 @@ class GaugeChart extends HookWidget {
           ),
         ),
         Text(
-          l10n.formatPercent(value.toStringAsFixed(0)),
+          i18n.app.formatPercent(percent: value.toStringAsFixed(0)),
           style: textTheme.titleLarge,
         ),
       ],

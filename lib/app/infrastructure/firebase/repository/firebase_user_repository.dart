@@ -1,8 +1,8 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../application/state/locale_provider.dart';
 import '../../../domain/exception/exceptions.dart';
 import '../../../domain/user/entity/auth_status.dart';
 import '../../../domain/user/entity/user.dart';
@@ -250,8 +250,6 @@ class FirebaseUserRepository implements UserRepository {
 
   /// 連携アカウントの解除
   Future<auth.User?> _unlinkWithProviderId(String providerId) async {
-    final l10n = ref.read(l10nProvider);
-
     // 認証されてなければNG
     final user = _currentUser;
 
@@ -263,7 +261,7 @@ class FirebaseUserRepository implements UserRepository {
     // 他の連携アカウントが存在するか否か
     final linkedMultiProvider = user != null && user.providerData.length >= 2;
     if (!linkedProvider || !linkedMultiProvider) {
-      throw AccountLinkException(l10n.authErrorMessageNotExistsProvider);
+      throw AccountLinkException(i18n.app.authErrorMessageNotExistsProvider);
     }
 
     return _currentUser?.unlink(providerId);

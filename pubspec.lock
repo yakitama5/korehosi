@@ -369,6 +369,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  csv:
+    dependency: transitive
+    description:
+      name: csv
+      sha256: c6aa2679b2a18cb57652920f674488d89712efaf4d3fdf2e537215b35fc19d6c
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
   custom_lint:
     dependency: "direct dev"
     description:
@@ -521,6 +529,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.3"
+  fcm_config:
+    dependency: "direct main"
+    description:
+      name: fcm_config
+      sha256: e2135581ffed8c4f1c017c8d911980cbd5ca18484e2a37525c8f53d2f48ba09d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.5"
   ffi:
     dependency: transitive
     description:
@@ -690,7 +706,7 @@ packages:
     source: hosted
     version: "3.8.10"
   firebase_messaging:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_messaging
       sha256: "60be38574f8b5658e2f22b7e311ff2064bea835c248424a383783464e8e02fcc"
@@ -799,7 +815,7 @@ packages:
     source: hosted
     version: "8.6.0"
   flutter_cache_manager:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_cache_manager
       sha256: "400b6592f16a4409a7f2bb929a9a7e38c72cceb8ffb99ee57bbf2cb2cecf8386"
@@ -943,7 +959,7 @@ packages:
     source: hosted
     version: "6.0.0"
   flutter_local_notifications:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_local_notifications
       sha256: "20ca0a9c82ce0c855ac62a2e580ab867f3fbea82680a90647f7953832d0850ae"
@@ -1524,6 +1540,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  nilts:
+    dependency: "direct dev"
+    description:
+      name: nilts
+      sha256: ff8f963a66fe9460d43e802a76fbcbe9e5f63f92e2dea000b0725babddb2ff2d
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.23.1"
+  nilts_core:
+    dependency: transitive
+    description:
+      name: nilts_core
+      sha256: ccd8f5e1e69e9e3abe1b15ae28ec36836ba990ea2869adf1538f0279f1c2dd3f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
   octo_image:
     dependency: transitive
     description:
@@ -2017,6 +2049,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  slang:
+    dependency: "direct main"
+    description:
+      name: slang
+      sha256: b02c531f453c328a1343818c64d730357ac140860147c9a29030fdfc82039266
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.1"
+  slang_flutter:
+    dependency: "direct main"
+    description:
+      name: slang_flutter
+      sha256: "7a5e55f2b1ec99e06354a5213b992d34017efacccba8ffc6066cfc5517cc0282"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.0"
   source_gen:
     dependency: transitive
     description:

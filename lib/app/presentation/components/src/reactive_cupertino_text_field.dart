@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -40,7 +41,6 @@ class ReactiveCupertinoDialogTextField<T> extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final colorScheme = useColorScheme();
 
     return ReactiveValueListenableBuilder(
@@ -55,9 +55,9 @@ class ReactiveCupertinoDialogTextField<T> extends HookWidget {
             /// 多言語化対応した共通エラーメッセージの設定方法がわからないので、
             /// こちらで共通的なものを設定しておく
             ValidationMessage.required: (error) =>
-                l10n.validErrorMessageRequired,
+                i18n.app.validErrorMessageRequired,
             CustomValidationMessage.url: (error) =>
-                l10n.validErrorMessageUrlPattern,
+                i18n.app.validErrorMessageUrlPattern,
           },
           minLines: minLines,
           maxLines: maxLines,

@@ -1,10 +1,10 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
 
 import '../../../components/importer.dart';
-import '../../../hooks/src/use_l10n.dart';
 import 'rating_icon.dart';
 
 class WishRankSelectorBottomSheet extends HookWidget {
@@ -25,11 +25,10 @@ class WishRankSelectorBottomSheet extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final wishRank = useState(initial ?? 0);
 
     return BottomSheetColumn(
-      titleData: l10n.wishRank,
+      titleData: i18n.app.wishRank,
       children: [
         RatingBar.builder(
           initialRating: wishRank.value,
@@ -59,11 +58,9 @@ class _CancelButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return TextButton(
       onPressed: () => Navigator.of(context).pop(),
-      child: Text(l10n.cancel),
+      child: Text(i18n.app.cancel),
     );
   }
 }
@@ -73,11 +70,9 @@ class _ResetButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return TextButton(
       onPressed: () => Navigator.of(context).pop<double>(-1),
-      child: Text(l10n.reset),
+      child: Text(i18n.app.reset),
     );
   }
 }
@@ -89,11 +84,9 @@ class _ApplyButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return FilledButton.tonal(
       onPressed: onPressed,
-      child: Text(l10n.apply),
+      child: Text(i18n.app.apply),
     );
   }
 }

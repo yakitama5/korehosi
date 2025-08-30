@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -11,7 +12,6 @@ class TextWithLabel extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final textTheme = useTextTheme();
 
     return Column(
@@ -19,7 +19,7 @@ class TextWithLabel extends HookWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label ?? '', style: textTheme.labelMedium),
-        Text(text ?? l10n.unset, style: textTheme.bodyLarge),
+        Text(text ?? i18n.app.unset, style: textTheme.bodyLarge),
       ],
     );
   }

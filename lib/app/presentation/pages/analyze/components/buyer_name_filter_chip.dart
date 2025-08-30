@@ -1,11 +1,11 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/usecase/analyze/state/buyer_filter_notifier_provider.dart';
 import '../../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
 import '../../../components/importer.dart';
-import '../../../hooks/importer.dart';
 
 /// 購入者名の`FilterChip`
 class BuyerNameFilterChip extends HookConsumerWidget {
@@ -16,9 +16,8 @@ class BuyerNameFilterChip extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-    final defaultTitle = l10n.buyerName;
-    final allLabel = l10n.all;
+    final defaultTitle = i18n.app.buyerName;
+    final allLabel = i18n.app.all;
 
     final selectName = ref.watch(buyerFilterNotifierProvider);
     final selected = selectName != null;

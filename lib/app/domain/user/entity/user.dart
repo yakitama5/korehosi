@@ -1,4 +1,4 @@
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../value_object/age_group.dart';
@@ -22,13 +22,13 @@ abstract class User with _$User {
 }
 
 extension UserX on User? {
-  String dispName(L10n l10n) {
+  String get dispName {
     // ユーザー自体が存在しなければ削除済ユーザーとして表示する
     if (this == null) {
-      return l10n.deletedUser;
+      return i18n.app.deletedUser;
     }
 
     // 名称が未設定の場合は未設定のラベルを表示
-    return this!.name ?? l10n.unset;
+    return this!.name ?? i18n.app.unset;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:io' as io;
 import 'dart:ui' as ui;
 
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -11,7 +12,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../application/state/locale_provider.dart';
 import '../../../../application/usecase/group/group_share_usecase.dart';
 import '../../../components/importer.dart';
 import '../../../hooks/importer.dart';
@@ -45,7 +45,6 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final theme = useTheme();
 
     return BottomSheetColumn(
@@ -63,7 +62,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
               ),
               const Gap(4),
               Text(
-                l10n.shareCaption,
+                i18n.app.shareCaption,
                 style: theme.textTheme.bodyMedium
                     ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
               ),
@@ -77,14 +76,14 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
           children: [
             Expanded(
               child: LabelIconButton(
-                label: Text(l10n.copy),
+                label: Text(i18n.app.copy),
                 iconData: Icons.copy,
                 onPressed: () => onCopy(context, ref),
               ),
             ),
             Expanded(
               child: LabelIconButton(
-                label: Text(l10n.share),
+                label: Text(i18n.app.share),
                 iconData: Icons.share,
                 onPressed: () => onShare(context, ref),
               ),
@@ -92,7 +91,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
             if (!kIsWeb)
               Expanded(
                 child: LabelIconButton(
-                  label: Text(l10n.save),
+                  label: Text(i18n.app.save),
                   iconData: Icons.save_alt,
                   onPressed: () => onSave(context, ref),
                 ),
@@ -105,15 +104,13 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
   }
 
   Future<void> onCopy(BuildContext context, WidgetRef ref) async {
-    final l10n = ref.read(l10nProvider);
-
     // クリップボードへコピー
     await execute(
       context,
       action: () => ref
           .read(groupShareUsecaseProvider)
           .copyMessage(shareUrl: shareUrl, groupName: groupName),
-      successMessage: l10n.copied,
+      successMessage: i18n.app.copied,
     );
   }
 
@@ -134,8 +131,6 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
   }
 
   Future<void> onSave(BuildContext context, WidgetRef ref) async {
-    final l10n = ref.read(l10nProvider);
-
     // 画像の保存
     await execute(
       context,
@@ -146,7 +141,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
         // 保存
         await ref.read(groupShareUsecaseProvider).saveQrCode(xFile: xFile!);
       },
-      successMessage: l10n.saved,
+      successMessage: i18n.app.saved,
     );
   }
 

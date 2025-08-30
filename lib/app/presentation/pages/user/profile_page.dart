@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -8,7 +9,6 @@ import '../../../application/model/user/user_form_model.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
 import 'components/age_group_field.dart';
@@ -44,8 +44,6 @@ class _Form extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return Nested(
       children: const [
         ReactiveFormDirtyConfirmPopScope(),
@@ -53,7 +51,7 @@ class _Form extends HookWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text(l10n.profile),
+          title: Text(i18n.app.profile),
           actions: const [
             _SaveButton(),
           ],
@@ -80,13 +78,11 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return Padding(
       padding: const EdgeInsets.only(right: 8),
       child: FilledButton(
         onPressed: () => onSave(context, ref),
-        child: Text(l10n.save),
+        child: Text(i18n.app.save),
       ),
     );
   }
