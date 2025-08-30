@@ -6,6 +6,7 @@
     "configurations": [
         {
             "name": "debug-dev",
+            "cwd": "apps/app",
             "type": "dart",
             "request": "launch",
             "flutterMode": "debug",
@@ -16,6 +17,7 @@
         },
         {
             "name": "release-dev",
+            "cwd": "apps/app",
             "type": "dart",
             "request": "launch",
             "flutterMode": "release",
@@ -26,6 +28,7 @@
         },
         {
             "name": "debug-prod",
+            "cwd": "apps/app",
             "type": "dart",
             "request": "launch",
             "flutterMode": "debug",
@@ -36,6 +39,7 @@
         },
         {
             "name": "profile-prod",
+            "cwd": "apps/app",
             "type": "dart",
             "request": "launch",
             "flutterMode": "debug",
@@ -46,6 +50,7 @@
         },
         {
             "name": "release-prod",
+            "cwd": "apps/app",
             "type": "dart",
             "request": "launch",
             "flutterMode": "release",
