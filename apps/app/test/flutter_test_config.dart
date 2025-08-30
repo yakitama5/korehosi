@@ -17,6 +17,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
       ),
       platformGoldensConfig: const PlatformGoldensConfig(
         enabled: !isRunningInCi,
+        renderShadows: !isRunningInCi,
       ),
     ),
     run: testMain,
