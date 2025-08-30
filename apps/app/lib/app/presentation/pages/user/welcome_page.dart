@@ -1,6 +1,6 @@
-import 'package:family_wish_list/gen/assets.gen.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/gen/assets.gen.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 
@@ -77,8 +77,9 @@ class _StartButton extends HookWidget {
         ),
         Text(
           i18n.app.firstTime,
-          style: textTheme.labelMedium
-              ?.copyWith(color: colorScheme.onSurfaceVariant),
+          style: textTheme.labelMedium?.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
         ),
       ],
     );
@@ -123,7 +124,9 @@ class _Links extends HookWidget {
             children: [
               Flexible(
                 child: UrlLink(
-                    url: urlConfig.contactUs, label: i18n.app.contactUs),
+                  url: urlConfig.contactUs,
+                  label: i18n.app.contactUs,
+                ),
               ),
               Flexible(
                 child: UrlLink(

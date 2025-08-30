@@ -1,6 +1,6 @@
-import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/presentation/hooks/src/use_theme.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -27,9 +27,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
 
     return authStatus.when(
       data: (data) => Scaffold(
-        appBar: AppBar(
-          title: Text(i18n.app.account),
-        ),
+        appBar: AppBar(title: Text(i18n.app.account)),
         body: ThemedSettingsList(
           sections: [
             SettingsSection(
@@ -42,10 +40,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
                   onToggle: (value) => _onToggleGoogle(context, ref, value),
                 ),
                 SettingsTile.switchTile(
-                  leading: Icon(
-                    MdiIcons.apple,
-                    color: colorScheme.onSurface,
-                  ),
+                  leading: Icon(MdiIcons.apple, color: colorScheme.onSurface),
                   title: Text(i18n.app.apple),
                   initialValue: data?.linkedApple,
                   onToggle: (value) => _onToggleApple(context, ref, value),
@@ -83,34 +78,28 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
     BuildContext context,
     WidgetRef ref,
     bool value,
-  ) =>
-      execute(
-        context,
-        action: () {
-          final usecase = ref.read(userUsecaseProvider);
-          return value
-              ? usecase.signInWithGoogle()
-              : usecase.unlinkWithGoogle();
-        },
-      );
+  ) => execute(
+    context,
+    action: () {
+      final usecase = ref.read(userUsecaseProvider);
+      return value ? usecase.signInWithGoogle() : usecase.unlinkWithGoogle();
+    },
+  );
 
   Future<void> _onToggleApple(
     BuildContext context,
     WidgetRef ref,
     bool value,
-  ) =>
-      execute(
-        context,
-        action: () {
-          final usecase = ref.read(userUsecaseProvider);
-          return value ? usecase.signInWithApple() : usecase.unlinkWithApple();
-        },
-      );
+  ) => execute(
+    context,
+    action: () {
+      final usecase = ref.read(userUsecaseProvider);
+      return value ? usecase.signInWithApple() : usecase.unlinkWithApple();
+    },
+  );
 
-  Future<void> _onLogout(BuildContext context, WidgetRef ref) => execute(
-        context,
-        action: () => ref.read(userUsecaseProvider).signOut(),
-      );
+  Future<void> _onLogout(BuildContext context, WidgetRef ref) =>
+      execute(context, action: () => ref.read(userUsecaseProvider).signOut());
 
   Future<void> _onDeleteAccount(BuildContext context, WidgetRef ref) async {
     // 削除確認

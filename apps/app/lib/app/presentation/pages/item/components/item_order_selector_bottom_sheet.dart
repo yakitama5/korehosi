@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 
@@ -15,12 +15,11 @@ class ItemOrderSelectorBottomSheet extends HookWidget {
     required BuildContext context,
     bool useSafeArea = false,
     required ItemOrderModel initial,
-  }) =>
-      showModalBottomSheet<ItemOrderModel?>(
-        context: context,
-        useSafeArea: true,
-        builder: (context) => ItemOrderSelectorBottomSheet(initial: initial),
-      );
+  }) => showModalBottomSheet<ItemOrderModel?>(
+    context: context,
+    useSafeArea: true,
+    builder: (context) => ItemOrderSelectorBottomSheet(initial: initial),
+  );
 
   final ItemOrderModel initial;
 
@@ -50,10 +49,7 @@ class ItemOrderSelectorBottomSheet extends HookWidget {
             _ApplyButton(
               // 呼び出し元に選択値を返却
               onPressed: () => Navigator.of(context).pop(
-                ItemOrderModel(
-                  key: orderKey.value,
-                  sortOrder: sortOrder.value,
-                ),
+                ItemOrderModel(key: orderKey.value, sortOrder: sortOrder.value),
               ),
             ),
           ],

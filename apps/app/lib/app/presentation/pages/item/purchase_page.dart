@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';

@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -83,9 +83,7 @@ class _SliverBody extends HookConsumerWidget {
               ),
             ),
       error: SliverErrorView.new,
-      loading: () => const SliverFillRemaining(
-        child: ListLoaderView(),
-      ),
+      loading: () => const SliverFillRemaining(child: ListLoaderView()),
     );
   }
 }
@@ -147,7 +145,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
       (
         AsyncData(value: final ownerData),
         AsyncData(value: final authUserData),
-        AsyncData(value: final currentGroupData)
+        AsyncData(value: final currentGroupData),
       ) =>
         Slidable(
           key: ValueKey(group.id),
@@ -170,25 +168,23 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            subtitle: Text(
-              ownerData?.name ?? i18n.app.unset,
-            ),
+            subtitle: Text(ownerData?.name ?? i18n.app.unset),
             // 表示中のグループにアイコンを表示
             leading: group.id == currentGroupData?.id
-                ? Icon(
-                    Icons.check_circle_outline,
-                    color: colorScheme.primary,
-                  )
+                ? Icon(Icons.check_circle_outline, color: colorScheme.primary)
                 : const SizedBox.shrink(),
           ),
         ),
       (AsyncError(error: final error, stackTrace: final stackTrace), _, _) ||
       (_, AsyncError(error: final error, stackTrace: final stackTrace), _) ||
-      (_, _, AsyncError(error: final error, stackTrace: final stackTrace)) =>
-        ErrorView(error, stackTrace),
+      (
+        _,
+        _,
+        AsyncError(error: final error, stackTrace: final stackTrace),
+      ) => ErrorView(error, stackTrace),
 
       // TODO(yakitama5): 読み込み中表示を後から作ること
-      _ => const CircularProgressIndicator()
+      _ => const CircularProgressIndicator(),
     };
   }
 
@@ -247,12 +243,12 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
   }
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) => execute(
-        context,
-        action: () => ref.read(groupUsecaseProvider).delete(groupId: group.id),
-      );
+    context,
+    action: () => ref.read(groupUsecaseProvider).delete(groupId: group.id),
+  );
 
   Future<void> onLeave(BuildContext context, WidgetRef ref) => execute(
-        context,
-        action: () => ref.read(groupUsecaseProvider).leave(groupId: group.id),
-      );
+    context,
+    action: () => ref.read(groupUsecaseProvider).leave(groupId: group.id),
+  );
 }

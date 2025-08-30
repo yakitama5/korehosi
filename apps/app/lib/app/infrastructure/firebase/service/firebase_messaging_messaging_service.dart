@@ -1,7 +1,7 @@
-import 'package:family_wish_list/app/infrastructure/firebase/messaging/extension/remote_message_extension.dart';
-import 'package:family_wish_list/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app/app/infrastructure/firebase/messaging/extension/remote_message_extension.dart';
+import 'package:flutter_app/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/notification/entity/notification_message.dart';

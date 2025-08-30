@@ -1,4 +1,4 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../value_object/age_group.dart';

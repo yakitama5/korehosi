@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:family_wish_list/app/application/usecase/user/state/token_timestamp_provider.dart';
-import 'package:family_wish_list/app/domain/service/cached_service.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_app/app/application/usecase/user/state/token_timestamp_provider.dart';
+import 'package:flutter_app/app/domain/service/cached_service.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -68,7 +68,9 @@ class UserUsecase with RunUsecaseMixin {
             '${name ?? i18n.app.noName}${i18n.app.groupInitialNameSuffix}';
 
         // 登録
-        await ref.read(userRepositoryProvider).signUp(
+        await ref
+            .read(userRepositoryProvider)
+            .signUp(
               name: name,
               ageGroup: ageGroup,
               groupName: groupName,
@@ -90,15 +92,14 @@ class UserUsecase with RunUsecaseMixin {
       ref,
       action: () async {
         // ログイン中のユーザー情報を取得
-        final userId =
-            await ref.read(authUserProvider.selectAsync((user) => user?.id));
+        final userId = await ref.read(
+          authUserProvider.selectAsync((user) => user?.id),
+        );
 
         // 更新
-        await ref.read(userRepositoryProvider).update(
-              userId: userId!,
-              name: name,
-              ageGroup: ageGroup,
-            );
+        await ref
+            .read(userRepositoryProvider)
+            .update(userId: userId!, name: name, ageGroup: ageGroup);
       },
     );
   }
@@ -151,8 +152,9 @@ class UserUsecase with RunUsecaseMixin {
       ref,
       action: () async {
         // ユーザー情報 および アカウントの削除
-        final userId =
-            await ref.read(authUserProvider.selectAsync((data) => data?.id));
+        final userId = await ref.read(
+          authUserProvider.selectAsync((data) => data?.id),
+        );
         if (userId == null) {
           throw UpdateTargetNotFoundException();
         }
@@ -166,15 +168,15 @@ class UserUsecase with RunUsecaseMixin {
 
   /// Googleアカウント連携を解除する
   Future<void> unlinkWithGoogle() => execute(
-        ref,
-        action: () => ref.read(userRepositoryProvider).unlinkWithGoogle(),
-      );
+    ref,
+    action: () => ref.read(userRepositoryProvider).unlinkWithGoogle(),
+  );
 
   /// Appleアカウント連携を解除する
   Future<void> unlinkWithApple() => execute(
-        ref,
-        action: () => ref.read(userRepositoryProvider).unlinkWithApple(),
-      );
+    ref,
+    action: () => ref.read(userRepositoryProvider).unlinkWithApple(),
+  );
 
   /// サインイン後の処理
   /// サインアップの際も含める
@@ -210,8 +212,9 @@ class UserUsecase with RunUsecaseMixin {
       return;
     }
 
-    final userId =
-        await ref.read(authStatusProvider.selectAsync((auth) => auth?.uid));
+    final userId = await ref.read(
+      authStatusProvider.selectAsync((auth) => auth?.uid),
+    );
     await ref.read(appInPurchaseServiceProvider).signIn(userId: userId!);
   }
 
@@ -229,8 +232,9 @@ class UserUsecase with RunUsecaseMixin {
   Future<void> _initCurrentGroup() async {
     // 参加中の先頭グループを設定
     await Future<void>.delayed(const Duration(milliseconds: 200));
-    final joinGroupIds = await ref
-        .read(authUserProvider.selectAsync((data) => data?.joinGroupIds));
+    final joinGroupIds = await ref.read(
+      authUserProvider.selectAsync((data) => data?.joinGroupIds),
+    );
     if (joinGroupIds == null || joinGroupIds.isEmpty) {
       return;
     }
@@ -263,8 +267,9 @@ class UserUsecase with RunUsecaseMixin {
     }
 
     // 前回取得から30日経過している場合のみ処理する
-    final tokenTimestamp =
-        await ref.read(tokenTimestampProvider(token: token).future);
+    final tokenTimestamp = await ref.read(
+      tokenTimestampProvider(token: token).future,
+    );
     final now = DateTime.now();
     if (tokenTimestamp != null &&
         now.add(const Duration(days: -30)).isBefore(tokenTimestamp)) {

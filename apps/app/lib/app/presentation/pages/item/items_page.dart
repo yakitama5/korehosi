@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
@@ -150,7 +150,7 @@ class _SliverBody extends HookConsumerWidget {
       (
         AsyncValue(value: final Group groupData, hasValue: true),
         AsyncValue(value: final List<Item> itemsData, hasValue: true),
-        AsyncValue(value: final List<Purchase> purchasesData, hasValue: true)
+        AsyncValue(value: final List<Purchase> purchasesData, hasValue: true),
       ) =>
         _ItemListView(
           currentGroup: groupData,
@@ -164,13 +164,14 @@ class _SliverBody extends HookConsumerWidget {
       // いずれかがエラーの場合はエラー表示
       (AsyncError(error: final error, stackTrace: final stackTrace), _, _) ||
       (_, AsyncError(error: final error, stackTrace: final stackTrace), _) ||
-      (_, _, AsyncError(error: final error, stackTrace: final stackTrace)) =>
-        SliverErrorView(error, stackTrace),
+      (
+        _,
+        _,
+        AsyncError(error: final error, stackTrace: final stackTrace),
+      ) => SliverErrorView(error, stackTrace),
 
       // ローディング
-      _ => const SliverFillRemaining(
-          child: ListLoaderView(),
-        ),
+      _ => const SliverFillRemaining(child: ListLoaderView()),
     };
   }
 }
@@ -258,56 +259,59 @@ class _ItemListView extends HookWidget {
   }
 
   List<Item> _filterItems() {
-    final purchaseMap =
-        Map.fromIterables(purchases.map((e) => e.id), purchases);
+    final purchaseMap = Map.fromIterables(
+      purchases.map((e) => e.id),
+      purchases,
+    );
 
     // 絞り込み + ソート
-    return items.where((item) {
-      // ステータスによる絞り込み
-      final isMatch = purchaseStatus.map((s) {
-        final purchase = purchaseMap[item.id];
-        final status = purchase.status;
-        return status == s;
-      }).reduce((v, e) => v || e);
-      if (!isMatch) {
-        return false;
-      }
+    return items
+        .where((item) {
+          // ステータスによる絞り込み
+          final isMatch = purchaseStatus
+              .map((s) {
+                final purchase = purchaseMap[item.id];
+                final status = purchase.status;
+                return status == s;
+              })
+              .reduce((v, e) => v || e);
+          if (!isMatch) {
+            return false;
+          }
 
-      // 欲しい度による絞り込み
-      // 未満を弾く
-      if (wishRank != null && item.wishRank < wishRank!) {
-        return false;
-      }
+          // 欲しい度による絞り込み
+          // 未満を弾く
+          if (wishRank != null && item.wishRank < wishRank!) {
+            return false;
+          }
 
-      return true;
-    }).sorted(
-      (a, b) {
-        late final Item source;
-        late final Item target;
-        if (itemOrder.sortOrder == SortOrder.asc) {
-          source = a;
-          target = b;
-        } else {
-          source = b;
-          target = a;
-        }
+          return true;
+        })
+        .sorted((a, b) {
+          late final Item source;
+          late final Item target;
+          if (itemOrder.sortOrder == SortOrder.asc) {
+            source = a;
+            target = b;
+          } else {
+            source = b;
+            target = a;
+          }
 
-        return switch (itemOrder.key) {
-          ItemOrderKey.name => source.name.compareTo(target.name),
-          ItemOrderKey.wishRank => source.wishRank.compareTo(target.wishRank),
-          ItemOrderKey.createdAt =>
-            source.createdAt.compareTo(target.createdAt),
-        };
-      },
-    ).toList();
+          return switch (itemOrder.key) {
+            ItemOrderKey.name => source.name.compareTo(target.name),
+            ItemOrderKey.wishRank => source.wishRank.compareTo(target.wishRank),
+            ItemOrderKey.createdAt => source.createdAt.compareTo(
+              target.createdAt,
+            ),
+          };
+        })
+        .toList();
   }
 }
 
 class _ItemOrderChip extends HookWidget {
-  const _ItemOrderChip({
-    required this.value,
-    required this.onChanged,
-  });
+  const _ItemOrderChip({required this.value, required this.onChanged});
 
   final ItemOrderModel value;
   final void Function(ItemOrderModel v) onChanged;
@@ -338,10 +342,7 @@ class _ItemOrderChip extends HookWidget {
 }
 
 class _PurchaseStatusChip extends HookWidget {
-  const _PurchaseStatusChip({
-    required this.value,
-    required this.onChanged,
-  });
+  const _PurchaseStatusChip({required this.value, required this.onChanged});
 
   final Set<PurchaseStatus> value;
   final void Function(Set<PurchaseStatus> v) onChanged;
@@ -351,8 +352,8 @@ class _PurchaseStatusChip extends HookWidget {
     final dispName = value.isEmpty
         ? i18n.app.status
         : value.length > 1
-            ? i18n.app.selectNumberText(length: value.length)
-            : value.first.localeName;
+        ? i18n.app.selectNumberText(length: value.length)
+        : value.first.localeName;
 
     return LeadingIconInputChip(
       label: Text(dispName),
@@ -376,10 +377,7 @@ class _PurchaseStatusChip extends HookWidget {
 }
 
 class _WishRankChip extends HookWidget {
-  const _WishRankChip({
-    required this.value,
-    required this.onChanged,
-  });
+  const _WishRankChip({required this.value, required this.onChanged});
 
   final double? value;
   final void Function(double? v) onChanged;
@@ -449,11 +447,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
         onTap: () {
           ItemRouteData(item.id).go(context);
         },
-        title: Text(
-          item.name,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
+        title: Text(item.name, maxLines: 2, overflow: TextOverflow.ellipsis),
         leading: ImageAspectRatio(
           child: StorageImage(imagePath: firstImagePath),
         ),
@@ -461,10 +455,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  Future<bool> confirmDismiss(
-    BuildContext context,
-    WidgetRef ref,
-  ) async {
+  Future<bool> confirmDismiss(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
     final result = await showAdaptiveOkCancelDialog(
       context,

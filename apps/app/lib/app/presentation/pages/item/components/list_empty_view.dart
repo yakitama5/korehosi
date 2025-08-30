@@ -1,5 +1,5 @@
-import 'package:family_wish_list/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/gen/assets.gen.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 
@@ -17,10 +17,7 @@ class ListEmptyView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Gap(8),
-          Lottie.asset(
-            Assets.lottie.womanEmptyBox,
-            height: 280,
-          ),
+          Lottie.asset(Assets.lottie.womanEmptyBox, height: 280),
           Text(
             message,
             style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),

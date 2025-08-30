@@ -1,8 +1,8 @@
-import 'package:family_wish_list/app/presentation/app.dart';
-import 'package:family_wish_list/app/presentation/components/src/responsive_auto_scale_box.dart';
-import 'package:family_wish_list/app/presentation/theme/src/color_schemes.g.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/presentation/app.dart';
+import 'package:flutter_app/app/presentation/components/src/responsive_auto_scale_box.dart';
+import 'package:flutter_app/app/presentation/theme/src/color_schemes.g.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';

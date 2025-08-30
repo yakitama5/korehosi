@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../components/importer.dart';
@@ -11,10 +11,10 @@ Future<bool> lanchUrlStringSafety(
   String? secondUrl,
 }) async {
   Future<void> showDialog() => showAdaptiveOkDialog(
-        context,
-        title: i18n.app.error,
-        message: i18n.app.urlErrorMessageCanNotOpen,
-      );
+    context,
+    title: i18n.app.error,
+    message: i18n.app.urlErrorMessageCanNotOpen,
+  );
 
   if (await canLaunchUrlString(url)) {
     return launchUrlString(url);

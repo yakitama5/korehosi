@@ -1,10 +1,10 @@
 import 'dart:io' as io;
 import 'dart:ui' as ui;
 
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,15 +29,12 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
     bool useSafeArea = false,
     required String groupName,
     required String shareUrl,
-  }) =>
-      showModalBottomSheet<void>(
-        context: context,
-        useSafeArea: true,
-        builder: (context) => ShareGroupBottomSheet(
-          groupName: groupName,
-          shareUrl: shareUrl,
-        ),
-      );
+  }) => showModalBottomSheet<void>(
+    context: context,
+    useSafeArea: true,
+    builder: (context) =>
+        ShareGroupBottomSheet(groupName: groupName, shareUrl: shareUrl),
+  );
 
   final String groupName;
   final String shareUrl;
@@ -63,8 +60,9 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
               const Gap(4),
               Text(
                 i18n.app.shareCaption,
-                style: theme.textTheme.bodyMedium
-                    ?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
               ),
               const Gap(8),
             ],

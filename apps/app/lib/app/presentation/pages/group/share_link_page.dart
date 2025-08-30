@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,21 +15,16 @@ class ShareLinkPage extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 画面描画と同時に参加用の処理を呼び出す
-    useEffect(
-      () {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _onBuild(context, ref);
-        });
-        return null;
-      },
-      [context.hashCode],
-    );
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _onBuild(context, ref);
+      });
+      return null;
+    }, [context.hashCode]);
 
     // 画面としてはずっとぐるぐる回るだけ
     return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator.adaptive(),
-      ),
+      body: Center(child: CircularProgressIndicator.adaptive()),
     );
   }
 

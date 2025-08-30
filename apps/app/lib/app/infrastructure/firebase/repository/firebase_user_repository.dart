@@ -1,6 +1,6 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/exception/exceptions.dart';

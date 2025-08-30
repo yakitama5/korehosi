@@ -1,6 +1,6 @@
-import 'package:family_wish_list/app/domain/exception/exceptions.dart';
-import 'package:family_wish_list/app/domain/service/deep_link_service.dart';
-import 'package:family_wish_list/app/utils/logger.dart';
+import 'package:flutter_app/app/domain/exception/exceptions.dart';
+import 'package:flutter_app/app/domain/service/deep_link_service.dart';
+import 'package:flutter_app/app/utils/logger.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
@@ -23,8 +23,10 @@ class BranchDeepLinkService implements DeepLinkService {
     final lp = BranchLinkProperties(feature: 'sharing');
 
     try {
-      final response =
-          await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+      final response = await FlutterBranchSdk.getShortUrl(
+        buo: buo,
+        linkProperties: lp,
+      );
 
       if (!response.success) {
         throw BusinessException('招待コードの生成に失敗しました');
@@ -40,15 +42,13 @@ class BranchDeepLinkService implements DeepLinkService {
   @override
   Stream<Uri> fetchDynamicLink() {
     return FlutterBranchSdk.listSession()
-        .map(
-          (data) {
-            if (data.containsKey('+clicked_branch_link') &&
-                data['+clicked_branch_link'] == true) {
-              return Uri.tryParse(data['\$canonical_url'] as String);
-            }
-            return null;
-          },
-        )
+        .map((data) {
+          if (data.containsKey('+clicked_branch_link') &&
+              data['+clicked_branch_link'] == true) {
+            return Uri.tryParse(data['\$canonical_url'] as String);
+          }
+          return null;
+        })
         .where((uri) => uri != null)
         .map((uri) => uri!);
   }

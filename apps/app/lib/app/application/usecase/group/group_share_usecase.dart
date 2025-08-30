@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -24,15 +24,14 @@ class GroupShareUsecase with RunUsecaseMixin {
   Future<void> copyMessage({
     required String shareUrl,
     required String groupName,
-  }) =>
-      execute(
-        ref,
-        action: () async {
-          final shareText = await _createShareText(shareUrl, groupName);
-          return Clipboard.setData(ClipboardData(text: shareText));
-        },
-        disableLoading: true,
-      );
+  }) => execute(
+    ref,
+    action: () async {
+      final shareText = await _createShareText(shareUrl, groupName);
+      return Clipboard.setData(ClipboardData(text: shareText));
+    },
+    disableLoading: true,
+  );
 
   /// 招待用のテキストと画像をシェアする
   /// シェアの方法などをOS側の機能を用いて選択させる
@@ -40,40 +39,38 @@ class GroupShareUsecase with RunUsecaseMixin {
     required String shareUrl,
     required String groupName,
     required XFile xFile,
-  }) =>
-      execute(
-        ref,
-        action: () async {
-          // 招待用のテキストを生成
-          final shareText = await _createShareText(shareUrl, groupName);
+  }) => execute(
+    ref,
+    action: () async {
+      // 招待用のテキストを生成
+      final shareText = await _createShareText(shareUrl, groupName);
 
-          // シェア
-          await SharePlus.instance
-              .share(ShareParams(files: [xFile], text: shareText));
-        },
-        disableLoading: true,
+      // シェア
+      await SharePlus.instance.share(
+        ShareParams(files: [xFile], text: shareText),
       );
+    },
+    disableLoading: true,
+  );
 
   /// 招待用のQRコードを保存する
-  Future<void> saveQrCode({
-    required XFile xFile,
-  }) =>
-      execute(
-        ref,
-        action: () async {
-          // `Uint8List`形式に変換
-          final bytes = await xFile.readAsBytes();
+  Future<void> saveQrCode({required XFile xFile}) => execute(
+    ref,
+    action: () async {
+      // `Uint8List`形式に変換
+      final bytes = await xFile.readAsBytes();
 
-          // 画像の保存
-          await ImageGallerySaverPlus.saveImage(bytes);
-        },
-        disableLoading: true,
-      );
+      // 画像の保存
+      await ImageGallerySaverPlus.saveImage(bytes);
+    },
+    disableLoading: true,
+  );
 
   /// 招待用のテキストを生成
   Future<String> _createShareText(String shareUrl, String groupName) async {
-    final userName =
-        await ref.read(authUserProvider.selectAsync((user) => user.dispName));
+    final userName = await ref.read(
+      authUserProvider.selectAsync((user) => user.dispName),
+    );
 
     return i18n.app.groupShareText(
       user: userName,

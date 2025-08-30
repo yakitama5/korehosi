@@ -1,6 +1,6 @@
-import 'package:family_wish_list/gen/assets.gen.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/gen/assets.gen.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -73,10 +73,7 @@ class _Caption extends HookWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            i18n.app.accountLinkDescTitle,
-            style: textTheme.titleMedium,
-          ),
+          Text(i18n.app.accountLinkDescTitle, style: textTheme.titleMedium),
           const Gap(16),
           ItemizedText([
             Text(i18n.app.accountLinkDescBodyCloudBackup),
@@ -122,10 +119,7 @@ class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
       child: ExpandWidthContainer(
         child: OutlinedButton.icon(
           onPressed: () => _onSignInWithApple(context, ref),
-          icon: Icon(
-            MdiIcons.apple,
-            color: colorScheme.onSurface,
-          ),
+          icon: Icon(MdiIcons.apple, color: colorScheme.onSurface),
           label: Text(i18n.app.signInWithApple),
         ),
       ),

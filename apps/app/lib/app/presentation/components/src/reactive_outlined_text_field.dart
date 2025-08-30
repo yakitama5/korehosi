@@ -1,6 +1,6 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -15,19 +15,17 @@ class ReactiveOutlinedRawAutocomplete
     String? labelText,
     int? maxLength,
   }) : super(
-          formControlName: formControlName,
-          builder: (
-            ReactiveFormFieldState<String, String> field,
-          ) =>
-              _ReactiveOutlinedRawAutocomplete(
-            key: key,
-            formControlName: formControlName,
-            field: field,
-            labelText: labelText,
-            maxLength: maxLength,
-            options: options,
-          ),
-        );
+         formControlName: formControlName,
+         builder: (ReactiveFormFieldState<String, String> field) =>
+             _ReactiveOutlinedRawAutocomplete(
+               key: key,
+               formControlName: formControlName,
+               field: field,
+               labelText: labelText,
+               maxLength: maxLength,
+               options: options,
+             ),
+       );
 }
 
 class _ReactiveOutlinedRawAutocomplete extends StatelessWidget {
@@ -63,10 +61,7 @@ class _ReactiveOutlinedRawAutocomplete extends StatelessWidget {
         alignLabelWithHint: true,
         border: const OutlineInputBorder(),
         suffixIcon: field.errorText?.isNotEmpty == true
-            ? Icon(
-                Icons.error,
-                color: Theme.of(context).colorScheme.error,
-              )
+            ? Icon(Icons.error, color: Theme.of(context).colorScheme.error)
             : const SizedBox.shrink(),
       ),
       optionsBuilder: (TextEditingValue textEditingValue) {
@@ -75,40 +70,41 @@ class _ReactiveOutlinedRawAutocomplete extends StatelessWidget {
         });
       },
 
-      optionsViewBuilder: (
-        BuildContext context,
-        AutocompleteOnSelected<String> onSelected,
-        Iterable<String> options,
-      ) {
-        // キー操作を行うため、選択されている箇所を取得
-        final selectedIndex = AutocompleteHighlightedOption.of(context);
+      optionsViewBuilder:
+          (
+            BuildContext context,
+            AutocompleteOnSelected<String> onSelected,
+            Iterable<String> options,
+          ) {
+            // キー操作を行うため、選択されている箇所を取得
+            final selectedIndex = AutocompleteHighlightedOption.of(context);
 
-        return Align(
-          alignment: Alignment.topLeft,
-          child: Material(
-            elevation: 4,
-            child: SizedBox(
-              height: 200,
-              child: ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemCount: options.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final option = options.elementAt(index);
-                  return GestureDetector(
-                    onTap: () {
-                      onSelected(option);
+            return Align(
+              alignment: Alignment.topLeft,
+              child: Material(
+                elevation: 4,
+                child: SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: options.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final option = options.elementAt(index);
+                      return GestureDetector(
+                        onTap: () {
+                          onSelected(option);
+                        },
+                        child: ListTile(
+                          title: Text(option),
+                          selected: selectedIndex == index,
+                        ),
+                      );
                     },
-                    child: ListTile(
-                      title: Text(option),
-                      selected: selectedIndex == index,
-                    ),
-                  );
-                },
+                  ),
+                ),
               ),
-            ),
-          ),
-        );
-      },
+            );
+          },
     );
   }
 }
@@ -130,27 +126,25 @@ class ReactiveOutlinedTextField<T> extends ReactiveFormField<T, T> {
     bool autofocus = false,
     List<TextInputFormatter>? inputFormatters,
   }) : super(
-          formControlName: formControlName,
-          builder: (
-            ReactiveFormFieldState<T, T> field,
-          ) =>
-              _ReactiveOutlinedTextField<T>(
-            formControlName: formControlName,
-            field: field,
-            labelText: labelText,
-            hintText: hintText,
-            isRequired: isRequired,
-            validationMessages: validationMessages,
-            maxLength: maxLength,
-            maxLines: maxLines,
-            minLines: minLines,
-            counterText: counterText,
-            textInputType: textInputType,
-            prefixText: prefixText,
-            inputFormatters: inputFormatters,
-            autofocus: autofocus,
-          ),
-        );
+         formControlName: formControlName,
+         builder: (ReactiveFormFieldState<T, T> field) =>
+             _ReactiveOutlinedTextField<T>(
+               formControlName: formControlName,
+               field: field,
+               labelText: labelText,
+               hintText: hintText,
+               isRequired: isRequired,
+               validationMessages: validationMessages,
+               maxLength: maxLength,
+               maxLines: maxLines,
+               minLines: minLines,
+               counterText: counterText,
+               textInputType: textInputType,
+               prefixText: prefixText,
+               inputFormatters: inputFormatters,
+               autofocus: autofocus,
+             ),
+       );
 }
 
 class _ReactiveOutlinedTextField<T> extends HookWidget {
@@ -207,10 +201,7 @@ class _ReactiveOutlinedTextField<T> extends HookWidget {
         helperText: isRequired ? i18n.app.requiredHelper : '',
         border: const OutlineInputBorder(),
         suffixIcon: field.errorText?.isNotEmpty == true
-            ? Icon(
-                Icons.error,
-                color: Theme.of(context).colorScheme.error,
-              )
+            ? Icon(Icons.error, color: Theme.of(context).colorScheme.error)
             : const SizedBox.shrink(),
       ),
     );

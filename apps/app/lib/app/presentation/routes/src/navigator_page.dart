@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,10 +9,7 @@ import '../../../application/state/theme_mode_provider.dart';
 import '../../hooks/importer.dart';
 
 class NavigatorPage extends HookWidget {
-  const NavigatorPage({
-    super.key,
-    required this.navigationShell,
-  });
+  const NavigatorPage({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 
@@ -38,14 +35,8 @@ class NavigatorPage extends HookWidget {
 
     final breakpoint = ResponsiveBreakpoints.of(context).breakpoint;
     return switch (breakpoint.name) {
-      MOBILE => _NavigationBar(
-          navigationShell,
-          navigationItems,
-        ),
-      (_) => _NavigationRail(
-          navigationShell,
-          navigationItems,
-        ),
+      MOBILE => _NavigationBar(navigationShell, navigationItems),
+      (_) => _NavigationRail(navigationShell, navigationItems),
     };
   }
 }
@@ -62,11 +53,13 @@ class _NavigationBar extends HookWidget {
       body: navigationShell,
       bottomNavigationBar: NavigationBar(
         destinations: navigationItems
-            .map((e) => NavigationDestination(
-                  icon: e.icon,
-                  label: e.label,
-                  selectedIcon: e.selectedIcon,
-                ))
+            .map(
+              (e) => NavigationDestination(
+                icon: e.icon,
+                label: e.label,
+                selectedIcon: e.selectedIcon,
+              ),
+            )
             .toList(),
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: _onDestinationSelected,
@@ -98,19 +91,19 @@ class _NavigationRail extends HookWidget {
               Expanded(
                 child: NavigationRail(
                   destinations: navigationItems
-                      .map((e) => NavigationRailDestination(
+                      .map(
+                        (e) => NavigationRailDestination(
                           label: Text(e.label),
                           // HACK(yakitama5): `Navigation rail`がTooltip非対応
                           /// 対応されたら書き換える
                           /// https://github.com/flutter/flutter/issues/113103
-                          icon: Tooltip(
-                            child: e.icon,
-                            message: e.label,
-                          ),
+                          icon: Tooltip(child: e.icon, message: e.label),
                           selectedIcon: Tooltip(
                             child: e.selectedIcon,
                             message: e.label,
-                          )))
+                          ),
+                        ),
+                      )
                       .toList(),
                   selectedIndex: navigationShell.currentIndex,
                   onDestinationSelected: _onDestinationSelected,
@@ -124,7 +117,7 @@ class _NavigationRail extends HookWidget {
             width: 1,
             color: Theme.of(context).colorScheme.outline,
           ),
-          Expanded(child: navigationShell)
+          Expanded(child: navigationShell),
         ],
       ),
     );
@@ -172,8 +165,11 @@ class _ThemeModeButton extends HookConsumerWidget {
 }
 
 class _NavigationItem {
-  const _NavigationItem(
-      {required this.icon, required this.selectedIcon, required this.label});
+  const _NavigationItem({
+    required this.icon,
+    required this.selectedIcon,
+    required this.label,
+  });
 
   final Icon icon;
   final Icon selectedIcon;

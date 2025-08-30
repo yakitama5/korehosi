@@ -1,7 +1,7 @@
-import 'package:family_wish_list/app/presentation/components/src/app_lifecycle_builder.dart';
-import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/presentation/components/src/app_lifecycle_builder.dart';
+import 'package:flutter_app/app/presentation/hooks/src/use_theme.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:settings_ui/settings_ui.dart';

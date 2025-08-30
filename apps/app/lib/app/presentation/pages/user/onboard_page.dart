@@ -1,6 +1,6 @@
-import 'package:family_wish_list/gen/assets.gen.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/gen/assets.gen.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -30,10 +30,7 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
       model: model,
       builder: (context, formModel, _) => Scaffold(
         body: Nested(
-          children: const [
-            UnfocusOnTap(),
-            PagePadding(),
-          ],
+          children: const [UnfocusOnTap(), PagePadding()],
           child: IntroductionScreen(
             key: introKey,
             initialPage: initialPage,
@@ -131,17 +128,15 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
     final colorScheme = Theme.of(context).colorScheme;
     final replaceColors = [
       ...svgReplaceColorsPrimary.map((c) => (c, colorScheme.primary)),
-      ...svgReplaceColorsPrimaryContainer
-          .map((c) => (c, colorScheme.primaryContainer)),
+      ...svgReplaceColorsPrimaryContainer.map(
+        (c) => (c, colorScheme.primaryContainer),
+      ),
     ];
 
     return PageViewModel(
       // 画像部分とForm部分の表示率は全て共通定義
       decoration: const PageDecoration(bodyFlex: 3, imageFlex: 2),
-      image: SvgAssetImage(
-        path: imagePath,
-        replaceColors: replaceColors,
-      ),
+      image: SvgAssetImage(path: imagePath, replaceColors: replaceColors),
       title: title,
       titleWidget: titleWidget,
       bodyWidget: Column(
@@ -163,10 +158,9 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
         final ageGroup = formModel.ageGroupControl.value;
 
         // 登録
-        await ref.read(userUsecaseProvider).signUp(
-              name: name,
-              ageGroup: ageGroup!,
-            );
+        await ref
+            .read(userUsecaseProvider)
+            .signUp(name: name, ageGroup: ageGroup!);
       },
     );
   }
@@ -181,10 +175,7 @@ class _FormFilledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandWidthContainer(
-      child: FilledButton.tonal(
-        onPressed: onPressed,
-        child: Text(label),
-      ),
+      child: FilledButton.tonal(onPressed: onPressed, child: Text(label)),
     );
   }
 }

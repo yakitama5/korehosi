@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../order.dart';
@@ -12,10 +12,10 @@ enum ItemOrderKey {
 
   /// 言語別の表示名
   String get localeName => switch (this) {
-        ItemOrderKey.name => i18n.app.orderKeyName,
-        ItemOrderKey.wishRank => i18n.app.orderKeyWishRank,
-        ItemOrderKey.createdAt => i18n.app.orderKeyCreatedAt,
-      };
+    ItemOrderKey.name => i18n.app.orderKeyName,
+    ItemOrderKey.wishRank => i18n.app.orderKeyWishRank,
+    ItemOrderKey.createdAt => i18n.app.orderKeyCreatedAt,
+  };
 
   /// アイコン
   IconData iconData(SortOrder type) {

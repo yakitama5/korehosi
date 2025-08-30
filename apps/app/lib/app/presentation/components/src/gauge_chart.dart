@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
 
@@ -38,8 +38,10 @@ class GaugeChart extends HookWidget {
             axis: GaugeAxis(
               max: 100,
               degrees: 360,
-              pointer:
-                  const GaugePointer.circle(radius: 0, color: Colors.white),
+              pointer: const GaugePointer.circle(
+                radius: 0,
+                color: Colors.white,
+              ),
               progressBar: GaugeProgressBar.rounded(
                 // 値が0以下の場合表示が崩れるので、透明色を設定して表示を調整する
                 color: value <= 0

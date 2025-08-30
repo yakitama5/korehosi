@@ -1,6 +1,6 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -11,10 +11,8 @@ import '../../helper/permission_helper.dart';
 import 'bottom_sheet_column.dart';
 
 typedef InputButtonBuilder = Widget Function(VoidCallback onPressed);
-typedef SelectedBuilder = Widget Function(
-  VoidCallback onPressed,
-  SelectedImageModel file,
-);
+typedef SelectedBuilder =
+    Widget Function(VoidCallback onPressed, SelectedImageModel file);
 
 class ReactiveImagePicker
     extends ReactiveFormField<SelectedImageModel, SelectedImageModel> {
@@ -27,25 +25,25 @@ class ReactiveImagePicker
     VoidCallback? onEditted,
     VoidCallback? onDeleted,
   }) : super(
-          formControlName: formControlName,
-          builder: (
-            ReactiveFormFieldState<SelectedImageModel, SelectedImageModel>
-                field,
-          ) =>
-              _Form(
-            field,
-            inputBuilder,
-            selectedBuilder,
-            onSelected,
-            onEditted,
-            onDeleted,
-          ),
-        );
+         formControlName: formControlName,
+         builder:
+             (
+               ReactiveFormFieldState<SelectedImageModel, SelectedImageModel>
+               field,
+             ) => _Form(
+               field,
+               inputBuilder,
+               selectedBuilder,
+               onSelected,
+               onEditted,
+               onDeleted,
+             ),
+       );
 
   @override
   ReactiveFormFieldState<SelectedImageModel, SelectedImageModel>
-      createState() =>
-          ReactiveFormFieldState<SelectedImageModel, SelectedImageModel>();
+  createState() =>
+      ReactiveFormFieldState<SelectedImageModel, SelectedImageModel>();
 }
 
 class _Form extends HookConsumerWidget {
@@ -72,18 +70,12 @@ class _Form extends HookConsumerWidget {
       return inputBuilder?.call(() => _handlePressed(context, ref)) ??
           const SizedBox.shrink();
     } else {
-      return selectedBuilder?.call(
-            () => _handlePressed(context, ref),
-            file,
-          ) ??
+      return selectedBuilder?.call(() => _handlePressed(context, ref), file) ??
           const SizedBox.shrink();
     }
   }
 
-  Future<void> _handlePressed(
-    BuildContext context,
-    WidgetRef ref,
-  ) async {
+  Future<void> _handlePressed(BuildContext context, WidgetRef ref) async {
     final hasFile = field.value != null;
 
     // ユーザーに選択を促す
@@ -119,8 +111,11 @@ class _Form extends HookConsumerWidget {
     ImageSource imageSource,
   ) async {
     // 権限確認
-    final isGranted =
-        await requestPermissionPickImage(context, ref, imageSource);
+    final isGranted = await requestPermissionPickImage(
+      context,
+      ref,
+      imageSource,
+    );
     if (!isGranted) {
       // 許可されてなければ何もしない
       return;
@@ -150,11 +145,7 @@ class _Form extends HookConsumerWidget {
   }
 }
 
-enum _EditSource {
-  camera,
-  gallery,
-  delete,
-}
+enum _EditSource { camera, gallery, delete }
 
 class _SourceSelectBottomSheet extends HookConsumerWidget {
   const _SourceSelectBottomSheet({this.showDelete = false});
@@ -162,12 +153,11 @@ class _SourceSelectBottomSheet extends HookConsumerWidget {
   static Future<_EditSource?> show({
     required BuildContext context,
     bool? showDelete,
-  }) =>
-      showModalBottomSheet<_EditSource>(
-        context: context,
-        useSafeArea: true,
-        builder: (context) => _SourceSelectBottomSheet(showDelete: showDelete),
-      );
+  }) => showModalBottomSheet<_EditSource>(
+    context: context,
+    useSafeArea: true,
+    builder: (context) => _SourceSelectBottomSheet(showDelete: showDelete),
+  );
 
   final bool? showDelete;
 

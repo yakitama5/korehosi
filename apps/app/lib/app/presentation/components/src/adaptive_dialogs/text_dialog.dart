@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -39,9 +39,7 @@ class TextDialog extends HookWidget {
       form: () => FormGroup({
         _textKey: FormControl<String>(
           value: initial,
-          validators: [
-            if (isRequired) Validators.required,
-          ],
+          validators: [if (isRequired) Validators.required],
         ),
       }),
       builder: (context, formGroup, child) => AlertDialog.adaptive(
@@ -65,10 +63,7 @@ class TextDialog extends HookWidget {
     );
   }
 
-  Future<void> _onOk(
-    BuildContext context,
-    FormGroup form,
-  ) async {
+  Future<void> _onOk(BuildContext context, FormGroup form) async {
     // 入力チェックNGの場合は処理不要
     if (form.invalid) {
       form.markAllAsTouched();

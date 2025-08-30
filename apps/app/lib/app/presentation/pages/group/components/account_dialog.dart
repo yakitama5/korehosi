@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,12 +20,11 @@ Future<String?> showAdaptiveAccountDialog(
   String? initial,
   String? labelText,
   int? maxLength,
-}) =>
-    showDialog(
-      context: context,
-      // TODO(yakitama5): iOS版を用意 (アダプティブ対応)
-      builder: (context) => const AndroidAccountDialog(),
-    );
+}) => showDialog(
+  context: context,
+  // TODO(yakitama5): iOS版を用意 (アダプティブ対応)
+  builder: (context) => const AndroidAccountDialog(),
+);
 
 class AndroidAccountDialog extends HookConsumerWidget {
   const AndroidAccountDialog({super.key});
@@ -56,18 +55,16 @@ class AndroidAccountDialog extends HookConsumerWidget {
                     const ProfileRouteData().go(context);
                     Navigator.pop(context);
                   },
-                  icon: Icon(
-                    Icons.edit,
-                    color: colorScheme.onSurfaceVariant,
-                  ),
+                  icon: Icon(Icons.edit, color: colorScheme.onSurfaceVariant),
                   tooltip: i18n.app.edit,
                 ),
               ],
             ),
             Text(
               user?.ageGroup.localeName ?? '',
-              style: textTheme.bodyMedium
-                  ?.copyWith(color: colorScheme.onSurfaceVariant),
+              style: textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
           ],
         ),

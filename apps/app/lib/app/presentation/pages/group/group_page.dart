@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -93,12 +93,9 @@ class _SliverBody extends HookConsumerWidget {
           separatorBuilder: (context, index) => const Divider(),
         ),
       ),
-      error: (error, stackTrace) => SliverFillRemaining(
-        child: ErrorView(error, stackTrace),
-      ),
-      loading: () => const SliverFillRemaining(
-        child: ListLoaderView(),
-      ),
+      error: (error, stackTrace) =>
+          SliverFillRemaining(child: ErrorView(error, stackTrace)),
+      loading: () => const SliverFillRemaining(child: ListLoaderView()),
     );
   }
 }
@@ -110,8 +107,9 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // Web以外のプラットフォームで参加済でないユーザーに表示
     final premiumed = ref.watch(
-      GroupDetailProviders.groupProvider
-          .select((value) => value.value?.premium == true),
+      GroupDetailProviders.groupProvider.select(
+        (value) => value.value?.premium == true,
+      ),
     );
 
     return SliverVisibility(
@@ -143,8 +141,9 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       final offerings = await Purchases.getOfferings();
       final package = offerings.all['familyWishList_once_premiumGroup_100']
           ?.getPackage('premiumGroups');
-      final price =
-          NumberFormat.decimalPattern().format(package?.storeProduct.price);
+      final price = NumberFormat.decimalPattern().format(
+        package?.storeProduct.price,
+      );
 
       if (!context.mounted) {
         return;
@@ -153,8 +152,10 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
         context,
         title: i18n.app.itemPurchase,
         okLabel: i18n.app.purchaseOkLabel(price: price),
-        message: i18n.app
-            .itemLimitReleaseMessage(term: i18n.app.lifeful, price: price),
+        message: i18n.app.itemLimitReleaseMessage(
+          term: i18n.app.lifeful,
+          price: price,
+        ),
       );
 
       if (result != DialogResult.ok) {
@@ -216,7 +217,9 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
       context,
       action: () async {
         final group = await ref.read(GroupDetailProviders.groupProvider.future);
-        final url = await ref.read(groupUsecaseProvider).buildShareLink(
+        final url = await ref
+            .read(groupUsecaseProvider)
+            .buildShareLink(
               groupId: group!.id,
               locationBuilder: (shareLinkId) =>
                   ShareLinkRouteData(shareLinkId).location,
@@ -243,14 +246,8 @@ class _ListTile extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        user.dispName,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Text(
-        user.ageGroup.localeName,
-      ),
+      title: Text(user.dispName, maxLines: 2, overflow: TextOverflow.ellipsis),
+      subtitle: Text(user.ageGroup.localeName),
     );
   }
 }
@@ -348,11 +345,13 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // 作成者のみ表示
     final ownerUserId = ref.watch(
-      GroupDetailProviders.groupProvider
-          .select((asyncValue) => asyncValue.value?.ownerUid),
+      GroupDetailProviders.groupProvider.select(
+        (asyncValue) => asyncValue.value?.ownerUid,
+      ),
     );
-    final userId =
-        ref.watch(authUserProvider.select((value) => value.value?.id));
+    final userId = ref.watch(
+      authUserProvider.select((value) => value.value?.id),
+    );
     if (userId != ownerUserId) {
       return const SizedBox.shrink();
     }
@@ -360,10 +359,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     final colorScheme = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () => onDelete(context, ref),
-      icon: Icon(
-        Icons.delete,
-        color: colorScheme.error,
-      ),
+      icon: Icon(Icons.delete, color: colorScheme.error),
       tooltip: i18n.app.delete,
     );
   }
@@ -404,11 +400,13 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     // 参加者のみ表示
     final ownerUserId = ref.watch(
-      GroupDetailProviders.groupProvider
-          .select((asyncValue) => asyncValue.value?.ownerUid),
+      GroupDetailProviders.groupProvider.select(
+        (asyncValue) => asyncValue.value?.ownerUid,
+      ),
     );
-    final userId =
-        ref.watch(authUserProvider.select((value) => value.value?.id));
+    final userId = ref.watch(
+      authUserProvider.select((value) => value.value?.id),
+    );
     if (userId == ownerUserId) {
       return const SizedBox.shrink();
     }
@@ -416,10 +414,7 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
     final colorScheme = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () => onLeave(context, ref),
-      icon: Icon(
-        Icons.person_off,
-        color: colorScheme.error,
-      ),
+      icon: Icon(Icons.person_off, color: colorScheme.error),
       tooltip: i18n.app.leave,
     );
   }

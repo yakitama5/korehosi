@@ -1,4 +1,4 @@
-import 'package:family_wish_list/app/application/usecase/analyze/state/wanter_filter_notifier_provider.dart';
+import 'package:flutter_app/app/application/usecase/analyze/state/wanter_filter_notifier_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

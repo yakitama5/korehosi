@@ -1,7 +1,7 @@
-import 'package:family_wish_list/app/application/config/app_config.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/application/config/app_config.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:store_redirect/store_redirect.dart';
 
@@ -29,30 +29,27 @@ class AppListner extends HookConsumerWidget {
       return;
     }
 
-    ref.listen(
-      forceUpdateProvider,
-      (previous, next) async {
-        if (next.value == true) {
-          // 更新が必要な場合はダイアログを表示
-          final result = await showAdaptiveOkCancelDialog(
-            context,
-            title: i18n.app.updateAppTitle,
-            message: i18n.app.updateAppMessage,
-            okLabel: i18n.app.goStore,
-          );
+    ref.listen(forceUpdateProvider, (previous, next) async {
+      if (next.value == true) {
+        // 更新が必要な場合はダイアログを表示
+        final result = await showAdaptiveOkCancelDialog(
+          context,
+          title: i18n.app.updateAppTitle,
+          message: i18n.app.updateAppMessage,
+          okLabel: i18n.app.goStore,
+        );
 
-          switch (result) {
-            case DialogResult.ok:
-              await StoreRedirect.redirect(
-                androidAppId: appConfig.packageName,
-                iOSAppId: appConfig.appStoreId,
-              );
-            case DialogResult.cancel:
-            case null:
-            // do nothing
-          }
+        switch (result) {
+          case DialogResult.ok:
+            await StoreRedirect.redirect(
+              androidAppId: appConfig.packageName,
+              iOSAppId: appConfig.appStoreId,
+            );
+          case DialogResult.cancel:
+          case null:
+          // do nothing
         }
-      },
-    );
+      }
+    });
   }
 }

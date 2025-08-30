@@ -1,10 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
-import 'package:family_wish_list/app/presentation/components/src/responsive_auto_scale_box.dart';
-import 'package:family_wish_list/app/presentation/hooks/importer.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/application/usecase/system/app_usecase.dart';
+import 'package:flutter_app/app/presentation/components/src/responsive_auto_scale_box.dart';
+import 'package:flutter_app/app/presentation/hooks/importer.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,9 +40,8 @@ class App extends HookConsumerWidget {
     return _SafetyDynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) => MaterialApp.router(
         title: appConfig.appName,
-        builder: (context, child) => _AppListener(
-          child: _AppBaseContainer(child: child),
-        ),
+        builder: (context, child) =>
+            _AppListener(child: _AppBaseContainer(child: child)),
         routerDelegate: router.routerDelegate,
         routeInformationParser: router.routeInformationParser,
         routeInformationProvider: router.routeInformationProvider,
@@ -51,16 +50,20 @@ class App extends HookConsumerWidget {
           Brightness.light,
           lightDynamic,
         ),
-        darkTheme:
-            createThemeData(themeData.platform, Brightness.dark, darkDynamic),
+        darkTheme: createThemeData(
+          themeData.platform,
+          Brightness.dark,
+          darkDynamic,
+        ),
         themeMode: themeMode,
         locale: TranslationProvider.of(context).flutterLocale, // use provider
         supportedLocales: AppLocaleUtils.supportedLocales,
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
         debugShowCheckedModeBanner: false,
         // アプリ全体のスクロール制御を変更
-        scrollBehavior: ScrollConfiguration.of(context)
-            .copyWith(physics: const BouncingScrollPhysics()),
+        scrollBehavior: ScrollConfiguration.of(
+          context,
+        ).copyWith(physics: const BouncingScrollPhysics()),
       ),
     );
   }
@@ -69,10 +72,8 @@ class App extends HookConsumerWidget {
 class _SafetyDynamicColorBuilder extends StatelessWidget {
   const _SafetyDynamicColorBuilder({required this.builder});
 
-  final Widget Function(
-    ColorScheme? lightDynamic,
-    ColorScheme? darkDynamic,
-  ) builder;
+  final Widget Function(ColorScheme? lightDynamic, ColorScheme? darkDynamic)
+  builder;
 
   @override
   Widget build(BuildContext context) => kIsWeb
@@ -86,8 +87,10 @@ class _SafetyDynamicColorBuilder extends StatelessWidget {
               return builder(null, null);
             }
 
-            final result =
-                _generateDynamicColourSchemes(lightDynamic, darkDynamic);
+            final result = _generateDynamicColourSchemes(
+              lightDynamic,
+              darkDynamic,
+            );
             return builder(result.$1, result.$2);
           },
         );
@@ -105,39 +108,42 @@ class _SafetyDynamicColorBuilder extends StatelessWidget {
     final lightAdditionalColours = _extractAdditionalColours(lightBase);
     final darkAdditionalColours = _extractAdditionalColours(darkBase);
 
-    final lightScheme =
-        _insertAdditionalColours(lightBase, lightAdditionalColours);
-    final darkScheme =
-        _insertAdditionalColours(darkBase, darkAdditionalColours);
+    final lightScheme = _insertAdditionalColours(
+      lightBase,
+      lightAdditionalColours,
+    );
+    final darkScheme = _insertAdditionalColours(
+      darkBase,
+      darkAdditionalColours,
+    );
 
     return (lightScheme.harmonized(), darkScheme.harmonized());
   }
 
   List<Color> _extractAdditionalColours(ColorScheme scheme) => [
-        scheme.surface,
-        scheme.surfaceDim,
-        scheme.surfaceBright,
-        scheme.surfaceContainerLowest,
-        scheme.surfaceContainerLow,
-        scheme.surfaceContainer,
-        scheme.surfaceContainerHigh,
-        scheme.surfaceContainerHighest,
-      ];
+    scheme.surface,
+    scheme.surfaceDim,
+    scheme.surfaceBright,
+    scheme.surfaceContainerLowest,
+    scheme.surfaceContainerLow,
+    scheme.surfaceContainer,
+    scheme.surfaceContainerHigh,
+    scheme.surfaceContainerHighest,
+  ];
 
   ColorScheme _insertAdditionalColours(
     ColorScheme scheme,
     List<Color> additionalColours,
-  ) =>
-      scheme.copyWith(
-        surface: additionalColours[0],
-        surfaceDim: additionalColours[1],
-        surfaceBright: additionalColours[2],
-        surfaceContainerLowest: additionalColours[3],
-        surfaceContainerLow: additionalColours[4],
-        surfaceContainer: additionalColours[5],
-        surfaceContainerHigh: additionalColours[6],
-        surfaceContainerHighest: additionalColours[7],
-      );
+  ) => scheme.copyWith(
+    surface: additionalColours[0],
+    surfaceDim: additionalColours[1],
+    surfaceBright: additionalColours[2],
+    surfaceContainerLowest: additionalColours[3],
+    surfaceContainerLow: additionalColours[4],
+    surfaceContainer: additionalColours[5],
+    surfaceContainerHigh: additionalColours[6],
+    surfaceContainerHighest: additionalColours[7],
+  );
 }
 
 class _AppListener extends SingleChildStatelessWidget {
@@ -168,40 +174,34 @@ class _AppListener extends SingleChildStatelessWidget {
     }
 
     // DynamicLinksのイベント判定
-    ref.listen(
-      reactiveDeepLinkProvider,
-      (previous, next) async {
-        // URLがなければスルー
-        if (!next.hasValue) {
-          return;
-        }
+    ref.listen(reactiveDeepLinkProvider, (previous, next) async {
+      // URLがなければスルー
+      if (!next.hasValue) {
+        return;
+      }
 
-        final uri = next.value;
-        if (uri == null || uri.path.isEmpty) {
-          return;
-        }
+      final uri = next.value;
+      if (uri == null || uri.path.isEmpty) {
+        return;
+      }
 
-        // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
-        ref.read(routerProvider).go(uri.path);
-      },
-    );
+      // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
+      ref.read(routerProvider).go(uri.path);
+    });
   }
 
   void _notificationLister(BuildContext context, WidgetRef ref) {
     // 通知イベント判定
-    ref.listen(
-      notificationMessageProvider,
-      (previous, next) async {
-        final message = next.value;
-        final path = message?.data['path'];
-        if (path == null) {
-          return;
-        }
+    ref.listen(notificationMessageProvider, (previous, next) async {
+      final message = next.value;
+      final path = message?.data['path'];
+      if (path == null) {
+        return;
+      }
 
-        // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
-        ref.read(routerProvider).go(path as String);
-      },
-    );
+      // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
+      ref.read(routerProvider).go(path as String);
+    });
   }
 }
 
@@ -211,10 +211,7 @@ class _AppBaseContainer extends SingleChildStatelessWidget {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
     return Nested(
-      children: const [
-        ReactiveFormWrapper(),
-        ResponsiveAutoScaleBox(),
-      ],
+      children: const [ReactiveFormWrapper(), ResponsiveAutoScaleBox()],
       child: Stack(
         children: [
           child ?? const SizedBox.shrink(),
@@ -233,19 +230,19 @@ class ReactiveFormWrapper extends SingleChildStatelessWidget {
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) => HookBuilder(
-        builder: (context) {
-          return ReactiveFormConfig(
-            validationMessages: {
-              /// エラーメッセージの共通定義
-              ValidationMessage.required: (error) =>
-                  i18n.app.validErrorMessageRequired,
-              CustomValidationMessage.url: (error) =>
-                  i18n.app.validErrorMessageUrlPattern,
-            },
-            child: child ?? const SizedBox.shrink(),
-          );
+    builder: (context) {
+      return ReactiveFormConfig(
+        validationMessages: {
+          /// エラーメッセージの共通定義
+          ValidationMessage.required: (error) =>
+              i18n.app.validErrorMessageRequired,
+          CustomValidationMessage.url: (error) =>
+              i18n.app.validErrorMessageUrlPattern,
         },
+        child: child ?? const SizedBox.shrink(),
       );
+    },
+  );
 }
 
 class _GlobalIndicator extends HookConsumerWidget {
@@ -257,9 +254,7 @@ class _GlobalIndicator extends HookConsumerWidget {
     if (isLoading) {
       return const ColoredBox(
         color: Colors.black54,
-        child: Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
+        child: Center(child: CircularProgressIndicator.adaptive()),
       );
     }
     return const SizedBox.shrink();

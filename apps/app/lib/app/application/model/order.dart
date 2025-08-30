@@ -1,4 +1,4 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 
 /// 並び順 (昇順 or 降順)
 enum SortOrder {
@@ -7,7 +7,7 @@ enum SortOrder {
 
   /// 表示名
   String get description => switch (this) {
-        SortOrder.asc => i18n.app.sortOrderAsc,
-        SortOrder.desc => i18n.app.sortOrderDesc
-      };
+    SortOrder.asc => i18n.app.sortOrderAsc,
+    SortOrder.desc => i18n.app.sortOrderDesc,
+  };
 }

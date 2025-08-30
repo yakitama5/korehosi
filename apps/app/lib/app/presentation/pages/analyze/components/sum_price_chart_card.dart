@@ -1,6 +1,6 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -24,7 +24,8 @@ class SumPriceChartCard extends HookConsumerWidget {
 
     final price = ref.watch(buyedSumPriceProvider).value;
     final currencyPrice = price?.formatCurrency(
-        locale: AppLocaleUtils.findDeviceLocale().languageCode);
+      locale: AppLocaleUtils.findDeviceLocale().languageCode,
+    );
     final spots = ref.watch(monthlySumPriceChartSpotsProvider).value;
     // 一瞬なのでローディング表示は行わない
     if (currencyPrice == null || spots == null) {
@@ -40,16 +41,10 @@ class SumPriceChartCard extends HookConsumerWidget {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              currencyPrice,
-              style: textTheme.headlineLarge,
-            ),
+            child: Text(currencyPrice, style: textTheme.headlineLarge),
           ),
           const Gap(16),
-          SizedBox(
-            height: 240,
-            child: _TotalPriceLinerChart(spots: spots),
-          ),
+          SizedBox(height: 240, child: _TotalPriceLinerChart(spots: spots)),
         ],
       ),
     );
@@ -72,8 +67,9 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
       children: [
         GestureDetector(
           onHorizontalDragEnd: (details) {
-            final notifier =
-                ref.read(monthlySumPriceChartRangeProvider.notifier);
+            final notifier = ref.read(
+              monthlySumPriceChartRangeProvider.notifier,
+            );
             if (details.primaryVelocity == null) {
               return;
             }
@@ -88,8 +84,9 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
             LineChartData(
               // マテリアルカラーに沿って色を変更
               backgroundColor: colorScheme.surfaceContainerLow,
-              borderData:
-                  FlBorderData(border: Border.all(color: colorScheme.outline)),
+              borderData: FlBorderData(
+                border: Border.all(color: colorScheme.outline),
+              ),
 
               // ラベルは下の期間表示と右の値段表示のみ
               titlesData: FlTitlesData(
@@ -128,10 +125,12 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
                         (e) => LineTooltipItem(
                           // 小数点は切り捨てて表示
                           e.y.formatCurrency(
-                              locale: AppLocaleUtils.findDeviceLocale()
-                                  .languageCode),
-                          textTheme.bodyMedium!
-                              .copyWith(color: colorScheme.onSurfaceVariant),
+                            locale:
+                                AppLocaleUtils.findDeviceLocale().languageCode,
+                          ),
+                          textTheme.bodyMedium!.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       )
                       .toList(),
@@ -149,9 +148,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
         Align(
           alignment: Alignment.topLeft,
           child: IconButton(
-            icon: const Icon(
-              Icons.keyboard_arrow_left_rounded,
-            ),
+            icon: const Icon(Icons.keyboard_arrow_left_rounded),
             tooltip: i18n.app.prev,
             onPressed: () =>
                 ref.read(monthlySumPriceChartRangeProvider.notifier).prev(),
@@ -188,10 +185,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
 
           return SideTitleWidget(
             meta: meta,
-            child: Text(
-              currency,
-              style: textTheme.labelMedium,
-            ),
+            child: Text(currency, style: textTheme.labelMedium),
           );
         },
       ),

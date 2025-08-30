@@ -1,5 +1,5 @@
-import 'package:family_wish_list/app/application/usecase/purchase/state/current_group_age_applicable_purchases_provider.dart';
-import 'package:family_wish_list/app/application/usecase/user/state/current_group_join_users_provider.dart';
+import 'package:flutter_app/app/application/usecase/purchase/state/current_group_age_applicable_purchases_provider.dart';
+import 'package:flutter_app/app/application/usecase/user/state/current_group_join_users_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -26,8 +26,5 @@ Future<List<String>> buyerNameSuggestion(Ref ref) async {
   );
 
   // 購入者の履歴を優先して結合
-  return {
-    ...await buyerNameHsts,
-    ...await currentGroupUserNames,
-  }.toList();
+  return {...await buyerNameHsts, ...await currentGroupUserNames}.toList();
 }

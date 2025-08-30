@@ -1,6 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/usecase/analyze/state/wanter_filter_notifier_provider.dart';
@@ -23,10 +23,7 @@ class WanterNameFilterChip extends HookConsumerWidget {
     final selected = selectName != null;
 
     return LeadingIconInputChip(
-      label: Text(
-        selectName ?? defaultTitle,
-        overflow: TextOverflow.ellipsis,
-      ),
+      label: Text(selectName ?? defaultTitle, overflow: TextOverflow.ellipsis),
       iconData: Icons.arrow_drop_down,
       selected: selected,
       showCheckmark: selected,
@@ -41,12 +38,7 @@ class WanterNameFilterChip extends HookConsumerWidget {
           AlertDialogAction<String>(key: _allKey, label: allLabel),
 
           // 重複を削除しているため、keyも同値を設定
-          ...buyerNames.map(
-            (e) => AlertDialogAction<String>(
-              key: e,
-              label: e,
-            ),
-          ),
+          ...buyerNames.map((e) => AlertDialogAction<String>(key: e, label: e)),
         ];
 
         final input = await showConfirmationDialog<String>(

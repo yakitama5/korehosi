@@ -1,9 +1,5 @@
 import 'dart:io' as io;
 
-import 'package:family_wish_list/app/domain/notification/interface/notification_token_repository.dart';
-import 'package:family_wish_list/app/infrastructure/branch/service/branch_deep_link_service.dart';
-import 'package:family_wish_list/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +7,10 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/app/domain/notification/interface/notification_token_repository.dart';
+import 'package:flutter_app/app/infrastructure/branch/service/branch_deep_link_service.dart';
+import 'package:flutter_app/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -59,9 +59,7 @@ void main() async {
   LocaleSettings.useDeviceLocale();
 
   // 画面の向きを強制
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // Flavor に応じた FirebaseOptions を準備する
   final firebaseOptions = switch (appConfig.flavor) {
@@ -70,9 +68,7 @@ void main() async {
   };
 
   // Initialize Firebase
-  await Firebase.initializeApp(
-    options: firebaseOptions,
-  );
+  await Firebase.initializeApp(options: firebaseOptions);
 
   // FCM Config
   await FCMConfig.instance.init(
@@ -95,9 +91,7 @@ void main() async {
       Flavor.prod => AppleProvider.deviceCheck,
       Flavor.dev => AppleProvider.debug,
     },
-    webProvider: ReCaptchaV3Provider(
-      recpthaSiteKey,
-    ),
+    webProvider: ReCaptchaV3Provider(recpthaSiteKey),
   );
 
   // RevenueCat
@@ -105,9 +99,12 @@ void main() async {
 
   // branch (deep link)
   await FlutterBranchSdk.init(
-      enableLogging: true, branchAttributionLevel: BranchAttributionLevel.FULL);
+    enableLogging: true,
+    branchAttributionLevel: BranchAttributionLevel.FULL,
+  );
   FlutterBranchSdk.setConsumerProtectionAttributionLevel(
-      BranchAttributionLevel.FULL);
+    BranchAttributionLevel.FULL,
+  );
 
   // WebのURLから "#" を削除
   usePathUrlStrategy();
@@ -132,27 +129,33 @@ void main() async {
           userRepositoryProvider.overrideWith(FirebaseUserRepository.new),
           groupRepositoryProvider.overrideWith(FirebaseGroupRepository.new),
           itemRepositoryProvider.overrideWith(FirebaseItemRepository.new),
-          purchaseRepositoryProvider
-              .overrideWith(FirebasePurchaseRepository.new),
+          purchaseRepositoryProvider.overrideWith(
+            FirebasePurchaseRepository.new,
+          ),
           storageServiceProvider.overrideWith(FirebaseStorageService.new),
           configServiceProvider.overrideWith(FirebaseConfigService.new),
           deepLinkServiceProvider.overrideWith(BranchDeepLinkService.new),
           analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
-          messagingServiceProvider
-              .overrideWith(FirebaseMessagingMessagingService.new),
-          notificationTokenRepositoryProvider
-              .overrideWith(FirebaseNotificationTokenRepository.new),
+          messagingServiceProvider.overrideWith(
+            FirebaseMessagingMessagingService.new,
+          ),
+          notificationTokenRepositoryProvider.overrideWith(
+            FirebaseNotificationTokenRepository.new,
+          ),
           // SharedPreference
           cachedServiceProvider.overrideWith(SharedPreferenceCachedService.new),
           // `package_info_plus`
-          appInfoServiceProvider
-              .overrideWith(PackageInfoPlusAppInfoService.new),
+          appInfoServiceProvider.overrideWith(
+            PackageInfoPlusAppInfoService.new,
+          ),
           // `device_info_plus`
-          deviceInfoServiceProvider
-              .overrideWith(DeviceInfoPlusDeviceInfoService.new),
+          deviceInfoServiceProvider.overrideWith(
+            DeviceInfoPlusDeviceInfoService.new,
+          ),
           // RevenueCat
-          appInPurchaseServiceProvider
-              .overrideWith(RevenueCatAppInPurchaseService.new),
+          appInPurchaseServiceProvider.overrideWith(
+            RevenueCatAppInPurchaseService.new,
+          ),
         ],
         child: const App(),
       ),
@@ -176,13 +179,9 @@ Future<void> initPlatformState() async {
 
   late final PurchasesConfiguration configuration;
   if (io.Platform.isAndroid) {
-    configuration = PurchasesConfiguration(
-      revenueCatPlayStoreKey,
-    );
+    configuration = PurchasesConfiguration(revenueCatPlayStoreKey);
   } else if (io.Platform.isIOS) {
-    configuration = PurchasesConfiguration(
-      revenueCatAppStoreKey,
-    );
+    configuration = PurchasesConfiguration(revenueCatAppStoreKey);
   } else {
     return;
   }

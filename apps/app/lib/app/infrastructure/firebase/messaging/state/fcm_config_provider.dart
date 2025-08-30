@@ -1,6 +1,6 @@
-import 'package:family_wish_list/app/infrastructure/firebase/messaging/state/background_handler.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_app/app/infrastructure/firebase/messaging/state/background_handler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,7 +28,5 @@ Future<List<Override>> initializeFCMConfig(FirebaseOptions options) async {
     },
   );
 
-  return <Override>[
-    fcmConfigProvider.overrideWithValue(fcmConfig),
-  ];
+  return <Override>[fcmConfigProvider.overrideWithValue(fcmConfig)];
 }

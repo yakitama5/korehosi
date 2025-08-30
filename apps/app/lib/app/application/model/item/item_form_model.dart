@@ -1,6 +1,6 @@
 // ignore_for_file: inference_failure_on_instance_creation
 
-import 'package:family_wish_list/app/application/validator/url_validator.dart';
+import 'package:flutter_app/app/application/validator/url_validator.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 import 'selected_image_model.dart';
@@ -10,15 +10,9 @@ part 'item_form_model.gform.dart';
 @Rf()
 class ItemFormModel {
   const ItemFormModel({
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.name = '',
+    @RfControl(validators: [RequiredValidator()]) this.name = '',
     @RfControl() this.wanterName,
-    @RfControl(
-      validators: [RequiredValidator()],
-    )
-    this.wishRank = 0.0,
+    @RfControl(validators: [RequiredValidator()]) this.wishRank = 0.0,
     @RfControl() this.wishSeason,
     @RfControl() this.memo,
     @RfArray(itemValidators: [UrlValidator()]) this.urls,

@@ -1,6 +1,6 @@
-import 'package:family_wish_list/app/application/usecase/analyze/state/analyze_source_items_provider.dart.dart';
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/application/usecase/analyze/state/analyze_source_items_provider.dart.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../application/usecase/analyze/state/analyze_buyed_count_provider.dart';
@@ -29,10 +29,7 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          GaugeChart(
-            value: percent,
-            radius: 80,
-          ),
+          GaugeChart(value: percent, radius: 80),
           const _BuyedItemCount(),
         ],
       ),

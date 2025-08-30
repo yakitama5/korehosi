@@ -1,5 +1,5 @@
-import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,10 +27,7 @@ class ProfilePage extends HookConsumerWidget {
       data: (data) => data == null
           ? const CircularProgressIndicator()
           : UserFormModelFormBuilder(
-              model: UserFormModel(
-                name: data.name,
-                ageGroup: data.ageGroup,
-              ),
+              model: UserFormModel(name: data.name, ageGroup: data.ageGroup),
               builder: (context, formModel, child) => const _Form(),
             ),
       error: ErrorView.new,
@@ -45,26 +42,17 @@ class _Form extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Nested(
-      children: const [
-        ReactiveFormDirtyConfirmPopScope(),
-        UnfocusOnTap(),
-      ],
+      children: const [ReactiveFormDirtyConfirmPopScope(), UnfocusOnTap()],
       child: Scaffold(
         appBar: AppBar(
           title: Text(i18n.app.profile),
-          actions: const [
-            _SaveButton(),
-          ],
+          actions: const [_SaveButton()],
         ),
         body: const SingleChildScrollView(
           child: PagePadding(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                UserNameField(),
-                Gap(16),
-                AgeGroupField(),
-              ],
+              children: [UserNameField(), Gap(16), AgeGroupField()],
             ),
           ),
         ),
@@ -99,10 +87,9 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
         final navigator = Navigator.of(context);
 
         // 登録
-        await ref.read(userUsecaseProvider).update(
-              name: name,
-              ageGroup: ageGroup,
-            );
+        await ref
+            .read(userUsecaseProvider)
+            .update(name: name, ageGroup: ageGroup);
 
         // 遷移元へ
         navigator.pop();
