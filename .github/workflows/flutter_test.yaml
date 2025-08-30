@@ -7,9 +7,6 @@ on:
   push:
     branches:
       - main
-    # tagの作成時にビルド実行
-    tags:
-      - "v*"
 jobs:
   flutter_test:
     # if: ${{ false }}
@@ -17,37 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      # セットアップ
+      - name: Setup Code
+        uses: ./.github/actions/setup-code
+      - name: Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
 
-      - name: Create dart-define
-        run: |
-          mkdir -p apps/app/dart_defines
-          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > apps/app/dart_defines/prod.json
-
-      - name: Create Firebase Conf
-        run: |
-          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > apps/app/lib/firebase_options.dart
-          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > apps/app/lib/firebase_options_dev.dart
-          mkdir -p apps/app/android/app/src/prod/
-          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > apps/app/android/app/src/prod/google-services.json
-          mkdir -p apps/app/ios/prod/
-          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > apps/app/ios/prod/GoogleService-Info.plist
-
-      - name: Create env
-        run: |
-          mkdir -p apps/app/scripts
-          mkdir -p apps/app/scripts/env
-          echo -n ${{ secrets.ENV_FILE }} | base64 -d > apps/app/scripts/env/.env
-          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > apps/app/scripts/env/.env.dev
-
-      - name: Setup Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ vars.FLUTTER_VERSION }}
-          channel: ${{ vars.FLUTTER_CHANNEL }}
-          cache: true
-
+      # 実行
       - run: melos bs
       - run: melos run regenerate_code
       - run: melos exec -- flutter test --dart-define=CI=true

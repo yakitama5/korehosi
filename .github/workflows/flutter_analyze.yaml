@@ -13,9 +13,6 @@ on:
   push:
     branches:
       - main
-    # tagの作成時にビルド実行
-    tags:
-      - "v*"
 
 # 複数のジョブを定義する
 # 各ジョブはそれぞれまったく別々の環境で実行される
@@ -35,41 +32,11 @@ jobs:
 
     # ジョブの手順
     steps:
-      # ソースコードをチェックアウト
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      # 環境ファイルの作成
-      - name: Create dart-define
-        run: |
-          mkdir -p apps/app/dart_defines
-          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > apps/app/dart_defines/prod.json
-
-      # Firebaseの接続情報の作成
-      - name: Create Firebase Conf
-        run: |
-          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > apps/app/lib/firebase_options.dart
-          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > apps/app/lib/firebase_options_dev.dart
-          mkdir -p apps/app/android/app/src/prod/
-          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > apps/app/android/app/src/prod/google-services.json
-          mkdir -p apps/app/ios/prod/
-          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > apps/app/ios/prod/GoogleService-Info.plist
-
-      # 機密ファイルの作成
-      - name: Create env
-        run: |
-          mkdir -p apps/app/scripts
-          mkdir -p apps/app/scripts/env
-          echo -n ${{ secrets.ENV_FILE }} | base64 -d > apps/app/scripts/env/.env
-          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > apps/app/scripts/env/.env.dev
-
       # セットアップ
-      - name: Setup Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ vars.FLUTTER_VERSION }}
-          channel: ${{ vars.FLUTTER_CHANNEL }}
-          cache: true
+      - name: Setup Code
+        uses: ./.github/actions/setup-code
+      - name: Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
 
       # 静的解析を実行
       - run: melos bs
