@@ -2,17 +2,17 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:family_wish_list/app/application/usecase/system/app_usecase.dart';
 import 'package:family_wish_list/app/presentation/components/src/responsive_auto_scale_box.dart';
 import 'package:family_wish_list/app/presentation/hooks/importer.dart';
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../application/config/app_config.dart';
 import '../application/state/loading_provider.dart';
-import '../application/state/locale_provider.dart';
 import '../application/state/notification_message_provider.dart';
 import '../application/state/reactive_deep_link_provider.dart';
 import '../application/state/theme_mode_provider.dart';
@@ -54,23 +54,13 @@ class App extends HookConsumerWidget {
         darkTheme:
             createThemeData(themeData.platform, Brightness.dark, darkDynamic),
         themeMode: themeMode,
-        localizationsDelegates: L10n.localizationsDelegates,
-        supportedLocales: L10n.supportedLocales,
+        locale: TranslationProvider.of(context).flutterLocale, // use provider
+        supportedLocales: AppLocaleUtils.supportedLocales,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
         debugShowCheckedModeBanner: false,
         // アプリ全体のスクロール制御を変更
         scrollBehavior: ScrollConfiguration.of(context)
             .copyWith(physics: const BouncingScrollPhysics()),
-        localeResolutionCallback: (locale, supportedLocales) {
-          // ロケールの変更を通知
-          if (locale != null) {
-            WidgetsBinding.instance.addPostFrameCallback(
-              (_) => ref
-                  .read(l10nProvider.notifier)
-                  .update((state) => lookupL10n(locale)),
-            );
-          }
-          return locale;
-        },
       ),
     );
   }
@@ -244,15 +234,13 @@ class ReactiveFormWrapper extends SingleChildStatelessWidget {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) => HookBuilder(
         builder: (context) {
-          final l10n = useL10n();
-
           return ReactiveFormConfig(
             validationMessages: {
               /// エラーメッセージの共通定義
               ValidationMessage.required: (error) =>
-                  l10n.validErrorMessageRequired,
+                  i18n.app.validErrorMessageRequired,
               CustomValidationMessage.url: (error) =>
-                  l10n.validErrorMessageUrlPattern,
+                  i18n.app.validErrorMessageUrlPattern,
             },
             child: child ?? const SizedBox.shrink(),
           );

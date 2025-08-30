@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,13 +12,11 @@ import '../../../application/config/item_config.dart';
 import '../../../application/model/dialog_result.dart';
 import '../../../application/model/item/item_form_model.dart';
 import '../../../application/model/item/selected_image_model.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/item/item_usecase.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/item/state/wanter_name_suggestion.dart';
 import '../../../domain/item/entity/item.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';
@@ -30,7 +29,6 @@ class ItemEditPage extends HookConsumerWidget with RouteAware {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final itemId = ref.watch(ItemDetailProviders.itemIdProvider);
     final item = ref.watch(ItemDetailProviders.itemProvider);
 
@@ -38,8 +36,8 @@ class ItemEditPage extends HookConsumerWidget with RouteAware {
       data: (itemData) => _ItemForm(
         item: itemData,
         titleData: itemId == null
-            ? l10n.createPageTitle(l10n.wishList)
-            : l10n.editPageTitle(l10n.wishList),
+            ? i18n.app.createPageTitle(item: i18n.app.wishList)
+            : i18n.app.editPageTitle(item: i18n.app.wishList),
       ),
       error: ErrorView.new,
       // すぐ表示されるはずなので、何も表示しない
@@ -212,7 +210,6 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
-    final l10n = ref.read(l10nProvider);
 
     final item = await ref.read(ItemDetailProviders.itemProvider.future);
     if (!context.mounted) {
@@ -220,8 +217,8 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     }
     final result = await showAdaptiveOkCancelDialog(
       context,
-      title: l10n.deleteConfirmTitle,
-      message: l10n.deleteCofirmMessage(item?.name ?? ''),
+      title: i18n.app.deleteConfirmTitle,
+      message: i18n.app.deleteCofirmMessage(item: item?.name ?? ''),
     );
     if (result != DialogResult.ok) {
       return;
@@ -242,7 +239,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
           const ItemsRouteData().go(context);
         }
       },
-      successMessage: l10n.completeDeleteMessage,
+      successMessage: i18n.app.completeDeleteMessage,
     );
   }
 }
@@ -302,11 +299,9 @@ class _NameField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ReactiveOutlinedTextField<String>(
       formControlName: ItemFormModelForm.nameControlName,
-      labelText: l10n.merchandiseName,
+      labelText: i18n.app.merchandiseName,
       maxLength: itemConfig.maxNameLength,
       isRequired: true,
     );
@@ -318,8 +313,6 @@ class _WanterNameField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     // グループ内のユーザーを候補に上げる
     final userNames = ref
         .watch(wanterNameSuggestionProvider)
@@ -331,7 +324,7 @@ class _WanterNameField extends HookConsumerWidget {
 
     return ReactiveOutlinedRawAutocomplete(
       formControlName: ItemFormModelForm.wanterNameControlName,
-      labelText: l10n.wanterName,
+      labelText: i18n.app.wanterName,
       maxLength: itemConfig.maxWanterNameLength,
       options: userNames ?? [],
     );
@@ -343,12 +336,10 @@ class _WishRankField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ReactiveRatingBarBuilder<double>(
       formControlName: ItemFormModelForm.wishRankControlName,
       decoration: InputDecoration(
-        label: Text(l10n.wishRank),
+        label: Text(i18n.app.wishRank),
         border: InputBorder.none,
         enabledBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
@@ -364,12 +355,10 @@ class _WishSeasonField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ReactiveOutlinedTextField<String>(
       formControlName: ItemFormModelForm.wishSeasonControlName,
-      labelText: l10n.wishSeasonLabel,
-      hintText: l10n.wishSeasonHint,
+      labelText: i18n.app.wishSeasonLabel,
+      hintText: i18n.app.wishSeasonHint,
       maxLength: itemConfig.maxWishSeasonLength,
     );
   }
@@ -380,7 +369,6 @@ class _UrlFields extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final formModel = ReactiveItemFormModelForm.of(context)!;
 
     return ReactiveItemFormModelFormArrayBuilder(
@@ -389,7 +377,7 @@ class _UrlFields extends HookConsumerWidget {
           ReactiveOutlinedTextField<String>(
         key: ObjectKey(formModel.urlsControl.control('$i')),
         formControlName: '$i',
-        labelText: l10n.url,
+        labelText: i18n.app.url,
         maxLength: itemConfig.maxUrlLength,
         textInputType: TextInputType.url,
         counterText: '',
@@ -405,12 +393,10 @@ class _UrlAddButton extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return TextButton.icon(
       onPressed: onAdd,
       icon: const Icon(Icons.add),
-      label: Text(l10n.addUrl),
+      label: Text(i18n.app.addUrl),
     );
   }
 }
@@ -420,11 +406,9 @@ class _MemoField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ReactiveOutlinedTextField<String>(
       formControlName: ItemFormModelForm.memoControlName,
-      labelText: l10n.memo,
+      labelText: i18n.app.memo,
       maxLines: 5,
       maxLength: itemConfig.maxMemoLength,
     );

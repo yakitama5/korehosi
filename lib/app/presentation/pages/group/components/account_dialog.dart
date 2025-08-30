@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -7,7 +8,6 @@ import '../../../../application/usecase/group/state/current_group_provider.dart'
 import '../../../../application/usecase/group/state/join_groups_provider.dart';
 import '../../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../../domain/user/entity/user.dart';
-import '../../../../domain/user/value_object/age_group.dart';
 import '../../../hooks/importer.dart';
 import '../../../routes/importer.dart';
 import 'premium_icon_container.dart';
@@ -32,7 +32,6 @@ class AndroidAccountDialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final textTheme = useTextTheme();
     final colorScheme = useColorScheme();
 
@@ -50,7 +49,7 @@ class AndroidAccountDialog extends HookConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(user.dispName(l10n)),
+                Text(user.dispName),
                 const Gap(8),
                 IconButton(
                   onPressed: () {
@@ -61,12 +60,12 @@ class AndroidAccountDialog extends HookConsumerWidget {
                     Icons.edit,
                     color: colorScheme.onSurfaceVariant,
                   ),
-                  tooltip: l10n.edit,
+                  tooltip: i18n.app.edit,
                 ),
               ],
             ),
             Text(
-              user?.ageGroup.getLocaleName(l10n) ?? '',
+              user?.ageGroup.localeName ?? '',
               style: textTheme.bodyMedium
                   ?.copyWith(color: colorScheme.onSurfaceVariant),
             ),
@@ -101,13 +100,13 @@ class AndroidAccountDialog extends HookConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(l10n.cancel),
+            child: Text(i18n.app.cancel),
           ),
           TextButton(
             onPressed: selectValue.value == null
                 ? null
                 : () => Navigator.pop(context, selectValue.value),
-            child: Text(l10n.ok),
+            child: Text(i18n.app.ok),
           ),
         ],
       ),

@@ -1,18 +1,12 @@
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 
 /// 年齢層 (子供 or 大人)
 enum AgeGroup {
   child,
-  adult,
-}
+  adult;
 
-extension AgeGroupX on AgeGroup {
-  String getLocaleName(L10n l) {
-    switch (this) {
-      case AgeGroup.child:
-        return l.ageGroupChild;
-      case AgeGroup.adult:
-        return l.ageGroupAdult;
-    }
-  }
+  String get localeName => switch (this) {
+        AgeGroup.child => i18n.app.ageGroupChild,
+        AgeGroup.adult => i18n.app.ageGroupAdult,
+      };
 }

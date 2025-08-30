@@ -1,7 +1,6 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
-import '../../hooks/importer.dart';
 
 class ItemizedText extends StatelessWidget {
   const ItemizedText(this.texts, {super.key});
@@ -27,13 +26,11 @@ class _ItemizedTextRow extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          l10n.bullet,
+          i18n.app.bullet,
           style: text.style,
         ),
         Expanded(child: text),

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -23,7 +23,6 @@ import '../../../domain/item/entity/item.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../../domain/purchase/value_object/purchase_status.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import '../group/components/account_dialog.dart';
@@ -41,7 +40,7 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // ephemeral state
-    final l10n = useL10n();
+
     final scrollController = useScrollController();
     final itemOrder = useState(itemsConfig.defaultOrder);
     final wishRank = useState(itemsConfig.defaultWishRank);
@@ -56,7 +55,7 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
             controller: scrollController,
             slivers: [
               SliverAppBar(
-                title: Text(l10n.wishList),
+                title: Text(i18n.app.wishList),
                 centerTitle: true,
                 actions: const [_AccountButton()],
               ),
@@ -95,16 +94,16 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
           /// 8の倍数ではないが、文字列が含まれるため許容
           expandWidth: 181,
           duration: const Duration(milliseconds: 150),
-          onPressed: () => _onAdd(context, ref, l10n),
+          onPressed: () => _onAdd(context, ref),
           icon: const Icon(Icons.add),
-          label: Text(l10n.addWishList),
+          label: Text(i18n.app.addWishList),
           controller: scrollController,
         ),
       ),
     );
   }
 
-  Future<void> _onAdd(BuildContext context, WidgetRef ref, L10n l10n) async {
+  Future<void> _onAdd(BuildContext context, WidgetRef ref) async {
     final currentGroup = await ref.read(currentGroupProvider.future);
 
     if (!context.mounted) {
@@ -117,8 +116,8 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
 
     await showAdaptiveOkDialog(
       context,
-      title: l10n.notSelectedGroupDialogTitle,
-      message: l10n.notSelectedGroupDialogMessage,
+      title: i18n.app.notSelectedGroupDialogTitle,
+      message: i18n.app.notSelectedGroupDialogMessage,
     );
   }
 }
@@ -180,16 +179,14 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
   const _AccountButton();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return IconButton(
       icon: const Icon(Icons.account_circle),
-      onPressed: () => onAccount(context, ref, l10n),
-      tooltip: l10n.account,
+      onPressed: () => onAccount(context, ref),
+      tooltip: i18n.app.account,
     );
   }
 
-  Future<void> onAccount(BuildContext context, WidgetRef ref, L10n l10n) async {
+  Future<void> onAccount(BuildContext context, WidgetRef ref) async {
     // ダイアログで選択
     final groupId = await showAdaptiveAccountDialog(context);
     if (groupId == null) {
@@ -202,7 +199,7 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
         context,
         action: () async =>
             ref.read(groupUsecaseProvider).setCurrentGroupId(groupId: groupId),
-        successMessage: l10n.completeChangeGroupMessage,
+        successMessage: i18n.app.completeChangeGroupMessage,
       );
     }
   }
@@ -239,14 +236,13 @@ class _ItemListView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final filterdItems = _filterItems();
 
     if (filterdItems.isEmpty) {
       return SliverFillRemaining(
         hasScrollBody: false,
         child: ListEmptyView(
-          message: l10n.searchEmptyMessage(l10n.wishList),
+          message: i18n.app.searchEmptyMessage(item: i18n.app.wishList),
         ),
       );
     }
@@ -318,10 +314,8 @@ class _ItemOrderChip extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return LeadingIconInputChip(
-      label: Text(value.localeName(l10n)),
+      label: Text(value.localeName),
       iconData: value.iconData,
       onPressed: () async {
         // BottomSheetの表示
@@ -354,13 +348,11 @@ class _PurchaseStatusChip extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     final dispName = value.isEmpty
-        ? l10n.status
+        ? i18n.app.status
         : value.length > 1
-            ? l10n.selectNumberText(value.length)
-            : value.first.localeName(l10n);
+            ? i18n.app.selectNumberText(length: value.length)
+            : value.first.localeName;
 
     return LeadingIconInputChip(
       label: Text(dispName),
@@ -394,13 +386,12 @@ class _WishRankChip extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final selected = value != null;
 
     return LeadingIconInputChip(
       label: selected
-          ? Text('${l10n.star}${value?.toStringAsFixed(1)}')
-          : Text(l10n.wishRank),
+          ? Text('${i18n.app.star}${value?.toStringAsFixed(1)}')
+          : Text(i18n.app.wishRank),
       iconData: Icons.arrow_drop_down,
       onPressed: () async {
         // BottomSheetの表示
@@ -431,7 +422,6 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final firstImagePath = item.imagesPath?.firstOrNull;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -443,15 +433,15 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
         children: [
           SlidableAction(
             onPressed: (_) async {
-              final res = await confirmDismiss(context, ref, l10n);
+              final res = await confirmDismiss(context, ref);
               if (res && context.mounted) {
-                await onDelete(context, ref, l10n);
+                await onDelete(context, ref);
               }
             },
             backgroundColor: colorScheme.error,
             foregroundColor: colorScheme.onError,
             icon: Icons.delete,
-            label: l10n.delete,
+            label: i18n.app.delete,
           ),
         ],
       ),
@@ -474,22 +464,21 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
   Future<bool> confirmDismiss(
     BuildContext context,
     WidgetRef ref,
-    L10n l10n,
   ) async {
     // ダイアログの表示
     final result = await showAdaptiveOkCancelDialog(
       context,
-      title: l10n.deleteConfirmTitle,
-      message: l10n.deleteCofirmMessage(item.name),
+      title: i18n.app.deleteConfirmTitle,
+      message: i18n.app.deleteCofirmMessage(item: item.name),
     );
     return result == DialogResult.ok;
   }
 
-  Future<void> onDelete(BuildContext context, WidgetRef ref, L10n l10n) async {
+  Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     await execute(
       context,
       action: () => ref.read(itemUsecaseProvider).delete(itemId: item.id),
-      successMessage: l10n.completeDeleteMessage,
+      successMessage: i18n.app.completeDeleteMessage,
     );
   }
 }

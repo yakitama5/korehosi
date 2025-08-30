@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -6,7 +7,6 @@ import '../../../../application/model/item/item_order_key.dart';
 import '../../../../application/model/item/item_order_model.dart';
 import '../../../../application/model/order.dart';
 import '../../../components/importer.dart';
-import '../../../hooks/src/use_l10n.dart';
 
 class ItemOrderSelectorBottomSheet extends HookWidget {
   const ItemOrderSelectorBottomSheet({super.key, required this.initial});
@@ -26,12 +26,11 @@ class ItemOrderSelectorBottomSheet extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final orderKey = useState(initial.key);
     final sortOrder = useState(initial.sortOrder);
 
     return BottomSheetColumn(
-      titleData: l10n.sortOrder,
+      titleData: i18n.app.sortOrder,
       children: [
         _OrderKeySegmentedButton(
           value: orderKey.value,
@@ -75,8 +74,6 @@ class _OrderKeySegmentedButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return ExpandWidthContainer(
       child: SegmentedButton<ItemOrderKey>(
         onSelectionChanged: onSelectionChanged,
@@ -84,7 +81,7 @@ class _OrderKeySegmentedButton extends HookWidget {
             .map(
               (e) => ButtonSegment<ItemOrderKey>(
                 value: e,
-                label: Text(e.localeName(l10n)),
+                label: Text(e.localeName),
               ),
             )
             .toList(),
@@ -105,8 +102,6 @@ class _SortOrderSegmentedButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return ExpandWidthContainer(
       child: SegmentedButton<SortOrder>(
         onSelectionChanged: onSelectionChanged,
@@ -114,7 +109,7 @@ class _SortOrderSegmentedButton extends HookWidget {
             .map(
               (e) => ButtonSegment<SortOrder>(
                 value: e,
-                label: Text(e.localeName(l10n)),
+                label: Text(e.description),
               ),
             )
             .toList(),
@@ -131,11 +126,9 @@ class _ApplyButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return FilledButton.tonal(
       onPressed: onPressed,
-      child: Text(l10n.apply),
+      child: Text(i18n.app.apply),
     );
   }
 }
@@ -145,13 +138,11 @@ class _CancelButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return TextButton(
       onPressed: () {
         Navigator.pop(context);
       },
-      child: Text(l10n.cancel),
+      child: Text(i18n.app.cancel),
     );
   }
 }

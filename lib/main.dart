@@ -3,6 +3,7 @@ import 'dart:io' as io;
 import 'package:family_wish_list/app/domain/notification/interface/notification_token_repository.dart';
 import 'package:family_wish_list/app/infrastructure/branch/service/branch_deep_link_service.dart';
 import 'package:family_wish_list/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -53,6 +54,9 @@ import 'firebase_options_dev.dart' as dev;
 void main() async {
   // Flutter Initialize
   WidgetsFlutterBinding.ensureInitialized();
+
+  // slang
+  LocaleSettings.useDeviceLocale();
 
   // 画面の向きを強制
   await SystemChrome.setPreferredOrientations([
@@ -116,38 +120,42 @@ void main() async {
   };
 
   runApp(
-    ProviderScope(
-      overrides: [
-        // 初期ロケーションの設定
-        initialLocationProvider.overrideWith((ref) => null),
+    TranslationProvider(
+      child: ProviderScope(
+        overrides: [
+          // 初期ロケーションの設定
+          initialLocationProvider.overrideWith((ref) => null),
 
-        // インフラ層のDI
-        // Firebase
-        ...await initializeFCMConfig(firebaseOptions),
-        userRepositoryProvider.overrideWith(FirebaseUserRepository.new),
-        groupRepositoryProvider.overrideWith(FirebaseGroupRepository.new),
-        itemRepositoryProvider.overrideWith(FirebaseItemRepository.new),
-        purchaseRepositoryProvider.overrideWith(FirebasePurchaseRepository.new),
-        storageServiceProvider.overrideWith(FirebaseStorageService.new),
-        configServiceProvider.overrideWith(FirebaseConfigService.new),
-        deepLinkServiceProvider.overrideWith(BranchDeepLinkService.new),
-        analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
-        messagingServiceProvider
-            .overrideWith(FirebaseMessagingMessagingService.new),
-        notificationTokenRepositoryProvider
-            .overrideWith(FirebaseNotificationTokenRepository.new),
-        // SharedPreference
-        cachedServiceProvider.overrideWith(SharedPreferenceCachedService.new),
-        // `package_info_plus`
-        appInfoServiceProvider.overrideWith(PackageInfoPlusAppInfoService.new),
-        // `device_info_plus`
-        deviceInfoServiceProvider
-            .overrideWith(DeviceInfoPlusDeviceInfoService.new),
-        // RevenueCat
-        appInPurchaseServiceProvider
-            .overrideWith(RevenueCatAppInPurchaseService.new),
-      ],
-      child: const App(),
+          // インフラ層のDI
+          // Firebase
+          ...await initializeFCMConfig(firebaseOptions),
+          userRepositoryProvider.overrideWith(FirebaseUserRepository.new),
+          groupRepositoryProvider.overrideWith(FirebaseGroupRepository.new),
+          itemRepositoryProvider.overrideWith(FirebaseItemRepository.new),
+          purchaseRepositoryProvider
+              .overrideWith(FirebasePurchaseRepository.new),
+          storageServiceProvider.overrideWith(FirebaseStorageService.new),
+          configServiceProvider.overrideWith(FirebaseConfigService.new),
+          deepLinkServiceProvider.overrideWith(BranchDeepLinkService.new),
+          analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
+          messagingServiceProvider
+              .overrideWith(FirebaseMessagingMessagingService.new),
+          notificationTokenRepositoryProvider
+              .overrideWith(FirebaseNotificationTokenRepository.new),
+          // SharedPreference
+          cachedServiceProvider.overrideWith(SharedPreferenceCachedService.new),
+          // `package_info_plus`
+          appInfoServiceProvider
+              .overrideWith(PackageInfoPlusAppInfoService.new),
+          // `device_info_plus`
+          deviceInfoServiceProvider
+              .overrideWith(DeviceInfoPlusDeviceInfoService.new),
+          // RevenueCat
+          appInPurchaseServiceProvider
+              .overrideWith(RevenueCatAppInPurchaseService.new),
+        ],
+        child: const App(),
+      ),
     ),
   );
 }

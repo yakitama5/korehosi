@@ -1,10 +1,10 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../domain/purchase/value_object/purchase_status.dart';
 import '../../../components/importer.dart';
-import '../../../hooks/src/use_l10n.dart';
 
 class PurchaseStatusSelectorBottomSheet extends HookWidget {
   const PurchaseStatusSelectorBottomSheet({super.key, required this.initial});
@@ -25,11 +25,10 @@ class PurchaseStatusSelectorBottomSheet extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final selected = useState(initial ?? {});
 
     return BottomSheetColumn(
-      titleData: l10n.status,
+      titleData: i18n.app.status,
       children: [
         ExpandWidthContainer(
           child: SegmentedButton<PurchaseStatus>(
@@ -39,7 +38,7 @@ class PurchaseStatusSelectorBottomSheet extends HookWidget {
                 .map(
                   (e) => ButtonSegment<PurchaseStatus>(
                     value: e,
-                    label: Text(e.localeName(l10n)),
+                    label: Text(e.localeName),
                   ),
                 )
                 .toList(),
@@ -52,12 +51,12 @@ class PurchaseStatusSelectorBottomSheet extends HookWidget {
           children: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text(l10n.cancel),
+              child: Text(i18n.app.cancel),
             ),
             const Gap(8),
             FilledButton.tonal(
               onPressed: () => Navigator.of(context).pop(selected.value),
-              child: Text(l10n.apply),
+              child: Text(i18n.app.apply),
             ),
           ],
         ),

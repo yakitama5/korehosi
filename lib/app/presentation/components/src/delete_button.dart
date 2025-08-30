@@ -1,8 +1,7 @@
 import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
-import '../../hooks/src/use_l10n.dart';
 
 /// 削除ボタン
 class DeleteButton extends HookWidget {
@@ -12,7 +11,6 @@ class DeleteButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final colorScheme = useColorScheme();
 
     return IconButton(
@@ -21,7 +19,7 @@ class DeleteButton extends HookWidget {
         Icons.delete,
         color: colorScheme.error,
       ),
-      tooltip: l10n.delete,
+      tooltip: i18n.app.delete,
     );
   }
 }

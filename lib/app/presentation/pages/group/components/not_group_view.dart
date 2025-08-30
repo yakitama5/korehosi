@@ -1,4 +1,5 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -11,7 +12,6 @@ class NotGroupView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final textTheme = useTextTheme();
     final colorScheme = useColorScheme();
 
@@ -34,7 +34,7 @@ class NotGroupView extends HookWidget {
             ),
           ),
           Text(
-            l10n.notJoinedGroupMessage,
+            i18n.app.notJoinedGroupMessage,
             style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           const Gap(40),

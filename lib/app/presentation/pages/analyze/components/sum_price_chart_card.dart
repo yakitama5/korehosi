@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -19,11 +20,11 @@ class SumPriceChartCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final textTheme = useTextTheme();
 
     final price = ref.watch(buyedSumPriceProvider).value;
-    final currencyPrice = price?.formatCurrency(locale: l10n.localeName);
+    final currencyPrice = price?.formatCurrency(
+        locale: AppLocaleUtils.findDeviceLocale().languageCode);
     final spots = ref.watch(monthlySumPriceChartSpotsProvider).value;
     // 一瞬なのでローディング表示は行わない
     if (currencyPrice == null || spots == null) {
@@ -32,7 +33,7 @@ class SumPriceChartCard extends HookConsumerWidget {
 
     return ChartCard(
       onTap: onTap,
-      title: l10n.purchasePrice,
+      title: i18n.app.purchasePrice,
       iconData: Icons.show_chart,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +67,6 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
     final colorScheme = useColorScheme();
     final textTheme = useTextTheme();
     final range = ref.watch(monthlySumPriceChartRangeProvider);
-    final l10n = useL10n();
 
     return Stack(
       children: [
@@ -127,7 +127,9 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
                       .map(
                         (e) => LineTooltipItem(
                           // 小数点は切り捨てて表示
-                          e.y.formatCurrency(locale: l10n.localeName),
+                          e.y.formatCurrency(
+                              locale: AppLocaleUtils.findDeviceLocale()
+                                  .languageCode),
                           textTheme.bodyMedium!
                               .copyWith(color: colorScheme.onSurfaceVariant),
                         ),
@@ -150,7 +152,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
             icon: const Icon(
               Icons.keyboard_arrow_left_rounded,
             ),
-            tooltip: l10n.prev,
+            tooltip: i18n.app.prev,
             onPressed: () =>
                 ref.read(monthlySumPriceChartRangeProvider.notifier).prev(),
           ),
@@ -161,7 +163,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
             padding: const EdgeInsets.only(right: 56),
             child: IconButton(
               icon: const Icon(Icons.keyboard_arrow_right_rounded),
-              tooltip: l10n.next,
+              tooltip: i18n.app.next,
               onPressed: () =>
                   ref.read(monthlySumPriceChartRangeProvider.notifier).next(),
             ),
@@ -173,7 +175,6 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
 
   /// グラフ右側のラベル郡を生成する.
   AxisTitles buildRightTitles(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final textTheme = Theme.of(context).textTheme;
 
     return AxisTitles(
@@ -182,7 +183,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
         reservedSize: 56,
         getTitlesWidget: (value, meta) {
           final currency = value.formatCurrency(
-            locale: l10n.localeName,
+            locale: AppLocaleUtils.findDeviceLocale().languageCode,
           );
 
           return SideTitleWidget(
@@ -199,7 +200,6 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
 
   /// グラフ下側のラベル郡を生成する.
   AxisTitles buildBottomTitles(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final textTheme = Theme.of(context).textTheme;
     final now = DateTime.now();
 
@@ -214,7 +214,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
           return SideTitleWidget(
             meta: meta,
             child: Text(
-              l10n.formatMonth(dt.month),
+              i18n.app.formatMonth(month: dt.month),
               style: textTheme.labelLarge,
             ),
           );

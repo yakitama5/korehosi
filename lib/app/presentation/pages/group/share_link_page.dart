@@ -1,8 +1,8 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/group/group_usecase.dart';
 import '../../../application/usecase/group/state/share_link_page_providers.dart';
 import '../../components/importer.dart';
@@ -45,11 +45,10 @@ class ShareLinkPage extends HookConsumerWidget with PresentationMixin {
 
         if (context.mounted) {
           // ダイアログを表示
-          final l10n = ref.read(l10nProvider);
           await showAdaptiveOkDialog(
             context,
-            title: l10n.joinedGroupTitle,
-            message: l10n.joinedGroupMessage,
+            title: i18n.app.joinedGroupTitle,
+            message: i18n.app.joinedGroupMessage,
           );
         }
       },

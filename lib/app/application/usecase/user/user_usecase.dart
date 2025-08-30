@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:family_wish_list/app/application/usecase/user/state/token_timestamp_provider.dart';
 import 'package:family_wish_list/app/domain/service/cached_service.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -18,7 +19,6 @@ import '../../../domain/user/value_object/age_group.dart';
 import '../../../utils/logger.dart';
 import '../../config/app_config.dart';
 import '../../model/flavor.dart';
-import '../../state/locale_provider.dart';
 import '../group/state/current_group_id_provider.dart';
 import '../group/state/group_provider.dart';
 import '../item/state/items_provider.dart';
@@ -64,9 +64,8 @@ class UserUsecase with RunUsecaseMixin {
       ref,
       action: () async {
         // 内容を元に編集
-        final l10n = ref.read(l10nProvider);
         final groupName =
-            '${name ?? l10n.noName}${l10n.groupInitialNameSuffix}';
+            '${name ?? i18n.app.noName}${i18n.app.groupInitialNameSuffix}';
 
         // 登録
         await ref.read(userRepositoryProvider).signUp(

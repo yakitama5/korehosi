@@ -1,5 +1,6 @@
 import 'package:family_wish_list/app/presentation/components/src/app_lifecycle_builder.dart';
 import 'package:family_wish_list/app/presentation/hooks/src/use_theme.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -9,7 +10,6 @@ import '../../../application/config/url_config.dart';
 import '../../components/importer.dart';
 import '../../helper/permission_helper.dart';
 import '../../helper/url_launcher_helper.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../../theme/importer.dart';
 
@@ -18,8 +18,6 @@ class SettingsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     // 設定アプリと行き来するため、ライフサイクルを検知してリビルドを行う
     return AppLifecycleBuilder(
       builder: (context, state) {
@@ -33,7 +31,7 @@ class SettingsPage extends HookConsumerWidget {
         final isNotificationGranted = Permission.notification.status.isGranted;
         return Scaffold(
           appBar: AppBar(
-            title: Text(l10n.settings),
+            title: Text(i18n.app.settings),
             centerTitle: true,
           ),
           body: FutureBuilder(
@@ -41,24 +39,24 @@ class SettingsPage extends HookConsumerWidget {
             builder: (_, snap) => ThemedSettingsList(
               sections: [
                 SettingsSection(
-                  title: Text(l10n.account),
+                  title: Text(i18n.app.account),
                   tiles: [
                     SettingsTile.navigation(
                       leading: const Icon(Icons.person),
                       trailing: trailing,
-                      title: Text(l10n.profile),
+                      title: Text(i18n.app.profile),
                       onPressed: (context) => _onProfile(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.group),
                       trailing: trailing,
-                      title: Text(l10n.group),
+                      title: Text(i18n.app.group),
                       onPressed: (context) => _onGroup(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.link),
                       trailing: trailing,
-                      title: Text(l10n.account),
+                      title: Text(i18n.app.account),
                       onPressed: (context) => _onAccount(context, ref),
                     ),
                     SettingsTile.switchTile(
@@ -79,42 +77,42 @@ class SettingsPage extends HookConsumerWidget {
                           );
                         }
                       },
-                      title: Text(l10n.pushNotification),
-                      description: Text(l10n.pushNotificationDescription),
+                      title: Text(i18n.app.pushNotification),
+                      description: Text(i18n.app.pushNotificationDescription),
                     ),
                   ],
                 ),
                 SettingsSection(
-                  title: Text(l10n.help),
+                  title: Text(i18n.app.help),
                   tiles: [
                     SettingsTile.navigation(
                       leading: const Icon(CustomIcons.beginner),
                       trailing: trailing,
-                      title: Text(l10n.howToUse),
+                      title: Text(i18n.app.howToUse),
                       onPressed: (context) => _onHowToUse(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.help),
                       trailing: trailing,
-                      title: Text(l10n.contactUs),
+                      title: Text(i18n.app.contactUs),
                       onPressed: (context) => _onContactUs(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(CustomIcons.x_twitter),
                       trailing: trailing,
-                      title: Text(l10n.developperTwitter),
+                      title: Text(i18n.app.developperTwitter),
                       onPressed: (context) =>
                           _onDevelopperTwitter(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.lock),
                       trailing: trailing,
-                      title: Text(l10n.privacyPolicy),
+                      title: Text(i18n.app.privacyPolicy),
                       onPressed: (context) => _onPrivacyPolicy(context, ref),
                     ),
                     SettingsTile.navigation(
                       trailing: trailing,
-                      title: Text(l10n.license),
+                      title: Text(i18n.app.license),
                       onPressed: (context) => _onLicense(context, ref),
                     ),
                   ],

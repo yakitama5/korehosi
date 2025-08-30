@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,15 +11,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../../application/model/dialog_result.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/group/group_usecase.dart';
 import '../../../application/usecase/group/state/current_group_id_provider.dart';
 import '../../../application/usecase/group/state/group_detail_providers.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../domain/user/entity/user.dart';
-import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
 import '../item/components/list_loader_view.dart';
@@ -31,7 +29,6 @@ class GroupPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final scrollController = useScrollController();
 
     final group = ref.watch(GroupDetailProviders.groupProvider);
@@ -40,7 +37,7 @@ class GroupPage extends HookConsumerWidget {
       skipLoadingOnReload: true,
       data: (groupData) {
         if (groupData == null) {
-          return ErrorView(l10n.deletedMessage, null);
+          return ErrorView(i18n.app.deletedMessage, null);
         }
 
         return Scaffold(
@@ -117,8 +114,6 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
           .select((value) => value.value?.premium == true),
     );
 
-    final l10n = useL10n();
-
     return SliverVisibility(
       visible: !premiumed && !kIsWeb,
       sliver: SliverPadding(
@@ -126,7 +121,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
         sliver: SliverToBoxAdapter(
           child: FilledButton.icon(
             onPressed: () => onPremium(context, ref),
-            label: Text(l10n.joinPremiumGroup),
+            label: Text(i18n.app.joinPremiumGroup),
             icon: Icon(MdiIcons.crown),
           ),
         ),
@@ -135,12 +130,11 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
   }
 
   Future<void> onPremium(BuildContext context, WidgetRef ref) async {
-    final l10n = ref.read(l10nProvider);
     final group = await ref.read(GroupDetailProviders.groupProvider.future);
     if (group == null && context.mounted) {
       ErrorSnackBar.show(
         ScaffoldMessenger.of(context),
-        message: l10n.unexpectedErrorMessage,
+        message: i18n.app.unexpectedErrorMessage,
       );
       return;
     }
@@ -157,9 +151,10 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       }
       final result = await showAdaptiveOkCancelDialog(
         context,
-        title: l10n.itemPurchase,
-        okLabel: l10n.purchaseOkLabel(price),
-        message: l10n.itemLimitReleaseMessage(l10n.lifeful, price),
+        title: i18n.app.itemPurchase,
+        okLabel: i18n.app.purchaseOkLabel(price: price),
+        message: i18n.app
+            .itemLimitReleaseMessage(term: i18n.app.lifeful, price: price),
       );
 
       if (result != DialogResult.ok) {
@@ -173,7 +168,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
           action: () => ref
               .read(groupUsecaseProvider)
               .upgradeLimitedReleasePlan(groupId: group!.id),
-          successMessage: l10n.joinedPremiumGroup,
+          successMessage: i18n.app.joinedPremiumGroup,
         );
       }
     } on PlatformException catch (e) {
@@ -183,7 +178,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
         if (context.mounted) {
           ErrorSnackBar.show(
             ScaffoldMessenger.of(context),
-            message: l10n.unexpectedErrorMessage,
+            message: i18n.app.unexpectedErrorMessage,
           );
         }
       }
@@ -191,7 +186,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       if (context.mounted) {
         ErrorSnackBar.show(
           ScaffoldMessenger.of(context),
-          message: l10n.unexpectedErrorMessage,
+          message: i18n.app.unexpectedErrorMessage,
         );
       }
     }
@@ -208,12 +203,10 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
-    final l10n = useL10n();
-
     return FloatingActionButton.extended(
       onPressed: () => onShare(context, ref),
       icon: const Icon(Icons.share),
-      label: Text(l10n.share),
+      label: Text(i18n.app.share),
     );
   }
 
@@ -249,16 +242,14 @@ class _ListTile extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return ListTile(
       title: Text(
-        user.dispName(l10n),
+        user.dispName,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
-        user.ageGroup.getLocaleName(l10n),
+        user.ageGroup.localeName,
       ),
     );
   }
@@ -280,12 +271,10 @@ class _SelectButton extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
-    final l10n = useL10n();
-
     return IconButton(
       onPressed: () => onSelect(context, ref),
       icon: const Icon(Icons.check_circle_outline_outlined),
-      tooltip: l10n.select,
+      tooltip: i18n.app.select,
     );
   }
 
@@ -312,12 +301,10 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return IconButton(
       onPressed: () => onEdit(context, ref),
       icon: const Icon(Icons.edit),
-      tooltip: l10n.edit,
+      tooltip: i18n.app.edit,
     );
   }
 
@@ -332,14 +319,13 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
         }
 
         // 値の入力 (ダイアログ表示)
-        final l10n = ref.read(l10nProvider);
         final result = await showAdaptiveTextDialog(
           context,
-          title: l10n.groupName,
+          title: i18n.app.groupName,
           initial: prev!.name,
-          labelText: l10n.groupName,
+          labelText: i18n.app.groupName,
           maxLength: 40,
-          okLabel: l10n.save,
+          okLabel: i18n.app.save,
           isRequired: true,
         );
         if (result == null || result.isEmpty) {
@@ -371,7 +357,6 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
-    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () => onDelete(context, ref),
@@ -379,7 +364,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
         Icons.delete,
         color: colorScheme.error,
       ),
-      tooltip: l10n.delete,
+      tooltip: i18n.app.delete,
     );
   }
 
@@ -387,12 +372,11 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     final navigator = Navigator.of(context);
 
     // 削除確認
-    final l10n = ref.read(l10nProvider);
     final group = ref.read(GroupDetailProviders.groupProvider).value;
     final result = await showAdaptiveOkCancelDialog(
       context,
-      title: l10n.deleteConfirmTitle,
-      message: l10n.deleteGroupCofirmMessage(group?.name ?? ''),
+      title: i18n.app.deleteConfirmTitle,
+      message: i18n.app.deleteGroupCofirmMessage(name: group?.name ?? ''),
     );
     if (result != DialogResult.ok) {
       return;
@@ -429,7 +413,6 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
       return const SizedBox.shrink();
     }
 
-    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
     return IconButton(
       onPressed: () => onLeave(context, ref),
@@ -437,7 +420,7 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
         Icons.person_off,
         color: colorScheme.error,
       ),
-      tooltip: l10n.leave,
+      tooltip: i18n.app.leave,
     );
   }
 
@@ -445,12 +428,11 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
     final navigator = Navigator.of(context);
 
     // 離脱確認
-    final l10n = ref.read(l10nProvider);
     final group = ref.read(GroupDetailProviders.groupProvider).value;
     final result = await showAdaptiveOkCancelDialog(
       context,
-      title: l10n.leaveConfirmTitle,
-      message: l10n.leaveCofirmMessage(group?.name ?? ''),
+      title: i18n.app.leaveConfirmTitle,
+      message: i18n.app.leaveCofirmMessage(group: group?.name ?? ''),
     );
     if (result != DialogResult.ok) {
       return;

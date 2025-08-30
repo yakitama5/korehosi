@@ -1,4 +1,5 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -61,7 +62,6 @@ class _StartButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final colorScheme = useColorScheme();
     final textTheme = useTextTheme();
 
@@ -71,12 +71,12 @@ class _StartButton extends HookWidget {
           child: ExpandWidthContainer(
             child: FilledButton(
               onPressed: () => onStart(context),
-              child: Text(l10n.start),
+              child: Text(i18n.app.start),
             ),
           ),
         ),
         Text(
-          l10n.firstTime,
+          i18n.app.firstTime,
           style: textTheme.labelMedium
               ?.copyWith(color: colorScheme.onSurfaceVariant),
         ),
@@ -93,13 +93,11 @@ class _AccountLinkButton extends HookWidget {
   const _AccountLinkButton();
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return ConstrainedTabletBox(
       child: ExpandWidthContainer(
         child: OutlinedButton(
           onPressed: () => onAccountLink(context),
-          child: Text(l10n.accountLink),
+          child: Text(i18n.app.accountLink),
         ),
       ),
     );
@@ -115,23 +113,22 @@ class _Links extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return Column(
       children: [
-        UrlLink(url: urlConfig.howToUse, label: l10n.howToUse),
+        UrlLink(url: urlConfig.howToUse, label: i18n.app.howToUse),
         const Gap(32),
         ExpandWidthContainer(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Flexible(
-                child: UrlLink(url: urlConfig.contactUs, label: l10n.contactUs),
+                child: UrlLink(
+                    url: urlConfig.contactUs, label: i18n.app.contactUs),
               ),
               Flexible(
                 child: UrlLink(
                   url: urlConfig.privacyPolicyJa,
-                  label: l10n.privacyPolicy,
+                  label: i18n.app.privacyPolicy,
                 ),
               ),
             ],

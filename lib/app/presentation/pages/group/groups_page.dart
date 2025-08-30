@@ -1,11 +1,10 @@
-import 'package:family_wish_list/l10n/app_localizations.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../application/model/dialog_result.dart';
-import '../../../application/state/locale_provider.dart';
 import '../../../application/usecase/group/group_usecase.dart';
 import '../../../application/usecase/group/state/current_group_provider.dart';
 import '../../../application/usecase/group/state/join_groups_provider.dart';
@@ -13,7 +12,6 @@ import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../application/usecase/user/state/group_join_user_provider.dart';
 import '../../../domain/group/entity/group.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../../hooks/src/use_theme.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
@@ -26,7 +24,6 @@ class GroupsPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
     final scrollController = useScrollController();
 
     return Scaffold(
@@ -35,12 +32,12 @@ class GroupsPage extends HookWidget {
           controller: scrollController,
           slivers: [
             SliverAppBar(
-              title: Text(l10n.joinGroup),
+              title: Text(i18n.app.joinGroup),
               actions: [
                 IconButton(
-                  onPressed: () => _onHelp(context, l10n),
+                  onPressed: () => _onHelp(context),
                   icon: const Icon(Icons.help),
-                  tooltip: l10n.help,
+                  tooltip: i18n.app.help,
                 ),
               ],
             ),
@@ -52,12 +49,12 @@ class GroupsPage extends HookWidget {
     );
   }
 
-  void _onHelp(BuildContext context, L10n l10n) {
+  void _onHelp(BuildContext context) {
     showAdaptiveOkDialog(
       context,
       icon: const Icon(Icons.help),
-      title: l10n.shareGroupHelpTitle,
-      message: l10n.shareGroupHelpMessage,
+      title: i18n.app.shareGroupHelpTitle,
+      message: i18n.app.shareGroupHelpMessage,
     );
   }
 }
@@ -97,10 +94,8 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
   const _Fab();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return FloatingActionButton.extended(
-      label: Text(l10n.addGroup),
+      label: Text(i18n.app.addGroup),
       icon: const Icon(Icons.add),
       onPressed: () => onAdd(context, ref),
     );
@@ -109,13 +104,12 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
   Future<void> onAdd(BuildContext context, WidgetRef ref) async {
     // ダイアログを表示して入力を促す
     // 値の入力 (ダイアログ表示)
-    final l10n = ref.read(l10nProvider);
     final inputName = await showAdaptiveTextDialog(
       context,
-      title: l10n.groupName,
-      labelText: l10n.groupName,
+      title: i18n.app.groupName,
+      labelText: i18n.app.groupName,
       maxLength: 40,
-      okLabel: l10n.save,
+      okLabel: i18n.app.save,
       isRequired: true,
     );
     if (inputName == null) {
@@ -141,7 +135,6 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final colorScheme = useColorScheme();
 
     final owner = ref.watch(
@@ -178,7 +171,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
               overflow: TextOverflow.ellipsis,
             ),
             subtitle: Text(
-              ownerData?.name ?? l10n.unset,
+              ownerData?.name ?? i18n.app.unset,
             ),
             // 表示中のグループにアイコンを表示
             leading: group.id == currentGroupData?.id
@@ -200,7 +193,6 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
   }
 
   SlidableAction _buildDeleteAction(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final colorScheme = Theme.of(context).colorScheme;
 
     return SlidableAction(
@@ -213,12 +205,11 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
       backgroundColor: colorScheme.error,
       foregroundColor: colorScheme.onError,
       icon: Icons.delete,
-      label: l10n.delete,
+      label: i18n.app.delete,
     );
   }
 
   SlidableAction _buildLeaveAction(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
     final colorScheme = useColorScheme();
 
     return SlidableAction(
@@ -231,28 +222,26 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
       backgroundColor: colorScheme.error,
       foregroundColor: colorScheme.onError,
       icon: Icons.person_off,
-      label: l10n.leave,
+      label: i18n.app.leave,
     );
   }
 
   Future<bool> confirmDelete(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
-    final l10n = ref.read(l10nProvider);
     final result = await showAdaptiveOkCancelDialog(
       context,
-      title: l10n.deleteConfirmTitle,
-      message: l10n.deleteGroupCofirmMessage(group.name),
+      title: i18n.app.deleteConfirmTitle,
+      message: i18n.app.deleteGroupCofirmMessage(name: group.name),
     );
     return result == DialogResult.ok;
   }
 
   Future<bool> confirmLeave(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
-    final l10n = ref.read(l10nProvider);
     final result = await showAdaptiveOkCancelDialog(
       context,
-      title: l10n.leaveConfirmTitle,
-      message: l10n.leaveCofirmMessage(group.name),
+      title: i18n.app.leaveConfirmTitle,
+      message: i18n.app.leaveCofirmMessage(group: group.name),
     );
     return result == DialogResult.ok;
   }

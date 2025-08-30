@@ -1,3 +1,4 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,7 +11,6 @@ import '../../../domain/service/cached_service.dart';
 import '../../../domain/service/deep_link_service.dart';
 import '../../config/app_config.dart';
 import '../../config/group_config.dart';
-import '../../state/locale_provider.dart';
 import '../run_usecase_mixin.dart';
 import '../user/state/auth_user_provider.dart';
 import 'state/current_group_id_provider.dart';
@@ -141,22 +141,23 @@ class GroupUsecase with RunUsecaseMixin {
               .read(groupRepositoryProvider)
               .joinGroup(shareLinkId: shareLinkId);
 
-          final l10n = ref.read(l10nProvider);
           switch (code) {
             case null:
               // do nothing
               break;
             case JoinGroupErrorCode.joinedGroup:
-              throw BusinessException(l10n.joinGroupErrorMessageJoinedGroup);
+              throw BusinessException(
+                  i18n.app.joinGroupErrorMessageJoinedGroup);
             case JoinGroupErrorCode.notAuth:
-              throw BusinessException(l10n.joinGroupErrorMessageNotAuth);
+              throw BusinessException(i18n.app.joinGroupErrorMessageNotAuth);
             case JoinGroupErrorCode.invalidDate:
-              throw BusinessException(l10n.joinGroupErrorMessageInvalidDate);
+              throw BusinessException(
+                  i18n.app.joinGroupErrorMessageInvalidDate);
             case JoinGroupErrorCode.overCount:
-              throw BusinessException(l10n.joinGroupErrorMessageLimitOver);
+              throw BusinessException(i18n.app.joinGroupErrorMessageLimitOver);
             case JoinGroupErrorCode.invalidRequest:
               throw BusinessException(
-                l10n.joinGroupErrorMessageInvalidShareLink,
+                i18n.app.joinGroupErrorMessageInvalidShareLink,
               );
           }
         },

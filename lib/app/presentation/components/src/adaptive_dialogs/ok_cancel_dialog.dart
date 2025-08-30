@@ -1,8 +1,8 @@
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../application/model/dialog_result.dart';
-import '../../../hooks/importer.dart';
 import 'adaptive_action.dart';
 
 /// 「OK or Cancel」をアクションに持つダイアログ
@@ -22,18 +22,16 @@ class OkCancelDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return AlertDialog.adaptive(
       title: Text(title ?? ''),
       content: Text(message ?? ''),
       actions: [
         AdaptiveAction(
-          child: Text(cancelLabel ?? l10n.cancel),
+          child: Text(cancelLabel ?? i18n.app.cancel),
           onPressed: () => Navigator.pop(context, DialogResult.cancel),
         ),
         AdaptiveAction(
-          child: Text(okLabel ?? l10n.ok),
+          child: Text(okLabel ?? i18n.app.ok),
           onPressed: () => Navigator.pop(context, DialogResult.ok),
         ),
       ],

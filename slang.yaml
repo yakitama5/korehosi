@@ -1,0 +1,11 @@
+fallback_strategy: base_locale
+input_directory: assets/i18n
+output_directory: lib/i18n
+translate_var: i18n
+input_file_pattern: .i18n.yaml
+namespaces: true
+lazy: false
+
+# Config
+imports:
+  - "package:flutter/material.dart"

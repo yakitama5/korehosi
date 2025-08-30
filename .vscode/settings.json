@@ -1,5 +1,4 @@
 {
-  "java.configuration.updateBuildConfiguration": "disabled",
   "git.autofetch": true,
   "[dart]": {
     "editor.formatOnSave": true,
@@ -9,9 +8,7 @@
     "editor.suggestSelection": "recentlyUsedByPrefix",
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off",
-    "editor.rulers": [
-      80
-    ],
+    "editor.rulers": [80],
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
       "source.organizeImports": "explicit",
@@ -25,7 +22,10 @@
     "**/*.g.dart": true
   },
   "files.watcherExclude": {
-    "**/.fvm": true
+    "**/.fvm": true,
+    "/.mason": true,
+    "**/.dart_tool": true,
+    "/.idea": true,
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
@@ -34,7 +34,87 @@
     "firebase.json": ".firebaserc, firestore.rules, firestore.indexes.json,storage.rules, remoteconfig.template.json",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
     "readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
-    "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).gform.dart"
+    "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).gform.dart",
+    "*_en.i18n.yaml": "$(capture)_*.i18n.yaml"
   },
-  "dart.flutterSdkPath": ".fvm/versions/3.35.1"
+  "dart.flutterSdkPath": ".fvm/versions/3.29.0",
+  "dart.sdkPath": ".fvm/flutter_sdk/bin/cache/dart-sdk",
+  "github.copilot.enable": {
+    "*": false
+  },
+  "github.copilot.editor.enableCodeActions": false,
+  "github.copilot.editor.enableAutoCompletions": false,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.associations": {
+    "*.json": "json"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "vscodeGitCommit.template": ["{prefix}: {message}"],
+  "vscodeGitCommit.variables": {
+    "prefix": "aliasesType",
+    "aliasesType": [
+      {
+        "label": "✨feat",
+        "detail": "新機能（New Feature）"
+      },
+      {
+        "label": "🐛fix",
+        "detail": "バグ修正（Bugfix）"
+      },
+      {
+        "label": "♻️refactor",
+        "detail": "リファクタリング(Refactoring)"
+      },
+      {
+        "label": "📚doc",
+        "detail": "ドキュメント（Documentation）"
+      },
+      {
+        "label": "🎨design",
+        "detail": "デザインUI/UX(Accessibility)"
+      },
+      {
+        "label": "🐎perf",
+        "detail": "パフォーマンス（Performance）"
+      },
+      {
+        "label": "🔧chore",
+        "detail": "ビルド、補助ツール、ライブラリ関連(Settings)"
+      },
+      {
+        "label": "🚨test",
+        "detail": "テスト（Tests）"
+      },
+      {
+        "label": "🗨️comment",
+        "detail": "コメント整理、TODOコメント(Comment)"
+      },
+      {
+        "label": "♻️generete",
+        "detail": "コード(再)生成、Bootstrap(Generate)"
+      },
+      {
+        "label": "🎉new",
+        "detail": "初めてのコミット（Initial Commit）"
+      },
+      {
+        "label": "🔖tag",
+        "detail": "バージョンタグ（Version Tag）"
+      },
+      {
+        "label": "🚧wip",
+        "detail": "WIP(Work In Progress)"
+      },
+      {
+        "label": "💩depre",
+        "detail": "非推奨追加（Deprecation）"
+      }
+    ]
+  }
 }

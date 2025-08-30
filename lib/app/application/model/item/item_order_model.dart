@@ -1,4 +1,3 @@
-import 'package:family_wish_list/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,6 +16,6 @@ abstract class ItemOrderModel with _$ItemOrderModel {
 
   const ItemOrderModel._();
 
-  String localeName(L10n l10n) => key.localeName(l10n);
+  String get localeName => key.localeName;
   IconData get iconData => key.iconData(sortOrder);
 }

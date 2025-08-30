@@ -1,4 +1,5 @@
 import 'package:family_wish_list/gen/assets.gen.dart';
+import 'package:family_wish_list/i18n/strings.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -7,7 +8,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 import '../../../application/usecase/user/user_usecase.dart';
 import '../../components/importer.dart';
-import '../../hooks/src/use_l10n.dart';
 import '../../theme/importer.dart';
 import '../presentation_mixin.dart';
 
@@ -16,10 +16,8 @@ class AccountLinkPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = useL10n();
-
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.accountLink)),
+      appBar: AppBar(title: Text(i18n.app.accountLink)),
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(8),
@@ -70,21 +68,20 @@ class _Caption extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final l10n = useL10n();
 
     return ExpandWidthContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.accountLinkDescTitle,
+            i18n.app.accountLinkDescTitle,
             style: textTheme.titleMedium,
           ),
           const Gap(16),
           ItemizedText([
-            Text(l10n.accountLinkDescBodyCloudBackup),
-            Text(l10n.accountLinkDescBodyMultiDevice),
-            Text(l10n.accountLinkDescBodyDataSend),
+            Text(i18n.app.accountLinkDescBodyCloudBackup),
+            Text(i18n.app.accountLinkDescBodyMultiDevice),
+            Text(i18n.app.accountLinkDescBodyDataSend),
           ]),
         ],
       ),
@@ -96,14 +93,12 @@ class _GoogleSignInButton extends HookConsumerWidget with PresentationMixin {
   const _GoogleSignInButton();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = useL10n();
-
     return ConstrainedTabletBox(
       child: ExpandWidthContainer(
         child: OutlinedButton.icon(
           onPressed: () => onSignInWithGoogle(context, ref),
           icon: const GoogleIcon(),
-          label: Text(l10n.signInWithGoogle),
+          label: Text(i18n.app.signInWithGoogle),
         ),
       ),
     );
@@ -122,7 +117,6 @@ class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
-    final l10n = useL10n();
 
     return ConstrainedTabletBox(
       child: ExpandWidthContainer(
@@ -132,7 +126,7 @@ class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
             MdiIcons.apple,
             color: colorScheme.onSurface,
           ),
-          label: Text(l10n.signInWithApple),
+          label: Text(i18n.app.signInWithApple),
         ),
       ),
     );
