@@ -12,27 +12,26 @@ class _Wrapper extends SingleChildStatelessWidget {
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
-    return TranslationProvider(
-      child: ProviderScope(
-        // `materialAppWrapper`は利用しない
-        child: MaterialApp(
-          theme: ThemeData(
-            brightness: Brightness.light,
-            colorScheme: lightColorScheme,
-            fontFamily: 'Murecho',
-          ),
-          home: Nested(
-            children: const [
-              ReactiveFormWrapper(),
-              ResponsiveAutoScaleBox(),
-            ],
-            child: child ?? const SizedBox.shrink(),
-          ),
-          supportedLocales: AppLocaleUtils.supportedLocales,
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          locale: const Locale('ja'),
-          debugShowCheckedModeBanner: false,
+    LocaleSettings.setLocaleRaw('ja');
+    return ProviderScope(
+      // `materialAppWrapper`は利用しない
+      child: MaterialApp(
+        theme: ThemeData(
+          brightness: Brightness.light,
+          colorScheme: lightColorScheme,
+          fontFamily: 'Murecho',
         ),
+        home: Nested(
+          children: const [
+            ReactiveFormWrapper(),
+            ResponsiveAutoScaleBox(),
+          ],
+          child: child ?? const SizedBox.shrink(),
+        ),
+        supportedLocales: AppLocaleUtils.supportedLocales,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
+        locale: const Locale('ja'),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
