@@ -17,7 +17,6 @@ dev_dependencies:
   yaml: ^3.1.2
   yaml_edit: ^2.2.1
 
-# melosのパスが通っていないことを考慮して `dart run melos **`で実行する
 melos: 
   command:
     bootstrap:
@@ -40,8 +39,6 @@ melos:
     build_app_android_dev: melos exec --scope="flutter_app" -- fvm flutter build appbundle --dart-define-from-file=flavor/dev.json
 
     report_test:
-      exec: flutter test --no-pub --machine > test_report.log
-      packageFilters:
         flutter: true
         dependsOn: test
 
@@ -54,7 +51,7 @@ melos:
       packageFilters:
         dependsOn: custom_lint
 
-    regenerate_code: dart run melos run regenerate_by_using_build_runner && dart run melos run regenerate_by_using_gen_slang
+    regenerate_code: melos run regenerate_by_using_build_runner && melos run regenerate_by_using_gen_slang
 
     regenerate_by_using_build_runner:
       run: dart run build_runner build -d
