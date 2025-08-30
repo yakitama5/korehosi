@@ -3,7 +3,6 @@ name: Flutter Analyze
 
 # ワークフローの起動条件を定義する
 on:
-
   # プルリクエストが作成 or 更新された時
   pull_request:
     types:
@@ -14,15 +13,11 @@ on:
   push:
     branches:
       - main
-    # tagの作成時にビルド実行
-    tags:
-      - 'v*'
 
 # 複数のジョブを定義する
 # 各ジョブはそれぞれまったく別々の環境で実行される
 jobs:
   flutter_analyze:
-
     # ジョブの表示名
     name: Analyze
 
@@ -37,44 +32,24 @@ jobs:
 
     # ジョブの手順
     steps:
-
-      # ソースコードをチェックアウト
+      # チェックアウト
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 環境ファイルの作成
-      - name: Create dart-define
-        run: |
-          mkdir -p dart_defines
-          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
-      
-      # Firebaseの接続情報の作成
-      - name: Create Firebase Conf
-        run: |
-          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
-          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > lib/firebase_options_dev.dart
-          mkdir -p android/app/src/prod/
-          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > android/app/src/prod/google-services.json
-          mkdir -p ios/prod/
-          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > ios/prod/GoogleService-Info.plist
-
-      # 機密ファイルの作成
-      - name: Create env
-        run: |
-          mkdir -p scripts
-          mkdir -p scripts/env
-          echo -n ${{ secrets.ENV_FILE }} | base64 -d > scripts/env/.env
-          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > scripts/env/.env.dev
-
       # セットアップ
-      - name: Setup Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ vars.FLUTTER_VERSION }}
-          channel: ${{ vars.FLUTTER_CHANNEL }}
-          cache: true
+      - name: Setup Config Files
+        uses: ./.github/actions/setup-config-files
+        env: # Set the secret as an input
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+      - name: Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
 
       # 静的解析を実行
-      - run: flutter pub get
-      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: melos run regenerate_code
       - run: flutter analyze

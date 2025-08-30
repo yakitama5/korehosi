@@ -1,140 +1,95 @@
 name: family_wish_list
-description: 子供と大人で利用する、家族のための欲しい物リストアプリ
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
-
-version: 1.0.8+20
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ^3.9.0
 
-dependencies:
-  adaptive_dialog: any
-  cached_network_image: any
-  carousel_slider: any
-  cloud_firestore: any
-  cloud_functions: any
-  collection: any
-  device_info_plus: any
-  dynamic_color: any
-  envied: any
-  fcm_config: ^3.6.5
-  firebase_analytics: any
-  firebase_app_check: any
-  firebase_auth: any
-  firebase_core: any
-  firebase_crashlytics: any
-  firebase_remote_config: any
-  firebase_storage: any
-  fl_chart: any
-  flutter:
-    sdk: flutter
-  flutter_branch_sdk: ^8.6.0
-  flutter_hooks: any
-  flutter_image_compress: any
-  flutter_localizations:
-    sdk: flutter
-  flutter_rating_bar: any
-  flutter_slidable: any
-  flutter_svg: any
-  flutter_web_plugins:
-    sdk: flutter
-  freezed_annotation: any
-  gap: any
-  gauge_indicator: any
-  go_router: any
-  google_fonts: any
-  google_sign_in: any
-  hooks_riverpod: any
-  image_gallery_saver_plus: any
-  image_picker: any
-  intl: any
-  introduction_screen: any
-  json_serializable: any
-  logger: any
-  lottie: any
-  material_color_utilities: any
-  material_design_icons_flutter: any
-  nested: any
-  package_info_plus: any
-  path_provider: any
-  pattern_formatter: any
-  permission_handler: any
-  photo_view: any
-  purchases_flutter: any
-  qr_flutter: any
-  reactive_cupertino_text_field: any
-  reactive_date_time_picker: any
-  reactive_flutter_rating_bar: any
-  reactive_forms: any
-  reactive_forms_annotations: any
-  reactive_image_picker: any
-  responsive_framework: any
-  riverpod_annotation: any
-  settings_ui: any
-  share_plus: any
-  shared_preferences: any
-  shimmer: any
-  slang: ^4.8.1
-  slang_flutter: ^4.8.0
-  store_redirect: any
-  url_launcher: any
-  uuid: any
-  version: any
+workspace:
+  - apps/app
 
 dev_dependencies:
-  alchemist: ^0.12.1
-  build_runner: any
   custom_lint: any
-  envied_generator: any
-  fake_cloud_firestore: any
-  firebase_auth_mocks: any
-  firebase_storage_mocks: any
-  flutter_gen_runner: any
-  flutter_launcher_icons: any
-  flutter_lints: any
-  flutter_test:
-    sdk: flutter
-  freezed: null
-  go_router_builder: any
-  google_sign_in_mocks: any
-  lint:
-    path: ./lint
-  mocktail: any
-  nilts: ^0.23.1
+  flutter_lints:
+  grinder: ^0.9.5
+  melos: ^7.0.0-dev.7
+  nilts: any
+  path: ^1.9.0
   pedantic_mono: any
-  reactive_forms_generator: any
-  riverpod_generator: any
+  yaml: ^3.1.2
+  yaml_edit: ^2.2.1
 
-flutter:
-  generate: true
-  uses-material-design: true
+melos: 
+  command:
+    bootstrap:
+      environment:
+        sdk: ^3.9.0
+        flutter: ^3.35.1
+    clean:
+      hooks:
+        post: melos exec --flutter --concurrency=3 -- "flutter clean"
+          melos exec --flutter --file-exists="ios/Podfile.lock" -- "cd ios && rm Podfile.lock"
+          melos exec --flutter --file-exists="macos/Podfile.lock" -- "cd macos && rm Podfile.lock"
 
-  # Assets & Fonts
-  assets:
-    - assets/images/
-    - assets/lottie/
-  fonts:
-    - family: CustomIcons
-      fonts:
-        - asset: assets/icons/CustomIcons.ttf
-    - family: Murecho
-      fonts:
-        - asset: assets/fonts/Murecho-VariableFont_wght.ttf
+  scripts:
+    build_app: melos run build_app_android && melos run build_app_ios
+    build_app_dev: melos run build_app_android_dev && melos run build_app_ios_dev
 
-# App Icon
-flutter_launcher_icons:
-  # https://zenn.dev/tsuruo/articles/eae9dbbad8372f#themed-app-icons
-  # https://blog.okaryo.io/20221127-support-themed-app-icon-in-flutter-app-for-android-13
-  android: true
-  ios: true
-  image_path: "assets/lancher_icons/AppIcon.png"
-  min_sdk_android: 21
-  adaptive_icon_background: "#FFFFFF"
-  adaptive_icon_foreground: "assets/lancher_icons/AppIcon_foreground.png"
-  # monochromeIconを作成する場合に以下を指定して一度生成する方法が一番楽かな？
-  # `/android/app/src/main/res/**/ic_launcher_foreground.png`を全て`ic_launcher_monochrome.png`にリネーム
-  # `android/res/mipmap-anydpi-v26/ic_launcher.xml`にmonochrome分を追加すれば完了
-  # adaptive_icon_foreground: "assets/lancher_icons/AppIcon_foreground_monochrome.png"
+    build_app_ios: melos exec --scope="flutter_app" -- fvm flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=flavor/prod.json
+    build_app_ios_dev: melos exec --scope="flutter_app" -- fvm flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=flavor/dev.json
+    build_app_android: melos exec --scope="flutter_app" -- fvm flutter build appbundle --dart-define-from-file=flavor/prod.json
+    build_app_android_dev: melos exec --scope="flutter_app" -- fvm flutter build appbundle --dart-define-from-file=flavor/dev.json
 
-flutter_intl:
-  enabled: true
+    report_test:
+        flutter: true
+        dependsOn: test
+
+    # ローカルでフォーマットとdart fix --applyを実行する
+    format_and_fix:
+      exec: bash "$MELOS_ROOT_PATH/scripts/format.sh"
+
+    report_custom_lint:ci:
+      exec: bash "$MELOS_ROOT_PATH/scripts/report-custom-lint-ci.sh"
+      packageFilters:
+        dependsOn: custom_lint
+
+    regenerate_code: melos run regenerate_by_using_build_runner && melos run regenerate_by_using_gen_slang
+
+    regenerate_by_using_build_runner:
+      run: dart run build_runner build -d
+      exec:
+        orderDependents: true
+      packageFilters:
+        dependsOn: build_runner
+
+    regenerate_by_using_gen_slang:
+      run: dart run slang
+      exec:
+        orderDependents: true
+      packageFilters:
+        dependsOn: slang
+
+    watch_build_runner:
+      run: dart run build_runner watch -d
+      exec:
+        orderDependents: true
+      packageFilters:
+        dependsOn: build_runner
+
+    test_golden:
+      run: flutter test --tags=golden
+      exec:
+        orderDependents: true
+      packageFilters:
+        dependsOn: alchemist
+
+    test_update_golden:
+      run: flutter test --update-goldens
+      exec:
+        orderDependents: true
+      packageFilters:
+        dependsOn: alchemist
+
+  ide:
+    intellij:
+      # Disabling IntelliJ's automatic configuration.
+      # This is to support different build configurations for environments.
+      enabled: false
