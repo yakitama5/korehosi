@@ -36,35 +36,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 設定ファイルの配置
-      - name: Create dart-define
-        run: |
-          mkdir -p apps/app/dart_defines
-          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > apps/app/dart_defines/prod.json
-
-      - name: Create Firebase Conf
-        run: |
-          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > apps/app/lib/firebase_options.dart
-          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > apps/app/lib/firebase_options_dev.dart
-          mkdir -p apps/app/android/app/src/prod/
-          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > apps/app/android/app/src/prod/google-services.json
-          mkdir -p apps/app/ios/prod/
-          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > apps/app/ios/prod/GoogleService-Info.plist
-
-      - name: Create env
-        run: |
-          mkdir -p apps/app/scripts
-          mkdir -p apps/app/scripts/env
-          echo -n ${{ secrets.ENV_FILE }} | base64 -d > apps/app/scripts/env/.env
-          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > apps/app/scripts/env/.env.dev
-
       # セットアップ
-      # - name: Setup Config Files
-      #   uses: ./.github/actions/setup-config-files
+      - name: Setup Config Files
+        uses: ./.github/actions/setup-config-files
+        with: # Set the secret as an input
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
       - name: Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
       # 静的解析を実行
-      - run: melos bs
-      - run: melos run regenerate_code
       - run: flutter analyze
