@@ -7,23 +7,23 @@ runs:
     - name: Create dart-define
       run: |
         mkdir -p apps/app/dart_defines
-        echo -n ${{ DART_DEFINE_JSON }} | base64 -d > apps/app/dart_defines/prod.json
+        echo -n $DART_DEFINE_JSON | base64 -d > apps/app/dart_defines/prod.json
       shell: bash
 
     - name: Create Firebase Conf
       run: |
-        echo -n ${{ FIREBASE_OPTIONS }} | base64 -d > apps/app/lib/firebase_options.dart
-        echo -n ${{ FIREBASE_OPTIONS_DEV }} | base64 -d > apps/app/lib/firebase_options_dev.dart
+        echo -n $FIREBASE_OPTIONS | base64 -d > apps/app/lib/firebase_options.dart
+        echo -n $FIREBASE_OPTIONS_DEV | base64 -d > apps/app/lib/firebase_options_dev.dart
         mkdir -p apps/app/android/app/src/prod/
-        echo -n ${{ GOOGLE_SERVICES_JSON }} | base64 -d > apps/app/android/app/src/prod/google-services.json
+        echo -n $GOOGLE_SERVICES_JSON | base64 -d > apps/app/android/app/src/prod/google-services.json
         mkdir -p apps/app/ios/prod/
-        echo -n ${{ GOOGLE_INFO_PLIST }} | base64 -d > apps/app/ios/prod/GoogleService-Info.plist
+        echo -n $GOOGLE_INFO_PLIST | base64 -d > apps/app/ios/prod/GoogleService-Info.plist
       shell: bash
 
     - name: Create env
       run: |
         mkdir -p apps/app/scripts
         mkdir -p apps/app/scripts/env
-        echo -n ${{ ENV_FILE }} | base64 -d > apps/app/scripts/env/.env
-        echo -n ${{ DEV_ENV_FILE }} | base64 -d > apps/app/scripts/env/.env.dev
+        echo -n $ENV_FILE | base64 -d > apps/app/scripts/env/.env
+        echo -n $DEV_ENV_FILE | base64 -d > apps/app/scripts/env/.env.dev
       shell: bash
