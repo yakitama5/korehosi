@@ -45,6 +45,12 @@ jobs:
       #   uses: ./.github/actions/setup-config-files
       # - name: Setup Application Runtime
       #   uses: ./.github/actions/setup-application-runtime
+      - name: Setup flutter
+        uses: subosito/flutter-action@1c5eb12d812966ca84680edc38353a0851c8fd56 # v2.14.0
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
 
       # https://github.com/kuhnroyal/flutter-fvm-config-action
       - uses: actions/checkout@v4
