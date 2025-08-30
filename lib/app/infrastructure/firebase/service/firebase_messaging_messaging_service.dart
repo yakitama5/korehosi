@@ -1,4 +1,6 @@
 import 'package:family_wish_list/app/infrastructure/firebase/messaging/extension/remote_message_extension.dart';
+import 'package:family_wish_list/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
+import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -9,7 +11,6 @@ import '../../../domain/notification/value_object/notification_permission.dart';
 import '../../../domain/notification/value_object/notification_target.dart';
 import '../firestore/model/firestore_group_message_model.dart';
 import '../firestore/state/firestore_group_message_provider.dart';
-import '../messaging/state/firebase_messaging.dart';
 
 /// Firebaseを利用したサービスの実装
 class FirebaseMessagingMessagingService implements MessagingService {
@@ -18,12 +19,13 @@ class FirebaseMessagingMessagingService implements MessagingService {
   final Ref ref;
 
   @override
-  Future<String?> getToken() => ref.read(firebaseMessagingProvider).getToken();
+  Future<String?> getToken() =>
+      ref.read(fcmConfigProvider).messaging.getToken();
 
   @override
   Future<NotificationPermission> requestPermission() async {
     final settings =
-        await ref.read(firebaseMessagingProvider).requestPermission();
+        await ref.read(fcmConfigProvider).messaging.requestPermission();
 
     // FCM特有のドメインモデルに変換
     return switch (settings.authorizationStatus) {
@@ -36,14 +38,15 @@ class FirebaseMessagingMessagingService implements MessagingService {
 
   @override
   Future<NotificationMessage?> getInitialMessage() => ref
-      .read(firebaseMessagingProvider)
+      .read(fcmConfigProvider)
       .getInitialMessage()
       .then((value) => value?.toDomainModel());
 
   @override
-  Stream<NotificationMessage> onMessageOpenedApp() =>
-      FirebaseMessaging.onMessageOpenedApp
-          .map((event) => event.toDomainModel());
+  Stream<NotificationMessage> onMessageOpenedApp() => ref
+      .read(fcmConfigProvider)
+      .onMessage
+      .map((event) => event.toDomainModel());
 
   @override
   Future<void> sendMessage({

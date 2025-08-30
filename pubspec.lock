@@ -521,6 +521,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.3"
+  fcm_config:
+    dependency: "direct main"
+    description:
+      name: fcm_config
+      sha256: e2135581ffed8c4f1c017c8d911980cbd5ca18484e2a37525c8f53d2f48ba09d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.5"
   ffi:
     dependency: transitive
     description:
@@ -690,7 +698,7 @@ packages:
     source: hosted
     version: "3.8.10"
   firebase_messaging:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: firebase_messaging
       sha256: "60be38574f8b5658e2f22b7e311ff2064bea835c248424a383783464e8e02fcc"

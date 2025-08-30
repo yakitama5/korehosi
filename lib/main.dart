@@ -2,6 +2,8 @@ import 'dart:io' as io;
 
 import 'package:family_wish_list/app/domain/notification/interface/notification_token_repository.dart';
 import 'package:family_wish_list/app/infrastructure/branch/service/branch_deep_link_service.dart';
+import 'package:family_wish_list/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
+import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -68,6 +70,17 @@ void main() async {
     options: firebaseOptions,
   );
 
+  // FCM Config
+  await FCMConfig.instance.init(
+    defaultAndroidForegroundIcon: '@mipmap/ic_launcher',
+    defaultAndroidChannel: const AndroidNotificationChannel(
+      'high_importance_channel',
+      'これほしい！からのお知らせ',
+      importance: Importance.high,
+      sound: RawResourceAndroidNotificationSound('notification'),
+    ),
+  );
+
   // App Check の初期化
   await FirebaseAppCheck.instance.activate(
     androidProvider: switch (appConfig.flavor) {
@@ -110,6 +123,7 @@ void main() async {
 
         // インフラ層のDI
         // Firebase
+        ...await initializeFCMConfig(firebaseOptions),
         userRepositoryProvider.overrideWith(FirebaseUserRepository.new),
         groupRepositoryProvider.overrideWith(FirebaseGroupRepository.new),
         itemRepositoryProvider.overrideWith(FirebaseItemRepository.new),
