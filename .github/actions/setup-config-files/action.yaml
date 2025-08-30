@@ -1,12 +1,9 @@
-name: "Setup Code"
-description: "Setup Code"
+name: "Setup Config Files"
+description: "setup-config-files"
 
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
     - name: Create dart-define
       run: |
         mkdir -p apps/app/dart_defines

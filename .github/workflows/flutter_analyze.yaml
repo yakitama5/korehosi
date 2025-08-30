@@ -32,9 +32,13 @@ jobs:
 
     # ジョブの手順
     steps:
+      # チェックアウト
+      - name: Checkout
+        uses: actions/checkout@v3
+
       # セットアップ
-      - name: Setup Code
-        uses: ./.github/actions/setup-code
+      - name: Setup Config Files
+        uses: ./.github/actions/setup-config-files
       - name: Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
