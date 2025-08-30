@@ -48,23 +48,54 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+            <meta-data android:name="flutter_deeplinking_enabled" android:value="false" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <!-- DynamicLinks -->
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="@string/app_web_domain" android:pathPrefix="/share_link" />
-            </intent-filter>
+            <!-- branch -->
+            <intent-filter>
+				<!-- If utilizing $deeplink_path please explicitly declare your hosts, or utilize a wildcard(*) -->
+				<!-- REPLACE `android:scheme` with your Android URI scheme -->
+				<data android:scheme="@string/deeplink_scheme" android:host="open" />
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+			</intent-filter>
+			<!-- Branch App Links - Live App -->
+			<intent-filter android:autoVerify="true">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<!-- REPLACE `android:host` with your `app.link` domain -->
+				<data android:scheme="https" android:host="kvh26.app.link" />
+				<data android:scheme="https" android:host="kvh26-alternate.app.link" />
+			</intent-filter>
+
+			<!-- Branch App Links - Test App -->
+			<intent-filter android:autoVerify="true">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="https" android:host="kvh26.test-app.link" />
+				<data android:scheme="https" android:host="kvh26-alternate.test-app.link" />
+			</intent-filter>
+
             <!-- FCM -->
             <intent-filter>
                 <action android:name="ADD_WISH_ITEM_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+		<!-- Branch init -->
+		<!-- REPLACE `BranchKey` with the value from your Branch Dashboard -->
+		<meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_kuBmHGShZC17oOc9i5pfAehkwzgoMfti" />
+		<!-- REPLACE `BranchKey.test` with the value from your Branch Dashboard -->
+		<meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_iEEbSPKbYDWYcMn5nWhosmlbDtlkHbqv" />
+		<!-- Set to `true` to use `BranchKey.test` -->
+		<meta-data android:name="io.branch.sdk.TestMode" android:value="true" />
+
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

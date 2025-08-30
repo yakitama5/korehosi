@@ -9,9 +9,6 @@ const dartDefineKeyAppName = 'appName';
 /// アプリ(Web)のURL
 const dartDefineKeyAppWebUrl = 'appWebUrl';
 
-/// DynamicLinkで生成するリンクの接頭句
-const dartDefineKeyDynamicLinkUriPrefix = 'dynamicLinkUriPrefix';
-
 /// Android番のパッケージ名
 /// DynamicLinksで全プラットフォームで利用するため定義
 const dartDefineKeyAndroidPackageName = 'androidPackageName';

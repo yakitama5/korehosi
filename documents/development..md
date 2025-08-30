@@ -51,12 +51,11 @@
        "appName": "(dev)アプリ名",
        "appIdSuffix": ".dev",
        "appWebUrl": "https://XXXXX.com",
-       "appWebDomain": "XXXXX.com",
        "androidPackageName": "com.example.xxxxx.dev",
+       "deeplinkScheme": "myapp.dev://",
        "iosBundleId": "com.example.xxxxx.dev",
        "reversedClientId": "xxxxx",
-       "appStoreId": "xxxxx",
-       "dynamicLinkUriPrefix": "https://xxxxx.link"
+       "appStoreId": "xxxxx"
    }
    ```
 

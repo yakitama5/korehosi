@@ -27,6 +27,22 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>FlutterDeepLinkingEnabled</key>
+	<false/>
+	<key>branch_universal_link_domains</key>
+	<array>
+		<string>kvh26.app.link</string>
+		<string>kvh26-alternate.app.link</string>
+		<string>kvh26.test-app.link</string>
+		<string>kvh26-alternate.test-app.link</string>
+	</array>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>key_live_kuBmHGShZC17oOc9i5pfAehkwzgoMfti</string>
+		<key>test</key>
+		<string>key_test_iEEbSPKbYDWYcMn5nWhosmlbDtlkHbqv</string>
+	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -35,10 +51,10 @@
 			<key>CFBundleURLIconFile</key>
 			<string></string>
 			<key>CFBundleURLName</key>
-			<string>DynamicLinks</string>
+			<string>BranchLinks</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>$(reversedClientId)</string>
+				<string>$(deeplinkScheme)</string>
 			</array>
 		</dict>
 	</array>
