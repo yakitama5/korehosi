@@ -51,5 +51,4 @@ jobs:
         uses: ./.github/actions/setup-application-runtime
 
       # 静的解析を実行
-      - run: melos run regenerate_code
       - run: flutter analyze

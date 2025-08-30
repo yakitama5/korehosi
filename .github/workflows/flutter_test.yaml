@@ -86,5 +86,4 @@ jobs:
         uses: ./.github/actions/setup-application-runtime
 
       # 実行
-      - run: dart run melos exec -- dart run build_runner build -d
       - run: dart run melos exec -- flutter test --dart-define=CI=true
