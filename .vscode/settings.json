@@ -37,7 +37,7 @@
     "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).gform.dart",
     "*_en.i18n.yaml": "$(capture)_*.i18n.yaml"
   },
-  "dart.flutterSdkPath": ".fvm/versions/3.29.0",
+  "dart.flutterSdkPath": ".fvm/flutter_sdk",
   "dart.sdkPath": ".fvm/flutter_sdk/bin/cache/dart-sdk",
   "github.copilot.enable": {
     "*": false
