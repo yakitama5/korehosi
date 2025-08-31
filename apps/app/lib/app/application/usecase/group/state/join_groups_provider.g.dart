@@ -15,8 +15,9 @@ String _$joinGroupsHash() => r'5af4e8c7fed5250aa60734dec23ed314e858e3d8';
 final joinGroupsProvider = AutoDisposeFutureProvider<List<Group>?>.internal(
   joinGroups,
   name: r'joinGroupsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$joinGroupsHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$joinGroupsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -32,9 +32,10 @@ skip: スキップ
 sexMan: おとこ
 sexWoman: おんな
 sexNeither: どちらでもない
-ageGroupChild: こども
-ageGroupAdult: おとな
 ageGroup: 年齢層
+ageGroupTypeName(context=AgeGroup):
+  child: こども
+  adult: おとな
 sex: 性別
 unset: <未設定>
 requiredIcon: '*'

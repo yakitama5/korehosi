@@ -51,24 +51,13 @@ class PurchaseFamily extends Family<AsyncValue<Purchase?>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [purchase].
-  PurchaseProvider call({
-    required String groupId,
-    required String itemId,
-  }) {
-    return PurchaseProvider(
-      groupId: groupId,
-      itemId: itemId,
-    );
+  PurchaseProvider call({required String groupId, required String itemId}) {
+    return PurchaseProvider(groupId: groupId, itemId: itemId);
   }
 
   @override
-  PurchaseProvider getProviderOverride(
-    covariant PurchaseProvider provider,
-  ) {
-    return call(
-      groupId: provider.groupId,
-      itemId: provider.itemId,
-    );
+  PurchaseProvider getProviderOverride(covariant PurchaseProvider provider) {
+    return call(groupId: provider.groupId, itemId: provider.itemId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -95,26 +84,19 @@ class PurchaseProvider extends StreamProvider<Purchase?> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [purchase].
-  PurchaseProvider({
-    required String groupId,
-    required String itemId,
-  }) : this._internal(
-          (ref) => purchase(
-            ref as PurchaseRef,
-            groupId: groupId,
-            itemId: itemId,
-          ),
-          from: purchaseProvider,
-          name: r'purchaseProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$purchaseHash,
-          dependencies: PurchaseFamily._dependencies,
-          allTransitiveDependencies: PurchaseFamily._allTransitiveDependencies,
-          groupId: groupId,
-          itemId: itemId,
-        );
+  PurchaseProvider({required String groupId, required String itemId})
+    : this._internal(
+        (ref) => purchase(ref as PurchaseRef, groupId: groupId, itemId: itemId),
+        from: purchaseProvider,
+        name: r'purchaseProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$purchaseHash,
+        dependencies: PurchaseFamily._dependencies,
+        allTransitiveDependencies: PurchaseFamily._allTransitiveDependencies,
+        groupId: groupId,
+        itemId: itemId,
+      );
 
   PurchaseProvider._internal(
     super._createNotifier, {
@@ -190,5 +172,6 @@ class _PurchaseProviderElement extends StreamProviderElement<Purchase?>
   @override
   String get itemId => (origin as PurchaseProvider).itemId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -47,21 +47,15 @@ class CurrentGroupItemFamily extends Family<AsyncValue<Item?>> {
   /// 現在のグループ内の欲しい物
   ///
   /// Copied from [currentGroupItem].
-  CurrentGroupItemProvider call({
-    required String itemId,
-  }) {
-    return CurrentGroupItemProvider(
-      itemId: itemId,
-    );
+  CurrentGroupItemProvider call({required String itemId}) {
+    return CurrentGroupItemProvider(itemId: itemId);
   }
 
   @override
   CurrentGroupItemProvider getProviderOverride(
     covariant CurrentGroupItemProvider provider,
   ) {
-    return call(
-      itemId: provider.itemId,
-    );
+    return call(itemId: provider.itemId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -86,24 +80,19 @@ class CurrentGroupItemProvider extends AutoDisposeFutureProvider<Item?> {
   /// 現在のグループ内の欲しい物
   ///
   /// Copied from [currentGroupItem].
-  CurrentGroupItemProvider({
-    required String itemId,
-  }) : this._internal(
-          (ref) => currentGroupItem(
-            ref as CurrentGroupItemRef,
-            itemId: itemId,
-          ),
-          from: currentGroupItemProvider,
-          name: r'currentGroupItemProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$currentGroupItemHash,
-          dependencies: CurrentGroupItemFamily._dependencies,
-          allTransitiveDependencies:
-              CurrentGroupItemFamily._allTransitiveDependencies,
-          itemId: itemId,
-        );
+  CurrentGroupItemProvider({required String itemId})
+    : this._internal(
+        (ref) => currentGroupItem(ref as CurrentGroupItemRef, itemId: itemId),
+        from: currentGroupItemProvider,
+        name: r'currentGroupItemProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$currentGroupItemHash,
+        dependencies: CurrentGroupItemFamily._dependencies,
+        allTransitiveDependencies:
+            CurrentGroupItemFamily._allTransitiveDependencies,
+        itemId: itemId,
+      );
 
   CurrentGroupItemProvider._internal(
     super._createNotifier, {
@@ -162,11 +151,13 @@ mixin CurrentGroupItemRef on AutoDisposeFutureProviderRef<Item?> {
 }
 
 class _CurrentGroupItemProviderElement
-    extends AutoDisposeFutureProviderElement<Item?> with CurrentGroupItemRef {
+    extends AutoDisposeFutureProviderElement<Item?>
+    with CurrentGroupItemRef {
   _CurrentGroupItemProviderElement(super.provider);
 
   @override
   String get itemId => (origin as CurrentGroupItemProvider).itemId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

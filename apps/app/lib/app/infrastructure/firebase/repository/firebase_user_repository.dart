@@ -1,13 +1,10 @@
+import 'package:cores_domain/user.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/exception/exceptions.dart';
-import '../../../domain/user/entity/auth_status.dart';
-import '../../../domain/user/entity/user.dart';
-import '../../../domain/user/interface/user_repository.dart';
-import '../../../domain/user/value_object/age_group.dart';
 import '../../google/state/google_sign_in.dart';
 import '../authentication/extension/firebase_auth_user_extension.dart';
 import '../authentication/state/firebase_auth.dart';

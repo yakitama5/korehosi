@@ -12,14 +12,14 @@ String _$groupShareUsecaseHash() => r'6dceeca26d8d37421a23b7879728b49c7d63f379';
 @ProviderFor(groupShareUsecase)
 final groupShareUsecaseProvider =
     AutoDisposeProvider<GroupShareUsecase>.internal(
-  groupShareUsecase,
-  name: r'groupShareUsecaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$groupShareUsecaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      groupShareUsecase,
+      name: r'groupShareUsecaseProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$groupShareUsecaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

@@ -51,21 +51,15 @@ class GroupJoinUsersFamily extends Family<AsyncValue<List<User>>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [groupJoinUsers].
-  GroupJoinUsersProvider call({
-    required String groupId,
-  }) {
-    return GroupJoinUsersProvider(
-      groupId: groupId,
-    );
+  GroupJoinUsersProvider call({required String groupId}) {
+    return GroupJoinUsersProvider(groupId: groupId);
   }
 
   @override
   GroupJoinUsersProvider getProviderOverride(
     covariant GroupJoinUsersProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-    );
+    return call(groupId: provider.groupId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -92,24 +86,19 @@ class GroupJoinUsersProvider extends StreamProvider<List<User>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [groupJoinUsers].
-  GroupJoinUsersProvider({
-    required String groupId,
-  }) : this._internal(
-          (ref) => groupJoinUsers(
-            ref as GroupJoinUsersRef,
-            groupId: groupId,
-          ),
-          from: groupJoinUsersProvider,
-          name: r'groupJoinUsersProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$groupJoinUsersHash,
-          dependencies: GroupJoinUsersFamily._dependencies,
-          allTransitiveDependencies:
-              GroupJoinUsersFamily._allTransitiveDependencies,
-          groupId: groupId,
-        );
+  GroupJoinUsersProvider({required String groupId})
+    : this._internal(
+        (ref) => groupJoinUsers(ref as GroupJoinUsersRef, groupId: groupId),
+        from: groupJoinUsersProvider,
+        name: r'groupJoinUsersProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$groupJoinUsersHash,
+        dependencies: GroupJoinUsersFamily._dependencies,
+        allTransitiveDependencies:
+            GroupJoinUsersFamily._allTransitiveDependencies,
+        groupId: groupId,
+      );
 
   GroupJoinUsersProvider._internal(
     super._createNotifier, {
@@ -174,5 +163,6 @@ class _GroupJoinUsersProviderElement extends StreamProviderElement<List<User>>
   @override
   String get groupId => (origin as GroupJoinUsersProvider).groupId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

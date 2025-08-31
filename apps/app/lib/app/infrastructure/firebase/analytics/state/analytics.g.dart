@@ -16,8 +16,9 @@ String _$analyticsHash() => r'8fb06ce3653ba0d954e4379b42d73d731065c520';
 final analyticsProvider = Provider<FirebaseAnalytics>.internal(
   analytics,
   name: r'analyticsProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$analyticsHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$analyticsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

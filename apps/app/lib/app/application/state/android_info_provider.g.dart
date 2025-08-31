@@ -15,8 +15,9 @@ String _$androidInfoHash() => r'618edcdb2bb9fe635511a8af0c6411891fbec788';
 final androidInfoProvider = AutoDisposeFutureProvider<AndroidInfo>.internal(
   androidInfo,
   name: r'androidInfoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$androidInfoHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$androidInfoHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

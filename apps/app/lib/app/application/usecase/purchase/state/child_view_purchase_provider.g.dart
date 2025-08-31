@@ -55,20 +55,14 @@ class ChildViewPurchaseFamily extends Family<AsyncValue<Purchase?>> {
     required String groupId,
     required String itemId,
   }) {
-    return ChildViewPurchaseProvider(
-      groupId: groupId,
-      itemId: itemId,
-    );
+    return ChildViewPurchaseProvider(groupId: groupId, itemId: itemId);
   }
 
   @override
   ChildViewPurchaseProvider getProviderOverride(
     covariant ChildViewPurchaseProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-      itemId: provider.itemId,
-    );
+    return call(groupId: provider.groupId, itemId: provider.itemId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -95,27 +89,24 @@ class ChildViewPurchaseProvider extends StreamProvider<Purchase?> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [childViewPurchase].
-  ChildViewPurchaseProvider({
-    required String groupId,
-    required String itemId,
-  }) : this._internal(
-          (ref) => childViewPurchase(
-            ref as ChildViewPurchaseRef,
-            groupId: groupId,
-            itemId: itemId,
-          ),
-          from: childViewPurchaseProvider,
-          name: r'childViewPurchaseProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$childViewPurchaseHash,
-          dependencies: ChildViewPurchaseFamily._dependencies,
-          allTransitiveDependencies:
-              ChildViewPurchaseFamily._allTransitiveDependencies,
+  ChildViewPurchaseProvider({required String groupId, required String itemId})
+    : this._internal(
+        (ref) => childViewPurchase(
+          ref as ChildViewPurchaseRef,
           groupId: groupId,
           itemId: itemId,
-        );
+        ),
+        from: childViewPurchaseProvider,
+        name: r'childViewPurchaseProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$childViewPurchaseHash,
+        dependencies: ChildViewPurchaseFamily._dependencies,
+        allTransitiveDependencies:
+            ChildViewPurchaseFamily._allTransitiveDependencies,
+        groupId: groupId,
+        itemId: itemId,
+      );
 
   ChildViewPurchaseProvider._internal(
     super._createNotifier, {
@@ -191,5 +182,6 @@ class _ChildViewPurchaseProviderElement extends StreamProviderElement<Purchase?>
   @override
   String get itemId => (origin as ChildViewPurchaseProvider).itemId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

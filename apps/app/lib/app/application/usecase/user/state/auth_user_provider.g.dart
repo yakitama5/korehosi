@@ -16,8 +16,9 @@ String _$authUserHash() => r'df4af207839d28c017692189fce47b42e80502f5';
 final authUserProvider = FutureProvider<User?>.internal(
   authUser,
   name: r'authUserProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authUserHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authUserHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

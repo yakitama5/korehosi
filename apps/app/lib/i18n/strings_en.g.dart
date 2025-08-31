@@ -143,14 +143,18 @@ class TranslationsAppEn {
 	/// en: 'Neither.'
 	String get sexNeither => 'Neither.';
 
-	/// en: 'children'
-	String get ageGroupChild => 'children';
-
-	/// en: 'adult'
-	String get ageGroupAdult => 'adult';
-
 	/// en: 'age-group'
 	String get ageGroup => 'age-group';
+
+	/// en: '(child) {child} (adult) {adult}'
+	String ageGroupTypeName({required AgeGroup context}) {
+		switch (context) {
+			case AgeGroup.child:
+				return 'child';
+			case AgeGroup.adult:
+				return 'adult';
+		}
+	}
 
 	/// en: 'gender'
 	String get sex => 'gender';
@@ -660,9 +664,15 @@ extension on Translations {
 			case 'app.sexMan': return 'man\'s man';
 			case 'app.sexWoman': return 'woman';
 			case 'app.sexNeither': return 'Neither.';
-			case 'app.ageGroupChild': return 'children';
-			case 'app.ageGroupAdult': return 'adult';
 			case 'app.ageGroup': return 'age-group';
+			case 'app.ageGroupTypeName': return ({required AgeGroup context}) {
+				switch (context) {
+					case AgeGroup.child:
+						return 'child';
+					case AgeGroup.adult:
+						return 'adult';
+				}
+			};
 			case 'app.sex': return 'gender';
 			case 'app.unset': return '<Unset';
 			case 'app.requiredIcon': return '*';

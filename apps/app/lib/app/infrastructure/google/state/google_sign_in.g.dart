@@ -16,8 +16,9 @@ String _$googleSignInHash() => r'0b3da4c5bf629e3f7401a2a78c79cccd40689ce1';
 final googleSignInProvider = AutoDisposeProvider<GoogleSignIn>.internal(
   googleSignIn,
   name: r'googleSignInProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$googleSignInHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$googleSignInHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

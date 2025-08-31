@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 
+import 'package:cores_domain/user.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,7 +32,6 @@ import 'app/domain/service/cached_service.dart';
 import 'app/domain/service/config_service.dart';
 import 'app/domain/service/deep_link_service.dart';
 import 'app/domain/service/storage_service.dart';
-import 'app/domain/user/interface/user_repository.dart';
 import 'app/infrastructure/device_info_plus/service/device_info_plus_device_info_service.dart';
 import 'app/infrastructure/firebase/app_check/config/app_check_config.dart';
 import 'app/infrastructure/firebase/repository/firebase_group_repository.dart';

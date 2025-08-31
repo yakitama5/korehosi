@@ -16,8 +16,9 @@ String _$revenueCatHash() => r'64a8dbd147f658788bd0ed4052b58fffa25eb6f5';
 final revenueCatProvider = Provider<Purchases>.internal(
   revenueCat,
   name: r'revenueCatProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$revenueCatHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$revenueCatHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

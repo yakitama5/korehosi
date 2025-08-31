@@ -1,7 +1,7 @@
+import 'package:cores_domain/user.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../domain/user/value_object/age_group.dart';
 import '../../../config/user_config.dart';
 import 'auth_user_provider.dart';
 
@@ -16,9 +16,7 @@ class UserForm extends _$UserForm {
     final initial = await ref.read(authUserProvider.future);
 
     return FormGroup({
-      userConfig.nameKey: FormControl<String>(
-        value: initial?.name,
-      ),
+      userConfig.nameKey: FormControl<String>(value: initial?.name),
       userConfig.ageGroupKey: FormControl<AgeGroup>(
         value: initial?.ageGroup ?? userConfig.initialAgeGroup,
         validators: [Validators.required],

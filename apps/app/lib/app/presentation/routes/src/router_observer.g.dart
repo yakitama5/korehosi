@@ -12,13 +12,14 @@ String _$currentRouteHash() => r'a4b5b290af8fd8e6cec936ad1328257c13c3326d';
 @ProviderFor(CurrentRoute)
 final currentRouteProvider =
     AutoDisposeNotifierProvider<CurrentRoute, Uri>.internal(
-  CurrentRoute.new,
-  name: r'currentRouteProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentRouteHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      CurrentRoute.new,
+      name: r'currentRouteProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$currentRouteHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$CurrentRoute = AutoDisposeNotifier<Uri>;
 // ignore_for_file: type=lint

@@ -16,14 +16,14 @@ String _$wanterNameSuggestionHash() =>
 @ProviderFor(wanterNameSuggestion)
 final wanterNameSuggestionProvider =
     AutoDisposeFutureProvider<List<String>>.internal(
-  wanterNameSuggestion,
-  name: r'wanterNameSuggestionProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$wanterNameSuggestionHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      wanterNameSuggestion,
+      name: r'wanterNameSuggestionProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$wanterNameSuggestionHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

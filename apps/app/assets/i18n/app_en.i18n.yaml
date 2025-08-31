@@ -29,9 +29,10 @@ skip: skip
 sexMan: man's man
 sexWoman: woman
 sexNeither: Neither.
-ageGroupChild: children
-ageGroupAdult: adult
 ageGroup: age-group
+ageGroupTypeName(context=AgeGroup):
+  child: child
+  adult: adult
 sex: gender
 unset: <Unset
 requiredIcon: "*"

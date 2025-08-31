@@ -49,21 +49,15 @@ class ParticipantCollectionRefFamily
   /// グループ参加者コレクションの参照
   ///
   /// Copied from [participantCollectionRef].
-  ParticipantCollectionRefProvider call({
-    required String groupId,
-  }) {
-    return ParticipantCollectionRefProvider(
-      groupId: groupId,
-    );
+  ParticipantCollectionRefProvider call({required String groupId}) {
+    return ParticipantCollectionRefProvider(groupId: groupId);
   }
 
   @override
   ParticipantCollectionRefProvider getProviderOverride(
     covariant ParticipantCollectionRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-    );
+    return call(groupId: provider.groupId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -89,24 +83,22 @@ class ParticipantCollectionRefProvider
   /// グループ参加者コレクションの参照
   ///
   /// Copied from [participantCollectionRef].
-  ParticipantCollectionRefProvider({
-    required String groupId,
-  }) : this._internal(
-          (ref) => participantCollectionRef(
-            ref as ParticipantCollectionRefRef,
-            groupId: groupId,
-          ),
-          from: participantCollectionRefProvider,
-          name: r'participantCollectionRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$participantCollectionRefHash,
-          dependencies: ParticipantCollectionRefFamily._dependencies,
-          allTransitiveDependencies:
-              ParticipantCollectionRefFamily._allTransitiveDependencies,
+  ParticipantCollectionRefProvider({required String groupId})
+    : this._internal(
+        (ref) => participantCollectionRef(
+          ref as ParticipantCollectionRefRef,
           groupId: groupId,
-        );
+        ),
+        from: participantCollectionRefProvider,
+        name: r'participantCollectionRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$participantCollectionRefHash,
+        dependencies: ParticipantCollectionRefFamily._dependencies,
+        allTransitiveDependencies:
+            ParticipantCollectionRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+      );
 
   ParticipantCollectionRefProvider._internal(
     super._createNotifier, {
@@ -123,8 +115,9 @@ class ParticipantCollectionRefProvider
   @override
   Override overrideWith(
     CollectionReference<FirestoreUserModel> Function(
-            ParticipantCollectionRefRef provider)
-        create,
+      ParticipantCollectionRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -142,7 +135,7 @@ class ParticipantCollectionRefProvider
 
   @override
   AutoDisposeProviderElement<CollectionReference<FirestoreUserModel>>
-      createElement() {
+  createElement() {
     return _ParticipantCollectionRefProviderElement(this);
   }
 
@@ -247,23 +240,22 @@ class ParticipantDocumentRefProvider
     required String groupId,
     String? participantId,
   }) : this._internal(
-          (ref) => participantDocumentRef(
-            ref as ParticipantDocumentRefRef,
-            groupId: groupId,
-            participantId: participantId,
-          ),
-          from: participantDocumentRefProvider,
-          name: r'participantDocumentRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$participantDocumentRefHash,
-          dependencies: ParticipantDocumentRefFamily._dependencies,
-          allTransitiveDependencies:
-              ParticipantDocumentRefFamily._allTransitiveDependencies,
-          groupId: groupId,
-          participantId: participantId,
-        );
+         (ref) => participantDocumentRef(
+           ref as ParticipantDocumentRefRef,
+           groupId: groupId,
+           participantId: participantId,
+         ),
+         from: participantDocumentRefProvider,
+         name: r'participantDocumentRefProvider',
+         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+             ? null
+             : _$participantDocumentRefHash,
+         dependencies: ParticipantDocumentRefFamily._dependencies,
+         allTransitiveDependencies:
+             ParticipantDocumentRefFamily._allTransitiveDependencies,
+         groupId: groupId,
+         participantId: participantId,
+       );
 
   ParticipantDocumentRefProvider._internal(
     super._createNotifier, {
@@ -282,8 +274,9 @@ class ParticipantDocumentRefProvider
   @override
   Override overrideWith(
     DocumentReference<FirestoreUserModel> Function(
-            ParticipantDocumentRefRef provider)
-        create,
+      ParticipantDocumentRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -302,7 +295,7 @@ class ParticipantDocumentRefProvider
 
   @override
   AutoDisposeProviderElement<DocumentReference<FirestoreUserModel>>
-      createElement() {
+  createElement() {
     return _ParticipantDocumentRefProviderElement(this);
   }
 
@@ -345,5 +338,6 @@ class _ParticipantDocumentRefProviderElement
   String? get participantId =>
       (origin as ParticipantDocumentRefProvider).participantId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

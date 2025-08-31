@@ -16,8 +16,9 @@ String _$firestoreHash() => r'864285def6284159b44f9598dcde96347e0c1dce';
 final firestoreProvider = Provider<FirebaseFirestore>.internal(
   firestore,
   name: r'firestoreProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$firestoreHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firestoreHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

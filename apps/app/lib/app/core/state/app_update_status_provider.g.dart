@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, duplicate_ignore
-
 part of 'app_update_status_provider.dart';
 
 // **************************************************************************
@@ -16,10 +14,9 @@ final appUpdateStatusProvider =
     AutoDisposeFutureProvider<AppUpdateStatus>.internal(
       appUpdateStatus,
       name: r'appUpdateStatusProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$appUpdateStatusHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$appUpdateStatusHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, duplicate_ignore
-
 part of 'force_update_version_provider.dart';
 
 // **************************************************************************
@@ -16,10 +14,9 @@ String _$forceUpdateVersionHash() =>
 final forceUpdateVersionProvider = AutoDisposeStreamProvider<Version>.internal(
   forceUpdateVersion,
   name: r'forceUpdateVersionProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$forceUpdateVersionHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$forceUpdateVersionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

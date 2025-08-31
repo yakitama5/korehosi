@@ -15,14 +15,14 @@ String _$analyzeSourceItemsHash() =>
 @ProviderFor(analyzeSourceItems)
 final analyzeSourceItemsProvider =
     AutoDisposeFutureProvider<List<Item>>.internal(
-  analyzeSourceItems,
-  name: r'analyzeSourceItemsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$analyzeSourceItemsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      analyzeSourceItems,
+      name: r'analyzeSourceItemsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$analyzeSourceItemsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

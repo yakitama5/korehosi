@@ -51,20 +51,14 @@ class GroupJoinUserFamily extends Family<AsyncValue<User?>> {
     required String groupId,
     required String userId,
   }) {
-    return GroupJoinUserProvider(
-      groupId: groupId,
-      userId: userId,
-    );
+    return GroupJoinUserProvider(groupId: groupId, userId: userId);
   }
 
   @override
   GroupJoinUserProvider getProviderOverride(
     covariant GroupJoinUserProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-      userId: provider.userId,
-    );
+    return call(groupId: provider.groupId, userId: provider.userId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -89,27 +83,24 @@ class GroupJoinUserProvider extends AutoDisposeFutureProvider<User?> {
   /// グループに参加中のユーザー情報
   ///
   /// Copied from [groupJoinUser].
-  GroupJoinUserProvider({
-    required String groupId,
-    required String userId,
-  }) : this._internal(
-          (ref) => groupJoinUser(
-            ref as GroupJoinUserRef,
-            groupId: groupId,
-            userId: userId,
-          ),
-          from: groupJoinUserProvider,
-          name: r'groupJoinUserProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$groupJoinUserHash,
-          dependencies: GroupJoinUserFamily._dependencies,
-          allTransitiveDependencies:
-              GroupJoinUserFamily._allTransitiveDependencies,
+  GroupJoinUserProvider({required String groupId, required String userId})
+    : this._internal(
+        (ref) => groupJoinUser(
+          ref as GroupJoinUserRef,
           groupId: groupId,
           userId: userId,
-        );
+        ),
+        from: groupJoinUserProvider,
+        name: r'groupJoinUserProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$groupJoinUserHash,
+        dependencies: GroupJoinUserFamily._dependencies,
+        allTransitiveDependencies:
+            GroupJoinUserFamily._allTransitiveDependencies,
+        groupId: groupId,
+        userId: userId,
+      );
 
   GroupJoinUserProvider._internal(
     super._createNotifier, {
@@ -177,7 +168,8 @@ mixin GroupJoinUserRef on AutoDisposeFutureProviderRef<User?> {
 }
 
 class _GroupJoinUserProviderElement
-    extends AutoDisposeFutureProviderElement<User?> with GroupJoinUserRef {
+    extends AutoDisposeFutureProviderElement<User?>
+    with GroupJoinUserRef {
   _GroupJoinUserProviderElement(super.provider);
 
   @override
@@ -185,5 +177,6 @@ class _GroupJoinUserProviderElement
   @override
   String get userId => (origin as GroupJoinUserProvider).userId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

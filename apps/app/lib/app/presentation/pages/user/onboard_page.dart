@@ -1,3 +1,4 @@
+import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/gen/assets.gen.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
@@ -9,7 +10,6 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../application/model/user/user_form_model.dart';
 import '../../../application/usecase/user/user_usecase.dart';
-import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
 import '../../theme/importer.dart';
 import '../presentation_mixin.dart';
@@ -98,7 +98,7 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
         ReactiveValueListenableBuilder<AgeGroup>(
           formControl: formModel.ageGroupControl,
           builder: (context, control, child) => TextWithLabel(
-            control.value?.localeName,
+            i18n.app.ageGroupTypeName(context: control.value!),
             label: i18n.app.ageGroup,
           ),
         ),

@@ -1,9 +1,10 @@
+import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../domain/user/value_object/age_group.dart';
 import '../../hooks/importer.dart';
 import 'expand_width_container.dart';
 
@@ -13,12 +14,10 @@ class ReactiveSegmentedButton extends ReactiveFormField<AgeGroup, AgeGroup> {
     String? labelText,
     required String formControlName,
   }) : super(
-          formControlName: formControlName,
-          builder: (
-            ReactiveFormFieldState<AgeGroup, AgeGroup> field,
-          ) =>
-              _Form(field, labelText),
-        );
+         formControlName: formControlName,
+         builder: (ReactiveFormFieldState<AgeGroup, AgeGroup> field) =>
+             _Form(field, labelText),
+       );
 }
 
 class _Form extends HookWidget {
@@ -35,17 +34,14 @@ class _Form extends HookWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (labelText != null)
-          Text(
-            labelText!,
-            style: theme.textTheme.labelMedium,
-          ),
+          Text(labelText!, style: theme.textTheme.labelMedium),
         const Gap(4),
         ExpandWidthContainer(
           child: SegmentedButton<AgeGroup>(
             segments: AgeGroup.values
                 .map(
                   (e) => ButtonSegment<AgeGroup>(
-                    label: Text(e.localeName),
+                    label: Text(i18n.app.ageGroupTypeName(context: e)),
                     value: e,
                   ),
                 )

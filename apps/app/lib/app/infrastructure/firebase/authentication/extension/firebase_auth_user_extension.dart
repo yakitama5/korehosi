@@ -1,6 +1,5 @@
+import 'package:cores_domain/user.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../../../../domain/user/entity/auth_status.dart';
 
 /// FirebaseAuth の 認証ユーザー拡張
 extension FirebaseAuthUserX on User {
@@ -16,9 +15,9 @@ extension FirebaseAuthUserX on User {
 
   /// ドメイン層への変換を記載
   AuthStatus get authStatus => AuthStatus(
-        uid: uid,
-        isAnonymous: isAnonymous,
-        linkedGoogle: linkedGoogle,
-        linkedApple: linkedApple,
-      );
+    uid: uid,
+    isAnonymous: isAnonymous,
+    linkedGoogle: linkedGoogle,
+    linkedApple: linkedApple,
+  );
 }

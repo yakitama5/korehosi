@@ -1,3 +1,4 @@
+import 'package:flutter_app/app/application/usecase/user/extension/user_mixin.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,7 +13,6 @@ import '../../../domain/notification/value_object/notification_event.dart';
 import '../../../domain/notification/value_object/notification_target.dart';
 import '../../../domain/service/config_service.dart';
 import '../../../domain/service/storage_service.dart';
-import '../../../domain/user/entity/user.dart';
 import '../../../presentation/routes/importer.dart';
 import '../../config/item_image_config.dart';
 import '../../model/item/selected_image_model.dart';
@@ -88,14 +88,14 @@ class ItemUsecase with RunUsecaseMixin {
 
       // 通知処理
       // TODO(yaiktama5): 必須ではないがトランザクション処理を行うこと
-      final user = ref.read(authUserProvider).value!;
+      final user = ref.read(authUserProvider).value;
       await ref
           .read(messagingServiceProvider)
           .sendMessage(
             groupId: groupId,
             title: i18n.app.notificationAddItemBody(name: user.dispName),
             body: name,
-            uid: user.id,
+            uid: user!.id,
             target: NotificationTarget.all,
             event: NotificationEvent.addWishItem,
             path: ItemRouteData(itemId).location,

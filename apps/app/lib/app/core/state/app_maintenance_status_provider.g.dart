@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, duplicate_ignore
-
 part of 'app_maintenance_status_provider.dart';
 
 // **************************************************************************
@@ -17,10 +15,9 @@ final appMaintenanceStatusProvider =
     StreamProvider<AppMaintenanceStatus>.internal(
       appMaintenanceStatus,
       name: r'appMaintenanceStatusProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$appMaintenanceStatusHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$appMaintenanceStatusHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

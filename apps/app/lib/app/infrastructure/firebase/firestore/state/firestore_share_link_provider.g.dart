@@ -15,19 +15,19 @@ String _$shareLinkCollectionRefHash() =>
 @ProviderFor(shareLinkCollectionRef)
 final shareLinkCollectionRefProvider =
     AutoDisposeProvider<CollectionReference<FirestoreShareLinkModel>>.internal(
-  shareLinkCollectionRef,
-  name: r'shareLinkCollectionRefProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$shareLinkCollectionRefHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      shareLinkCollectionRef,
+      name: r'shareLinkCollectionRefProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$shareLinkCollectionRefHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ShareLinkCollectionRefRef
-    = AutoDisposeProviderRef<CollectionReference<FirestoreShareLinkModel>>;
+typedef ShareLinkCollectionRefRef =
+    AutoDisposeProviderRef<CollectionReference<FirestoreShareLinkModel>>;
 String _$shareLinkDocumentRefHash() =>
     r'478b824de60435fad7d9a94683b199bd7b16bedd';
 
@@ -71,21 +71,15 @@ class ShareLinkDocumentRefFamily
   /// グループ共有リンクドキュメントの参照
   ///
   /// Copied from [shareLinkDocumentRef].
-  ShareLinkDocumentRefProvider call({
-    String? shareLinkId,
-  }) {
-    return ShareLinkDocumentRefProvider(
-      shareLinkId: shareLinkId,
-    );
+  ShareLinkDocumentRefProvider call({String? shareLinkId}) {
+    return ShareLinkDocumentRefProvider(shareLinkId: shareLinkId);
   }
 
   @override
   ShareLinkDocumentRefProvider getProviderOverride(
     covariant ShareLinkDocumentRefProvider provider,
   ) {
-    return call(
-      shareLinkId: provider.shareLinkId,
-    );
+    return call(shareLinkId: provider.shareLinkId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -111,24 +105,22 @@ class ShareLinkDocumentRefProvider
   /// グループ共有リンクドキュメントの参照
   ///
   /// Copied from [shareLinkDocumentRef].
-  ShareLinkDocumentRefProvider({
-    String? shareLinkId,
-  }) : this._internal(
-          (ref) => shareLinkDocumentRef(
-            ref as ShareLinkDocumentRefRef,
-            shareLinkId: shareLinkId,
-          ),
-          from: shareLinkDocumentRefProvider,
-          name: r'shareLinkDocumentRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$shareLinkDocumentRefHash,
-          dependencies: ShareLinkDocumentRefFamily._dependencies,
-          allTransitiveDependencies:
-              ShareLinkDocumentRefFamily._allTransitiveDependencies,
+  ShareLinkDocumentRefProvider({String? shareLinkId})
+    : this._internal(
+        (ref) => shareLinkDocumentRef(
+          ref as ShareLinkDocumentRefRef,
           shareLinkId: shareLinkId,
-        );
+        ),
+        from: shareLinkDocumentRefProvider,
+        name: r'shareLinkDocumentRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$shareLinkDocumentRefHash,
+        dependencies: ShareLinkDocumentRefFamily._dependencies,
+        allTransitiveDependencies:
+            ShareLinkDocumentRefFamily._allTransitiveDependencies,
+        shareLinkId: shareLinkId,
+      );
 
   ShareLinkDocumentRefProvider._internal(
     super._createNotifier, {
@@ -145,8 +137,9 @@ class ShareLinkDocumentRefProvider
   @override
   Override overrideWith(
     DocumentReference<FirestoreShareLinkModel> Function(
-            ShareLinkDocumentRefRef provider)
-        create,
+      ShareLinkDocumentRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -164,7 +157,7 @@ class ShareLinkDocumentRefProvider
 
   @override
   AutoDisposeProviderElement<DocumentReference<FirestoreShareLinkModel>>
-      createElement() {
+  createElement() {
     return _ShareLinkDocumentRefProviderElement(this);
   }
 
@@ -191,13 +184,16 @@ mixin ShareLinkDocumentRefRef
   String? get shareLinkId;
 }
 
-class _ShareLinkDocumentRefProviderElement extends AutoDisposeProviderElement<
-    DocumentReference<FirestoreShareLinkModel>> with ShareLinkDocumentRefRef {
+class _ShareLinkDocumentRefProviderElement
+    extends
+        AutoDisposeProviderElement<DocumentReference<FirestoreShareLinkModel>>
+    with ShareLinkDocumentRefRef {
   _ShareLinkDocumentRefProviderElement(super.provider);
 
   @override
   String? get shareLinkId =>
       (origin as ShareLinkDocumentRefProvider).shareLinkId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

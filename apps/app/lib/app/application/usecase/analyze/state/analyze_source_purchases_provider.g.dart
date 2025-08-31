@@ -13,18 +13,18 @@ String _$analyzeSourcePurchasesHash() =>
 @ProviderFor(analyzeSourcePurchases)
 final analyzeSourcePurchasesProvider =
     AutoDisposeFutureProvider<List<Purchase>>.internal(
-  analyzeSourcePurchases,
-  name: r'analyzeSourcePurchasesProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$analyzeSourcePurchasesHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      analyzeSourcePurchases,
+      name: r'analyzeSourcePurchasesProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$analyzeSourcePurchasesHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AnalyzeSourcePurchasesRef
-    = AutoDisposeFutureProviderRef<List<Purchase>>;
+typedef AnalyzeSourcePurchasesRef =
+    AutoDisposeFutureProviderRef<List<Purchase>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

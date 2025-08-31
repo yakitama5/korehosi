@@ -14,14 +14,14 @@ String _$currentGroupItemsHash() => r'10d7926577479634400d8a16074f4b4e1318c4de';
 @ProviderFor(currentGroupItems)
 final currentGroupItemsProvider =
     AutoDisposeFutureProvider<List<Item>>.internal(
-  currentGroupItems,
-  name: r'currentGroupItemsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentGroupItemsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      currentGroupItems,
+      name: r'currentGroupItemsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$currentGroupItemsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

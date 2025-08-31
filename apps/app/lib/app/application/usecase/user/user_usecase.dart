@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cores_core/util.dart';
+import 'package:cores_domain/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_app/app/application/usecase/user/state/token_timestamp_provider.dart';
 import 'package:flutter_app/app/domain/service/cached_service.dart';
@@ -13,10 +14,6 @@ import '../../../domain/exception/exceptions.dart';
 import '../../../domain/notification/interface/messaging_service.dart';
 import '../../../domain/notification/interface/notification_token_repository.dart';
 import '../../../domain/service/analytics_service.dart';
-import '../../../domain/user/entity/auth_status.dart';
-import '../../../domain/user/entity/user.dart';
-import '../../../domain/user/interface/user_repository.dart';
-import '../../../domain/user/value_object/age_group.dart';
 import '../../config/app_config.dart';
 import '../../model/flavor.dart';
 import '../group/state/current_group_id_provider.dart';

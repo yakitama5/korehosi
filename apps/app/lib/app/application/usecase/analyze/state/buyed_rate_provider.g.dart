@@ -15,8 +15,9 @@ String _$buyedRateHash() => r'4597b3dcdecab8db0c1bc619b41d82b5a570e50a';
 final buyedRateProvider = AutoDisposeFutureProvider<double>.internal(
   buyedRate,
   name: r'buyedRateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$buyedRateHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$buyedRateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, duplicate_ignore
-
 part of 'app_loading_provider.dart';
 
 // **************************************************************************
@@ -18,10 +16,9 @@ final loadingNotifierProvider =
     AutoDisposeNotifierProvider<LoadingNotifier, bool>.internal(
       LoadingNotifier.new,
       name: r'loadingNotifierProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$loadingNotifierHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$loadingNotifierHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

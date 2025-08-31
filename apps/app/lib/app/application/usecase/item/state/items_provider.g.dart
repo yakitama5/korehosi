@@ -51,21 +51,13 @@ class ItemsFamily extends Family<AsyncValue<List<Item>>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [items].
-  ItemsProvider call({
-    required String groupId,
-  }) {
-    return ItemsProvider(
-      groupId: groupId,
-    );
+  ItemsProvider call({required String groupId}) {
+    return ItemsProvider(groupId: groupId);
   }
 
   @override
-  ItemsProvider getProviderOverride(
-    covariant ItemsProvider provider,
-  ) {
-    return call(
-      groupId: provider.groupId,
-    );
+  ItemsProvider getProviderOverride(covariant ItemsProvider provider) {
+    return call(groupId: provider.groupId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -92,23 +84,18 @@ class ItemsProvider extends StreamProvider<List<Item>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [items].
-  ItemsProvider({
-    required String groupId,
-  }) : this._internal(
-          (ref) => items(
-            ref as ItemsRef,
-            groupId: groupId,
-          ),
-          from: itemsProvider,
-          name: r'itemsProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$itemsHash,
-          dependencies: ItemsFamily._dependencies,
-          allTransitiveDependencies: ItemsFamily._allTransitiveDependencies,
-          groupId: groupId,
-        );
+  ItemsProvider({required String groupId})
+    : this._internal(
+        (ref) => items(ref as ItemsRef, groupId: groupId),
+        from: itemsProvider,
+        name: r'itemsProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$itemsHash,
+        dependencies: ItemsFamily._dependencies,
+        allTransitiveDependencies: ItemsFamily._allTransitiveDependencies,
+        groupId: groupId,
+      );
 
   ItemsProvider._internal(
     super._createNotifier, {
@@ -123,9 +110,7 @@ class ItemsProvider extends StreamProvider<List<Item>> {
   final String groupId;
 
   @override
-  Override overrideWith(
-    Stream<List<Item>> Function(ItemsRef provider) create,
-  ) {
+  Override overrideWith(Stream<List<Item>> Function(ItemsRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: ItemsProvider._internal(
@@ -173,5 +158,6 @@ class _ItemsProviderElement extends StreamProviderElement<List<Item>>
   @override
   String get groupId => (origin as ItemsProvider).groupId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

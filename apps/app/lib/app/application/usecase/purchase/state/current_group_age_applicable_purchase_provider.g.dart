@@ -50,21 +50,15 @@ class CurrentGroupAgeApplicablePurchaseFamily
   /// グループ内の年齢に応じた購入情報
   ///
   /// Copied from [currentGroupAgeApplicablePurchase].
-  CurrentGroupAgeApplicablePurchaseProvider call({
-    required String itemId,
-  }) {
-    return CurrentGroupAgeApplicablePurchaseProvider(
-      itemId: itemId,
-    );
+  CurrentGroupAgeApplicablePurchaseProvider call({required String itemId}) {
+    return CurrentGroupAgeApplicablePurchaseProvider(itemId: itemId);
   }
 
   @override
   CurrentGroupAgeApplicablePurchaseProvider getProviderOverride(
     covariant CurrentGroupAgeApplicablePurchaseProvider provider,
   ) {
-    return call(
-      itemId: provider.itemId,
-    );
+    return call(itemId: provider.itemId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -90,24 +84,22 @@ class CurrentGroupAgeApplicablePurchaseProvider
   /// グループ内の年齢に応じた購入情報
   ///
   /// Copied from [currentGroupAgeApplicablePurchase].
-  CurrentGroupAgeApplicablePurchaseProvider({
-    required String itemId,
-  }) : this._internal(
-          (ref) => currentGroupAgeApplicablePurchase(
-            ref as CurrentGroupAgeApplicablePurchaseRef,
-            itemId: itemId,
-          ),
-          from: currentGroupAgeApplicablePurchaseProvider,
-          name: r'currentGroupAgeApplicablePurchaseProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$currentGroupAgeApplicablePurchaseHash,
-          dependencies: CurrentGroupAgeApplicablePurchaseFamily._dependencies,
-          allTransitiveDependencies: CurrentGroupAgeApplicablePurchaseFamily
-              ._allTransitiveDependencies,
+  CurrentGroupAgeApplicablePurchaseProvider({required String itemId})
+    : this._internal(
+        (ref) => currentGroupAgeApplicablePurchase(
+          ref as CurrentGroupAgeApplicablePurchaseRef,
           itemId: itemId,
-        );
+        ),
+        from: currentGroupAgeApplicablePurchaseProvider,
+        name: r'currentGroupAgeApplicablePurchaseProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$currentGroupAgeApplicablePurchaseHash,
+        dependencies: CurrentGroupAgeApplicablePurchaseFamily._dependencies,
+        allTransitiveDependencies:
+            CurrentGroupAgeApplicablePurchaseFamily._allTransitiveDependencies,
+        itemId: itemId,
+      );
 
   CurrentGroupAgeApplicablePurchaseProvider._internal(
     super._createNotifier, {
@@ -124,7 +116,7 @@ class CurrentGroupAgeApplicablePurchaseProvider
   @override
   Override overrideWith(
     FutureOr<Purchase?> Function(CurrentGroupAgeApplicablePurchaseRef provider)
-        create,
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -177,5 +169,6 @@ class _CurrentGroupAgeApplicablePurchaseProviderElement
   String get itemId =>
       (origin as CurrentGroupAgeApplicablePurchaseProvider).itemId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

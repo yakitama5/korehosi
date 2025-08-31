@@ -7,11 +7,7 @@ part of 'join_group_request.dart';
 // **************************************************************************
 
 _JoinGroupRequest _$JoinGroupRequestFromJson(Map<String, dynamic> json) =>
-    _JoinGroupRequest(
-      shareLinkId: json['shareLinkId'] as String,
-    );
+    _JoinGroupRequest(shareLinkId: json['shareLinkId'] as String);
 
 Map<String, dynamic> _$JoinGroupRequestToJson(_JoinGroupRequest instance) =>
-    <String, dynamic>{
-      'shareLinkId': instance.shareLinkId,
-    };
+    <String, dynamic>{'shareLinkId': instance.shareLinkId};

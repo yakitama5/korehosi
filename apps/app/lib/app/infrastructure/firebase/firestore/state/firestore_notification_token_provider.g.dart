@@ -50,21 +50,15 @@ class NotificationTokenCollectionRefFamily
   /// 通知FCMトークンコレクションの参照
   ///
   /// Copied from [notificationTokenCollectionRef].
-  NotificationTokenCollectionRefProvider call({
-    required String userId,
-  }) {
-    return NotificationTokenCollectionRefProvider(
-      userId: userId,
-    );
+  NotificationTokenCollectionRefProvider call({required String userId}) {
+    return NotificationTokenCollectionRefProvider(userId: userId);
   }
 
   @override
   NotificationTokenCollectionRefProvider getProviderOverride(
     covariant NotificationTokenCollectionRefProvider provider,
   ) {
-    return call(
-      userId: provider.userId,
-    );
+    return call(userId: provider.userId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -85,29 +79,30 @@ class NotificationTokenCollectionRefFamily
 /// 通知FCMトークンコレクションの参照
 ///
 /// Copied from [notificationTokenCollectionRef].
-class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
-    CollectionReference<FirestoreNotificationTokenModel>> {
+class NotificationTokenCollectionRefProvider
+    extends
+        AutoDisposeProvider<
+          CollectionReference<FirestoreNotificationTokenModel>
+        > {
   /// 通知FCMトークンコレクションの参照
   ///
   /// Copied from [notificationTokenCollectionRef].
-  NotificationTokenCollectionRefProvider({
-    required String userId,
-  }) : this._internal(
-          (ref) => notificationTokenCollectionRef(
-            ref as NotificationTokenCollectionRefRef,
-            userId: userId,
-          ),
-          from: notificationTokenCollectionRefProvider,
-          name: r'notificationTokenCollectionRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$notificationTokenCollectionRefHash,
-          dependencies: NotificationTokenCollectionRefFamily._dependencies,
-          allTransitiveDependencies:
-              NotificationTokenCollectionRefFamily._allTransitiveDependencies,
+  NotificationTokenCollectionRefProvider({required String userId})
+    : this._internal(
+        (ref) => notificationTokenCollectionRef(
+          ref as NotificationTokenCollectionRefRef,
           userId: userId,
-        );
+        ),
+        from: notificationTokenCollectionRefProvider,
+        name: r'notificationTokenCollectionRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$notificationTokenCollectionRefHash,
+        dependencies: NotificationTokenCollectionRefFamily._dependencies,
+        allTransitiveDependencies:
+            NotificationTokenCollectionRefFamily._allTransitiveDependencies,
+        userId: userId,
+      );
 
   NotificationTokenCollectionRefProvider._internal(
     super._createNotifier, {
@@ -124,8 +119,9 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
   @override
   Override overrideWith(
     CollectionReference<FirestoreNotificationTokenModel> Function(
-            NotificationTokenCollectionRefRef provider)
-        create,
+      NotificationTokenCollectionRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -143,7 +139,9 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
 
   @override
   AutoDisposeProviderElement<
-      CollectionReference<FirestoreNotificationTokenModel>> createElement() {
+    CollectionReference<FirestoreNotificationTokenModel>
+  >
+  createElement() {
     return _NotificationTokenCollectionRefProviderElement(this);
   }
 
@@ -164,15 +162,20 @@ class NotificationTokenCollectionRefProvider extends AutoDisposeProvider<
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin NotificationTokenCollectionRefRef on AutoDisposeProviderRef<
-    CollectionReference<FirestoreNotificationTokenModel>> {
+mixin NotificationTokenCollectionRefRef
+    on
+        AutoDisposeProviderRef<
+          CollectionReference<FirestoreNotificationTokenModel>
+        > {
   /// The parameter `userId` of this provider.
   String get userId;
 }
 
 class _NotificationTokenCollectionRefProviderElement
-    extends AutoDisposeProviderElement<
-        CollectionReference<FirestoreNotificationTokenModel>>
+    extends
+        AutoDisposeProviderElement<
+          CollectionReference<FirestoreNotificationTokenModel>
+        >
     with NotificationTokenCollectionRefRef {
   _NotificationTokenCollectionRefProviderElement(super.provider);
 
@@ -208,20 +211,14 @@ class NotificationTokenDocumentRefFamily
     required String userId,
     String? token,
   }) {
-    return NotificationTokenDocumentRefProvider(
-      userId: userId,
-      token: token,
-    );
+    return NotificationTokenDocumentRefProvider(userId: userId, token: token);
   }
 
   @override
   NotificationTokenDocumentRefProvider getProviderOverride(
     covariant NotificationTokenDocumentRefProvider provider,
   ) {
-    return call(
-      userId: provider.userId,
-      token: provider.token,
-    );
+    return call(userId: provider.userId, token: provider.token);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -242,32 +239,32 @@ class NotificationTokenDocumentRefFamily
 /// 通知FCMトークンドキュメントの参照
 ///
 /// Copied from [notificationTokenDocumentRef].
-class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
-    DocumentReference<FirestoreNotificationTokenModel>> {
+class NotificationTokenDocumentRefProvider
+    extends
+        AutoDisposeProvider<
+          DocumentReference<FirestoreNotificationTokenModel>
+        > {
   /// 通知FCMトークンドキュメントの参照
   ///
   /// Copied from [notificationTokenDocumentRef].
-  NotificationTokenDocumentRefProvider({
-    required String userId,
-    String? token,
-  }) : this._internal(
-          (ref) => notificationTokenDocumentRef(
-            ref as NotificationTokenDocumentRefRef,
-            userId: userId,
-            token: token,
-          ),
-          from: notificationTokenDocumentRefProvider,
-          name: r'notificationTokenDocumentRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$notificationTokenDocumentRefHash,
-          dependencies: NotificationTokenDocumentRefFamily._dependencies,
-          allTransitiveDependencies:
-              NotificationTokenDocumentRefFamily._allTransitiveDependencies,
+  NotificationTokenDocumentRefProvider({required String userId, String? token})
+    : this._internal(
+        (ref) => notificationTokenDocumentRef(
+          ref as NotificationTokenDocumentRefRef,
           userId: userId,
           token: token,
-        );
+        ),
+        from: notificationTokenDocumentRefProvider,
+        name: r'notificationTokenDocumentRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$notificationTokenDocumentRefHash,
+        dependencies: NotificationTokenDocumentRefFamily._dependencies,
+        allTransitiveDependencies:
+            NotificationTokenDocumentRefFamily._allTransitiveDependencies,
+        userId: userId,
+        token: token,
+      );
 
   NotificationTokenDocumentRefProvider._internal(
     super._createNotifier, {
@@ -286,8 +283,9 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
   @override
   Override overrideWith(
     DocumentReference<FirestoreNotificationTokenModel> Function(
-            NotificationTokenDocumentRefRef provider)
-        create,
+      NotificationTokenDocumentRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -306,7 +304,7 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
 
   @override
   AutoDisposeProviderElement<DocumentReference<FirestoreNotificationTokenModel>>
-      createElement() {
+  createElement() {
     return _NotificationTokenDocumentRefProviderElement(this);
   }
 
@@ -329,8 +327,11 @@ class NotificationTokenDocumentRefProvider extends AutoDisposeProvider<
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin NotificationTokenDocumentRefRef on AutoDisposeProviderRef<
-    DocumentReference<FirestoreNotificationTokenModel>> {
+mixin NotificationTokenDocumentRefRef
+    on
+        AutoDisposeProviderRef<
+          DocumentReference<FirestoreNotificationTokenModel>
+        > {
   /// The parameter `userId` of this provider.
   String get userId;
 
@@ -339,8 +340,10 @@ mixin NotificationTokenDocumentRefRef on AutoDisposeProviderRef<
 }
 
 class _NotificationTokenDocumentRefProviderElement
-    extends AutoDisposeProviderElement<
-        DocumentReference<FirestoreNotificationTokenModel>>
+    extends
+        AutoDisposeProviderElement<
+          DocumentReference<FirestoreNotificationTokenModel>
+        >
     with NotificationTokenDocumentRefRef {
   _NotificationTokenDocumentRefProviderElement(super.provider);
 
@@ -349,5 +352,6 @@ class _NotificationTokenDocumentRefProviderElement
   @override
   String? get token => (origin as NotificationTokenDocumentRefProvider).token;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

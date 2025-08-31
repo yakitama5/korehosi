@@ -15,14 +15,14 @@ String _$currentGroupJoinUsersHash() =>
 @ProviderFor(currentGroupJoinUsers)
 final currentGroupJoinUsersProvider =
     AutoDisposeFutureProvider<List<User>>.internal(
-  currentGroupJoinUsers,
-  name: r'currentGroupJoinUsersProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentGroupJoinUsersHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      currentGroupJoinUsers,
+      name: r'currentGroupJoinUsersProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$currentGroupJoinUsersHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

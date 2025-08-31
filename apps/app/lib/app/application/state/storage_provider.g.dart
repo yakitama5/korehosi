@@ -47,21 +47,13 @@ class ImageUrlFamily extends Family<AsyncValue<String?>> {
   /// 画像URL
   ///
   /// Copied from [imageUrl].
-  ImageUrlProvider call(
-    String? path,
-  ) {
-    return ImageUrlProvider(
-      path,
-    );
+  ImageUrlProvider call(String? path) {
+    return ImageUrlProvider(path);
   }
 
   @override
-  ImageUrlProvider getProviderOverride(
-    covariant ImageUrlProvider provider,
-  ) {
-    return call(
-      provider.path,
-    );
+  ImageUrlProvider getProviderOverride(covariant ImageUrlProvider provider) {
+    return call(provider.path);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -86,23 +78,18 @@ class ImageUrlProvider extends FutureProvider<String?> {
   /// 画像URL
   ///
   /// Copied from [imageUrl].
-  ImageUrlProvider(
-    String? path,
-  ) : this._internal(
-          (ref) => imageUrl(
-            ref as ImageUrlRef,
-            path,
-          ),
-          from: imageUrlProvider,
-          name: r'imageUrlProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$imageUrlHash,
-          dependencies: ImageUrlFamily._dependencies,
-          allTransitiveDependencies: ImageUrlFamily._allTransitiveDependencies,
-          path: path,
-        );
+  ImageUrlProvider(String? path)
+    : this._internal(
+        (ref) => imageUrl(ref as ImageUrlRef, path),
+        from: imageUrlProvider,
+        name: r'imageUrlProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$imageUrlHash,
+        dependencies: ImageUrlFamily._dependencies,
+        allTransitiveDependencies: ImageUrlFamily._allTransitiveDependencies,
+        path: path,
+      );
 
   ImageUrlProvider._internal(
     super._createNotifier, {
@@ -167,5 +154,6 @@ class _ImageUrlProviderElement extends FutureProviderElement<String?>
   @override
   String? get path => (origin as ImageUrlProvider).path;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

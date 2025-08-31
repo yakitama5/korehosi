@@ -15,8 +15,9 @@ String _$shareLinkIdHash() => r'9f39a0b0075bd52249a79cf456bd09d98e81e3ba';
 final _shareLinkIdProvider = AutoDisposeProvider<String>.internal(
   _shareLinkId,
   name: r'_shareLinkIdProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$shareLinkIdHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$shareLinkIdHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

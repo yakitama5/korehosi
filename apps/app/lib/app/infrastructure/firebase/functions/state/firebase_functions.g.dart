@@ -15,14 +15,14 @@ String _$firebaseFunctionsHash() => r'3c986d4d43427f37786a729442cd1a430c787a91';
 @ProviderFor(firebaseFunctions)
 final firebaseFunctionsProvider =
     AutoDisposeProvider<FirebaseFunctions>.internal(
-  firebaseFunctions,
-  name: r'firebaseFunctionsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseFunctionsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      firebaseFunctions,
+      name: r'firebaseFunctionsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firebaseFunctionsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

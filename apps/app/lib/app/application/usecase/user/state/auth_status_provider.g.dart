@@ -15,8 +15,9 @@ String _$authStatusHash() => r'571b4bf908b8dc5312fde78ae19e34d71e873bdd';
 final authStatusProvider = StreamProvider<AuthStatus?>.internal(
   authStatus,
   name: r'authStatusProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authStatusHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authStatusHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -1,6 +1,5 @@
+import 'package:cores_domain/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../domain/user/value_object/age_group.dart';
 
 part 'user_config.freezed.dart';
 

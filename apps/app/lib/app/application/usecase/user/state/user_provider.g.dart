@@ -51,21 +51,13 @@ class UserFamily extends Family<AsyncValue<User?>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [user].
-  UserProvider call({
-    required String userId,
-  }) {
-    return UserProvider(
-      userId: userId,
-    );
+  UserProvider call({required String userId}) {
+    return UserProvider(userId: userId);
   }
 
   @override
-  UserProvider getProviderOverride(
-    covariant UserProvider provider,
-  ) {
-    return call(
-      userId: provider.userId,
-    );
+  UserProvider getProviderOverride(covariant UserProvider provider) {
+    return call(userId: provider.userId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -92,21 +84,18 @@ class UserProvider extends StreamProvider<User?> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [user].
-  UserProvider({
-    required String userId,
-  }) : this._internal(
-          (ref) => user(
-            ref as UserRef,
-            userId: userId,
-          ),
-          from: userProvider,
-          name: r'userProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product') ? null : _$userHash,
-          dependencies: UserFamily._dependencies,
-          allTransitiveDependencies: UserFamily._allTransitiveDependencies,
-          userId: userId,
-        );
+  UserProvider({required String userId})
+    : this._internal(
+        (ref) => user(ref as UserRef, userId: userId),
+        from: userProvider,
+        name: r'userProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$userHash,
+        dependencies: UserFamily._dependencies,
+        allTransitiveDependencies: UserFamily._allTransitiveDependencies,
+        userId: userId,
+      );
 
   UserProvider._internal(
     super._createNotifier, {
@@ -121,9 +110,7 @@ class UserProvider extends StreamProvider<User?> {
   final String userId;
 
   @override
-  Override overrideWith(
-    Stream<User?> Function(UserRef provider) create,
-  ) {
+  Override overrideWith(Stream<User?> Function(UserRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: UserProvider._internal(
@@ -170,5 +157,6 @@ class _UserProviderElement extends StreamProviderElement<User?> with UserRef {
   @override
   String get userId => (origin as UserProvider).userId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

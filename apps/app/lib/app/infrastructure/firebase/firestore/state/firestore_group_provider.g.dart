@@ -15,19 +15,19 @@ String _$groupCollectionRefHash() =>
 @ProviderFor(groupCollectionRef)
 final groupCollectionRefProvider =
     AutoDisposeProvider<CollectionReference<FirestoreGroupModel>>.internal(
-  groupCollectionRef,
-  name: r'groupCollectionRefProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$groupCollectionRefHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      groupCollectionRef,
+      name: r'groupCollectionRefProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$groupCollectionRefHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GroupCollectionRefRef
-    = AutoDisposeProviderRef<CollectionReference<FirestoreGroupModel>>;
+typedef GroupCollectionRefRef =
+    AutoDisposeProviderRef<CollectionReference<FirestoreGroupModel>>;
 String _$groupDocumentRefHash() => r'e0084394835c4e1ee873a6e281b6ea3b32c561b6';
 
 /// Copied from Dart SDK
@@ -70,21 +70,15 @@ class GroupDocumentRefFamily
   /// グループドキュメントの参照
   ///
   /// Copied from [groupDocumentRef].
-  GroupDocumentRefProvider call({
-    String? groupId,
-  }) {
-    return GroupDocumentRefProvider(
-      groupId: groupId,
-    );
+  GroupDocumentRefProvider call({String? groupId}) {
+    return GroupDocumentRefProvider(groupId: groupId);
   }
 
   @override
   GroupDocumentRefProvider getProviderOverride(
     covariant GroupDocumentRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-    );
+    return call(groupId: provider.groupId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -110,24 +104,19 @@ class GroupDocumentRefProvider
   /// グループドキュメントの参照
   ///
   /// Copied from [groupDocumentRef].
-  GroupDocumentRefProvider({
-    String? groupId,
-  }) : this._internal(
-          (ref) => groupDocumentRef(
-            ref as GroupDocumentRefRef,
-            groupId: groupId,
-          ),
-          from: groupDocumentRefProvider,
-          name: r'groupDocumentRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$groupDocumentRefHash,
-          dependencies: GroupDocumentRefFamily._dependencies,
-          allTransitiveDependencies:
-              GroupDocumentRefFamily._allTransitiveDependencies,
-          groupId: groupId,
-        );
+  GroupDocumentRefProvider({String? groupId})
+    : this._internal(
+        (ref) => groupDocumentRef(ref as GroupDocumentRefRef, groupId: groupId),
+        from: groupDocumentRefProvider,
+        name: r'groupDocumentRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$groupDocumentRefHash,
+        dependencies: GroupDocumentRefFamily._dependencies,
+        allTransitiveDependencies:
+            GroupDocumentRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+      );
 
   GroupDocumentRefProvider._internal(
     super._createNotifier, {
@@ -144,8 +133,9 @@ class GroupDocumentRefProvider
   @override
   Override overrideWith(
     DocumentReference<FirestoreGroupModel> Function(
-            GroupDocumentRefRef provider)
-        create,
+      GroupDocumentRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -163,7 +153,7 @@ class GroupDocumentRefProvider
 
   @override
   AutoDisposeProviderElement<DocumentReference<FirestoreGroupModel>>
-      createElement() {
+  createElement() {
     return _GroupDocumentRefProviderElement(this);
   }
 
@@ -197,5 +187,6 @@ class _GroupDocumentRefProviderElement
   @override
   String? get groupId => (origin as GroupDocumentRefProvider).groupId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

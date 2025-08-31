@@ -12,14 +12,14 @@ String _$routerNotifierHash() => r'db6ce83d50ba69d12ddcf5ef37bcc0e8772d6535';
 @ProviderFor(RouterNotifier)
 final routerNotifierProvider =
     AutoDisposeAsyncNotifierProvider<RouterNotifier, void>.internal(
-  RouterNotifier.new,
-  name: r'routerNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$routerNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      RouterNotifier.new,
+      name: r'routerNotifierProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$routerNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$RouterNotifier = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint

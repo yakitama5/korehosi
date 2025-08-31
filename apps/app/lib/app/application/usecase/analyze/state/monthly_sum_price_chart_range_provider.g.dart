@@ -13,16 +13,19 @@ String _$monthlySumPriceChartRangeHash() =>
 ///
 /// Copied from [MonthlySumPriceChartRange].
 @ProviderFor(MonthlySumPriceChartRange)
-final monthlySumPriceChartRangeProvider = AutoDisposeNotifierProvider<
-    MonthlySumPriceChartRange, (double, double)>.internal(
-  MonthlySumPriceChartRange.new,
-  name: r'monthlySumPriceChartRangeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$monthlySumPriceChartRangeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final monthlySumPriceChartRangeProvider =
+    AutoDisposeNotifierProvider<
+      MonthlySumPriceChartRange,
+      (double, double)
+    >.internal(
+      MonthlySumPriceChartRange.new,
+      name: r'monthlySumPriceChartRangeProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$monthlySumPriceChartRangeHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$MonthlySumPriceChartRange = AutoDisposeNotifier<(double, double)>;
 // ignore_for_file: type=lint

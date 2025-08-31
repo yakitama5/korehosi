@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, duplicate_ignore
-
 part of 'app_build_config_provider.dart';
 
 // **************************************************************************
@@ -15,10 +13,9 @@ String _$appBuildConfigHash() => r'd4de2441f05786a30e954ce90fc0970a35426ab6';
 final appBuildConfigProvider = Provider<AppBuildConfig>.internal(
   appBuildConfig,
   name: r'appBuildConfigProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$appBuildConfigHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$appBuildConfigHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

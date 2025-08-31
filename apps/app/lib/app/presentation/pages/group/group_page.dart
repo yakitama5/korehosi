@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cores_domain/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,7 +16,6 @@ import '../../../application/usecase/group/group_usecase.dart';
 import '../../../application/usecase/group/state/current_group_id_provider.dart';
 import '../../../application/usecase/group/state/group_detail_providers.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../../domain/user/entity/user.dart';
 import '../../components/importer.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
@@ -247,7 +247,7 @@ class _ListTile extends HookWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(user.dispName, maxLines: 2, overflow: TextOverflow.ellipsis),
-      subtitle: Text(user.ageGroup.localeName),
+      subtitle: Text(i18n.app.ageGroupTypeName(context: user.ageGroup)),
     );
   }
 }

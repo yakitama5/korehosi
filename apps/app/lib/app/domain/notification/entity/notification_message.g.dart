@@ -17,12 +17,12 @@ _NotificationMessage _$NotificationMessageFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$NotificationMessageToJson(
-        _NotificationMessage instance) =>
-    <String, dynamic>{
-      'senderId': instance.senderId,
-      'category': instance.category,
-      'data': instance.data,
-      'from': instance.from,
-      'messageId': instance.messageId,
-      'messageType': instance.messageType,
-    };
+  _NotificationMessage instance,
+) => <String, dynamic>{
+  'senderId': instance.senderId,
+  'category': instance.category,
+  'data': instance.data,
+  'from': instance.from,
+  'messageId': instance.messageId,
+  'messageType': instance.messageType,
+};

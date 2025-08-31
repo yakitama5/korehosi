@@ -16,8 +16,9 @@ String _$itemIdHash() => r'a3ee906db5df5a1aac622eba5ecbfb6c33a332b2';
 final _itemIdProvider = AutoDisposeProvider<String?>.internal(
   _itemId,
   name: r'_itemIdProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$itemIdHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$itemIdHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -35,12 +36,13 @@ String _$itemHash() => r'eeb8aba393b91ebd02124be9914a963969cf61af';
 final _itemProvider = AutoDisposeFutureProvider<Item?>.internal(
   _item,
   name: r'_itemProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$itemHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$itemHash,
   dependencies: <ProviderOrFamily>[_itemIdProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
     _itemIdProvider,
-    ...?_itemIdProvider.allTransitiveDependencies
+    ...?_itemIdProvider.allTransitiveDependencies,
   },
 );
 
@@ -57,12 +59,13 @@ String _$purchaseHash() => r'448fb7ae5ce01766c90e3ebaffc2c1bfe855bebb';
 final _purchaseProvider = AutoDisposeFutureProvider<Purchase?>.internal(
   _purchase,
   name: r'_purchaseProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$purchaseHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$purchaseHash,
   dependencies: <ProviderOrFamily>[_itemIdProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
     _itemIdProvider,
-    ...?_itemIdProvider.allTransitiveDependencies
+    ...?_itemIdProvider.allTransitiveDependencies,
   },
 );
 

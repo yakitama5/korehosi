@@ -1,8 +1,7 @@
 // ignore_for_file: inference_failure_on_instance_creation
 
+import 'package:cores_domain/user.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
-
-import '../../../domain/user/value_object/age_group.dart';
 
 part 'user_form_model.gform.dart';
 

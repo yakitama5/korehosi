@@ -28,7 +28,4 @@ Map<String, dynamic> _$FirestoreUserModelToJson(_FirestoreUserModel instance) =>
       'updatedAt': timestampFromDateValue(instance.updatedAt),
     };
 
-const _$AgeGroupEnumMap = {
-  AgeGroup.child: 'child',
-  AgeGroup.adult: 'adult',
-};
+const _$AgeGroupEnumMap = {AgeGroup.child: 'child', AgeGroup.adult: 'adult'};

@@ -1,7 +1,7 @@
+import 'package:cores_domain/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../domain/user/entity/user.dart';
 import '../user_usecase.dart';
 
 part 'user_provider.g.dart';

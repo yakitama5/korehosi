@@ -49,21 +49,15 @@ class PurchaseCollectionRefFamily
   /// 購入情報コレクションの参照
   ///
   /// Copied from [purchaseCollectionRef].
-  PurchaseCollectionRefProvider call({
-    required String groupId,
-  }) {
-    return PurchaseCollectionRefProvider(
-      groupId: groupId,
-    );
+  PurchaseCollectionRefProvider call({required String groupId}) {
+    return PurchaseCollectionRefProvider(groupId: groupId);
   }
 
   @override
   PurchaseCollectionRefProvider getProviderOverride(
     covariant PurchaseCollectionRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-    );
+    return call(groupId: provider.groupId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -89,24 +83,22 @@ class PurchaseCollectionRefProvider
   /// 購入情報コレクションの参照
   ///
   /// Copied from [purchaseCollectionRef].
-  PurchaseCollectionRefProvider({
-    required String groupId,
-  }) : this._internal(
-          (ref) => purchaseCollectionRef(
-            ref as PurchaseCollectionRefRef,
-            groupId: groupId,
-          ),
-          from: purchaseCollectionRefProvider,
-          name: r'purchaseCollectionRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$purchaseCollectionRefHash,
-          dependencies: PurchaseCollectionRefFamily._dependencies,
-          allTransitiveDependencies:
-              PurchaseCollectionRefFamily._allTransitiveDependencies,
+  PurchaseCollectionRefProvider({required String groupId})
+    : this._internal(
+        (ref) => purchaseCollectionRef(
+          ref as PurchaseCollectionRefRef,
           groupId: groupId,
-        );
+        ),
+        from: purchaseCollectionRefProvider,
+        name: r'purchaseCollectionRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$purchaseCollectionRefHash,
+        dependencies: PurchaseCollectionRefFamily._dependencies,
+        allTransitiveDependencies:
+            PurchaseCollectionRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+      );
 
   PurchaseCollectionRefProvider._internal(
     super._createNotifier, {
@@ -123,8 +115,9 @@ class PurchaseCollectionRefProvider
   @override
   Override overrideWith(
     CollectionReference<FirestorePurchaseModel> Function(
-            PurchaseCollectionRefRef provider)
-        create,
+      PurchaseCollectionRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -142,7 +135,7 @@ class PurchaseCollectionRefProvider
 
   @override
   AutoDisposeProviderElement<CollectionReference<FirestorePurchaseModel>>
-      createElement() {
+  createElement() {
     return _PurchaseCollectionRefProviderElement(this);
   }
 
@@ -168,8 +161,10 @@ mixin PurchaseCollectionRefRef
   String get groupId;
 }
 
-class _PurchaseCollectionRefProviderElement extends AutoDisposeProviderElement<
-    CollectionReference<FirestorePurchaseModel>> with PurchaseCollectionRefRef {
+class _PurchaseCollectionRefProviderElement
+    extends
+        AutoDisposeProviderElement<CollectionReference<FirestorePurchaseModel>>
+    with PurchaseCollectionRefRef {
   _PurchaseCollectionRefProviderElement(super.provider);
 
   @override
@@ -212,10 +207,7 @@ class PurchaseDocumentRefFamily
   PurchaseDocumentRefProvider getProviderOverride(
     covariant PurchaseDocumentRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-      purchaseId: provider.purchaseId,
-    );
+    return call(groupId: provider.groupId, purchaseId: provider.purchaseId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -241,27 +233,24 @@ class PurchaseDocumentRefProvider
   /// 購入情報ドキュメントの参照
   ///
   /// Copied from [purchaseDocumentRef].
-  PurchaseDocumentRefProvider({
-    required String groupId,
-    String? purchaseId,
-  }) : this._internal(
-          (ref) => purchaseDocumentRef(
-            ref as PurchaseDocumentRefRef,
-            groupId: groupId,
-            purchaseId: purchaseId,
-          ),
-          from: purchaseDocumentRefProvider,
-          name: r'purchaseDocumentRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$purchaseDocumentRefHash,
-          dependencies: PurchaseDocumentRefFamily._dependencies,
-          allTransitiveDependencies:
-              PurchaseDocumentRefFamily._allTransitiveDependencies,
+  PurchaseDocumentRefProvider({required String groupId, String? purchaseId})
+    : this._internal(
+        (ref) => purchaseDocumentRef(
+          ref as PurchaseDocumentRefRef,
           groupId: groupId,
           purchaseId: purchaseId,
-        );
+        ),
+        from: purchaseDocumentRefProvider,
+        name: r'purchaseDocumentRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$purchaseDocumentRefHash,
+        dependencies: PurchaseDocumentRefFamily._dependencies,
+        allTransitiveDependencies:
+            PurchaseDocumentRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+        purchaseId: purchaseId,
+      );
 
   PurchaseDocumentRefProvider._internal(
     super._createNotifier, {
@@ -280,8 +269,9 @@ class PurchaseDocumentRefProvider
   @override
   Override overrideWith(
     DocumentReference<FirestorePurchaseModel> Function(
-            PurchaseDocumentRefRef provider)
-        create,
+      PurchaseDocumentRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -300,7 +290,7 @@ class PurchaseDocumentRefProvider
 
   @override
   AutoDisposeProviderElement<DocumentReference<FirestorePurchaseModel>>
-      createElement() {
+  createElement() {
     return _PurchaseDocumentRefProviderElement(this);
   }
 
@@ -332,8 +322,10 @@ mixin PurchaseDocumentRefRef
   String? get purchaseId;
 }
 
-class _PurchaseDocumentRefProviderElement extends AutoDisposeProviderElement<
-    DocumentReference<FirestorePurchaseModel>> with PurchaseDocumentRefRef {
+class _PurchaseDocumentRefProviderElement
+    extends
+        AutoDisposeProviderElement<DocumentReference<FirestorePurchaseModel>>
+    with PurchaseDocumentRefRef {
   _PurchaseDocumentRefProviderElement(super.provider);
 
   @override
@@ -341,5 +333,6 @@ class _PurchaseDocumentRefProviderElement extends AutoDisposeProviderElement<
   @override
   String? get purchaseId => (origin as PurchaseDocumentRefProvider).purchaseId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

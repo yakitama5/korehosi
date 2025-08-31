@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/application/usecase/user/extension/user_mixin.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -7,7 +8,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../application/usecase/group/state/current_group_provider.dart';
 import '../../../../application/usecase/group/state/join_groups_provider.dart';
 import '../../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../../../domain/user/entity/user.dart';
 import '../../../hooks/importer.dart';
 import '../../../routes/importer.dart';
 import 'premium_icon_container.dart';
@@ -61,7 +61,9 @@ class AndroidAccountDialog extends HookConsumerWidget {
               ],
             ),
             Text(
-              user?.ageGroup.localeName ?? '',
+              user == null
+                  ? ''
+                  : i18n.app.ageGroupTypeName(context: user.ageGroup),
               style: textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),

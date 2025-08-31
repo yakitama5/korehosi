@@ -48,21 +48,15 @@ class ItemCollectionRefFamily
   /// 欲しい物コレクションの参照
   ///
   /// Copied from [itemCollectionRef].
-  ItemCollectionRefProvider call({
-    required String groupId,
-  }) {
-    return ItemCollectionRefProvider(
-      groupId: groupId,
-    );
+  ItemCollectionRefProvider call({required String groupId}) {
+    return ItemCollectionRefProvider(groupId: groupId);
   }
 
   @override
   ItemCollectionRefProvider getProviderOverride(
     covariant ItemCollectionRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-    );
+    return call(groupId: provider.groupId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -88,24 +82,20 @@ class ItemCollectionRefProvider
   /// 欲しい物コレクションの参照
   ///
   /// Copied from [itemCollectionRef].
-  ItemCollectionRefProvider({
-    required String groupId,
-  }) : this._internal(
-          (ref) => itemCollectionRef(
-            ref as ItemCollectionRefRef,
-            groupId: groupId,
-          ),
-          from: itemCollectionRefProvider,
-          name: r'itemCollectionRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$itemCollectionRefHash,
-          dependencies: ItemCollectionRefFamily._dependencies,
-          allTransitiveDependencies:
-              ItemCollectionRefFamily._allTransitiveDependencies,
-          groupId: groupId,
-        );
+  ItemCollectionRefProvider({required String groupId})
+    : this._internal(
+        (ref) =>
+            itemCollectionRef(ref as ItemCollectionRefRef, groupId: groupId),
+        from: itemCollectionRefProvider,
+        name: r'itemCollectionRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$itemCollectionRefHash,
+        dependencies: ItemCollectionRefFamily._dependencies,
+        allTransitiveDependencies:
+            ItemCollectionRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+      );
 
   ItemCollectionRefProvider._internal(
     super._createNotifier, {
@@ -122,8 +112,9 @@ class ItemCollectionRefProvider
   @override
   Override overrideWith(
     CollectionReference<FirestoreItemModel> Function(
-            ItemCollectionRefRef provider)
-        create,
+      ItemCollectionRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -141,7 +132,7 @@ class ItemCollectionRefProvider
 
   @override
   AutoDisposeProviderElement<CollectionReference<FirestoreItemModel>>
-      createElement() {
+  createElement() {
     return _ItemCollectionRefProviderElement(this);
   }
 
@@ -197,24 +188,15 @@ class ItemDocumentRefFamily
   /// 欲しい物ドキュメントの参照
   ///
   /// Copied from [itemDocumentRef].
-  ItemDocumentRefProvider call({
-    required String groupId,
-    String? itemId,
-  }) {
-    return ItemDocumentRefProvider(
-      groupId: groupId,
-      itemId: itemId,
-    );
+  ItemDocumentRefProvider call({required String groupId, String? itemId}) {
+    return ItemDocumentRefProvider(groupId: groupId, itemId: itemId);
   }
 
   @override
   ItemDocumentRefProvider getProviderOverride(
     covariant ItemDocumentRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-      itemId: provider.itemId,
-    );
+    return call(groupId: provider.groupId, itemId: provider.itemId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -240,27 +222,24 @@ class ItemDocumentRefProvider
   /// 欲しい物ドキュメントの参照
   ///
   /// Copied from [itemDocumentRef].
-  ItemDocumentRefProvider({
-    required String groupId,
-    String? itemId,
-  }) : this._internal(
-          (ref) => itemDocumentRef(
-            ref as ItemDocumentRefRef,
-            groupId: groupId,
-            itemId: itemId,
-          ),
-          from: itemDocumentRefProvider,
-          name: r'itemDocumentRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$itemDocumentRefHash,
-          dependencies: ItemDocumentRefFamily._dependencies,
-          allTransitiveDependencies:
-              ItemDocumentRefFamily._allTransitiveDependencies,
+  ItemDocumentRefProvider({required String groupId, String? itemId})
+    : this._internal(
+        (ref) => itemDocumentRef(
+          ref as ItemDocumentRefRef,
           groupId: groupId,
           itemId: itemId,
-        );
+        ),
+        from: itemDocumentRefProvider,
+        name: r'itemDocumentRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$itemDocumentRefHash,
+        dependencies: ItemDocumentRefFamily._dependencies,
+        allTransitiveDependencies:
+            ItemDocumentRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+        itemId: itemId,
+      );
 
   ItemDocumentRefProvider._internal(
     super._createNotifier, {
@@ -279,7 +258,7 @@ class ItemDocumentRefProvider
   @override
   Override overrideWith(
     DocumentReference<FirestoreItemModel> Function(ItemDocumentRefRef provider)
-        create,
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -298,7 +277,7 @@ class ItemDocumentRefProvider
 
   @override
   AutoDisposeProviderElement<DocumentReference<FirestoreItemModel>>
-      createElement() {
+  createElement() {
     return _ItemDocumentRefProviderElement(this);
   }
 
@@ -340,5 +319,6 @@ class _ItemDocumentRefProviderElement
   @override
   String? get itemId => (origin as ItemDocumentRefProvider).itemId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

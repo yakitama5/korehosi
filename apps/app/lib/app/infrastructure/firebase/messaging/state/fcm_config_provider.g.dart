@@ -13,8 +13,9 @@ String _$fcmConfigHash() => r'061b9dc7062d30469283c2a74cb034b853d5b48d';
 final fcmConfigProvider = AutoDisposeProvider<FCMConfig>.internal(
   fcmConfig,
   name: r'fcmConfigProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$fcmConfigHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$fcmConfigHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

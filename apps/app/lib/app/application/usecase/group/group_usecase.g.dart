@@ -13,8 +13,9 @@ String _$groupUsecaseHash() => r'7052184c4e41784c33d7f048a5b41b2fee5263c0';
 final groupUsecaseProvider = AutoDisposeProvider<GroupUsecase>.internal(
   groupUsecase,
   name: r'groupUsecaseProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$groupUsecaseHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$groupUsecaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

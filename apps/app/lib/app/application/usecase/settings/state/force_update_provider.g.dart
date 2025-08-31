@@ -15,8 +15,9 @@ String _$forceUpdateHash() => r'32e36b3e0ff37d19d7d4afee1d5e6cad41ab0030';
 final forceUpdateProvider = AutoDisposeFutureProvider<bool>.internal(
   forceUpdate,
   name: r'forceUpdateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$forceUpdateHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$forceUpdateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

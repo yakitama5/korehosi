@@ -1,7 +1,6 @@
+import 'package:cores_domain/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/user/entity/user.dart';
-import '../../../../domain/user/value_object/age_group.dart';
 import '../converter/json_key.dart';
 
 part 'firestore_user_model.freezed.dart';
@@ -26,13 +25,13 @@ abstract class FirestoreUserModel with _$FirestoreUserModel {
 extension FirestoreUserModelX on FirestoreUserModel {
   /// ドメイン層への変換
   User toDomainModel() => User(
-        id: id,
-        ageGroup: ageGroup,
-        name: name,
-        joinGroupIds: joinGroupIds,
-        createdAt: createdAt!,
-        updatedAt: updatedAt!,
-      );
+    id: id,
+    ageGroup: ageGroup,
+    name: name,
+    joinGroupIds: joinGroupIds,
+    createdAt: createdAt!,
+    updatedAt: updatedAt!,
+  );
 
   /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;

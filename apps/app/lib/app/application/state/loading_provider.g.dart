@@ -14,14 +14,14 @@ String _$loadingNotifierHash() => r'af1996d9ac77e923458cbf2039e2302f793c28b6';
 @ProviderFor(LoadingNotifier)
 final loadingNotifierProvider =
     AutoDisposeNotifierProvider<LoadingNotifier, bool>.internal(
-  LoadingNotifier.new,
-  name: r'loadingNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$loadingNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      LoadingNotifier.new,
+      name: r'loadingNotifierProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$loadingNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$LoadingNotifier = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint

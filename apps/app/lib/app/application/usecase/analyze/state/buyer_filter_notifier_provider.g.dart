@@ -15,14 +15,14 @@ String _$buyerFilterNotifierHash() =>
 @ProviderFor(BuyerFilterNotifier)
 final buyerFilterNotifierProvider =
     AutoDisposeNotifierProvider<BuyerFilterNotifier, String?>.internal(
-  BuyerFilterNotifier.new,
-  name: r'buyerFilterNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$buyerFilterNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      BuyerFilterNotifier.new,
+      name: r'buyerFilterNotifierProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$buyerFilterNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$BuyerFilterNotifier = AutoDisposeNotifier<String?>;
 // ignore_for_file: type=lint

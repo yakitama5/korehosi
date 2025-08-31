@@ -1,3 +1,4 @@
+import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -11,8 +12,6 @@ import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../domain/item/entity/item.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../../domain/purchase/value_object/purchase_status.dart';
-import '../../../domain/user/entity/user.dart';
-import '../../../domain/user/value_object/age_group.dart';
 import '../../components/importer.dart';
 import '../../components/src/date_text_with_label.dart';
 import '../../routes/importer.dart';
@@ -45,17 +44,16 @@ class ItemPage extends HookConsumerWidget {
         AsyncData(value: final Purchase? purchaseData),
         AsyncData(value: final User userData),
       ) =>
-        _ItemDetailView(
-          item: itemData,
-          purchase: purchaseData,
-          user: userData,
-        ),
+        _ItemDetailView(item: itemData, purchase: purchaseData, user: userData),
 
       // いずれかがエラーの場合はエラー
       (AsyncError(error: final error, stackTrace: final stackTrace), _, _) ||
       (_, AsyncError(error: final error, stackTrace: final stackTrace), _) ||
-      (_, _, AsyncError(error: final error, stackTrace: final stackTrace)) =>
-        ErrorView(error, stackTrace),
+      (
+        _,
+        _,
+        AsyncError(error: final error, stackTrace: final stackTrace),
+      ) => ErrorView(error, stackTrace),
 
       // 一瞬なのでローディング中は何も表示しない
       _ => const SizedBox.shrink(),
@@ -79,11 +77,7 @@ class _ItemDetailView extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(item.name),
-        actions: [
-          EditIconButton(
-            onPressed: () => _onEdit(context),
-          ),
-        ],
+        actions: [EditIconButton(onPressed: () => _onEdit(context))],
       ),
       body: SingleChildScrollView(
         child: PagePadding(
@@ -92,51 +86,27 @@ class _ItemDetailView extends HookWidget {
             children: [
               ItemImages(imagesPath: item.imagesPath),
               const Gap(8),
-              _PurchaseStatus(
-                purchaseStatus: purchase.status,
-              ),
+              _PurchaseStatus(purchaseStatus: purchase.status),
               const Gap(32),
-              TextWithLabel(
-                item.name,
-                label: i18n.app.name,
-              ),
+              TextWithLabel(item.name, label: i18n.app.name),
               const Gap(16),
-              TextWithLabel(
-                item.wanterName,
-                label: i18n.app.wanterName,
-              ),
+              TextWithLabel(item.wanterName, label: i18n.app.wanterName),
               const Gap(16),
-              _WishRank(
-                wishRank: item.wishRank,
-              ),
+              _WishRank(wishRank: item.wishRank),
               const Gap(16),
-              TextWithLabel(
-                item.wishSeason,
-                label: i18n.app.wishSeasonLabel,
-              ),
+              TextWithLabel(item.wishSeason, label: i18n.app.wishSeasonLabel),
               const Gap(16),
-              _Urls(
-                urls: item.urls,
-              ),
+              _Urls(urls: item.urls),
               const Gap(16),
-              TextWithLabel(
-                item.memo,
-                label: i18n.app.memo,
-              ),
+              TextWithLabel(item.memo, label: i18n.app.memo),
               const Gap(40),
-              _PurchaseInfo(
-                purchase: purchase,
-                user: user,
-              ),
+              _PurchaseInfo(purchase: purchase, user: user),
               const Gap(160),
             ],
           ),
         ),
       ),
-      floatingActionButton: _PurchaseFab(
-        item: item,
-        user: user,
-      ),
+      floatingActionButton: _PurchaseFab(item: item, user: user),
     );
   }
 
@@ -162,10 +132,7 @@ class _PurchaseStatus extends HookWidget {
       children: [
         Icon(purchaseStatus.iconData, color: colorScheme.primary),
         const Gap(8),
-        Text(
-          purchaseStatus.localeName,
-          style: textTheme.bodyLarge,
-        ),
+        Text(purchaseStatus.localeName, style: textTheme.bodyLarge),
       ],
     );
   }
@@ -184,10 +151,7 @@ class _WishRank extends HookWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          i18n.app.wishRank,
-          style: textTheme.labelMedium,
-        ),
+        Text(i18n.app.wishRank, style: textTheme.labelMedium),
         RatingBar.builder(
           itemBuilder: (context, index) => const RatingIcon(),
           initialRating: wishRank ?? 0,
@@ -240,10 +204,7 @@ class _Urls extends HookWidget {
 /// 購入情報
 /// ログインユーザーが子供の場合は表示しない
 class _PurchaseInfo extends HookWidget {
-  const _PurchaseInfo({
-    this.purchase,
-    required this.user,
-  });
+  const _PurchaseInfo({this.purchase, required this.user});
 
   final Purchase? purchase;
   final User user;
@@ -264,7 +225,8 @@ class _PurchaseInfo extends HookWidget {
         const Gap(16),
         TextWithLabel(
           purchase?.price?.formatCurrency(
-              locale: AppLocaleUtils.findDeviceLocale().languageCode),
+            locale: AppLocaleUtils.findDeviceLocale().languageCode,
+          ),
           label: i18n.app.price,
         ),
         const Gap(16),
@@ -273,20 +235,11 @@ class _PurchaseInfo extends HookWidget {
           label: i18n.app.purchasePlanDateTime,
         ),
         const Gap(16),
-        DateTextWithLabel(
-          dateTime: purchase?.sentAt,
-          label: i18n.app.sentAt,
-        ),
+        DateTextWithLabel(dateTime: purchase?.sentAt, label: i18n.app.sentAt),
         const Gap(16),
-        TextWithLabel(
-          purchase?.buyerName,
-          label: i18n.app.buyerName,
-        ),
+        TextWithLabel(purchase?.buyerName, label: i18n.app.buyerName),
         const Gap(16),
-        TextWithLabel(
-          purchase?.memo,
-          label: i18n.app.memo,
-        ),
+        TextWithLabel(purchase?.memo, label: i18n.app.memo),
       ],
     );
   }
@@ -304,14 +257,12 @@ class _PurchaseInfoTitle extends HookWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          i18n.app.purchaseInfoTitle,
-          style: textTheme.titleMedium,
-        ),
+        Text(i18n.app.purchaseInfoTitle, style: textTheme.titleMedium),
         Text(
           i18n.app.purchaseInfoCaption,
-          style: textTheme.labelMedium
-              ?.copyWith(color: colorScheme.onSurfaceVariant),
+          style: textTheme.labelMedium?.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
         ),
       ],
     );
@@ -322,10 +273,7 @@ class _PurchaseInfoTitle extends HookWidget {
 ///
 /// ログインユーザーが子供の場合は表示しない
 class _PurchaseFab extends HookConsumerWidget {
-  const _PurchaseFab({
-    required this.item,
-    required this.user,
-  });
+  const _PurchaseFab({required this.item, required this.user});
 
   final Item item;
   final User user;

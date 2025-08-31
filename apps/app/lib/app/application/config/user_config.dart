@@ -1,4 +1,5 @@
-import '../../domain/user/value_object/age_group.dart';
+import 'package:cores_domain/user.dart';
+
 import '../model/user/user_config.dart';
 
 /// ユーザーの設定

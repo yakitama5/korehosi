@@ -15,14 +15,14 @@ String _$currentGroupIdHash() => r'731f51f563d6d125429fe499710472441acce0d6';
 @ProviderFor(CurrentGroupId)
 final currentGroupIdProvider =
     AsyncNotifierProvider<CurrentGroupId, String?>.internal(
-  CurrentGroupId.new,
-  name: r'currentGroupIdProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentGroupIdHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      CurrentGroupId.new,
+      name: r'currentGroupIdProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$currentGroupIdHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$CurrentGroupId = AsyncNotifier<String?>;
 // ignore_for_file: type=lint

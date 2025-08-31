@@ -6,122 +6,135 @@ part of 'routes_data.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $baseShellSrouteData,
-    ];
+List<RouteBase> get $appRoutes => [$baseShellSrouteData];
 
 RouteBase get $baseShellSrouteData => ShellRouteData.$route(
-      navigatorKey: BaseShellSrouteData.$navigatorKey,
-      factory: $BaseShellSrouteDataExtension._fromState,
+  navigatorKey: BaseShellSrouteData.$navigatorKey,
+  factory: $BaseShellSrouteDataExtension._fromState,
+  routes: [
+    GoRouteData.$route(path: '/', factory: _$RootRouteData._fromState),
+    GoRouteData.$route(
+      path: '/start',
+
+      factory: _$OnboardStartRouteData._fromState,
       routes: [
         GoRouteData.$route(
-          path: '/',
-          factory: _$RootRouteData._fromState,
+          path: 'account_link',
+
+          factory: _$AccountLinkRouteData._fromState,
         ),
-        GoRouteData.$route(
-          path: '/start',
-          factory: _$OnboardStartRouteData._fromState,
+      ],
+    ),
+    GoRouteData.$route(
+      path: '/share_link/:shareLinkId',
+
+      factory: _$ShareLinkRouteData._fromState,
+    ),
+    GoRouteData.$route(
+      path: '/preview',
+
+      factory: _$PhotoPreviewRouteData._fromState,
+    ),
+    GoRouteData.$route(
+      path: '/onboard_form',
+
+      factory: _$OnboardFormRouteData._fromState,
+    ),
+    StatefulShellRouteData.$route(
+      restorationScopeId: BottomNavitorShellRouteData.$restorationScopeId,
+      factory: $BottomNavitorShellRouteDataExtension._fromState,
+      branches: [
+        StatefulShellBranchData.$branch(
           routes: [
             GoRouteData.$route(
-              path: 'account_link',
-              factory: _$AccountLinkRouteData._fromState,
+              path: '/items',
+
+              factory: _$ItemsRouteData._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'item/:itemId',
+
+                  factory: _$ItemRouteData._fromState,
+                  routes: [
+                    GoRouteData.$route(
+                      path: 'edit',
+
+                      factory: _$ItemEditRouteData._fromState,
+                    ),
+                    GoRouteData.$route(
+                      path: 'purchase',
+
+                      factory: _$PurchaseRouteData._fromState,
+                    ),
+                  ],
+                ),
+                GoRouteData.$route(
+                  path: 'edit',
+
+                  factory: _$ItemCreateRouteData._fromState,
+                ),
+              ],
             ),
           ],
         ),
-        GoRouteData.$route(
-          path: '/share_link/:shareLinkId',
-          factory: _$ShareLinkRouteData._fromState,
-        ),
-        GoRouteData.$route(
-          path: '/preview',
-          factory: _$PhotoPreviewRouteData._fromState,
-        ),
-        GoRouteData.$route(
-          path: '/onboard_form',
-          factory: _$OnboardFormRouteData._fromState,
-        ),
-        StatefulShellRouteData.$route(
-          restorationScopeId: BottomNavitorShellRouteData.$restorationScopeId,
-          factory: $BottomNavitorShellRouteDataExtension._fromState,
-          branches: [
-            StatefulShellBranchData.$branch(
+        StatefulShellBranchData.$branch(
+          routes: [
+            GoRouteData.$route(
+              path: '/analyze',
+
+              factory: _$AnalyzeRouteData._fromState,
               routes: [
                 GoRouteData.$route(
-                  path: '/items',
-                  factory: _$ItemsRouteData._fromState,
-                  routes: [
-                    GoRouteData.$route(
-                      path: 'item/:itemId',
-                      factory: _$ItemRouteData._fromState,
-                      routes: [
-                        GoRouteData.$route(
-                          path: 'edit',
-                          factory: _$ItemEditRouteData._fromState,
-                        ),
-                        GoRouteData.$route(
-                          path: 'purchase',
-                          factory: _$PurchaseRouteData._fromState,
-                        ),
-                      ],
-                    ),
-                    GoRouteData.$route(
-                      path: 'edit',
-                      factory: _$ItemCreateRouteData._fromState,
-                    ),
-                  ],
+                  path: 'analyze_detail',
+
+                  factory: _$AnalyzeDetailRouteData._fromState,
                 ),
               ],
             ),
-            StatefulShellBranchData.$branch(
+          ],
+        ),
+        StatefulShellBranchData.$branch(
+          routes: [
+            GoRouteData.$route(
+              path: '/settings',
+
+              factory: _$SettingsRouteData._fromState,
               routes: [
                 GoRouteData.$route(
-                  path: '/analyze',
-                  factory: _$AnalyzeRouteData._fromState,
+                  path: 'groups',
+
+                  factory: _$GroupsRouteData._fromState,
                   routes: [
                     GoRouteData.$route(
-                      path: 'analyze_detail',
-                      factory: _$AnalyzeDetailRouteData._fromState,
+                      path: 'group/:groupId',
+
+                      factory: _$GroupRouteData._fromState,
                     ),
                   ],
                 ),
-              ],
-            ),
-            StatefulShellBranchData.$branch(
-              routes: [
                 GoRouteData.$route(
-                  path: '/settings',
-                  factory: _$SettingsRouteData._fromState,
-                  routes: [
-                    GoRouteData.$route(
-                      path: 'groups',
-                      factory: _$GroupsRouteData._fromState,
-                      routes: [
-                        GoRouteData.$route(
-                          path: 'group/:groupId',
-                          factory: _$GroupRouteData._fromState,
-                        ),
-                      ],
-                    ),
-                    GoRouteData.$route(
-                      path: 'profile',
-                      factory: _$ProfileRouteData._fromState,
-                    ),
-                    GoRouteData.$route(
-                      path: 'account',
-                      factory: _$AccountRouteData._fromState,
-                    ),
-                    GoRouteData.$route(
-                      path: 'license',
-                      factory: _$LicenseRouteData._fromState,
-                    ),
-                  ],
+                  path: 'profile',
+
+                  factory: _$ProfileRouteData._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'account',
+
+                  factory: _$AccountRouteData._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'license',
+
+                  factory: _$LicenseRouteData._fromState,
                 ),
               ],
             ),
           ],
         ),
       ],
-    );
+    ),
+  ],
+);
 
 extension $BaseShellSrouteDataExtension on BaseShellSrouteData {
   static BaseShellSrouteData _fromState(GoRouterState state) =>
@@ -132,9 +145,7 @@ mixin _$RootRouteData on GoRouteData {
   static RootRouteData _fromState(GoRouterState state) => const RootRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/',
-      );
+  String get location => GoRouteData.$location('/');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -155,9 +166,7 @@ mixin _$OnboardStartRouteData on GoRouteData {
       const OnboardStartRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/start',
-      );
+  String get location => GoRouteData.$location('/start');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -178,9 +187,7 @@ mixin _$AccountLinkRouteData on GoRouteData {
       const AccountLinkRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/start/account_link',
-      );
+  String get location => GoRouteData.$location('/start/account_link');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -198,16 +205,14 @@ mixin _$AccountLinkRouteData on GoRouteData {
 
 mixin _$ShareLinkRouteData on GoRouteData {
   static ShareLinkRouteData _fromState(GoRouterState state) =>
-      ShareLinkRouteData(
-        state.pathParameters['shareLinkId']!,
-      );
+      ShareLinkRouteData(state.pathParameters['shareLinkId']!);
 
   ShareLinkRouteData get _self => this as ShareLinkRouteData;
 
   @override
   String get location => GoRouteData.$location(
-        '/share_link/${Uri.encodeComponent(_self.shareLinkId)}',
-      );
+    '/share_link/${Uri.encodeComponent(_self.shareLinkId)}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -226,8 +231,11 @@ mixin _$ShareLinkRouteData on GoRouteData {
 mixin _$PhotoPreviewRouteData on GoRouteData {
   static PhotoPreviewRouteData _fromState(GoRouterState state) =>
       PhotoPreviewRouteData(
-        index:
-            _$convertMapValue('index', state.uri.queryParameters, int.tryParse),
+        index: _$convertMapValue(
+          'index',
+          state.uri.queryParameters,
+          int.tryParse,
+        ),
         $extra: state.extra as List<String>?,
       );
 
@@ -235,11 +243,9 @@ mixin _$PhotoPreviewRouteData on GoRouteData {
 
   @override
   String get location => GoRouteData.$location(
-        '/preview',
-        queryParams: {
-          if (_self.index != null) 'index': _self.index!.toString(),
-        },
-      );
+    '/preview',
+    queryParams: {if (_self.index != null) 'index': _self.index!.toString()},
+  );
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -262,9 +268,7 @@ mixin _$OnboardFormRouteData on GoRouteData {
       const OnboardFormRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/onboard_form',
-      );
+  String get location => GoRouteData.$location('/onboard_form');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -290,9 +294,7 @@ mixin _$ItemsRouteData on GoRouteData {
       const ItemsRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/items',
-      );
+  String get location => GoRouteData.$location('/items');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -309,16 +311,14 @@ mixin _$ItemsRouteData on GoRouteData {
 }
 
 mixin _$ItemRouteData on GoRouteData {
-  static ItemRouteData _fromState(GoRouterState state) => ItemRouteData(
-        state.pathParameters['itemId']!,
-      );
+  static ItemRouteData _fromState(GoRouterState state) =>
+      ItemRouteData(state.pathParameters['itemId']!);
 
   ItemRouteData get _self => this as ItemRouteData;
 
   @override
-  String get location => GoRouteData.$location(
-        '/items/item/${Uri.encodeComponent(_self.itemId)}',
-      );
+  String get location =>
+      GoRouteData.$location('/items/item/${Uri.encodeComponent(_self.itemId)}');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -335,16 +335,15 @@ mixin _$ItemRouteData on GoRouteData {
 }
 
 mixin _$ItemEditRouteData on GoRouteData {
-  static ItemEditRouteData _fromState(GoRouterState state) => ItemEditRouteData(
-        state.pathParameters['itemId']!,
-      );
+  static ItemEditRouteData _fromState(GoRouterState state) =>
+      ItemEditRouteData(state.pathParameters['itemId']!);
 
   ItemEditRouteData get _self => this as ItemEditRouteData;
 
   @override
   String get location => GoRouteData.$location(
-        '/items/item/${Uri.encodeComponent(_self.itemId)}/edit',
-      );
+    '/items/item/${Uri.encodeComponent(_self.itemId)}/edit',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -361,16 +360,15 @@ mixin _$ItemEditRouteData on GoRouteData {
 }
 
 mixin _$PurchaseRouteData on GoRouteData {
-  static PurchaseRouteData _fromState(GoRouterState state) => PurchaseRouteData(
-        state.pathParameters['itemId']!,
-      );
+  static PurchaseRouteData _fromState(GoRouterState state) =>
+      PurchaseRouteData(state.pathParameters['itemId']!);
 
   PurchaseRouteData get _self => this as PurchaseRouteData;
 
   @override
   String get location => GoRouteData.$location(
-        '/items/item/${Uri.encodeComponent(_self.itemId)}/purchase',
-      );
+    '/items/item/${Uri.encodeComponent(_self.itemId)}/purchase',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -391,9 +389,7 @@ mixin _$ItemCreateRouteData on GoRouteData {
       const ItemCreateRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/items/edit',
-      );
+  String get location => GoRouteData.$location('/items/edit');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -414,9 +410,7 @@ mixin _$AnalyzeRouteData on GoRouteData {
       const AnalyzeRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/analyze',
-      );
+  String get location => GoRouteData.$location('/analyze');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -435,19 +429,20 @@ mixin _$AnalyzeRouteData on GoRouteData {
 mixin _$AnalyzeDetailRouteData on GoRouteData {
   static AnalyzeDetailRouteData _fromState(GoRouterState state) =>
       AnalyzeDetailRouteData(
-        index:
-            _$convertMapValue('index', state.uri.queryParameters, int.tryParse),
+        index: _$convertMapValue(
+          'index',
+          state.uri.queryParameters,
+          int.tryParse,
+        ),
       );
 
   AnalyzeDetailRouteData get _self => this as AnalyzeDetailRouteData;
 
   @override
   String get location => GoRouteData.$location(
-        '/analyze/analyze_detail',
-        queryParams: {
-          if (_self.index != null) 'index': _self.index!.toString(),
-        },
-      );
+    '/analyze/analyze_detail',
+    queryParams: {if (_self.index != null) 'index': _self.index!.toString()},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -468,9 +463,7 @@ mixin _$SettingsRouteData on GoRouteData {
       const SettingsRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/settings',
-      );
+  String get location => GoRouteData.$location('/settings');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -491,9 +484,7 @@ mixin _$GroupsRouteData on GoRouteData {
       const GroupsRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/settings/groups',
-      );
+  String get location => GoRouteData.$location('/settings/groups');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -510,16 +501,15 @@ mixin _$GroupsRouteData on GoRouteData {
 }
 
 mixin _$GroupRouteData on GoRouteData {
-  static GroupRouteData _fromState(GoRouterState state) => GroupRouteData(
-        state.pathParameters['groupId']!,
-      );
+  static GroupRouteData _fromState(GoRouterState state) =>
+      GroupRouteData(state.pathParameters['groupId']!);
 
   GroupRouteData get _self => this as GroupRouteData;
 
   @override
   String get location => GoRouteData.$location(
-        '/settings/groups/group/${Uri.encodeComponent(_self.groupId)}',
-      );
+    '/settings/groups/group/${Uri.encodeComponent(_self.groupId)}',
+  );
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -540,9 +530,7 @@ mixin _$ProfileRouteData on GoRouteData {
       const ProfileRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/settings/profile',
-      );
+  String get location => GoRouteData.$location('/settings/profile');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -563,9 +551,7 @@ mixin _$AccountRouteData on GoRouteData {
       const AccountRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/settings/account',
-      );
+  String get location => GoRouteData.$location('/settings/account');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -586,9 +572,7 @@ mixin _$LicenseRouteData on GoRouteData {
       const LicenseRouteData();
 
   @override
-  String get location => GoRouteData.$location(
-        '/settings/license',
-      );
+  String get location => GoRouteData.$location('/settings/license');
 
   @override
   void go(BuildContext context) => context.go(location);

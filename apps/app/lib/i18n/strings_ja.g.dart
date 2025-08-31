@@ -4,6 +4,7 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 
+import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -80,9 +81,15 @@ class _TranslationsAppJa extends TranslationsAppEn {
 	@override String get sexMan => 'おとこ';
 	@override String get sexWoman => 'おんな';
 	@override String get sexNeither => 'どちらでもない';
-	@override String get ageGroupChild => 'こども';
-	@override String get ageGroupAdult => 'おとな';
 	@override String get ageGroup => '年齢層';
+	@override String ageGroupTypeName({required AgeGroup context}) {
+		switch (context) {
+			case AgeGroup.child:
+				return 'こども';
+			case AgeGroup.adult:
+				return 'おとな';
+		}
+	}
 	@override String get sex => '性別';
 	@override String get unset => '<未設定>';
 	@override String get requiredIcon => '*';
@@ -278,9 +285,15 @@ extension on TranslationsJa {
 			case 'app.sexMan': return 'おとこ';
 			case 'app.sexWoman': return 'おんな';
 			case 'app.sexNeither': return 'どちらでもない';
-			case 'app.ageGroupChild': return 'こども';
-			case 'app.ageGroupAdult': return 'おとな';
 			case 'app.ageGroup': return '年齢層';
+			case 'app.ageGroupTypeName': return ({required AgeGroup context}) {
+				switch (context) {
+					case AgeGroup.child:
+						return 'こども';
+					case AgeGroup.adult:
+						return 'おとな';
+				}
+			};
 			case 'app.sex': return '性別';
 			case 'app.unset': return '<未設定>';
 			case 'app.requiredIcon': return '*';

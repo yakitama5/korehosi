@@ -52,20 +52,14 @@ class AgeApplicablePurchaseFamily extends Family<AsyncValue<Purchase?>> {
     required String groupId,
     required String itemId,
   }) {
-    return AgeApplicablePurchaseProvider(
-      groupId: groupId,
-      itemId: itemId,
-    );
+    return AgeApplicablePurchaseProvider(groupId: groupId, itemId: itemId);
   }
 
   @override
   AgeApplicablePurchaseProvider getProviderOverride(
     covariant AgeApplicablePurchaseProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-      itemId: provider.itemId,
-    );
+    return call(groupId: provider.groupId, itemId: provider.itemId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -95,23 +89,22 @@ class AgeApplicablePurchaseProvider
     required String groupId,
     required String itemId,
   }) : this._internal(
-          (ref) => ageApplicablePurchase(
-            ref as AgeApplicablePurchaseRef,
-            groupId: groupId,
-            itemId: itemId,
-          ),
-          from: ageApplicablePurchaseProvider,
-          name: r'ageApplicablePurchaseProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$ageApplicablePurchaseHash,
-          dependencies: AgeApplicablePurchaseFamily._dependencies,
-          allTransitiveDependencies:
-              AgeApplicablePurchaseFamily._allTransitiveDependencies,
-          groupId: groupId,
-          itemId: itemId,
-        );
+         (ref) => ageApplicablePurchase(
+           ref as AgeApplicablePurchaseRef,
+           groupId: groupId,
+           itemId: itemId,
+         ),
+         from: ageApplicablePurchaseProvider,
+         name: r'ageApplicablePurchaseProvider',
+         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+             ? null
+             : _$ageApplicablePurchaseHash,
+         dependencies: AgeApplicablePurchaseFamily._dependencies,
+         allTransitiveDependencies:
+             AgeApplicablePurchaseFamily._allTransitiveDependencies,
+         groupId: groupId,
+         itemId: itemId,
+       );
 
   AgeApplicablePurchaseProvider._internal(
     super._createNotifier, {
@@ -188,5 +181,6 @@ class _AgeApplicablePurchaseProviderElement
   @override
   String get itemId => (origin as AgeApplicablePurchaseProvider).itemId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -47,21 +47,15 @@ class TokenTimestampFamily extends Family<AsyncValue<DateTime?>> {
   /// FCMトークンのタイムスタンプを管理するProvider
   ///
   /// Copied from [tokenTimestamp].
-  TokenTimestampProvider call({
-    required String token,
-  }) {
-    return TokenTimestampProvider(
-      token: token,
-    );
+  TokenTimestampProvider call({required String token}) {
+    return TokenTimestampProvider(token: token);
   }
 
   @override
   TokenTimestampProvider getProviderOverride(
     covariant TokenTimestampProvider provider,
   ) {
-    return call(
-      token: provider.token,
-    );
+    return call(token: provider.token);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -86,24 +80,19 @@ class TokenTimestampProvider extends AutoDisposeFutureProvider<DateTime?> {
   /// FCMトークンのタイムスタンプを管理するProvider
   ///
   /// Copied from [tokenTimestamp].
-  TokenTimestampProvider({
-    required String token,
-  }) : this._internal(
-          (ref) => tokenTimestamp(
-            ref as TokenTimestampRef,
-            token: token,
-          ),
-          from: tokenTimestampProvider,
-          name: r'tokenTimestampProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$tokenTimestampHash,
-          dependencies: TokenTimestampFamily._dependencies,
-          allTransitiveDependencies:
-              TokenTimestampFamily._allTransitiveDependencies,
-          token: token,
-        );
+  TokenTimestampProvider({required String token})
+    : this._internal(
+        (ref) => tokenTimestamp(ref as TokenTimestampRef, token: token),
+        from: tokenTimestampProvider,
+        name: r'tokenTimestampProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$tokenTimestampHash,
+        dependencies: TokenTimestampFamily._dependencies,
+        allTransitiveDependencies:
+            TokenTimestampFamily._allTransitiveDependencies,
+        token: token,
+      );
 
   TokenTimestampProvider._internal(
     super._createNotifier, {
@@ -162,11 +151,13 @@ mixin TokenTimestampRef on AutoDisposeFutureProviderRef<DateTime?> {
 }
 
 class _TokenTimestampProviderElement
-    extends AutoDisposeFutureProviderElement<DateTime?> with TokenTimestampRef {
+    extends AutoDisposeFutureProviderElement<DateTime?>
+    with TokenTimestampRef {
   _TokenTimestampProviderElement(super.provider);
 
   @override
   String get token => (origin as TokenTimestampProvider).token;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

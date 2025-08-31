@@ -15,8 +15,9 @@ String _$appInfoHash() => r'f30669cbe0a5602f10d0ce402e4ee54a7899cd87';
 final appInfoProvider = FutureProvider<AppInfo>.internal(
   appInfo,
   name: r'appInfoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$appInfoHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$appInfoHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

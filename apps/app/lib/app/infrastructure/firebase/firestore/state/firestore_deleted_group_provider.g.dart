@@ -15,19 +15,19 @@ String _$dgroupCollectionRefHash() =>
 @ProviderFor(dgroupCollectionRef)
 final dgroupCollectionRefProvider =
     AutoDisposeProvider<CollectionReference<FirestoreGroupModel>>.internal(
-  dgroupCollectionRef,
-  name: r'dgroupCollectionRefProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$dgroupCollectionRefHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      dgroupCollectionRef,
+      name: r'dgroupCollectionRefProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$dgroupCollectionRefHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef DgroupCollectionRefRef
-    = AutoDisposeProviderRef<CollectionReference<FirestoreGroupModel>>;
+typedef DgroupCollectionRefRef =
+    AutoDisposeProviderRef<CollectionReference<FirestoreGroupModel>>;
 String _$dgroupDocumentRefHash() => r'dc0460d57ed93b0885d868159d2f89835fb02d1a';
 
 /// Copied from Dart SDK
@@ -70,21 +70,15 @@ class DgroupDocumentRefFamily
   /// グループドキュメントの参照
   ///
   /// Copied from [dgroupDocumentRef].
-  DgroupDocumentRefProvider call({
-    String? groupId,
-  }) {
-    return DgroupDocumentRefProvider(
-      groupId: groupId,
-    );
+  DgroupDocumentRefProvider call({String? groupId}) {
+    return DgroupDocumentRefProvider(groupId: groupId);
   }
 
   @override
   DgroupDocumentRefProvider getProviderOverride(
     covariant DgroupDocumentRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-    );
+    return call(groupId: provider.groupId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -110,24 +104,20 @@ class DgroupDocumentRefProvider
   /// グループドキュメントの参照
   ///
   /// Copied from [dgroupDocumentRef].
-  DgroupDocumentRefProvider({
-    String? groupId,
-  }) : this._internal(
-          (ref) => dgroupDocumentRef(
-            ref as DgroupDocumentRefRef,
-            groupId: groupId,
-          ),
-          from: dgroupDocumentRefProvider,
-          name: r'dgroupDocumentRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$dgroupDocumentRefHash,
-          dependencies: DgroupDocumentRefFamily._dependencies,
-          allTransitiveDependencies:
-              DgroupDocumentRefFamily._allTransitiveDependencies,
-          groupId: groupId,
-        );
+  DgroupDocumentRefProvider({String? groupId})
+    : this._internal(
+        (ref) =>
+            dgroupDocumentRef(ref as DgroupDocumentRefRef, groupId: groupId),
+        from: dgroupDocumentRefProvider,
+        name: r'dgroupDocumentRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$dgroupDocumentRefHash,
+        dependencies: DgroupDocumentRefFamily._dependencies,
+        allTransitiveDependencies:
+            DgroupDocumentRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+      );
 
   DgroupDocumentRefProvider._internal(
     super._createNotifier, {
@@ -144,8 +134,9 @@ class DgroupDocumentRefProvider
   @override
   Override overrideWith(
     DocumentReference<FirestoreGroupModel> Function(
-            DgroupDocumentRefRef provider)
-        create,
+      DgroupDocumentRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -163,7 +154,7 @@ class DgroupDocumentRefProvider
 
   @override
   AutoDisposeProviderElement<DocumentReference<FirestoreGroupModel>>
-      createElement() {
+  createElement() {
     return _DgroupDocumentRefProviderElement(this);
   }
 
@@ -197,5 +188,6 @@ class _DgroupDocumentRefProviderElement
   @override
   String? get groupId => (origin as DgroupDocumentRefProvider).groupId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

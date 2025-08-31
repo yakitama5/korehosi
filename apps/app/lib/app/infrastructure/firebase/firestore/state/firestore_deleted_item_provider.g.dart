@@ -49,21 +49,15 @@ class DitemCollectionRefFamily
   /// 削除済欲しい物コレクションの参照
   ///
   /// Copied from [ditemCollectionRef].
-  DitemCollectionRefProvider call({
-    required String groupId,
-  }) {
-    return DitemCollectionRefProvider(
-      groupId: groupId,
-    );
+  DitemCollectionRefProvider call({required String groupId}) {
+    return DitemCollectionRefProvider(groupId: groupId);
   }
 
   @override
   DitemCollectionRefProvider getProviderOverride(
     covariant DitemCollectionRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-    );
+    return call(groupId: provider.groupId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -89,24 +83,20 @@ class DitemCollectionRefProvider
   /// 削除済欲しい物コレクションの参照
   ///
   /// Copied from [ditemCollectionRef].
-  DitemCollectionRefProvider({
-    required String groupId,
-  }) : this._internal(
-          (ref) => ditemCollectionRef(
-            ref as DitemCollectionRefRef,
-            groupId: groupId,
-          ),
-          from: ditemCollectionRefProvider,
-          name: r'ditemCollectionRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$ditemCollectionRefHash,
-          dependencies: DitemCollectionRefFamily._dependencies,
-          allTransitiveDependencies:
-              DitemCollectionRefFamily._allTransitiveDependencies,
-          groupId: groupId,
-        );
+  DitemCollectionRefProvider({required String groupId})
+    : this._internal(
+        (ref) =>
+            ditemCollectionRef(ref as DitemCollectionRefRef, groupId: groupId),
+        from: ditemCollectionRefProvider,
+        name: r'ditemCollectionRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$ditemCollectionRefHash,
+        dependencies: DitemCollectionRefFamily._dependencies,
+        allTransitiveDependencies:
+            DitemCollectionRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+      );
 
   DitemCollectionRefProvider._internal(
     super._createNotifier, {
@@ -123,8 +113,9 @@ class DitemCollectionRefProvider
   @override
   Override overrideWith(
     CollectionReference<FirestoreItemModel> Function(
-            DitemCollectionRefRef provider)
-        create,
+      DitemCollectionRefRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -142,7 +133,7 @@ class DitemCollectionRefProvider
 
   @override
   AutoDisposeProviderElement<CollectionReference<FirestoreItemModel>>
-      createElement() {
+  createElement() {
     return _DitemCollectionRefProviderElement(this);
   }
 
@@ -198,24 +189,15 @@ class DitemDocumentRefFamily
   /// 欲しい物ドキュメントの参照
   ///
   /// Copied from [ditemDocumentRef].
-  DitemDocumentRefProvider call({
-    required String groupId,
-    String? itemId,
-  }) {
-    return DitemDocumentRefProvider(
-      groupId: groupId,
-      itemId: itemId,
-    );
+  DitemDocumentRefProvider call({required String groupId, String? itemId}) {
+    return DitemDocumentRefProvider(groupId: groupId, itemId: itemId);
   }
 
   @override
   DitemDocumentRefProvider getProviderOverride(
     covariant DitemDocumentRefProvider provider,
   ) {
-    return call(
-      groupId: provider.groupId,
-      itemId: provider.itemId,
-    );
+    return call(groupId: provider.groupId, itemId: provider.itemId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -241,27 +223,24 @@ class DitemDocumentRefProvider
   /// 欲しい物ドキュメントの参照
   ///
   /// Copied from [ditemDocumentRef].
-  DitemDocumentRefProvider({
-    required String groupId,
-    String? itemId,
-  }) : this._internal(
-          (ref) => ditemDocumentRef(
-            ref as DitemDocumentRefRef,
-            groupId: groupId,
-            itemId: itemId,
-          ),
-          from: ditemDocumentRefProvider,
-          name: r'ditemDocumentRefProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$ditemDocumentRefHash,
-          dependencies: DitemDocumentRefFamily._dependencies,
-          allTransitiveDependencies:
-              DitemDocumentRefFamily._allTransitiveDependencies,
+  DitemDocumentRefProvider({required String groupId, String? itemId})
+    : this._internal(
+        (ref) => ditemDocumentRef(
+          ref as DitemDocumentRefRef,
           groupId: groupId,
           itemId: itemId,
-        );
+        ),
+        from: ditemDocumentRefProvider,
+        name: r'ditemDocumentRefProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$ditemDocumentRefHash,
+        dependencies: DitemDocumentRefFamily._dependencies,
+        allTransitiveDependencies:
+            DitemDocumentRefFamily._allTransitiveDependencies,
+        groupId: groupId,
+        itemId: itemId,
+      );
 
   DitemDocumentRefProvider._internal(
     super._createNotifier, {
@@ -280,7 +259,7 @@ class DitemDocumentRefProvider
   @override
   Override overrideWith(
     DocumentReference<FirestoreItemModel> Function(DitemDocumentRefRef provider)
-        create,
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -299,7 +278,7 @@ class DitemDocumentRefProvider
 
   @override
   AutoDisposeProviderElement<DocumentReference<FirestoreItemModel>>
-      createElement() {
+  createElement() {
     return _DitemDocumentRefProviderElement(this);
   }
 
@@ -341,5 +320,6 @@ class _DitemDocumentRefProviderElement
   @override
   String? get itemId => (origin as DitemDocumentRefProvider).itemId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

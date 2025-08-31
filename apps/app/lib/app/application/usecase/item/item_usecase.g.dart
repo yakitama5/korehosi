@@ -13,8 +13,9 @@ String _$itemUsecaseHash() => r'9383f73136ec5015f5dcddf7d9a9441d20a064f8';
 final itemUsecaseProvider = AutoDisposeProvider<ItemUsecase>.internal(
   itemUsecase,
   name: r'itemUsecaseProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$itemUsecaseHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$itemUsecaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

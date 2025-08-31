@@ -15,8 +15,9 @@ String _$currentGroupHash() => r'0a54f0b52f2e68e233dc5769ef41f1d6a36a5ec4';
 final currentGroupProvider = FutureProvider<Group?>.internal(
   currentGroup,
   name: r'currentGroupProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$currentGroupHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentGroupHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

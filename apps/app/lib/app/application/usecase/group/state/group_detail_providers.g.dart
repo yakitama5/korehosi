@@ -16,8 +16,9 @@ String _$groupIdHash() => r'18532e7c3bcce2f437bdcf124bbc0f90b500a3d6';
 final _groupIdProvider = AutoDisposeProvider<String?>.internal(
   _groupId,
   name: r'_groupIdProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$groupIdHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$groupIdHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -35,12 +36,13 @@ String _$groupHash() => r'9b114a42e29290d0b7a315739e99b593c7c97459';
 final _groupProvider = AutoDisposeFutureProvider<Group?>.internal(
   _group,
   name: r'_groupProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$groupHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$groupHash,
   dependencies: <ProviderOrFamily>[_groupIdProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
     _groupIdProvider,
-    ...?_groupIdProvider.allTransitiveDependencies
+    ...?_groupIdProvider.allTransitiveDependencies,
   },
 );
 
@@ -57,12 +59,13 @@ String _$usersHash() => r'1126ddf7f0389aa77d2fe672898b83152e37335b';
 final _usersProvider = AutoDisposeFutureProvider<List<User>>.internal(
   _users,
   name: r'_usersProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$usersHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$usersHash,
   dependencies: <ProviderOrFamily>[_groupIdProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
     _groupIdProvider,
-    ...?_groupIdProvider.allTransitiveDependencies
+    ...?_groupIdProvider.allTransitiveDependencies,
   },
 );
 
