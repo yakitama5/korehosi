@@ -18,6 +18,8 @@ dependencies:
   collection: any
   cores_core:
     path: ../../packages/cores/core
+  cores_domain:
+    path: ../../packages/cores/domain
   device_info_plus: any
   dynamic_color: any
   envied: any
@@ -108,6 +110,7 @@ dev_dependencies:
   pedantic_mono: any
   reactive_forms_generator: any
   riverpod_generator: any
+  riverpod_lint: any
 
 flutter:
   uses-material-design: true

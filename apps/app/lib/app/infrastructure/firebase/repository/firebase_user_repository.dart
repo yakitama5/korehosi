@@ -34,10 +34,11 @@ class FirebaseUserRepository implements UserRepository {
         .read(userDocumentRefProvider(userId: userId))
         .snapshots()
         .where((s) {
-      // 読み込み中のドキュメントが存在する場合はスキップ
-      final doc = s.data();
-      return doc == null || !doc.fieldValuePending;
-    }).map((snap) => snap.data()?.toDomainModel());
+          // 読み込み中のドキュメントが存在する場合はスキップ
+          final doc = s.data();
+          return doc == null || !doc.fieldValuePending;
+        })
+        .map((snap) => snap.data()?.toDomainModel());
   }
 
   @override
@@ -103,10 +104,10 @@ class FirebaseUserRepository implements UserRepository {
     }
 
     final param = prev.data()!.copyWith(
-          id: userId,
-          ageGroup: ageGroup,
-          name: name,
-        );
+      id: userId,
+      ageGroup: ageGroup,
+      name: name,
+    );
 
     // 更新
     return ref.read(userDocumentRefProvider(userId: userId)).set(param);
@@ -155,8 +156,9 @@ class FirebaseUserRepository implements UserRepository {
   @override
   Future<AuthStatus> signInWithApple() async {
     // プラットフォームに応じた認証
-    final credential =
-        await (kIsWeb ? _signInWithAppleByWeb() : _signInWithAppleByMobile());
+    final credential = await (kIsWeb
+        ? _signInWithAppleByWeb()
+        : _signInWithAppleByMobile());
 
     // 変換して返却
     return credential.user!.authStatus;
@@ -254,7 +256,8 @@ class FirebaseUserRepository implements UserRepository {
     final user = _currentUser;
 
     // 認証済か否か
-    final linkedProvider = user?.providerData
+    final linkedProvider =
+        user?.providerData
             .where((u) => u.providerId == providerId)
             .isNotEmpty ??
         false;
