@@ -1,8 +1,8 @@
+import 'package:cores_core/util.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_app/app/application/config/app_config.dart';
 import 'package:flutter_app/app/application/model/flavor.dart';
-import 'package:flutter_app/app/utils/logger.dart';
 import 'package:flutter_app/firebase_options.dart';
 import 'package:flutter_app/firebase_options_dev.dart' as dev;
 

@@ -5,19 +5,26 @@ environment:
 
 workspace:
   - apps/app
+  - packages/cores/core
+  # - packages/cores/designsystem
+  # - packages/cores/domain
+  # - packages/infrastructure/firebase
+  # - packages/infrastructure/mock
+  # - packages/infrastructure/shared_preferences
 
 dev_dependencies:
   custom_lint: any
-  flutter_lints:
+  flutter_lints: any
   grinder: ^0.9.5
   melos: ^7.0.0-dev.7
   nilts: any
   path: ^1.9.0
   pedantic_mono: any
+  riverpod_lint: any
   yaml: ^3.1.2
   yaml_edit: ^2.2.1
 
-melos: 
+melos:
   command:
     bootstrap:
       environment:
@@ -25,22 +32,29 @@ melos:
         flutter: ^3.35.1
     clean:
       hooks:
-        post: melos exec --flutter --concurrency=3 -- "flutter clean"
-          melos exec --flutter --file-exists="ios/Podfile.lock" -- "cd ios && rm Podfile.lock"
-          melos exec --flutter --file-exists="macos/Podfile.lock" -- "cd macos && rm Podfile.lock"
+        post: melos exec --flutter --concurrency=3 -- "flutter clean" melos exec
+          --flutter --file-exists="ios/Podfile.lock" -- "cd ios && rm
+          Podfile.lock" melos exec --flutter --file-exists="macos/Podfile.lock"
+          -- "cd macos && rm Podfile.lock"
 
   scripts:
     build_app: melos run build_app_android && melos run build_app_ios
     build_app_dev: melos run build_app_android_dev && melos run build_app_ios_dev
 
-    build_app_ios: melos exec --scope="flutter_app" -- fvm flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=flavor/prod.json
-    build_app_ios_dev: melos exec --scope="flutter_app" -- fvm flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=flavor/dev.json
-    build_app_android: melos exec --scope="flutter_app" -- fvm flutter build appbundle --dart-define-from-file=flavor/prod.json
-    build_app_android_dev: melos exec --scope="flutter_app" -- fvm flutter build appbundle --dart-define-from-file=flavor/dev.json
+    build_app_ios: melos exec --scope="flutter_app" -- fvm flutter build ipa
+      --export-options-plist=ExportOptions.plist
+      --dart-define-from-file=flavor/prod.json
+    build_app_ios_dev: melos exec --scope="flutter_app" -- fvm flutter build ipa
+      --export-options-plist=ExportOptions.plist
+      --dart-define-from-file=flavor/dev.json
+    build_app_android: melos exec --scope="flutter_app" -- fvm flutter build
+      appbundle --dart-define-from-file=flavor/prod.json
+    build_app_android_dev: melos exec --scope="flutter_app" -- fvm flutter build
+      appbundle --dart-define-from-file=flavor/dev.json
 
     report_test:
-        flutter: true
-        dependsOn: test
+      flutter: true
+      dependsOn: test
 
     # ローカルでフォーマットとdart fix --applyを実行する
     format_and_fix:
@@ -51,7 +65,8 @@ melos:
       packageFilters:
         dependsOn: custom_lint
 
-    regenerate_code: melos run regenerate_by_using_build_runner && melos run regenerate_by_using_gen_slang
+    regenerate_code: melos run regenerate_by_using_build_runner && melos run
+      regenerate_by_using_gen_slang
 
     regenerate_by_using_build_runner:
       run: dart run build_runner build -d

@@ -1,3 +1,4 @@
+import 'package:cores_core/util.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -6,7 +7,6 @@ import '../../../application/state/initial_notification_provider.dart';
 import '../../../application/usecase/item/state/current_group_item_provider.dart';
 import '../../../application/usecase/user/state/auth_status_provider.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../../utils/logger.dart';
 import 'routes_data.dart';
 
 part 'router_notifier.g.dart';
@@ -39,8 +39,8 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
     final isSplash = location == const RootRouteData().location;
     final isNotAuthLocations =
         location.startsWith(const AccountLinkRouteData().location) ||
-            location.startsWith(const OnboardFormRouteData().location) ||
-            location.startsWith(const OnboardStartRouteData().location);
+        location.startsWith(const OnboardFormRouteData().location) ||
+        location.startsWith(const OnboardStartRouteData().location);
 
     // 認証判定
     final authUser = await ref.watch(authStatusProvider.future);
@@ -61,8 +61,9 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
     }
 
     // プッシュ通知からのアプリ表示を判定
-    final initialMessage =
-        await ref.read(initialNotificationMessageProvider.future);
+    final initialMessage = await ref.read(
+      initialNotificationMessageProvider.future,
+    );
     if (initialMessage != null && initialMessage.data['path'] != null) {
       return initialMessage.data['path'] as String;
     }
@@ -71,8 +72,9 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
     if (routeState.pathParameters.containsKey('itemId')) {
       final itemId = routeState.pathParameters['itemId']!;
       final exists = await ref.watch(
-        currentGroupItemProvider(itemId: itemId)
-            .selectAsync((data) => data != null),
+        currentGroupItemProvider(
+          itemId: itemId,
+        ).selectAsync((data) => data != null),
       );
 
       // 存在しなければ一覧にリダイレクト

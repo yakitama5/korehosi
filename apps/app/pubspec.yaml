@@ -16,6 +16,8 @@ dependencies:
   cloud_firestore: any
   cloud_functions: any
   collection: any
+  cores_core:
+    path: ../../packages/cores/core
   device_info_plus: any
   dynamic_color: any
   envied: any
