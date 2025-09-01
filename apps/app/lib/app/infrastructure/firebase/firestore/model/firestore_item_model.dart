@@ -1,6 +1,6 @@
+import 'package:cores_domain/item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/item/entity/item.dart';
 import '../converter/json_key.dart';
 
 part 'firestore_item_model.freezed.dart';
@@ -29,17 +29,17 @@ abstract class FirestoreItemModel with _$FirestoreItemModel {
 extension FirestoreItemModelX on FirestoreItemModel {
   /// ドメイン層への変換
   Item toDomainModel() => Item(
-        id: id,
-        imagesPath: imagesPath,
-        name: name,
-        wanterName: wanterName,
-        wishRank: wishRank,
-        wishSeason: wishSeason,
-        urls: urls,
-        memo: memo,
-        createdAt: createdAt!,
-        updatedAt: updatedAt!,
-      );
+    id: id,
+    imagesPath: imagesPath,
+    name: name,
+    wanterName: wanterName,
+    wishRank: wishRank,
+    wishSeason: wishSeason,
+    urls: urls,
+    memo: memo,
+    createdAt: createdAt!,
+    updatedAt: updatedAt!,
+  );
 
   /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;

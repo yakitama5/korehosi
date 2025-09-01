@@ -1,3 +1,4 @@
+import 'package:cores_domain/item.dart';
 import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
@@ -9,7 +10,6 @@ import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import '../../../application/extension/number_extension.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../../domain/item/entity/item.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../../domain/purchase/value_object/purchase_status.dart';
 import '../../components/importer.dart';

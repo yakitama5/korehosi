@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:cores_domain/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
@@ -15,7 +16,6 @@ import '../../../application/model/item/selected_image_model.dart';
 import '../../../application/usecase/item/item_usecase.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/item/state/wanter_name_suggestion.dart';
-import '../../../domain/item/entity/item.dart';
 import '../../components/importer.dart';
 import '../../routes/importer.dart';
 import '../error/components/error_view.dart';
@@ -48,10 +48,7 @@ class ItemEditPage extends HookConsumerWidget with RouteAware {
 
 /// 入力フォーム
 class _ItemForm extends HookConsumerWidget {
-  const _ItemForm({
-    this.titleData,
-    this.item,
-  });
+  const _ItemForm({this.titleData, this.item});
 
   final String? titleData;
   final Item? item;
@@ -61,10 +58,7 @@ class _ItemForm extends HookConsumerWidget {
     return ItemFormModelFormBuilder(
       model: _createModel(),
       builder: (context, formModel, child) => Nested(
-        children: const [
-          ReactiveFormDirtyConfirmPopScope(),
-          UnfocusOnTap(),
-        ],
+        children: const [ReactiveFormDirtyConfirmPopScope(), UnfocusOnTap()],
         child: Scaffold(
           appBar: AppBar(
             title: Text(titleData ?? ''),
@@ -204,9 +198,8 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   const _DeleteButton();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => DeleteButton(
-        onPressed: () => onDelete(context, ref),
-      );
+  Widget build(BuildContext context, WidgetRef ref) =>
+      DeleteButton(onPressed: () => onDelete(context, ref));
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
@@ -375,13 +368,13 @@ class _UrlFields extends HookConsumerWidget {
       formControl: formModel.urlsControl,
       itemBuilder: (_, i, __, ___, formModel) =>
           ReactiveOutlinedTextField<String>(
-        key: ObjectKey(formModel.urlsControl.control('$i')),
-        formControlName: '$i',
-        labelText: i18n.app.url,
-        maxLength: itemConfig.maxUrlLength,
-        textInputType: TextInputType.url,
-        counterText: '',
-      ),
+            key: ObjectKey(formModel.urlsControl.control('$i')),
+            formControlName: '$i',
+            labelText: i18n.app.url,
+            maxLength: itemConfig.maxUrlLength,
+            textInputType: TextInputType.url,
+            counterText: '',
+          ),
     );
   }
 }

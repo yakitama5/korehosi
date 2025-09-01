@@ -1,7 +1,7 @@
+import 'package:cores_domain/item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../domain/item/entity/item.dart';
 import '../../../../domain/purchase/entity/purchase.dart';
 import '../../purchase/state/current_group_age_applicable_purchase_provider.dart';
 import 'current_group_item_provider.dart';
@@ -44,6 +44,7 @@ Future<Purchase?> _purchase(Ref ref) async {
     return null;
   }
 
-  return ref
-      .watch(currentGroupAgeApplicablePurchaseProvider(itemId: itemId).future);
+  return ref.watch(
+    currentGroupAgeApplicablePurchaseProvider(itemId: itemId).future,
+  );
 }

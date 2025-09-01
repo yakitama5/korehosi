@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cores_domain/item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../domain/item/entity/item.dart';
-import '../../../domain/item/interface/item_repository.dart';
 import '../firestore/model/firestore_item_model.dart';
 import '../firestore/state/firestore.dart';
 import '../firestore/state/firestore_deleted_item_provider.dart';
@@ -37,10 +36,11 @@ class FirebaseItemRepository implements ItemRepository {
         .read(itemDocumentRefProvider(groupId: groupId, itemId: itemId))
         .snapshots()
         .where((s) {
-      // 読み込み中のドキュメントが存在する場合はスキップ
-      final doc = s.data();
-      return doc == null || !doc.fieldValuePending;
-    }).map((snap) => snap.data()?.toDomainModel());
+          // 読み込み中のドキュメントが存在する場合はスキップ
+          final doc = s.data();
+          return doc == null || !doc.fieldValuePending;
+        })
+        .map((snap) => snap.data()?.toDomainModel());
   }
 
   @override
@@ -62,8 +62,9 @@ class FirebaseItemRepository implements ItemRepository {
     String? memo,
   }) async {
     // IDが指定されていなければ、新しいドキュメントを取得
-    final docRef =
-        ref.read(itemDocumentRefProvider(groupId: groupId, itemId: itemId));
+    final docRef = ref.read(
+      itemDocumentRefProvider(groupId: groupId, itemId: itemId),
+    );
 
     // Firestore用のモデルに変換
     final docModel = FirestoreItemModel(
@@ -124,10 +125,12 @@ class FirebaseItemRepository implements ItemRepository {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
       // 削除前の状態を保持
-      final docRef =
-          ref.read(itemDocumentRefProvider(groupId: groupId, itemId: itemId));
-      final delDocRef =
-          ref.read(ditemDocumentRefProvider(groupId: groupId, itemId: itemId));
+      final docRef = ref.read(
+        itemDocumentRefProvider(groupId: groupId, itemId: itemId),
+      );
+      final delDocRef = ref.read(
+        ditemDocumentRefProvider(groupId: groupId, itemId: itemId),
+      );
       final doc = await transaction.get(docRef);
 
       transaction

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
+import 'package:cores_domain/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -19,7 +20,6 @@ import '../../../application/usecase/item/item_usecase.dart';
 import '../../../application/usecase/item/state/current_group_items_provider.dart';
 import '../../../application/usecase/purchase/state/current_group_age_applicable_purchases_provider.dart';
 import '../../../domain/group/entity/group.dart';
-import '../../../domain/item/entity/item.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../../domain/purchase/value_object/purchase_status.dart';
 import '../../components/importer.dart';

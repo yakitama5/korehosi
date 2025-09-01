@@ -1,3 +1,4 @@
+import 'package:cores_domain/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
@@ -14,7 +15,6 @@ import '../../../application/model/purchase/purchase_form_model.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/purchase/purchase_usecase.dart';
 import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
-import '../../../domain/item/entity/item.dart';
 import '../../../domain/purchase/entity/purchase.dart';
 import '../../components/importer.dart';
 import '../error/components/error_view.dart';
@@ -32,17 +32,16 @@ class PurchasePage extends HookConsumerWidget {
     return switch ((item, purchase)) {
       (
         AsyncData(value: final Item itemData),
-        AsyncData(value: final Purchase? purchaseData)
+        AsyncData(value: final Purchase? purchaseData),
       ) =>
-        _PurchaseForm(
-          item: itemData,
-          purchase: purchaseData,
-        ),
+        _PurchaseForm(item: itemData, purchase: purchaseData),
 
       // エラー表示
       (AsyncError(error: final error, stackTrace: final stackTrace), _) ||
-      (_, AsyncError(error: final error, stackTrace: final stackTrace)) =>
-        ErrorView(error, stackTrace),
+      (
+        _,
+        AsyncError(error: final error, stackTrace: final stackTrace),
+      ) => ErrorView(error, stackTrace),
 
       // 一瞬なのでローディング中は何も表示しない
       _ => const SizedBox.shrink(),
@@ -51,10 +50,7 @@ class PurchasePage extends HookConsumerWidget {
 }
 
 class _PurchaseForm extends HookConsumerWidget {
-  const _PurchaseForm({
-    required this.item,
-    this.purchase,
-  });
+  const _PurchaseForm({required this.item, this.purchase});
 
   final Item item;
   final Purchase? purchase;
@@ -84,10 +80,7 @@ class _PurchaseForm extends HookConsumerWidget {
                   children: [
                     ItemImages(imagesPath: item.imagesPath),
                     const Gap(16),
-                    TextWithLabel(
-                      item.name,
-                      label: i18n.app.name,
-                    ),
+                    TextWithLabel(item.name, label: i18n.app.name),
                     const Gap(16),
                     const _SurpriseField(),
                     const Gap(16),
@@ -112,18 +105,15 @@ class _PurchaseForm extends HookConsumerWidget {
 
   /// FormGroupを生成する
   PurchaseFormModel _createModel() => PurchaseFormModel(
-        price: purchase?.price?.formatComma(),
-        buyerName: purchase?.buyerName,
-        surprise: purchase?.surprise ?? true,
-        planDate: purchase?.planDate,
-        sentAt: purchase?.sentAt,
-        memo: purchase?.memo,
-      );
+    price: purchase?.price?.formatComma(),
+    buyerName: purchase?.buyerName,
+    surprise: purchase?.surprise ?? true,
+    planDate: purchase?.planDate,
+    sentAt: purchase?.sentAt,
+    memo: purchase?.memo,
+  );
 
-  Future<void> _onWillPopScope(
-    BuildContext context,
-    bool didPop,
-  ) async {
+  Future<void> _onWillPopScope(BuildContext context, bool didPop) async {
     // Notes: 移行ガイドに沿って変更
     // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
     if (didPop) {
@@ -221,9 +211,8 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
   const _DeleteButton();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => DeleteButton(
-        onPressed: () => onDelete(context, ref),
-      );
+  Widget build(BuildContext context, WidgetRef ref) =>
+      DeleteButton(onPressed: () => onDelete(context, ref));
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
@@ -272,10 +261,7 @@ class _SurpriseField extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(i18n.app.surprise),
-          Text(
-            i18n.app.surpriseCaption,
-            style: textTheme.labelMedium,
-          ),
+          Text(i18n.app.surpriseCaption, style: textTheme.labelMedium),
         ],
       ),
     );
@@ -295,9 +281,7 @@ class _PriceField extends HookConsumerWidget {
       textInputType: TextInputType.number,
       prefixText: i18n.app.yenMark,
       // 金額はカンマ区切りで整形する
-      inputFormatters: [
-        ThousandsFormatter(),
-      ],
+      inputFormatters: [ThousandsFormatter()],
     );
   }
 }
