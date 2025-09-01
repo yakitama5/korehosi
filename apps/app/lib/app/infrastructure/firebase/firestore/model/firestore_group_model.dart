@@ -1,4 +1,4 @@
-import 'package:cores_domain/user.dart';
+import 'package:cores_domain/group.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../converter/json_key.dart';

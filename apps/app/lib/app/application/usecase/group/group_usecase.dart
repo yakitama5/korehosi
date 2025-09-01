@@ -1,4 +1,4 @@
-import 'package:cores_domain/user.dart';
+import 'package:cores_domain/group.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

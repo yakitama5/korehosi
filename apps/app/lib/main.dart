@@ -1,5 +1,6 @@
 import 'dart:io' as io;
 
+import 'package:cores_domain/group.dart';
 import 'package:cores_domain/item.dart';
 import 'package:cores_domain/user.dart';
 import 'package:fcm_config/fcm_config.dart';
