@@ -1,7 +1,7 @@
+import 'package:cores_domain/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../domain/group/entity/group.dart';
 import '../../user/state/auth_user_provider.dart';
 import 'group_provider.dart';
 
@@ -11,8 +11,9 @@ part 'join_groups_provider.g.dart';
 @riverpod
 Future<List<Group>?> joinGroups(Ref ref) async {
   // 参加グループがなければ、`Null`を返却
-  final joinGroupIds = await ref
-      .watch(authUserProvider.selectAsync((user) => user?.joinGroupIds));
+  final joinGroupIds = await ref.watch(
+    authUserProvider.selectAsync((user) => user?.joinGroupIds),
+  );
   if (joinGroupIds == null || joinGroupIds.isEmpty) {
     return null;
   }

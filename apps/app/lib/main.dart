@@ -24,7 +24,6 @@ import 'app/application/state/initial_location_provider.dart';
 import 'app/domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import 'app/domain/app_info/interface/app_info_service.dart';
 import 'app/domain/device_info/interface/device_info_service.dart';
-import 'app/domain/group/interface/group_repository.dart';
 import 'app/domain/notification/interface/messaging_service.dart';
 import 'app/domain/purchase/interface/purchase_repository.dart';
 import 'app/domain/service/analytics_service.dart';

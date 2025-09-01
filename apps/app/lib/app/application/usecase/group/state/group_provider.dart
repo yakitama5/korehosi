@@ -1,8 +1,6 @@
+import 'package:cores_domain/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../../../domain/group/entity/group.dart';
-import '../../../../domain/group/interface/group_repository.dart';
 
 part 'group_provider.g.dart';
 

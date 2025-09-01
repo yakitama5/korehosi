@@ -1,6 +1,6 @@
+import 'package:cores_domain/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/group/entity/group.dart';
 import '../converter/json_key.dart';
 
 part 'firestore_group_model.freezed.dart';
@@ -27,15 +27,15 @@ abstract class FirestoreGroupModel with _$FirestoreGroupModel {
 extension FirestoreGroupModelX on FirestoreGroupModel {
   /// ドメイン層で定義しているエンティティへの変換
   Group toDomainModel() => Group(
-        id: id,
-        name: name,
-        joinUids: joinUids,
-        ownerUid: ownerUid,
-        itemCount: itemCount,
-        premium: premium,
-        createdAt: createdAt!,
-        updatedAt: updatedAt!,
-      );
+    id: id,
+    name: name,
+    joinUids: joinUids,
+    ownerUid: ownerUid,
+    itemCount: itemCount,
+    premium: premium,
+    createdAt: createdAt!,
+    updatedAt: updatedAt!,
+  );
 
   /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;

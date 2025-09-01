@@ -1,12 +1,10 @@
+import 'package:cores_domain/user.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import '../../../domain/exception/exceptions.dart';
-import '../../../domain/group/entity/group.dart';
-import '../../../domain/group/interface/group_repository.dart';
-import '../../../domain/group/value_object/join_group_error_code.dart';
 import '../../../domain/service/cached_service.dart';
 import '../../../domain/service/deep_link_service.dart';
 import '../../config/app_config.dart';

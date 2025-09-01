@@ -1,6 +1,6 @@
+import 'package:cores_domain/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/group/entity/share_link.dart';
 import '../converter/json_key.dart';
 
 part 'firestore_share_link_model.freezed.dart';
@@ -24,12 +24,12 @@ abstract class FirestoreShareLinkModel with _$FirestoreShareLinkModel {
 extension FirestoreShareLinkModelX on FirestoreShareLinkModel {
   /// ドメイン層への変換
   ShareLink toDomainModel() => ShareLink(
-        id: id,
-        groupId: groupId,
-        validDays: validDays,
-        createdAt: createdAt!,
-        updatedAt: updatedAt!,
-      );
+    id: id,
+    groupId: groupId,
+    validDays: validDays,
+    createdAt: createdAt!,
+    updatedAt: updatedAt!,
+  );
 
   /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;

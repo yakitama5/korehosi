@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cores_domain/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../domain/exception/exceptions.dart';
-import '../../../domain/group/entity/group.dart';
-import '../../../domain/group/entity/share_link.dart';
-import '../../../domain/group/interface/group_repository.dart';
-import '../../../domain/group/value_object/join_group_error_code.dart';
 import '../firestore/constants/columns.dart';
 import '../firestore/model/firestore_group_model.dart';
 import '../firestore/model/firestore_share_link_model.dart';
@@ -30,10 +27,11 @@ class FirebaseGroupRepository implements GroupRepository {
         .read(groupDocumentRefProvider(groupId: groupId))
         .snapshots()
         .where((s) {
-      // 読み込み中のドキュメントが存在する場合はスキップ
-      final doc = s.data();
-      return doc == null || !doc.fieldValuePending;
-    }).map((snap) => snap.data()?.toDomainModel());
+          // 読み込み中のドキュメントが存在する場合はスキップ
+          final doc = s.data();
+          return doc == null || !doc.fieldValuePending;
+        })
+        .map((snap) => snap.data()?.toDomainModel());
   }
 
   @override
@@ -59,25 +57,21 @@ class FirebaseGroupRepository implements GroupRepository {
     );
 
     // 登録
-    await ref.read(firestoreProvider).runTransaction(
+    await ref
+        .read(firestoreProvider)
+        .runTransaction(
           (transaction) async => transaction
               // グループを追加
               .set(groupDocRef, group)
               // ユーザーの参加グループへ追加
-              .update(
-            userDocRef,
-            {
-              'joinGroupIds': FieldValue.arrayUnion([groupDocRef.id]),
-            },
-          ),
+              .update(userDocRef, {
+                'joinGroupIds': FieldValue.arrayUnion([groupDocRef.id]),
+              }),
         );
   }
 
   @override
-  Future<void> update({
-    required String groupId,
-    required String name,
-  }) async {
+  Future<void> update({required String groupId, required String name}) async {
     // Firestore用のモデルに変換
     final docRef = ref.read(groupDocumentRefProvider(groupId: groupId));
     final prev = await docRef.get();
@@ -113,10 +107,11 @@ class FirebaseGroupRepository implements GroupRepository {
         .read(shareLinkDocumentRefProvider(shareLinkId: shareLinkId))
         .snapshots()
         .skipWhile((element) {
-      // 読み込み中のドキュメントが存在する場合はスキップ
-      final doc = element.data();
-      return doc != null && doc.createdAt == null;
-    }).map((snap) => snap.data()?.toDomainModel());
+          // 読み込み中のドキュメントが存在する場合はスキップ
+          final doc = element.data();
+          return doc != null && doc.createdAt == null;
+        })
+        .map((snap) => snap.data()?.toDomainModel());
   }
 
   @override
@@ -129,8 +124,9 @@ class FirebaseGroupRepository implements GroupRepository {
         .call<Map<String, dynamic>>(param.toJson());
 
     // エラーハンドリング
-    final resultCode =
-        FunctionsJoinGroupResponse.fromJson(result.data).errorCode;
+    final resultCode = FunctionsJoinGroupResponse.fromJson(
+      result.data,
+    ).errorCode;
     return switch (resultCode) {
       'not-auth' => JoinGroupErrorCode.notAuth,
       'invalid-param' => JoinGroupErrorCode.invalidRequest,
@@ -152,12 +148,14 @@ class FirebaseGroupRepository implements GroupRepository {
       transaction
           // グループから除外
           .update(groupDocRef, {
-        firestoreColumnJoinUidsWithGroup: FieldValue.arrayRemove([userId]),
-      })
+            firestoreColumnJoinUidsWithGroup: FieldValue.arrayRemove([userId]),
+          })
           // ユーザーの参加グループから削除
           .update(userDocRef, {
-        firestoreColumnJoinGroupIdsWithUser: FieldValue.arrayRemove([groupId]),
-      });
+            firestoreColumnJoinGroupIdsWithUser: FieldValue.arrayRemove([
+              groupId,
+            ]),
+          });
     });
   }
 

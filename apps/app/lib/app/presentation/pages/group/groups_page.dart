@@ -1,3 +1,4 @@
+import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -10,7 +11,6 @@ import '../../../application/usecase/group/state/current_group_provider.dart';
 import '../../../application/usecase/group/state/join_groups_provider.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
 import '../../../application/usecase/user/state/group_join_user_provider.dart';
-import '../../../domain/group/entity/group.dart';
 import '../../components/importer.dart';
 import '../../hooks/src/use_theme.dart';
 import '../../routes/importer.dart';
