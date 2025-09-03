@@ -1,9 +1,8 @@
+import 'package:cores_domain/item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../domain/exception/exceptions.dart';
-import '../../../domain/purchase/entity/purchase.dart';
-import '../../../domain/purchase/interface/purchase_repository.dart';
 import '../group/state/current_group_provider.dart';
 import '../run_usecase_mixin.dart';
 import '../user/state/auth_user_provider.dart';
@@ -23,19 +22,17 @@ class PurchaseUsecase with RunUsecaseMixin {
   Stream<Purchase?> fetchByItemId({
     required String groupId,
     required String itemId,
-  }) =>
-      ref
-          .read(purchaseRepositoryProvider)
-          .fetchByItemId(groupId: groupId, itemId: itemId);
+  }) => ref
+      .read(purchaseRepositoryProvider)
+      .fetchByItemId(groupId: groupId, itemId: itemId);
 
   /// (子供参照用)購入情報の取得
   Stream<Purchase?> fetchByItemIdForChild({
     required String groupId,
     required String itemId,
-  }) =>
-      ref
-          .read(purchaseRepositoryProvider)
-          .fetchByItemIdForChild(groupId: groupId, itemId: itemId);
+  }) => ref
+      .read(purchaseRepositoryProvider)
+      .fetchByItemIdForChild(groupId: groupId, itemId: itemId);
 
   /// 購入情報の登録
   Future<void> add({
@@ -46,33 +43,36 @@ class PurchaseUsecase with RunUsecaseMixin {
     required bool surprise,
     DateTime? sentAt,
     String? memo,
-  }) =>
-      execute(
-        ref,
-        action: () async {
-          // グループ所属判定
-          final groupId = await ref
-              .read(currentGroupProvider.selectAsync((group) => group?.id));
-          if (groupId == null) {
-            throw UpdateTargetNotFoundException();
-          }
-
-          // ドキュメントの登録
-          final userId =
-              await ref.read(authUserProvider.selectAsync((data) => data?.id));
-          await ref.read(purchaseRepositoryProvider).add(
-                groupId: groupId,
-                itemId: itemId,
-                price: price,
-                buyerName: buyerName,
-                planDate: planDate,
-                surprise: surprise,
-                sentAt: sentAt,
-                memo: memo,
-                uid: userId!,
-              );
-        },
+  }) => execute(
+    ref,
+    action: () async {
+      // グループ所属判定
+      final groupId = await ref.read(
+        currentGroupProvider.selectAsync((group) => group?.id),
       );
+      if (groupId == null) {
+        throw UpdateTargetNotFoundException();
+      }
+
+      // ドキュメントの登録
+      final userId = await ref.read(
+        authUserProvider.selectAsync((data) => data?.id),
+      );
+      await ref
+          .read(purchaseRepositoryProvider)
+          .add(
+            groupId: groupId,
+            itemId: itemId,
+            price: price,
+            buyerName: buyerName,
+            planDate: planDate,
+            surprise: surprise,
+            sentAt: sentAt,
+            memo: memo,
+            uid: userId!,
+          );
+    },
+  );
 
   /// 欲しい物の更新
   Future<void> update({
@@ -83,48 +83,52 @@ class PurchaseUsecase with RunUsecaseMixin {
     required bool surprise,
     DateTime? sentAt,
     String? memo,
-  }) =>
-      execute(
-        ref,
-        action: () async {
-          // グループ所属判定
-          final groupId = await ref
-              .read(currentGroupProvider.selectAsync((group) => group?.id));
-          if (groupId == null) {
-            throw UpdateTargetNotFoundException();
-          }
-
-          // ドキュメントの登録
-          final userId =
-              await ref.read(authUserProvider.selectAsync((data) => data?.id));
-          await ref.read(purchaseRepositoryProvider).update(
-                purchaseId: itemId,
-                groupId: groupId,
-                price: price,
-                buyerName: buyerName,
-                planDate: planDate,
-                surprise: surprise,
-                sentAt: sentAt,
-                memo: memo,
-                uid: userId!,
-              );
-        },
+  }) => execute(
+    ref,
+    action: () async {
+      // グループ所属判定
+      final groupId = await ref.read(
+        currentGroupProvider.selectAsync((group) => group?.id),
       );
+      if (groupId == null) {
+        throw UpdateTargetNotFoundException();
+      }
+
+      // ドキュメントの登録
+      final userId = await ref.read(
+        authUserProvider.selectAsync((data) => data?.id),
+      );
+      await ref
+          .read(purchaseRepositoryProvider)
+          .update(
+            purchaseId: itemId,
+            groupId: groupId,
+            price: price,
+            buyerName: buyerName,
+            planDate: planDate,
+            surprise: surprise,
+            sentAt: sentAt,
+            memo: memo,
+            uid: userId!,
+          );
+    },
+  );
 
   /// 購入情報の削除
   Future<void> delete({required String itemId}) => execute(
-        ref,
-        action: () async {
-          // グループ所属判定
-          final groupId = await ref
-              .read(currentGroupProvider.selectAsync((group) => group?.id));
-          if (groupId == null) {
-            throw UpdateTargetNotFoundException();
-          }
-
-          await ref
-              .read(purchaseRepositoryProvider)
-              .delete(groupId: groupId, purchaseId: itemId);
-        },
+    ref,
+    action: () async {
+      // グループ所属判定
+      final groupId = await ref.read(
+        currentGroupProvider.selectAsync((group) => group?.id),
       );
+      if (groupId == null) {
+        throw UpdateTargetNotFoundException();
+      }
+
+      await ref
+          .read(purchaseRepositoryProvider)
+          .delete(groupId: groupId, purchaseId: itemId);
+    },
+  );
 }

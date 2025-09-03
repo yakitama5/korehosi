@@ -15,7 +15,6 @@ import '../../../application/model/purchase/purchase_form_model.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/purchase/purchase_usecase.dart';
 import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
-import '../../../domain/purchase/entity/purchase.dart';
 import '../../components/importer.dart';
 import '../error/components/error_view.dart';
 import '../presentation_mixin.dart';

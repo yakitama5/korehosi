@@ -1,7 +1,6 @@
+import 'package:cores_domain/item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../domain/purchase/entity/purchase.dart';
-import '../../../domain/purchase/interface/purchase_repository.dart';
 import '../firestore/model/firestore_purchase_model.dart';
 import '../firestore/state/firestore.dart';
 import '../firestore/state/firestore_child_view_purchase_provider.dart';
@@ -20,18 +19,14 @@ class FirebasePurchaseRepository implements PurchaseRepository {
     required String itemId,
   }) {
     return ref
-        .read(
-          purchaseDocumentRefProvider(
-            groupId: groupId,
-            purchaseId: itemId,
-          ),
-        )
+        .read(purchaseDocumentRefProvider(groupId: groupId, purchaseId: itemId))
         .snapshots()
         .where((s) {
-      // 読み込み中のドキュメントが存在する場合はスキップ
-      final doc = s.data();
-      return doc == null || !doc.fieldValuePending;
-    }).map((snap) => snap.data()?.toDomainModel());
+          // 読み込み中のドキュメントが存在する場合はスキップ
+          final doc = s.data();
+          return doc == null || !doc.fieldValuePending;
+        })
+        .map((snap) => snap.data()?.toDomainModel());
   }
 
   @override
@@ -41,17 +36,15 @@ class FirebasePurchaseRepository implements PurchaseRepository {
   }) {
     return ref
         .read(
-          cpurchaseDocumentRefProvider(
-            groupId: groupId,
-            purchaseId: itemId,
-          ),
+          cpurchaseDocumentRefProvider(groupId: groupId, purchaseId: itemId),
         )
         .snapshots()
         .where((s) {
-      // 読み込み中のドキュメントが存在する場合はスキップ
-      final doc = s.data();
-      return doc == null || !doc.fieldValuePending;
-    }).map((snap) => snap.data()?.toDomainModel());
+          // 読み込み中のドキュメントが存在する場合はスキップ
+          final doc = s.data();
+          return doc == null || !doc.fieldValuePending;
+        })
+        .map((snap) => snap.data()?.toDomainModel());
   }
 
   @override
@@ -114,10 +107,7 @@ class FirebasePurchaseRepository implements PurchaseRepository {
     // 登録
     return ref
         .read(
-          purchaseDocumentRefProvider(
-            groupId: groupId,
-            purchaseId: purchaseId,
-          ),
+          purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
         )
         .set(docModel);
   }
@@ -131,16 +121,10 @@ class FirebasePurchaseRepository implements PurchaseRepository {
     await firestore.runTransaction((transaction) async {
       // 削除前の状態を保持
       final docRef = ref.read(
-        purchaseDocumentRefProvider(
-          groupId: groupId,
-          purchaseId: purchaseId,
-        ),
+        purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
       );
       final delDocRef = ref.read(
-        dpurchaseDocumentRefProvider(
-          groupId: groupId,
-          purchaseId: purchaseId,
-        ),
+        dpurchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
       );
       final doc = await transaction.get(docRef);
 

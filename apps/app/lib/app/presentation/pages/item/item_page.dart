@@ -10,8 +10,6 @@ import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import '../../../application/extension/number_extension.dart';
 import '../../../application/usecase/item/state/item_detail_providers.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../../domain/purchase/entity/purchase.dart';
-import '../../../domain/purchase/value_object/purchase_status.dart';
 import '../../components/importer.dart';
 import '../../components/src/date_text_with_label.dart';
 import '../../routes/importer.dart';

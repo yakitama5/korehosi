@@ -1,7 +1,7 @@
+import 'package:cores_domain/item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../domain/purchase/entity/purchase.dart';
 import '../purchase_usecase.dart';
 
 part 'purchase_provider.g.dart';
