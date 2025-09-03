@@ -22,7 +22,6 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'app/application/config/app_config.dart';
 import 'app/application/model/flavor.dart';
 import 'app/application/state/initial_location_provider.dart';
-import 'app/domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import 'app/domain/app_info/interface/app_info_service.dart';
 import 'app/domain/device_info/interface/device_info_service.dart';
 import 'app/domain/notification/interface/messaging_service.dart';

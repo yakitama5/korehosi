@@ -1,8 +1,7 @@
+import 'package:cores_domain/group.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
-import '../../../domain/app_in_purchase/entity/app_in_purchase_product.dart';
-import '../../../domain/app_in_purchase/interface/app_in_purchase_service.dart';
 import '../../../domain/exception/exceptions.dart';
 
 /// 欲しい物の登録数上限解除プロダクトのキー
@@ -24,8 +23,9 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
   Future<AppInPurchaseProduct?> fetchLimitedReleasePlan() async {
     // アプリ内課金の商品情報を取得
     final offerings = await Purchases.getOfferings();
-    final package = offerings.all[_limitedReleasePlanOfferingsKey]
-        ?.getPackage(_limitedReleasePlanPackageKey);
+    final package = offerings.all[_limitedReleasePlanOfferingsKey]?.getPackage(
+      _limitedReleasePlanPackageKey,
+    );
     if (package == null) {
       return null;
     }
@@ -41,15 +41,19 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
   @override
   Future<void> purchaseLimitedReleasePlan() async {
     final offerings = await Purchases.getOfferings();
-    final package = offerings.all[_limitedReleasePlanOfferingsKey]
-        ?.getPackage(_limitedReleasePlanPackageKey);
+    final package = offerings.all[_limitedReleasePlanOfferingsKey]?.getPackage(
+      _limitedReleasePlanPackageKey,
+    );
     if (package == null) {
       throw BusinessException('Not exists purchase package');
     }
 
     final purchaserInfo = await Purchases.purchasePackage(package);
-    if (purchaserInfo.customerInfo.entitlements
-            .all[_limitedReleasePlanEntitlementKey]?.isActive !=
+    if (purchaserInfo
+            .customerInfo
+            .entitlements
+            .all[_limitedReleasePlanEntitlementKey]
+            ?.isActive !=
         true) {
       throw BusinessException('Not active');
     }
