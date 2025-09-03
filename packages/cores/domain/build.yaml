@@ -16,7 +16,7 @@ targets:
             - lib/{entity,**/entity}/**.dart
             - lib/{model,**/model}/**.dart
         options:
-          field_rename: snake
+          # field_rename: snake
           # json のデシリアライズ時に発生する Exception を CheckedFromJsonException にまとめる
           checked: true
       riverpod_generator:
