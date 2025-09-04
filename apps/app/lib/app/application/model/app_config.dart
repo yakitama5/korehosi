@@ -1,6 +1,5 @@
+import 'package:cores_domain/core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'flavor.dart';
 
 part 'app_config.freezed.dart';
 

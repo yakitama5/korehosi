@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
+import 'package:cores_domain/core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../domain/service/storage_service.dart';
 import '../storage/state/firebase_storage.dart';
 
 /// Firebaseを利用したサービスの実装

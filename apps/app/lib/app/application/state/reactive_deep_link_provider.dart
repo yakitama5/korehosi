@@ -1,7 +1,6 @@
+import 'package:cores_domain/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../domain/service/deep_link_service.dart';
 
 part 'reactive_deep_link_provider.g.dart';
 

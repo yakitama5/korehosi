@@ -1,6 +1,6 @@
+import 'package:cores_domain/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../domain/service/analytics_service.dart';
 import '../analytics/state/analytics.dart';
 
 /// Firebaseを利用したサービスの実装
@@ -11,9 +11,7 @@ class FirebaseAnalyticsService implements AnalyticsService {
 
   @override
   Future<void> screenView({required String screenName}) =>
-      ref.read(analyticsProvider).logScreenView(
-            screenName: screenName,
-          );
+      ref.read(analyticsProvider).logScreenView(screenName: screenName);
 
   @override
   Future<void> signedIn() => ref.read(analyticsProvider).logLogin();

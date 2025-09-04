@@ -1,20 +1,18 @@
 import 'dart:async';
 
 import 'package:cores_core/util.dart';
+import 'package:cores_domain/core.dart';
 import 'package:cores_domain/exception.dart';
 import 'package:cores_domain/group.dart';
 import 'package:cores_domain/notification.dart';
 import 'package:cores_domain/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_app/app/application/usecase/user/state/token_timestamp_provider.dart';
-import 'package:flutter_app/app/domain/service/cached_service.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../domain/service/analytics_service.dart';
 import '../../config/app_config.dart';
-import '../../model/flavor.dart';
 import '../group/state/current_group_id_provider.dart';
 import '../group/state/group_provider.dart';
 import '../item/state/items_provider.dart';
@@ -37,7 +35,7 @@ class UserUsecase with RunUsecaseMixin {
   final Ref ref;
 
   /// アプリ内購入対応プラットフォームか否か
-  bool get _appInPurchasePlatform => !kIsWeb && appConfig.flavor == Flavor.prod;
+  bool get _appInPurchasePlatform => !kIsWeb && appConfig.flavor == Flavor.prd;
 
   /// 認証状態の取得
   Stream<AuthStatus?> fetchAuthStatus() =>

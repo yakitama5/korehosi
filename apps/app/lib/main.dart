@@ -1,6 +1,7 @@
 import 'dart:io' as io;
 
 import 'package:cores_domain/app_info.dart';
+import 'package:cores_domain/core.dart';
 import 'package:cores_domain/device_info.dart';
 import 'package:cores_domain/group.dart';
 import 'package:cores_domain/item.dart';
@@ -22,13 +23,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'app/application/config/app_config.dart';
-import 'app/application/model/flavor.dart';
 import 'app/application/state/initial_location_provider.dart';
-import 'app/domain/service/analytics_service.dart';
-import 'app/domain/service/cached_service.dart';
-import 'app/domain/service/config_service.dart';
-import 'app/domain/service/deep_link_service.dart';
-import 'app/domain/service/storage_service.dart';
 import 'app/infrastructure/device_info_plus/service/device_info_plus_device_info_service.dart';
 import 'app/infrastructure/firebase/app_check/config/app_check_config.dart';
 import 'app/infrastructure/firebase/repository/firebase_group_repository.dart';
@@ -60,7 +55,7 @@ void main() async {
 
   // Flavor に応じた FirebaseOptions を準備する
   final firebaseOptions = switch (appConfig.flavor) {
-    Flavor.prod => DefaultFirebaseOptions.currentPlatform,
+    Flavor.prd => DefaultFirebaseOptions.currentPlatform,
     Flavor.dev => dev.DefaultFirebaseOptions.currentPlatform,
   };
 
@@ -81,11 +76,11 @@ void main() async {
   // App Check の初期化
   await FirebaseAppCheck.instance.activate(
     androidProvider: switch (appConfig.flavor) {
-      Flavor.prod => AndroidProvider.playIntegrity,
+      Flavor.prd => AndroidProvider.playIntegrity,
       Flavor.dev => AndroidProvider.debug,
     },
     appleProvider: switch (appConfig.flavor) {
-      Flavor.prod => AppleProvider.deviceCheck,
+      Flavor.prd => AppleProvider.deviceCheck,
       Flavor.dev => AppleProvider.debug,
     },
     webProvider: ReCaptchaV3Provider(recpthaSiteKey),
@@ -170,7 +165,7 @@ Future<void> initPlatformState() async {
   switch (appConfig.flavor) {
     case Flavor.dev:
       return;
-    case Flavor.prod:
+    case Flavor.prd:
     // do nothing
   }
 

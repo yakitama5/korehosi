@@ -1,6 +1,6 @@
+import 'package:cores_domain/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../domain/service/config_service.dart';
 import '../remote_config/state/remote_config.dart';
 
 /// 欲しい物の登録数上限

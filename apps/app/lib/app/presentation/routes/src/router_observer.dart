@@ -1,9 +1,9 @@
 import 'package:cores_core/util.dart';
+import 'package:cores_domain/core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../domain/service/analytics_service.dart';
 import 'router.dart';
 
 part 'router_observer.g.dart';

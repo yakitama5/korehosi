@@ -1,7 +1,7 @@
+import 'package:cores_domain/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../../domain/service/cached_service.dart';
 import '../state/shared_preference.dart';
 
 /// 現在のグループIDの保存Key
@@ -26,9 +26,7 @@ class SharedPreferenceCachedService implements CachedService {
   }
 
   @override
-  Future<bool> setCurrentGroupId({
-    required String groupId,
-  }) async {
+  Future<bool> setCurrentGroupId({required String groupId}) async {
     final shared = await ref.read(sharedPreferencesProvider.future);
     return shared.setString(_currentGroupKey, groupId);
   }

@@ -1,6 +1,6 @@
+import 'package:cores_domain/core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../domain/service/cached_service.dart';
 import '../group_usecase.dart';
 
 part 'current_group_id_provider.g.dart';
