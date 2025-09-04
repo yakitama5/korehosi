@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:cores_core/util.dart';
+import 'package:cores_domain/exception.dart';
 import 'package:cores_domain/group.dart';
+import 'package:cores_domain/notification.dart';
 import 'package:cores_domain/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_app/app/application/usecase/user/state/token_timestamp_provider.dart';
@@ -10,9 +12,6 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../domain/exception/exceptions.dart';
-import '../../../domain/notification/interface/messaging_service.dart';
-import '../../../domain/notification/interface/notification_token_repository.dart';
 import '../../../domain/service/analytics_service.dart';
 import '../../config/app_config.dart';
 import '../../model/flavor.dart';

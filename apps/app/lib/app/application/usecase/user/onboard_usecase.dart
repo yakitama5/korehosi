@@ -1,7 +1,7 @@
+import 'package:flutter_app/app/application/state/introduction_screen_key_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../state/introduction_screen_key_provider.dart';
 import '../run_usecase_mixin.dart';
 
 part 'onboard_usecase.g.dart';

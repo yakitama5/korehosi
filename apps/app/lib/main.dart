@@ -1,7 +1,10 @@
 import 'dart:io' as io;
 
+import 'package:cores_domain/app_info.dart';
+import 'package:cores_domain/device_info.dart';
 import 'package:cores_domain/group.dart';
 import 'package:cores_domain/item.dart';
+import 'package:cores_domain/notification.dart';
 import 'package:cores_domain/user.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -10,7 +13,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/app/domain/notification/interface/notification_token_repository.dart';
 import 'package:flutter_app/app/infrastructure/branch/service/branch_deep_link_service.dart';
 import 'package:flutter_app/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
@@ -22,9 +24,6 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'app/application/config/app_config.dart';
 import 'app/application/model/flavor.dart';
 import 'app/application/state/initial_location_provider.dart';
-import 'app/domain/app_info/interface/app_info_service.dart';
-import 'app/domain/device_info/interface/device_info_service.dart';
-import 'app/domain/notification/interface/messaging_service.dart';
 import 'app/domain/service/analytics_service.dart';
 import 'app/domain/service/cached_service.dart';
 import 'app/domain/service/config_service.dart';

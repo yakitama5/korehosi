@@ -1,10 +1,10 @@
+import 'package:cores_domain/exception.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../gen/assets.gen.dart';
-import '../../../../domain/exception/exceptions.dart';
 import '../../../hooks/src/use_theme.dart';
 
 class ErrorView extends HookWidget {
@@ -28,10 +28,10 @@ class ErrorView extends HookWidget {
             height: 120,
             delegates: LottieDelegates(
               values: [
-                ValueDelegate.color(
-                  const ['Shape Layer 1', '**'],
-                  value: colorScheme.error,
-                ),
+                ValueDelegate.color(const [
+                  'Shape Layer 1',
+                  '**',
+                ], value: colorScheme.error),
               ],
             ),
           ),
@@ -51,9 +51,7 @@ class SliverErrorView extends ErrorView {
 
   @override
   Widget build(BuildContext context) {
-    return SliverFillRemaining(
-      child: super.build(context),
-    );
+    return SliverFillRemaining(child: super.build(context));
   }
 }
 

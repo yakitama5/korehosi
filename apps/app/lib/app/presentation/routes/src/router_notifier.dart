@@ -1,9 +1,9 @@
 import 'package:cores_core/util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/application/state/initial_notification_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../application/state/initial_notification_provider.dart';
 import '../../../application/usecase/item/state/current_group_item_provider.dart';
 import '../../../application/usecase/user/state/auth_status_provider.dart';
 import '../../../application/usecase/user/state/auth_user_provider.dart';

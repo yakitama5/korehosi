@@ -1,14 +1,10 @@
+import 'package:cores_domain/notification.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_app/app/infrastructure/firebase/messaging/extension/remote_message_extension.dart';
 import 'package:flutter_app/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../domain/notification/entity/notification_message.dart';
-import '../../../domain/notification/interface/messaging_service.dart';
-import '../../../domain/notification/value_object/notification_event.dart';
-import '../../../domain/notification/value_object/notification_permission.dart';
-import '../../../domain/notification/value_object/notification_target.dart';
 import '../firestore/model/firestore_group_message_model.dart';
 import '../firestore/state/firestore_group_message_provider.dart';
 
@@ -24,8 +20,10 @@ class FirebaseMessagingMessagingService implements MessagingService {
 
   @override
   Future<NotificationPermission> requestPermission() async {
-    final settings =
-        await ref.read(fcmConfigProvider).messaging.requestPermission();
+    final settings = await ref
+        .read(fcmConfigProvider)
+        .messaging
+        .requestPermission();
 
     // FCM特有のドメインモデルに変換
     return switch (settings.authorizationStatus) {
@@ -59,9 +57,7 @@ class FirebaseMessagingMessagingService implements MessagingService {
     required String path,
   }) {
     // IDが指定されていなければ、新しいドキュメントを取得
-    final docRef = ref.read(
-      groupMessageDocumentRefProvider(groupId: groupId),
-    );
+    final docRef = ref.read(groupMessageDocumentRefProvider(groupId: groupId));
 
     // Firestore用のモデルに変換
     final docModel = FirestoreGroupMessageModel(

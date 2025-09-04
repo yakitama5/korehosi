@@ -1,6 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/application/state/loading_provider.dart';
+import 'package:flutter_app/app/application/state/notification_message_provider.dart';
+import 'package:flutter_app/app/application/state/reactive_deep_link_provider.dart';
+import 'package:flutter_app/app/application/state/theme_mode_provider.dart';
 import 'package:flutter_app/app/application/usecase/system/app_usecase.dart';
 import 'package:flutter_app/app/presentation/components/src/responsive_auto_scale_box.dart';
 import 'package:flutter_app/app/presentation/hooks/importer.dart';
@@ -12,10 +16,6 @@ import 'package:nested/nested.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../application/config/app_config.dart';
-import '../application/state/loading_provider.dart';
-import '../application/state/notification_message_provider.dart';
-import '../application/state/reactive_deep_link_provider.dart';
-import '../application/state/theme_mode_provider.dart';
 import '../application/validator/validation_messages.dart';
 import 'routes/importer.dart';
 import 'theme/importer.dart';

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cores_domain/notification.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../../../domain/notification/value_object/notification_event.dart';
 
 /// Timestamp → DateTimeのConverter
 DateTime? dateFromTimestampValue(dynamic value) =>
@@ -21,8 +20,10 @@ String stringFromNotificationEventValue(dynamic value) =>
     (value as NotificationEvent).actionName;
 
 /// Timestamp ↔ DateTimeのConverter Json Key
-const timestampKey =
-    JsonKey(fromJson: dateFromTimestampValue, toJson: timestampFromDateValue);
+const timestampKey = JsonKey(
+  fromJson: dateFromTimestampValue,
+  toJson: timestampFromDateValue,
+);
 
 /// NotificationEvent ↔ StringのConverter Json Key
 const notificationEventKey = JsonKey(

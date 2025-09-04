@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cores_domain/exception.dart';
 import 'package:cores_domain/group.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../domain/exception/exceptions.dart';
 import '../firestore/constants/columns.dart';
 import '../firestore/model/firestore_group_model.dart';
 import '../firestore/model/firestore_share_link_model.dart';

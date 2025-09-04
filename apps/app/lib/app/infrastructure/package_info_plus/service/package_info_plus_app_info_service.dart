@@ -1,7 +1,6 @@
+import 'package:cores_domain/app_info.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../domain/app_info/entity/app_info.dart';
-import '../../../domain/app_info/interface/app_info_service.dart';
 import '../state/package_info_provider.dart';
 
 /// `package_info_plus`パッケージを利用したサービスの実装

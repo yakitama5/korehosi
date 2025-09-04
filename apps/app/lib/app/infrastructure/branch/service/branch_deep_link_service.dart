@@ -1,5 +1,5 @@
 import 'package:cores_core/util.dart';
-import 'package:flutter_app/app/domain/exception/exceptions.dart';
+import 'package:cores_domain/exception.dart';
 import 'package:flutter_app/app/domain/service/deep_link_service.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,9 +1,6 @@
+import 'package:cores_domain/device_info.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../domain/device_info/entity/android_info.dart';
-import '../../../domain/device_info/interface/device_info_service.dart';
-import '../../../domain/device_info/value_object/android_version.dart';
 
 ///  `device_info_plus`パッケージによるサービスの実装
 class DeviceInfoPlusDeviceInfoService implements DeviceInfoService {

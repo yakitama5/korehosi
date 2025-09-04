@@ -1,6 +1,6 @@
+import 'package:cores_domain/notification.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/notification/entity/notification_token.dart';
 import '../converter/json_key.dart';
 
 part 'firestore_notification_token_model.freezed.dart';
@@ -16,19 +16,17 @@ abstract class FirestoreNotificationTokenModel
     @timestampKey DateTime? updatedAt,
   }) = _FirestoreNotificationTokenModel;
 
-  factory FirestoreNotificationTokenModel.fromJson(
-    Map<String, dynamic> json,
-  ) =>
+  factory FirestoreNotificationTokenModel.fromJson(Map<String, dynamic> json) =>
       _$FirestoreNotificationTokenModelFromJson(json);
 }
 
 extension FirestoreNotificationTokenModelX on FirestoreNotificationTokenModel {
   /// ドメイン層で定義しているエンティティへの変換
   NotificationToken toDomainModel() => NotificationToken(
-        token: token,
-        createdAt: createdAt!,
-        updatedAt: updatedAt!,
-      );
+    token: token,
+    createdAt: createdAt!,
+    updatedAt: updatedAt!,
+  );
 
   /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;

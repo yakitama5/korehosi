@@ -1,8 +1,6 @@
+import 'package:cores_domain/notification.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/notification/entity/group_message.dart';
-import '../../../../domain/notification/value_object/notification_event.dart';
-import '../../../../domain/notification/value_object/notification_target.dart';
 import '../converter/json_key.dart';
 
 part 'firestore_group_message_model.freezed.dart';
@@ -23,25 +21,23 @@ abstract class FirestoreGroupMessageModel with _$FirestoreGroupMessageModel {
     @timestampKey DateTime? updatedAt,
   }) = _FirestoreGroupMessageModel;
 
-  factory FirestoreGroupMessageModel.fromJson(
-    Map<String, dynamic> json,
-  ) =>
+  factory FirestoreGroupMessageModel.fromJson(Map<String, dynamic> json) =>
       _$FirestoreGroupMessageModelFromJson(json);
 }
 
 extension FirestoreGroupMessageModelX on FirestoreGroupMessageModel {
   /// ドメイン層で定義しているエンティティへの変換
   GroupMessage toDomainModel() => GroupMessage(
-        id: id,
-        title: title,
-        body: body,
-        target: target,
-        event: event,
-        path: path,
-        uid: uid,
-        createdAt: createdAt,
-        updatedAt: updatedAt,
-      );
+    id: id,
+    title: title,
+    body: body,
+    target: target,
+    event: event,
+    path: path,
+    uid: uid,
+    createdAt: createdAt,
+    updatedAt: updatedAt,
+  );
 
   /// `FieldValue`による更新が保留中か否か
   bool get fieldValuePending => createdAt == null || updatedAt == null;
