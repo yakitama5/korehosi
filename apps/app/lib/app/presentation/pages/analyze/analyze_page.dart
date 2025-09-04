@@ -1,9 +1,9 @@
+import 'package:cores_domain/analyze.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 
-import '../../../domain/analyze/value_object/analyze_typs.dart';
 import '../../components/importer.dart';
 import 'components/analyze_type_switching_card.dart';
 

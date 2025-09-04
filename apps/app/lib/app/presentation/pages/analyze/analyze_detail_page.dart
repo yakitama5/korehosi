@@ -1,18 +1,16 @@
+import 'package:cores_domain/analyze.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
-import '../../../domain/analyze/value_object/analyze_typs.dart';
 import 'components/analyze_type_switching_card.dart';
 import 'components/buyer_name_filter_chip.dart';
 import 'components/wanter_name_filter_chip.dart';
 
 class AnalyzeDetailPage extends HookConsumerWidget {
-  const AnalyzeDetailPage({
-    super.key,
-    int? initialIndex,
-  }) : _initialIndex = initialIndex ?? 0;
+  const AnalyzeDetailPage({super.key, int? initialIndex})
+    : _initialIndex = initialIndex ?? 0;
 
   final int _initialIndex;
 
@@ -25,11 +23,7 @@ class AnalyzeDetailPage extends HookConsumerWidget {
           const Padding(
             padding: EdgeInsets.only(left: 16, right: 16),
             child: Row(
-              children: [
-                BuyerNameFilterChip(),
-                Gap(8),
-                WanterNameFilterChip(),
-              ],
+              children: [BuyerNameFilterChip(), Gap(8), WanterNameFilterChip()],
             ),
           ),
           Expanded(
@@ -38,8 +32,9 @@ class AnalyzeDetailPage extends HookConsumerWidget {
               pages: AnalyzeType.values
                   .map(
                     (e) => PageViewModel(
-                      decoration:
-                          const PageDecoration(titlePadding: EdgeInsets.zero),
+                      decoration: const PageDecoration(
+                        titlePadding: EdgeInsets.zero,
+                      ),
                       titleWidget: const SizedBox.shrink(),
                       bodyWidget: AnalyzeTypeSwitchingCard(
                         analyzeType: e,
