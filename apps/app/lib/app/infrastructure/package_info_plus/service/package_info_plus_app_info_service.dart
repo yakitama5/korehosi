@@ -1,5 +1,5 @@
-import 'package:cores_domain/app_info.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/app_info.dart';
 
 import '../state/package_info_provider.dart';
 

@@ -1,6 +1,6 @@
-import 'package:cores_domain/exception.dart';
-import 'package:cores_domain/group.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/exception.dart';
+import 'package:packages_domain/group.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 /// 欲しい物の登録数上限解除プロダクトのキー

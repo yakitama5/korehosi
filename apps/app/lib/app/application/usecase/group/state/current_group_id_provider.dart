@@ -1,4 +1,4 @@
-import 'package:cores_domain/core.dart';
+import 'package:packages_domain/core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../group_usecase.dart';

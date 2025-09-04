@@ -1,5 +1,5 @@
-import 'package:cores_domain/core.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/core.dart';
 
 part 'app_config.freezed.dart';
 

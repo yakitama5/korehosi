@@ -1,7 +1,7 @@
-import 'package:cores_core/util.dart';
-import 'package:cores_domain/core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_core/util.dart';
+import 'package:packages_domain/core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'router.dart';

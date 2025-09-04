@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cores_domain/notification.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/notification.dart';
 
 /// Timestamp → DateTimeのConverter
 DateTime? dateFromTimestampValue(dynamic value) =>

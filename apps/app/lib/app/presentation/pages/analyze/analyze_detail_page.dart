@@ -1,8 +1,8 @@
-import 'package:cores_domain/analyze.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:packages_domain/analyze.dart';
 
 import 'components/analyze_type_switching_card.dart';
 import 'components/buyer_name_filter_chip.dart';

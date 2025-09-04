@@ -1,5 +1,5 @@
-import 'package:cores_domain/user.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
+import 'package:packages_domain/user.dart';
 
 extension UserX on User? {
   String get dispName {

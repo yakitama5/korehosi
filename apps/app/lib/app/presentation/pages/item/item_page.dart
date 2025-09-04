@@ -1,10 +1,10 @@
-import 'package:cores_domain/item.dart';
-import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/item.dart';
+import 'package:packages_domain/user.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 
 import '../../../application/extension/number_extension.dart';

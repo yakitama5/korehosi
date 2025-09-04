@@ -1,12 +1,5 @@
 import 'dart:io' as io;
 
-import 'package:cores_domain/app_info.dart';
-import 'package:cores_domain/core.dart';
-import 'package:cores_domain/device_info.dart';
-import 'package:cores_domain/group.dart';
-import 'package:cores_domain/item.dart';
-import 'package:cores_domain/notification.dart';
-import 'package:cores_domain/user.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +13,13 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/app_info.dart';
+import 'package:packages_domain/core.dart';
+import 'package:packages_domain/device_info.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/item.dart';
+import 'package:packages_domain/notification.dart';
+import 'package:packages_domain/user.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'app/application/config/app_config.dart';

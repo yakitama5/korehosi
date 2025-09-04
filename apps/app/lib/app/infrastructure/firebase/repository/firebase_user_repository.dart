@@ -1,9 +1,9 @@
-import 'package:cores_domain/exception.dart';
-import 'package:cores_domain/user.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/exception.dart';
+import 'package:packages_domain/user.dart';
 
 import '../../google/state/google_sign_in.dart';
 import '../authentication/extension/firebase_auth_user_extension.dart';

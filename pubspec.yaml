@@ -5,9 +5,9 @@ environment:
 
 workspace:
   - apps/app
-  - packages/cores/core
+  - packages/core
   # - packages/cores/designsystem
-  - packages/cores/domain
+  - packages/domain
   # - packages/infrastructure/firebase
   # - packages/infrastructure/mock
   # - packages/infrastructure/shared_preferences

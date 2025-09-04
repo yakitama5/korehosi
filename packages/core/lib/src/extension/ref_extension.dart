@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cores_core/src/util/logger.dart';
+import 'package:packages_core/src/util/logger.dart';
 import 'package:riverpod/riverpod.dart';
 
 extension CacheForExtension on Ref {

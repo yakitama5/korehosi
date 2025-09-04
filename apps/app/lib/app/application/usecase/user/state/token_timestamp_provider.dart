@@ -1,6 +1,6 @@
-import 'package:cores_domain/core.dart';
 import 'package:flutter_app/app/application/usecase/user/state/auth_status_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'token_timestamp_provider.g.dart';

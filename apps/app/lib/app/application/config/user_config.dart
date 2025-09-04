@@ -1,4 +1,4 @@
-import 'package:cores_domain/user.dart';
+import 'package:packages_domain/user.dart';
 
 import '../model/user/user_config.dart';
 

@@ -1,5 +1,5 @@
-import 'package:cores_domain/item.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/item.dart';
 
 import 'item_order_model.dart';
 

@@ -1,4 +1,4 @@
-import 'package:cores_domain/user.dart';
+import 'package:packages_domain/user.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

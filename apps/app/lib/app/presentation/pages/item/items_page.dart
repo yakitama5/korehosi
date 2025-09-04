@@ -1,14 +1,14 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:cores_domain/group.dart';
-import 'package:cores_domain/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/item.dart';
 
 import '../../../application/config/items_config.dart';
 import '../../../application/model/dialog_result.dart';

@@ -1,8 +1,8 @@
-import 'package:cores_domain/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/item.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';

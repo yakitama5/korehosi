@@ -1,11 +1,11 @@
 import 'package:collection/collection.dart';
-import 'package:cores_domain/item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
+import 'package:packages_domain/item.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 

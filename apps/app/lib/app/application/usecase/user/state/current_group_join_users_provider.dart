@@ -1,5 +1,5 @@
-import 'package:cores_domain/user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../group/state/current_group_provider.dart';

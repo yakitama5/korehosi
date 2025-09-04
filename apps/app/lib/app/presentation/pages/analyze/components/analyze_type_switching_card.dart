@@ -1,6 +1,6 @@
-import 'package:cores_domain/analyze.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/analyze.dart';
 
 import '../../../routes/importer.dart';
 import 'purchase_gauge_chart_card.dart';

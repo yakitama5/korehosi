@@ -1,4 +1,4 @@
-import 'package:cores_domain/item.dart';
+import 'package:packages_domain/item.dart';
 
 import '../model/item/item_order_key.dart';
 import '../model/item/item_order_model.dart';

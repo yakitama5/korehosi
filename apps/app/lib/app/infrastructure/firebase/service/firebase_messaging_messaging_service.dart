@@ -1,9 +1,9 @@
-import 'package:cores_domain/notification.dart';
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_app/app/infrastructure/firebase/messaging/extension/remote_message_extension.dart';
 import 'package:flutter_app/app/infrastructure/firebase/messaging/state/fcm_config_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/notification.dart';
 
 import '../firestore/model/firestore_group_message_model.dart';
 import '../firestore/state/firestore_group_message_provider.dart';

@@ -1453,13 +1453,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-  lint:
-    dependency: transitive
-    description:
-      path: lint
-      relative: true
-    source: path
-    version: "0.0.1"
   lints:
     dependency: transitive
     description:

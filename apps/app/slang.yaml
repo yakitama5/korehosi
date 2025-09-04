@@ -9,7 +9,7 @@ lazy: false
 # Config
 imports:
   - "package:flutter/material.dart"
-  - "package:cores_domain/user.dart"
+  - "package:packages_domain/user.dart"
 contexts:
   AgeGroup:
     generate_enum: false

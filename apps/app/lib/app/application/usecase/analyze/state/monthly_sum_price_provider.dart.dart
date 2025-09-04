@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:cores_domain/analyze.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/analyze.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../extension/date_time_extension.dart';

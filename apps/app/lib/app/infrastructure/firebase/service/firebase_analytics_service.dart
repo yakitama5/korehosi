@@ -1,5 +1,5 @@
-import 'package:cores_domain/core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/core.dart';
 
 import '../analytics/state/analytics.dart';
 

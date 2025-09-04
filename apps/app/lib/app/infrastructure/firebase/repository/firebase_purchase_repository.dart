@@ -1,5 +1,5 @@
-import 'package:cores_domain/item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/item.dart';
 
 import '../firestore/model/firestore_purchase_model.dart';
 import '../firestore/state/firestore.dart';

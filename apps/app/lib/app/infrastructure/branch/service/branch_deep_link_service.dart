@@ -1,8 +1,8 @@
-import 'package:cores_core/util.dart';
-import 'package:cores_domain/core.dart' hide BusinessException;
-import 'package:cores_domain/exception.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_core/util.dart';
+import 'package:packages_domain/core.dart' hide BusinessException;
+import 'package:packages_domain/exception.dart';
 import 'package:uuid/uuid.dart';
 
 class BranchDeepLinkService implements DeepLinkService {

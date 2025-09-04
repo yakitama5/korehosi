@@ -1,5 +1,5 @@
-import 'package:cores_domain/user.dart' hide User;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:packages_domain/user.dart' hide User;
 
 /// FirebaseAuth の 認証ユーザー拡張
 extension FirebaseAuthUserX on User {

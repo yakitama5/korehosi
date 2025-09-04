@@ -1,5 +1,5 @@
-import 'package:cores_domain/notification.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/notification.dart';
 
 import '../converter/json_key.dart';
 

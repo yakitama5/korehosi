@@ -1,4 +1,4 @@
-import 'package:cores_domain/core.dart';
+import 'package:packages_domain/core.dart';
 
 import '../../../env/dart_define_key.dart';
 import '../model/app_config.dart';

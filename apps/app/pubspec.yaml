@@ -16,10 +16,6 @@ dependencies:
   cloud_firestore: any
   cloud_functions: any
   collection: any
-  cores_core:
-    path: ../../packages/cores/core
-  cores_domain:
-    path: ../../packages/cores/domain
   device_info_plus: any
   dynamic_color: any
   envied: any
@@ -61,6 +57,10 @@ dependencies:
   material_color_utilities: any
   material_design_icons_flutter: any
   nested: any
+  packages_core:
+    path: ../../packages/core
+  packages_domain:
+    path: ../../packages/domain
   package_info_plus: any
   path_provider: any
   pattern_formatter: any
@@ -103,8 +103,6 @@ dev_dependencies:
   freezed: null
   go_router_builder: any
   google_sign_in_mocks: any
-  lint:
-    path: ./../../lint
   mocktail: any
   nilts: ^0.23.1
   pedantic_mono: any

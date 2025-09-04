@@ -1,8 +1,8 @@
-import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:packages_domain/user.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../hooks/importer.dart';
