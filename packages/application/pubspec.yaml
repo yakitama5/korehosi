@@ -1,0 +1,27 @@
+name: packages_application
+description: "This package provides core features of app."
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  freezed_annotation: any
+  intl: any
+  json_annotation: any
+  riverpod: any
+  riverpod_annotation: any
+  version: null
+
+dev_dependencies:
+  build_runner: any
+  custom_lint: any
+  freezed: any
+  json_serializable: any
+  nilts: any
+  pedantic_mono: any
+  riverpod_generator: any
+  riverpod_lint: any
+
+resolution: workspace

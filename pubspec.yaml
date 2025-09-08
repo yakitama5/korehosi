@@ -6,7 +6,7 @@ environment:
 workspace:
   - apps/app
   - packages/core
-  # - packages/cores/designsystem
+  - packages/application
   - packages/domain
   # - packages/infrastructure/firebase
   # - packages/infrastructure/mock

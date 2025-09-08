@@ -1,0 +1,4 @@
+enum AppMaintenanceStatus {
+  none,
+  maintenance,
+}

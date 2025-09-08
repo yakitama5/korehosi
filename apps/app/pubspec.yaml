@@ -57,11 +57,11 @@ dependencies:
   material_color_utilities: any
   material_design_icons_flutter: any
   nested: any
+  package_info_plus: any
   packages_core:
     path: ../../packages/core
   packages_domain:
     path: ../../packages/domain
-  package_info_plus: any
   path_provider: any
   pattern_formatter: any
   permission_handler: any
