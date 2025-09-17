@@ -9,6 +9,7 @@ environment:
 dependencies:
   cloud_firestore: any
   cloud_functions: any
+  collection: any
   fcm_config: ^3.6.5
   firebase_analytics: any
   firebase_app_check: any
@@ -17,10 +18,16 @@ dependencies:
   firebase_crashlytics: any
   firebase_remote_config: any
   firebase_storage: any
+  flutter:
+    sdk: flutter
+  flutter_image_compress: any
+  flutter_localizations:
+    sdk: flutter
   freezed_annotation: any
   google_sign_in: any
   intl: any
   json_serializable: any
+  logger: any
   nested: any
   packages_core:
     path: ../../core
@@ -28,10 +35,16 @@ dependencies:
     path: ../../domain
   riverpod: any
   riverpod_annotation: any
+  uuid: any
+  version: any
 
 dev_dependencies:
+  alchemist: ^0.12.1
   build_runner: any
   custom_lint: any
+  flutter_lints: any
+  flutter_test:
+    sdk: flutter
   freezed: null
   nilts: ^0.23.1
   pedantic_mono: any
