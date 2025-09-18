@@ -1,7 +1,7 @@
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_app/app/infrastructure/firebase/messaging/state/background_handler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:infrastructure_firebase/messaging/state/background_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'fcm_config_provider.g.dart';
