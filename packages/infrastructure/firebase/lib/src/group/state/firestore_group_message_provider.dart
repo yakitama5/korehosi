@@ -1,0 +1,42 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
+import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
+import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
+import 'package:infrastructure_firebase/src/group/model/firestore_group_message_model.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'firestore_group_message_provider.g.dart';
+
+/// 通知メッセージコレクションの参照
+@riverpod
+CollectionReference<FirestoreGroupMessageModel> groupMessageCollectionRef(
+  Ref ref, {
+  required String groupId,
+}) {
+  return ref
+      .watch(firestoreProvider)
+      .messagesRef(groupId)
+      .withConverter(
+        fromFirestore: (snapshot, options) =>
+            FirestoreGroupMessageModel.fromJson(snapshot.data()!),
+        toFirestore: (value, options) => {
+          ...value.toJson(),
+
+          // 日付項目は自動更新
+          FirestoreColumns.updatedAt.fieldName: FieldValue.serverTimestamp(),
+          if (value.createdAt == null)
+            FirestoreColumns.createdAt.fieldName: FieldValue.serverTimestamp(),
+        },
+      );
+}
+
+/// 通知メッセージドキュメントの参照
+@riverpod
+DocumentReference<FirestoreGroupMessageModel> groupMessageDocumentRef(
+  Ref ref, {
+  required String groupId,
+  String? notificationMessageId,
+}) => ref
+    .watch(groupMessageCollectionRefProvider(groupId: groupId))
+    .doc(notificationMessageId);
