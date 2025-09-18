@@ -1,36 +1,20 @@
 import 'dart:io' as io;
 
-import 'package:fcm_config/fcm_config.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/app/infrastructure/branch/service/branch_deep_link_service.dart';
 import 'package:flutter_app/env/env.dart' as p;
 import 'package:flutter_app/env/env.dev.dart' as d;
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:infrastructure_firebase/service/firebase_analytics_service.dart';
-import 'package:infrastructure_firebase/src/messaging/state/fcm_config_provider.dart';
-import 'package:infrastructure_firebase/src/repository/firebase_group_repository.dart';
-import 'package:infrastructure_firebase/src/repository/firebase_item_repository.dart';
-import 'package:infrastructure_firebase/src/repository/firebase_notification_token_repository.dart';
-import 'package:infrastructure_firebase/src/repository/firebase_purchase_repository.dart';
-import 'package:infrastructure_firebase/src/service/firebase_config_service.dart';
-import 'package:infrastructure_firebase/src/service/firebase_messaging_messaging_service.dart';
-import 'package:infrastructure_firebase/src/service/firebase_storage_service.dart';
-import 'package:infrastructure_firebase/src/user/repository/firebase_user_repository.dart';
+import 'package:infrastructure_firebase/common.dart';
+import 'package:packages_dependency_override/dependency_override.dart';
 import 'package:packages_domain/app_info.dart';
 import 'package:packages_domain/core.dart';
 import 'package:packages_domain/device_info.dart';
 import 'package:packages_domain/group.dart';
-import 'package:packages_domain/item.dart';
-import 'package:packages_domain/notification.dart';
-import 'package:packages_domain/user.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'app/application/config/app_config.dart';
@@ -41,8 +25,6 @@ import 'app/infrastructure/revenue_cat/config/revenue_cat_config.dart';
 import 'app/infrastructure/revenue_cat/service/revenue_cat_app_in_purchase_service.dart';
 import 'app/infrastructure/shared_preference/service/shared_preference_cached_service.dart';
 import 'app/presentation/app.dart';
-import 'firebase_options.dart';
-import 'firebase_options_dev.dart' as dev;
 
 void main() async {
   // Flutter Initialize
@@ -54,43 +36,13 @@ void main() async {
   // 画面の向きを強制
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  // Flavor に応じた FirebaseOptions を準備する
-  final firebaseOptions = switch (appConfig.flavor) {
-    Flavor.prd => DefaultFirebaseOptions.currentPlatform,
-    Flavor.dev => dev.DefaultFirebaseOptions.currentPlatform,
-  };
-
-  // Initialize Firebase
-  await Firebase.initializeApp(options: firebaseOptions);
-
-  // FCM Config
-  await FCMConfig.instance.init(
-    defaultAndroidForegroundIcon: '@mipmap/ic_launcher',
-    defaultAndroidChannel: const AndroidNotificationChannel(
-      'high_importance_channel',
-      'これほしい！からのお知らせ',
-      importance: Importance.high,
-      sound: RawResourceAndroidNotificationSound('notification'),
-    ),
-  );
-
-  // App Check の初期化
+  // Firebase
   // 公開しているWebサイトのサイトキー
   final recpthaSiteKey = switch (appConfig.flavor) {
     Flavor.prd => p.Env.recpthaSiteKey,
     Flavor.dev => d.Env.recpthaSiteKey,
   };
-  await FirebaseAppCheck.instance.activate(
-    androidProvider: switch (appConfig.flavor) {
-      Flavor.prd => AndroidProvider.playIntegrity,
-      Flavor.dev => AndroidProvider.debug,
-    },
-    appleProvider: switch (appConfig.flavor) {
-      Flavor.prd => AppleProvider.deviceCheck,
-      Flavor.dev => AppleProvider.debug,
-    },
-    webProvider: ReCaptchaV3Provider(recpthaSiteKey),
-  );
+  await FirebaseInitializer.initialize(appConfig.flavor, recpthaSiteKey);
 
   // RevenueCat
   await initPlatformState();
@@ -108,11 +60,11 @@ void main() async {
   usePathUrlStrategy();
 
   // Firebase Crashlytics
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+  // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  // PlatformDispatcher.instance.onError = (error, stack) {
+  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  //   return true;
+  // };
 
   runApp(
     TranslationProvider(
@@ -122,24 +74,8 @@ void main() async {
           initialLocationProvider.overrideWith((ref) => null),
 
           // インフラ層のDI
-          // Firebase
-          ...await initializeFCMConfig(firebaseOptions),
-          userRepositoryProvider.overrideWith(FirebaseUserRepository.new),
-          groupRepositoryProvider.overrideWith(FirebaseGroupRepository.new),
-          itemRepositoryProvider.overrideWith(FirebaseItemRepository.new),
-          purchaseRepositoryProvider.overrideWith(
-            FirebasePurchaseRepository.new,
-          ),
-          storageServiceProvider.overrideWith(FirebaseStorageService.new),
-          configServiceProvider.overrideWith(FirebaseConfigService.new),
-          deepLinkServiceProvider.overrideWith(BranchDeepLinkService.new),
-          analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
-          messagingServiceProvider.overrideWith(
-            FirebaseMessagingMessagingService.new,
-          ),
-          notificationTokenRepositoryProvider.overrideWith(
-            FirebaseNotificationTokenRepository.new,
-          ),
+          ...await initializeInfrastructureProviders(),
+
           // SharedPreference
           cachedServiceProvider.overrideWith(SharedPreferenceCachedService.new),
           // `package_info_plus`
