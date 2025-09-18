@@ -1,8 +1,8 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'analytics.g.dart';
+part 'analytics_provider.g.dart';
 
 /// Firebase Analytics
 /// テスト時にDIすることを考慮して、Providerとして定義
