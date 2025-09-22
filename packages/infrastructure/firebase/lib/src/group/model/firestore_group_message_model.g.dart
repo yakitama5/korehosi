@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_group_message_model.dart';
 
 // **************************************************************************
@@ -8,17 +10,23 @@ part of 'firestore_group_message_model.dart';
 
 _FirestoreGroupMessageModel _$FirestoreGroupMessageModelFromJson(
   Map<String, dynamic> json,
-) => _FirestoreGroupMessageModel(
-  id: json['id'] as String,
-  title: json['title'] as String,
-  body: json['body'] as String,
-  target: $enumDecode(_$NotificationTargetEnumMap, json['target']),
-  event: notificationEventFromStringValue(json['event']),
-  path: json['path'] as String?,
-  uid: json['uid'] as String,
-  createdAt: dateFromTimestampValue(json['createdAt']),
-  updatedAt: dateFromTimestampValue(json['updatedAt']),
-);
+) => $checkedCreate('_FirestoreGroupMessageModel', json, ($checkedConvert) {
+  final val = _FirestoreGroupMessageModel(
+    id: $checkedConvert('id', (v) => v as String),
+    title: $checkedConvert('title', (v) => v as String),
+    body: $checkedConvert('body', (v) => v as String),
+    target: $checkedConvert(
+      'target',
+      (v) => $enumDecode(_$NotificationTargetEnumMap, v),
+    ),
+    event: $checkedConvert('event', (v) => notificationEventFromStringValue(v)),
+    path: $checkedConvert('path', (v) => v as String?),
+    uid: $checkedConvert('uid', (v) => v as String),
+    createdAt: $checkedConvert('createdAt', (v) => dateFromTimestampValue(v)),
+    updatedAt: $checkedConvert('updatedAt', (v) => dateFromTimestampValue(v)),
+  );
+  return val;
+});
 
 Map<String, dynamic> _$FirestoreGroupMessageModelToJson(
   _FirestoreGroupMessageModel instance,

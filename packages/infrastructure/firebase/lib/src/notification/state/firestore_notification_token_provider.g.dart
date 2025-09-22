@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_notification_token_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'firestore_notification_token_provider.dart';
 // **************************************************************************
 
 String _$notificationTokenCollectionRefHash() =>
-    r'697d1c61f6fae706c1805c9d40c0640767800f7f';
+    r'057437d8ad03a98b9d8f44d503b43fd5797af3c7';
 
 /// Copied from Dart SDK
 class _SystemHash {

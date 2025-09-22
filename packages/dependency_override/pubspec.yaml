@@ -11,6 +11,8 @@ dependencies:
     path: ../infrastructure/branch
   infrastructure_firebase:
     path: ../infrastructure/firebase
+  infrastructure_shared_preferences:
+    path: ../infrastructure/shared_preferences
   packages_domain:
     path: ../domain
   riverpod: any

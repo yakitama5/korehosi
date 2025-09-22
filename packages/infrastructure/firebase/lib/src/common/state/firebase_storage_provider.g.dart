@@ -18,10 +18,9 @@ String _$firebaseStorageHash() => r'4d34fbbd82ac849c74805e19a05079afa5e20cad';
 final firebaseStorageProvider = Provider<FirebaseStorage>.internal(
   firebaseStorage,
   name: r'firebaseStorageProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$firebaseStorageHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firebaseStorageHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

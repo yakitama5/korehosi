@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:infrastructure_firebase/src/common/state/firebase_functions.dart';
+import 'package:infrastructure_firebase/src/common/state/firebase_functions_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_group_model.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_share_link_model.dart';

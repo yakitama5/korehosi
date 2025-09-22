@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'fcm_config_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fcmConfigHash() => r'061b9dc7062d30469283c2a74cb034b853d5b48d';
+String _$fcmConfigHash() => r'6f8dd18d4b5218bcb06d380fc61ecff154252d6a';
 
 /// See also [fcmConfig].
 @ProviderFor(fcmConfig)

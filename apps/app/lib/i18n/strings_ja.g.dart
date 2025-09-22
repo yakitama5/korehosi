@@ -4,10 +4,10 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 
-import 'package:cores_domain/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:packages_domain/user.dart';
 import 'package:slang/generated.dart';
 import 'strings.g.dart';
 

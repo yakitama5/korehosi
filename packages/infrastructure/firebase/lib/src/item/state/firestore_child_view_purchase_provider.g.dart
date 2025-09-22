@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_child_view_purchase_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'firestore_child_view_purchase_provider.dart';
 // **************************************************************************
 
 String _$cpurchaseCollectionRefHash() =>
-    r'0d4a79a58628da0e3639bf34d882fe09c6760e2f';
+    r'88d896523129dac6b46018f68522391c3100f7e3';
 
 /// Copied from Dart SDK
 class _SystemHash {

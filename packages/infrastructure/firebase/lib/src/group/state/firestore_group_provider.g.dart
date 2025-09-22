@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_group_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'firestore_group_provider.dart';
 // **************************************************************************
 
 String _$groupCollectionRefHash() =>
-    r'725c990f2dc83e9d36812a680c50c2c35844471c';
+    r'390fd2c4d8fa9219e054e97f98886172ef6010fc';
 
 /// グループコレクションの参照
 ///

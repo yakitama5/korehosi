@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_share_link_model.dart';
 
 // **************************************************************************
@@ -8,13 +10,16 @@ part of 'firestore_share_link_model.dart';
 
 _FirestoreShareLinkModel _$FirestoreShareLinkModelFromJson(
   Map<String, dynamic> json,
-) => _FirestoreShareLinkModel(
-  id: json['id'] as String,
-  groupId: json['groupId'] as String,
-  validDays: (json['validDays'] as num).toInt(),
-  createdAt: dateFromTimestampValue(json['createdAt']),
-  updatedAt: dateFromTimestampValue(json['updatedAt']),
-);
+) => $checkedCreate('_FirestoreShareLinkModel', json, ($checkedConvert) {
+  final val = _FirestoreShareLinkModel(
+    id: $checkedConvert('id', (v) => v as String),
+    groupId: $checkedConvert('groupId', (v) => v as String),
+    validDays: $checkedConvert('validDays', (v) => (v as num).toInt()),
+    createdAt: $checkedConvert('createdAt', (v) => dateFromTimestampValue(v)),
+    updatedAt: $checkedConvert('updatedAt', (v) => dateFromTimestampValue(v)),
+  );
+  return val;
+});
 
 Map<String, dynamic> _$FirestoreShareLinkModelToJson(
   _FirestoreShareLinkModel instance,

@@ -11,7 +11,7 @@ workspace:
   - packages/infrastructure/firebase
   - packages/infrastructure/branch
   # - packages/infrastructure/mock
-  # - packages/infrastructure/shared_preferences
+  - packages/infrastructure/shared_preferences
 
 dev_dependencies:
   custom_lint: any

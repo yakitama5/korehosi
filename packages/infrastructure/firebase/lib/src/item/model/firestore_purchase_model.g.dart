@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_purchase_model.dart';
 
 // **************************************************************************
@@ -8,18 +10,21 @@ part of 'firestore_purchase_model.dart';
 
 _FirestorePurchaseModel _$FirestorePurchaseModelFromJson(
   Map<String, dynamic> json,
-) => _FirestorePurchaseModel(
-  id: json['id'] as String,
-  price: (json['price'] as num?)?.toInt(),
-  buyerName: json['buyerName'] as String?,
-  planDate: dateFromTimestampValue(json['planDate']),
-  surprise: json['surprise'] as bool,
-  sentAt: dateFromTimestampValue(json['sentAt']),
-  memo: json['memo'] as String?,
-  uid: json['uid'] as String,
-  createdAt: dateFromTimestampValue(json['createdAt']),
-  updatedAt: dateFromTimestampValue(json['updatedAt']),
-);
+) => $checkedCreate('_FirestorePurchaseModel', json, ($checkedConvert) {
+  final val = _FirestorePurchaseModel(
+    id: $checkedConvert('id', (v) => v as String),
+    price: $checkedConvert('price', (v) => (v as num?)?.toInt()),
+    buyerName: $checkedConvert('buyerName', (v) => v as String?),
+    planDate: $checkedConvert('planDate', (v) => dateFromTimestampValue(v)),
+    surprise: $checkedConvert('surprise', (v) => v as bool),
+    sentAt: $checkedConvert('sentAt', (v) => dateFromTimestampValue(v)),
+    memo: $checkedConvert('memo', (v) => v as String?),
+    uid: $checkedConvert('uid', (v) => v as String),
+    createdAt: $checkedConvert('createdAt', (v) => dateFromTimestampValue(v)),
+    updatedAt: $checkedConvert('updatedAt', (v) => dateFromTimestampValue(v)),
+  );
+  return val;
+});
 
 Map<String, dynamic> _$FirestorePurchaseModelToJson(
   _FirestorePurchaseModel instance,

@@ -19,10 +19,9 @@ final firebaseFunctionsProvider =
     AutoDisposeProvider<FirebaseFunctions>.internal(
       firebaseFunctions,
       name: r'firebaseFunctionsProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$firebaseFunctionsHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$firebaseFunctionsHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

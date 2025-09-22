@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'join_group_request.dart';
 
 // **************************************************************************
@@ -7,7 +9,12 @@ part of 'join_group_request.dart';
 // **************************************************************************
 
 _JoinGroupRequest _$JoinGroupRequestFromJson(Map<String, dynamic> json) =>
-    _JoinGroupRequest(shareLinkId: json['shareLinkId'] as String);
+    $checkedCreate('_JoinGroupRequest', json, ($checkedConvert) {
+      final val = _JoinGroupRequest(
+        shareLinkId: $checkedConvert('shareLinkId', (v) => v as String),
+      );
+      return val;
+    });
 
 Map<String, dynamic> _$JoinGroupRequestToJson(_JoinGroupRequest instance) =>
     <String, dynamic>{'shareLinkId': instance.shareLinkId};

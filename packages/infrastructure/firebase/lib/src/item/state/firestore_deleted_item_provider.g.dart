@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_deleted_item_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'firestore_deleted_item_provider.dart';
 // **************************************************************************
 
 String _$ditemCollectionRefHash() =>
-    r'9d384be616c3e7442fd5e7ddba43e95936dc6ab5';
+    r'6e04e12eff76f086b46e27562b4c9e136db8eebb';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'notification_message.dart';
 
 // **************************************************************************
@@ -7,14 +9,17 @@ part of 'notification_message.dart';
 // **************************************************************************
 
 _NotificationMessage _$NotificationMessageFromJson(Map<String, dynamic> json) =>
-    _NotificationMessage(
-      senderId: json['senderId'] as String?,
-      category: json['category'] as String?,
-      data: json['data'] as Map<String, dynamic>,
-      from: json['from'] as String?,
-      messageId: json['messageId'] as String?,
-      messageType: json['messageType'] as String?,
-    );
+    $checkedCreate('_NotificationMessage', json, ($checkedConvert) {
+      final val = _NotificationMessage(
+        senderId: $checkedConvert('senderId', (v) => v as String?),
+        category: $checkedConvert('category', (v) => v as String?),
+        data: $checkedConvert('data', (v) => v as Map<String, dynamic>),
+        from: $checkedConvert('from', (v) => v as String?),
+        messageId: $checkedConvert('messageId', (v) => v as String?),
+        messageType: $checkedConvert('messageType', (v) => v as String?),
+      );
+      return val;
+    });
 
 Map<String, dynamic> _$NotificationMessageToJson(
   _NotificationMessage instance,

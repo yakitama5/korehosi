@@ -18,8 +18,9 @@ String _$remoteConfigHash() => r'36d7b397a177e8516a81814c1f515ebf6415c1a6';
 final remoteConfigProvider = FutureProvider<FirebaseRemoteConfig>.internal(
   remoteConfig,
   name: r'remoteConfigProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$remoteConfigHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$remoteConfigHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -94,10 +95,9 @@ class StringConfigProvider extends AutoDisposeFutureProvider<String> {
         (ref) => stringConfig(ref as StringConfigRef, config: config),
         from: stringConfigProvider,
         name: r'stringConfigProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$stringConfigHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$stringConfigHash,
         dependencies: StringConfigFamily._dependencies,
         allTransitiveDependencies:
             StringConfigFamily._allTransitiveDependencies,
@@ -215,10 +215,9 @@ class BoolConfigProvider extends AutoDisposeFutureProvider<bool> {
         (ref) => boolConfig(ref as BoolConfigRef, config: config),
         from: boolConfigProvider,
         name: r'boolConfigProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$boolConfigHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$boolConfigHash,
         dependencies: BoolConfigFamily._dependencies,
         allTransitiveDependencies: BoolConfigFamily._allTransitiveDependencies,
         config: config,
@@ -336,10 +335,9 @@ class StringStreamConfigProvider extends AutoDisposeStreamProvider<String> {
             stringStreamConfig(ref as StringStreamConfigRef, config: config),
         from: stringStreamConfigProvider,
         name: r'stringStreamConfigProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$stringStreamConfigHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$stringStreamConfigHash,
         dependencies: StringStreamConfigFamily._dependencies,
         allTransitiveDependencies:
             StringStreamConfigFamily._allTransitiveDependencies,
@@ -458,10 +456,9 @@ class BoolStreamConfigProvider extends AutoDisposeStreamProvider<bool> {
         (ref) => boolStreamConfig(ref as BoolStreamConfigRef, config: config),
         from: boolStreamConfigProvider,
         name: r'boolStreamConfigProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$boolStreamConfigHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$boolStreamConfigHash,
         dependencies: BoolStreamConfigFamily._dependencies,
         allTransitiveDependencies:
             BoolStreamConfigFamily._allTransitiveDependencies,

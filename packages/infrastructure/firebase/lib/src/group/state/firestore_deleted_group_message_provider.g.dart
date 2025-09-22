@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_deleted_group_message_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'firestore_deleted_group_message_provider.dart';
 // **************************************************************************
 
 String _$dgroupMessageCollectionRefHash() =>
-    r'4a7836c3de8bc165d96d3551572c37321f96d62d';
+    r'07d3f7f4ce51d587dcd6c5d17759d8515303443f';
 
 /// Copied from Dart SDK
 class _SystemHash {

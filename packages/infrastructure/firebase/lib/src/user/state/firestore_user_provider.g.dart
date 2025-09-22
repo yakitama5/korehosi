@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_user_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userCollectionRefHash() => r'b914316f3a8f5df31dd2bc6fe88a87a3cb29739b';
+String _$userCollectionRefHash() => r'1a0a25e375965d7d6d7afd4fe5d5e5207486865f';
 
 /// ユーザーコレクションの参照
 ///

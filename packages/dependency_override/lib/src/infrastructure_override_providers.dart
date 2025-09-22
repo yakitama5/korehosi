@@ -14,7 +14,7 @@ import 'package:riverpod/riverpod.dart';
 Future<List<Override>> initializeInfrastructureProviders() async {
   return <Override>[
     // SharedPreferences
-    // ...await initializeSharedPreferencesProviders(),
+    await initializeSharedPreferencesProvider(),
     // themeRepositoryProvider.overrideWith(SharedPreferencesThemeRepository.new),
     // goodsConfigRepositoryProvider.overrideWith(
     //   SharedPreferencesGoodsConfigRepository.new,

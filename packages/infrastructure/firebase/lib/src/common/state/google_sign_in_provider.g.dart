@@ -18,8 +18,9 @@ String _$googleSignInHash() => r'4df13ef226b172967e2ad6fef31c4648f6d52fd9';
 final googleSignInProvider = Provider<GoogleSignIn>.internal(
   googleSignIn,
   name: r'googleSignInProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$googleSignInHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$googleSignInHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -1,22 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_user_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_FirestoreUserModel _$FirestoreUserModelFromJson(Map<String, dynamic> json) =>
-    _FirestoreUserModel(
-      id: json['id'] as String,
-      ageGroup: $enumDecode(_$AgeGroupEnumMap, json['ageGroup']),
-      name: json['name'] as String?,
-      joinGroupIds: (json['joinGroupIds'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      createdAt: dateFromTimestampValue(json['createdAt']),
-      updatedAt: dateFromTimestampValue(json['updatedAt']),
-    );
+_FirestoreUserModel _$FirestoreUserModelFromJson(
+  Map<String, dynamic> json,
+) => $checkedCreate('_FirestoreUserModel', json, ($checkedConvert) {
+  final val = _FirestoreUserModel(
+    id: $checkedConvert('id', (v) => v as String),
+    ageGroup: $checkedConvert(
+      'ageGroup',
+      (v) => $enumDecode(_$AgeGroupEnumMap, v),
+    ),
+    name: $checkedConvert('name', (v) => v as String?),
+    joinGroupIds: $checkedConvert(
+      'joinGroupIds',
+      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+    ),
+    createdAt: $checkedConvert('createdAt', (v) => dateFromTimestampValue(v)),
+    updatedAt: $checkedConvert('updatedAt', (v) => dateFromTimestampValue(v)),
+  );
+  return val;
+});
 
 Map<String, dynamic> _$FirestoreUserModelToJson(_FirestoreUserModel instance) =>
     <String, dynamic>{

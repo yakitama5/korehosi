@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_item_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemCollectionRefHash() => r'7469411ecb44a0f8c3c9fc47bcc5474aa0ca9042';
+String _$itemCollectionRefHash() => r'878270116cb5ccfc5407466c6f69b15abb8312dc';
 
 /// Copied from Dart SDK
 class _SystemHash {

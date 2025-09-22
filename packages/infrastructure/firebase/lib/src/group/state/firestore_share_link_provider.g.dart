@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_share_link_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'firestore_share_link_provider.dart';
 // **************************************************************************
 
 String _$shareLinkCollectionRefHash() =>
-    r'68d5d2e44f51bc05645ad4989943886dae9fe47d';
+    r'4b2ce6b3b490325f3b8fca628edf82880c42ed93';
 
 /// グループ共有リンクコレクションの参照
 ///

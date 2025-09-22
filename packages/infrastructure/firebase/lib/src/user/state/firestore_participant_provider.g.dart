@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'firestore_participant_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'firestore_participant_provider.dart';
 // **************************************************************************
 
 String _$participantCollectionRefHash() =>
-    r'eeb70d9ec5429a6913aca43ddfa571c19e1b2f51';
+    r'9a48b4b70c0647eb7c7383436fcba431b6e1f039';
 
 /// Copied from Dart SDK
 class _SystemHash {

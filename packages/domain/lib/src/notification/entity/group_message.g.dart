@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'group_message.dart';
 
 // **************************************************************************
@@ -7,21 +9,32 @@ part of 'group_message.dart';
 // **************************************************************************
 
 _GroupMessage _$GroupMessageFromJson(Map<String, dynamic> json) =>
-    _GroupMessage(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      body: json['body'] as String,
-      target: $enumDecode(_$NotificationTargetEnumMap, json['target']),
-      event: $enumDecode(_$NotificationEventEnumMap, json['event']),
-      path: json['path'] as String?,
-      uid: json['uid'] as String,
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
-    );
+    $checkedCreate('_GroupMessage', json, ($checkedConvert) {
+      final val = _GroupMessage(
+        id: $checkedConvert('id', (v) => v as String),
+        title: $checkedConvert('title', (v) => v as String),
+        body: $checkedConvert('body', (v) => v as String),
+        target: $checkedConvert(
+          'target',
+          (v) => $enumDecode(_$NotificationTargetEnumMap, v),
+        ),
+        event: $checkedConvert(
+          'event',
+          (v) => $enumDecode(_$NotificationEventEnumMap, v),
+        ),
+        path: $checkedConvert('path', (v) => v as String?),
+        uid: $checkedConvert('uid', (v) => v as String),
+        createdAt: $checkedConvert(
+          'createdAt',
+          (v) => v == null ? null : DateTime.parse(v as String),
+        ),
+        updatedAt: $checkedConvert(
+          'updatedAt',
+          (v) => v == null ? null : DateTime.parse(v as String),
+        ),
+      );
+      return val;
+    });
 
 Map<String, dynamic> _$GroupMessageToJson(_GroupMessage instance) =>
     <String, dynamic>{

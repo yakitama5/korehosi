@@ -1,0 +1,27 @@
+name: infrastructure_shared_preferences
+description: "This package provides core features of app."
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  json_serializable: any
+  packages_core:
+    path: ../../core
+  packages_domain:
+    path: ../../domain
+  riverpod: any
+  shared_preferences: ^2.5.3
+
+dev_dependencies:
+  build_runner: any
+  custom_lint: any
+  flutter_lints: any
+  freezed: null
+  nilts: ^0.23.1
+  pedantic_mono: any
+  riverpod_lint: any
+
+resolution: workspace
