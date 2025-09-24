@@ -28,35 +28,42 @@ class SharedPreferenceCachedService implements UserSessionRepository {
       .remove();
 
   @override
-  DateTime? fetchTokenTimestamp({
-    required String uid,
-    required String token,
-  }) {
-    final shared = await ref.read(sharedPreferencesProvider.future);
-    final str = shared.getString('${_tokenTimestampKey}_${uid}_$token');
-    final formatter = DateFormat(_tokenTimestampFormat);
-    return str == null ? null : formatter.parse(str);
-  }
-
-  @override
-  Future<bool> updateTokenTimestamp({
-    required String uid,
-    required String token,
-  }) async {
-    final shared = await ref.read(sharedPreferencesProvider.future);
-    final formatter = DateFormat(_tokenTimestampFormat);
-    return shared.setString(
-      '${_tokenTimestampKey}_${uid}_$token',
-      formatter.format(DateTime.now()),
+  DateTime? fetchTokenTimestamp({required String uid}) {
+    final str = ref.watch(
+      stringWithStringFamilyPreferenceProvider(Preferences.curentGroup, uid),
     );
+    final formatter = DateFormat(_tokenTimestampFormat);
+    return formatter.parse(str);
   }
 
   @override
-  Future<bool> removeTokenTimestamp({
+  Future<void> updateTokenTimestamp({
     required String uid,
-    required String token,
+    required DateTime dateTime,
+  }) {
+    final formatter = DateFormat(_tokenTimestampFormat);
+    return ref
+        .watch(
+          stringWithStringFamilyPreferenceProvider(
+            Preferences.curentGroup,
+            uid,
+          ).notifier,
+        )
+        .update(formatter.format(dateTime));
+  }
+
+  @override
+  Future<void> removeTokenTimestamp({
+    required String uid,
+    required DateTime dateTime,
   }) async {
-    final shared = await ref.read(sharedPreferencesProvider.future);
-    return shared.remove('${_tokenTimestampKey}_${uid}_$token');
+    return ref
+        .watch(
+          stringWithStringFamilyPreferenceProvider(
+            Preferences.curentGroup,
+            uid,
+          ).notifier,
+        )
+        .remove();
   }
 }

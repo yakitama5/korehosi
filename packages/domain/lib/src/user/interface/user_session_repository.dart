@@ -21,17 +21,17 @@ abstract class UserSessionRepository {
   Future<void> removeCurrentGroupId();
 
   /// 前回のトークン更新タイムスタンプを取得
-  DateTime? fetchTokenTimestamp({required String uid, required String token});
+  DateTime? fetchTokenTimestamp({required String uid});
 
   /// タイムスタンプの更新を行う
   Future<void> updateTokenTimestamp({
     required String uid,
-    required String token,
+    required DateTime dateTime,
   });
 
   /// タイムスタンプの削除を行う
   Future<void> removeTokenTimestamp({
     required String uid,
-    required String token,
+    required DateTime dateTime,
   });
 }
