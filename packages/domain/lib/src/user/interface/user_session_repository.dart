@@ -12,28 +12,25 @@ UserSessionRepository userSessionRepository(Ref ref) =>
 /// ユーザーセッションに関するサービス
 abstract class UserSessionRepository {
   /// キャッシュ上に保存された現在のグループIDを取得
-  Future<String?> fetchCurrentGroupId();
+  String? fetchCurrentGroupId();
 
   /// キャッシュ上に現在のグループIDを設定
-  Future<bool> setCurrentGroupId({required String groupId});
+  Future<void> setCurrentGroupId({required String groupId});
 
   /// キャッシュ上に現在のグループIDを削除
-  Future<bool> removeCurrentGroupId();
+  Future<void> removeCurrentGroupId();
 
   /// 前回のトークン更新タイムスタンプを取得
-  Future<DateTime?> fetchTokenTimestamp({
-    required String uid,
-    required String token,
-  });
+  DateTime? fetchTokenTimestamp({required String uid, required String token});
 
   /// タイムスタンプの更新を行う
-  Future<bool> updateTokenTimestamp({
+  Future<void> updateTokenTimestamp({
     required String uid,
     required String token,
   });
 
   /// タイムスタンプの削除を行う
-  Future<bool> removeTokenTimestamp({
+  Future<void> removeTokenTimestamp({
     required String uid,
     required String token,
   });

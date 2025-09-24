@@ -21,6 +21,39 @@ class StringPreference extends _$StringPreference {
     await ref.read(sharedPreferencesProvider).setString(pref.key, value);
     ref.invalidateSelf();
   }
+
+  /// ローカルストレージ値のクリア
+  Future<void> remove() async {
+    await ref.read(sharedPreferencesProvider).remove(pref.key);
+    ref.invalidateSelf();
+  }
+}
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+@riverpod
+class StringWithStringFamilyPreference
+    extends _$StringWithStringFamilyPreference {
+  @override
+  String build(Preferences<String> pref, String family) =>
+      ref.read(sharedPreferencesProvider).getString('${pref.key}_$family') ??
+      pref.defaultValue;
+
+  /// ローカルストレージ値の更新
+  Future<void> update(String value) async {
+    await ref
+        .read(sharedPreferencesProvider)
+        .setString('${pref.key}_$family', value);
+    ref.invalidateSelf();
+  }
+
+  /// ローカルストレージ値のクリア
+  Future<void> remove() async {
+    await ref.read(sharedPreferencesProvider).remove('${pref.key}_$family');
+    ref.invalidateSelf();
+  }
 }
 
 ///

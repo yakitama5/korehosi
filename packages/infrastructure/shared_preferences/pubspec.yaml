@@ -13,6 +13,7 @@ dependencies:
   packages_domain:
     path: ../../domain
   riverpod: any
+  riverpod_annotation: any
   shared_preferences: ^2.5.3
 
 dev_dependencies:
@@ -22,6 +23,7 @@ dev_dependencies:
   freezed: null
   nilts: ^0.23.1
   pedantic_mono: any
+  riverpod_generator: any
   riverpod_lint: any
 
 resolution: workspace

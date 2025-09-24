@@ -8,7 +8,7 @@ part of 'preferences_notifier_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$stringPreferenceHash() => r'66b53c815db911bd973af7fbd3d5914b7a4c5c72';
+String _$stringPreferenceHash() => r'17dab086a4e493d1f077f87e6c77d14d7ad9e948';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -112,10 +112,9 @@ class StringPreferenceProvider
         () => StringPreference()..pref = pref,
         from: stringPreferenceProvider,
         name: r'stringPreferenceProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$stringPreferenceHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$stringPreferenceHash,
         dependencies: StringPreferenceFamily._dependencies,
         allTransitiveDependencies:
             StringPreferenceFamily._allTransitiveDependencies,
@@ -188,6 +187,203 @@ class _StringPreferenceProviderElement
 
   @override
   Preferences<String> get pref => (origin as StringPreferenceProvider).pref;
+}
+
+String _$stringWithStringFamilyPreferenceHash() =>
+    r'e541a67bef349dd06f9f497db0841197cd5f0472';
+
+abstract class _$StringWithStringFamilyPreference
+    extends BuildlessAutoDisposeNotifier<String> {
+  late final Preferences<String> pref;
+  late final String family;
+
+  String build(Preferences<String> pref, String family);
+}
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+///
+/// Copied from [StringWithStringFamilyPreference].
+@ProviderFor(StringWithStringFamilyPreference)
+const stringWithStringFamilyPreferenceProvider =
+    StringWithStringFamilyPreferenceFamily();
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+///
+/// Copied from [StringWithStringFamilyPreference].
+class StringWithStringFamilyPreferenceFamily extends Family<String> {
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<String>`のenum値を設定して利用する.
+  ///
+  ///
+  /// Copied from [StringWithStringFamilyPreference].
+  const StringWithStringFamilyPreferenceFamily();
+
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<String>`のenum値を設定して利用する.
+  ///
+  ///
+  /// Copied from [StringWithStringFamilyPreference].
+  StringWithStringFamilyPreferenceProvider call(
+    Preferences<String> pref,
+    String family,
+  ) {
+    return StringWithStringFamilyPreferenceProvider(pref, family);
+  }
+
+  @override
+  StringWithStringFamilyPreferenceProvider getProviderOverride(
+    covariant StringWithStringFamilyPreferenceProvider provider,
+  ) {
+    return call(provider.pref, provider.family);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'stringWithStringFamilyPreferenceProvider';
+}
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+///
+/// Copied from [StringWithStringFamilyPreference].
+class StringWithStringFamilyPreferenceProvider
+    extends
+        AutoDisposeNotifierProviderImpl<
+          StringWithStringFamilyPreference,
+          String
+        > {
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<String>`のenum値を設定して利用する.
+  ///
+  ///
+  /// Copied from [StringWithStringFamilyPreference].
+  StringWithStringFamilyPreferenceProvider(
+    Preferences<String> pref,
+    String family,
+  ) : this._internal(
+        () => StringWithStringFamilyPreference()
+          ..pref = pref
+          ..family = family,
+        from: stringWithStringFamilyPreferenceProvider,
+        name: r'stringWithStringFamilyPreferenceProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$stringWithStringFamilyPreferenceHash,
+        dependencies: StringWithStringFamilyPreferenceFamily._dependencies,
+        allTransitiveDependencies:
+            StringWithStringFamilyPreferenceFamily._allTransitiveDependencies,
+        pref: pref,
+        family: family,
+      );
+
+  StringWithStringFamilyPreferenceProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.pref,
+    required this.family,
+  }) : super.internal();
+
+  final Preferences<String> pref;
+  final String family;
+
+  @override
+  String runNotifierBuild(covariant StringWithStringFamilyPreference notifier) {
+    return notifier.build(pref, family);
+  }
+
+  @override
+  Override overrideWith(StringWithStringFamilyPreference Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: StringWithStringFamilyPreferenceProvider._internal(
+        () => create()
+          ..pref = pref
+          ..family = family,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        pref: pref,
+        family: family,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<StringWithStringFamilyPreference, String>
+  createElement() {
+    return _StringWithStringFamilyPreferenceProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is StringWithStringFamilyPreferenceProvider &&
+        other.pref == pref &&
+        other.family == family;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, pref.hashCode);
+    hash = _SystemHash.combine(hash, family.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin StringWithStringFamilyPreferenceRef
+    on AutoDisposeNotifierProviderRef<String> {
+  /// The parameter `pref` of this provider.
+  Preferences<String> get pref;
+
+  /// The parameter `family` of this provider.
+  String get family;
+}
+
+class _StringWithStringFamilyPreferenceProviderElement
+    extends
+        AutoDisposeNotifierProviderElement<
+          StringWithStringFamilyPreference,
+          String
+        >
+    with StringWithStringFamilyPreferenceRef {
+  _StringWithStringFamilyPreferenceProviderElement(super.provider);
+
+  @override
+  Preferences<String> get pref =>
+      (origin as StringWithStringFamilyPreferenceProvider).pref;
+  @override
+  String get family =>
+      (origin as StringWithStringFamilyPreferenceProvider).family;
 }
 
 String _$boolPreferenceHash() => r'1645984b3471a9801c471b1803d35d078c38b074';
@@ -273,10 +469,9 @@ class BoolPreferenceProvider
         () => BoolPreference()..pref = pref,
         from: boolPreferenceProvider,
         name: r'boolPreferenceProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$boolPreferenceHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$boolPreferenceHash,
         dependencies: BoolPreferenceFamily._dependencies,
         allTransitiveDependencies:
             BoolPreferenceFamily._allTransitiveDependencies,
@@ -434,10 +629,9 @@ class IntPreferenceProvider
         () => IntPreference()..pref = pref,
         from: intPreferenceProvider,
         name: r'intPreferenceProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$intPreferenceHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$intPreferenceHash,
         dependencies: IntPreferenceFamily._dependencies,
         allTransitiveDependencies:
             IntPreferenceFamily._allTransitiveDependencies,

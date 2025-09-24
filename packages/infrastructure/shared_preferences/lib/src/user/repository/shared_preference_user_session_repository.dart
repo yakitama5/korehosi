@@ -1,47 +1,37 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:infrastructure_shared_preferences/common.dart';
+import 'package:infrastructure_shared_preferences/src/common/enum/preferences.dart';
 import 'package:intl/intl.dart';
-import 'package:packages_domain/core.dart';
-
-import '../state/shared_preference.dart';
-
-/// 現在のグループIDの保存Key
-const _currentGroupKey = 'current_group_id';
-
-/// FCMトークンの更新タイムスタンプKey
-const _tokenTimestampKey = 'fcm_token_timestamp';
+import 'package:packages_domain/user.dart';
 
 /// FCMトークンタイムスタンプの日付形式
 const _tokenTimestampFormat = 'yyyy-MM-dd';
 
 /// `shared_preference`パッケージを利用したサービスの実装
-class SharedPreferenceCachedService implements CachedService {
+class SharedPreferenceCachedService implements UserSessionRepository {
   const SharedPreferenceCachedService(this.ref);
 
   final Ref ref;
 
   @override
-  Future<String?> fetchCurrentGroupId() async {
-    final shared = await ref.read(sharedPreferencesProvider.future);
-    return shared.getString(_currentGroupKey);
-  }
+  String? fetchCurrentGroupId() =>
+      ref.watch(stringPreferenceProvider(Preferences.curentGroup));
 
   @override
-  Future<bool> setCurrentGroupId({required String groupId}) async {
-    final shared = await ref.read(sharedPreferencesProvider.future);
-    return shared.setString(_currentGroupKey, groupId);
-  }
+  Future<void> setCurrentGroupId({required String groupId}) => ref
+      .watch(stringPreferenceProvider(Preferences.curentGroup).notifier)
+      .update(groupId);
 
   @override
-  Future<bool> removeCurrentGroupId() async {
-    final shared = await ref.read(sharedPreferencesProvider.future);
-    return shared.remove(_currentGroupKey);
-  }
+  Future<void> removeCurrentGroupId() => ref
+      .watch(stringPreferenceProvider(Preferences.curentGroup).notifier)
+      .remove();
 
   @override
-  Future<DateTime?> fetchTokenTimestamp({
+  DateTime? fetchTokenTimestamp({
     required String uid,
     required String token,
-  }) async {
+  }) {
     final shared = await ref.read(sharedPreferencesProvider.future);
     final str = shared.getString('${_tokenTimestampKey}_${uid}_$token');
     final formatter = DateFormat(_tokenTimestampFormat);
