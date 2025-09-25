@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/env/env.dart' as p;
 import 'package:flutter_app/env/env.dev.dart' as d;
 import 'package:flutter_app/i18n/strings.g.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:infrastructure_branch/common.dart';
 import 'package:infrastructure_firebase/common.dart';
 import 'package:packages_dependency_override/dependency_override.dart';
 import 'package:packages_domain/app_info.dart';
@@ -23,7 +23,6 @@ import 'app/infrastructure/device_info_plus/service/device_info_plus_device_info
 import 'app/infrastructure/package_info_plus/service/package_info_plus_app_info_service.dart';
 import 'app/infrastructure/revenue_cat/config/revenue_cat_config.dart';
 import 'app/infrastructure/revenue_cat/service/revenue_cat_app_in_purchase_service.dart';
-import 'app/infrastructure/shared_preference/service/shared_preference_cached_service.dart';
 import 'app/presentation/app.dart';
 
 void main() async {
@@ -48,23 +47,10 @@ void main() async {
   await initPlatformState();
 
   // branch (deep link)
-  await FlutterBranchSdk.init(
-    enableLogging: true,
-    branchAttributionLevel: BranchAttributionLevel.FULL,
-  );
-  FlutterBranchSdk.setConsumerProtectionAttributionLevel(
-    BranchAttributionLevel.FULL,
-  );
+  await BranchInitializer.initialize();
 
   // WebのURLから "#" を削除
   usePathUrlStrategy();
-
-  // Firebase Crashlytics
-  // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-  //   return true;
-  // };
 
   runApp(
     TranslationProvider(
@@ -76,8 +62,6 @@ void main() async {
           // インフラ層のDI
           ...await initializeInfrastructureProviders(),
 
-          // SharedPreference
-          cachedServiceProvider.overrideWith(SharedPreferenceCachedService.new),
           // `package_info_plus`
           appInfoServiceProvider.overrideWith(
             PackageInfoPlusAppInfoService.new,

@@ -1,6 +1,6 @@
 import 'package:flutter_app/app/application/usecase/user/state/auth_status_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'token_timestamp_provider.g.dart';
@@ -14,6 +14,6 @@ Future<DateTime?> tokenTimestamp(Ref ref, {required String token}) async {
   }
 
   return ref
-      .read(cachedServiceProvider)
-      .fetchTokenTimestamp(uid: authStatus.uid, token: token);
+      .read(userSessionRepositoryProvider)
+      .fetchTokenTimestamp(uid: authStatus.uid);
 }

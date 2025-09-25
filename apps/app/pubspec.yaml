@@ -49,6 +49,8 @@ dependencies:
   hooks_riverpod: any
   image_gallery_saver_plus: any
   image_picker: any
+  infrastructure_branch:
+    path: ../../packages/infrastructure/branch
   infrastructure_firebase:
     path: ../../packages/infrastructure/firebase
   intl: any

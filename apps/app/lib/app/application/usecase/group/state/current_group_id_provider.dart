@@ -1,4 +1,4 @@
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../group_usecase.dart';
@@ -19,7 +19,9 @@ class CurrentGroupId extends _$CurrentGroupId {
   }
 
   Future<void> set({required String groupId}) async {
-    await ref.read(cachedServiceProvider).setCurrentGroupId(groupId: groupId);
+    await ref
+        .read(userSessionRepositoryProvider)
+        .setCurrentGroupId(groupId: groupId);
     ref.invalidateSelf();
 
     // await ref.read(groupUsecaseProvider).setCurrentGroupId(groupId: groupId);
@@ -29,7 +31,7 @@ class CurrentGroupId extends _$CurrentGroupId {
   }
 
   Future<void> remove() async {
-    await ref.read(cachedServiceProvider).removeCurrentGroupId();
+    await ref.read(userSessionRepositoryProvider).removeCurrentGroupId();
     ref.invalidateSelf();
     // state = const AsyncValue.data(null);
   }

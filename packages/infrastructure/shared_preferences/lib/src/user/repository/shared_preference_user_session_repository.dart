@@ -8,8 +8,8 @@ import 'package:packages_domain/user.dart';
 const _tokenTimestampFormat = 'yyyy-MM-dd';
 
 /// `shared_preference`パッケージを利用したサービスの実装
-class SharedPreferenceCachedService implements UserSessionRepository {
-  const SharedPreferenceCachedService(this.ref);
+class SharedPreferenceUserSessionRepository implements UserSessionRepository {
+  const SharedPreferenceUserSessionRepository(this.ref);
 
   final Ref ref;
 

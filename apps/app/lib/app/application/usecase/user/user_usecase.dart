@@ -277,8 +277,8 @@ class UserUsecase with RunUsecaseMixin {
 
     // ローカル上にタイムスタンプを設定
     await ref
-        .read(cachedServiceProvider)
-        .updateTokenTimestamp(uid: uid, token: token);
+        .read(userSessionRepositoryProvider)
+        .updateTokenTimestamp(uid: uid, dateTime: now);
   }
 
   /// Permissionエラーを避けるために、キャッシュしていた取得データをリフレッシュする

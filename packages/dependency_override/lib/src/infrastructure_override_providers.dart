@@ -5,6 +5,7 @@ import 'package:infrastructure_firebase/item.dart';
 import 'package:infrastructure_firebase/notification.dart';
 import 'package:infrastructure_firebase/user.dart';
 import 'package:infrastructure_shared_preferences/init.dart';
+import 'package:infrastructure_shared_preferences/user.dart';
 import 'package:packages_domain/core.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
@@ -16,10 +17,10 @@ Future<List<Override>> initializeInfrastructureProviders() async {
   return <Override>[
     // SharedPreferences
     await initializeSharedPreferencesProvider(),
+    userSessionRepositoryProvider.overrideWith(
+      SharedPreferenceUserSessionRepository.new,
+    ),
     // themeRepositoryProvider.overrideWith(SharedPreferencesThemeRepository.new),
-    // goodsConfigRepositoryProvider.overrideWith(
-    //   SharedPreferencesGoodsConfigRepository.new,
-    // ),
 
     // Firebase
     userRepositoryProvider.overrideWith(FirebaseUserRepository.new),

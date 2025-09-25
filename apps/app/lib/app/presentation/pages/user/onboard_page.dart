@@ -98,7 +98,7 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
         ReactiveValueListenableBuilder<AgeGroup>(
           formControl: formModel.ageGroupControl,
           builder: (context, control, child) => TextWithLabel(
-            i18n.app.ageGroupTypeName(context: control.value),
+            i18n.app.ageGroupTypeName(context: control.value!),
             label: i18n.app.ageGroup,
           ),
         ),

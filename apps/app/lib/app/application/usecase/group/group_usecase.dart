@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_domain/core.dart' hide BusinessException;
 import 'package:packages_domain/exception.dart';
 import 'package:packages_domain/group.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../config/app_config.dart';
@@ -31,7 +32,7 @@ class GroupUsecase with RunUsecaseMixin {
 
   /// 現在のグループを取得
   Future<String?> fetchCurrentGroupId() async {
-    return ref.read(cachedServiceProvider).fetchCurrentGroupId();
+    return ref.read(userSessionRepositoryProvider).fetchCurrentGroupId();
   }
 
   /// 現在のグループを設定
