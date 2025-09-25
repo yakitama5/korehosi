@@ -97,10 +97,10 @@ class _NavigationRail extends HookWidget {
                           // HACK(yakitama5): `Navigation rail`がTooltip非対応
                           /// 対応されたら書き換える
                           /// https://github.com/flutter/flutter/issues/113103
-                          icon: Tooltip(child: e.icon, message: e.label),
+                          icon: Tooltip(message: e.label, child: e.icon),
                           selectedIcon: Tooltip(
-                            child: e.selectedIcon,
                             message: e.label,
+                            child: e.selectedIcon,
                           ),
                         ),
                       )

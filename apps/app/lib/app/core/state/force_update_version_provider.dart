@@ -1,5 +1,5 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_domain/core.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:version/version.dart';
 

@@ -1,63 +1,60 @@
 {
-    // IntelliSense を使用して利用可能な属性を学べます。
-    // 既存の属性の説明をホバーして表示します。
-    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "debug-dev",
-            "cwd": "apps/app",
-            "type": "dart",
-            "request": "launch",
-            "flutterMode": "debug",
-            "program": "lib/main.dart",
-            "args": [
-                "--dart-define-from-file=dart_defines/dev.json"
-            ]
-        },
-        {
-            "name": "release-dev",
-            "cwd": "apps/app",
-            "type": "dart",
-            "request": "launch",
-            "flutterMode": "release",
-            "program": "lib/main.dart",
-            "args": [
-                "--dart-define-from-file=dart_defines/dev.json"
-            ]
-        },
-        {
-            "name": "debug-prod",
-            "cwd": "apps/app",
-            "type": "dart",
-            "request": "launch",
-            "flutterMode": "debug",
-            "program": "lib/main.dart",
-            "args": [
-                "--dart-define-from-file=dart_defines/prod.json"
-            ]
-        },
-        {
-            "name": "profile-prod",
-            "cwd": "apps/app",
-            "type": "dart",
-            "request": "launch",
-            "flutterMode": "debug",
-            "program": "lib/main.dart",
-            "args": [
-                "--dart-define-from-file=dart_defines/prod.json"
-            ]
-        },
-        {
-            "name": "release-prod",
-            "cwd": "apps/app",
-            "type": "dart",
-            "request": "launch",
-            "flutterMode": "release",
-            "program": "lib/main.dart",
-            "args": [
-                "--dart-define-from-file=dart_defines/prod.json"
-            ]
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "dev-debug",
+      "cwd": "apps/app",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "type": "dart",
+      "args": ["--dart-define-from-file=dart_defines/dev.json", "--web-renderer html"]
+    },
+    {
+      "name": "dev-profile",
+      "cwd": "apps/app",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "type": "dart",
+      "args": [
+        "--dart-define-from-file=dart_defines/dev.json",
+        "--web-renderer html",
+        "--profile"
+      ]
+    },
+    {
+      "name": "dev-release",
+      "cwd": "apps/app",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "type": "dart",
+      "args": [
+        "--dart-define-from-file=dart_defines/dev.json",
+        "--web-renderer html",
+        "--release"
+      ]
+    },
+    {
+      "name": "prd-debug",
+      "cwd": "apps/app",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "type": "dart",
+      "args": ["--dart-define-from-file=dart_defines/prod.json", "--web-renderer html"]
+    },
+    {
+      "name": "device-preview",
+      "cwd": "apps/app",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "type": "dart",
+      "args": [
+        "--dart-define-from-file=dart_defines/prod.json",
+        "--wasm",
+        "--dart-define=devicePreview=true"
+      ]
+    }
+  ]
 }

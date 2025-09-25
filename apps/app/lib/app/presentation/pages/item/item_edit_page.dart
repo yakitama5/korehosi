@@ -366,15 +366,14 @@ class _UrlFields extends HookConsumerWidget {
 
     return ReactiveItemFormModelFormArrayBuilder(
       formControl: formModel.urlsControl,
-      itemBuilder: (_, i, __, ___, formModel) =>
-          ReactiveOutlinedTextField<String>(
-            key: ObjectKey(formModel.urlsControl.control('$i')),
-            formControlName: '$i',
-            labelText: i18n.app.url,
-            maxLength: itemConfig.maxUrlLength,
-            textInputType: TextInputType.url,
-            counterText: '',
-          ),
+      itemBuilder: (_, i, _, _, formModel) => ReactiveOutlinedTextField<String>(
+        key: ObjectKey(formModel.urlsControl.control('$i')),
+        formControlName: '$i',
+        labelText: i18n.app.url,
+        maxLength: itemConfig.maxUrlLength,
+        textInputType: TextInputType.url,
+        counterText: '',
+      ),
     );
   }
 }

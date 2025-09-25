@@ -1,0 +1,27 @@
+{
+    "recommendations": [
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        "blaugold.melos-code",
+        "djbkwon.flutter-dependency-docs",
+        "esbenp.prettier-vscode",
+        "DavidAnson.vscode-markdownlint",
+        "aaron-bond.better-comments",
+        "ryanluker.vscode-coverage-gutters",
+        "flutterando.flutter-coverage",
+        "djbkwon.flutter-dependency-docs",
+        "robert-brunhage.flutter-riverpod-snippets",
+        "github.vscode-github-actions",
+        "GitHub.vscode-pull-request-github",
+        "oderwat.indent-rainbow",
+        "MS-CEINTL.vscode-language-pack-ja",
+        "ZainChen.json",
+        "nickdemayo.vscode-json-editor",
+        "ryanolsonx.solarized",
+        "Gruntfuggly.todo-tree",
+        "pflannery.vscode-versionlens",
+        "rioukkevin.vscode-git-commit",
+        "redhat.vscode-yaml",
+        "sourcegraph.cody-ai"
+    ]
+}

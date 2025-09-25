@@ -5,9 +5,7 @@ import '../../../components/importer.dart';
 
 /// ListView用の読み込み中ローダー
 class ListLoaderView extends StatelessWidget {
-  const ListLoaderView({
-    super.key,
-  });
+  const ListLoaderView({super.key});
 
   /// アイテムの数
   static const int itemCount = 20;
@@ -31,10 +29,8 @@ class ListLoaderView extends StatelessWidget {
         child: ListView.separated(
           shrinkWrap: true,
           padding: EdgeInsets.zero,
-          itemBuilder: (_, __) => const _LoaderListTile(),
-          separatorBuilder: (context, _) => const Divider(
-            color: Colors.white,
-          ),
+          itemBuilder: (_, _) => const _LoaderListTile(),
+          separatorBuilder: (context, _) => const Divider(color: Colors.white),
           itemCount: itemCount,
         ),
       ),
@@ -48,11 +44,7 @@ class _LoaderListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const ImageAspectRatio(
-        child: ColoredBox(
-          color: Colors.white,
-        ),
-      ),
+      leading: const ImageAspectRatio(child: ColoredBox(color: Colors.white)),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -61,10 +53,7 @@ class _LoaderListTile extends StatelessWidget {
               width: double.infinity,
               height: ListLoaderView.boneHeight,
             ),
-          const LoaderBone(
-            width: 64,
-            height: ListLoaderView.boneHeight,
-          ),
+          const LoaderBone(width: 64, height: ListLoaderView.boneHeight),
         ],
       ),
     );
@@ -72,11 +61,7 @@ class _LoaderListTile extends StatelessWidget {
 }
 
 class LoaderBone extends StatelessWidget {
-  const LoaderBone({
-    super.key,
-    this.width,
-    this.height,
-  });
+  const LoaderBone({super.key, this.width, this.height});
 
   final double? width;
   final double? height;
@@ -88,9 +73,7 @@ class LoaderBone extends StatelessWidget {
       child: SizedBox(
         width: width,
         height: height,
-        child: const ColoredBox(
-          color: Colors.white,
-        ),
+        child: const ColoredBox(color: Colors.white),
       ),
     );
   }

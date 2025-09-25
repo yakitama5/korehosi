@@ -20,7 +20,7 @@ class AnalyzePage extends HookWidget {
           child: ListView.separated(
             itemBuilder: (_, i) =>
                 AnalyzeTypeSwitchingCard(analyzeType: AnalyzeType.values[i]),
-            separatorBuilder: (_, __) => const Gap(16),
+            separatorBuilder: (_, _) => const Gap(16),
             itemCount: AnalyzeType.values.length,
           ),
         ),
