@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../application/model/dialog_result.dart';
-import '../../application/state/android_info_provider.dart';
 import '../components/importer.dart';
 
 Future<bool> requestPermissionPickImage(
@@ -62,12 +61,6 @@ Future<Permission?> _permissionGallery(
   final theme = Theme.of(context);
   switch (theme.platform) {
     case TargetPlatform.android:
-      final androidInfo = await ref.read(androidInfoProvider.future);
-      if (androidInfo.version.sdkInt <= 32) {
-        return Permission.storage;
-      } else {
-        return Permission.photos;
-      }
     case TargetPlatform.iOS:
       return Permission.photos;
     case TargetPlatform.fuchsia:

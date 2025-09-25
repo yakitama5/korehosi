@@ -13,13 +13,11 @@ import 'package:infrastructure_firebase/common.dart';
 import 'package:packages_dependency_override/dependency_override.dart';
 import 'package:packages_domain/app_info.dart';
 import 'package:packages_domain/core.dart';
-import 'package:packages_domain/device_info.dart';
 import 'package:packages_domain/group.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import 'app/application/config/app_config.dart';
 import 'app/application/state/initial_location_provider.dart';
-import 'app/infrastructure/device_info_plus/service/device_info_plus_device_info_service.dart';
 import 'app/infrastructure/package_info_plus/service/package_info_plus_app_info_service.dart';
 import 'app/infrastructure/revenue_cat/config/revenue_cat_config.dart';
 import 'app/infrastructure/revenue_cat/service/revenue_cat_app_in_purchase_service.dart';
@@ -65,10 +63,6 @@ void main() async {
           // `package_info_plus`
           appInfoServiceProvider.overrideWith(
             PackageInfoPlusAppInfoService.new,
-          ),
-          // `device_info_plus`
-          deviceInfoServiceProvider.overrideWith(
-            DeviceInfoPlusDeviceInfoService.new,
           ),
           // RevenueCat
           appInPurchaseServiceProvider.overrideWith(

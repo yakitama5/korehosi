@@ -16,7 +16,6 @@ dependencies:
   cloud_firestore: any
   cloud_functions: any
   collection: any
-  device_info_plus: any
   dynamic_color: any
   envied: any
   fcm_config: ^3.6.5
