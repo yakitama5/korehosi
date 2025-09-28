@@ -8,12 +8,12 @@ environment:
 
 dependencies:
   freezed_annotation: any
-  intl: any
   json_annotation: any
   packages_core:
     path: ../../core
   packages_domain:
     path: ../../domain
+  purchases_flutter: ^9.6.2
   riverpod: any
   riverpod_annotation: any
 
