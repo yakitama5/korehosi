@@ -3,6 +3,8 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:infrastructure_firebase/env/env.dart';
+import 'package:infrastructure_firebase/env/env.dev.dart';
 import 'package:infrastructure_firebase/src/common/config/firebase_options.dart';
 import 'package:infrastructure_firebase/src/common/config/firebase_options_dev.dart'
     as dev;
@@ -12,7 +14,7 @@ import 'package:packages_domain/core.dart';
 final class FirebaseInitializer {
   FirebaseInitializer._();
 
-  static Future<void> initialize(Flavor flavor, String recpthaSiteKey) async {
+  static Future<void> initialize(Flavor flavor) async {
     // Flavor に応じた FirebaseOptions を準備する
     final firebaseOptions = switch (flavor) {
       Flavor.dev => dev.DefaultFirebaseOptions.currentPlatform,
@@ -23,6 +25,11 @@ final class FirebaseInitializer {
     await Firebase.initializeApp(options: firebaseOptions);
 
     // App Check
+    // 公開しているWebサイトのサイトキー
+    final recpthaSiteKey = switch (flavor) {
+      Flavor.prd => ProductionEnv.recpthaSiteKey,
+      Flavor.dev => DevEnv.recpthaSiteKey,
+    };
     await FirebaseAppCheck.instance.activate(
       androidProvider: switch (flavor) {
         Flavor.prd => AndroidProvider.playIntegrity,

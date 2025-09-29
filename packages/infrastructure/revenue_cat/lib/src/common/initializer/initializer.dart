@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:infrastructure_revenue_cat/env/env.dart';
 import 'package:packages_domain/core.dart';
-import 'package:purchases_flutter/models/purchases_configuration.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 final class RevenueCatInitializer {
   RevenueCatInitializer._();
 
-  static Future<void> initialize(Flavor flavor, bool isWeb) async {
+  static Future<void> initialize(Flavor flavor, {required bool isWeb}) async {
     // Web版は課金は未対応
     if (isWeb) {
       return;
@@ -20,9 +20,14 @@ final class RevenueCatInitializer {
 
     late final PurchasesConfiguration configuration;
     if (Platform.isAndroid) {
-      configuration = PurchasesConfiguration(revenueCatPlayStoreKey);
+      /// PlayStoreの課金情報キー
+      configuration = PurchasesConfiguration(
+        ProductionEnv.revenueCatKeyPlayStore,
+      );
     } else if (Platform.isIOS) {
-      configuration = PurchasesConfiguration(revenueCatAppStoreKey);
+      configuration = PurchasesConfiguration(
+        ProductionEnv.revenueCatKeyAppleStore,
+      );
     } else {
       return;
     }

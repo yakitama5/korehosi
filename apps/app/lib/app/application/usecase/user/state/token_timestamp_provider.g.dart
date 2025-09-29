@@ -6,7 +6,7 @@ part of 'token_timestamp_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$tokenTimestampHash() => r'401ed0b1e2f6e12b7ed85acb93aeb49cbc931bed';
+String _$tokenTimestampHash() => r'0d9097e42eb653e14de2686e4234d3a8d24eeeba';
 
 /// Copied from Dart SDK
 class _SystemHash {

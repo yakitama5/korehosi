@@ -47,7 +47,9 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
       throw BusinessException('Not exists purchase package');
     }
 
-    final purchaserInfo = await Purchases.purchasePackage(package);
+    final purchaserInfo = await Purchases.purchase(
+      PurchaseParams.package(package),
+    );
     if (purchaserInfo
             .customerInfo
             .entitlements

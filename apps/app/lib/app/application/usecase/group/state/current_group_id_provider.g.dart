@@ -6,7 +6,7 @@ part of 'current_group_id_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentGroupIdHash() => r'731f51f563d6d125429fe499710472441acce0d6';
+String _$currentGroupIdHash() => r'bc06b3a55a661697f4c21121c510e2f498ca60d4';
 
 /// 現在のグループID
 /// 現在のグループID
