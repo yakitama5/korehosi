@@ -4,11 +4,9 @@ import 'package:infrastructure_firebase/group.dart';
 import 'package:infrastructure_firebase/item.dart';
 import 'package:infrastructure_firebase/notification.dart';
 import 'package:infrastructure_firebase/user.dart';
-import 'package:infrastructure_package_info/app_info.dart';
 import 'package:infrastructure_revenue_cat/common.dart';
 import 'package:infrastructure_shared_preferences/init.dart';
 import 'package:infrastructure_shared_preferences/user.dart';
-import 'package:packages_domain/app_info.dart';
 import 'package:packages_domain/core.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
@@ -46,11 +44,6 @@ Future<List<Override>> initializeInfrastructureProviders() async {
     // RevenueCat
     appInPurchaseServiceProvider.overrideWith(
       RevenueCatAppInPurchaseService.new,
-    ),
-
-    // `package_info_plus`
-    appInfoRepositoryProvider.overrideWith(
-      PackageInfoPlusAppInfoRepository.new,
     ),
 
     // Mock

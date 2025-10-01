@@ -1357,13 +1357,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
-  infrastructure_package_info:
-    dependency: transitive
-    description:
-      path: "packages/infrastructure/package_info"
-      relative: true
-    source: path
-    version: "0.0.1"
   intersperse:
     dependency: transitive
     description:
