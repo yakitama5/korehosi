@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_app/app/application/usecase/user/state/group_join_users_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/src/user/state/group_join_users_provider.dart';
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

@@ -1,8 +1,8 @@
+import 'package:packages_application/src/user/config/user_config.dart';
 import 'package:packages_domain/user.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../config/user_config.dart';
 import 'auth_user_provider.dart';
 
 part 'user_form_provider.g.dart';

@@ -1,8 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/src/user/usecase/user_usecase.dart';
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../user_usecase.dart';
 
 part 'auth_status_provider.g.dart';
 

@@ -1,9 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_app/app/application/usecase/user/state/token_timestamp_provider.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
+import 'package:packages_application/src/common/state/app_build_config_provider.dart';
+import 'package:packages_application/src/group/state/current_group_id_provider.dart';
+import 'package:packages_application/src/group/state/group_provider.dart';
+import 'package:packages_application/src/item/state/items_provider.dart';
+import 'package:packages_application/src/item/state/purchase_provider.dart';
+import 'package:packages_application/src/user/state/auth_status_provider.dart';
+import 'package:packages_application/src/user/state/auth_user_provider.dart';
+import 'package:packages_application/src/user/state/group_join_users_provider.dart';
+import 'package:packages_application/src/user/state/token_timestamp_provider.dart';
+import 'package:packages_application/src/user/state/user_provider.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_domain/core.dart';
 import 'package:packages_domain/exception.dart';
@@ -11,17 +21,6 @@ import 'package:packages_domain/group.dart';
 import 'package:packages_domain/notification.dart';
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../config/app_config.dart';
-import '../group/state/current_group_id_provider.dart';
-import '../group/state/group_provider.dart';
-import '../item/state/items_provider.dart';
-import '../purchase/state/purchase_provider.dart';
-import '../run_usecase_mixin.dart';
-import 'state/auth_status_provider.dart';
-import 'state/auth_user_provider.dart';
-import 'state/group_join_users_provider.dart';
-import 'state/user_provider.dart';
 
 part 'user_usecase.g.dart';
 
@@ -34,8 +33,12 @@ class UserUsecase with RunUsecaseMixin {
 
   final Ref ref;
 
+  /// アプリ情報
+  AppBuildConfig get _appBuildConfig => ref.watch(appBuildConfigProvider);
+
   /// アプリ内購入対応プラットフォームか否か
-  bool get _appInPurchasePlatform => !kIsWeb && appConfig.flavor == Flavor.prd;
+  bool get _appInPurchasePlatform =>
+      !kIsWeb && _appBuildConfig.flavor == Flavor.prd;
 
   /// 認証状態の取得
   Stream<AuthStatus?> fetchAuthStatus() =>
