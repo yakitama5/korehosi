@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-import '../order.dart';
+import 'package:packages_domain/core.dart';
 
 /// 欲しい物一覧の並び替え種類
 enum ItemOrderKey {

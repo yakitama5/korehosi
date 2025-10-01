@@ -1,6 +1,6 @@
-import 'package:flutter_app/app/application/usecase/purchase/state/current_group_age_applicable_purchases_provider.dart';
-import 'package:flutter_app/app/application/usecase/user/state/current_group_join_users_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/src/item/state/current_group_age_applicable_purchases_provider.dart';
+import 'package:packages_application/src/user/state/current_group_join_users_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'buyer_name_suggestion.g.dart';

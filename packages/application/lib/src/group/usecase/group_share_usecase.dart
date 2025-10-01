@@ -1,13 +1,12 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_app/app/application/usecase/user/extension/user_mixin.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
+import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
+import 'package:packages_application/src/user/state/auth_user_provider.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:share_plus/share_plus.dart';
-
-import '../run_usecase_mixin.dart';
-import '../user/state/auth_user_provider.dart';
 
 part 'group_share_usecase.g.dart';
 

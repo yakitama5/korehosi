@@ -1,4 +1,4 @@
-import '../model/item/item_image_config.dart';
+import 'package:packages_application/src/item/model/item_image_config.dart';
 
 /// ほしい物の画像に関する設定
 const itemIamgeConfig = ItemImageConfig(

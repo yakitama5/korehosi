@@ -1,4 +1,4 @@
-import '../model/item/item_config.dart';
+import 'package:packages_application/src/item/model/item_config.dart';
 
 /// ほしい物の設定
 const itemConfig = ItemConfig(

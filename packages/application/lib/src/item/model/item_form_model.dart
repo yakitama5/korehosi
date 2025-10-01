@@ -1,6 +1,6 @@
 // ignore_for_file: inference_failure_on_instance_creation
 
-import 'package:flutter_app/app/application/validator/url_validator.dart';
+import 'package:packages_application/src/common/validator/url_validator.dart';
 import 'package:reactive_forms_annotations/reactive_forms_annotations.dart';
 
 import 'selected_image_model.dart';

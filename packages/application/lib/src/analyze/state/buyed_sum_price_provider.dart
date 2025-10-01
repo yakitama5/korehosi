@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'analyze_buyed_purchases_provider.dart';
 
-part 'buyed_sum_price.g.dart';
+part 'buyed_sum_price_provider.g.dart';
 
 /// 購入済の合計金額
 @riverpod

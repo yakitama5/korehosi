@@ -1,9 +1,8 @@
+import 'package:packages_application/src/item/model/item_order_key.dart';
+import 'package:packages_application/src/item/model/item_order_model.dart';
+import 'package:packages_application/src/item/model/items_config.dart';
+import 'package:packages_domain/core.dart';
 import 'package:packages_domain/item.dart';
-
-import '../model/item/item_order_key.dart';
-import '../model/item/item_order_model.dart';
-import '../model/item/items_config.dart';
-import '../model/order.dart';
 
 /// 欲しい物一覧の設定
 const itemsConfig = ItemsConfig(

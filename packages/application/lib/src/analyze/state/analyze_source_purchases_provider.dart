@@ -1,7 +1,7 @@
-import 'package:flutter_app/app/application/usecase/analyze/state/analyze_source_items_provider.dart.dart';
-import 'package:flutter_app/app/application/usecase/analyze/state/buyer_filter_notifier_provider.dart';
-import 'package:flutter_app/app/application/usecase/purchase/state/current_group_age_applicable_purchase_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/src/analyze/state/analyze_source_items_provider.dart';
+import 'package:packages_application/src/analyze/state/buyer_filter_notifier_provider.dart';
+import 'package:packages_application/src/item/state/current_group_age_applicable_purchase_provider.dart';
 import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/core.dart';
 
-import '../order.dart';
 import 'item_order_key.dart';
 
 part 'item_order_model.freezed.dart';

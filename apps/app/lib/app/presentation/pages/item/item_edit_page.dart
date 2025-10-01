@@ -136,7 +136,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
       context,
       action: () async {
         // 入力チェック判定
-        final formModel = ReactiveItemFormModelForm.of(context)!;
+        final formModel = ReactiveItemFormModelForm.of(context);
         if (formModel.form.invalid) {
           formModel.form.markAllAsTouched();
           return;
@@ -172,6 +172,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
             wishSeason: wishSeason,
             urls: urls,
             memo: memo,
+            generateItemDetailRoute: (itemId) => ItemRouteData(itemId).location,
           );
         } else {
           await usecase.update(
@@ -243,7 +244,7 @@ class _ImageFields extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formModel = ReactiveItemFormModelForm.of(context)!;
+    final formModel = ReactiveItemFormModelForm.of(context);
 
     return ReactiveFormArray<SelectedImageModel>(
       formArray: formModel.imagesControl,
@@ -362,7 +363,7 @@ class _UrlFields extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formModel = ReactiveItemFormModelForm.of(context)!;
+    final formModel = ReactiveItemFormModelForm.of(context);
 
     return ReactiveItemFormModelFormArrayBuilder(
       formControl: formModel.urlsControl,

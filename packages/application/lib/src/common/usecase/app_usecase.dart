@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter_app/app/application/usecase/run_usecase_mixin.dart';
-import 'package:flutter_app/app/application/usecase/user/user_usecase.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
+import 'package:packages_application/src/user/usecase/user_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_usecase.g.dart';

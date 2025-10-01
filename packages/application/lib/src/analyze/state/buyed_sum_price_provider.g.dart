@@ -1,6 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'buyed_sum_price.dart';
+// ignore_for_file: type=lint, duplicate_ignore
+
+part of 'buyed_sum_price_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator

@@ -1,12 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/src/analyze/state/analyze_buyed_purchases_provider.dart';
+import 'package:packages_application/src/common/extension/date_time_extension.dart';
 import 'package:packages_domain/analyze.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../extension/date_time_extension.dart';
-import 'analyze_buyed_purchases_provider.dart';
-
-part 'monthly_sum_price_provider.dart.g.dart';
+part 'monthly_sum_price_provider.g.dart';
 
 /// 月間合計購入金額
 @riverpod
