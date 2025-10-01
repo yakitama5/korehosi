@@ -7,8 +7,9 @@ workspace:
   - apps/app
   - packages/core
   - packages/domain
-  - packages/dependency_override
+  - packages/application
   - packages/designsystem
+  - packages/dependency_override
   - packages/infrastructure/firebase
   - packages/infrastructure/revenue_cat
   - packages/infrastructure/branch

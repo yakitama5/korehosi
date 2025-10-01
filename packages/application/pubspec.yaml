@@ -1,0 +1,57 @@
+name: packages_application
+description: "This package provides core features of app."
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ^3.9.0
+  flutter: ^3.35.1
+
+resolution: workspace
+
+dependencies:
+  collection: any
+  dynamic_color: any
+  flutter:
+    sdk: flutter
+  flutter_image_compress: any
+  freezed_annotation: any
+  image_gallery_saver_plus: any
+  json_serializable: any
+  material_color_utilities: any
+  material_design_icons_flutter: any
+  nested: any
+  packages_core:
+    path: ../../packages/core
+  packages_domain:
+    path: ../../packages/domain
+  path_provider: any
+  pattern_formatter: any
+  permission_handler: any
+  qr_flutter: any
+  reactive_forms: any
+  reactive_forms_annotations: any
+  riverpod: any
+  riverpod_annotation: any
+  share_plus: any
+  slang: ^4.8.1
+  slang_flutter: ^4.8.0
+  store_redirect: any
+  url_launcher: any
+  uuid: any
+  version: any
+
+dev_dependencies:
+  alchemist: ^0.12.1
+  build_runner: any
+  custom_lint: any
+  flutter_lints: any
+  flutter_test:
+    sdk: flutter
+  freezed: null
+  mocktail: any
+  nilts: ^0.23.1
+  pedantic_mono: any
+  reactive_forms_generator: any
+  riverpod_generator: any
+  riverpod_lint: any

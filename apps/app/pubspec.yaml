@@ -61,6 +61,8 @@ dependencies:
   material_design_icons_flutter: any
   nested: any
   package_info_plus: any
+  packages_application:
+    path: ../../packages/application
   packages_core:
     path: ../../packages/core
   packages_dependency_override:
