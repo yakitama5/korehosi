@@ -1,0 +1,32 @@
+uiStyle(context=UIStyle):
+  system: システム設定
+  android: Android
+  ios: iOS
+themeColor(context=ThemeColor):
+  dynamicColor: ダイナミックカラー
+  monochrome: モノクロ
+  blue: ブルー
+  purple: パープル
+  green: グリーン
+  red: レッド
+  pink: ピンク
+  yellow: イエロー
+  orange: オレンジ
+themeMode(context=ThemeMode):
+  system: システムテーマ
+  light: ライトテーマ
+  dark: ダークテーマ
+viewLayout:
+  name: 表示形式
+  typeName(context=ViewLayout):
+    grid: グリッド表示
+    list: リスト表示
+sortOrder(context=SortOrder):
+  asc: 昇順
+  desc: 降順
+appUpdate:
+  updatePossible:
+    message: 新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？
+  forceUpdate:
+    message: ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。
+  navigateStore: ストアを開く

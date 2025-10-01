@@ -1,0 +1,1 @@
+enum DynamicColorSupportStatus { notSupported, supported }
