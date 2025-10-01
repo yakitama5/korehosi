@@ -63,6 +63,8 @@ dependencies:
     path: ../../packages/core
   packages_dependency_override:
     path: ../../packages/dependency_override
+  packages_designsystem:
+    path: ../../packages/designsystem
   packages_domain:
     path: ../../packages/domain
   path_provider: any

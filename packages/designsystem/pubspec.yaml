@@ -13,6 +13,8 @@ dependencies:
   adaptive_dialog: ^2.4.0
   animations: any
   collection: any
+  packages_application:
+    path: ../application
   packages_domain:
     path: ../domain
   dynamic_color: any

@@ -1,9 +1,9 @@
-import 'package:flutter_app/app/core/state/app_build_config_provider.dart';
-import 'package:flutter_app/app/core/state/app_latest_version_provider.dart';
-import 'package:flutter_app/app/core/state/force_update_version_provider.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/src/common/state/app_build_config_provider.dart';
+import 'package:packages_application/src/common/state/app_latest_version_provider.dart';
+import 'package:packages_application/src/common/state/force_update_version_provider.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_domain/core.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_update_status_provider.g.dart';

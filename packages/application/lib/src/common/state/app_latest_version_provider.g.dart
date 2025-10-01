@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'app_latest_version_provider.dart';
 
 // **************************************************************************
@@ -13,9 +15,10 @@ String _$appLatestVersionHash() => r'f65b69fc9217b01d86b567a74be8b7813f5e668f';
 final appLatestVersionProvider = AutoDisposeStreamProvider<Version>.internal(
   appLatestVersion,
   name: r'appLatestVersionProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appLatestVersionHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$appLatestVersionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

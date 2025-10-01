@@ -1,13 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_app/app/app.dart';
 import 'package:flutter_app/app/app_initializer.dart';
-import 'package:flutter_app/app/presentation/app.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/common.dart';
 import 'package:packages_dependency_override/dependency_override.dart';
-import 'package:packages_domain/core.dart';
 
 void main() async {
   // アプリの初期処理
@@ -18,7 +15,12 @@ void main() async {
       child: ProviderScope(
         overrides: [
           // 初期ロケーションの設定
-          initialLocationProvider.overrideWith((ref) => null),
+          initialLocationProvider.overrideWithValue(null),
+
+          // 起動時に取得したアプリの基本情報を設定
+          appBuildConfigProvider.overrideWithValue(
+            initializedResult.buildConfig,
+          ),
 
           // インフラ層のDI
           ...await initializeInfrastructureProviders(),

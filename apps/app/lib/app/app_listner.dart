@@ -1,13 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/application/config/app_config.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:store_redirect/store_redirect.dart';
-
-import '../application/model/dialog_result.dart';
-import '../application/usecase/settings/state/force_update_provider.dart';
-import 'components/importer.dart';
 
 class AppListner extends HookConsumerWidget {
   const AppListner(this.child, {super.key});

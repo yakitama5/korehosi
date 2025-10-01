@@ -37,6 +37,10 @@ Future<List<Override>> initializeInfrastructureProviders() async {
     notificationTokenRepositoryProvider.overrideWith(
       FirebaseNotificationTokenRepository.new,
     ),
+    appVersionRepositoryProvider.overrideWith(FirebaseAppVersionRepository.new),
+    appMaintenanceRepositoryProvider.overrideWith(
+      FirebaseAppMaintenanceRepository.new,
+    ),
 
     // Branch
     deepLinkServiceProvider.overrideWith(BranchDeepLinkService.new),

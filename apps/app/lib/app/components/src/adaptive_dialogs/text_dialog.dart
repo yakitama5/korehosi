@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/src/adaptive_dialogs/adaptive_action.dart';
+import 'package:flutter_app/app/components/src/reactive_outlined_text_field.dart';
+import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_designsystem/extension.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../../../hooks/importer.dart';
-import '../../../theme/importer.dart';
-import '../reactive_cupertino_text_field.dart';
-import '../reactive_outlined_text_field.dart';
-import 'adaptive_action.dart';
 
 const _textKey = 'name';
 

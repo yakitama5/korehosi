@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'color_schemes.g.dart';
+import '../color_schemes.g.dart';
 
 ThemeData createThemeData(
   TargetPlatform platform,
@@ -21,8 +21,9 @@ ThemeData createThemeData(
   }
 
   // TODO(yakitama5): 色を指定することでユーザーがテーマを変更できるようにしたい
-  final defaultColor =
-      brightness == Brightness.light ? lightColorScheme : darkColorScheme;
+  final defaultColor = brightness == Brightness.light
+      ? lightColorScheme
+      : darkColorScheme;
 
   return ThemeData(
     useMaterial3: true,

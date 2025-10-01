@@ -1,22 +1,17 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/application/state/loading_provider.dart';
-import 'package:flutter_app/app/application/state/notification_message_provider.dart';
-import 'package:flutter_app/app/application/state/reactive_deep_link_provider.dart';
-import 'package:flutter_app/app/application/state/theme_mode_provider.dart';
-import 'package:flutter_app/app/application/usecase/system/app_usecase.dart';
-import 'package:flutter_app/app/presentation/components/src/responsive_auto_scale_box.dart';
-import 'package:flutter_app/app/presentation/hooks/importer.dart';
+import 'package:flutter_app/app/components/src/responsive_auto_scale_box.dart';
+import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_domain/core.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../application/config/app_config.dart';
-import '../application/validator/validation_messages.dart';
 import 'routes/importer.dart';
 import 'theme/importer.dart';
 
@@ -34,12 +29,13 @@ class App extends HookConsumerWidget {
 
     final router = ref.watch(routerProvider);
     final themeMode = ref.watch(themeModeNotifierProvider);
+    final appBuildConfig = ref.watch(appBuildConfigProvider);
 
     // Material3対応
     // Note: https://pub.dev/packages/dynamic_color
     return _SafetyDynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) => MaterialApp.router(
-        title: appConfig.appName,
+        title: appBuildConfig.appName,
         builder: (context, child) =>
             _AppListener(child: _AppBaseContainer(child: child)),
         routerDelegate: router.routerDelegate,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_application/common.dart';
 
 class LoaderOverlay extends SingleChildStatelessWidget {
   const LoaderOverlay({super.key, super.child});
@@ -20,9 +20,7 @@ class LoaderOverlay extends SingleChildStatelessWidget {
 
             return const ColoredBox(
               color: Colors.black54,
-              child: Center(
-                child: CircularProgressIndicator.adaptive(),
-              ),
+              child: Center(child: CircularProgressIndicator.adaptive()),
             );
           },
         ),

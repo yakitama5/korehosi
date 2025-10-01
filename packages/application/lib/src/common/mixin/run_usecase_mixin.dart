@@ -1,5 +1,5 @@
-import 'package:flutter_app/app/core/state/app_loading_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/common.dart';
 
 /// ユースケース実行のためのメソッドを備えた Mixin
 mixin RunUsecaseMixin {
