@@ -4,8 +4,8 @@ import 'package:packages_domain/app_info.dart';
 import '../state/package_info_provider.dart';
 
 /// `package_info_plus`パッケージを利用したサービスの実装
-class PackageInfoPlusAppInfoService implements AppInfoService {
-  const PackageInfoPlusAppInfoService(this.ref);
+class PackageInfoPlusAppInfoRepository implements AppInfoRepository {
+  const PackageInfoPlusAppInfoRepository(this.ref);
 
   final Ref ref;
 

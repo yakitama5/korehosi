@@ -3,17 +3,17 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entity/app_info.dart';
 
-part 'app_info_service.g.dart';
+part 'app_info_repository.g.dart';
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 @Riverpod(keepAlive: true)
-AppInfoService appInfoService(Ref ref) =>
-// アプリ起動時 or テスト時に `override` することを前提に利用
+AppInfoRepository appInfoRepository(Ref ref) =>
+    // アプリ起動時 or テスト時に `override` することを前提に利用
     throw UnimplementedError();
 
 /// アプリ情報を管理するサービス
 // ignore: one_member_abstracts
-abstract class AppInfoService {
+abstract class AppInfoRepository {
   /// アプリ情報を取得する
   Future<AppInfo> fetchAppInfo();
 }
