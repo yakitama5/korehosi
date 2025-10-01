@@ -6,8 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_dependency_override/dependency_override.dart';
 import 'package:packages_domain/app_info.dart';
 
+import '../../../packages/infrastructure/package_info/lib/src/common/service/package_info_plus_app_info_service.dart';
 import 'app/application/state/initial_location_provider.dart';
-import 'app/infrastructure/package_info_plus/service/package_info_plus_app_info_service.dart';
 import 'app/presentation/app.dart';
 
 void main() async {
