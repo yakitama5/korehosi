@@ -22,7 +22,7 @@ targets:
       riverpod_generator:
         generate_for:
           include:
-            - lib/**/*provider.dart
+            - lib/**/*{provider,providers}.dart
             - lib/**/*repository.dart
             - lib/**/*service.dart
             - lib/**/*usecase.dart

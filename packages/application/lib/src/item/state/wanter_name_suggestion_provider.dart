@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../user/state/current_group_join_users_provider.dart';
 import 'current_group_items_provider.dart';
 
-part 'wanter_name_suggestion.g.dart';
+part 'wanter_name_suggestion_provider.g.dart';
 
 /// 欲しい人のサジェストリスト
 /// 対象は「だれがほしい？」に入力したことのある人 + 現在のグループ内のユーザー
@@ -27,8 +27,5 @@ Future<List<String>> wanterNameSuggestion(Ref ref) async {
   );
 
   // ほしい人の履歴を優先して結合
-  return {
-    ...await wanterNameHsts,
-    ...await currentGroupUserNames,
-  }.toList();
+  return {...await wanterNameHsts, ...await currentGroupUserNames}.toList();
 }

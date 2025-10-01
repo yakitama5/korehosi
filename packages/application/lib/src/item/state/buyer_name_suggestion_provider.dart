@@ -3,7 +3,7 @@ import 'package:packages_application/src/item/state/current_group_age_applicable
 import 'package:packages_application/src/user/state/current_group_join_users_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'buyer_name_suggestion.g.dart';
+part 'buyer_name_suggestion_provider.g.dart';
 
 /// 購入者のサジェストリスト
 /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー

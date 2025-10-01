@@ -1,6 +1,6 @@
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_application/src/common/config/app_config.dart';
+import 'package:packages_application/src/common/config/web_app_config.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/config/group_config.dart';
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
@@ -166,7 +166,7 @@ class GroupUsecase with RunUsecaseMixin {
 
       // DynamicLinkの作成
       final path = locationBuilder(shareLinkId);
-      final uri = Uri.parse(appConfig.webUrl + path);
+      final uri = Uri.parse(webAppConfig.appWebUrL + path);
       return ref.read(deepLinkServiceProvider).buildLink(uri: uri);
     },
   );
