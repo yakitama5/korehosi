@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/presentation/components/src/app_lifecycle_builder.dart';
-import 'package:flutter_app/app/presentation/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/components/src/app_lifecycle_builder.dart';
+import 'package:flutter_app/app/components/src/themed_settings_list.dart';
+import 'package:flutter_app/app/helper/permission_helper.dart';
+import 'package:flutter_app/app/helper/url_launcher_helper.dart';
+import 'package:flutter_app/app/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/routes/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_designsystem/theme.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:settings_ui/settings_ui.dart';
-
-import '../../../application/config/url_config.dart';
-import '../../components/importer.dart';
-import '../../helper/permission_helper.dart';
-import '../../helper/url_launcher_helper.dart';
-import '../../routes/importer.dart';
-import '../../theme/importer.dart';
 
 class SettingsPage extends HookConsumerWidget {
   const SettingsPage({super.key});
@@ -30,10 +29,7 @@ class SettingsPage extends HookConsumerWidget {
         // BUG(yakitama5): Androidで権限OFFにした際に再起動がかかってしまう件を対処したい
         final isNotificationGranted = Permission.notification.status.isGranted;
         return Scaffold(
-          appBar: AppBar(
-            title: Text(i18n.app.settings),
-            centerTitle: true,
-          ),
+          appBar: AppBar(title: Text(i18n.app.settings), centerTitle: true),
           body: FutureBuilder(
             future: isNotificationGranted,
             builder: (_, snap) => ThemedSettingsList(

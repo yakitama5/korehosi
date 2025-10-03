@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
+import 'package:flutter_app/app/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/gen/assets.gen.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-
-import '../../../application/config/url_config.dart';
-import '../../components/importer.dart';
-import '../../hooks/importer.dart';
-import '../../routes/importer.dart';
-import '../../theme/importer.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_designsystem/theme.dart';
 
 class WelcomePage extends HookWidget {
   const WelcomePage({super.key});

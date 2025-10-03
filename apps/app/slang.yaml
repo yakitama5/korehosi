@@ -19,3 +19,13 @@ contexts:
     generate_enum: false
   SortOrder:
     generate_enum: false
+  PurchaseStatus:
+    generate_enum: false
+  ViewLayout:
+    generate_enum: false
+  ThemeMode:
+    generate_enum: false
+  ThemeColor:
+    generate_enum: false
+  UIStyle:
+    generate_enum: false

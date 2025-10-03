@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/presentation/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/components/importer.dart';
+import 'package:flutter_app/app/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/pages/error/components/error_view.dart';
+import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/extension.dart';
 import 'package:settings_ui/settings_ui.dart';
-
-import '../../../application/model/dialog_result.dart';
-import '../../../application/usecase/user/state/auth_status_provider.dart';
-import '../../../application/usecase/user/user_usecase.dart';
-import '../../components/importer.dart';
-import '../../theme/importer.dart';
-import '../error/components/error_view.dart';
-import '../presentation_mixin.dart';
 
 class AccountPage extends HookConsumerWidget with PresentationMixin {
   const AccountPage({super.key});

@@ -237,3 +237,4 @@ notificationAddItemTitle: '${name:String}さんがほしいものを追加しま
 notificationAddItemBody: '${name:String}さんがほしいものを追加しました！'
 pushNotification: プッシュ通知
 pushNotificationDescription: グループ内でほしいものが追加された場合に通知が受け取れます
+purchased: 購入済

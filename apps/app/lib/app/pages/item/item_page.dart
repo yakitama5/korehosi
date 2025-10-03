@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
+import 'package:flutter_app/app/components/src/date_text_with_label.dart';
+import 'package:flutter_app/app/pages/error/components/error_view.dart';
+import 'package:flutter_app/app/pages/item/components/item_images.dart';
+import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
+import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_application/item.dart';
+import 'package:packages_application/user.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
-
-import '../../../application/extension/number_extension.dart';
-import '../../../application/usecase/item/state/item_detail_providers.dart';
-import '../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../components/importer.dart';
-import '../../components/src/date_text_with_label.dart';
-import '../../routes/importer.dart';
-import '../error/components/error_view.dart';
-import 'components/item_images.dart';
-import 'components/rating_icon.dart';
 
 class ItemPage extends HookConsumerWidget {
   const ItemPage({super.key});
@@ -130,7 +129,10 @@ class _PurchaseStatus extends HookWidget {
       children: [
         Icon(purchaseStatus.iconData, color: colorScheme.primary),
         const Gap(8),
-        Text(purchaseStatus.localeName, style: textTheme.bodyLarge),
+        Text(
+          i18n.kEnum.purchaseStatus(context: purchaseStatus),
+          style: textTheme.bodyLarge,
+        ),
       ],
     );
   }

@@ -178,3 +178,4 @@ notificationAddItemTitle: "${name:String}added what you want!"
 notificationAddItemBody: "${name:String}added what you want!"
 pushNotification: push notification
 pushNotificationDescription: Receive notifications when new items you want are added to the group
+purchased: already bought

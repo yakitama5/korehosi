@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
+import 'package:flutter_app/app/pages/presentation_mixin.dart';
+import 'package:flutter_app/app/pages/user/components/age_group_field.dart';
+import 'package:flutter_app/app/pages/user/components/user_name_field.dart';
 import 'package:flutter_app/gen/assets.gen.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:nested/nested.dart';
+import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/theme.dart';
 import 'package:packages_domain/user.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../../../application/model/user/user_form_model.dart';
-import '../../../application/usecase/user/user_usecase.dart';
-import '../../components/importer.dart';
-import '../../theme/importer.dart';
-import '../presentation_mixin.dart';
-import 'components/age_group_field.dart';
-import 'components/user_name_field.dart';
 
 class OnboardPage extends HookConsumerWidget with PresentationMixin {
   OnboardPage({super.key, this.initialPage = 0});
@@ -98,7 +96,7 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
         ReactiveValueListenableBuilder<AgeGroup>(
           formControl: formModel.ageGroupControl,
           builder: (context, control, child) => TextWithLabel(
-            i18n.app.ageGroupTypeName(context: control.value!),
+            i18n.kEnum.ageGroup(context: control.value!),
             label: i18n.app.ageGroup,
           ),
         ),

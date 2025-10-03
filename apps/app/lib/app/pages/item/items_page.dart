@@ -2,35 +2,28 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
+import 'package:flutter_app/app/pages/error/components/error_view.dart';
+import 'package:flutter_app/app/pages/group/components/account_dialog.dart';
+import 'package:flutter_app/app/pages/group/components/not_group_view.dart';
+import 'package:flutter_app/app/pages/item/components/item_order_selector_bottom_sheet.dart';
+import 'package:flutter_app/app/pages/item/components/list_empty_view.dart';
+import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
+import 'package:flutter_app/app/pages/item/components/purchase_status_selector_bottom_sheet.dart';
+import 'package:flutter_app/app/pages/item/components/wish_rank_selector_bottom_sheet.dart';
+import 'package:flutter_app/app/pages/presentation_mixin.dart';
+import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_application/group.dart';
+import 'package:packages_application/item.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
-
-import '../../../application/config/items_config.dart';
-import '../../../application/model/dialog_result.dart';
-import '../../../application/model/item/item_order_key.dart';
-import '../../../application/model/item/item_order_model.dart';
-import '../../../application/model/order.dart';
-import '../../../application/usecase/group/group_usecase.dart';
-import '../../../application/usecase/group/state/current_group_provider.dart';
-import '../../../application/usecase/item/item_usecase.dart';
-import '../../../application/usecase/item/state/current_group_items_provider.dart';
-import '../../../application/usecase/purchase/state/current_group_age_applicable_purchases_provider.dart';
-import '../../components/importer.dart';
-import '../../routes/importer.dart';
-import '../error/components/error_view.dart';
-import '../group/components/account_dialog.dart';
-import '../group/components/not_group_view.dart';
-import '../presentation_mixin.dart';
-import 'components/item_order_selector_bottom_sheet.dart';
-import 'components/list_empty_view.dart';
-import 'components/list_loader_view.dart';
-import 'components/purchase_status_selector_bottom_sheet.dart';
-import 'components/wish_rank_selector_bottom_sheet.dart';
 
 class ItemsPage extends HookConsumerWidget with PresentationMixin {
   const ItemsPage({super.key});
@@ -317,7 +310,7 @@ class _ItemOrderChip extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return LeadingIconInputChip(
-      label: Text(value.localeName),
+      label: Text(i18n.kEnum.itemOrderKey(context: value.key)),
       iconData: value.iconData,
       onPressed: () async {
         // BottomSheetの表示
@@ -351,7 +344,7 @@ class _PurchaseStatusChip extends HookWidget {
         ? i18n.app.status
         : value.length > 1
         ? i18n.app.selectNumberText(length: value.length)
-        : value.first.localeName;
+        : i18n.kEnum.purchaseStatus(context: value.first);
 
     return LeadingIconInputChip(
       label: Text(dispName),

@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
+import 'package:flutter_app/app/pages/error/components/error_view.dart';
+import 'package:flutter_app/app/pages/item/components/item_images.dart';
+import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_application/item.dart';
 import 'package:packages_domain/item.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../../../application/config/purchase_config.dart';
-import '../../../application/extension/number_extension.dart';
-import '../../../application/extension/string_extension.dart';
-import '../../../application/model/dialog_result.dart';
-import '../../../application/model/purchase/purchase_form_model.dart';
-import '../../../application/usecase/item/state/item_detail_providers.dart';
-import '../../../application/usecase/purchase/purchase_usecase.dart';
-import '../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
-import '../../components/importer.dart';
-import '../error/components/error_view.dart';
-import '../presentation_mixin.dart';
-import 'components/item_images.dart';
 
 class PurchasePage extends HookConsumerWidget {
   const PurchasePage({super.key});

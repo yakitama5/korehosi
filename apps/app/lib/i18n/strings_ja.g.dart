@@ -233,6 +233,7 @@ class _TranslationsAppJa extends TranslationsAppEn {
 	@override String notificationAddItemBody({required String name}) => '${name}さんがほしいものを追加しました！';
 	@override String get pushNotification => 'プッシュ通知';
 	@override String get pushNotificationDescription => 'グループ内でほしいものが追加された場合に通知が受け取れます';
+	@override String get purchased => '購入済';
 }
 
 // Path: kEnum
@@ -559,6 +560,7 @@ extension on TranslationsJa {
 			case 'app.notificationAddItemBody': return ({required String name}) => '${name}さんがほしいものを追加しました！';
 			case 'app.pushNotification': return 'プッシュ通知';
 			case 'app.pushNotificationDescription': return 'グループ内でほしいものが追加された場合に通知が受け取れます';
+			case 'app.purchased': return '購入済';
 			case 'kEnum.uiStyle': return ({required UIStyle context}) {
 				switch (context) {
 					case UIStyle.system:

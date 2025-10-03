@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
+import 'package:flutter_app/app/pages/error/components/error_view.dart';
+import 'package:flutter_app/app/pages/presentation_mixin.dart';
+import 'package:flutter_app/app/pages/user/components/age_group_field.dart';
+import 'package:flutter_app/app/pages/user/components/user_name_field.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
-
-import '../../../application/model/user/user_form_model.dart';
-import '../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../../application/usecase/user/user_usecase.dart';
-import '../../components/importer.dart';
-import '../error/components/error_view.dart';
-import '../presentation_mixin.dart';
-import 'components/age_group_field.dart';
-import 'components/user_name_field.dart';
+import 'package:packages_application/user.dart';
 
 class ProfilePage extends HookConsumerWidget {
   const ProfilePage({super.key});

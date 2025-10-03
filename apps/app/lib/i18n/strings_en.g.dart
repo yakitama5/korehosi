@@ -590,6 +590,9 @@ class TranslationsAppEn {
 
 	/// en: 'Receive notifications when new items you want are added to the group'
 	String get pushNotificationDescription => 'Receive notifications when new items you want are added to the group';
+
+	/// en: 'already bought'
+	String get purchased => 'already bought';
 }
 
 // Path: kEnum
@@ -902,6 +905,7 @@ extension on Translations {
 			case 'app.notificationAddItemBody': return ({required String name}) => '${name}added what you want!';
 			case 'app.pushNotification': return 'push notification';
 			case 'app.pushNotificationDescription': return 'Receive notifications when new items you want are added to the group';
+			case 'app.purchased': return 'already bought';
 			case 'kEnum.uiStyle': return ({required UIStyle context}) {
 				switch (context) {
 					case UIStyle.system:
