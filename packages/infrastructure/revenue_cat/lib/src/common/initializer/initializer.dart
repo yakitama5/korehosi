@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:infrastructure_revenue_cat/env/env.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 final class RevenueCatInitializer {

@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/app_listner.dart';
+import 'package:flutter_app/app/pages/analyze/analyze_detail_page.dart';
+import 'package:flutter_app/app/pages/analyze/analyze_page.dart';
+import 'package:flutter_app/app/pages/group/group_page.dart';
+import 'package:flutter_app/app/pages/group/groups_page.dart';
+import 'package:flutter_app/app/pages/group/share_link_page.dart';
+import 'package:flutter_app/app/pages/item/components/photo_viewer.dart';
+import 'package:flutter_app/app/pages/item/item_edit_page.dart';
+import 'package:flutter_app/app/pages/item/item_page.dart';
+import 'package:flutter_app/app/pages/item/items_page.dart';
+import 'package:flutter_app/app/pages/item/purchase_page.dart';
+import 'package:flutter_app/app/pages/settings/settings_page.dart';
+import 'package:flutter_app/app/pages/user/account_link_page.dart';
+import 'package:flutter_app/app/pages/user/account_page.dart';
+import 'package:flutter_app/app/pages/user/license_page.dart';
+import 'package:flutter_app/app/pages/user/onboard_page.dart';
+import 'package:flutter_app/app/pages/user/profile_page.dart';
+import 'package:flutter_app/app/pages/user/welcome_page.dart';
+import 'package:flutter_app/app/routes/src/navigator_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../application/usecase/group/state/group_detail_providers.dart';
-import '../../../application/usecase/group/state/share_link_page_providers.dart';
-import '../../../application/usecase/item/state/item_detail_providers.dart';
-import '../../app_listner.dart';
-import '../../pages/analyze/analyze_detail_page.dart';
-import '../../pages/analyze/analyze_page.dart';
-import '../../pages/group/group_page.dart';
-import '../../pages/group/groups_page.dart';
-import '../../pages/group/share_link_page.dart';
-import '../../pages/item/components/photo_viewer.dart';
-import '../../pages/item/item_edit_page.dart';
-import '../../pages/item/item_page.dart';
-import '../../pages/item/items_page.dart';
-import '../../pages/item/purchase_page.dart';
-import '../../pages/settings/settings_page.dart';
-import '../../pages/user/account_link_page.dart';
-import '../../pages/user/account_page.dart';
-import '../../pages/user/license_page.dart';
-import '../../pages/user/onboard_page.dart';
-import '../../pages/user/profile_page.dart';
-import '../../pages/user/welcome_page.dart';
-import 'navigator_page.dart';
+import 'package:packages_application/group.dart';
+import 'package:packages_application/item.dart';
 
 part 'analyze_branch.dart';
 part 'item_branch.dart';
@@ -45,11 +43,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
     TypedGoRoute<PhotoPreviewRouteData>(path: PhotoPreviewRouteData.path),
     TypedGoRoute<OnboardFormRouteData>(path: OnboardFormRouteData.path),
     TypedStatefulShellRoute<BottomNavitorShellRouteData>(
-      branches: [
-        itemBranch,
-        analyzeBranch,
-        settingsBranch,
-      ],
+      branches: [itemBranch, analyzeBranch, settingsBranch],
     ),
   ],
 )
@@ -70,11 +64,7 @@ class RootRouteData extends GoRouteData with _$RootRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       // ぐるぐる回すだけ
-      const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
-      );
+      const Scaffold(body: Center(child: CircularProgressIndicator.adaptive()));
 }
 
 final GlobalKey<NavigatorState> _shellNavigatorKey =
@@ -91,9 +81,7 @@ class BottomNavitorShellRouteData extends StatefulShellRouteData {
     GoRouterState state,
     StatefulNavigationShell navigationShell,
   ) {
-    return NavigatorPage(
-      navigationShell: navigationShell,
-    );
+    return NavigatorPage(navigationShell: navigationShell);
   }
 
   static const String $restorationScopeId = 'app_router';
@@ -137,11 +125,11 @@ class ShareLinkRouteData extends GoRouteData with _$ShareLinkRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => ProviderScope(
-        overrides: [
-          ShareLinkPageProviders.idProvider.overrideWithValue(shareLinkId),
-        ],
-        child: const ShareLinkPage(),
-      );
+    overrides: [
+      ShareLinkPageProviders.idProvider.overrideWithValue(shareLinkId),
+    ],
+    child: const ShareLinkPage(),
+  );
 }
 
 class PhotoPreviewRouteData extends GoRouteData with _$PhotoPreviewRouteData {
@@ -158,9 +146,7 @@ class PhotoPreviewRouteData extends GoRouteData with _$PhotoPreviewRouteData {
       child: PhotoViewer(
         imagesPath: $extra ?? [],
         initialIndex: index ?? 0,
-        backgroundDecoration: const BoxDecoration(
-          color: Colors.black,
-        ),
+        backgroundDecoration: const BoxDecoration(color: Colors.black),
       ),
       fullscreenDialog: true,
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/presentation/pages/error/components/error_view.dart';
+import 'package:flutter_app/app/pages/error/components/error_view.dart';
 
 import '../components/importer.dart';
 

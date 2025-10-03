@@ -41,7 +41,7 @@ class _Form extends HookWidget {
             segments: AgeGroup.values
                 .map(
                   (e) => ButtonSegment<AgeGroup>(
-                    label: Text(i18n.app.ageGroupTypeName(context: e)),
+                    label: Text(i18n.kEnum.ageGroup(context: e)),
                     value: e,
                   ),
                 )

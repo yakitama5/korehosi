@@ -1,9 +1,10 @@
 import 'package:fcm_config/fcm_config.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_app/firebase_options.dart';
-import 'package:flutter_app/firebase_options_dev.dart' as dev;
+import 'package:infrastructure_firebase/src/common/config/firebase_options.dart';
+import 'package:infrastructure_firebase/src/common/config/firebase_options_dev.dart'
+    as dev;
 import 'package:packages_core/util.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(

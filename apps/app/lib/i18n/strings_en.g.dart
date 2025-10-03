@@ -40,6 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	late final TranslationsAppEn app = TranslationsAppEn.internal(_root);
+	late final TranslationsKEnumEn kEnum = TranslationsKEnumEn.internal(_root);
 }
 
 // Path: app
@@ -146,16 +147,6 @@ class TranslationsAppEn {
 	/// en: 'age-group'
 	String get ageGroup => 'age-group';
 
-	/// en: '(child) {child} (adult) {adult}'
-	String ageGroupTypeName({required AgeGroup context}) {
-		switch (context) {
-			case AgeGroup.child:
-				return 'child';
-			case AgeGroup.adult:
-				return 'adult';
-		}
-	}
-
 	/// en: 'gender'
 	String get sex => 'gender';
 
@@ -186,26 +177,8 @@ class TranslationsAppEn {
 	/// en: 'Add what you want'
 	String get addWishList => 'Add what you want';
 
-	/// en: 'Name'
-	String get orderKeyName => 'Name';
-
-	/// en: 'degree of desirability'
-	String get orderKeyWishRank => 'degree of desirability';
-
-	/// en: 'creation-day'
-	String get orderKeyCreatedAt => 'creation-day';
-
-	/// en: 'update date'
-	String get orderKeyUpdatedAt => 'update date';
-
 	/// en: 'sort'
 	String get sortOrder => 'sort';
-
-	/// en: 'ascending-order'
-	String get sortOrderAsc => 'ascending-order';
-
-	/// en: 'descending-order'
-	String get sortOrderDesc => 'descending-order';
 
 	/// en: 'status'
 	String get status => 'status';
@@ -221,15 +194,6 @@ class TranslationsAppEn {
 
 	/// en: 'adoption'
 	String get apply => 'adoption';
-
-	/// en: 'unpurchased'
-	String get notPurchased => 'unpurchased';
-
-	/// en: 'Planned purchases'
-	String get purchasePlan => 'Planned purchases';
-
-	/// en: 'already bought'
-	String get purchased => 'already bought';
 
 	/// en: 'all'
 	String get all => 'all';
@@ -628,6 +592,131 @@ class TranslationsAppEn {
 	String get pushNotificationDescription => 'Receive notifications when new items you want are added to the group';
 }
 
+// Path: kEnum
+class TranslationsKEnumEn {
+	TranslationsKEnumEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: '(system) {System} (android) {Android} (ios) {iOS}'
+	String uiStyle({required UIStyle context}) {
+		switch (context) {
+			case UIStyle.system:
+				return 'System';
+			case UIStyle.android:
+				return 'Android';
+			case UIStyle.ios:
+				return 'iOS';
+		}
+	}
+
+	/// en: '(dynamicColor) {DynamicColor} (monochrome) {Monochrome} (blue) {Blue} (purple) {Purple} (green) {Green} (red) {Red} (pink) {Pink} (yellow) {Yellow} (orange) {Orange}'
+	String themeColor({required ThemeColor context}) {
+		switch (context) {
+			case ThemeColor.dynamicColor:
+				return 'DynamicColor';
+			case ThemeColor.monochrome:
+				return 'Monochrome';
+			case ThemeColor.blue:
+				return 'Blue';
+			case ThemeColor.purple:
+				return 'Purple';
+			case ThemeColor.green:
+				return 'Green';
+			case ThemeColor.red:
+				return 'Red';
+			case ThemeColor.pink:
+				return 'Pink';
+			case ThemeColor.yellow:
+				return 'Yellow';
+			case ThemeColor.orange:
+				return 'Orange';
+		}
+	}
+
+	/// en: '(system) {System} (light) {Light} (dark) {Dark}'
+	String themeMode({required ThemeMode context}) {
+		switch (context) {
+			case ThemeMode.system:
+				return 'System';
+			case ThemeMode.light:
+				return 'Light';
+			case ThemeMode.dark:
+				return 'Dark';
+		}
+	}
+
+	late final TranslationsKEnumViewLayoutEn viewLayout = TranslationsKEnumViewLayoutEn.internal(_root);
+
+	/// en: '(asc) {ASC} (desc) {DESC}'
+	String sortOrder({required SortOrder context}) {
+		switch (context) {
+			case SortOrder.asc:
+				return 'ASC';
+			case SortOrder.desc:
+				return 'DESC';
+		}
+	}
+
+	/// en: '(createdAt) {Created at} (name) {Name} (wishRank) {Degree of desirability}'
+	String itemOrderKey({required ItemOrderKey context}) {
+		switch (context) {
+			case ItemOrderKey.createdAt:
+				return 'Created at';
+			case ItemOrderKey.name:
+				return 'Name';
+			case ItemOrderKey.wishRank:
+				return 'Degree of desirability';
+		}
+	}
+
+	/// en: '(child) {child} (adult) {adult}'
+	String ageGroup({required AgeGroup context}) {
+		switch (context) {
+			case AgeGroup.child:
+				return 'child';
+			case AgeGroup.adult:
+				return 'adult';
+		}
+	}
+
+	/// en: '(notPurchased) {unpurchased} (purchasePlan) {Planned purchases} (purchased) {already bought}'
+	String purchaseStatus({required PurchaseStatus context}) {
+		switch (context) {
+			case PurchaseStatus.notPurchased:
+				return 'unpurchased';
+			case PurchaseStatus.purchasePlan:
+				return 'Planned purchases';
+			case PurchaseStatus.purchased:
+				return 'already bought';
+		}
+	}
+}
+
+// Path: kEnum.viewLayout
+class TranslationsKEnumViewLayoutEn {
+	TranslationsKEnumViewLayoutEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Layout'
+	String get name => 'Layout';
+
+	/// en: '(grid) {Grid} (list) {List}'
+	String typeName({required ViewLayout context}) {
+		switch (context) {
+			case ViewLayout.grid:
+				return 'Grid';
+			case ViewLayout.list:
+				return 'List';
+		}
+	}
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Translations {
@@ -665,14 +754,6 @@ extension on Translations {
 			case 'app.sexWoman': return 'woman';
 			case 'app.sexNeither': return 'Neither.';
 			case 'app.ageGroup': return 'age-group';
-			case 'app.ageGroupTypeName': return ({required AgeGroup context}) {
-				switch (context) {
-					case AgeGroup.child:
-						return 'child';
-					case AgeGroup.adult:
-						return 'adult';
-				}
-			};
 			case 'app.sex': return 'gender';
 			case 'app.unset': return '<Unset';
 			case 'app.requiredIcon': return '*';
@@ -683,21 +764,12 @@ extension on Translations {
 			case 'app.analyze': return 'quid pro quo';
 			case 'app.settings': return 'posing (a problem)';
 			case 'app.addWishList': return 'Add what you want';
-			case 'app.orderKeyName': return 'Name';
-			case 'app.orderKeyWishRank': return 'degree of desirability';
-			case 'app.orderKeyCreatedAt': return 'creation-day';
-			case 'app.orderKeyUpdatedAt': return 'update date';
 			case 'app.sortOrder': return 'sort';
-			case 'app.sortOrderAsc': return 'ascending-order';
-			case 'app.sortOrderDesc': return 'descending-order';
 			case 'app.status': return 'status';
 			case 'app.wishRank': return 'degree of desirability';
 			case 'app.cancel': return 'cancel';
 			case 'app.reset': return 'reset';
 			case 'app.apply': return 'adoption';
-			case 'app.notPurchased': return 'unpurchased';
-			case 'app.purchasePlan': return 'Planned purchases';
-			case 'app.purchased': return 'already bought';
 			case 'app.all': return 'all';
 			case 'app.noName': return 'nameless';
 			case 'app.groupInitialNameSuffix': return ' group of';
@@ -830,6 +902,93 @@ extension on Translations {
 			case 'app.notificationAddItemBody': return ({required String name}) => '${name}added what you want!';
 			case 'app.pushNotification': return 'push notification';
 			case 'app.pushNotificationDescription': return 'Receive notifications when new items you want are added to the group';
+			case 'kEnum.uiStyle': return ({required UIStyle context}) {
+				switch (context) {
+					case UIStyle.system:
+						return 'System';
+					case UIStyle.android:
+						return 'Android';
+					case UIStyle.ios:
+						return 'iOS';
+				}
+			};
+			case 'kEnum.themeColor': return ({required ThemeColor context}) {
+				switch (context) {
+					case ThemeColor.dynamicColor:
+						return 'DynamicColor';
+					case ThemeColor.monochrome:
+						return 'Monochrome';
+					case ThemeColor.blue:
+						return 'Blue';
+					case ThemeColor.purple:
+						return 'Purple';
+					case ThemeColor.green:
+						return 'Green';
+					case ThemeColor.red:
+						return 'Red';
+					case ThemeColor.pink:
+						return 'Pink';
+					case ThemeColor.yellow:
+						return 'Yellow';
+					case ThemeColor.orange:
+						return 'Orange';
+				}
+			};
+			case 'kEnum.themeMode': return ({required ThemeMode context}) {
+				switch (context) {
+					case ThemeMode.system:
+						return 'System';
+					case ThemeMode.light:
+						return 'Light';
+					case ThemeMode.dark:
+						return 'Dark';
+				}
+			};
+			case 'kEnum.viewLayout.name': return 'Layout';
+			case 'kEnum.viewLayout.typeName': return ({required ViewLayout context}) {
+				switch (context) {
+					case ViewLayout.grid:
+						return 'Grid';
+					case ViewLayout.list:
+						return 'List';
+				}
+			};
+			case 'kEnum.sortOrder': return ({required SortOrder context}) {
+				switch (context) {
+					case SortOrder.asc:
+						return 'ASC';
+					case SortOrder.desc:
+						return 'DESC';
+				}
+			};
+			case 'kEnum.itemOrderKey': return ({required ItemOrderKey context}) {
+				switch (context) {
+					case ItemOrderKey.createdAt:
+						return 'Created at';
+					case ItemOrderKey.name:
+						return 'Name';
+					case ItemOrderKey.wishRank:
+						return 'Degree of desirability';
+				}
+			};
+			case 'kEnum.ageGroup': return ({required AgeGroup context}) {
+				switch (context) {
+					case AgeGroup.child:
+						return 'child';
+					case AgeGroup.adult:
+						return 'adult';
+				}
+			};
+			case 'kEnum.purchaseStatus': return ({required PurchaseStatus context}) {
+				switch (context) {
+					case PurchaseStatus.notPurchased:
+						return 'unpurchased';
+					case PurchaseStatus.purchasePlan:
+						return 'Planned purchases';
+					case PurchaseStatus.purchased:
+						return 'already bought';
+				}
+			};
 			default: return null;
 		}
 	}

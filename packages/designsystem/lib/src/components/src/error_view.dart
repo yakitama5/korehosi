@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 class ErrorView extends HookWidget {
   const ErrorView(this.error, this.stackTrace, {super.key});

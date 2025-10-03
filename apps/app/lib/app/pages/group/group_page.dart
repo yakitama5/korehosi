@@ -3,26 +3,24 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
+import 'package:flutter_app/app/components/src/snackbar/error_snackbar.dart';
+import 'package:flutter_app/app/pages/error/components/error_view.dart';
+import 'package:flutter_app/app/pages/group/components/premium_icon_container.dart';
+import 'package:flutter_app/app/pages/group/components/share_group_bottom_sheet.dart';
+import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
+import 'package:flutter_app/app/pages/presentation_mixin.dart';
+import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_application/group.dart';
+import 'package:packages_application/user.dart';
 import 'package:packages_domain/user.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
-
-import '../../../application/model/dialog_result.dart';
-import '../../../application/usecase/group/group_usecase.dart';
-import '../../../application/usecase/group/state/current_group_id_provider.dart';
-import '../../../application/usecase/group/state/group_detail_providers.dart';
-import '../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../components/importer.dart';
-import '../../routes/importer.dart';
-import '../error/components/error_view.dart';
-import '../item/components/list_loader_view.dart';
-import '../presentation_mixin.dart';
-import 'components/premium_icon_container.dart';
-import 'components/share_group_bottom_sheet.dart';
 
 class GroupPage extends HookConsumerWidget {
   const GroupPage({super.key});
@@ -247,7 +245,7 @@ class _ListTile extends HookWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(user.dispName, maxLines: 2, overflow: TextOverflow.ellipsis),
-      subtitle: Text(i18n.app.ageGroupTypeName(context: user.ageGroup)),
+      subtitle: Text(i18n.kEnum.ageGroup(context: user.ageGroup)),
     );
   }
 }

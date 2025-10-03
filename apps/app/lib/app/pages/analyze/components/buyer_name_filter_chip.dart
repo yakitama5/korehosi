@@ -1,11 +1,10 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../application/usecase/analyze/state/buyer_filter_notifier_provider.dart';
-import '../../../../application/usecase/purchase/state/buyer_name_suggestion.dart';
-import '../../../components/importer.dart';
+import 'package:packages_application/analyze.dart';
+import 'package:packages_application/item.dart';
 
 /// 購入者名の`FilterChip`
 class BuyerNameFilterChip extends HookConsumerWidget {

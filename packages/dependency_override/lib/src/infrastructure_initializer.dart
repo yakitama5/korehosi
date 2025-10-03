@@ -1,7 +1,7 @@
 import 'package:infrastructure_branch/common.dart';
 import 'package:infrastructure_firebase/common.dart';
 import 'package:infrastructure_revenue_cat/common.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 final class InfrastructureInitializer {
   InfrastructureInitializer._();

@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:packages_application/common.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import '../../application/model/dialog_result.dart';
-import '../components/importer.dart';
 
 Future<bool> requestPermissionPickImage(
   BuildContext context,

@@ -1,4 +1,4 @@
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:version/version.dart';

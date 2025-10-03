@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:nested/nested.dart';
+import 'package:packages_application/common.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../../../application/model/dialog_result.dart';
-import 'adaptive_dialog.dart';
 
 class ReactiveFormDirtyConfirmPopScope extends SingleChildStatelessWidget {
   const ReactiveFormDirtyConfirmPopScope({super.key, super.child});

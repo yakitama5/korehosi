@@ -15,8 +15,7 @@ class DeletePermissionException implements Exception {
 
 /// アカウント連携時のException
 class AccountLinkException implements Exception {
-  const AccountLinkException(this.errorMessage);
-  final String errorMessage;
+  const AccountLinkException();
 }
 
 /// 業務不整合が発生した際のException

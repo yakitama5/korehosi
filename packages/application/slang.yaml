@@ -10,12 +10,6 @@ lazy: false
 imports:
   - "package:flutter/material.dart"
   - "package:packages_domain/user.dart"
-  - "package:packages_domain/common.dart"
-  - "package:packages_application/item.dart"
 contexts:
   AgeGroup:
-    generate_enum: false
-  ItemOrderKey:
-    generate_enum: false
-  SortOrder:
     generate_enum: false

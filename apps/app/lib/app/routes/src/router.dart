@@ -1,10 +1,9 @@
-import 'package:flutter_app/app/application/state/initial_location_provider.dart';
+import 'package:flutter_app/app/pages/error/error_page.dart';
+import 'package:flutter_app/app/routes/src/router_notifier.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../pages/error/error_page.dart';
-import 'router_notifier.dart';
 
 part 'router.g.dart';
 

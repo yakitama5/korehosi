@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
+import 'package:flutter_app/app/pages/presentation_mixin.dart';
+import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../application/usecase/group/group_usecase.dart';
-import '../../../application/usecase/group/state/share_link_page_providers.dart';
-import '../../components/importer.dart';
-import '../../routes/importer.dart';
-import '../presentation_mixin.dart';
+import 'package:packages_application/group.dart';
 
 class ShareLinkPage extends HookConsumerWidget with PresentationMixin {
   const ShareLinkPage({super.key});

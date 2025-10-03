@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/presentation/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class EmptyItemImage extends HookWidget {

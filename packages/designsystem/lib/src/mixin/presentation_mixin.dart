@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:packages_designsystem/src/components/src/snack_bar_manager.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 /// プレゼンテーション層用の共通処理 Mixin
 mixin PresentationMixin {

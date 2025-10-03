@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/application/state/initial_notification_provider.dart';
+import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:go_router/go_router.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_application/item.dart';
+import 'package:packages_application/user.dart';
 import 'package:packages_core/util.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../../../application/usecase/item/state/current_group_item_provider.dart';
-import '../../../application/usecase/user/state/auth_status_provider.dart';
-import '../../../application/usecase/user/state/auth_user_provider.dart';
-import 'routes_data.dart';
 
 part 'router_notifier.g.dart';
 

@@ -1,14 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/src/bottom_sheet_column.dart';
+import 'package:flutter_app/app/helper/permission_helper.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:packages_application/item.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_image_picker/reactive_image_picker.dart';
-
-import '../../../application/model/item/selected_image_model.dart';
-import '../../helper/permission_helper.dart';
-import 'bottom_sheet_column.dart';
 
 typedef InputButtonBuilder = Widget Function(VoidCallback onPressed);
 typedef SelectedBuilder =

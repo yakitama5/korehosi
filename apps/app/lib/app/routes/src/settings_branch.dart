@@ -9,11 +9,7 @@ const settingsBranch = TypedStatefulShellBranch<BranchSettingsData>(
       routes: [
         TypedGoRoute<GroupsRouteData>(
           path: GroupsRouteData.path,
-          routes: [
-            TypedGoRoute<GroupRouteData>(
-              path: GroupRouteData.path,
-            ),
-          ],
+          routes: [TypedGoRoute<GroupRouteData>(path: GroupRouteData.path)],
         ),
         TypedGoRoute<ProfileRouteData>(path: ProfileRouteData.path),
         TypedGoRoute<AccountRouteData>(path: AccountRouteData.path),
@@ -56,11 +52,11 @@ class GroupRouteData extends GoRouteData with _$GroupRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => ProviderScope(
-        overrides: [
-          GroupDetailProviders.groupIdProvider.overrideWithValue(groupId),
-        ],
-        child: const GroupPage(),
-      );
+    overrides: [
+      GroupDetailProviders.groupIdProvider.overrideWithValue(groupId),
+    ],
+    child: const GroupPage(),
+  );
 }
 
 class ProfileRouteData extends GoRouteData with _$ProfileRouteData {

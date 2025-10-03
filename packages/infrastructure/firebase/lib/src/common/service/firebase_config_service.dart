@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/state/remote_config_provider.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 /// 欲しい物の登録数上限
 const _maxGroupCountKey = 'max_group_count_by_free_plan';

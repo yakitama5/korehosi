@@ -1,28 +1,22 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/importer.dart';
+import 'package:flutter_app/app/pages/error/components/error_view.dart';
+import 'package:flutter_app/app/pages/item/components/empty_item_image.dart';
+import 'package:flutter_app/app/pages/item/components/item_image_carousel_slider.dart';
+import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
+import 'package:flutter_app/app/pages/presentation_mixin.dart';
+import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
+import 'package:packages_application/common.dart';
+import 'package:packages_application/item.dart';
 import 'package:packages_domain/item.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../../../application/config/item_config.dart';
-import '../../../application/model/dialog_result.dart';
-import '../../../application/model/item/item_form_model.dart';
-import '../../../application/model/item/selected_image_model.dart';
-import '../../../application/usecase/item/item_usecase.dart';
-import '../../../application/usecase/item/state/item_detail_providers.dart';
-import '../../../application/usecase/item/state/wanter_name_suggestion.dart';
-import '../../components/importer.dart';
-import '../../routes/importer.dart';
-import '../error/components/error_view.dart';
-import '../presentation_mixin.dart';
-import 'components/empty_item_image.dart';
-import 'components/item_image_carousel_slider.dart';
-import 'components/rating_icon.dart';
 
 class ItemEditPage extends HookConsumerWidget with RouteAware {
   const ItemEditPage({super.key});
@@ -136,7 +130,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
       context,
       action: () async {
         // 入力チェック判定
-        final formModel = ReactiveItemFormModelForm.of(context);
+        final formModel = ReactiveItemFormModelForm.of(context)!;
         if (formModel.form.invalid) {
           formModel.form.markAllAsTouched();
           return;
@@ -244,7 +238,7 @@ class _ImageFields extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formModel = ReactiveItemFormModelForm.of(context);
+    final formModel = ReactiveItemFormModelForm.of(context)!;
 
     return ReactiveFormArray<SelectedImageModel>(
       formArray: formModel.imagesControl,
@@ -363,7 +357,7 @@ class _UrlFields extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formModel = ReactiveItemFormModelForm.of(context);
+    final formModel = ReactiveItemFormModelForm.of(context)!;
 
     return ReactiveItemFormModelFormArrayBuilder(
       formControl: formModel.urlsControl,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:packages_designsystem/i18n/strings.g.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 extension SortOrderX on SortOrder {
   String get title => i18n.designsystem.sortOrder(context: this);

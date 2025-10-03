@@ -8,7 +8,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_dependency_override/dependency_override.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 import 'package:version/version.dart';
 
 typedef InitializedValues = ({AppBuildConfig buildConfig});

@@ -7,9 +7,7 @@ const analyzeBranch = TypedStatefulShellBranch<BranchAnalyzeData>(
     TypedGoRoute<AnalyzeRouteData>(
       path: AnalyzeRouteData.path,
       routes: [
-        TypedGoRoute<AnalyzeDetailRouteData>(
-          path: AnalyzeDetailRouteData.path,
-        ),
+        TypedGoRoute<AnalyzeDetailRouteData>(path: AnalyzeDetailRouteData.path),
       ],
     ),
   ],

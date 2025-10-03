@@ -1,4 +1,3 @@
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/src/common/config/web_app_config.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
@@ -6,7 +5,7 @@ import 'package:packages_application/src/group/config/group_config.dart';
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
 import 'package:packages_application/src/group/state/group_provider.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
-import 'package:packages_domain/core.dart' hide BusinessException;
+import 'package:packages_domain/common.dart' hide BusinessException;
 import 'package:packages_domain/exception.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';

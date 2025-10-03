@@ -7,7 +7,7 @@ import 'package:infrastructure_firebase/user.dart';
 import 'package:infrastructure_revenue_cat/common.dart';
 import 'package:infrastructure_shared_preferences/init.dart';
 import 'package:infrastructure_shared_preferences/user.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/notification.dart';

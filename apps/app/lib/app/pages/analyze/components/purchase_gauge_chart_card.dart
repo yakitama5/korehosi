@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/application/usecase/analyze/state/analyze_source_items_provider.dart.dart';
+import 'package:flutter_app/app/components/src/gauge_chart.dart';
+import 'package:flutter_app/app/pages/analyze/components/chart_card.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../application/usecase/analyze/state/analyze_buyed_count_provider.dart';
-import '../../../../application/usecase/analyze/state/buyed_rate_provider.dart';
-import '../../../components/importer.dart';
-import 'chart_card.dart';
+import 'package:packages_application/analyze.dart';
 
 /// 購入率を表すCard
 class PurchaseGaugeChartCard extends HookConsumerWidget {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/src/adaptive_dialogs/adaptive_action.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
-import '../../../../application/model/dialog_result.dart';
-import 'adaptive_action.dart';
+import 'package:packages_application/common.dart';
 
 /// 「OK or Cancel」をアクションに持つダイアログ
 class OkCancelDialog extends HookWidget {

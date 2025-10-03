@@ -55,3 +55,4 @@ dev_dependencies:
   reactive_forms_generator: any
   riverpod_generator: any
   riverpod_lint: any
+  slang_build_runner: ^4.8.1

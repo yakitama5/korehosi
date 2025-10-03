@@ -30,9 +30,6 @@ sexMan: man's man
 sexWoman: woman
 sexNeither: Neither.
 ageGroup: age-group
-ageGroupTypeName(context=AgeGroup):
-  child: child
-  adult: adult
 sex: gender
 unset: <Unset
 requiredIcon: "*"
@@ -43,21 +40,12 @@ wishList: wanted article
 analyze: quid pro quo
 settings: posing (a problem)
 addWishList: Add what you want
-orderKeyName: Name
-orderKeyWishRank: degree of desirability
-orderKeyCreatedAt: creation-day
-orderKeyUpdatedAt: update date
 sortOrder: sort
-sortOrderAsc: ascending-order
-sortOrderDesc: descending-order
 status: status
 wishRank: degree of desirability
 cancel: cancel
 reset: reset
 apply: adoption
-notPurchased: unpurchased
-purchasePlan: Planned purchases
-purchased: already bought
 all: all
 noName: nameless
 groupInitialNameSuffix: " group of"

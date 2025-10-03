@@ -9,7 +9,7 @@ import 'package:infrastructure_firebase/src/common/config/firebase_options.dart'
 import 'package:infrastructure_firebase/src/common/config/firebase_options_dev.dart'
     as dev;
 import 'package:infrastructure_firebase/src/common/state/background_handler.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 final class FirebaseInitializer {
   FirebaseInitializer._();

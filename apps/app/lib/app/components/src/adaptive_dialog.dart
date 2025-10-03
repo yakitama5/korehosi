@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/src/adaptive_dialogs/ok_cancel_dialog.dart';
+import 'package:flutter_app/app/components/src/adaptive_dialogs/ok_dialog.dart';
+import 'package:flutter_app/app/components/src/adaptive_dialogs/text_dialog.dart';
+import 'package:packages_application/common.dart';
 
 Future<DialogResult?> showAdaptiveOkDialog(
   BuildContext context, {

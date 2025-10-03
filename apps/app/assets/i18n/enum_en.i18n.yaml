@@ -1,0 +1,37 @@
+uiStyle(context=UIStyle):
+  system: System
+  android: Android
+  ios: iOS
+themeColor(context=ThemeColor):
+  dynamicColor: DynamicColor
+  monochrome: Monochrome
+  blue: Blue
+  purple: Purple
+  green: Green
+  red: Red
+  pink: Pink
+  yellow: Yellow
+  orange: Orange
+themeMode(context=ThemeMode):
+  system: System
+  light: Light
+  dark: Dark
+viewLayout:
+  name: Layout
+  typeName(context=ViewLayout):
+    grid: Grid
+    list: List
+sortOrder(context=SortOrder):
+  asc: ASC
+  desc: DESC
+itemOrderKey(context=ItemOrderKey):
+  createdAt: Created at
+  name: Name
+  wishRank: Degree of desirability
+ageGroup(context=AgeGroup):
+  child: child
+  adult: adult
+purchaseStatus(context=PurchaseStatus):
+  notPurchased: unpurchased
+  purchasePlan: Planned purchases
+  purchased: already bought

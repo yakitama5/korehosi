@@ -10,17 +10,11 @@ const itemBranch = TypedStatefulShellBranch<BranchItemsData>(
         TypedGoRoute<ItemRouteData>(
           path: ItemRouteData.path,
           routes: [
-            TypedGoRoute<ItemEditRouteData>(
-              path: ItemEditRouteData.path,
-            ),
-            TypedGoRoute<PurchaseRouteData>(
-              path: PurchaseRouteData.path,
-            ),
+            TypedGoRoute<ItemEditRouteData>(path: ItemEditRouteData.path),
+            TypedGoRoute<PurchaseRouteData>(path: PurchaseRouteData.path),
           ],
         ),
-        TypedGoRoute<ItemCreateRouteData>(
-          path: ItemCreateRouteData.path,
-        ),
+        TypedGoRoute<ItemCreateRouteData>(path: ItemCreateRouteData.path),
       ],
     ),
   ],
@@ -49,13 +43,13 @@ class ItemRouteData extends GoRouteData with _$ItemRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => ProviderScope(
-        overrides: [
-          // 欲しい物のIDだけを指定
-          // 明細は依存Providerが勝手に処理してくれる
-          ItemDetailProviders.itemIdProvider.overrideWithValue(itemId),
-        ],
-        child: const ItemPage(),
-      );
+    overrides: [
+      // 欲しい物のIDだけを指定
+      // 明細は依存Providerが勝手に処理してくれる
+      ItemDetailProviders.itemIdProvider.overrideWithValue(itemId),
+    ],
+    child: const ItemPage(),
+  );
 }
 
 class PurchaseRouteData extends GoRouteData with _$PurchaseRouteData {
@@ -67,13 +61,13 @@ class PurchaseRouteData extends GoRouteData with _$PurchaseRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => ProviderScope(
-        overrides: [
-          // 欲しい物のIDだけを指定
-          // 明細は依存Providerが勝手に処理してくれる
-          ItemDetailProviders.itemIdProvider.overrideWithValue(itemId),
-        ],
-        child: const PurchasePage(),
-      );
+    overrides: [
+      // 欲しい物のIDだけを指定
+      // 明細は依存Providerが勝手に処理してくれる
+      ItemDetailProviders.itemIdProvider.overrideWithValue(itemId),
+    ],
+    child: const PurchasePage(),
+  );
 }
 
 class ItemCreateRouteData extends GoRouteData with _$ItemCreateRouteData {

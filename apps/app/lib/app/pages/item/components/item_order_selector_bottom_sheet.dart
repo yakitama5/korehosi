@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/components/src/bottom_sheet_column.dart';
+import 'package:flutter_app/app/components/src/expand_width_container.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-
-import '../../../../application/model/item/item_order_key.dart';
-import '../../../../application/model/item/item_order_model.dart';
-import '../../../../application/model/order.dart';
-import '../../../components/importer.dart';
+import 'package:packages_application/item.dart';
+import 'package:packages_domain/common.dart';
 
 class ItemOrderSelectorBottomSheet extends HookWidget {
   const ItemOrderSelectorBottomSheet({super.key, required this.initial});
@@ -77,7 +76,7 @@ class _OrderKeySegmentedButton extends HookWidget {
             .map(
               (e) => ButtonSegment<ItemOrderKey>(
                 value: e,
-                label: Text(e.localeName),
+                label: Text(i18n.kEnum.itemOrderKey(context: e)),
               ),
             )
             .toList(),
@@ -105,7 +104,7 @@ class _SortOrderSegmentedButton extends HookWidget {
             .map(
               (e) => ButtonSegment<SortOrder>(
                 value: e,
-                label: Text(e.description),
+                label: Text(i18n.kEnum.sortOrder(context: e)),
               ),
             )
             .toList(),

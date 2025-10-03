@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
 
 /// 欲しい物の購入状況
 enum PurchaseStatus {
@@ -7,15 +6,15 @@ enum PurchaseStatus {
   purchasePlan,
   purchased;
 
-  String get localeName => switch (this) {
-        PurchaseStatus.notPurchased => i18n.app.notPurchased,
-        PurchaseStatus.purchasePlan => i18n.app.purchasePlan,
-        PurchaseStatus.purchased => i18n.app.purchased,
-      };
+  // String get localeName => switch (this) {
+  //   PurchaseStatus.notPurchased => i18n.app.notPurchased,
+  //   PurchaseStatus.purchasePlan => i18n.app.purchasePlan,
+  //   PurchaseStatus.purchased => i18n.app.purchased,
+  // };
 
   IconData get iconData => switch (this) {
-        PurchaseStatus.notPurchased => Icons.remove_shopping_cart_outlined,
-        PurchaseStatus.purchasePlan => Icons.shopping_cart_outlined,
-        PurchaseStatus.purchased => Icons.shopping_cart,
-      };
+    PurchaseStatus.notPurchased => Icons.remove_shopping_cart_outlined,
+    PurchaseStatus.purchasePlan => Icons.shopping_cart_outlined,
+    PurchaseStatus.purchased => Icons.shopping_cart,
+  };
 }

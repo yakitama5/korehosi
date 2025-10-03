@@ -1,16 +1,16 @@
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/state/current_group_provider.dart';
 import 'package:packages_application/src/item/config/item_image_config.dart';
 import 'package:packages_application/src/item/model/selected_image_model.dart';
+import 'package:packages_application/src/user/extension/user_mixin.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
-import 'package:packages_domain/core.dart' hide BusinessException;
+import 'package:packages_domain/common.dart' hide BusinessException;
 import 'package:packages_domain/exception.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/notification.dart';
-import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 

@@ -2,9 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:packages_application/common.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../../application/state/storage_provider.dart';
 
 class StorageImage extends HookConsumerWidget {
   const StorageImage({super.key, required this.imagePath});

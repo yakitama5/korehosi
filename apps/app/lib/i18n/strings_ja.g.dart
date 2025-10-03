@@ -7,6 +7,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:packages_application/item.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/user.dart';
 import 'package:slang/generated.dart';
 import 'strings.g.dart';
@@ -41,6 +43,7 @@ class TranslationsJa extends Translations {
 
 	// Translations
 	@override late final _TranslationsAppJa app = _TranslationsAppJa._(_root);
+	@override late final _TranslationsKEnumJa kEnum = _TranslationsKEnumJa._(_root);
 }
 
 // Path: app
@@ -82,14 +85,6 @@ class _TranslationsAppJa extends TranslationsAppEn {
 	@override String get sexWoman => 'おんな';
 	@override String get sexNeither => 'どちらでもない';
 	@override String get ageGroup => '年齢層';
-	@override String ageGroupTypeName({required AgeGroup context}) {
-		switch (context) {
-			case AgeGroup.child:
-				return 'こども';
-			case AgeGroup.adult:
-				return 'おとな';
-		}
-	}
 	@override String get sex => '性別';
 	@override String get unset => '<未設定>';
 	@override String get requiredIcon => '*';
@@ -100,21 +95,12 @@ class _TranslationsAppJa extends TranslationsAppEn {
 	@override String get analyze => 'ふりかえり';
 	@override String get settings => 'せってい';
 	@override String get addWishList => 'ほしいものを追加';
-	@override String get orderKeyName => '名前';
-	@override String get orderKeyWishRank => '欲しい度';
-	@override String get orderKeyCreatedAt => '作成日';
-	@override String get orderKeyUpdatedAt => '更新日';
 	@override String get sortOrder => '並び替え';
-	@override String get sortOrderAsc => '昇順';
-	@override String get sortOrderDesc => '降順';
 	@override String get status => 'ステータス';
 	@override String get wishRank => '欲しい度';
 	@override String get cancel => 'キャンセル';
 	@override String get reset => 'リセット';
 	@override String get apply => '適用';
-	@override String get notPurchased => '未購入';
-	@override String get purchasePlan => '購入予定';
-	@override String get purchased => '購入済';
 	@override String get all => 'すべて';
 	@override String get noName => '名無し';
 	@override String get groupInitialNameSuffix => ' のグループ';
@@ -249,6 +235,145 @@ class _TranslationsAppJa extends TranslationsAppEn {
 	@override String get pushNotificationDescription => 'グループ内でほしいものが追加された場合に通知が受け取れます';
 }
 
+// Path: kEnum
+class _TranslationsKEnumJa extends TranslationsKEnumEn {
+	_TranslationsKEnumJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String uiStyle({required UIStyle context}) {
+		switch (context) {
+			case UIStyle.system:
+				return 'システム設定';
+			case UIStyle.android:
+				return 'Android';
+			case UIStyle.ios:
+				return 'iOS';
+		}
+	}
+	@override String themeColor({required ThemeColor context}) {
+		switch (context) {
+			case ThemeColor.dynamicColor:
+				return 'ダイナミックカラー';
+			case ThemeColor.monochrome:
+				return 'モノクロ';
+			case ThemeColor.blue:
+				return 'ブルー';
+			case ThemeColor.purple:
+				return 'パープル';
+			case ThemeColor.green:
+				return 'グリーン';
+			case ThemeColor.red:
+				return 'レッド';
+			case ThemeColor.pink:
+				return 'ピンク';
+			case ThemeColor.yellow:
+				return 'イエロー';
+			case ThemeColor.orange:
+				return 'オレンジ';
+		}
+	}
+	@override String themeMode({required ThemeMode context}) {
+		switch (context) {
+			case ThemeMode.system:
+				return 'システムテーマ';
+			case ThemeMode.light:
+				return 'ライトテーマ';
+			case ThemeMode.dark:
+				return 'ダークテーマ';
+		}
+	}
+	@override late final _TranslationsKEnumViewLayoutJa viewLayout = _TranslationsKEnumViewLayoutJa._(_root);
+	@override String sortOrder({required SortOrder context}) {
+		switch (context) {
+			case SortOrder.asc:
+				return '昇順';
+			case SortOrder.desc:
+				return '降順';
+		}
+	}
+	@override late final _TranslationsKEnumAppUpdateJa appUpdate = _TranslationsKEnumAppUpdateJa._(_root);
+	@override String itemOrderKey({required ItemOrderKey context}) {
+		switch (context) {
+			case ItemOrderKey.createdAt:
+				return '作成日時';
+			case ItemOrderKey.name:
+				return '名前';
+			case ItemOrderKey.wishRank:
+				return '欲しい度';
+		}
+	}
+	@override String ageGroup({required AgeGroup context}) {
+		switch (context) {
+			case AgeGroup.child:
+				return 'こども';
+			case AgeGroup.adult:
+				return 'おとな';
+		}
+	}
+	@override String purchaseStatus({required PurchaseStatus context}) {
+		switch (context) {
+			case PurchaseStatus.notPurchased:
+				return '未購入';
+			case PurchaseStatus.purchasePlan:
+				return '購入予定';
+			case PurchaseStatus.purchased:
+				return '購入済';
+		}
+	}
+}
+
+// Path: kEnum.viewLayout
+class _TranslationsKEnumViewLayoutJa extends TranslationsKEnumViewLayoutEn {
+	_TranslationsKEnumViewLayoutJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get name => '表示形式';
+	@override String typeName({required ViewLayout context}) {
+		switch (context) {
+			case ViewLayout.grid:
+				return 'グリッド表示';
+			case ViewLayout.list:
+				return 'リスト表示';
+		}
+	}
+}
+
+// Path: kEnum.appUpdate
+class _TranslationsKEnumAppUpdateJa extends TranslationsKEnumAppUpdateEn {
+	_TranslationsKEnumAppUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override late final _TranslationsKEnumAppUpdateUpdatePossibleJa updatePossible = _TranslationsKEnumAppUpdateUpdatePossibleJa._(_root);
+	@override late final _TranslationsKEnumAppUpdateForceUpdateJa forceUpdate = _TranslationsKEnumAppUpdateForceUpdateJa._(_root);
+	@override String get navigateStore => 'ストアを開く';
+}
+
+// Path: kEnum.appUpdate.updatePossible
+class _TranslationsKEnumAppUpdateUpdatePossibleJa extends TranslationsKEnumAppUpdateUpdatePossibleEn {
+	_TranslationsKEnumAppUpdateUpdatePossibleJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get message => '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
+}
+
+// Path: kEnum.appUpdate.forceUpdate
+class _TranslationsKEnumAppUpdateForceUpdateJa extends TranslationsKEnumAppUpdateForceUpdateEn {
+	_TranslationsKEnumAppUpdateForceUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get message => 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on TranslationsJa {
@@ -286,14 +411,6 @@ extension on TranslationsJa {
 			case 'app.sexWoman': return 'おんな';
 			case 'app.sexNeither': return 'どちらでもない';
 			case 'app.ageGroup': return '年齢層';
-			case 'app.ageGroupTypeName': return ({required AgeGroup context}) {
-				switch (context) {
-					case AgeGroup.child:
-						return 'こども';
-					case AgeGroup.adult:
-						return 'おとな';
-				}
-			};
 			case 'app.sex': return '性別';
 			case 'app.unset': return '<未設定>';
 			case 'app.requiredIcon': return '*';
@@ -304,21 +421,12 @@ extension on TranslationsJa {
 			case 'app.analyze': return 'ふりかえり';
 			case 'app.settings': return 'せってい';
 			case 'app.addWishList': return 'ほしいものを追加';
-			case 'app.orderKeyName': return '名前';
-			case 'app.orderKeyWishRank': return '欲しい度';
-			case 'app.orderKeyCreatedAt': return '作成日';
-			case 'app.orderKeyUpdatedAt': return '更新日';
 			case 'app.sortOrder': return '並び替え';
-			case 'app.sortOrderAsc': return '昇順';
-			case 'app.sortOrderDesc': return '降順';
 			case 'app.status': return 'ステータス';
 			case 'app.wishRank': return '欲しい度';
 			case 'app.cancel': return 'キャンセル';
 			case 'app.reset': return 'リセット';
 			case 'app.apply': return '適用';
-			case 'app.notPurchased': return '未購入';
-			case 'app.purchasePlan': return '購入予定';
-			case 'app.purchased': return '購入済';
 			case 'app.all': return 'すべて';
 			case 'app.noName': return '名無し';
 			case 'app.groupInitialNameSuffix': return ' のグループ';
@@ -451,6 +559,96 @@ extension on TranslationsJa {
 			case 'app.notificationAddItemBody': return ({required String name}) => '${name}さんがほしいものを追加しました！';
 			case 'app.pushNotification': return 'プッシュ通知';
 			case 'app.pushNotificationDescription': return 'グループ内でほしいものが追加された場合に通知が受け取れます';
+			case 'kEnum.uiStyle': return ({required UIStyle context}) {
+				switch (context) {
+					case UIStyle.system:
+						return 'システム設定';
+					case UIStyle.android:
+						return 'Android';
+					case UIStyle.ios:
+						return 'iOS';
+				}
+			};
+			case 'kEnum.themeColor': return ({required ThemeColor context}) {
+				switch (context) {
+					case ThemeColor.dynamicColor:
+						return 'ダイナミックカラー';
+					case ThemeColor.monochrome:
+						return 'モノクロ';
+					case ThemeColor.blue:
+						return 'ブルー';
+					case ThemeColor.purple:
+						return 'パープル';
+					case ThemeColor.green:
+						return 'グリーン';
+					case ThemeColor.red:
+						return 'レッド';
+					case ThemeColor.pink:
+						return 'ピンク';
+					case ThemeColor.yellow:
+						return 'イエロー';
+					case ThemeColor.orange:
+						return 'オレンジ';
+				}
+			};
+			case 'kEnum.themeMode': return ({required ThemeMode context}) {
+				switch (context) {
+					case ThemeMode.system:
+						return 'システムテーマ';
+					case ThemeMode.light:
+						return 'ライトテーマ';
+					case ThemeMode.dark:
+						return 'ダークテーマ';
+				}
+			};
+			case 'kEnum.viewLayout.name': return '表示形式';
+			case 'kEnum.viewLayout.typeName': return ({required ViewLayout context}) {
+				switch (context) {
+					case ViewLayout.grid:
+						return 'グリッド表示';
+					case ViewLayout.list:
+						return 'リスト表示';
+				}
+			};
+			case 'kEnum.sortOrder': return ({required SortOrder context}) {
+				switch (context) {
+					case SortOrder.asc:
+						return '昇順';
+					case SortOrder.desc:
+						return '降順';
+				}
+			};
+			case 'kEnum.appUpdate.updatePossible.message': return '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
+			case 'kEnum.appUpdate.forceUpdate.message': return 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
+			case 'kEnum.appUpdate.navigateStore': return 'ストアを開く';
+			case 'kEnum.itemOrderKey': return ({required ItemOrderKey context}) {
+				switch (context) {
+					case ItemOrderKey.createdAt:
+						return '作成日時';
+					case ItemOrderKey.name:
+						return '名前';
+					case ItemOrderKey.wishRank:
+						return '欲しい度';
+				}
+			};
+			case 'kEnum.ageGroup': return ({required AgeGroup context}) {
+				switch (context) {
+					case AgeGroup.child:
+						return 'こども';
+					case AgeGroup.adult:
+						return 'おとな';
+				}
+			};
+			case 'kEnum.purchaseStatus': return ({required PurchaseStatus context}) {
+				switch (context) {
+					case PurchaseStatus.notPurchased:
+						return '未購入';
+					case PurchaseStatus.purchasePlan:
+						return '購入予定';
+					case PurchaseStatus.purchased:
+						return '購入済';
+				}
+			};
 			default: return null;
 		}
 	}

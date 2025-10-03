@@ -33,9 +33,6 @@ sexMan: おとこ
 sexWoman: おんな
 sexNeither: どちらでもない
 ageGroup: 年齢層
-ageGroupTypeName(context=AgeGroup):
-  child: こども
-  adult: おとな
 sex: 性別
 unset: <未設定>
 requiredIcon: '*'
@@ -46,21 +43,12 @@ wishList: ほしいもの
 analyze: ふりかえり
 settings: せってい
 addWishList: ほしいものを追加
-orderKeyName: 名前
-orderKeyWishRank: 欲しい度
-orderKeyCreatedAt: 作成日
-orderKeyUpdatedAt: 更新日
 sortOrder: 並び替え
-sortOrderAsc: 昇順
-sortOrderDesc: 降順
 status: ステータス
 wishRank: 欲しい度
 cancel: キャンセル
 reset: リセット
 apply: 適用
-notPurchased: 未購入
-purchasePlan: 購入予定
-purchased: 購入済
 all: すべて
 noName: 名無し
 groupInitialNameSuffix: ' のグループ'

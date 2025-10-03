@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 419 (209 per locale)
+/// Strings: 10 (5 per locale)
 ///
-/// Built on 2025-10-03 at 00:49 UTC
+/// Built on 2025-10-02 at 04:25 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
@@ -14,8 +14,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:packages_application/item.dart';
-import 'package:packages_domain/common.dart';
 import 'package:packages_domain/user.dart';
 import 'package:slang/generated.dart';
 import 'package:slang_flutter/slang_flutter.dart';
@@ -173,41 +171,4 @@ class AppLocaleUtils extends BaseAppLocaleUtils<AppLocale, Translations> {
 	static AppLocale findDeviceLocale() => instance.findDeviceLocale();
 	static List<Locale> get supportedLocales => instance.supportedLocales;
 	static List<String> get supportedLocalesRaw => instance.supportedLocalesRaw;
-}
-
-// context enums
-
-enum UIStyle {
-	system,
-	android,
-	ios,
-}
-
-enum ThemeColor {
-	dynamicColor,
-	monochrome,
-	blue,
-	purple,
-	green,
-	red,
-	pink,
-	yellow,
-	orange,
-}
-
-enum ThemeMode {
-	system,
-	light,
-	dark,
-}
-
-enum ViewLayout {
-	grid,
-	list,
-}
-
-enum PurchaseStatus {
-	notPurchased,
-	purchasePlan,
-	purchased,
 }

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/application/usecase/user/extension/user_mixin.dart';
+import 'package:flutter_app/app/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/pages/group/components/premium_icon_container.dart';
+import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../application/usecase/group/state/current_group_provider.dart';
-import '../../../../application/usecase/group/state/join_groups_provider.dart';
-import '../../../../application/usecase/user/state/auth_user_provider.dart';
-import '../../../hooks/importer.dart';
-import '../../../routes/importer.dart';
-import 'premium_icon_container.dart';
+import 'package:packages_application/group.dart';
+import 'package:packages_application/user.dart';
 
 Future<String?> showAdaptiveAccountDialog(
   BuildContext context, {
@@ -61,9 +58,7 @@ class AndroidAccountDialog extends HookConsumerWidget {
               ],
             ),
             Text(
-              user == null
-                  ? ''
-                  : i18n.app.ageGroupTypeName(context: user.ageGroup),
+              user == null ? '' : i18n.kEnum.ageGroup(context: user.ageGroup),
               style: textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),

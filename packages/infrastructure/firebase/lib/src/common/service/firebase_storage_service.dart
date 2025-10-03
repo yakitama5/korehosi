@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_storage_provider.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 /// Firebaseを利用したサービスの実装
 class FirebaseStorageService implements StorageService {

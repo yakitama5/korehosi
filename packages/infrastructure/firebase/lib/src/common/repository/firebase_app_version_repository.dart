@@ -1,6 +1,6 @@
 import 'package:infrastructure_firebase/src/common/enum/remote_configs.dart';
 import 'package:infrastructure_firebase/src/common/state/remote_config_provider.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:version/version.dart';
 

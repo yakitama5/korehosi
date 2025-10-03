@@ -3,17 +3,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/src/responsive_auto_scale_box.dart';
 import 'package:flutter_app/app/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/routes/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/common.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_designsystem/theme.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import 'routes/importer.dart';
-import 'theme/importer.dart';
 
 class App extends HookConsumerWidget {
   const App({super.key});

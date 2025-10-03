@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:packages_domain/core.dart';
+import 'package:packages_domain/common.dart';
 
 import 'item_order_key.dart';
 
@@ -16,6 +16,5 @@ abstract class ItemOrderModel with _$ItemOrderModel {
 
   const ItemOrderModel._();
 
-  String get localeName => key.localeName;
   IconData get iconData => key.iconData(sortOrder);
 }

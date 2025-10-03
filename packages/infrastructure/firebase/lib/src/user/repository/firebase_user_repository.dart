@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/extension/firebase_auth_user_extension.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_auth_provider.dart';
@@ -260,7 +259,7 @@ class FirebaseUserRepository implements UserRepository {
     // 他の連携アカウントが存在するか否か
     final linkedMultiProvider = user != null && user.providerData.length >= 2;
     if (!linkedProvider || !linkedMultiProvider) {
-      throw AccountLinkException(i18n.app.authErrorMessageNotExistsProvider);
+      throw const AccountLinkException();
     }
 
     return _currentUser?.unlink(providerId);
