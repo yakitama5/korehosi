@@ -1,5 +1,5 @@
 import 'package:alchemist/alchemist.dart';
-import 'package:flutter_app/app/presentation/pages/user/welcome_page.dart';
+import 'package:flutter_app/app/pages/user/welcome_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../test_utils/importer.dart';
