@@ -5,9 +5,11 @@ import 'package:infrastructure_firebase/item.dart';
 import 'package:infrastructure_firebase/notification.dart';
 import 'package:infrastructure_firebase/user.dart';
 import 'package:infrastructure_revenue_cat/common.dart';
+import 'package:infrastructure_shared_preferences/designsystem.dart';
 import 'package:infrastructure_shared_preferences/init.dart';
 import 'package:infrastructure_shared_preferences/user.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/designsystem.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/notification.dart';
@@ -21,7 +23,7 @@ Future<List<Override>> initializeInfrastructureProviders() async {
     userSessionRepositoryProvider.overrideWith(
       SharedPreferenceUserSessionRepository.new,
     ),
-    // themeRepositoryProvider.overrideWith(SharedPreferencesThemeRepository.new),
+    themeRepositoryProvider.overrideWith(SharedPreferencesThemeRepository.new),
 
     // Firebase
     userRepositoryProvider.overrideWith(FirebaseUserRepository.new),
