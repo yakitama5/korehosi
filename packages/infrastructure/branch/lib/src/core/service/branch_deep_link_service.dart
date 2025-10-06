@@ -29,13 +29,13 @@ class BranchDeepLinkService implements DeepLinkService {
       );
 
       if (!response.success) {
-        throw BusinessException('招待コードの生成に失敗しました');
+        throw const BusinessException('招待コードの生成に失敗しました');
       }
       logger.d('short url: ${response.result.toString()}');
 
       return response.result.toString();
     } on Exception catch (_) {
-      throw BusinessException('招待コードの生成に失敗しました');
+      throw const BusinessException('招待コードの生成に失敗しました');
     }
   }
 

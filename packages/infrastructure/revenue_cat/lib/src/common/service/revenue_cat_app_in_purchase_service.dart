@@ -44,7 +44,7 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
       _limitedReleasePlanPackageKey,
     );
     if (package == null) {
-      throw BusinessException('Not exists purchase package');
+      throw const BusinessException('Not exists purchase package');
     }
 
     final purchaserInfo = await Purchases.purchase(
@@ -56,7 +56,7 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
             .all[_limitedReleasePlanEntitlementKey]
             ?.isActive !=
         true) {
-      throw BusinessException('Not active');
+      throw const BusinessException('Not active');
     }
   }
 

@@ -227,7 +227,7 @@ class FirebaseUserRepository implements UserRepository {
     final googleUser = await ref.read(googleSignInProvider).signIn();
     if (googleUser == null) {
       // TODO(yakitama5): メッセージ(多言語化)はアプリ層ですること
-      throw BusinessException('Google認証に失敗しました。');
+      throw const BusinessException('Google認証に失敗しました。');
     }
 
     final googleAuth = await googleUser.authentication;
