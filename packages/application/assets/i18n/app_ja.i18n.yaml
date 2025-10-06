@@ -8,3 +8,7 @@ groupShareText: >-
   ${url:String}
 notificationAddItemTitle: '${name:String}さんがほしいものを追加しました！'
 notificationAddItemBody: '${name:String}さんがほしいものを追加しました！'
+user:
+  noname: 名無し
+group:
+  templateName: '${userName: String}のグループ'

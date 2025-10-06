@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/common/state/app_build_config_provider.dart';
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
@@ -60,8 +61,9 @@ class UserUsecase with RunUsecaseMixin {
       ref,
       action: () async {
         // 内容を元に編集
-        final groupName =
-            '${name ?? i18n.app.noName}${i18n.app.groupInitialNameSuffix}';
+        final groupName = i18n.app.group.templateName(
+          userName: name ?? i18n.app.user.noname,
+        );
 
         // 登録
         await ref

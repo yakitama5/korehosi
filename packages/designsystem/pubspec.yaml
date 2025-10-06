@@ -13,10 +13,6 @@ dependencies:
   adaptive_dialog: ^2.4.0
   animations: any
   collection: any
-  packages_application:
-    path: ../application
-  packages_domain:
-    path: ../domain
   dynamic_color: any
   flutter:
     sdk: flutter
@@ -30,6 +26,10 @@ dependencies:
   linked_scroll_controller: any
   material_color_utilities: any
   nested: any
+  packages_application:
+    path: ../application
+  packages_domain:
+    path: ../domain
   responsive_framework: ^1.5.1
   riverpod_annotation: any
   shimmer: any

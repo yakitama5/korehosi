@@ -174,7 +174,7 @@ class ItemUsecase with RunUsecaseMixin {
         group?.itemCount != null && group!.itemCount! >= maxCount;
 
     if (!isPremium && overItemCount) {
-      throw BusinessException(i18n.app.businessErrorMessageOverItemCount);
+      throw BusinessException(i18n.exceptions.itemRegistrationPolicy.limitOver);
     }
   }
 

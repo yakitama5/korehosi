@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/src/common/config/web_app_config.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/config/group_config.dart';
@@ -133,16 +134,16 @@ class GroupUsecase with RunUsecaseMixin {
           // do nothing
           break;
         case JoinGroupErrorCode.joinedGroup:
-          throw BusinessException(i18n.app.joinGroupErrorMessageJoinedGroup);
+          throw BusinessException(i18n.exceptions.joinGroupPolicy.joinedGroup);
         case JoinGroupErrorCode.notAuth:
-          throw BusinessException(i18n.app.joinGroupErrorMessageNotAuth);
+          throw BusinessException(i18n.exceptions.joinGroupPolicy.notAuth);
         case JoinGroupErrorCode.invalidDate:
-          throw BusinessException(i18n.app.joinGroupErrorMessageInvalidDate);
+          throw BusinessException(i18n.exceptions.joinGroupPolicy.expired);
         case JoinGroupErrorCode.overCount:
-          throw BusinessException(i18n.app.joinGroupErrorMessageLimitOver);
+          throw BusinessException(i18n.exceptions.joinGroupPolicy.limitOver);
         case JoinGroupErrorCode.invalidRequest:
           throw BusinessException(
-            i18n.app.joinGroupErrorMessageInvalidShareLink,
+            i18n.exceptions.joinGroupPolicy.invalidShareLink,
           );
       }
     },

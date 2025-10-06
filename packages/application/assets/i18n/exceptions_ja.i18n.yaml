@@ -1,0 +1,11 @@
+joinGroupPolicy:
+  joinedGroup: すでに参加しています。
+  expired: 招待リンクの有効期限が切れています。
+  notAuth: 認証エラーが発生しました。
+  limitOver: グループの参加上限(5件)に達しました。
+  invalidShareLink: 招待リンクが正しくありません。
+itemRegistrationPolicy:
+  limitOver: >-
+    登録数の上限に達しました。
+
+    購入済のものを削除するか、プレミアムプランに変更して下さい。

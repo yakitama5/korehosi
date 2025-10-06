@@ -188,11 +188,6 @@ deleteAccountConfirmMessage: >-
   この操作は元に戻すことができません。
 joinedGroupTitle: グループへ参加
 joinedGroupMessage: グループに参加しました。
-joinGroupErrorMessageInvalidShareLink: 招待リンクが正しくありません。
-joinGroupErrorMessageJoinedGroup: すでに参加しています。
-joinGroupErrorMessageInvalidDate: 招待リンクの有効期限が切れています。
-joinGroupErrorMessageNotAuth: 認証エラーが発生しました。
-joinGroupErrorMessageLimitOver: グループの参加上限(5件)に達しました。
 leave: 離脱
 select: 選択
 wanterName: だれがほしい？

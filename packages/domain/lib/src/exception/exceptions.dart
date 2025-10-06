@@ -20,7 +20,7 @@ class AccountLinkException implements Exception {
 
 /// 業務不整合が発生した際のException
 class BusinessException implements Exception {
-  BusinessException(this.errorMessage);
+  const BusinessException(this.errorMessage);
   final String errorMessage;
 }
 
