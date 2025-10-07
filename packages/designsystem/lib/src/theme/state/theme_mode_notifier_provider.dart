@@ -21,7 +21,7 @@ class _ThemeMode extends _$ThemeMode {
   /// 初期状態はダークモード
   @override
   ThemeMode build() =>
-      _repository.fetchThemeMode()?.themeMode ?? AppThemeMode.dark.themeMode;
+      _repository.fetchThemeMode()?.themeMode ?? AppThemeMode.system.themeMode;
 
   Future<void> update(ThemeMode themeMode) async {
     final appThemeMode = switch (themeMode) {

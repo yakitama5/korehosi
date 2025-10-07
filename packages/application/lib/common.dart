@@ -15,6 +15,5 @@ export 'src/common/state/loading_provider.dart';
 export 'src/common/state/notification_message_provider.dart';
 export 'src/common/state/reactive_deep_link_provider.dart';
 export 'src/common/state/storage_provider.dart';
-export 'src/common/state/theme_mode_provider.dart';
 export 'src/common/usecase/app_usecase.dart';
 export 'src/common/validator/validation_messages.dart';

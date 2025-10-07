@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nested/nested.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -36,17 +37,21 @@ class CurrentRoute extends _$CurrentRoute {
   }
 }
 
-class RouteObserverContainer extends HookConsumerWidget {
-  const RouteObserverContainer({super.key});
+class RouteObserverContainer extends SingleChildStatelessWidget {
+  const RouteObserverContainer({super.key, super.child});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // HACK(yakitama5): リビルド抑制のため、ref.watchからListnerに変更する
-    // riverpodを使わない方法に変更する方法をちょうさ
-    // 現在のパスを検知し続ける
-    ref.watch(currentRouteProvider);
+  Widget buildWithChild(BuildContext context, Widget? child) {
+    return Consumer(
+      builder: (context, ref, child) {
+        // HACK(yakitama5): リビルド抑制のため、ref.watchからListnerに変更する
+        // riverpodを使わない方法に変更する方法をちょうさ
+        // 現在のパスを検知し続ける
+        ref.watch(currentRouteProvider);
 
-    // ダミー要素を描画する
-    return const SizedBox.shrink();
+        // ダミー要素を描画する
+        return const SizedBox.shrink();
+      },
+    );
   }
 }

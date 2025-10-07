@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/hooks/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_application/common.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class NavigatorPage extends HookWidget {
@@ -108,7 +105,6 @@ class _NavigationRail extends HookWidget {
                   onDestinationSelected: _onDestinationSelected,
                 ),
               ),
-              const _ThemeModeButton(),
             ],
           ),
           VerticalDivider(
@@ -126,39 +122,6 @@ class _NavigationRail extends HookWidget {
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
-    );
-  }
-}
-
-class _ThemeModeButton extends HookConsumerWidget {
-  const _ThemeModeButton();
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = useTheme();
-    final brightness = theme.brightness;
-
-    late final IconData iconData;
-    late final ThemeMode themeMode;
-    late final String tooltip;
-    switch (brightness) {
-      case Brightness.light:
-        iconData = Icons.dark_mode;
-        themeMode = ThemeMode.dark;
-        tooltip = i18n.app.darkMode;
-      case Brightness.dark:
-        iconData = Icons.light_mode;
-        themeMode = ThemeMode.light;
-        tooltip = i18n.app.lightMode;
-    }
-
-    return Padding(
-      padding: const EdgeInsets.only(top: 40),
-      child: IconButton(
-        icon: Icon(iconData),
-        tooltip: tooltip,
-        onPressed: () =>
-            ref.read(themeModeNotifierProvider.notifier).change(themeMode),
-      ),
     );
   }
 }

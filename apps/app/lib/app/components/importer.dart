@@ -19,7 +19,6 @@ export 'src/reactive_form_dirty_confirm_pop_scope.dart';
 export 'src/reactive_image_picker.dart';
 export 'src/reactive_outlined_text_field.dart';
 export 'src/reactive_segmented_button.dart';
-export 'src/responsive_auto_scale_box.dart';
 export 'src/save_button.dart';
 export 'src/sliver_chips_delegate.dart';
 export 'src/snackbar/error_snackbar.dart';
