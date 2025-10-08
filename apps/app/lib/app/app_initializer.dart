@@ -25,7 +25,7 @@ final class AppInitializer {
     logger.i(buildConfig);
 
     // slang
-    LocaleSettings.useDeviceLocale();
+    await LocaleSettings.useDeviceLocale();
 
     // 画面の向きを強制
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
