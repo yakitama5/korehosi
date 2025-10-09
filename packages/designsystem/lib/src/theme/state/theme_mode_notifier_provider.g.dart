@@ -8,7 +8,7 @@ part of 'theme_mode_notifier_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$themeModeHash() => r'72254efcdfac3a4a727b89f9e0d0a5fec060a80d';
+String _$themeModeHash() => r'49029efa46de61765d868407914237fc8ad28699';
 
 /// テーマを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
@@ -19,10 +19,9 @@ final _themeModeProvider =
     AutoDisposeNotifierProvider<_ThemeMode, ThemeMode>.internal(
       _ThemeMode.new,
       name: r'_themeModeProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$themeModeHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$themeModeHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

@@ -85,10 +85,9 @@ class AppThemeProvider extends AutoDisposeProvider<ThemeData> {
         (ref) => appTheme(ref as AppThemeRef, brightness: brightness),
         from: appThemeProvider,
         name: r'appThemeProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$appThemeHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$appThemeHash,
         dependencies: AppThemeFamily._dependencies,
         allTransitiveDependencies: AppThemeFamily._allTransitiveDependencies,
         brightness: brightness,

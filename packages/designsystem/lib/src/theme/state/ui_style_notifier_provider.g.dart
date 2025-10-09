@@ -18,8 +18,9 @@ String _$uiStyleHash() => r'b771ccec73dffa1b44fa4b80f06cf6b03e48d113';
 final uiStyleProvider = AutoDisposeNotifierProvider<UiStyle, UIStyle>.internal(
   UiStyle.new,
   name: r'uiStyleProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$uiStyleHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$uiStyleHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

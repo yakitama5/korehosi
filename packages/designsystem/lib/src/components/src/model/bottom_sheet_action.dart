@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'bottom_sheet_action.freezed.dart';
 
 @freezed
-class BottomSheetAction<T> with _$BottomSheetAction<T> {
+abstract class BottomSheetAction<T> with _$BottomSheetAction<T> {
   const factory BottomSheetAction({
     required Widget title,
     Widget? icon,

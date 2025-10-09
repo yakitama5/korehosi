@@ -200,11 +200,6 @@ class _TranslationsAppJa extends TranslationsAppEn {
 	@override String get deleteAccountConfirmMessage => '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
 	@override String get joinedGroupTitle => 'グループへ参加';
 	@override String get joinedGroupMessage => 'グループに参加しました。';
-	@override String get joinGroupErrorMessageInvalidShareLink => '招待リンクが正しくありません。';
-	@override String get joinGroupErrorMessageJoinedGroup => 'すでに参加しています。';
-	@override String get joinGroupErrorMessageInvalidDate => '招待リンクの有効期限が切れています。';
-	@override String get joinGroupErrorMessageNotAuth => '認証エラーが発生しました。';
-	@override String get joinGroupErrorMessageLimitOver => 'グループの参加上限(5件)に達しました。';
 	@override String get leave => '離脱';
 	@override String get select => '選択';
 	@override String get wanterName => 'だれがほしい？';
@@ -527,11 +522,6 @@ extension on TranslationsJa {
 			case 'app.deleteAccountConfirmMessage': return '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
 			case 'app.joinedGroupTitle': return 'グループへ参加';
 			case 'app.joinedGroupMessage': return 'グループに参加しました。';
-			case 'app.joinGroupErrorMessageInvalidShareLink': return '招待リンクが正しくありません。';
-			case 'app.joinGroupErrorMessageJoinedGroup': return 'すでに参加しています。';
-			case 'app.joinGroupErrorMessageInvalidDate': return '招待リンクの有効期限が切れています。';
-			case 'app.joinGroupErrorMessageNotAuth': return '認証エラーが発生しました。';
-			case 'app.joinGroupErrorMessageLimitOver': return 'グループの参加上限(5件)に達しました。';
 			case 'app.leave': return '離脱';
 			case 'app.select': return '選択';
 			case 'app.wanterName': return 'だれがほしい？';

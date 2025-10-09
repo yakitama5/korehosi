@@ -18,7 +18,6 @@ dependencies:
   collection: any
   device_preview: ^1.3.1
   dynamic_color: any
-  envied: any
   fcm_config: ^3.6.5
   firebase_analytics: any
   firebase_app_check: any
@@ -97,7 +96,6 @@ dev_dependencies:
   alchemist: ^0.12.1
   build_runner: any
   custom_lint: any
-  envied_generator: any
   fake_cloud_firestore: any
   firebase_auth_mocks: any
   firebase_storage_mocks: any

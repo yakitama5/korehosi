@@ -17,10 +17,9 @@ final dynamicColorSupportProviderProvider =
     AutoDisposeProvider<DynamicColorSupportStatus>.internal(
       dynamicColorSupportProvider,
       name: r'dynamicColorSupportProviderProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$dynamicColorSupportProviderHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$dynamicColorSupportProviderHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

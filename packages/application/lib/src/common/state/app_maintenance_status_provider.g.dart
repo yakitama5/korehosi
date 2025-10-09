@@ -17,10 +17,9 @@ final appMaintenanceStatusProvider =
     StreamProvider<AppMaintenanceStatus>.internal(
       appMaintenanceStatus,
       name: r'appMaintenanceStatusProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$appMaintenanceStatusHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$appMaintenanceStatusHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

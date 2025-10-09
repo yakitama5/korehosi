@@ -16,10 +16,9 @@ final appUpdateStatusProvider =
     AutoDisposeFutureProvider<AppUpdateStatus>.internal(
       appUpdateStatus,
       name: r'appUpdateStatusProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$appUpdateStatusHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$appUpdateStatusHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

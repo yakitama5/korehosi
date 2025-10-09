@@ -20,10 +20,9 @@ final themeColorNotifierProvider =
     AutoDisposeNotifierProvider<ThemeColorNotifier, ThemeColor>.internal(
       ThemeColorNotifier.new,
       name: r'themeColorNotifierProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$themeColorNotifierHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$themeColorNotifierHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

@@ -88,10 +88,9 @@ class AppColorSchemeProvider extends AutoDisposeProvider<ColorScheme> {
             appColorScheme(ref as AppColorSchemeRef, brightness: brightness),
         from: appColorSchemeProvider,
         name: r'appColorSchemeProvider',
-        debugGetCreateSourceHash:
-            const bool.fromEnvironment('dart.vm.product')
-                ? null
-                : _$appColorSchemeHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$appColorSchemeHash,
         dependencies: AppColorSchemeFamily._dependencies,
         allTransitiveDependencies:
             AppColorSchemeFamily._allTransitiveDependencies,

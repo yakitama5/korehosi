@@ -15,8 +15,9 @@ String _$corePaletteHash() => r'be47ff890a167762c13f171d1af68f5b23817ef8';
 final corePaletteProvider = AutoDisposeFutureProvider<CorePalette?>.internal(
   corePalette,
   name: r'corePaletteProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$corePaletteHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$corePaletteHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

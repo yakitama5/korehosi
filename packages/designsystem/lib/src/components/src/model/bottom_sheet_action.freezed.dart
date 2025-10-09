@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,203 +9,269 @@ part of 'bottom_sheet_action.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
-
 /// @nodoc
 mixin _$BottomSheetAction<T> {
-  Widget get title => throw _privateConstructorUsedError;
-  Widget? get icon => throw _privateConstructorUsedError;
-  T get value => throw _privateConstructorUsedError;
 
-  /// Create a copy of BottomSheetAction
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $BottomSheetActionCopyWith<T, BottomSheetAction<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+ Widget get title; Widget? get icon; T get value;
+/// Create a copy of BottomSheetAction
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BottomSheetActionCopyWith<T, BottomSheetAction<T>> get copyWith => _$BottomSheetActionCopyWithImpl<T, BottomSheetAction<T>>(this as BottomSheetAction<T>, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BottomSheetAction<T>&&(identical(other.title, title) || other.title == title)&&(identical(other.icon, icon) || other.icon == icon)&&const DeepCollectionEquality().equals(other.value, value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,title,icon,const DeepCollectionEquality().hash(value));
+
+@override
+String toString() {
+  return 'BottomSheetAction<$T>(title: $title, icon: $icon, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $BottomSheetActionCopyWith<T, $Res> {
-  factory $BottomSheetActionCopyWith(
-    BottomSheetAction<T> value,
-    $Res Function(BottomSheetAction<T>) then,
-  ) = _$BottomSheetActionCopyWithImpl<T, $Res, BottomSheetAction<T>>;
-  @useResult
-  $Res call({Widget title, Widget? icon, T value});
-}
+abstract mixin class $BottomSheetActionCopyWith<T,$Res>  {
+  factory $BottomSheetActionCopyWith(BottomSheetAction<T> value, $Res Function(BottomSheetAction<T>) _then) = _$BottomSheetActionCopyWithImpl;
+@useResult
+$Res call({
+ Widget title, Widget? icon, T value
+});
 
+
+
+
+}
 /// @nodoc
-class _$BottomSheetActionCopyWithImpl<
-  T,
-  $Res,
-  $Val extends BottomSheetAction<T>
->
+class _$BottomSheetActionCopyWithImpl<T,$Res>
     implements $BottomSheetActionCopyWith<T, $Res> {
-  _$BottomSheetActionCopyWithImpl(this._value, this._then);
+  _$BottomSheetActionCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final BottomSheetAction<T> _self;
+  final $Res Function(BottomSheetAction<T>) _then;
 
-  /// Create a copy of BottomSheetAction
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? title = null,
-    Object? icon = freezed,
-    Object? value = freezed,
-  }) {
-    return _then(
-      _value.copyWith(
-            title:
-                null == title
-                    ? _value.title
-                    : title // ignore: cast_nullable_to_non_nullable
-                        as Widget,
-            icon:
-                freezed == icon
-                    ? _value.icon
-                    : icon // ignore: cast_nullable_to_non_nullable
-                        as Widget?,
-            value:
-                freezed == value
-                    ? _value.value
-                    : value // ignore: cast_nullable_to_non_nullable
-                        as T,
-          )
-          as $Val,
-    );
-  }
+/// Create a copy of BottomSheetAction
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? icon = freezed,Object? value = freezed,}) {
+  return _then(_self.copyWith(
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as Widget,icon: freezed == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
+as Widget?,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as T,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [BottomSheetAction].
+extension BottomSheetActionPatterns<T> on BottomSheetAction<T> {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _BottomSheetAction<T> value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _BottomSheetAction() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _BottomSheetAction<T> value)  $default,){
+final _that = this;
+switch (_that) {
+case _BottomSheetAction():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _BottomSheetAction<T> value)?  $default,){
+final _that = this;
+switch (_that) {
+case _BottomSheetAction() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Widget title,  Widget? icon,  T value)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _BottomSheetAction() when $default != null:
+return $default(_that.title,_that.icon,_that.value);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Widget title,  Widget? icon,  T value)  $default,) {final _that = this;
+switch (_that) {
+case _BottomSheetAction():
+return $default(_that.title,_that.icon,_that.value);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Widget title,  Widget? icon,  T value)?  $default,) {final _that = this;
+switch (_that) {
+case _BottomSheetAction() when $default != null:
+return $default(_that.title,_that.icon,_that.value);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$BottomSheetActionImplCopyWith<T, $Res>
-    implements $BottomSheetActionCopyWith<T, $Res> {
-  factory _$$BottomSheetActionImplCopyWith(
-    _$BottomSheetActionImpl<T> value,
-    $Res Function(_$BottomSheetActionImpl<T>) then,
-  ) = __$$BottomSheetActionImplCopyWithImpl<T, $Res>;
-  @override
-  @useResult
-  $Res call({Widget title, Widget? icon, T value});
+
+
+class _BottomSheetAction<T> implements BottomSheetAction<T> {
+  const _BottomSheetAction({required this.title, this.icon, required this.value});
+  
+
+@override final  Widget title;
+@override final  Widget? icon;
+@override final  T value;
+
+/// Create a copy of BottomSheetAction
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$BottomSheetActionCopyWith<T, _BottomSheetAction<T>> get copyWith => __$BottomSheetActionCopyWithImpl<T, _BottomSheetAction<T>>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BottomSheetAction<T>&&(identical(other.title, title) || other.title == title)&&(identical(other.icon, icon) || other.icon == icon)&&const DeepCollectionEquality().equals(other.value, value));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,title,icon,const DeepCollectionEquality().hash(value));
+
+@override
+String toString() {
+  return 'BottomSheetAction<$T>(title: $title, icon: $icon, value: $value)';
+}
+
+
 }
 
 /// @nodoc
-class __$$BottomSheetActionImplCopyWithImpl<T, $Res>
-    extends _$BottomSheetActionCopyWithImpl<T, $Res, _$BottomSheetActionImpl<T>>
-    implements _$$BottomSheetActionImplCopyWith<T, $Res> {
-  __$$BottomSheetActionImplCopyWithImpl(
-    _$BottomSheetActionImpl<T> _value,
-    $Res Function(_$BottomSheetActionImpl<T>) _then,
-  ) : super(_value, _then);
+abstract mixin class _$BottomSheetActionCopyWith<T,$Res> implements $BottomSheetActionCopyWith<T, $Res> {
+  factory _$BottomSheetActionCopyWith(_BottomSheetAction<T> value, $Res Function(_BottomSheetAction<T>) _then) = __$BottomSheetActionCopyWithImpl;
+@override @useResult
+$Res call({
+ Widget title, Widget? icon, T value
+});
 
-  /// Create a copy of BottomSheetAction
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? title = null,
-    Object? icon = freezed,
-    Object? value = freezed,
-  }) {
-    return _then(
-      _$BottomSheetActionImpl<T>(
-        title:
-            null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                    as Widget,
-        icon:
-            freezed == icon
-                ? _value.icon
-                : icon // ignore: cast_nullable_to_non_nullable
-                    as Widget?,
-        value:
-            freezed == value
-                ? _value.value
-                : value // ignore: cast_nullable_to_non_nullable
-                    as T,
-      ),
-    );
-  }
+
+
+
 }
-
 /// @nodoc
+class __$BottomSheetActionCopyWithImpl<T,$Res>
+    implements _$BottomSheetActionCopyWith<T, $Res> {
+  __$BottomSheetActionCopyWithImpl(this._self, this._then);
 
-class _$BottomSheetActionImpl<T> implements _BottomSheetAction<T> {
-  const _$BottomSheetActionImpl({
-    required this.title,
-    this.icon,
-    required this.value,
-  });
+  final _BottomSheetAction<T> _self;
+  final $Res Function(_BottomSheetAction<T>) _then;
 
-  @override
-  final Widget title;
-  @override
-  final Widget? icon;
-  @override
-  final T value;
-
-  @override
-  String toString() {
-    return 'BottomSheetAction<$T>(title: $title, icon: $icon, value: $value)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BottomSheetActionImpl<T> &&
-            (identical(other.title, title) || other.title == title) &&
-            (identical(other.icon, icon) || other.icon == icon) &&
-            const DeepCollectionEquality().equals(other.value, value));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    title,
-    icon,
-    const DeepCollectionEquality().hash(value),
-  );
-
-  /// Create a copy of BottomSheetAction
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BottomSheetActionImplCopyWith<T, _$BottomSheetActionImpl<T>>
-  get copyWith =>
-      __$$BottomSheetActionImplCopyWithImpl<T, _$BottomSheetActionImpl<T>>(
-        this,
-        _$identity,
-      );
+/// Create a copy of BottomSheetAction
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? title = null,Object? icon = freezed,Object? value = freezed,}) {
+  return _then(_BottomSheetAction<T>(
+title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as Widget,icon: freezed == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
+as Widget?,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
+as T,
+  ));
 }
 
-abstract class _BottomSheetAction<T> implements BottomSheetAction<T> {
-  const factory _BottomSheetAction({
-    required final Widget title,
-    final Widget? icon,
-    required final T value,
-  }) = _$BottomSheetActionImpl<T>;
 
-  @override
-  Widget get title;
-  @override
-  Widget? get icon;
-  @override
-  T get value;
-
-  /// Create a copy of BottomSheetAction
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BottomSheetActionImplCopyWith<T, _$BottomSheetActionImpl<T>>
-  get copyWith => throw _privateConstructorUsedError;
 }
+
+// dart format on
