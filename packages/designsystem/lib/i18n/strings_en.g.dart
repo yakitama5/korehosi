@@ -17,9 +17,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
+	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = TranslationMetadata(
+		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.en,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
@@ -36,6 +36,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	late final Translations _root = this; // ignore: unused_field
 
+	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
+
 	// Translations
 	late final TranslationsCommonEn common = TranslationsCommonEn.internal(_root);
 	late final TranslationsDesignsystemEn designsystem = TranslationsDesignsystemEn.internal(_root);
@@ -48,8 +50,13 @@ class TranslationsCommonEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: 'Yes'
 	String get yes => 'Yes';
+
+	/// en: 'No'
 	String get no => 'No';
+
 	late final TranslationsCommonConfirmDiscardChangesEn confirmDiscardChanges = TranslationsCommonConfirmDiscardChangesEn.internal(_root);
 }
 
@@ -60,6 +67,8 @@ class TranslationsDesignsystemEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: '(system) {System} (android) {Android} (ios) {iOS}'
 	String uiStyle({required UIStyle context}) {
 		switch (context) {
 			case UIStyle.system:
@@ -70,6 +79,8 @@ class TranslationsDesignsystemEn {
 				return 'iOS';
 		}
 	}
+
+	/// en: '(dynamicColor) {DynamicColor} (monochrome) {Monochrome} (blue) {Blue} (purple) {Purple} (green) {Green} (red) {Red} (pink) {Pink} (yellow) {Yellow} (orange) {Orange}'
 	String themeColor({required ThemeColor context}) {
 		switch (context) {
 			case ThemeColor.dynamicColor:
@@ -92,6 +103,8 @@ class TranslationsDesignsystemEn {
 				return 'Orange';
 		}
 	}
+
+	/// en: '(system) {System} (light) {Light} (dark) {Dark}'
 	String themeMode({required ThemeMode context}) {
 		switch (context) {
 			case ThemeMode.system:
@@ -102,7 +115,10 @@ class TranslationsDesignsystemEn {
 				return 'Dark';
 		}
 	}
+
 	late final TranslationsDesignsystemViewLayoutEn viewLayout = TranslationsDesignsystemViewLayoutEn.internal(_root);
+
+	/// en: '(asc) {ASC} (desc) {DESC}'
 	String sortOrder({required SortOrder context}) {
 		switch (context) {
 			case SortOrder.asc:
@@ -111,6 +127,7 @@ class TranslationsDesignsystemEn {
 				return 'DESC';
 		}
 	}
+
 	late final TranslationsDesignsystemAppUpdateEn appUpdate = TranslationsDesignsystemAppUpdateEn.internal(_root);
 }
 
@@ -121,9 +138,17 @@ class TranslationsCommonConfirmDiscardChangesEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: 'Discard changes?'
 	String get title => 'Discard changes?';
+
+	/// en: 'All changes will be lost'
 	String get message => 'All changes will be lost';
+
+	/// en: 'discard'
 	String get discard => 'discard';
+
+	/// en: 'not to be discarded'
 	String get notDiscard => 'not to be discarded';
 }
 
@@ -134,7 +159,11 @@ class TranslationsDesignsystemViewLayoutEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: 'Layout'
 	String get name => 'Layout';
+
+	/// en: '(grid) {Grid} (list) {List}'
 	String typeName({required ViewLayout context}) {
 		switch (context) {
 			case ViewLayout.grid:
@@ -154,6 +183,8 @@ class TranslationsDesignsystemAppUpdateEn {
 	// Translations
 	late final TranslationsDesignsystemAppUpdateUpdatePossibleEn updatePossible = TranslationsDesignsystemAppUpdateUpdatePossibleEn.internal(_root);
 	late final TranslationsDesignsystemAppUpdateForceUpdateEn forceUpdate = TranslationsDesignsystemAppUpdateForceUpdateEn.internal(_root);
+
+	/// en: 'Open Store'
 	String get navigateStore => 'Open Store';
 }
 
@@ -164,6 +195,8 @@ class TranslationsDesignsystemAppUpdateUpdatePossibleEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: 'A new version has been released.\nBy updating, you can enjoy new features.\nWould you like to update?'
 	String get message => 'A new version has been released.\nBy updating, you can enjoy new features.\nWould you like to update?';
 }
 
@@ -174,6 +207,8 @@ class TranslationsDesignsystemAppUpdateForceUpdateEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+
+	/// en: 'The version you are using is currently unavailable. \nPlease download a new version from the store.'
 	String get message => 'The version you are using is currently unavailable. \nPlease download a new version from the store.';
 }
 

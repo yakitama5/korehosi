@@ -6,16 +6,18 @@
 /// Locales: 2
 /// Strings: 58 (29 per locale)
 ///
-/// Built on 2025-03-31 at 08:18 UTC
+/// Built on 2025-10-09 at 04:07 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 
-import 'package:cores_domain/core.dart';
-import 'package:cores_domain/designsystem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:packages_application/item.dart';
+import 'package:packages_domain/common.dart';
+import 'package:packages_domain/designsystem.dart';
+import 'package:packages_domain/user.dart';
 import 'package:slang/generated.dart';
 import 'package:slang_flutter/slang_flutter.dart';
 export 'package:slang_flutter/slang_flutter.dart';
@@ -35,8 +37,8 @@ enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 
 	const AppLocale({
 		required this.languageCode,
-		this.scriptCode, // ignore: unused_element
-		this.countryCode, // ignore: unused_element
+		this.scriptCode, // ignore: unused_element, unused_element_parameter
+		this.countryCode, // ignore: unused_element, unused_element_parameter
 	});
 
 	@override final String languageCode;
