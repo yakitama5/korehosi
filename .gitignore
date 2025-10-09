@@ -27,3 +27,8 @@ firebase_options*.dart
 # FVM Version Cache
 /.fvm
 kotlin-compiler*.salive
+
+# env
+env.g.dart
+env.dev.g.dart
+.env*

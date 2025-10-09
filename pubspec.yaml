@@ -36,10 +36,7 @@ melos:
         flutter: ^3.35.1
     clean:
       hooks:
-        post: melos exec --flutter --concurrency=3 -- "flutter clean" melos exec
-          --flutter --file-exists="ios/Podfile.lock" -- "cd ios && rm
-          Podfile.lock" melos exec --flutter --file-exists="macos/Podfile.lock"
-          -- "cd macos && rm Podfile.lock"
+        post: melos exec --flutter --concurrency=3 -- "flutter clean"
 
   scripts:
     build_app: melos run build_app_android && melos run build_app_ios
