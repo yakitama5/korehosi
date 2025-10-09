@@ -11,6 +11,7 @@ imports:
   - "package:flutter/material.dart"
   - "package:packages_domain/user.dart"
   - "package:packages_domain/common.dart"
+  - "package:packages_domain/designsystem.dart"
   - "package:packages_application/item.dart"
 contexts:
   AgeGroup:

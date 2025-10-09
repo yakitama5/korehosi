@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/designsystem.dart';
 import 'package:packages_domain/user.dart';
 import 'package:slang/generated.dart';
 import 'strings.g.dart';
