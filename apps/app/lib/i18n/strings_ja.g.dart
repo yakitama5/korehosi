@@ -4,30 +4,27 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
-import 'package:packages_application/item.dart';
-import 'package:packages_domain/common.dart';
-import 'package:packages_domain/designsystem.dart';
-import 'package:packages_domain/user.dart';
-import 'package:slang/generated.dart';
-import 'strings.g.dart';
+part of 'strings.g.dart';
 
 // Path: <root>
-class TranslationsJa extends Translations {
+typedef TranslationsJa = Translations; // ignore: unused_element
+class Translations implements BaseTranslations<AppLocale, Translations> {
+	/// Returns the current translations of the given [context].
+	///
+	/// Usage:
+	/// final i18n = Translations.of(context);
+	static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
+
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	TranslationsJa({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
+	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
 		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.ja,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ),
-		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
-		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		  ) {
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -35,211 +32,564 @@ class TranslationsJa extends Translations {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+	dynamic operator[](String key) => $meta.getTranslation(key);
 
-	late final TranslationsJa _root = this; // ignore: unused_field
+	late final Translations _root = this; // ignore: unused_field
 
-	@override 
-	TranslationsJa $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsJa(meta: meta ?? this.$meta);
+	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
-	@override late final _TranslationsAppJa app = _TranslationsAppJa._(_root);
-	@override late final _TranslationsKEnumJa kEnum = _TranslationsKEnumJa._(_root);
+	late final TranslationsAppJa app = TranslationsAppJa.internal(_root);
+	late final TranslationsKEnumJa kEnum = TranslationsKEnumJa.internal(_root);
 }
 
 // Path: app
-class _TranslationsAppJa extends TranslationsAppEn {
-	_TranslationsAppJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class TranslationsAppJa {
+	TranslationsAppJa.internal(this._root);
 
-	final TranslationsJa _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String get start => 'はじめる';
-	@override String get firstTime => 'はじめての方はこちら';
-	@override String get accountLink => 'アカウント連携';
-	@override String get contactUs => 'お問い合わせ';
-	@override String get termOfService => '利用規約';
-	@override String get privacyPolicy => 'プライバシーポリシー';
-	@override String get accountLinkDescTitle => 'アカウント連携を行うことで、\n下記の機能をご利用いただけます。';
-	@override String get accountLinkDescBodyCloudBackup => 'クラウドへのデータバックアップ';
-	@override String get accountLinkDescBodyMultiDevice => '複数端末での同時利用';
-	@override String get accountLinkDescBodyDataSend => '端末変更に伴うデータ移行';
-	@override String get onboardStartTitle => 'はじめに';
-	@override String get onboardStartMessage => 'まずはプロフィールを登録しましょう';
-	@override String get questionAgeGroup => 'あなたは？';
-	@override String get questionSex => '性別は？';
-	@override String get questionName => 'お名前は？';
-	@override String get questionNameCapiton => 'または ニックネーム';
-	@override String get questionConfirm => 'あっていますか？';
-	@override String get selectChild => 'こども (買ってほしい)';
-	@override String get selectAdult => 'おとな (買ってあげたい)';
-	@override String get selectMan => 'おとこ';
-	@override String get selectWoman => 'おんな';
-	@override String get selectNeither => 'どちらでもない';
-	@override String get nameLabel => '名前 または ニックネーム';
-	@override String get name => '名前';
-	@override String get next => '次へ';
-	@override String get back => '戻る';
-	@override String get prev => '前へ';
-	@override String get skip => 'スキップ';
-	@override String get sexMan => 'おとこ';
-	@override String get sexWoman => 'おんな';
-	@override String get sexNeither => 'どちらでもない';
-	@override String get ageGroup => '年齢層';
-	@override String get sex => '性別';
-	@override String get unset => '<未設定>';
-	@override String get requiredIcon => '*';
-	@override String get requiredHelper => '*必須項目';
-	@override String get signInWithGoogle => 'Googleでサインイン';
-	@override String get signInWithApple => 'Appleでサインイン';
-	@override String get wishList => 'ほしいもの';
-	@override String get analyze => 'ふりかえり';
-	@override String get settings => 'せってい';
-	@override String get addWishList => 'ほしいものを追加';
-	@override String get sortOrder => '並び替え';
-	@override String get status => 'ステータス';
-	@override String get wishRank => '欲しい度';
-	@override String get cancel => 'キャンセル';
-	@override String get reset => 'リセット';
-	@override String get apply => '適用';
-	@override String get all => 'すべて';
-	@override String get noName => '名無し';
-	@override String get groupInitialNameSuffix => ' のグループ';
-	@override String get unexpectedErrorMessage => '予期せぬエラーが発生しました。';
-	@override String searchEmptyMessage({required String item}) => '${item}が見つかりませんでした。';
-	@override String get merchandiseName => '商品名';
-	@override String get save => '保存';
-	@override String editPageTitle({required String item}) => '${item}を編集';
-	@override String createPageTitle({required String item}) => '${item}を作成';
-	@override String get wishSeasonLabel => 'いつほしい？';
-	@override String get wishSeasonHint => '例：クリスマス、誕生日';
-	@override String get url => 'URL';
-	@override String get addUrl => 'URLを追加';
-	@override String get memo => 'メモ';
-	@override String get shoot => '写真を撮る';
-	@override String get chooseFromLibrary => 'ライブラリから画像を選択';
-	@override String get star => '星';
-	@override String get delete => '削除';
-	@override String get deletedMessage => '削除済です。';
-	@override String get completeDeleteMessage => '削除しました。';
-	@override String get completeChangeGroupMessage => 'グループを切り替えました。';
-	@override String get uploadImage => '写真のアップロード';
-	@override String lackOfPermission({required String permission}) => '${permission}が許可されていません';
-	@override String confirmPermissionOffTitle({required String permission}) => '${permission}をオフにしますか？';
-	@override String confirmPermissionOffMessage({required String permission}) => '設定アプリを開いて${permission}をオフにしてください';
-	@override String get permissionPhotos => 'ギャラリーへのアクセス';
-	@override String get permissionCamera => 'カメラへのアクセス';
-	@override String get permissionPushNotification => 'プッシュ通知';
-	@override String permissionWarnMessage({required String permission}) => '設定アプリを開いて${permission}を許可してください';
-	@override String get openSettingsApp => '設定アプリを開く';
-	@override String get ok => 'OK';
-	@override String get confirmDiscardChangesTitle => '変更を破棄しますか？';
-	@override String get confirmDiscardChangesMessage => 'すべての変更は失われます';
-	@override String get discard => '破棄';
-	@override String get notDiscard => '破棄しない';
-	@override String get validErrorMessageRequired => '必須項目を入力して下さい';
-	@override String get validErrorMessageUrlPattern => '正しいURL形式で入力して下さい';
-	@override String get edit => '編集';
-	@override String get purchaseOrpurchasePlan => '購入/購入予定';
-	@override String get deleteConfirmTitle => '削除の確認';
-	@override String deleteCofirmMessage({required String item}) => '「${item}」を削除しますか？';
-	@override String deleteGroupCofirmMessage({required String name}) => '「${name}」を削除しますか？\nグループに登録している欲しい物は全て削除されます。\nこの操作は元に戻すことができません。';
-	@override String get leaveConfirmTitle => '離脱の確認';
-	@override String leaveCofirmMessage({required String group}) => '「${group}」から離脱しますか？';
-	@override String get notSelectedGroupDialogTitle => 'グループが選択されていません';
-	@override String get notSelectedGroupDialogMessage => 'グループを選択してからほしいものを追加して下さい';
-	@override String get purchaseInfoTitle => '購入/購入予定情報';
-	@override String get purchaseInfoCaption => '以降の内容はグループ内の大人にだけ表示されます';
-	@override String get price => '金額';
-	@override String get purchasePlanDateTime => '購入予定日';
-	@override String get yenMark => '¥';
-	@override String get surprise => 'サプライズ';
-	@override String get surpriseCaption => '状況を子供に知られたくない';
-	@override String get purchasePlanDateTimeCaption => '入力すると「購入予定」になります';
-	@override String get sentAtCaption => '入力すると「購入済」になります';
-	@override String get sentAt => '渡した日';
-	@override String get authErrorMessage => '認証エラーが発生しました。\nしばらく時間を置いてログインして下さい。';
-	@override String get account => 'アカウント';
-	@override String get profile => 'プロフィール';
-	@override String get group => 'グループ';
-	@override String get help => 'ヘルプ';
-	@override String get developperTwitter => '開発者X (旧Twitter)';
-	@override String get license => 'ライセンス';
-	@override String get error => 'エラー';
-	@override String get urlErrorMessageCanNotOpen => 'URLを開けませんでした。\n頻発する場合はお問い合わせ下さい。';
-	@override String get joinGroup => '参加グループ';
-	@override String get share => '共有';
-	@override String get copy => 'コピー';
-	@override String get shareCaption => '共有してメンバーを招待しましょう';
-	@override String groupShareText({required String user, required String group, required String url}) => '${user}さんから${group}へ招待されました。\n下記のURLをクリックするか、QRコードを読み取ることで、欲しい物リストのグループに参加できます\n${url}';
-	@override String get copied => 'コピーしました';
-	@override String get saved => '保存しました';
-	@override String get groupName => 'グループ名';
-	@override String get deleteErrorMessageRequiredExists => '作成したグループを全て削除することはできません。\n最低でも1件以上のグループが必要です。';
-	@override String get deleteErrorMessagePermission => '削除を行う権限がありません。';
-	@override String get shareGroupHelpTitle => 'グループの共有/参加';
-	@override String get shareGroupHelpMessage => '【グループの共有】\nグループから「共有」を行って下さい\n\n【グループへの参加】\n共有されたURLをクリックするか、\nQRコードを読み取ることで参加できます';
-	@override String get addGroup => 'グループを追加';
-	@override String get other => 'その他';
-	@override String get logout => 'ログアウト';
-	@override String get deleteAccount => '退会';
-	@override String get google => 'Google';
-	@override String get apple => 'Apple';
-	@override String get notJoinedGroupMessage => 'グループに所属していません。\nグループを作成するか、\n招待されたグループに参加して下さい。';
-	@override String get deletedUser => '<削除済ユーザー>';
-	@override String selectNumberText({required int length}) => '${length}件選択';
-	@override String get authErrorMessageNotExistsProvider => 'アカウントは1つ以上の外部アカウントとの連携をしておく必要があります。';
-	@override String get authErrorMessagAlreadyInUse => 'このアカウントはすでに連携済です。\n別のアカウントを利用するか、一度ログアウトしてから連携して下さい。';
-	@override String get bullet => '・';
-	@override String get notUseAnalytics => '現在、ふりかえり機能はご利用頂けません。';
-	@override String get analyticsFeatureTitle => 'ふりかえり機能では、以下の機能がご利用頂けます。';
-	@override String get priceAnalytics => '金額の推移';
-	@override String get purchaseUserAnalytics => '買ってくれた人の割合';
-	@override String get purchasedAnalytics => '買ってもらった割合';
-	@override String get analyticsPublishPlan => '※ 開発者のこどもが幼稚園に入るまでには公開します';
-	@override String get deleteAccountConfirmTitle => '退会の確認';
-	@override String get deleteAccountConfirmMessage => '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
-	@override String get joinedGroupTitle => 'グループへ参加';
-	@override String get joinedGroupMessage => 'グループに参加しました。';
-	@override String get leave => '離脱';
-	@override String get select => '選択';
-	@override String get wanterName => 'だれがほしい？';
-	@override String get wanterNameChipTitle => 'ほしい人';
-	@override String get businessErrorMessageOverItemCount => '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。';
-	@override String get updateAppTitle => 'アプリの更新';
-	@override String get updateAppMessage => 'アプリの最新版がリリースされています。\nストアへ移動しますか？';
-	@override String get goStore => 'ストアへ';
-	@override String get buyerName => '購入した人';
-	@override String get howToUse => '使い方';
-	@override String get joinPremiumGroup => '欲しい物の登録数制限を解放';
-	@override String get joinedPremiumGroup => '欲しい物の登録数制限が解放されました。(無制限)';
-	@override String get itemPurchase => '商品の購入';
-	@override String itemLimitReleaseMessage({required String price, required String term}) => '商品を購入すると\n表示中のグループに登録できる\n欲しい物の制限が解放されます。\n(無料版は30個まで)\n\n価格：¥${price}(${term})';
-	@override String purchaseOkLabel({required String price}) => '購入(¥${price})';
-	@override String get lifeful => '無期限';
-	@override String get darkMode => 'ダークモード';
-	@override String get lightMode => 'ライトモード';
-	@override String get purchaseRate => '購入率';
-	@override String get purchaseRateAndPlan => '購入率 (予定込)';
-	@override String formatPercent({required String percent}) => '${percent}%';
-	@override String get purchasePrice => '購入金額';
-	@override String formatMonth({required int month}) => '${month}月';
-	@override String formatFraction({required int molecule, required int denominator}) => '${molecule}/${denominator}';
-	@override String notificationAddItemTitle({required String name}) => '${name}さんがほしいものを追加しました！';
-	@override String notificationAddItemBody({required String name}) => '${name}さんがほしいものを追加しました！';
-	@override String get pushNotification => 'プッシュ通知';
-	@override String get pushNotificationDescription => 'グループ内でほしいものが追加された場合に通知が受け取れます';
-	@override String get purchased => '購入済';
+
+	/// ja: 'はじめる'
+	String get start => 'はじめる';
+
+	/// ja: 'はじめての方はこちら'
+	String get firstTime => 'はじめての方はこちら';
+
+	/// ja: 'アカウント連携'
+	String get accountLink => 'アカウント連携';
+
+	/// ja: 'お問い合わせ'
+	String get contactUs => 'お問い合わせ';
+
+	/// ja: '利用規約'
+	String get termOfService => '利用規約';
+
+	/// ja: 'プライバシーポリシー'
+	String get privacyPolicy => 'プライバシーポリシー';
+
+	/// ja: 'アカウント連携を行うことで、 下記の機能をご利用いただけます。'
+	String get accountLinkDescTitle => 'アカウント連携を行うことで、\n下記の機能をご利用いただけます。';
+
+	/// ja: 'クラウドへのデータバックアップ'
+	String get accountLinkDescBodyCloudBackup => 'クラウドへのデータバックアップ';
+
+	/// ja: '複数端末での同時利用'
+	String get accountLinkDescBodyMultiDevice => '複数端末での同時利用';
+
+	/// ja: '端末変更に伴うデータ移行'
+	String get accountLinkDescBodyDataSend => '端末変更に伴うデータ移行';
+
+	/// ja: 'はじめに'
+	String get onboardStartTitle => 'はじめに';
+
+	/// ja: 'まずはプロフィールを登録しましょう'
+	String get onboardStartMessage => 'まずはプロフィールを登録しましょう';
+
+	/// ja: 'あなたは？'
+	String get questionAgeGroup => 'あなたは？';
+
+	/// ja: '性別は？'
+	String get questionSex => '性別は？';
+
+	/// ja: 'お名前は？'
+	String get questionName => 'お名前は？';
+
+	/// ja: 'または ニックネーム'
+	String get questionNameCapiton => 'または ニックネーム';
+
+	/// ja: 'あっていますか？'
+	String get questionConfirm => 'あっていますか？';
+
+	/// ja: 'こども (買ってほしい)'
+	String get selectChild => 'こども (買ってほしい)';
+
+	/// ja: 'おとな (買ってあげたい)'
+	String get selectAdult => 'おとな (買ってあげたい)';
+
+	/// ja: 'おとこ'
+	String get selectMan => 'おとこ';
+
+	/// ja: 'おんな'
+	String get selectWoman => 'おんな';
+
+	/// ja: 'どちらでもない'
+	String get selectNeither => 'どちらでもない';
+
+	/// ja: '名前 または ニックネーム'
+	String get nameLabel => '名前 または ニックネーム';
+
+	/// ja: '名前'
+	String get name => '名前';
+
+	/// ja: '次へ'
+	String get next => '次へ';
+
+	/// ja: '戻る'
+	String get back => '戻る';
+
+	/// ja: '前へ'
+	String get prev => '前へ';
+
+	/// ja: 'スキップ'
+	String get skip => 'スキップ';
+
+	/// ja: 'おとこ'
+	String get sexMan => 'おとこ';
+
+	/// ja: 'おんな'
+	String get sexWoman => 'おんな';
+
+	/// ja: 'どちらでもない'
+	String get sexNeither => 'どちらでもない';
+
+	/// ja: '年齢層'
+	String get ageGroup => '年齢層';
+
+	/// ja: '性別'
+	String get sex => '性別';
+
+	/// ja: '<未設定>'
+	String get unset => '<未設定>';
+
+	/// ja: '*'
+	String get requiredIcon => '*';
+
+	/// ja: '*必須項目'
+	String get requiredHelper => '*必須項目';
+
+	/// ja: 'Googleでサインイン'
+	String get signInWithGoogle => 'Googleでサインイン';
+
+	/// ja: 'Appleでサインイン'
+	String get signInWithApple => 'Appleでサインイン';
+
+	/// ja: 'ほしいもの'
+	String get wishList => 'ほしいもの';
+
+	/// ja: 'ふりかえり'
+	String get analyze => 'ふりかえり';
+
+	/// ja: 'せってい'
+	String get settings => 'せってい';
+
+	/// ja: 'ほしいものを追加'
+	String get addWishList => 'ほしいものを追加';
+
+	/// ja: '並び替え'
+	String get sortOrder => '並び替え';
+
+	/// ja: 'ステータス'
+	String get status => 'ステータス';
+
+	/// ja: '欲しい度'
+	String get wishRank => '欲しい度';
+
+	/// ja: 'キャンセル'
+	String get cancel => 'キャンセル';
+
+	/// ja: 'リセット'
+	String get reset => 'リセット';
+
+	/// ja: '適用'
+	String get apply => '適用';
+
+	/// ja: 'すべて'
+	String get all => 'すべて';
+
+	/// ja: '名無し'
+	String get noName => '名無し';
+
+	/// ja: ' のグループ'
+	String get groupInitialNameSuffix => ' のグループ';
+
+	/// ja: '予期せぬエラーが発生しました。'
+	String get unexpectedErrorMessage => '予期せぬエラーが発生しました。';
+
+	/// ja: '${item:String}が見つかりませんでした。'
+	String searchEmptyMessage({required String item}) => '${item}が見つかりませんでした。';
+
+	/// ja: '商品名'
+	String get merchandiseName => '商品名';
+
+	/// ja: '保存'
+	String get save => '保存';
+
+	/// ja: '${item:String}を編集'
+	String editPageTitle({required String item}) => '${item}を編集';
+
+	/// ja: '${item:String}を作成'
+	String createPageTitle({required String item}) => '${item}を作成';
+
+	/// ja: 'いつほしい？'
+	String get wishSeasonLabel => 'いつほしい？';
+
+	/// ja: '例：クリスマス、誕生日'
+	String get wishSeasonHint => '例：クリスマス、誕生日';
+
+	/// ja: 'URL'
+	String get url => 'URL';
+
+	/// ja: 'URLを追加'
+	String get addUrl => 'URLを追加';
+
+	/// ja: 'メモ'
+	String get memo => 'メモ';
+
+	/// ja: '写真を撮る'
+	String get shoot => '写真を撮る';
+
+	/// ja: 'ライブラリから画像を選択'
+	String get chooseFromLibrary => 'ライブラリから画像を選択';
+
+	/// ja: '星'
+	String get star => '星';
+
+	/// ja: '削除'
+	String get delete => '削除';
+
+	/// ja: '削除済です。'
+	String get deletedMessage => '削除済です。';
+
+	/// ja: '削除しました。'
+	String get completeDeleteMessage => '削除しました。';
+
+	/// ja: 'グループを切り替えました。'
+	String get completeChangeGroupMessage => 'グループを切り替えました。';
+
+	/// ja: '写真のアップロード'
+	String get uploadImage => '写真のアップロード';
+
+	/// ja: '${permission:String}が許可されていません'
+	String lackOfPermission({required String permission}) => '${permission}が許可されていません';
+
+	/// ja: '${permission:String}をオフにしますか？'
+	String confirmPermissionOffTitle({required String permission}) => '${permission}をオフにしますか？';
+
+	/// ja: '設定アプリを開いて${permission:String}をオフにしてください'
+	String confirmPermissionOffMessage({required String permission}) => '設定アプリを開いて${permission}をオフにしてください';
+
+	/// ja: 'ギャラリーへのアクセス'
+	String get permissionPhotos => 'ギャラリーへのアクセス';
+
+	/// ja: 'カメラへのアクセス'
+	String get permissionCamera => 'カメラへのアクセス';
+
+	/// ja: 'プッシュ通知'
+	String get permissionPushNotification => 'プッシュ通知';
+
+	/// ja: '設定アプリを開いて${permission:String}を許可してください'
+	String permissionWarnMessage({required String permission}) => '設定アプリを開いて${permission}を許可してください';
+
+	/// ja: '設定アプリを開く'
+	String get openSettingsApp => '設定アプリを開く';
+
+	/// ja: 'OK'
+	String get ok => 'OK';
+
+	/// ja: '変更を破棄しますか？'
+	String get confirmDiscardChangesTitle => '変更を破棄しますか？';
+
+	/// ja: 'すべての変更は失われます'
+	String get confirmDiscardChangesMessage => 'すべての変更は失われます';
+
+	/// ja: '破棄'
+	String get discard => '破棄';
+
+	/// ja: '破棄しない'
+	String get notDiscard => '破棄しない';
+
+	/// ja: '必須項目を入力して下さい'
+	String get validErrorMessageRequired => '必須項目を入力して下さい';
+
+	/// ja: '正しいURL形式で入力して下さい'
+	String get validErrorMessageUrlPattern => '正しいURL形式で入力して下さい';
+
+	/// ja: '編集'
+	String get edit => '編集';
+
+	/// ja: '購入/購入予定'
+	String get purchaseOrpurchasePlan => '購入/購入予定';
+
+	/// ja: '削除の確認'
+	String get deleteConfirmTitle => '削除の確認';
+
+	/// ja: '「${item:String}」を削除しますか？'
+	String deleteCofirmMessage({required String item}) => '「${item}」を削除しますか？';
+
+	/// ja: '「${name:String}」を削除しますか？ グループに登録している欲しい物は全て削除されます。 この操作は元に戻すことができません。'
+	String deleteGroupCofirmMessage({required String name}) => '「${name}」を削除しますか？\nグループに登録している欲しい物は全て削除されます。\nこの操作は元に戻すことができません。';
+
+	/// ja: '離脱の確認'
+	String get leaveConfirmTitle => '離脱の確認';
+
+	/// ja: '「${group:String}」から離脱しますか？'
+	String leaveCofirmMessage({required String group}) => '「${group}」から離脱しますか？';
+
+	/// ja: 'グループが選択されていません'
+	String get notSelectedGroupDialogTitle => 'グループが選択されていません';
+
+	/// ja: 'グループを選択してからほしいものを追加して下さい'
+	String get notSelectedGroupDialogMessage => 'グループを選択してからほしいものを追加して下さい';
+
+	/// ja: '購入/購入予定情報'
+	String get purchaseInfoTitle => '購入/購入予定情報';
+
+	/// ja: '以降の内容はグループ内の大人にだけ表示されます'
+	String get purchaseInfoCaption => '以降の内容はグループ内の大人にだけ表示されます';
+
+	/// ja: '金額'
+	String get price => '金額';
+
+	/// ja: '購入予定日'
+	String get purchasePlanDateTime => '購入予定日';
+
+	/// ja: '¥'
+	String get yenMark => '¥';
+
+	/// ja: 'サプライズ'
+	String get surprise => 'サプライズ';
+
+	/// ja: '状況を子供に知られたくない'
+	String get surpriseCaption => '状況を子供に知られたくない';
+
+	/// ja: '入力すると「購入予定」になります'
+	String get purchasePlanDateTimeCaption => '入力すると「購入予定」になります';
+
+	/// ja: '入力すると「購入済」になります'
+	String get sentAtCaption => '入力すると「購入済」になります';
+
+	/// ja: '渡した日'
+	String get sentAt => '渡した日';
+
+	/// ja: '認証エラーが発生しました。 しばらく時間を置いてログインして下さい。'
+	String get authErrorMessage => '認証エラーが発生しました。\nしばらく時間を置いてログインして下さい。';
+
+	/// ja: 'アカウント'
+	String get account => 'アカウント';
+
+	/// ja: 'プロフィール'
+	String get profile => 'プロフィール';
+
+	/// ja: 'グループ'
+	String get group => 'グループ';
+
+	/// ja: 'ヘルプ'
+	String get help => 'ヘルプ';
+
+	/// ja: '開発者X (旧Twitter)'
+	String get developperTwitter => '開発者X (旧Twitter)';
+
+	/// ja: 'ライセンス'
+	String get license => 'ライセンス';
+
+	/// ja: 'エラー'
+	String get error => 'エラー';
+
+	/// ja: 'URLを開けませんでした。 頻発する場合はお問い合わせ下さい。'
+	String get urlErrorMessageCanNotOpen => 'URLを開けませんでした。\n頻発する場合はお問い合わせ下さい。';
+
+	/// ja: '参加グループ'
+	String get joinGroup => '参加グループ';
+
+	/// ja: '共有'
+	String get share => '共有';
+
+	/// ja: 'コピー'
+	String get copy => 'コピー';
+
+	/// ja: '共有してメンバーを招待しましょう'
+	String get shareCaption => '共有してメンバーを招待しましょう';
+
+	/// ja: '${user:String}さんから${group:String}へ招待されました。 下記のURLをクリックするか、QRコードを読み取ることで、欲しい物リストのグループに参加できます ${url:String}'
+	String groupShareText({required String user, required String group, required String url}) => '${user}さんから${group}へ招待されました。\n下記のURLをクリックするか、QRコードを読み取ることで、欲しい物リストのグループに参加できます\n${url}';
+
+	/// ja: 'コピーしました'
+	String get copied => 'コピーしました';
+
+	/// ja: '保存しました'
+	String get saved => '保存しました';
+
+	/// ja: 'グループ名'
+	String get groupName => 'グループ名';
+
+	/// ja: '作成したグループを全て削除することはできません。 最低でも1件以上のグループが必要です。'
+	String get deleteErrorMessageRequiredExists => '作成したグループを全て削除することはできません。\n最低でも1件以上のグループが必要です。';
+
+	/// ja: '削除を行う権限がありません。'
+	String get deleteErrorMessagePermission => '削除を行う権限がありません。';
+
+	/// ja: 'グループの共有/参加'
+	String get shareGroupHelpTitle => 'グループの共有/参加';
+
+	/// ja: '【グループの共有】 グループから「共有」を行って下さい 【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます'
+	String get shareGroupHelpMessage => '【グループの共有】\nグループから「共有」を行って下さい\n\n【グループへの参加】\n共有されたURLをクリックするか、\nQRコードを読み取ることで参加できます';
+
+	/// ja: 'グループを追加'
+	String get addGroup => 'グループを追加';
+
+	/// ja: 'その他'
+	String get other => 'その他';
+
+	/// ja: 'ログアウト'
+	String get logout => 'ログアウト';
+
+	/// ja: '退会'
+	String get deleteAccount => '退会';
+
+	/// ja: 'Google'
+	String get google => 'Google';
+
+	/// ja: 'Apple'
+	String get apple => 'Apple';
+
+	/// ja: 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。'
+	String get notJoinedGroupMessage => 'グループに所属していません。\nグループを作成するか、\n招待されたグループに参加して下さい。';
+
+	/// ja: '<削除済ユーザー>'
+	String get deletedUser => '<削除済ユーザー>';
+
+	/// ja: '${length:int}件選択'
+	String selectNumberText({required int length}) => '${length}件選択';
+
+	/// ja: 'アカウントは1つ以上の外部アカウントとの連携をしておく必要があります。'
+	String get authErrorMessageNotExistsProvider => 'アカウントは1つ以上の外部アカウントとの連携をしておく必要があります。';
+
+	/// ja: 'このアカウントはすでに連携済です。 別のアカウントを利用するか、一度ログアウトしてから連携して下さい。'
+	String get authErrorMessagAlreadyInUse => 'このアカウントはすでに連携済です。\n別のアカウントを利用するか、一度ログアウトしてから連携して下さい。';
+
+	/// ja: '・'
+	String get bullet => '・';
+
+	/// ja: '現在、ふりかえり機能はご利用頂けません。'
+	String get notUseAnalytics => '現在、ふりかえり機能はご利用頂けません。';
+
+	/// ja: 'ふりかえり機能では、以下の機能がご利用頂けます。'
+	String get analyticsFeatureTitle => 'ふりかえり機能では、以下の機能がご利用頂けます。';
+
+	/// ja: '金額の推移'
+	String get priceAnalytics => '金額の推移';
+
+	/// ja: '買ってくれた人の割合'
+	String get purchaseUserAnalytics => '買ってくれた人の割合';
+
+	/// ja: '買ってもらった割合'
+	String get purchasedAnalytics => '買ってもらった割合';
+
+	/// ja: '※ 開発者のこどもが幼稚園に入るまでには公開します'
+	String get analyticsPublishPlan => '※ 開発者のこどもが幼稚園に入るまでには公開します';
+
+	/// ja: '退会の確認'
+	String get deleteAccountConfirmTitle => '退会の確認';
+
+	/// ja: '本当に退会してもよろしいですか？ この操作は元に戻すことができません。'
+	String get deleteAccountConfirmMessage => '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
+
+	/// ja: 'グループへ参加'
+	String get joinedGroupTitle => 'グループへ参加';
+
+	/// ja: 'グループに参加しました。'
+	String get joinedGroupMessage => 'グループに参加しました。';
+
+	/// ja: '離脱'
+	String get leave => '離脱';
+
+	/// ja: '選択'
+	String get select => '選択';
+
+	/// ja: 'だれがほしい？'
+	String get wanterName => 'だれがほしい？';
+
+	/// ja: 'ほしい人'
+	String get wanterNameChipTitle => 'ほしい人';
+
+	/// ja: '登録数の上限に達しました。 購入済のものを削除するか、プレミアムプランに変更して下さい。'
+	String get businessErrorMessageOverItemCount => '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。';
+
+	/// ja: 'アプリの更新'
+	String get updateAppTitle => 'アプリの更新';
+
+	/// ja: 'アプリの最新版がリリースされています。 ストアへ移動しますか？'
+	String get updateAppMessage => 'アプリの最新版がリリースされています。\nストアへ移動しますか？';
+
+	/// ja: 'ストアへ'
+	String get goStore => 'ストアへ';
+
+	/// ja: '購入した人'
+	String get buyerName => '購入した人';
+
+	/// ja: '使い方'
+	String get howToUse => '使い方';
+
+	/// ja: '欲しい物の登録数制限を解放'
+	String get joinPremiumGroup => '欲しい物の登録数制限を解放';
+
+	/// ja: '欲しい物の登録数制限が解放されました。(無制限)'
+	String get joinedPremiumGroup => '欲しい物の登録数制限が解放されました。(無制限)';
+
+	/// ja: '商品の購入'
+	String get itemPurchase => '商品の購入';
+
+	/// ja: '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで) 価格：¥${price:String}(${term:String})'
+	String itemLimitReleaseMessage({required String price, required String term}) => '商品を購入すると\n表示中のグループに登録できる\n欲しい物の制限が解放されます。\n(無料版は30個まで)\n\n価格：¥${price}(${term})';
+
+	/// ja: '購入(¥${price:String})'
+	String purchaseOkLabel({required String price}) => '購入(¥${price})';
+
+	/// ja: '無期限'
+	String get lifeful => '無期限';
+
+	/// ja: 'ダークモード'
+	String get darkMode => 'ダークモード';
+
+	/// ja: 'ライトモード'
+	String get lightMode => 'ライトモード';
+
+	/// ja: '購入率'
+	String get purchaseRate => '購入率';
+
+	/// ja: '購入率 (予定込)'
+	String get purchaseRateAndPlan => '購入率 (予定込)';
+
+	/// ja: '${percent:String}%'
+	String formatPercent({required String percent}) => '${percent}%';
+
+	/// ja: '購入金額'
+	String get purchasePrice => '購入金額';
+
+	/// ja: '${month:int}月'
+	String formatMonth({required int month}) => '${month}月';
+
+	/// ja: '${molecule:int}/${denominator:int}'
+	String formatFraction({required int molecule, required int denominator}) => '${molecule}/${denominator}';
+
+	/// ja: '${name:String}さんがほしいものを追加しました！'
+	String notificationAddItemTitle({required String name}) => '${name}さんがほしいものを追加しました！';
+
+	/// ja: '${name:String}さんがほしいものを追加しました！'
+	String notificationAddItemBody({required String name}) => '${name}さんがほしいものを追加しました！';
+
+	/// ja: 'プッシュ通知'
+	String get pushNotification => 'プッシュ通知';
+
+	/// ja: 'グループ内でほしいものが追加された場合に通知が受け取れます'
+	String get pushNotificationDescription => 'グループ内でほしいものが追加された場合に通知が受け取れます';
+
+	/// ja: '購入済'
+	String get purchased => '購入済';
 }
 
 // Path: kEnum
-class _TranslationsKEnumJa extends TranslationsKEnumEn {
-	_TranslationsKEnumJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class TranslationsKEnumJa {
+	TranslationsKEnumJa.internal(this._root);
 
-	final TranslationsJa _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String uiStyle({required UIStyle context}) {
+
+	/// ja: '(system) {システム設定} (android) {Android} (ios) {iOS}'
+	String uiStyle({required UIStyle context}) {
 		switch (context) {
 			case UIStyle.system:
 				return 'システム設定';
@@ -249,7 +599,9 @@ class _TranslationsKEnumJa extends TranslationsKEnumEn {
 				return 'iOS';
 		}
 	}
-	@override String themeColor({required ThemeColor context}) {
+
+	/// ja: '(dynamicColor) {ダイナミックカラー} (monochrome) {モノクロ} (blue) {ブルー} (purple) {パープル} (green) {グリーン} (red) {レッド} (pink) {ピンク} (yellow) {イエロー} (orange) {オレンジ}'
+	String themeColor({required ThemeColor context}) {
 		switch (context) {
 			case ThemeColor.dynamicColor:
 				return 'ダイナミックカラー';
@@ -271,7 +623,9 @@ class _TranslationsKEnumJa extends TranslationsKEnumEn {
 				return 'オレンジ';
 		}
 	}
-	@override String themeMode({required ThemeMode context}) {
+
+	/// ja: '(system) {システムテーマ} (light) {ライトテーマ} (dark) {ダークテーマ}'
+	String themeMode({required ThemeMode context}) {
 		switch (context) {
 			case ThemeMode.system:
 				return 'システムテーマ';
@@ -281,8 +635,11 @@ class _TranslationsKEnumJa extends TranslationsKEnumEn {
 				return 'ダークテーマ';
 		}
 	}
-	@override late final _TranslationsKEnumViewLayoutJa viewLayout = _TranslationsKEnumViewLayoutJa._(_root);
-	@override String sortOrder({required SortOrder context}) {
+
+	late final TranslationsKEnumViewLayoutJa viewLayout = TranslationsKEnumViewLayoutJa.internal(_root);
+
+	/// ja: '(asc) {昇順} (desc) {降順}'
+	String sortOrder({required SortOrder context}) {
 		switch (context) {
 			case SortOrder.asc:
 				return '昇順';
@@ -290,8 +647,11 @@ class _TranslationsKEnumJa extends TranslationsKEnumEn {
 				return '降順';
 		}
 	}
-	@override late final _TranslationsKEnumAppUpdateJa appUpdate = _TranslationsKEnumAppUpdateJa._(_root);
-	@override String itemOrderKey({required ItemOrderKey context}) {
+
+	late final TranslationsKEnumAppUpdateJa appUpdate = TranslationsKEnumAppUpdateJa.internal(_root);
+
+	/// ja: '(createdAt) {作成日時} (name) {名前} (wishRank) {欲しい度}'
+	String itemOrderKey({required ItemOrderKey context}) {
 		switch (context) {
 			case ItemOrderKey.createdAt:
 				return '作成日時';
@@ -301,7 +661,9 @@ class _TranslationsKEnumJa extends TranslationsKEnumEn {
 				return '欲しい度';
 		}
 	}
-	@override String ageGroup({required AgeGroup context}) {
+
+	/// ja: '(child) {こども} (adult) {おとな}'
+	String ageGroup({required AgeGroup context}) {
 		switch (context) {
 			case AgeGroup.child:
 				return 'こども';
@@ -309,7 +671,9 @@ class _TranslationsKEnumJa extends TranslationsKEnumEn {
 				return 'おとな';
 		}
 	}
-	@override String purchaseStatus({required PurchaseStatus context}) {
+
+	/// ja: '(notPurchased) {未購入} (purchasePlan) {購入予定} (purchased) {購入済}'
+	String purchaseStatus({required PurchaseStatus context}) {
 		switch (context) {
 			case PurchaseStatus.notPurchased:
 				return '未購入';
@@ -322,14 +686,18 @@ class _TranslationsKEnumJa extends TranslationsKEnumEn {
 }
 
 // Path: kEnum.viewLayout
-class _TranslationsKEnumViewLayoutJa extends TranslationsKEnumViewLayoutEn {
-	_TranslationsKEnumViewLayoutJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class TranslationsKEnumViewLayoutJa {
+	TranslationsKEnumViewLayoutJa.internal(this._root);
 
-	final TranslationsJa _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String get name => '表示形式';
-	@override String typeName({required ViewLayout context}) {
+
+	/// ja: '表示形式'
+	String get name => '表示形式';
+
+	/// ja: '(grid) {グリッド表示} (list) {リスト表示}'
+	String typeName({required ViewLayout context}) {
 		switch (context) {
 			case ViewLayout.grid:
 				return 'グリッド表示';
@@ -340,40 +708,46 @@ class _TranslationsKEnumViewLayoutJa extends TranslationsKEnumViewLayoutEn {
 }
 
 // Path: kEnum.appUpdate
-class _TranslationsKEnumAppUpdateJa extends TranslationsKEnumAppUpdateEn {
-	_TranslationsKEnumAppUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class TranslationsKEnumAppUpdateJa {
+	TranslationsKEnumAppUpdateJa.internal(this._root);
 
-	final TranslationsJa _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override late final _TranslationsKEnumAppUpdateUpdatePossibleJa updatePossible = _TranslationsKEnumAppUpdateUpdatePossibleJa._(_root);
-	@override late final _TranslationsKEnumAppUpdateForceUpdateJa forceUpdate = _TranslationsKEnumAppUpdateForceUpdateJa._(_root);
-	@override String get navigateStore => 'ストアを開く';
+	late final TranslationsKEnumAppUpdateUpdatePossibleJa updatePossible = TranslationsKEnumAppUpdateUpdatePossibleJa.internal(_root);
+	late final TranslationsKEnumAppUpdateForceUpdateJa forceUpdate = TranslationsKEnumAppUpdateForceUpdateJa.internal(_root);
+
+	/// ja: 'ストアを開く'
+	String get navigateStore => 'ストアを開く';
 }
 
 // Path: kEnum.appUpdate.updatePossible
-class _TranslationsKEnumAppUpdateUpdatePossibleJa extends TranslationsKEnumAppUpdateUpdatePossibleEn {
-	_TranslationsKEnumAppUpdateUpdatePossibleJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class TranslationsKEnumAppUpdateUpdatePossibleJa {
+	TranslationsKEnumAppUpdateUpdatePossibleJa.internal(this._root);
 
-	final TranslationsJa _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String get message => '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
+
+	/// ja: '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？'
+	String get message => '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
 }
 
 // Path: kEnum.appUpdate.forceUpdate
-class _TranslationsKEnumAppUpdateForceUpdateJa extends TranslationsKEnumAppUpdateForceUpdateEn {
-	_TranslationsKEnumAppUpdateForceUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+class TranslationsKEnumAppUpdateForceUpdateJa {
+	TranslationsKEnumAppUpdateForceUpdateJa.internal(this._root);
 
-	final TranslationsJa _root; // ignore: unused_field
+	final Translations _root; // ignore: unused_field
 
 	// Translations
-	@override String get message => 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
+
+	/// ja: 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。'
+	String get message => 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
 }
 
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
-extension on TranslationsJa {
+extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app.start': return 'はじめる';

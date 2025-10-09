@@ -1,3 +1,4 @@
+base_locale: ja
 fallback_strategy: base_locale
 input_directory: assets/i18n
 output_directory: lib/i18n
@@ -10,6 +11,7 @@ lazy: false
 imports:
   - "package:flutter/material.dart"
   - "package:packages_domain/user.dart"
+  - "package:packages_domain/item.dart"
   - "package:packages_domain/common.dart"
   - "package:packages_domain/designsystem.dart"
   - "package:packages_application/item.dart"

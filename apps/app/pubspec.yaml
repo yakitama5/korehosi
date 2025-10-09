@@ -56,7 +56,7 @@ dependencies:
   material_color_utilities: any
   material_design_icons_flutter: any
   nested: any
-  package_info_plus: any
+  package_info_plus: ^9.0.0
   packages_application:
     path: ../../packages/application
   packages_core:

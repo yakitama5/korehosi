@@ -4,27 +4,31 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 
-part of 'strings.g.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:packages_application/item.dart';
+import 'package:packages_domain/common.dart';
+import 'package:packages_domain/designsystem.dart';
+import 'package:packages_domain/item.dart';
+import 'package:packages_domain/user.dart';
+import 'package:slang/generated.dart';
+import 'strings.g.dart';
 
 // Path: <root>
-typedef TranslationsEn = Translations; // ignore: unused_element
-class Translations implements BaseTranslations<AppLocale, Translations> {
-	/// Returns the current translations of the given [context].
-	///
-	/// Usage:
-	/// final i18n = Translations.of(context);
-	static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
-
+class TranslationsEn extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
+	TranslationsEn({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
 		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.en,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -32,579 +36,216 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
-	late final Translations _root = this; // ignore: unused_field
+	late final TranslationsEn _root = this; // ignore: unused_field
 
-	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
+	@override 
+	TranslationsEn $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsEn(meta: meta ?? this.$meta);
 
 	// Translations
-	late final TranslationsAppEn app = TranslationsAppEn.internal(_root);
-	late final TranslationsKEnumEn kEnum = TranslationsKEnumEn.internal(_root);
+	@override late final _TranslationsAppEn app = _TranslationsAppEn._(_root);
+	@override late final _TranslationsKEnumEn kEnum = _TranslationsKEnumEn._(_root);
 }
 
 // Path: app
-class TranslationsAppEn {
-	TranslationsAppEn.internal(this._root);
+class _TranslationsAppEn extends TranslationsAppJa {
+	_TranslationsAppEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-
-	/// en: 'Start'
-	String get start => 'Start';
-
-	/// en: 'Click here if you are a first time user.'
-	String get firstTime => 'Click here if you are a first time user.';
-
-	/// en: 'Account Linkage'
-	String get accountLink => 'Account Linkage';
-
-	/// en: 'Contact Us'
-	String get contactUs => 'Contact Us';
-
-	/// en: 'Terms of Use'
-	String get termOfService => 'Terms of Use';
-
-	/// en: 'Privacy Policy'
-	String get privacyPolicy => 'Privacy Policy';
-
-	/// en: 'By linking your account, you will be able to use the following features'
-	String get accountLinkDescTitle => 'By linking your account, you will be able to use the following features';
-
-	/// en: 'Data backup to the cloud'
-	String get accountLinkDescBodyCloudBackup => 'Data backup to the cloud';
-
-	/// en: 'Simultaneous use on multiple terminals'
-	String get accountLinkDescBodyMultiDevice => 'Simultaneous use on multiple terminals';
-
-	/// en: 'Data transfer due to device change'
-	String get accountLinkDescBodyDataSend => 'Data transfer due to device change';
-
-	/// en: 'Introduction.'
-	String get onboardStartTitle => 'Introduction.';
-
-	/// en: 'Register your profile first!'
-	String get onboardStartMessage => 'Register your profile first!';
-
-	/// en: 'What about you?'
-	String get questionAgeGroup => 'What about you?';
-
-	/// en: 'Gender.'
-	String get questionSex => 'Gender.';
-
-	/// en: 'What is your name?'
-	String get questionName => 'What is your name?';
-
-	/// en: 'or Nickname'
-	String get questionNameCapiton => 'or Nickname';
-
-	/// en: 'Is it correct?'
-	String get questionConfirm => 'Is it correct?';
-
-	/// en: 'Children (Please buy)'
-	String get selectChild => 'Children (Please buy)';
-
-	/// en: 'Adult (I want to buy it for you)'
-	String get selectAdult => 'Adult (I want to buy it for you)';
-
-	/// en: 'man's man'
-	String get selectMan => 'man\'s man';
-
-	/// en: 'woman'
-	String get selectWoman => 'woman';
-
-	/// en: 'Neither.'
-	String get selectNeither => 'Neither.';
-
-	/// en: 'Name or Nickname'
-	String get nameLabel => 'Name or Nickname';
-
-	/// en: 'Name'
-	String get name => 'Name';
-
-	/// en: 'Next.'
-	String get next => 'Next.';
-
-	/// en: 'return'
-	String get back => 'return';
-
-	/// en: 'Previous'
-	String get prev => 'Previous';
-
-	/// en: 'skip'
-	String get skip => 'skip';
-
-	/// en: 'man's man'
-	String get sexMan => 'man\'s man';
-
-	/// en: 'woman'
-	String get sexWoman => 'woman';
-
-	/// en: 'Neither.'
-	String get sexNeither => 'Neither.';
-
-	/// en: 'age-group'
-	String get ageGroup => 'age-group';
-
-	/// en: 'gender'
-	String get sex => 'gender';
-
-	/// en: '<Unset'
-	String get unset => '<Unset';
-
-	/// en: '*'
-	String get requiredIcon => '*';
-
-	/// en: '*Required fields'
-	String get requiredHelper => '*Required fields';
-
-	/// en: 'Sign in with Google'
-	String get signInWithGoogle => 'Sign in with Google';
-
-	/// en: 'Sign in with Apple'
-	String get signInWithApple => 'Sign in with Apple';
-
-	/// en: 'wanted article'
-	String get wishList => 'wanted article';
-
-	/// en: 'quid pro quo'
-	String get analyze => 'quid pro quo';
-
-	/// en: 'posing (a problem)'
-	String get settings => 'posing (a problem)';
-
-	/// en: 'Add what you want'
-	String get addWishList => 'Add what you want';
-
-	/// en: 'sort'
-	String get sortOrder => 'sort';
-
-	/// en: 'status'
-	String get status => 'status';
-
-	/// en: 'degree of desirability'
-	String get wishRank => 'degree of desirability';
-
-	/// en: 'cancel'
-	String get cancel => 'cancel';
-
-	/// en: 'reset'
-	String get reset => 'reset';
-
-	/// en: 'adoption'
-	String get apply => 'adoption';
-
-	/// en: 'all'
-	String get all => 'all';
-
-	/// en: 'nameless'
-	String get noName => 'nameless';
-
-	/// en: ' group of'
-	String get groupInitialNameSuffix => ' group of';
-
-	/// en: 'An unexpected error has occurred.'
-	String get unexpectedErrorMessage => 'An unexpected error has occurred.';
-
-	/// en: '${item:String}could not be found.'
-	String searchEmptyMessage({required String item}) => '${item}could not be found.';
-
-	/// en: 'trade (brand) name'
-	String get merchandiseName => 'trade (brand) name';
-
-	/// en: 'preservation'
-	String get save => 'preservation';
-
-	/// en: '${item:String}Edit the'
-	String editPageTitle({required String item}) => '${item}Edit the';
-
-	/// en: '${item:String}Create a'
-	String createPageTitle({required String item}) => '${item}Create a';
-
-	/// en: 'When do you want it?'
-	String get wishSeasonLabel => 'When do you want it?';
-
-	/// en: 'Examples: Christmas, birthdays'
-	String get wishSeasonHint => 'Examples: Christmas, birthdays';
-
-	/// en: 'uniform resouce locator'
-	String get url => 'uniform resouce locator';
-
-	/// en: 'Add URL'
-	String get addUrl => 'Add URL';
-
-	/// en: 'memo'
-	String get memo => 'memo';
-
-	/// en: 'take a picture'
-	String get shoot => 'take a picture';
-
-	/// en: 'Select an image from the library'
-	String get chooseFromLibrary => 'Select an image from the library';
-
-	/// en: 'star'
-	String get star => 'star';
-
-	/// en: 'deletion'
-	String get delete => 'deletion';
-
-	/// en: 'Deleted.'
-	String get deletedMessage => 'Deleted.';
-
-	/// en: 'Deleted.'
-	String get completeDeleteMessage => 'Deleted.';
-
-	/// en: 'Switched groups.'
-	String get completeChangeGroupMessage => 'Switched groups.';
-
-	/// en: 'Upload Photo'
-	String get uploadImage => 'Upload Photo';
-
-	/// en: '${permission:String}is not allowed'
-	String lackOfPermission({required String permission}) => '${permission}is not allowed';
-
-	/// en: '${permission:String}to be turned off?'
-	String confirmPermissionOffTitle({required String permission}) => '${permission}to be turned off?';
-
-	/// en: 'Open the Settings app and turn${permission:String} and turn off the'
-	String confirmPermissionOffMessage({required String permission}) => 'Open the Settings app and turn${permission} and turn off the';
-
-	/// en: 'Gallery Access'
-	String get permissionPhotos => 'Gallery Access';
-
-	/// en: 'Access to the camera'
-	String get permissionCamera => 'Access to the camera';
-
-	/// en: 'push notification'
-	String get permissionPushNotification => 'push notification';
-
-	/// en: 'Open the Settings app and${permission:String} Allow the'
-	String permissionWarnMessage({required String permission}) => 'Open the Settings app and${permission} Allow the';
-
-	/// en: 'Open the Settings application'
-	String get openSettingsApp => 'Open the Settings application';
-
-	/// en: 'OK'
-	String get ok => 'OK';
-
-	/// en: 'Discard changes?'
-	String get confirmDiscardChangesTitle => 'Discard changes?';
-
-	/// en: 'All changes will be lost'
-	String get confirmDiscardChangesMessage => 'All changes will be lost';
-
-	/// en: 'discard'
-	String get discard => 'discard';
-
-	/// en: 'not to be discarded'
-	String get notDiscard => 'not to be discarded';
-
-	/// en: 'Please fill in the required fields'
-	String get validErrorMessageRequired => 'Please fill in the required fields';
-
-	/// en: 'Please enter the correct URL format'
-	String get validErrorMessageUrlPattern => 'Please enter the correct URL format';
-
-	/// en: 'editing'
-	String get edit => 'editing';
-
-	/// en: 'Purchase/plan to purchase'
-	String get purchaseOrpurchasePlan => 'Purchase/plan to purchase';
-
-	/// en: 'Confirmation of deletion'
-	String get deleteConfirmTitle => 'Confirmation of deletion';
-
-	/// en: 'Do you want to delete "${item:String} Do you want to delete "?'
-	String deleteCofirmMessage({required String item}) => 'Do you want to delete "${item} Do you want to delete "?';
-
-	/// en: 'Do you want to delete "${name:String} Do you want to delete "? \All the wants registered in the ߋn group will be deleted. \ɑnThis operation cannot be undone.'
-	String deleteGroupCofirmMessage({required String name}) => 'Do you want to delete "${name} Do you want to delete "? \All the wants registered in the ߋn group will be deleted. \ɑnThis operation cannot be undone.';
-
-	/// en: 'Confirmation of withdrawal'
-	String get leaveConfirmTitle => 'Confirmation of withdrawal';
-
-	/// en: 'Do you want to leave the${group:String} Do you wish to leave the'
-	String leaveCofirmMessage({required String group}) => 'Do you want to leave the${group} Do you wish to leave the';
-
-	/// en: 'No group selected'
-	String get notSelectedGroupDialogTitle => 'No group selected';
-
-	/// en: 'Please select a group and then add what you want'
-	String get notSelectedGroupDialogMessage => 'Please select a group and then add what you want';
-
-	/// en: 'Purchase/Purchase Information'
-	String get purchaseInfoTitle => 'Purchase/Purchase Information';
-
-	/// en: 'Subsequent content will only be visible to adults in the group'
-	String get purchaseInfoCaption => 'Subsequent content will only be visible to adults in the group';
-
-	/// en: 'Amount of money'
-	String get price => 'Amount of money';
-
-	/// en: 'Expected Date of Purchase'
-	String get purchasePlanDateTime => 'Expected Date of Purchase';
-
-	/// en: '¥'
-	String get yenMark => '¥';
-
-	/// en: 'surprise'
-	String get surprise => 'surprise';
-
-	/// en: 'I don't want my kids to know what's going on.'
-	String get surpriseCaption => 'I don\'t want my kids to know what\'s going on.';
-
-	/// en: 'Enter "To be purchased".'
-	String get purchasePlanDateTimeCaption => 'Enter "To be purchased".';
-
-	/// en: 'Entering the information will make it "Purchased".'
-	String get sentAtCaption => 'Entering the information will make it "Purchased".';
-
-	/// en: 'Date given'
-	String get sentAt => 'Date given';
-
-	/// en: 'An authentication error has occurred. \Please log in after a few moments.'
-	String get authErrorMessage => 'An authentication error has occurred. \Please log in after a few moments.';
-
-	/// en: 'account'
-	String get account => 'account';
-
-	/// en: 'Profile'
-	String get profile => 'Profile';
-
-	/// en: 'group (usu. of people)'
-	String get group => 'group (usu. of people)';
-
-	/// en: 'help'
-	String get help => 'help';
-
-	/// en: 'Developer X (formerly Twitter)'
-	String get developperTwitter => 'Developer X (formerly Twitter)';
-
-	/// en: 'License'
-	String get license => 'License';
-
-	/// en: 'error'
-	String get error => 'error';
-
-	/// en: 'Could not open URL. \Please contact us if this occurs frequently.'
-	String get urlErrorMessageCanNotOpen => 'Could not open URL. \Please contact us if this occurs frequently.';
-
-	/// en: 'Participating Groups'
-	String get joinGroup => 'Participating Groups';
-
-	/// en: 'share'
-	String get share => 'share';
-
-	/// en: 'copy'
-	String get copy => 'copy';
-
-	/// en: 'Share and invite members!'
-	String get shareCaption => 'Share and invite members!';
-
-	/// en: '${user:String}from${group:String} You have been invited to \You can join the Wishlist group by clicking the URL below or scanning the QR code.${url:String}'
-	String groupShareText({required String user, required String group, required String url}) => '${user}from${group} You have been invited to \You can join the Wishlist group by clicking the URL below or scanning the QR code.${url}';
-
-	/// en: 'Copied.'
-	String get copied => 'Copied.';
-
-	/// en: 'Saved in.'
-	String get saved => 'Saved in.';
-
-	/// en: 'Group Name'
-	String get groupName => 'Group Name';
-
-	/// en: 'You cannot delete all the groups you have created. \You must have at least one group.'
-	String get deleteErrorMessageRequiredExists => 'You cannot delete all the groups you have created. \You must have at least one group.';
-
-	/// en: 'You are not authorized to delete.'
-	String get deleteErrorMessagePermission => 'You are not authorized to delete.';
-
-	/// en: 'Share/join groups'
-	String get shareGroupHelpTitle => 'Share/join groups';
-
-	/// en: 'Please "Share" from the [Share Group] group.'
-	String get shareGroupHelpMessage => 'Please "Share" from the [Share Group] group.';
-
-	/// en: 'Add Group'
-	String get addGroup => 'Add Group';
-
-	/// en: 'Other'
-	String get other => 'Other';
-
-	/// en: 'logout'
-	String get logout => 'logout';
-
-	/// en: 'withdrawal from a group'
-	String get deleteAccount => 'withdrawal from a group';
-
-	/// en: 'Google (WWW search engine)'
-	String get google => 'Google (WWW search engine)';
-
-	/// en: 'Apple'
-	String get apple => 'Apple';
-
-	/// en: 'You do not belong to any group. \Please create a group or join a group to which you have been invited.'
-	String get notJoinedGroupMessage => 'You do not belong to any group. \Please create a group or join a group to which you have been invited.';
-
-	/// en: '<Deleted User>.'
-	String get deletedUser => '<Deleted User>.';
-
-	/// en: '${length:int}selecting an option (from a test case, e.g. litmus test)'
-	String selectNumberText({required int length}) => '${length}selecting an option (from a test case, e.g. litmus test)';
-
-	/// en: 'The account must be linked to one or more external accounts.'
-	String get authErrorMessageNotExistsProvider => 'The account must be linked to one or more external accounts.';
-
-	/// en: 'This account has already been linked. \Please use another account or log out once and link it.'
-	String get authErrorMessagAlreadyInUse => 'This account has already been linked. \Please use another account or log out once and link it.';
-
-	/// en: 'interpoint (interword separation)'
-	String get bullet => 'interpoint (interword separation)';
-
-	/// en: 'Currently, the look-back function is not available.'
-	String get notUseAnalytics => 'Currently, the look-back function is not available.';
-
-	/// en: 'The following functions are available in the Reflection function.'
-	String get analyticsFeatureTitle => 'The following functions are available in the Reflection function.';
-
-	/// en: 'Change in Amount'
-	String get priceAnalytics => 'Change in Amount';
-
-	/// en: 'Percentage of people who bought'
-	String get purchaseUserAnalytics => 'Percentage of people who bought';
-
-	/// en: 'Percentage of purchases made'
-	String get purchasedAnalytics => 'Percentage of purchases made';
-
-	/// en: 'We will release it before the developer's child starts kindergarten.'
-	String get analyticsPublishPlan => 'We will release it before the developer\'s child starts kindergarten.';
-
-	/// en: 'Confirmation of withdrawal from membership'
-	String get deleteAccountConfirmTitle => 'Confirmation of withdrawal from membership';
-
-	/// en: 'Are you sure you want to cancel your membership? \Ўn this operation cannot be undone.'
-	String get deleteAccountConfirmMessage => 'Are you sure you want to cancel your membership? \Ўn this operation cannot be undone.';
-
-	/// en: 'Join Group'
-	String get joinedGroupTitle => 'Join Group';
-
-	/// en: 'I joined the group.'
-	String get joinedGroupMessage => 'I joined the group.';
-
-	/// en: 'The invitation link is incorrect.'
-	String get joinGroupErrorMessageInvalidShareLink => 'The invitation link is incorrect.';
-
-	/// en: 'I have already participated.'
-	String get joinGroupErrorMessageJoinedGroup => 'I have already participated.';
-
-	/// en: 'Invitation link has expired.'
-	String get joinGroupErrorMessageInvalidDate => 'Invitation link has expired.';
-
-	/// en: 'An authentication error has occurred.'
-	String get joinGroupErrorMessageNotAuth => 'An authentication error has occurred.';
-
-	/// en: 'The maximum number of participants (5) in the group has been reached.'
-	String get joinGroupErrorMessageLimitOver => 'The maximum number of participants (5) in the group has been reached.';
-
-	/// en: 'withdrawal'
-	String get leave => 'withdrawal';
-
-	/// en: 'selection'
-	String get select => 'selection';
-
-	/// en: 'Who do you want?'
-	String get wanterName => 'Who do you want?';
-
-	/// en: 'people who want something'
-	String get wanterNameChipTitle => 'people who want something';
-
-	/// en: 'You have reached your registration limit. \Please delete your ዄn-purchased items or change to a premium plan.'
-	String get businessErrorMessageOverItemCount => 'You have reached your registration limit. \Please delete your ዄn-purchased items or change to a premium plan.';
-
-	/// en: 'App Update'
-	String get updateAppTitle => 'App Update';
-
-	/// en: 'The latest version of the application has been released. \Would you like to go to the 팀n store?'
-	String get updateAppMessage => 'The latest version of the application has been released. \Would you like to go to the 팀n store?';
-
-	/// en: 'Go to Store'
-	String get goStore => 'Go to Store';
-
-	/// en: 'Purchased by'
-	String get buyerName => 'Purchased by';
-
-	/// en: 'treatment'
-	String get howToUse => 'treatment';
-
-	/// en: 'Release the limit on the number of want registrations.'
-	String get joinPremiumGroup => 'Release the limit on the number of want registrations.';
-
-	/// en: 'The limit on the number of want registrations has been released. (Unlimited)'
-	String get joinedPremiumGroup => 'The limit on the number of want registrations has been released. (Unlimited)';
-
-	/// en: 'Purchase Products'
-	String get itemPurchase => 'Purchase Products';
-
-	/// en: 'Purchasing an item will release the restrictions on the items you want to be able to register in the group you are viewing. \You can purchase up to 30 items for the free version.\nPrice:³³)${price:String} (${term:String} )'
-	String itemLimitReleaseMessage({required String price, required String term}) => 'Purchasing an item will release the restrictions on the items you want to be able to register in the group you are viewing. \You can purchase up to 30 items for the free version.\nPrice:³³)${price} (${term} )';
-
-	/// en: 'Purchase (¥)${price:String} )'
-	String purchaseOkLabel({required String price}) => 'Purchase (¥)${price} )';
-
-	/// en: 'indefinite'
-	String get lifeful => 'indefinite';
-
-	/// en: 'dark mode'
-	String get darkMode => 'dark mode';
-
-	/// en: 'light mode'
-	String get lightMode => 'light mode';
-
-	/// en: 'Purchase rate'
-	String get purchaseRate => 'Purchase rate';
-
-	/// en: 'Purchase rate (including planned)'
-	String get purchaseRateAndPlan => 'Purchase rate (including planned)';
-
-	/// en: '${percent:String}%'
-	String formatPercent({required String percent}) => '${percent}%';
-
-	/// en: 'Purchase price'
-	String get purchasePrice => 'Purchase price';
-
-	/// en: '${month:int}month'
-	String formatMonth({required int month}) => '${month}month';
-
-	/// en: '${molecule:int}/${denominator:int}'
-	String formatFraction({required int molecule, required int denominator}) => '${molecule}/${denominator}';
-
-	/// en: '${name:String}added what you want!'
-	String notificationAddItemTitle({required String name}) => '${name}added what you want!';
-
-	/// en: '${name:String}added what you want!'
-	String notificationAddItemBody({required String name}) => '${name}added what you want!';
-
-	/// en: 'push notification'
-	String get pushNotification => 'push notification';
-
-	/// en: 'Receive notifications when new items you want are added to the group'
-	String get pushNotificationDescription => 'Receive notifications when new items you want are added to the group';
-
-	/// en: 'already bought'
-	String get purchased => 'already bought';
+	@override String get start => 'Start';
+	@override String get firstTime => 'Click here if you are a first time user.';
+	@override String get accountLink => 'Account Linkage';
+	@override String get contactUs => 'Contact Us';
+	@override String get termOfService => 'Terms of Use';
+	@override String get privacyPolicy => 'Privacy Policy';
+	@override String get accountLinkDescTitle => 'By linking your account, you will be able to use the following features';
+	@override String get accountLinkDescBodyCloudBackup => 'Data backup to the cloud';
+	@override String get accountLinkDescBodyMultiDevice => 'Simultaneous use on multiple terminals';
+	@override String get accountLinkDescBodyDataSend => 'Data transfer due to device change';
+	@override String get onboardStartTitle => 'Introduction.';
+	@override String get onboardStartMessage => 'Register your profile first!';
+	@override String get questionAgeGroup => 'What about you?';
+	@override String get questionSex => 'Gender.';
+	@override String get questionName => 'What is your name?';
+	@override String get questionNameCapiton => 'or Nickname';
+	@override String get questionConfirm => 'Is it correct?';
+	@override String get selectChild => 'Children (Please buy)';
+	@override String get selectAdult => 'Adult (I want to buy it for you)';
+	@override String get selectMan => 'man\'s man';
+	@override String get selectWoman => 'woman';
+	@override String get selectNeither => 'Neither.';
+	@override String get nameLabel => 'Name or Nickname';
+	@override String get name => 'Name';
+	@override String get next => 'Next.';
+	@override String get back => 'return';
+	@override String get prev => 'Previous';
+	@override String get skip => 'skip';
+	@override String get sexMan => 'man\'s man';
+	@override String get sexWoman => 'woman';
+	@override String get sexNeither => 'Neither.';
+	@override String get ageGroup => 'age-group';
+	@override String get sex => 'gender';
+	@override String get unset => '<Unset';
+	@override String get requiredIcon => '*';
+	@override String get requiredHelper => '*Required fields';
+	@override String get signInWithGoogle => 'Sign in with Google';
+	@override String get signInWithApple => 'Sign in with Apple';
+	@override String get wishList => 'wanted article';
+	@override String get analyze => 'quid pro quo';
+	@override String get settings => 'posing (a problem)';
+	@override String get addWishList => 'Add what you want';
+	@override String get sortOrder => 'sort';
+	@override String get status => 'status';
+	@override String get wishRank => 'degree of desirability';
+	@override String get cancel => 'cancel';
+	@override String get reset => 'reset';
+	@override String get apply => 'adoption';
+	@override String get all => 'all';
+	@override String get noName => 'nameless';
+	@override String get groupInitialNameSuffix => ' group of';
+	@override String get unexpectedErrorMessage => 'An unexpected error has occurred.';
+	@override String searchEmptyMessage({required String item}) => '${item}could not be found.';
+	@override String get merchandiseName => 'trade (brand) name';
+	@override String get save => 'preservation';
+	@override String editPageTitle({required String item}) => '${item}Edit the';
+	@override String createPageTitle({required String item}) => '${item}Create a';
+	@override String get wishSeasonLabel => 'When do you want it?';
+	@override String get wishSeasonHint => 'Examples: Christmas, birthdays';
+	@override String get url => 'uniform resouce locator';
+	@override String get addUrl => 'Add URL';
+	@override String get memo => 'memo';
+	@override String get shoot => 'take a picture';
+	@override String get chooseFromLibrary => 'Select an image from the library';
+	@override String get star => 'star';
+	@override String get delete => 'deletion';
+	@override String get deletedMessage => 'Deleted.';
+	@override String get completeDeleteMessage => 'Deleted.';
+	@override String get completeChangeGroupMessage => 'Switched groups.';
+	@override String get uploadImage => 'Upload Photo';
+	@override String lackOfPermission({required String permission}) => '${permission}is not allowed';
+	@override String confirmPermissionOffTitle({required String permission}) => '${permission}to be turned off?';
+	@override String confirmPermissionOffMessage({required String permission}) => 'Open the Settings app and turn${permission} and turn off the';
+	@override String get permissionPhotos => 'Gallery Access';
+	@override String get permissionCamera => 'Access to the camera';
+	@override String get permissionPushNotification => 'push notification';
+	@override String permissionWarnMessage({required String permission}) => 'Open the Settings app and${permission} Allow the';
+	@override String get openSettingsApp => 'Open the Settings application';
+	@override String get ok => 'OK';
+	@override String get confirmDiscardChangesTitle => 'Discard changes?';
+	@override String get confirmDiscardChangesMessage => 'All changes will be lost';
+	@override String get discard => 'discard';
+	@override String get notDiscard => 'not to be discarded';
+	@override String get validErrorMessageRequired => 'Please fill in the required fields';
+	@override String get validErrorMessageUrlPattern => 'Please enter the correct URL format';
+	@override String get edit => 'editing';
+	@override String get purchaseOrpurchasePlan => 'Purchase/plan to purchase';
+	@override String get deleteConfirmTitle => 'Confirmation of deletion';
+	@override String deleteCofirmMessage({required String item}) => 'Do you want to delete "${item} Do you want to delete "?';
+	@override String deleteGroupCofirmMessage({required String name}) => 'Do you want to delete "${name} Do you want to delete "? \All the wants registered in the ߋn group will be deleted. \ɑnThis operation cannot be undone.';
+	@override String get leaveConfirmTitle => 'Confirmation of withdrawal';
+	@override String leaveCofirmMessage({required String group}) => 'Do you want to leave the${group} Do you wish to leave the';
+	@override String get notSelectedGroupDialogTitle => 'No group selected';
+	@override String get notSelectedGroupDialogMessage => 'Please select a group and then add what you want';
+	@override String get purchaseInfoTitle => 'Purchase/Purchase Information';
+	@override String get purchaseInfoCaption => 'Subsequent content will only be visible to adults in the group';
+	@override String get price => 'Amount of money';
+	@override String get purchasePlanDateTime => 'Expected Date of Purchase';
+	@override String get yenMark => '¥';
+	@override String get surprise => 'surprise';
+	@override String get surpriseCaption => 'I don\'t want my kids to know what\'s going on.';
+	@override String get purchasePlanDateTimeCaption => 'Enter "To be purchased".';
+	@override String get sentAtCaption => 'Entering the information will make it "Purchased".';
+	@override String get sentAt => 'Date given';
+	@override String get authErrorMessage => 'An authentication error has occurred. \Please log in after a few moments.';
+	@override String get account => 'account';
+	@override String get profile => 'Profile';
+	@override String get group => 'group (usu. of people)';
+	@override String get help => 'help';
+	@override String get developperTwitter => 'Developer X (formerly Twitter)';
+	@override String get license => 'License';
+	@override String get error => 'error';
+	@override String get urlErrorMessageCanNotOpen => 'Could not open URL. \Please contact us if this occurs frequently.';
+	@override String get joinGroup => 'Participating Groups';
+	@override String get share => 'share';
+	@override String get copy => 'copy';
+	@override String get shareCaption => 'Share and invite members!';
+	@override String groupShareText({required String user, required String group, required String url}) => '${user}from${group} You have been invited to \You can join the Wishlist group by clicking the URL below or scanning the QR code.${url}';
+	@override String get copied => 'Copied.';
+	@override String get saved => 'Saved in.';
+	@override String get groupName => 'Group Name';
+	@override String get deleteErrorMessageRequiredExists => 'You cannot delete all the groups you have created. \You must have at least one group.';
+	@override String get deleteErrorMessagePermission => 'You are not authorized to delete.';
+	@override String get shareGroupHelpTitle => 'Share/join groups';
+	@override String get shareGroupHelpMessage => 'Please "Share" from the [Share Group] group.';
+	@override String get addGroup => 'Add Group';
+	@override String get other => 'Other';
+	@override String get logout => 'logout';
+	@override String get deleteAccount => 'withdrawal from a group';
+	@override String get google => 'Google (WWW search engine)';
+	@override String get apple => 'Apple';
+	@override String get notJoinedGroupMessage => 'You do not belong to any group. \Please create a group or join a group to which you have been invited.';
+	@override String get deletedUser => '<Deleted User>.';
+	@override String selectNumberText({required int length}) => '${length}selecting an option (from a test case, e.g. litmus test)';
+	@override String get authErrorMessageNotExistsProvider => 'The account must be linked to one or more external accounts.';
+	@override String get authErrorMessagAlreadyInUse => 'This account has already been linked. \Please use another account or log out once and link it.';
+	@override String get bullet => 'interpoint (interword separation)';
+	@override String get notUseAnalytics => 'Currently, the look-back function is not available.';
+	@override String get analyticsFeatureTitle => 'The following functions are available in the Reflection function.';
+	@override String get priceAnalytics => 'Change in Amount';
+	@override String get purchaseUserAnalytics => 'Percentage of people who bought';
+	@override String get purchasedAnalytics => 'Percentage of purchases made';
+	@override String get analyticsPublishPlan => 'We will release it before the developer\'s child starts kindergarten.';
+	@override String get deleteAccountConfirmTitle => 'Confirmation of withdrawal from membership';
+	@override String get deleteAccountConfirmMessage => 'Are you sure you want to cancel your membership? \Ўn this operation cannot be undone.';
+	@override String get joinedGroupTitle => 'Join Group';
+	@override String get joinedGroupMessage => 'I joined the group.';
+	@override String get joinGroupErrorMessageInvalidShareLink => 'The invitation link is incorrect.';
+	@override String get joinGroupErrorMessageJoinedGroup => 'I have already participated.';
+	@override String get joinGroupErrorMessageInvalidDate => 'Invitation link has expired.';
+	@override String get joinGroupErrorMessageNotAuth => 'An authentication error has occurred.';
+	@override String get joinGroupErrorMessageLimitOver => 'The maximum number of participants (5) in the group has been reached.';
+	@override String get leave => 'withdrawal';
+	@override String get select => 'selection';
+	@override String get wanterName => 'Who do you want?';
+	@override String get wanterNameChipTitle => 'people who want something';
+	@override String get businessErrorMessageOverItemCount => 'You have reached your registration limit. \Please delete your ዄn-purchased items or change to a premium plan.';
+	@override String get updateAppTitle => 'App Update';
+	@override String get updateAppMessage => 'The latest version of the application has been released. \Would you like to go to the 팀n store?';
+	@override String get goStore => 'Go to Store';
+	@override String get buyerName => 'Purchased by';
+	@override String get howToUse => 'treatment';
+	@override String get joinPremiumGroup => 'Release the limit on the number of want registrations.';
+	@override String get joinedPremiumGroup => 'The limit on the number of want registrations has been released. (Unlimited)';
+	@override String get itemPurchase => 'Purchase Products';
+	@override String itemLimitReleaseMessage({required String price, required String term}) => 'Purchasing an item will release the restrictions on the items you want to be able to register in the group you are viewing. \You can purchase up to 30 items for the free version.\nPrice:³³)${price} (${term} )';
+	@override String purchaseOkLabel({required String price}) => 'Purchase (¥)${price} )';
+	@override String get lifeful => 'indefinite';
+	@override String get darkMode => 'dark mode';
+	@override String get lightMode => 'light mode';
+	@override String get purchaseRate => 'Purchase rate';
+	@override String get purchaseRateAndPlan => 'Purchase rate (including planned)';
+	@override String formatPercent({required String percent}) => '${percent}%';
+	@override String get purchasePrice => 'Purchase price';
+	@override String formatMonth({required int month}) => '${month}month';
+	@override String formatFraction({required int molecule, required int denominator}) => '${molecule}/${denominator}';
+	@override String notificationAddItemTitle({required String name}) => '${name}added what you want!';
+	@override String notificationAddItemBody({required String name}) => '${name}added what you want!';
+	@override String get pushNotification => 'push notification';
+	@override String get pushNotificationDescription => 'Receive notifications when new items you want are added to the group';
+	@override String get purchased => 'already bought';
 }
 
 // Path: kEnum
-class TranslationsKEnumEn {
-	TranslationsKEnumEn.internal(this._root);
+class _TranslationsKEnumEn extends TranslationsKEnumJa {
+	_TranslationsKEnumEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-
-	/// en: '(system) {System} (android) {Android} (ios) {iOS}'
-	String uiStyle({required UIStyle context}) {
+	@override String uiStyle({required UIStyle context}) {
 		switch (context) {
 			case UIStyle.system:
 				return 'System';
@@ -614,9 +255,7 @@ class TranslationsKEnumEn {
 				return 'iOS';
 		}
 	}
-
-	/// en: '(dynamicColor) {DynamicColor} (monochrome) {Monochrome} (blue) {Blue} (purple) {Purple} (green) {Green} (red) {Red} (pink) {Pink} (yellow) {Yellow} (orange) {Orange}'
-	String themeColor({required ThemeColor context}) {
+	@override String themeColor({required ThemeColor context}) {
 		switch (context) {
 			case ThemeColor.dynamicColor:
 				return 'DynamicColor';
@@ -638,9 +277,7 @@ class TranslationsKEnumEn {
 				return 'Orange';
 		}
 	}
-
-	/// en: '(system) {System} (light) {Light} (dark) {Dark}'
-	String themeMode({required ThemeMode context}) {
+	@override String themeMode({required ThemeMode context}) {
 		switch (context) {
 			case ThemeMode.system:
 				return 'System';
@@ -650,11 +287,8 @@ class TranslationsKEnumEn {
 				return 'Dark';
 		}
 	}
-
-	late final TranslationsKEnumViewLayoutEn viewLayout = TranslationsKEnumViewLayoutEn.internal(_root);
-
-	/// en: '(asc) {ASC} (desc) {DESC}'
-	String sortOrder({required SortOrder context}) {
+	@override late final _TranslationsKEnumViewLayoutEn viewLayout = _TranslationsKEnumViewLayoutEn._(_root);
+	@override String sortOrder({required SortOrder context}) {
 		switch (context) {
 			case SortOrder.asc:
 				return 'ASC';
@@ -662,9 +296,7 @@ class TranslationsKEnumEn {
 				return 'DESC';
 		}
 	}
-
-	/// en: '(createdAt) {Created at} (name) {Name} (wishRank) {Degree of desirability}'
-	String itemOrderKey({required ItemOrderKey context}) {
+	@override String itemOrderKey({required ItemOrderKey context}) {
 		switch (context) {
 			case ItemOrderKey.createdAt:
 				return 'Created at';
@@ -674,9 +306,7 @@ class TranslationsKEnumEn {
 				return 'Degree of desirability';
 		}
 	}
-
-	/// en: '(child) {child} (adult) {adult}'
-	String ageGroup({required AgeGroup context}) {
+	@override String ageGroup({required AgeGroup context}) {
 		switch (context) {
 			case AgeGroup.child:
 				return 'child';
@@ -684,9 +314,7 @@ class TranslationsKEnumEn {
 				return 'adult';
 		}
 	}
-
-	/// en: '(notPurchased) {unpurchased} (purchasePlan) {Planned purchases} (purchased) {already bought}'
-	String purchaseStatus({required PurchaseStatus context}) {
+	@override String purchaseStatus({required PurchaseStatus context}) {
 		switch (context) {
 			case PurchaseStatus.notPurchased:
 				return 'unpurchased';
@@ -699,18 +327,14 @@ class TranslationsKEnumEn {
 }
 
 // Path: kEnum.viewLayout
-class TranslationsKEnumViewLayoutEn {
-	TranslationsKEnumViewLayoutEn.internal(this._root);
+class _TranslationsKEnumViewLayoutEn extends TranslationsKEnumViewLayoutJa {
+	_TranslationsKEnumViewLayoutEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-
-	/// en: 'Layout'
-	String get name => 'Layout';
-
-	/// en: '(grid) {Grid} (list) {List}'
-	String typeName({required ViewLayout context}) {
+	@override String get name => 'Layout';
+	@override String typeName({required ViewLayout context}) {
 		switch (context) {
 			case ViewLayout.grid:
 				return 'Grid';
@@ -722,7 +346,7 @@ class TranslationsKEnumViewLayoutEn {
 
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
-extension on Translations {
+extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app.start': return 'Start';
