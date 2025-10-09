@@ -29,6 +29,14 @@ firebase_options*.dart
 kotlin-compiler*.salive
 
 # env
-env.g.dart
-env.dev.g.dart
+# アプリ公開に伴い機密情報などは除外
+ExportOptions.plist
+dart_defines/**
 .env*
+scripts/**
+GoogleService-Info.plist
+google-services.json
+env.*.dart
+firebase_options*.dart
+firebase_app_id_file.json
+*.rules
