@@ -16,12 +16,9 @@ GoRouter router(Ref ref) {
     routes: router.routes,
     initialLocation: initialLocation,
     redirect: router.redirect,
+    errorBuilder: (_, state) => ErrorPage(exception: state.error),
 
     // ログイン状態やデータの変更でredirectを検知するように、`refreshListenable`を設定
     refreshListenable: router,
-    // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら復活する
-    /// https://github.com/flutter/flutter/issues/112196
-    // observers: [GoRouterObserver()],
-    errorBuilder: (_, state) => ErrorPage(exception: state.error),
   );
 }
