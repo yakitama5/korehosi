@@ -9,6 +9,28 @@ import 'router.dart';
 
 part 'router_observer.g.dart';
 
+class GoRouterObserver extends NavigatorObserver {
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    logger.i('MyTest didPush: $route');
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    logger.i('MyTest didPop: $route');
+  }
+
+  @override
+  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    logger.i('MyTest didRemove: $route');
+  }
+
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+    logger.i('MyTest didReplace: $newRoute');
+  }
+}
+
 @riverpod
 class CurrentRoute extends _$CurrentRoute {
   @override

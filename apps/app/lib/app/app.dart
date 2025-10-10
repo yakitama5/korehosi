@@ -31,12 +31,13 @@ class App extends HookConsumerWidget {
       title: appBuildConfig.appName,
       builder: (_, child) => Nested(
         children: const [
+          // TODO(yakitama5): TEST
           ResponsiveAutoScaleBox(),
           LoaderOverlay(),
           AppUpdateListner(),
           DevicePreviewSingleChildContainer(),
           AppReactiveFormConfig(),
-          RouteObserverContainer(),
+          // RouteObserverContainer(),
           DynamicLinkListner(),
           NotificationClickListner(),
         ],
@@ -46,6 +47,9 @@ class App extends HookConsumerWidget {
         context,
       ).copyWith(physics: const BouncingScrollPhysics()),
 
+      // Router
+      routerConfig: ref.watch(routerProvider),
+
       // Slang
       locale:
           DevicePreview.locale(context) ??
@@ -54,7 +58,6 @@ class App extends HookConsumerWidget {
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
       scaffoldMessengerKey: SnackBarManager.rootScaffoldMessengerKey,
-      routerConfig: ref.watch(routerProvider),
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,
