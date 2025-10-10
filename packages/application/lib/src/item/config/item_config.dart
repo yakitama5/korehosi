@@ -7,4 +7,5 @@ const itemConfig = ItemConfig(
   maxWishSeasonLength: 50,
   maxUrlLength: 2500,
   maxMemoLength: 1000,
+  limitItemCount: 30,
 );

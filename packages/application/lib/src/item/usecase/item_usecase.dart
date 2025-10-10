@@ -1,10 +1,9 @@
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/group.dart';
 import 'package:packages_application/i18n/strings.g.dart';
+import 'package:packages_application/item.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
-import 'package:packages_application/src/group/state/current_group_provider.dart';
-import 'package:packages_application/src/item/config/item_image_config.dart';
-import 'package:packages_application/src/item/model/selected_image_model.dart';
 import 'package:packages_application/src/user/extension/user_mixin.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
 import 'package:packages_domain/common.dart' hide BusinessException;
@@ -167,11 +166,11 @@ class ItemUsecase with RunUsecaseMixin {
   /// 欲しい物の登録数上限を検証
   Future<void> _validateItemCount() async {
     final group = await ref.read(currentGroupProvider.future);
-    final maxCount = await ref.read(configServiceProvider).fetchMaxItemCount();
 
     final isPremium = group?.premium == true;
     final overItemCount =
-        group?.itemCount != null && group!.itemCount! >= maxCount;
+        group?.itemCount != null &&
+        group!.itemCount! >= itemConfig.limitItemCount;
 
     if (!isPremium && overItemCount) {
       throw BusinessException(i18n.exceptions.itemRegistrationPolicy.limitOver);

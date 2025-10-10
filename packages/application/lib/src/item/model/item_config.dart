@@ -11,5 +11,6 @@ abstract class ItemConfig with _$ItemConfig {
     required int maxWishSeasonLength,
     required int maxUrlLength,
     required int maxMemoLength,
+    required int limitItemCount,
   }) = _ItemConfig;
 }

@@ -1,7 +1,6 @@
 export 'src/common/interface/analytics_service.dart';
 export 'src/common/interface/app_maintenance_repository.dart';
 export 'src/common/interface/app_version_repository.dart';
-export 'src/common/interface/config_service.dart';
 export 'src/common/interface/deep_link_service.dart';
 export 'src/common/interface/storage_service.dart';
 export 'src/common/value_object/app_build_config.dart';

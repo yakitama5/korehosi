@@ -31,7 +31,6 @@ Future<List<Override>> initializeInfrastructureProviders() async {
     itemRepositoryProvider.overrideWith(FirebaseItemRepository.new),
     purchaseRepositoryProvider.overrideWith(FirebasePurchaseRepository.new),
     storageServiceProvider.overrideWith(FirebaseStorageService.new),
-    configServiceProvider.overrideWith(FirebaseConfigService.new),
     analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
     messagingServiceProvider.overrideWith(
       FirebaseMessagingMessagingService.new,

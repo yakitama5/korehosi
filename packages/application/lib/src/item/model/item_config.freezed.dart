@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ItemConfig {
 
- int get maxNameLength; int get maxWanterNameLength; int get maxWishSeasonLength; int get maxUrlLength; int get maxMemoLength;
+ int get maxNameLength; int get maxWanterNameLength; int get maxWishSeasonLength; int get maxUrlLength; int get maxMemoLength; int get limitItemCount;
 /// Create a copy of ItemConfig
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ItemConfigCopyWith<ItemConfig> get copyWith => _$ItemConfigCopyWithImpl<ItemCon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemConfig&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength)&&(identical(other.maxWanterNameLength, maxWanterNameLength) || other.maxWanterNameLength == maxWanterNameLength)&&(identical(other.maxWishSeasonLength, maxWishSeasonLength) || other.maxWishSeasonLength == maxWishSeasonLength)&&(identical(other.maxUrlLength, maxUrlLength) || other.maxUrlLength == maxUrlLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemConfig&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength)&&(identical(other.maxWanterNameLength, maxWanterNameLength) || other.maxWanterNameLength == maxWanterNameLength)&&(identical(other.maxWishSeasonLength, maxWishSeasonLength) || other.maxWishSeasonLength == maxWishSeasonLength)&&(identical(other.maxUrlLength, maxUrlLength) || other.maxUrlLength == maxUrlLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength)&&(identical(other.limitItemCount, limitItemCount) || other.limitItemCount == limitItemCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,maxNameLength,maxWanterNameLength,maxWishSeasonLength,maxUrlLength,maxMemoLength);
+int get hashCode => Object.hash(runtimeType,maxNameLength,maxWanterNameLength,maxWishSeasonLength,maxUrlLength,maxMemoLength,limitItemCount);
 
 @override
 String toString() {
-  return 'ItemConfig(maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength)';
+  return 'ItemConfig(maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength, limitItemCount: $limitItemCount)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ItemConfigCopyWith<$Res>  {
   factory $ItemConfigCopyWith(ItemConfig value, $Res Function(ItemConfig) _then) = _$ItemConfigCopyWithImpl;
 @useResult
 $Res call({
- int maxNameLength, int maxWanterNameLength, int maxWishSeasonLength, int maxUrlLength, int maxMemoLength
+ int maxNameLength, int maxWanterNameLength, int maxWishSeasonLength, int maxUrlLength, int maxMemoLength, int limitItemCount
 });
 
 
@@ -62,13 +62,14 @@ class _$ItemConfigCopyWithImpl<$Res>
 
 /// Create a copy of ItemConfig
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? maxNameLength = null,Object? maxWanterNameLength = null,Object? maxWishSeasonLength = null,Object? maxUrlLength = null,Object? maxMemoLength = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? maxNameLength = null,Object? maxWanterNameLength = null,Object? maxWishSeasonLength = null,Object? maxUrlLength = null,Object? maxMemoLength = null,Object? limitItemCount = null,}) {
   return _then(_self.copyWith(
 maxNameLength: null == maxNameLength ? _self.maxNameLength : maxNameLength // ignore: cast_nullable_to_non_nullable
 as int,maxWanterNameLength: null == maxWanterNameLength ? _self.maxWanterNameLength : maxWanterNameLength // ignore: cast_nullable_to_non_nullable
 as int,maxWishSeasonLength: null == maxWishSeasonLength ? _self.maxWishSeasonLength : maxWishSeasonLength // ignore: cast_nullable_to_non_nullable
 as int,maxUrlLength: null == maxUrlLength ? _self.maxUrlLength : maxUrlLength // ignore: cast_nullable_to_non_nullable
 as int,maxMemoLength: null == maxMemoLength ? _self.maxMemoLength : maxMemoLength // ignore: cast_nullable_to_non_nullable
+as int,limitItemCount: null == limitItemCount ? _self.limitItemCount : limitItemCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int maxNameLength,  int maxWanterNameLength,  int maxWishSeasonLength,  int maxUrlLength,  int maxMemoLength)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int maxNameLength,  int maxWanterNameLength,  int maxWishSeasonLength,  int maxUrlLength,  int maxMemoLength,  int limitItemCount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ItemConfig() when $default != null:
-return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeasonLength,_that.maxUrlLength,_that.maxMemoLength);case _:
+return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeasonLength,_that.maxUrlLength,_that.maxMemoLength,_that.limitItemCount);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeaso
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int maxNameLength,  int maxWanterNameLength,  int maxWishSeasonLength,  int maxUrlLength,  int maxMemoLength)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int maxNameLength,  int maxWanterNameLength,  int maxWishSeasonLength,  int maxUrlLength,  int maxMemoLength,  int limitItemCount)  $default,) {final _that = this;
 switch (_that) {
 case _ItemConfig():
-return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeasonLength,_that.maxUrlLength,_that.maxMemoLength);case _:
+return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeasonLength,_that.maxUrlLength,_that.maxMemoLength,_that.limitItemCount);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +196,10 @@ return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeaso
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int maxNameLength,  int maxWanterNameLength,  int maxWishSeasonLength,  int maxUrlLength,  int maxMemoLength)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int maxNameLength,  int maxWanterNameLength,  int maxWishSeasonLength,  int maxUrlLength,  int maxMemoLength,  int limitItemCount)?  $default,) {final _that = this;
 switch (_that) {
 case _ItemConfig() when $default != null:
-return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeasonLength,_that.maxUrlLength,_that.maxMemoLength);case _:
+return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeasonLength,_that.maxUrlLength,_that.maxMemoLength,_that.limitItemCount);case _:
   return null;
 
 }
@@ -210,7 +211,7 @@ return $default(_that.maxNameLength,_that.maxWanterNameLength,_that.maxWishSeaso
 
 
 class _ItemConfig implements ItemConfig {
-  const _ItemConfig({required this.maxNameLength, required this.maxWanterNameLength, required this.maxWishSeasonLength, required this.maxUrlLength, required this.maxMemoLength});
+  const _ItemConfig({required this.maxNameLength, required this.maxWanterNameLength, required this.maxWishSeasonLength, required this.maxUrlLength, required this.maxMemoLength, required this.limitItemCount});
   
 
 @override final  int maxNameLength;
@@ -218,6 +219,7 @@ class _ItemConfig implements ItemConfig {
 @override final  int maxWishSeasonLength;
 @override final  int maxUrlLength;
 @override final  int maxMemoLength;
+@override final  int limitItemCount;
 
 /// Create a copy of ItemConfig
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +231,16 @@ _$ItemConfigCopyWith<_ItemConfig> get copyWith => __$ItemConfigCopyWithImpl<_Ite
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemConfig&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength)&&(identical(other.maxWanterNameLength, maxWanterNameLength) || other.maxWanterNameLength == maxWanterNameLength)&&(identical(other.maxWishSeasonLength, maxWishSeasonLength) || other.maxWishSeasonLength == maxWishSeasonLength)&&(identical(other.maxUrlLength, maxUrlLength) || other.maxUrlLength == maxUrlLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemConfig&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength)&&(identical(other.maxWanterNameLength, maxWanterNameLength) || other.maxWanterNameLength == maxWanterNameLength)&&(identical(other.maxWishSeasonLength, maxWishSeasonLength) || other.maxWishSeasonLength == maxWishSeasonLength)&&(identical(other.maxUrlLength, maxUrlLength) || other.maxUrlLength == maxUrlLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength)&&(identical(other.limitItemCount, limitItemCount) || other.limitItemCount == limitItemCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,maxNameLength,maxWanterNameLength,maxWishSeasonLength,maxUrlLength,maxMemoLength);
+int get hashCode => Object.hash(runtimeType,maxNameLength,maxWanterNameLength,maxWishSeasonLength,maxUrlLength,maxMemoLength,limitItemCount);
 
 @override
 String toString() {
-  return 'ItemConfig(maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength)';
+  return 'ItemConfig(maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength, limitItemCount: $limitItemCount)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$ItemConfigCopyWith<$Res> implements $ItemConfigCopyWith<$
   factory _$ItemConfigCopyWith(_ItemConfig value, $Res Function(_ItemConfig) _then) = __$ItemConfigCopyWithImpl;
 @override @useResult
 $Res call({
- int maxNameLength, int maxWanterNameLength, int maxWishSeasonLength, int maxUrlLength, int maxMemoLength
+ int maxNameLength, int maxWanterNameLength, int maxWishSeasonLength, int maxUrlLength, int maxMemoLength, int limitItemCount
 });
 
 
@@ -266,13 +268,14 @@ class __$ItemConfigCopyWithImpl<$Res>
 
 /// Create a copy of ItemConfig
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? maxNameLength = null,Object? maxWanterNameLength = null,Object? maxWishSeasonLength = null,Object? maxUrlLength = null,Object? maxMemoLength = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? maxNameLength = null,Object? maxWanterNameLength = null,Object? maxWishSeasonLength = null,Object? maxUrlLength = null,Object? maxMemoLength = null,Object? limitItemCount = null,}) {
   return _then(_ItemConfig(
 maxNameLength: null == maxNameLength ? _self.maxNameLength : maxNameLength // ignore: cast_nullable_to_non_nullable
 as int,maxWanterNameLength: null == maxWanterNameLength ? _self.maxWanterNameLength : maxWanterNameLength // ignore: cast_nullable_to_non_nullable
 as int,maxWishSeasonLength: null == maxWishSeasonLength ? _self.maxWishSeasonLength : maxWishSeasonLength // ignore: cast_nullable_to_non_nullable
 as int,maxUrlLength: null == maxUrlLength ? _self.maxUrlLength : maxUrlLength // ignore: cast_nullable_to_non_nullable
 as int,maxMemoLength: null == maxMemoLength ? _self.maxMemoLength : maxMemoLength // ignore: cast_nullable_to_non_nullable
+as int,limitItemCount: null == limitItemCount ? _self.limitItemCount : limitItemCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
