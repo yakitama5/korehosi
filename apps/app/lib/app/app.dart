@@ -37,7 +37,7 @@ class App extends HookConsumerWidget {
           AppUpdateListner(),
           DevicePreviewSingleChildContainer(),
           AppReactiveFormConfig(),
-          // RouteObserverContainer(),
+          RouteObserverContainer(),
           DynamicLinkListner(),
           NotificationClickListner(),
         ],

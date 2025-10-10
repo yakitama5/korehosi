@@ -9,40 +9,13 @@ import 'router.dart';
 
 part 'router_observer.g.dart';
 
-class GoRouterObserver extends NavigatorObserver {
-  @override
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    logger.i('MyTest didPush: $route');
-  }
-
-  @override
-  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    logger.i('MyTest didPop: $route');
-  }
-
-  @override
-  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    logger.i('MyTest didRemove: $route');
-  }
-
-  @override
-  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
-    logger.i('MyTest didReplace: $newRoute');
-  }
-}
-
 @riverpod
 class CurrentRoute extends _$CurrentRoute {
   @override
   Uri build() {
     final router = ref.watch(routerProvider);
     void listener() {
-      final uri = router.routeInformationProvider.value.uri;
-      state = uri;
-      logger.i(uri);
-
-      // FirebaseAnalyticsに反映
-      ref.read(analyticsServiceProvider).screenView(screenName: uri.path);
+      ref.invalidateSelf();
     }
 
     router.routerDelegate.addListener(listener);
@@ -51,10 +24,6 @@ class CurrentRoute extends _$CurrentRoute {
     });
 
     final uri = router.routeInformationProvider.value.uri;
-    logger.i(uri);
-
-    // FirebaseAnalyticsに反映
-    ref.read(analyticsServiceProvider).screenView(screenName: uri.path);
     return uri;
   }
 }
@@ -65,14 +34,16 @@ class RouteObserverContainer extends SingleChildStatelessWidget {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
     return Consumer(
-      builder: (context, ref, child) {
-        // HACK(yakitama5): リビルド抑制のため、ref.watchからListnerに変更する
-        // riverpodを使わない方法に変更する方法をちょうさ
+      builder: (_, ref, _) {
         // 現在のパスを検知し続ける
-        ref.watch(currentRouteProvider);
+        ref.listen(currentRouteProvider, (_, uri) {
+          logger.i(uri);
 
-        // ダミー要素を描画する
-        return const SizedBox.shrink();
+          // FirebaseAnalyticsに反映
+          ref.read(analyticsServiceProvider).screenView(screenName: uri.path);
+        });
+
+        return child ?? const SizedBox.shrink();
       },
     );
   }

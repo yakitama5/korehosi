@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/app_listner.dart';
 import 'package:flutter_app/app/pages/analyze/analyze_detail_page.dart';
 import 'package:flutter_app/app/pages/analyze/analyze_page.dart';
 import 'package:flutter_app/app/pages/group/group_page.dart';
@@ -17,7 +16,7 @@ import 'package:flutter_app/app/pages/user/license_page.dart';
 import 'package:flutter_app/app/pages/user/onboard_page.dart';
 import 'package:flutter_app/app/pages/user/profile_page.dart';
 import 'package:flutter_app/app/pages/user/welcome_page.dart';
-import 'package:flutter_app/app/routes/src/navigator_page.dart';
+import 'package:flutter_app/app/routes/importer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
@@ -53,7 +52,8 @@ class BaseShellSrouteData extends ShellRouteData {
   // ルート設定のために定義だけ
   @override
   Widget builder(BuildContext context, GoRouterState state, Widget navigator) =>
-      AppListner(navigator);
+      // RouteObserverContainer(child: navigator);
+      navigator;
 }
 
 class RootRouteData extends GoRouteData with _$RootRouteData {

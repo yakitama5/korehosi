@@ -18,7 +18,7 @@ void main() async {
     ProviderScope(
       overrides: [
         // 初期ロケーションの設定
-        initialLocationProvider.overrideWithValue('/items'),
+        initialLocationProvider.overrideWithValue(null),
 
         // 起動時に取得したアプリの基本情報を設定
         appBuildConfigProvider.overrideWithValue(initializedResult.buildConfig),

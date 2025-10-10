@@ -1,6 +1,5 @@
 import 'package:flutter_app/app/pages/error/error_page.dart';
 import 'package:flutter_app/app/routes/src/router_notifier.dart';
-import 'package:flutter_app/app/routes/src/router_observer.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
@@ -22,7 +21,7 @@ GoRouter router(Ref ref) {
     refreshListenable: router,
     // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら復活する
     /// https://github.com/flutter/flutter/issues/112196
-    observers: [GoRouterObserver()],
+    // observers: [GoRouterObserver()],
     errorBuilder: (_, state) => ErrorPage(exception: state.error),
   );
 }
