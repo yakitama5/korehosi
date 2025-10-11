@@ -14,6 +14,15 @@ const settingsBranch = TypedStatefulShellBranch<BranchSettingsData>(
         TypedGoRoute<ProfileRouteData>(path: ProfileRouteData.path),
         TypedGoRoute<AccountRouteData>(path: AccountRouteData.path),
         TypedGoRoute<LicenseRouteData>(path: LicenseRouteData.path),
+        TypedGoRoute<SettingsUiStylePageRoute>(
+          path: SettingsUiStylePageRoute.path,
+        ),
+        TypedGoRoute<SettingsThemeColorPageRoute>(
+          path: SettingsThemeColorPageRoute.path,
+        ),
+        TypedGoRoute<SettingsThemeModePageRoute>(
+          path: SettingsThemeModePageRoute.path,
+        ),
       ],
     ),
   ],
@@ -87,4 +96,34 @@ class AccountRouteData extends GoRouteData with _$AccountRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const AccountPage();
+}
+
+class SettingsUiStylePageRoute extends GoRouteData {
+  const SettingsUiStylePageRoute();
+
+  static const path = 'ui_style';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SettingsUiStylePage();
+}
+
+class SettingsThemeColorPageRoute extends GoRouteData {
+  const SettingsThemeColorPageRoute();
+
+  static const path = 'color_style';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SettingsThemeColorPage();
+}
+
+class SettingsThemeModePageRoute extends GoRouteData {
+  const SettingsThemeModePageRoute();
+
+  static const path = 'theme_mode';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SettingsThemeModePage();
 }

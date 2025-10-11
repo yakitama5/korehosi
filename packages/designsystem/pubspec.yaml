@@ -24,6 +24,7 @@ dependencies:
   google_fonts: ^6.2.1
   hooks_riverpod: any
   linked_scroll_controller: any
+  lottie: ^3.3.2
   material_color_utilities: any
   nested: any
   packages_application:
@@ -57,6 +58,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/lottie/
   fonts:
     - family: CustomIcons
       fonts:

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
-import 'package:flutter_app/app/pages/error/components/error_view.dart';
 import 'package:flutter_app/app/pages/item/components/item_images.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/item.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
@@ -222,7 +221,6 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       return;
     }
     await execute(
-      context,
       action: () async {
         final navigator = Navigator.of(context);
 

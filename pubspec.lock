@@ -1051,6 +1051,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.1"
+  flutter_settings_ui:
+    dependency: transitive
+    description:
+      name: flutter_settings_ui
+      sha256: dcc506fab724192594e5c232b6214a941abd6e7b5151626635b89258fadbc17c
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   flutter_slidable:
     dependency: transitive
     description:
@@ -1489,10 +1497,10 @@ packages:
     dependency: transitive
     description:
       name: lottie
-      sha256: c5fa04a80a620066c15cf19cc44773e19e9b38e989ff23ea32e5903ef1015950
+      sha256: "8ae0be46dbd9e19641791dc12ee480d34e1fd3f84c749adc05f3ad9342b71b95"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.1"
+    version: "3.3.2"
   macos_ui:
     dependency: transitive
     description:
@@ -2037,14 +2045,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
-  settings_ui:
-    dependency: transitive
-    description:
-      name: settings_ui
-      sha256: d9838037cb554b24b4218b2d07666fbada3478882edefae375ee892b6c820ef3
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   share_plus:
     dependency: transitive
     description:

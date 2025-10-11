@@ -8,6 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/i18n.dart';
 
 Future<String?> showAdaptiveAccountDialog(
   BuildContext context, {
@@ -58,7 +59,9 @@ class AndroidAccountDialog extends HookConsumerWidget {
               ],
             ),
             Text(
-              user == null ? '' : i18n.kEnum.ageGroup(context: user.ageGroup),
+              user == null
+                  ? ''
+                  : commonI18n.kEnum.ageGroup(context: user.ageGroup),
               style: textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/app/hooks/src/use_theme.dart';
-import 'package:flutter_app/app/pages/error/components/error_view.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
+import 'package:flutter_app/app/pages/settings/components/themed_settings_list.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/extension.dart';
-import 'package:settings_ui/settings_ui.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class AccountPage extends HookConsumerWidget with PresentationMixin {
   const AccountPage({super.key});
@@ -77,7 +77,6 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
     WidgetRef ref,
     bool value,
   ) => execute(
-    context,
     action: () {
       final usecase = ref.read(userUsecaseProvider);
       return value ? usecase.signInWithGoogle() : usecase.unlinkWithGoogle();
@@ -89,7 +88,6 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
     WidgetRef ref,
     bool value,
   ) => execute(
-    context,
     action: () {
       final usecase = ref.read(userUsecaseProvider);
       return value ? usecase.signInWithApple() : usecase.unlinkWithApple();
@@ -97,7 +95,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
   );
 
   Future<void> _onLogout(BuildContext context, WidgetRef ref) =>
-      execute(context, action: () => ref.read(userUsecaseProvider).signOut());
+      execute(action: () => ref.read(userUsecaseProvider).signOut());
 
   Future<void> _onDeleteAccount(BuildContext context, WidgetRef ref) async {
     // 削除確認
@@ -112,10 +110,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
 
     // 削除処理
     if (context.mounted) {
-      return execute(
-        context,
-        action: () => ref.read(userUsecaseProvider).delete(),
-      );
+      return execute(action: () => ref.read(userUsecaseProvider).delete());
     }
   }
 }

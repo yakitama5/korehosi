@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
-import 'package:flutter_app/app/pages/error/components/error_view.dart';
 import 'package:flutter_app/app/pages/group/components/account_dialog.dart';
 import 'package:flutter_app/app/pages/group/components/not_group_view.dart';
 import 'package:flutter_app/app/pages/item/components/item_order_selector_bottom_sheet.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_app/app/pages/item/components/list_empty_view.dart';
 import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
 import 'package:flutter_app/app/pages/item/components/purchase_status_selector_bottom_sheet.dart';
 import 'package:flutter_app/app/pages/item/components/wish_rank_selector_bottom_sheet.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -21,6 +19,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/i18n.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
@@ -188,7 +188,6 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
     // 選択結果に応じてグループを切り替える
     if (context.mounted) {
       await execute(
-        context,
         action: () async =>
             ref.read(groupUsecaseProvider).setCurrentGroupId(groupId: groupId),
         successMessage: i18n.app.completeChangeGroupMessage,
@@ -310,7 +309,7 @@ class _ItemOrderChip extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return LeadingIconInputChip(
-      label: Text(i18n.kEnum.itemOrderKey(context: value.key)),
+      label: Text(commonI18n.kEnum.itemOrderKey(context: value.key)),
       iconData: value.iconData,
       onPressed: () async {
         // BottomSheetの表示
@@ -344,7 +343,7 @@ class _PurchaseStatusChip extends HookWidget {
         ? i18n.app.status
         : value.length > 1
         ? i18n.app.selectNumberText(length: value.length)
-        : i18n.kEnum.purchaseStatus(context: value.first);
+        : commonI18n.kEnum.purchaseStatus(context: value.first);
 
     return LeadingIconInputChip(
       label: Text(dispName),
@@ -458,7 +457,6 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     await execute(
-      context,
       action: () => ref.read(itemUsecaseProvider).delete(itemId: item.id),
       successMessage: i18n.app.completeDeleteMessage,
     );

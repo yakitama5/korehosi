@@ -1,0 +1,30 @@
+settingsPage:
+  title: Settings
+  account:
+    head: Account
+    account: Account
+  layout:
+    haed: Layout
+    uiStyle: UI Style
+    themeMode: ThemeMode
+    colorTheme: Colors
+  help:
+    head: Help
+    howToUse: HowToUse
+    contactUs: Contact us
+    developperTwitter: Developper
+    privacyPollicy: PrivacyPollicy
+    licencse: License
+accountPage:
+  title: Account
+  link:
+    head: Account link
+    google: Google
+    apple: Apple
+  other: 
+    head: Other
+    logout: Logout
+    leave: Leave
+  leaveConfirmDialog:
+    title: Leave?
+    body: Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.

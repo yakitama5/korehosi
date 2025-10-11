@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_domain/exception.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
@@ -44,7 +44,9 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
       _limitedReleasePlanPackageKey,
     );
     if (package == null) {
-      throw const BusinessException('Not exists purchase package');
+      throw const BusinessException(
+        BusinessExceptionType.appInPurchasePolicyPackageNotExist,
+      );
     }
 
     final purchaserInfo = await Purchases.purchase(
@@ -56,7 +58,9 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
             .all[_limitedReleasePlanEntitlementKey]
             ?.isActive !=
         true) {
-      throw const BusinessException('Not active');
+      throw const BusinessException(
+        BusinessExceptionType.appInPurchasePolicyPackageNotActive,
+      );
     }
   }
 

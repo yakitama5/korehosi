@@ -1,0 +1,30 @@
+settingsPage:
+  title: 設定
+  account:
+    head: アカウント
+    account: アカウント
+  layout:
+    haed: レイアウト
+    uiStyle: UIスタイル
+    themeMode: テーマモード
+    colorTheme: カラー
+  help:
+    head: ヘルプ
+    howToUse: つかい方
+    contactUs: お問い合わせ
+    developperTwitter: 開発者情報
+    privacyPollicy: プライバシーポリシー
+    licencse: ライセンス
+accountPage:
+  title: アカウント
+  link:
+    head: アカウント連携
+    google: Google
+    apple: Apple
+  other:
+    head: その他
+    logout: ログアウト
+    leave: 退会
+  leaveConfirmDialog:
+    title: 退会しますか？
+    body: 本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
-import 'package:flutter_app/app/pages/error/components/error_view.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/app/pages/user/components/age_group_field.dart';
 import 'package:flutter_app/app/pages/user/components/user_name_field.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
@@ -10,6 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class ProfilePage extends HookConsumerWidget {
   const ProfilePage({super.key});
@@ -74,7 +73,6 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onSave(BuildContext context, WidgetRef ref) async {
     await execute(
-      context,
       action: () async {
         // 画面の入力内容を取得
         final formModel = ReactiveUserFormModelForm.of(context)!;

@@ -45,7 +45,7 @@ class TranslationsEn extends Translations {
 
 	// Translations
 	@override late final _TranslationsAppEn app = _TranslationsAppEn._(_root);
-	@override late final _TranslationsKEnumEn kEnum = _TranslationsKEnumEn._(_root);
+	@override late final _TranslationsSettingsEn settings = _TranslationsSettingsEn._(_root);
 }
 
 // Path: app
@@ -238,110 +238,115 @@ class _TranslationsAppEn extends TranslationsAppJa {
 	@override String get purchased => 'already bought';
 }
 
-// Path: kEnum
-class _TranslationsKEnumEn extends TranslationsKEnumJa {
-	_TranslationsKEnumEn._(TranslationsEn root) : this._root = root, super.internal(root);
+// Path: settings
+class _TranslationsSettingsEn extends TranslationsSettingsJa {
+	_TranslationsSettingsEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String uiStyle({required UIStyle context}) {
-		switch (context) {
-			case UIStyle.system:
-				return 'System';
-			case UIStyle.android:
-				return 'Android';
-			case UIStyle.ios:
-				return 'iOS';
-		}
-	}
-	@override String themeColor({required ThemeColor context}) {
-		switch (context) {
-			case ThemeColor.dynamicColor:
-				return 'DynamicColor';
-			case ThemeColor.monochrome:
-				return 'Monochrome';
-			case ThemeColor.blue:
-				return 'Blue';
-			case ThemeColor.purple:
-				return 'Purple';
-			case ThemeColor.green:
-				return 'Green';
-			case ThemeColor.red:
-				return 'Red';
-			case ThemeColor.pink:
-				return 'Pink';
-			case ThemeColor.yellow:
-				return 'Yellow';
-			case ThemeColor.orange:
-				return 'Orange';
-		}
-	}
-	@override String themeMode({required ThemeMode context}) {
-		switch (context) {
-			case ThemeMode.system:
-				return 'System';
-			case ThemeMode.light:
-				return 'Light';
-			case ThemeMode.dark:
-				return 'Dark';
-		}
-	}
-	@override late final _TranslationsKEnumViewLayoutEn viewLayout = _TranslationsKEnumViewLayoutEn._(_root);
-	@override String sortOrder({required SortOrder context}) {
-		switch (context) {
-			case SortOrder.asc:
-				return 'ASC';
-			case SortOrder.desc:
-				return 'DESC';
-		}
-	}
-	@override String itemOrderKey({required ItemOrderKey context}) {
-		switch (context) {
-			case ItemOrderKey.createdAt:
-				return 'Created at';
-			case ItemOrderKey.name:
-				return 'Name';
-			case ItemOrderKey.wishRank:
-				return 'Degree of desirability';
-		}
-	}
-	@override String ageGroup({required AgeGroup context}) {
-		switch (context) {
-			case AgeGroup.child:
-				return 'child';
-			case AgeGroup.adult:
-				return 'adult';
-		}
-	}
-	@override String purchaseStatus({required PurchaseStatus context}) {
-		switch (context) {
-			case PurchaseStatus.notPurchased:
-				return 'unpurchased';
-			case PurchaseStatus.purchasePlan:
-				return 'Planned purchases';
-			case PurchaseStatus.purchased:
-				return 'already bought';
-		}
-	}
+	@override late final _TranslationsSettingsSettingsPageEn settingsPage = _TranslationsSettingsSettingsPageEn._(_root);
+	@override late final _TranslationsSettingsAccountPageEn accountPage = _TranslationsSettingsAccountPageEn._(_root);
 }
 
-// Path: kEnum.viewLayout
-class _TranslationsKEnumViewLayoutEn extends TranslationsKEnumViewLayoutJa {
-	_TranslationsKEnumViewLayoutEn._(TranslationsEn root) : this._root = root, super.internal(root);
+// Path: settings.settingsPage
+class _TranslationsSettingsSettingsPageEn extends TranslationsSettingsSettingsPageJa {
+	_TranslationsSettingsSettingsPageEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get name => 'Layout';
-	@override String typeName({required ViewLayout context}) {
-		switch (context) {
-			case ViewLayout.grid:
-				return 'Grid';
-			case ViewLayout.list:
-				return 'List';
-		}
-	}
+	@override String get title => 'Settings';
+	@override late final _TranslationsSettingsSettingsPageAccountEn account = _TranslationsSettingsSettingsPageAccountEn._(_root);
+	@override late final _TranslationsSettingsSettingsPageLayoutEn layout = _TranslationsSettingsSettingsPageLayoutEn._(_root);
+	@override late final _TranslationsSettingsSettingsPageHelpEn help = _TranslationsSettingsSettingsPageHelpEn._(_root);
+}
+
+// Path: settings.accountPage
+class _TranslationsSettingsAccountPageEn extends TranslationsSettingsAccountPageJa {
+	_TranslationsSettingsAccountPageEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Account';
+	@override late final _TranslationsSettingsAccountPageLinkEn link = _TranslationsSettingsAccountPageLinkEn._(_root);
+	@override late final _TranslationsSettingsAccountPageOtherEn other = _TranslationsSettingsAccountPageOtherEn._(_root);
+	@override late final _TranslationsSettingsAccountPageLeaveConfirmDialogEn leaveConfirmDialog = _TranslationsSettingsAccountPageLeaveConfirmDialogEn._(_root);
+}
+
+// Path: settings.settingsPage.account
+class _TranslationsSettingsSettingsPageAccountEn extends TranslationsSettingsSettingsPageAccountJa {
+	_TranslationsSettingsSettingsPageAccountEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get head => 'Account';
+	@override String get account => 'Account';
+}
+
+// Path: settings.settingsPage.layout
+class _TranslationsSettingsSettingsPageLayoutEn extends TranslationsSettingsSettingsPageLayoutJa {
+	_TranslationsSettingsSettingsPageLayoutEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get haed => 'Layout';
+	@override String get uiStyle => 'UI Style';
+	@override String get themeMode => 'ThemeMode';
+	@override String get colorTheme => 'Colors';
+}
+
+// Path: settings.settingsPage.help
+class _TranslationsSettingsSettingsPageHelpEn extends TranslationsSettingsSettingsPageHelpJa {
+	_TranslationsSettingsSettingsPageHelpEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get head => 'Help';
+	@override String get howToUse => 'HowToUse';
+	@override String get contactUs => 'Contact us';
+	@override String get developperTwitter => 'Developper';
+	@override String get privacyPollicy => 'PrivacyPollicy';
+	@override String get licencse => 'License';
+}
+
+// Path: settings.accountPage.link
+class _TranslationsSettingsAccountPageLinkEn extends TranslationsSettingsAccountPageLinkJa {
+	_TranslationsSettingsAccountPageLinkEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get head => 'Account link';
+	@override String get google => 'Google';
+	@override String get apple => 'Apple';
+}
+
+// Path: settings.accountPage.other
+class _TranslationsSettingsAccountPageOtherEn extends TranslationsSettingsAccountPageOtherJa {
+	_TranslationsSettingsAccountPageOtherEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get head => 'Other';
+	@override String get logout => 'Logout';
+	@override String get leave => 'Leave';
+}
+
+// Path: settings.accountPage.leaveConfirmDialog
+class _TranslationsSettingsAccountPageLeaveConfirmDialogEn extends TranslationsSettingsAccountPageLeaveConfirmDialogJa {
+	_TranslationsSettingsAccountPageLeaveConfirmDialogEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Leave?';
+	@override String get body => 'Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.';
 }
 
 /// Flat map(s) containing all translations.
@@ -530,93 +535,28 @@ extension on TranslationsEn {
 			case 'app.pushNotification': return 'push notification';
 			case 'app.pushNotificationDescription': return 'Receive notifications when new items you want are added to the group';
 			case 'app.purchased': return 'already bought';
-			case 'kEnum.uiStyle': return ({required UIStyle context}) {
-				switch (context) {
-					case UIStyle.system:
-						return 'System';
-					case UIStyle.android:
-						return 'Android';
-					case UIStyle.ios:
-						return 'iOS';
-				}
-			};
-			case 'kEnum.themeColor': return ({required ThemeColor context}) {
-				switch (context) {
-					case ThemeColor.dynamicColor:
-						return 'DynamicColor';
-					case ThemeColor.monochrome:
-						return 'Monochrome';
-					case ThemeColor.blue:
-						return 'Blue';
-					case ThemeColor.purple:
-						return 'Purple';
-					case ThemeColor.green:
-						return 'Green';
-					case ThemeColor.red:
-						return 'Red';
-					case ThemeColor.pink:
-						return 'Pink';
-					case ThemeColor.yellow:
-						return 'Yellow';
-					case ThemeColor.orange:
-						return 'Orange';
-				}
-			};
-			case 'kEnum.themeMode': return ({required ThemeMode context}) {
-				switch (context) {
-					case ThemeMode.system:
-						return 'System';
-					case ThemeMode.light:
-						return 'Light';
-					case ThemeMode.dark:
-						return 'Dark';
-				}
-			};
-			case 'kEnum.viewLayout.name': return 'Layout';
-			case 'kEnum.viewLayout.typeName': return ({required ViewLayout context}) {
-				switch (context) {
-					case ViewLayout.grid:
-						return 'Grid';
-					case ViewLayout.list:
-						return 'List';
-				}
-			};
-			case 'kEnum.sortOrder': return ({required SortOrder context}) {
-				switch (context) {
-					case SortOrder.asc:
-						return 'ASC';
-					case SortOrder.desc:
-						return 'DESC';
-				}
-			};
-			case 'kEnum.itemOrderKey': return ({required ItemOrderKey context}) {
-				switch (context) {
-					case ItemOrderKey.createdAt:
-						return 'Created at';
-					case ItemOrderKey.name:
-						return 'Name';
-					case ItemOrderKey.wishRank:
-						return 'Degree of desirability';
-				}
-			};
-			case 'kEnum.ageGroup': return ({required AgeGroup context}) {
-				switch (context) {
-					case AgeGroup.child:
-						return 'child';
-					case AgeGroup.adult:
-						return 'adult';
-				}
-			};
-			case 'kEnum.purchaseStatus': return ({required PurchaseStatus context}) {
-				switch (context) {
-					case PurchaseStatus.notPurchased:
-						return 'unpurchased';
-					case PurchaseStatus.purchasePlan:
-						return 'Planned purchases';
-					case PurchaseStatus.purchased:
-						return 'already bought';
-				}
-			};
+			case 'settings.settingsPage.title': return 'Settings';
+			case 'settings.settingsPage.account.head': return 'Account';
+			case 'settings.settingsPage.account.account': return 'Account';
+			case 'settings.settingsPage.layout.haed': return 'Layout';
+			case 'settings.settingsPage.layout.uiStyle': return 'UI Style';
+			case 'settings.settingsPage.layout.themeMode': return 'ThemeMode';
+			case 'settings.settingsPage.layout.colorTheme': return 'Colors';
+			case 'settings.settingsPage.help.head': return 'Help';
+			case 'settings.settingsPage.help.howToUse': return 'HowToUse';
+			case 'settings.settingsPage.help.contactUs': return 'Contact us';
+			case 'settings.settingsPage.help.developperTwitter': return 'Developper';
+			case 'settings.settingsPage.help.privacyPollicy': return 'PrivacyPollicy';
+			case 'settings.settingsPage.help.licencse': return 'License';
+			case 'settings.accountPage.title': return 'Account';
+			case 'settings.accountPage.link.head': return 'Account link';
+			case 'settings.accountPage.link.google': return 'Google';
+			case 'settings.accountPage.link.apple': return 'Apple';
+			case 'settings.accountPage.other.head': return 'Other';
+			case 'settings.accountPage.other.logout': return 'Logout';
+			case 'settings.accountPage.other.leave': return 'Leave';
+			case 'settings.accountPage.leaveConfirmDialog.title': return 'Leave?';
+			case 'settings.accountPage.leaveConfirmDialog.body': return 'Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.';
 			default: return null;
 		}
 	}

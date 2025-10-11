@@ -10,8 +10,10 @@ lazy: false
 imports:
   - "package:flutter/material.dart"
   - "package:packages_domain/user.dart"
+  - "package:packages_domain/item.dart"
   - "package:packages_domain/common.dart"
   - "package:packages_domain/designsystem.dart"
+  - "package:packages_application/common.dart"
   - "package:packages_application/item.dart"
 contexts:
   AgeGroup:
@@ -29,4 +31,6 @@ contexts:
   ThemeColor:
     generate_enum: false
   UIStyle:
+    generate_enum: false
+  BusinessExceptionType:
     generate_enum: false

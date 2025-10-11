@@ -1,13 +1,11 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/src/common/config/web_app_config.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/config/group_config.dart';
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
 import 'package:packages_application/src/group/state/group_provider.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
-import 'package:packages_domain/common.dart' hide BusinessException;
-import 'package:packages_domain/exception.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -105,7 +103,9 @@ class GroupUsecase with RunUsecaseMixin {
         // 対象の取得
         final group = await ref.read(groupProvider(groupId: groupId).future);
         if (group == null) {
-          throw UpdateTargetNotFoundException();
+          throw const BusinessException(
+            BusinessExceptionType.updateTargetNotFound,
+          );
         }
 
         // アプリ内課金を行う
@@ -134,16 +134,24 @@ class GroupUsecase with RunUsecaseMixin {
           // do nothing
           break;
         case JoinGroupErrorCode.joinedGroup:
-          throw BusinessException(i18n.exceptions.joinGroupPolicy.joinedGroup);
+          throw const BusinessException(
+            BusinessExceptionType.joinGroupPolicyJoinedGroup,
+          );
         case JoinGroupErrorCode.notAuth:
-          throw BusinessException(i18n.exceptions.joinGroupPolicy.notAuth);
+          throw const BusinessException(
+            BusinessExceptionType.joinGroupPolicyNotAuth,
+          );
         case JoinGroupErrorCode.invalidDate:
-          throw BusinessException(i18n.exceptions.joinGroupPolicy.expired);
+          throw const BusinessException(
+            BusinessExceptionType.joinGroupPolicyExpired,
+          );
         case JoinGroupErrorCode.overCount:
-          throw BusinessException(i18n.exceptions.joinGroupPolicy.limitOver);
+          throw const BusinessException(
+            BusinessExceptionType.joinGroupPolicyLimitOver,
+          );
         case JoinGroupErrorCode.invalidRequest:
-          throw BusinessException(
-            i18n.exceptions.joinGroupPolicy.invalidShareLink,
+          throw const BusinessException(
+            BusinessExceptionType.joinGroupPolicyInvalidShareLink,
           );
       }
     },

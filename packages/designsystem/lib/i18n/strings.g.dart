@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 58 (29 per locale)
+/// Strings: 143 (71 per locale)
 ///
-/// Built on 2025-10-09 at 04:19 UTC
+/// Built on 2025-10-11 at 11:42 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
@@ -14,9 +14,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/designsystem.dart';
+import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
 import 'package:slang/generated.dart';
 import 'package:slang_flutter/slang_flutter.dart';

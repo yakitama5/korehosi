@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_domain/item.dart';
 
 import '../../../components/importer.dart';
@@ -36,7 +37,7 @@ class PurchaseStatusSelectorBottomSheet extends HookWidget {
                 .map(
                   (e) => ButtonSegment<PurchaseStatus>(
                     value: e,
-                    label: Text(i18n.kEnum.purchaseStatus(context: e)),
+                    label: Text(commonI18n.kEnum.purchaseStatus(context: e)),
                   ),
                 )
                 .toList(),

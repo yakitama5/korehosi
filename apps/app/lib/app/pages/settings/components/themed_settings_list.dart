@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:settings_ui/settings_ui.dart';
 
 class ThemedSettingsList extends HookConsumerWidget {
   const ThemedSettingsList({

@@ -1,11 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
-import 'package:flutter_app/app/pages/error/components/error_view.dart';
 import 'package:flutter_app/app/pages/item/components/empty_item_image.dart';
 import 'package:flutter_app/app/pages/item/components/item_image_carousel_slider.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
@@ -14,6 +12,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:nested/nested.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/item.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -127,7 +126,6 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onSave(BuildContext context, WidgetRef ref) async {
     await execute(
-      context,
       action: () async {
         // 入力チェック判定
         final formModel = ReactiveItemFormModelForm.of(context)!;
@@ -217,7 +215,6 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       return;
     }
     await execute(
-      context,
       action: () async {
         final itemId = ref.read(ItemDetailProviders.itemIdProvider);
         await ref.read(itemUsecaseProvider).delete(itemId: itemId!);

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
-import 'package:packages_domain/common.dart';
+import 'package:lottie/lottie.dart';
+import 'package:packages_designsystem/src/extension/exception_extension.dart';
+import 'package:packages_designsystem/src/gen/assets/assets.gen.dart';
 
 class ErrorView extends HookWidget {
   const ErrorView(this.error, this.stackTrace, {super.key});
@@ -12,19 +14,30 @@ class ErrorView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // TODO(yakitama5): エラー画像を設定する
-          const Text('Sorry'),
           const Gap(8),
+          Lottie.asset(
+            Assets.lottie.error,
+            height: 120,
+            delegates: LottieDelegates(
+              values: [
+                ValueDelegate.color(const [
+                  'Shape Layer 1',
+                  '**',
+                ], value: colorScheme.error),
+              ],
+            ),
+          ),
           Text(
             error.errorMessage,
-            // HACK(yakitama5): `ThemeExtension`
             style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
+          const Gap(40),
         ],
       ),
     );
@@ -37,15 +50,5 @@ class SliverErrorView extends ErrorView {
   @override
   Widget build(BuildContext context) {
     return SliverFillRemaining(child: super.build(context));
-  }
-}
-
-extension _ExceptionX on Object {
-  String get errorMessage {
-    if (this is AppException) {
-      return (this as AppException).message!;
-    }
-
-    return toString();
   }
 }

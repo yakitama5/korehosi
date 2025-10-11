@@ -7,6 +7,7 @@ export 'src/common/value_object/app_build_config.dart';
 export 'src/common/value_object/app_exception.dart';
 export 'src/common/value_object/app_maintenance_status.dart';
 export 'src/common/value_object/app_update_status.dart';
+export 'src/common/value_object/business_exception_type.dart';
 export 'src/common/value_object/flavor.dart';
 export 'src/common/value_object/page_info.dart';
 export 'src/common/value_object/sort_order.dart';

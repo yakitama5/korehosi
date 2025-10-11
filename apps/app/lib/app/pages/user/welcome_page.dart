@@ -8,6 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_designsystem/theme.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class WelcomePage extends HookWidget {
   const WelcomePage({super.key});
@@ -48,7 +49,10 @@ class _WelcomeImage extends HookWidget {
         child: SvgAssetImage(
           path: Assets.images.onboardDone,
           replaceColors: svgReplaceColorsPrimary
-              .map((c) => (c, colorScheme.primary))
+              .map(
+                (c) =>
+                    SvgReplaceColors(rawColor: c, color: colorScheme.primary),
+              )
               .toList(),
         ),
       ),

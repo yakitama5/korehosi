@@ -42,6 +42,16 @@ class $AssetsImagesGen {
   List<dynamic> get values => [google, logoDark, logoSvg];
 }
 
+class $AssetsLottieGen {
+  const $AssetsLottieGen();
+
+  /// File path: assets/lottie/error.json
+  String get error => 'packages/packages_designsystem/assets/lottie/error.json';
+
+  /// List of all assets
+  List<String> get values => [error];
+}
+
 class Assets {
   const Assets._();
 
@@ -49,6 +59,7 @@ class Assets {
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
 
 class AssetGenImage {

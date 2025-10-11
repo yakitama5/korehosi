@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/src/app_lifecycle_builder.dart';
-import 'package:flutter_app/app/components/src/themed_settings_list.dart';
 import 'package:flutter_app/app/helper/permission_helper.dart';
 import 'package:flutter_app/app/helper/url_launcher_helper.dart';
 import 'package:flutter_app/app/hooks/src/use_theme.dart';
+import 'package:flutter_app/app/pages/settings/components/themed_settings_list.dart';
 import 'package:flutter_app/app/routes/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
+import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_designsystem/theme.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:settings_ui/settings_ui.dart';
 
 class SettingsPage extends HookConsumerWidget {
   const SettingsPage({super.key});

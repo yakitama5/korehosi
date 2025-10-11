@@ -1,10 +1,10 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/analyze.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 /// 購入者名の`FilterChip`
 class BuyerNameFilterChip extends HookConsumerWidget {

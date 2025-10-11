@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:packages_designsystem/src/components/src/snack_bar_manager.dart';
-import 'package:packages_domain/common.dart';
+import 'package:packages_designsystem/src/extension/exception_extension.dart';
 
 /// プレゼンテーション層用の共通処理 Mixin
 mixin PresentationMixin {
@@ -14,11 +14,8 @@ mixin PresentationMixin {
       if (successMessage != null) {
         SnackBarManager.showInfoSnackBar(successMessage);
       }
-    } on AppException catch (e) {
-      // TODO(yakitama5): 整理
-      SnackBarManager.showErrorSnackBar(e.message ?? '');
     } on Exception catch (e) {
-      SnackBarManager.showErrorSnackBar(e.toString());
+      SnackBarManager.showErrorSnackBar(e.errorMessage);
     }
   }
 }

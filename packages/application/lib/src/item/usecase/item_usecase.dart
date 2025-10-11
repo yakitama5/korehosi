@@ -6,8 +6,7 @@ import 'package:packages_application/item.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/user/extension/user_mixin.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
-import 'package:packages_domain/common.dart' hide BusinessException;
-import 'package:packages_domain/exception.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/notification.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -52,7 +51,9 @@ class ItemUsecase with RunUsecaseMixin {
         currentGroupProvider.selectAsync((group) => group?.id),
       );
       if (groupId == null) {
-        throw UpdateTargetNotFoundException();
+        throw const BusinessException(
+          BusinessExceptionType.updateTargetNotFound,
+        );
       }
 
       // 画像をアップロードするため、先にIDを発番する
@@ -118,7 +119,9 @@ class ItemUsecase with RunUsecaseMixin {
         currentGroupProvider.selectAsync((group) => group?.id),
       );
       if (groupId == null) {
-        throw UpdateTargetNotFoundException();
+        throw const BusinessException(
+          BusinessExceptionType.updateTargetNotFound,
+        );
       }
 
       // 画像をアップロードして、ストレージのパスに変換する
@@ -154,7 +157,9 @@ class ItemUsecase with RunUsecaseMixin {
         currentGroupProvider.selectAsync((group) => group?.id),
       );
       if (groupId == null) {
-        throw UpdateTargetNotFoundException();
+        throw const BusinessException(
+          BusinessExceptionType.updateTargetNotFound,
+        );
       }
 
       return ref
@@ -173,7 +178,9 @@ class ItemUsecase with RunUsecaseMixin {
         group!.itemCount! >= itemConfig.limitItemCount;
 
     if (!isPremium && overItemCount) {
-      throw BusinessException(i18n.exceptions.itemRegistrationPolicy.limitOver);
+      throw const BusinessException(
+        BusinessExceptionType.registrationItemPolicyLimitOver,
+      );
     }
   }
 

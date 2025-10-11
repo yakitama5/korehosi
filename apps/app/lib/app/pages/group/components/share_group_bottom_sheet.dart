@@ -7,12 +7,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_app/app/components/src/bottom_sheet_column.dart';
 import 'package:flutter_app/app/components/src/label_icon_button.dart';
 import 'package:flutter_app/app/hooks/src/use_theme.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:packages_application/group.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -104,7 +104,6 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
   Future<void> onCopy(BuildContext context, WidgetRef ref) async {
     // クリップボードへコピー
     await execute(
-      context,
       action: () => ref
           .read(groupShareUsecaseProvider)
           .copyMessage(shareUrl: shareUrl, groupName: groupName),
@@ -115,7 +114,6 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
   Future<void> onShare(BuildContext context, WidgetRef ref) async {
     // 共有 (BottomSheetを表示)
     await execute(
-      context,
       action: () async {
         // Widgetを画像形式に変換
         final xFile = await repaintBoundartKeyToXFile(_qrImageKey);
@@ -131,7 +129,6 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
   Future<void> onSave(BuildContext context, WidgetRef ref) async {
     // 画像の保存
     await execute(
-      context,
       action: () async {
         // Widgetを画像形式に変換
         final xFile = await repaintBoundartKeyToXFile(_qrImageKey);

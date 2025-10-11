@@ -11,7 +11,7 @@ import 'package:infrastructure_firebase/src/user/model/firestore_user_model.dart
 import 'package:infrastructure_firebase/src/user/state/firestore_deleted_user_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_participant_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_user_provider.dart';
-import 'package:packages_domain/exception.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/user.dart';
 
 /// Firebaseを利用したリポジトリの実装
@@ -95,7 +95,7 @@ class FirebaseUserRepository implements UserRepository {
     final docRef = ref.read(userDocumentRefProvider(userId: userId));
     final prev = await docRef.get();
     if (!prev.exists) {
-      throw UpdateTargetNotFoundException();
+      throw const BusinessException(BusinessExceptionType.updateTargetNotFound);
     }
 
     final param = prev.data()!.copyWith(
@@ -226,8 +226,7 @@ class FirebaseUserRepository implements UserRepository {
   Future<auth.UserCredential> _signInWithGoogleByMobile() async {
     final googleUser = await ref.read(googleSignInProvider).signIn();
     if (googleUser == null) {
-      // TODO(yakitama5): メッセージ(多言語化)はアプリ層ですること
-      throw const BusinessException('Google認証に失敗しました。');
+      throw const BusinessException(BusinessExceptionType.googleSignInUnknown);
     }
 
     final googleAuth = await googleUser.authentication;
@@ -259,7 +258,9 @@ class FirebaseUserRepository implements UserRepository {
     // 他の連携アカウントが存在するか否か
     final linkedMultiProvider = user != null && user.providerData.length >= 2;
     if (!linkedProvider || !linkedMultiProvider) {
-      throw const AccountLinkException();
+      throw const BusinessException(
+        BusinessExceptionType.signInPolicyLinkedAccount,
+      );
     }
 
     return _currentUser?.unlink(providerId);

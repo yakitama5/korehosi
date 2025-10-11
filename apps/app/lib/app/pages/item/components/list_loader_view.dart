@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../../components/importer.dart';
 
 /// ListView用の読み込み中ローダー
 class ListLoaderView extends StatelessWidget {

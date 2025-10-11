@@ -1,8 +1,7 @@
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_core/util.dart';
-import 'package:packages_domain/common.dart' hide BusinessException;
-import 'package:packages_domain/exception.dart';
+import 'package:packages_domain/common.dart';
 import 'package:uuid/uuid.dart';
 
 class BranchDeepLinkService implements DeepLinkService {
@@ -29,13 +28,17 @@ class BranchDeepLinkService implements DeepLinkService {
       );
 
       if (!response.success) {
-        throw const BusinessException('招待コードの生成に失敗しました');
+        throw const BusinessException(
+          BusinessExceptionType.createDynamicLinkUnknown,
+        );
       }
       logger.d('short url: ${response.result.toString()}');
 
       return response.result.toString();
     } on Exception catch (_) {
-      throw const BusinessException('招待コードの生成に失敗しました');
+      throw const BusinessException(
+        BusinessExceptionType.createDynamicLinkUnknown,
+      );
     }
   }
 

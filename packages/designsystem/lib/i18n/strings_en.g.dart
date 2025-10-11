@@ -41,6 +41,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	late final TranslationsCommonEn common = TranslationsCommonEn.internal(_root);
 	late final TranslationsDesignsystemEn designsystem = TranslationsDesignsystemEn.internal(_root);
+	late final TranslationsKEnumEn kEnum = TranslationsKEnumEn.internal(_root);
+	late final TranslationsExceptionsEn exceptions = TranslationsExceptionsEn.internal(_root);
 }
 
 // Path: common
@@ -131,6 +133,150 @@ class TranslationsDesignsystemEn {
 	late final TranslationsDesignsystemAppUpdateEn appUpdate = TranslationsDesignsystemAppUpdateEn.internal(_root);
 }
 
+// Path: kEnum
+class TranslationsKEnumEn {
+	TranslationsKEnumEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: '(system) {System} (android) {Android} (ios) {iOS}'
+	String uiStyle({required UIStyle context}) {
+		switch (context) {
+			case UIStyle.system:
+				return 'System';
+			case UIStyle.android:
+				return 'Android';
+			case UIStyle.ios:
+				return 'iOS';
+		}
+	}
+
+	/// en: '(dynamicColor) {DynamicColor} (monochrome) {Monochrome} (blue) {Blue} (purple) {Purple} (green) {Green} (red) {Red} (pink) {Pink} (yellow) {Yellow} (orange) {Orange}'
+	String themeColor({required ThemeColor context}) {
+		switch (context) {
+			case ThemeColor.dynamicColor:
+				return 'DynamicColor';
+			case ThemeColor.monochrome:
+				return 'Monochrome';
+			case ThemeColor.blue:
+				return 'Blue';
+			case ThemeColor.purple:
+				return 'Purple';
+			case ThemeColor.green:
+				return 'Green';
+			case ThemeColor.red:
+				return 'Red';
+			case ThemeColor.pink:
+				return 'Pink';
+			case ThemeColor.yellow:
+				return 'Yellow';
+			case ThemeColor.orange:
+				return 'Orange';
+		}
+	}
+
+	/// en: '(system) {System} (light) {Light} (dark) {Dark}'
+	String themeMode({required ThemeMode context}) {
+		switch (context) {
+			case ThemeMode.system:
+				return 'System';
+			case ThemeMode.light:
+				return 'Light';
+			case ThemeMode.dark:
+				return 'Dark';
+		}
+	}
+
+	late final TranslationsKEnumViewLayoutEn viewLayout = TranslationsKEnumViewLayoutEn.internal(_root);
+
+	/// en: '(asc) {ASC} (desc) {DESC}'
+	String sortOrder({required SortOrder context}) {
+		switch (context) {
+			case SortOrder.asc:
+				return 'ASC';
+			case SortOrder.desc:
+				return 'DESC';
+		}
+	}
+
+	/// en: '(createdAt) {Created at} (name) {Name} (wishRank) {Degree of desirability}'
+	String itemOrderKey({required ItemOrderKey context}) {
+		switch (context) {
+			case ItemOrderKey.createdAt:
+				return 'Created at';
+			case ItemOrderKey.name:
+				return 'Name';
+			case ItemOrderKey.wishRank:
+				return 'Degree of desirability';
+		}
+	}
+
+	/// en: '(child) {child} (adult) {adult}'
+	String ageGroup({required AgeGroup context}) {
+		switch (context) {
+			case AgeGroup.child:
+				return 'child';
+			case AgeGroup.adult:
+				return 'adult';
+		}
+	}
+
+	/// en: '(notPurchased) {unpurchased} (purchasePlan) {Planned purchases} (purchased) {already bought}'
+	String purchaseStatus({required PurchaseStatus context}) {
+		switch (context) {
+			case PurchaseStatus.notPurchased:
+				return 'unpurchased';
+			case PurchaseStatus.purchasePlan:
+				return 'Planned purchases';
+			case PurchaseStatus.purchased:
+				return 'already bought';
+		}
+	}
+}
+
+// Path: exceptions
+class TranslationsExceptionsEn {
+	TranslationsExceptionsEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: '(deleted) {削除済です。} (updateTargetNotFound) {保存に失敗しました、あらためて操作を行ってください。} (createDynamicLinkUnknown) {招待リンクの作成に失敗しました。} (joinGroupPolicyJoinedGroup) {すでに参加しています。} (joinGroupPolicyExpired) {招待リンクの有効期限が切れています。} (joinGroupPolicyNotAuth) {認証エラーが発生しました。} (joinGroupPolicyLimitOver) {グループの参加上限(5件)に達しました。} (joinGroupPolicyInvalidShareLink) {招待リンクが正しくありません。} (registrationItemPolicyLimitOver) {登録数の上限に達しました。 購入済のものを削除するか、プレミアムプランに変更して下さい。} (signInPolicyLinkedAccount) {すでに連携済のアカウントです。} (googleSignInUnknown) {Google認証に失敗しました。} (appInPurchasePolicyPackageNotExist) {購入処理に失敗しました。} (appInPurchasePolicyPackageNotActive) {購入処理に失敗しました。}'
+	String businessException({required BusinessExceptionType context}) {
+		switch (context) {
+			case BusinessExceptionType.deleted:
+				return '削除済です。';
+			case BusinessExceptionType.updateTargetNotFound:
+				return '保存に失敗しました、あらためて操作を行ってください。';
+			case BusinessExceptionType.createDynamicLinkUnknown:
+				return '招待リンクの作成に失敗しました。';
+			case BusinessExceptionType.joinGroupPolicyJoinedGroup:
+				return 'すでに参加しています。';
+			case BusinessExceptionType.joinGroupPolicyExpired:
+				return '招待リンクの有効期限が切れています。';
+			case BusinessExceptionType.joinGroupPolicyNotAuth:
+				return '認証エラーが発生しました。';
+			case BusinessExceptionType.joinGroupPolicyLimitOver:
+				return 'グループの参加上限(5件)に達しました。';
+			case BusinessExceptionType.joinGroupPolicyInvalidShareLink:
+				return '招待リンクが正しくありません。';
+			case BusinessExceptionType.registrationItemPolicyLimitOver:
+				return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。';
+			case BusinessExceptionType.signInPolicyLinkedAccount:
+				return 'すでに連携済のアカウントです。';
+			case BusinessExceptionType.googleSignInUnknown:
+				return 'Google認証に失敗しました。';
+			case BusinessExceptionType.appInPurchasePolicyPackageNotExist:
+				return '購入処理に失敗しました。';
+			case BusinessExceptionType.appInPurchasePolicyPackageNotActive:
+				return '購入処理に失敗しました。';
+		}
+	}
+}
+
 // Path: common.confirmDiscardChanges
 class TranslationsCommonConfirmDiscardChangesEn {
 	TranslationsCommonConfirmDiscardChangesEn.internal(this._root);
@@ -186,6 +332,28 @@ class TranslationsDesignsystemAppUpdateEn {
 
 	/// en: 'Open Store'
 	String get navigateStore => 'Open Store';
+}
+
+// Path: kEnum.viewLayout
+class TranslationsKEnumViewLayoutEn {
+	TranslationsKEnumViewLayoutEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Layout'
+	String get name => 'Layout';
+
+	/// en: '(grid) {Grid} (list) {List}'
+	String typeName({required ViewLayout context}) {
+		switch (context) {
+			case ViewLayout.grid:
+				return 'Grid';
+			case ViewLayout.list:
+				return 'List';
+		}
+	}
 }
 
 // Path: designsystem.appUpdate.updatePossible
@@ -285,6 +453,123 @@ extension on Translations {
 			case 'designsystem.appUpdate.updatePossible.message': return 'A new version has been released.\nBy updating, you can enjoy new features.\nWould you like to update?';
 			case 'designsystem.appUpdate.forceUpdate.message': return 'The version you are using is currently unavailable. \nPlease download a new version from the store.';
 			case 'designsystem.appUpdate.navigateStore': return 'Open Store';
+			case 'kEnum.uiStyle': return ({required UIStyle context}) {
+				switch (context) {
+					case UIStyle.system:
+						return 'System';
+					case UIStyle.android:
+						return 'Android';
+					case UIStyle.ios:
+						return 'iOS';
+				}
+			};
+			case 'kEnum.themeColor': return ({required ThemeColor context}) {
+				switch (context) {
+					case ThemeColor.dynamicColor:
+						return 'DynamicColor';
+					case ThemeColor.monochrome:
+						return 'Monochrome';
+					case ThemeColor.blue:
+						return 'Blue';
+					case ThemeColor.purple:
+						return 'Purple';
+					case ThemeColor.green:
+						return 'Green';
+					case ThemeColor.red:
+						return 'Red';
+					case ThemeColor.pink:
+						return 'Pink';
+					case ThemeColor.yellow:
+						return 'Yellow';
+					case ThemeColor.orange:
+						return 'Orange';
+				}
+			};
+			case 'kEnum.themeMode': return ({required ThemeMode context}) {
+				switch (context) {
+					case ThemeMode.system:
+						return 'System';
+					case ThemeMode.light:
+						return 'Light';
+					case ThemeMode.dark:
+						return 'Dark';
+				}
+			};
+			case 'kEnum.viewLayout.name': return 'Layout';
+			case 'kEnum.viewLayout.typeName': return ({required ViewLayout context}) {
+				switch (context) {
+					case ViewLayout.grid:
+						return 'Grid';
+					case ViewLayout.list:
+						return 'List';
+				}
+			};
+			case 'kEnum.sortOrder': return ({required SortOrder context}) {
+				switch (context) {
+					case SortOrder.asc:
+						return 'ASC';
+					case SortOrder.desc:
+						return 'DESC';
+				}
+			};
+			case 'kEnum.itemOrderKey': return ({required ItemOrderKey context}) {
+				switch (context) {
+					case ItemOrderKey.createdAt:
+						return 'Created at';
+					case ItemOrderKey.name:
+						return 'Name';
+					case ItemOrderKey.wishRank:
+						return 'Degree of desirability';
+				}
+			};
+			case 'kEnum.ageGroup': return ({required AgeGroup context}) {
+				switch (context) {
+					case AgeGroup.child:
+						return 'child';
+					case AgeGroup.adult:
+						return 'adult';
+				}
+			};
+			case 'kEnum.purchaseStatus': return ({required PurchaseStatus context}) {
+				switch (context) {
+					case PurchaseStatus.notPurchased:
+						return 'unpurchased';
+					case PurchaseStatus.purchasePlan:
+						return 'Planned purchases';
+					case PurchaseStatus.purchased:
+						return 'already bought';
+				}
+			};
+			case 'exceptions.businessException': return ({required BusinessExceptionType context}) {
+				switch (context) {
+					case BusinessExceptionType.deleted:
+						return '削除済です。';
+					case BusinessExceptionType.updateTargetNotFound:
+						return '保存に失敗しました、あらためて操作を行ってください。';
+					case BusinessExceptionType.createDynamicLinkUnknown:
+						return '招待リンクの作成に失敗しました。';
+					case BusinessExceptionType.joinGroupPolicyJoinedGroup:
+						return 'すでに参加しています。';
+					case BusinessExceptionType.joinGroupPolicyExpired:
+						return '招待リンクの有効期限が切れています。';
+					case BusinessExceptionType.joinGroupPolicyNotAuth:
+						return '認証エラーが発生しました。';
+					case BusinessExceptionType.joinGroupPolicyLimitOver:
+						return 'グループの参加上限(5件)に達しました。';
+					case BusinessExceptionType.joinGroupPolicyInvalidShareLink:
+						return '招待リンクが正しくありません。';
+					case BusinessExceptionType.registrationItemPolicyLimitOver:
+						return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。';
+					case BusinessExceptionType.signInPolicyLinkedAccount:
+						return 'すでに連携済のアカウントです。';
+					case BusinessExceptionType.googleSignInUnknown:
+						return 'Google認証に失敗しました。';
+					case BusinessExceptionType.appInPurchasePolicyPackageNotExist:
+						return '購入処理に失敗しました。';
+					case BusinessExceptionType.appInPurchasePolicyPackageNotActive:
+						return '購入処理に失敗しました。';
+				}
+			};
 			default: return null;
 		}
 	}

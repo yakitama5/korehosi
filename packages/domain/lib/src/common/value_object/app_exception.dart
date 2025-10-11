@@ -1,23 +1,17 @@
+import 'package:packages_domain/src/common/value_object/business_exception_type.dart';
+
 sealed class AppException implements Exception {
-  const AppException(this.message);
-
-  final String? message;
+  const AppException();
 }
 
-sealed class BusinessException extends AppException {
-  const BusinessException(super.message);
-}
+class BusinessException extends AppException {
+  const BusinessException(this.exceptionType);
 
-sealed class PermissionException extends BusinessException {
-  const PermissionException(super.message);
-}
-
-class NotAuthException extends PermissionException {
-  const NotAuthException(super.message);
+  final BusinessExceptionType exceptionType;
 }
 
 sealed class NetworkException extends AppException {
-  const NetworkException(super.message);
+  const NetworkException();
 
   factory NetworkException.fromStatusCode(int? statusCode) {
     if (statusCode == null) {
@@ -25,32 +19,28 @@ sealed class NetworkException extends AppException {
     }
 
     return switch (statusCode) {
-      >= 400 && < 500 => ClientNetworkException(
-          'Client error occurred($statusCode)',
-        ),
-      >= 500 && < 600 => ServerNetworkException(
-          'Server error occurred($statusCode)',
-        ),
+      >= 400 && < 500 => const ClientNetworkException(),
+      >= 500 && < 600 => const ServerNetworkException(),
       _ => throw ArgumentError(
-          'Invalid status code: $statusCode.',
-          'statusCode',
-        ),
+        'Invalid status code: $statusCode.',
+        'statusCode',
+      ),
     };
   }
 }
 
 class ClientNetworkException extends NetworkException {
-  const ClientNetworkException(super.message);
+  const ClientNetworkException();
 }
 
 class ServerNetworkException extends NetworkException {
-  const ServerNetworkException(super.message);
+  const ServerNetworkException();
 }
 
 class UnknownNetworkException extends NetworkException {
-  const UnknownNetworkException() : super('Unknown network error occurred');
+  const UnknownNetworkException();
 }
 
 class UnknownException extends AppException {
-  const UnknownException() : super('Unknown error occurred');
+  const UnknownException();
 }

@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
 import 'package:flutter_app/app/components/src/snackbar/error_snackbar.dart';
-import 'package:flutter_app/app/pages/error/components/error_view.dart';
 import 'package:flutter_app/app/pages/group/components/premium_icon_container.dart';
 import 'package:flutter_app/app/pages/group/components/share_group_bottom_sheet.dart';
 import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -19,6 +17,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:packages_application/common.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/i18n.dart';
+import 'package:packages_designsystem/widgets.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/user.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
@@ -35,7 +36,10 @@ class GroupPage extends HookConsumerWidget {
       skipLoadingOnReload: true,
       data: (groupData) {
         if (groupData == null) {
-          return ErrorView(i18n.app.deletedMessage, null);
+          return const ErrorView(
+            BusinessException(BusinessExceptionType.deleted),
+            null,
+          );
         }
 
         return Scaffold(
@@ -163,7 +167,6 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       // SnackBarの表示は`listen`を用いて行うため、ここでは不要
       if (context.mounted) {
         await execute(
-          context,
           action: () => ref
               .read(groupUsecaseProvider)
               .upgradeLimitedReleasePlan(groupId: group!.id),
@@ -212,7 +215,6 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
   Future<void> onShare(BuildContext context, WidgetRef ref) async {
     // DynamicLinkの作成 (完了するまでローディング表示)
     await execute(
-      context,
       action: () async {
         final group = await ref.read(GroupDetailProviders.groupProvider.future);
         final url = await ref
@@ -245,7 +247,7 @@ class _ListTile extends HookWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(user.dispName, maxLines: 2, overflow: TextOverflow.ellipsis),
-      subtitle: Text(i18n.kEnum.ageGroup(context: user.ageGroup)),
+      subtitle: Text(commonI18n.kEnum.ageGroup(context: user.ageGroup)),
     );
   }
 }
@@ -281,7 +283,6 @@ class _SelectButton extends HookConsumerWidget with PresentationMixin {
     }
 
     await execute(
-      context,
       action: () async {
         await ref
             .read(groupUsecaseProvider)
@@ -305,7 +306,6 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onEdit(BuildContext context, WidgetRef ref) async {
     await execute(
-      context,
       action: () async {
         // 初期値の取得
         final prev = await ref.read(GroupDetailProviders.groupProvider.future);
@@ -381,7 +381,6 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
       return;
     }
     await execute(
-      context,
       action: () async {
         await ref.read(groupUsecaseProvider).delete(groupId: group!.id);
 
@@ -435,7 +434,6 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
       return;
     }
     await execute(
-      context,
       action: () async {
         await ref.read(groupUsecaseProvider).leave(groupId: group!.id);
 

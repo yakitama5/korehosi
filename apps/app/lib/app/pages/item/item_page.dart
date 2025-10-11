@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/app/components/src/date_text_with_label.dart';
-import 'package:flutter_app/app/pages/error/components/error_view.dart';
 import 'package:flutter_app/app/pages/item/components/item_images.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
@@ -12,6 +11,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/i18n.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
@@ -130,7 +131,7 @@ class _PurchaseStatus extends HookWidget {
         Icon(purchaseStatus.iconData, color: colorScheme.primary),
         const Gap(8),
         Text(
-          i18n.kEnum.purchaseStatus(context: purchaseStatus),
+          commonI18n.kEnum.purchaseStatus(context: purchaseStatus),
           style: textTheme.bodyLarge,
         ),
       ],

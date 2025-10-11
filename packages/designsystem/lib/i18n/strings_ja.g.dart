@@ -7,9 +7,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/designsystem.dart';
+import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
 import 'package:slang/generated.dart';
 import 'strings.g.dart';
@@ -45,6 +47,8 @@ class TranslationsJa extends Translations {
 	// Translations
 	@override late final _TranslationsCommonJa common = _TranslationsCommonJa._(_root);
 	@override late final _TranslationsDesignsystemJa designsystem = _TranslationsDesignsystemJa._(_root);
+	@override late final _TranslationsKEnumJa kEnum = _TranslationsKEnumJa._(_root);
+	@override late final _TranslationsExceptionsJa exceptions = _TranslationsExceptionsJa._(_root);
 }
 
 // Path: common
@@ -120,6 +124,134 @@ class _TranslationsDesignsystemJa extends TranslationsDesignsystemEn {
 	@override late final _TranslationsDesignsystemAppUpdateJa appUpdate = _TranslationsDesignsystemAppUpdateJa._(_root);
 }
 
+// Path: kEnum
+class _TranslationsKEnumJa extends TranslationsKEnumEn {
+	_TranslationsKEnumJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String uiStyle({required UIStyle context}) {
+		switch (context) {
+			case UIStyle.system:
+				return 'システム設定';
+			case UIStyle.android:
+				return 'Android';
+			case UIStyle.ios:
+				return 'iOS';
+		}
+	}
+	@override String themeColor({required ThemeColor context}) {
+		switch (context) {
+			case ThemeColor.dynamicColor:
+				return 'ダイナミックカラー';
+			case ThemeColor.monochrome:
+				return 'モノクロ';
+			case ThemeColor.blue:
+				return 'ブルー';
+			case ThemeColor.purple:
+				return 'パープル';
+			case ThemeColor.green:
+				return 'グリーン';
+			case ThemeColor.red:
+				return 'レッド';
+			case ThemeColor.pink:
+				return 'ピンク';
+			case ThemeColor.yellow:
+				return 'イエロー';
+			case ThemeColor.orange:
+				return 'オレンジ';
+		}
+	}
+	@override String themeMode({required ThemeMode context}) {
+		switch (context) {
+			case ThemeMode.system:
+				return 'システムテーマ';
+			case ThemeMode.light:
+				return 'ライトテーマ';
+			case ThemeMode.dark:
+				return 'ダークテーマ';
+		}
+	}
+	@override late final _TranslationsKEnumViewLayoutJa viewLayout = _TranslationsKEnumViewLayoutJa._(_root);
+	@override String sortOrder({required SortOrder context}) {
+		switch (context) {
+			case SortOrder.asc:
+				return '昇順';
+			case SortOrder.desc:
+				return '降順';
+		}
+	}
+	@override late final _TranslationsKEnumAppUpdateJa appUpdate = _TranslationsKEnumAppUpdateJa._(_root);
+	@override String itemOrderKey({required ItemOrderKey context}) {
+		switch (context) {
+			case ItemOrderKey.createdAt:
+				return '作成日時';
+			case ItemOrderKey.name:
+				return '名前';
+			case ItemOrderKey.wishRank:
+				return '欲しい度';
+		}
+	}
+	@override String ageGroup({required AgeGroup context}) {
+		switch (context) {
+			case AgeGroup.child:
+				return 'こども';
+			case AgeGroup.adult:
+				return 'おとな';
+		}
+	}
+	@override String purchaseStatus({required PurchaseStatus context}) {
+		switch (context) {
+			case PurchaseStatus.notPurchased:
+				return '未購入';
+			case PurchaseStatus.purchasePlan:
+				return '購入予定';
+			case PurchaseStatus.purchased:
+				return '購入済';
+		}
+	}
+}
+
+// Path: exceptions
+class _TranslationsExceptionsJa extends TranslationsExceptionsEn {
+	_TranslationsExceptionsJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String businessException({required BusinessExceptionType context}) {
+		switch (context) {
+			case BusinessExceptionType.deleted:
+				return '削除済です。';
+			case BusinessExceptionType.updateTargetNotFound:
+				return '保存に失敗しました、あらためて操作を行ってください。';
+			case BusinessExceptionType.createDynamicLinkUnknown:
+				return '招待リンクの作成に失敗しました。';
+			case BusinessExceptionType.joinGroupPolicyJoinedGroup:
+				return 'すでに参加しています。';
+			case BusinessExceptionType.joinGroupPolicyExpired:
+				return '招待リンクの有効期限が切れています。';
+			case BusinessExceptionType.joinGroupPolicyNotAuth:
+				return '認証エラーが発生しました。';
+			case BusinessExceptionType.joinGroupPolicyLimitOver:
+				return 'グループの参加上限(5件)に達しました。';
+			case BusinessExceptionType.joinGroupPolicyInvalidShareLink:
+				return '招待リンクが正しくありません。';
+			case BusinessExceptionType.registrationItemPolicyLimitOver:
+				return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。';
+			case BusinessExceptionType.signInPolicyLinkedAccount:
+				return 'すでに連携済のアカウントです。';
+			case BusinessExceptionType.googleSignInUnknown:
+				return 'Google認証に失敗しました。';
+			case BusinessExceptionType.appInPurchasePolicyPackageNotExist:
+				return '購入処理に失敗しました。';
+			case BusinessExceptionType.appInPurchasePolicyPackageNotActive:
+				return '購入処理に失敗しました。';
+		}
+	}
+}
+
 // Path: common.confirmDiscardChanges
 class _TranslationsCommonConfirmDiscardChangesJa extends TranslationsCommonConfirmDiscardChangesEn {
 	_TranslationsCommonConfirmDiscardChangesJa._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -163,6 +295,36 @@ class _TranslationsDesignsystemAppUpdateJa extends TranslationsDesignsystemAppUp
 	@override String get navigateStore => 'ストアを開く';
 }
 
+// Path: kEnum.viewLayout
+class _TranslationsKEnumViewLayoutJa extends TranslationsKEnumViewLayoutEn {
+	_TranslationsKEnumViewLayoutJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get name => '表示形式';
+	@override String typeName({required ViewLayout context}) {
+		switch (context) {
+			case ViewLayout.grid:
+				return 'グリッド表示';
+			case ViewLayout.list:
+				return 'リスト表示';
+		}
+	}
+}
+
+// Path: kEnum.appUpdate
+class _TranslationsKEnumAppUpdateJa extends TranslationsKEnumAppUpdateEn {
+	_TranslationsKEnumAppUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override late final _TranslationsKEnumAppUpdateUpdatePossibleJa updatePossible = _TranslationsKEnumAppUpdateUpdatePossibleJa._(_root);
+	@override late final _TranslationsKEnumAppUpdateForceUpdateJa forceUpdate = _TranslationsKEnumAppUpdateForceUpdateJa._(_root);
+	@override String get navigateStore => 'ストアを開く';
+}
+
 // Path: designsystem.appUpdate.updatePossible
 class _TranslationsDesignsystemAppUpdateUpdatePossibleJa extends TranslationsDesignsystemAppUpdateUpdatePossibleEn {
 	_TranslationsDesignsystemAppUpdateUpdatePossibleJa._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -176,6 +338,26 @@ class _TranslationsDesignsystemAppUpdateUpdatePossibleJa extends TranslationsDes
 // Path: designsystem.appUpdate.forceUpdate
 class _TranslationsDesignsystemAppUpdateForceUpdateJa extends TranslationsDesignsystemAppUpdateForceUpdateEn {
 	_TranslationsDesignsystemAppUpdateForceUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get message => 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
+}
+
+// Path: kEnum.appUpdate.updatePossible
+class _TranslationsKEnumAppUpdateUpdatePossibleJa extends TranslationsKEnumAppUpdateUpdatePossibleEn {
+	_TranslationsKEnumAppUpdateUpdatePossibleJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get message => '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
+}
+
+// Path: kEnum.appUpdate.forceUpdate
+class _TranslationsKEnumAppUpdateForceUpdateJa extends TranslationsKEnumAppUpdateForceUpdateEn {
+	_TranslationsKEnumAppUpdateForceUpdateJa._(TranslationsJa root) : this._root = root, super.internal(root);
 
 	final TranslationsJa _root; // ignore: unused_field
 
@@ -256,6 +438,126 @@ extension on TranslationsJa {
 			case 'designsystem.appUpdate.updatePossible.message': return '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
 			case 'designsystem.appUpdate.forceUpdate.message': return 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
 			case 'designsystem.appUpdate.navigateStore': return 'ストアを開く';
+			case 'kEnum.uiStyle': return ({required UIStyle context}) {
+				switch (context) {
+					case UIStyle.system:
+						return 'システム設定';
+					case UIStyle.android:
+						return 'Android';
+					case UIStyle.ios:
+						return 'iOS';
+				}
+			};
+			case 'kEnum.themeColor': return ({required ThemeColor context}) {
+				switch (context) {
+					case ThemeColor.dynamicColor:
+						return 'ダイナミックカラー';
+					case ThemeColor.monochrome:
+						return 'モノクロ';
+					case ThemeColor.blue:
+						return 'ブルー';
+					case ThemeColor.purple:
+						return 'パープル';
+					case ThemeColor.green:
+						return 'グリーン';
+					case ThemeColor.red:
+						return 'レッド';
+					case ThemeColor.pink:
+						return 'ピンク';
+					case ThemeColor.yellow:
+						return 'イエロー';
+					case ThemeColor.orange:
+						return 'オレンジ';
+				}
+			};
+			case 'kEnum.themeMode': return ({required ThemeMode context}) {
+				switch (context) {
+					case ThemeMode.system:
+						return 'システムテーマ';
+					case ThemeMode.light:
+						return 'ライトテーマ';
+					case ThemeMode.dark:
+						return 'ダークテーマ';
+				}
+			};
+			case 'kEnum.viewLayout.name': return '表示形式';
+			case 'kEnum.viewLayout.typeName': return ({required ViewLayout context}) {
+				switch (context) {
+					case ViewLayout.grid:
+						return 'グリッド表示';
+					case ViewLayout.list:
+						return 'リスト表示';
+				}
+			};
+			case 'kEnum.sortOrder': return ({required SortOrder context}) {
+				switch (context) {
+					case SortOrder.asc:
+						return '昇順';
+					case SortOrder.desc:
+						return '降順';
+				}
+			};
+			case 'kEnum.appUpdate.updatePossible.message': return '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
+			case 'kEnum.appUpdate.forceUpdate.message': return 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
+			case 'kEnum.appUpdate.navigateStore': return 'ストアを開く';
+			case 'kEnum.itemOrderKey': return ({required ItemOrderKey context}) {
+				switch (context) {
+					case ItemOrderKey.createdAt:
+						return '作成日時';
+					case ItemOrderKey.name:
+						return '名前';
+					case ItemOrderKey.wishRank:
+						return '欲しい度';
+				}
+			};
+			case 'kEnum.ageGroup': return ({required AgeGroup context}) {
+				switch (context) {
+					case AgeGroup.child:
+						return 'こども';
+					case AgeGroup.adult:
+						return 'おとな';
+				}
+			};
+			case 'kEnum.purchaseStatus': return ({required PurchaseStatus context}) {
+				switch (context) {
+					case PurchaseStatus.notPurchased:
+						return '未購入';
+					case PurchaseStatus.purchasePlan:
+						return '購入予定';
+					case PurchaseStatus.purchased:
+						return '購入済';
+				}
+			};
+			case 'exceptions.businessException': return ({required BusinessExceptionType context}) {
+				switch (context) {
+					case BusinessExceptionType.deleted:
+						return '削除済です。';
+					case BusinessExceptionType.updateTargetNotFound:
+						return '保存に失敗しました、あらためて操作を行ってください。';
+					case BusinessExceptionType.createDynamicLinkUnknown:
+						return '招待リンクの作成に失敗しました。';
+					case BusinessExceptionType.joinGroupPolicyJoinedGroup:
+						return 'すでに参加しています。';
+					case BusinessExceptionType.joinGroupPolicyExpired:
+						return '招待リンクの有効期限が切れています。';
+					case BusinessExceptionType.joinGroupPolicyNotAuth:
+						return '認証エラーが発生しました。';
+					case BusinessExceptionType.joinGroupPolicyLimitOver:
+						return 'グループの参加上限(5件)に達しました。';
+					case BusinessExceptionType.joinGroupPolicyInvalidShareLink:
+						return '招待リンクが正しくありません。';
+					case BusinessExceptionType.registrationItemPolicyLimitOver:
+						return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。';
+					case BusinessExceptionType.signInPolicyLinkedAccount:
+						return 'すでに連携済のアカウントです。';
+					case BusinessExceptionType.googleSignInUnknown:
+						return 'Google認証に失敗しました。';
+					case BusinessExceptionType.appInPurchasePolicyPackageNotExist:
+						return '購入処理に失敗しました。';
+					case BusinessExceptionType.appInPurchasePolicyPackageNotActive:
+						return '購入処理に失敗しました。';
+				}
+			};
 			default: return null;
 		}
 	}

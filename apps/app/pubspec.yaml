@@ -35,6 +35,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_rating_bar: any
+  flutter_settings_ui: ^3.0.1
   flutter_slidable: any
   flutter_svg: any
   flutter_web_plugins:
@@ -52,7 +53,7 @@ dependencies:
   introduction_screen: any
   json_serializable: any
   logger: any
-  lottie: any
+  lottie: ^3.3.2
   material_color_utilities: any
   material_design_icons_flutter: any
   nested: any
@@ -81,7 +82,6 @@ dependencies:
   reactive_image_picker: any
   responsive_framework: any
   riverpod_annotation: any
-  settings_ui: any
   share_plus: any
   shared_preferences: any
   shimmer: any

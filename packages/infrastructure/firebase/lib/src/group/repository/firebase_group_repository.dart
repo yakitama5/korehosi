@@ -10,7 +10,7 @@ import 'package:infrastructure_firebase/src/group/state/firestore_deleted_group_
 import 'package:infrastructure_firebase/src/group/state/firestore_group_provider.dart';
 import 'package:infrastructure_firebase/src/group/state/firestore_share_link_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_user_provider.dart';
-import 'package:packages_domain/exception.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 
 /// Firebaseを利用したリポジトリの実装
@@ -74,7 +74,7 @@ class FirebaseGroupRepository implements GroupRepository {
     final docRef = ref.read(groupDocumentRefProvider(groupId: groupId));
     final prev = await docRef.get();
     if (!prev.exists) {
-      throw UpdateTargetNotFoundException();
+      throw const BusinessException(BusinessExceptionType.updateTargetNotFound);
     }
     final docModel = prev.data()!.copyWith(name: name);
 

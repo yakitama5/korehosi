@@ -5,6 +5,7 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_domain/common.dart';
 
 class ItemOrderSelectorBottomSheet extends HookWidget {
@@ -76,7 +77,7 @@ class _OrderKeySegmentedButton extends HookWidget {
             .map(
               (e) => ButtonSegment<ItemOrderKey>(
                 value: e,
-                label: Text(i18n.kEnum.itemOrderKey(context: e)),
+                label: Text(commonI18n.kEnum.itemOrderKey(context: e)),
               ),
             )
             .toList(),
@@ -104,7 +105,7 @@ class _SortOrderSegmentedButton extends HookWidget {
             .map(
               (e) => ButtonSegment<SortOrder>(
                 value: e,
-                label: Text(i18n.kEnum.sortOrder(context: e)),
+                label: Text(commonI18n.kEnum.sortOrder(context: e)),
               ),
             )
             .toList(),

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
 import 'package:flutter_app/app/hooks/src/use_theme.dart';
-import 'package:flutter_app/app/pages/error/components/error_view.dart';
 import 'package:flutter_app/app/pages/group/components/not_group_view.dart';
 import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -13,6 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/group.dart';
 
 class GroupsPage extends HookWidget {
@@ -113,7 +112,6 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
     // 登録
     if (context.mounted) {
       await execute(
-        context,
         action: () async {
           await ref.read(groupUsecaseProvider).add(name: inputName);
         },
@@ -239,12 +237,10 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
   }
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) => execute(
-    context,
     action: () => ref.read(groupUsecaseProvider).delete(groupId: group.id),
   );
 
   Future<void> onLeave(BuildContext context, WidgetRef ref) => execute(
-    context,
     action: () => ref.read(groupUsecaseProvider).leave(groupId: group.id),
   );
 }

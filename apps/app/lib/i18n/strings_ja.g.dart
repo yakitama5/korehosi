@@ -40,7 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	late final TranslationsAppJa app = TranslationsAppJa.internal(_root);
-	late final TranslationsKEnumJa kEnum = TranslationsKEnumJa.internal(_root);
+	late final TranslationsSettingsJa settings = TranslationsSettingsJa.internal(_root);
 }
 
 // Path: app
@@ -580,169 +580,161 @@ class TranslationsAppJa {
 	String get purchased => '購入済';
 }
 
-// Path: kEnum
-class TranslationsKEnumJa {
-	TranslationsKEnumJa.internal(this._root);
+// Path: settings
+class TranslationsSettingsJa {
+	TranslationsSettingsJa.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-
-	/// ja: '(system) {システム設定} (android) {Android} (ios) {iOS}'
-	String uiStyle({required UIStyle context}) {
-		switch (context) {
-			case UIStyle.system:
-				return 'システム設定';
-			case UIStyle.android:
-				return 'Android';
-			case UIStyle.ios:
-				return 'iOS';
-		}
-	}
-
-	/// ja: '(dynamicColor) {ダイナミックカラー} (monochrome) {モノクロ} (blue) {ブルー} (purple) {パープル} (green) {グリーン} (red) {レッド} (pink) {ピンク} (yellow) {イエロー} (orange) {オレンジ}'
-	String themeColor({required ThemeColor context}) {
-		switch (context) {
-			case ThemeColor.dynamicColor:
-				return 'ダイナミックカラー';
-			case ThemeColor.monochrome:
-				return 'モノクロ';
-			case ThemeColor.blue:
-				return 'ブルー';
-			case ThemeColor.purple:
-				return 'パープル';
-			case ThemeColor.green:
-				return 'グリーン';
-			case ThemeColor.red:
-				return 'レッド';
-			case ThemeColor.pink:
-				return 'ピンク';
-			case ThemeColor.yellow:
-				return 'イエロー';
-			case ThemeColor.orange:
-				return 'オレンジ';
-		}
-	}
-
-	/// ja: '(system) {システムテーマ} (light) {ライトテーマ} (dark) {ダークテーマ}'
-	String themeMode({required ThemeMode context}) {
-		switch (context) {
-			case ThemeMode.system:
-				return 'システムテーマ';
-			case ThemeMode.light:
-				return 'ライトテーマ';
-			case ThemeMode.dark:
-				return 'ダークテーマ';
-		}
-	}
-
-	late final TranslationsKEnumViewLayoutJa viewLayout = TranslationsKEnumViewLayoutJa.internal(_root);
-
-	/// ja: '(asc) {昇順} (desc) {降順}'
-	String sortOrder({required SortOrder context}) {
-		switch (context) {
-			case SortOrder.asc:
-				return '昇順';
-			case SortOrder.desc:
-				return '降順';
-		}
-	}
-
-	late final TranslationsKEnumAppUpdateJa appUpdate = TranslationsKEnumAppUpdateJa.internal(_root);
-
-	/// ja: '(createdAt) {作成日時} (name) {名前} (wishRank) {欲しい度}'
-	String itemOrderKey({required ItemOrderKey context}) {
-		switch (context) {
-			case ItemOrderKey.createdAt:
-				return '作成日時';
-			case ItemOrderKey.name:
-				return '名前';
-			case ItemOrderKey.wishRank:
-				return '欲しい度';
-		}
-	}
-
-	/// ja: '(child) {こども} (adult) {おとな}'
-	String ageGroup({required AgeGroup context}) {
-		switch (context) {
-			case AgeGroup.child:
-				return 'こども';
-			case AgeGroup.adult:
-				return 'おとな';
-		}
-	}
-
-	/// ja: '(notPurchased) {未購入} (purchasePlan) {購入予定} (purchased) {購入済}'
-	String purchaseStatus({required PurchaseStatus context}) {
-		switch (context) {
-			case PurchaseStatus.notPurchased:
-				return '未購入';
-			case PurchaseStatus.purchasePlan:
-				return '購入予定';
-			case PurchaseStatus.purchased:
-				return '購入済';
-		}
-	}
+	late final TranslationsSettingsSettingsPageJa settingsPage = TranslationsSettingsSettingsPageJa.internal(_root);
+	late final TranslationsSettingsAccountPageJa accountPage = TranslationsSettingsAccountPageJa.internal(_root);
 }
 
-// Path: kEnum.viewLayout
-class TranslationsKEnumViewLayoutJa {
-	TranslationsKEnumViewLayoutJa.internal(this._root);
+// Path: settings.settingsPage
+class TranslationsSettingsSettingsPageJa {
+	TranslationsSettingsSettingsPageJa.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
 
-	/// ja: '表示形式'
-	String get name => '表示形式';
+	/// ja: '設定'
+	String get title => '設定';
 
-	/// ja: '(grid) {グリッド表示} (list) {リスト表示}'
-	String typeName({required ViewLayout context}) {
-		switch (context) {
-			case ViewLayout.grid:
-				return 'グリッド表示';
-			case ViewLayout.list:
-				return 'リスト表示';
-		}
-	}
+	late final TranslationsSettingsSettingsPageAccountJa account = TranslationsSettingsSettingsPageAccountJa.internal(_root);
+	late final TranslationsSettingsSettingsPageLayoutJa layout = TranslationsSettingsSettingsPageLayoutJa.internal(_root);
+	late final TranslationsSettingsSettingsPageHelpJa help = TranslationsSettingsSettingsPageHelpJa.internal(_root);
 }
 
-// Path: kEnum.appUpdate
-class TranslationsKEnumAppUpdateJa {
-	TranslationsKEnumAppUpdateJa.internal(this._root);
+// Path: settings.accountPage
+class TranslationsSettingsAccountPageJa {
+	TranslationsSettingsAccountPageJa.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	late final TranslationsKEnumAppUpdateUpdatePossibleJa updatePossible = TranslationsKEnumAppUpdateUpdatePossibleJa.internal(_root);
-	late final TranslationsKEnumAppUpdateForceUpdateJa forceUpdate = TranslationsKEnumAppUpdateForceUpdateJa.internal(_root);
 
-	/// ja: 'ストアを開く'
-	String get navigateStore => 'ストアを開く';
+	/// ja: 'アカウント'
+	String get title => 'アカウント';
+
+	late final TranslationsSettingsAccountPageLinkJa link = TranslationsSettingsAccountPageLinkJa.internal(_root);
+	late final TranslationsSettingsAccountPageOtherJa other = TranslationsSettingsAccountPageOtherJa.internal(_root);
+	late final TranslationsSettingsAccountPageLeaveConfirmDialogJa leaveConfirmDialog = TranslationsSettingsAccountPageLeaveConfirmDialogJa.internal(_root);
 }
 
-// Path: kEnum.appUpdate.updatePossible
-class TranslationsKEnumAppUpdateUpdatePossibleJa {
-	TranslationsKEnumAppUpdateUpdatePossibleJa.internal(this._root);
+// Path: settings.settingsPage.account
+class TranslationsSettingsSettingsPageAccountJa {
+	TranslationsSettingsSettingsPageAccountJa.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
 
-	/// ja: '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？'
-	String get message => '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
+	/// ja: 'アカウント'
+	String get head => 'アカウント';
+
+	/// ja: 'アカウント'
+	String get account => 'アカウント';
 }
 
-// Path: kEnum.appUpdate.forceUpdate
-class TranslationsKEnumAppUpdateForceUpdateJa {
-	TranslationsKEnumAppUpdateForceUpdateJa.internal(this._root);
+// Path: settings.settingsPage.layout
+class TranslationsSettingsSettingsPageLayoutJa {
+	TranslationsSettingsSettingsPageLayoutJa.internal(this._root);
 
 	final Translations _root; // ignore: unused_field
 
 	// Translations
 
-	/// ja: 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。'
-	String get message => 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
+	/// ja: 'レイアウト'
+	String get haed => 'レイアウト';
+
+	/// ja: 'UIスタイル'
+	String get uiStyle => 'UIスタイル';
+
+	/// ja: 'テーマモード'
+	String get themeMode => 'テーマモード';
+
+	/// ja: 'カラー'
+	String get colorTheme => 'カラー';
+}
+
+// Path: settings.settingsPage.help
+class TranslationsSettingsSettingsPageHelpJa {
+	TranslationsSettingsSettingsPageHelpJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ヘルプ'
+	String get head => 'ヘルプ';
+
+	/// ja: 'つかい方'
+	String get howToUse => 'つかい方';
+
+	/// ja: 'お問い合わせ'
+	String get contactUs => 'お問い合わせ';
+
+	/// ja: '開発者情報'
+	String get developperTwitter => '開発者情報';
+
+	/// ja: 'プライバシーポリシー'
+	String get privacyPollicy => 'プライバシーポリシー';
+
+	/// ja: 'ライセンス'
+	String get licencse => 'ライセンス';
+}
+
+// Path: settings.accountPage.link
+class TranslationsSettingsAccountPageLinkJa {
+	TranslationsSettingsAccountPageLinkJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'アカウント連携'
+	String get head => 'アカウント連携';
+
+	/// ja: 'Google'
+	String get google => 'Google';
+
+	/// ja: 'Apple'
+	String get apple => 'Apple';
+}
+
+// Path: settings.accountPage.other
+class TranslationsSettingsAccountPageOtherJa {
+	TranslationsSettingsAccountPageOtherJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'その他'
+	String get head => 'その他';
+
+	/// ja: 'ログアウト'
+	String get logout => 'ログアウト';
+
+	/// ja: '退会'
+	String get leave => '退会';
+}
+
+// Path: settings.accountPage.leaveConfirmDialog
+class TranslationsSettingsAccountPageLeaveConfirmDialogJa {
+	TranslationsSettingsAccountPageLeaveConfirmDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '退会しますか？'
+	String get title => '退会しますか？';
+
+	/// ja: '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。'
+	String get body => '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
 }
 
 /// Flat map(s) containing all translations.
@@ -926,96 +918,28 @@ extension on Translations {
 			case 'app.pushNotification': return 'プッシュ通知';
 			case 'app.pushNotificationDescription': return 'グループ内でほしいものが追加された場合に通知が受け取れます';
 			case 'app.purchased': return '購入済';
-			case 'kEnum.uiStyle': return ({required UIStyle context}) {
-				switch (context) {
-					case UIStyle.system:
-						return 'システム設定';
-					case UIStyle.android:
-						return 'Android';
-					case UIStyle.ios:
-						return 'iOS';
-				}
-			};
-			case 'kEnum.themeColor': return ({required ThemeColor context}) {
-				switch (context) {
-					case ThemeColor.dynamicColor:
-						return 'ダイナミックカラー';
-					case ThemeColor.monochrome:
-						return 'モノクロ';
-					case ThemeColor.blue:
-						return 'ブルー';
-					case ThemeColor.purple:
-						return 'パープル';
-					case ThemeColor.green:
-						return 'グリーン';
-					case ThemeColor.red:
-						return 'レッド';
-					case ThemeColor.pink:
-						return 'ピンク';
-					case ThemeColor.yellow:
-						return 'イエロー';
-					case ThemeColor.orange:
-						return 'オレンジ';
-				}
-			};
-			case 'kEnum.themeMode': return ({required ThemeMode context}) {
-				switch (context) {
-					case ThemeMode.system:
-						return 'システムテーマ';
-					case ThemeMode.light:
-						return 'ライトテーマ';
-					case ThemeMode.dark:
-						return 'ダークテーマ';
-				}
-			};
-			case 'kEnum.viewLayout.name': return '表示形式';
-			case 'kEnum.viewLayout.typeName': return ({required ViewLayout context}) {
-				switch (context) {
-					case ViewLayout.grid:
-						return 'グリッド表示';
-					case ViewLayout.list:
-						return 'リスト表示';
-				}
-			};
-			case 'kEnum.sortOrder': return ({required SortOrder context}) {
-				switch (context) {
-					case SortOrder.asc:
-						return '昇順';
-					case SortOrder.desc:
-						return '降順';
-				}
-			};
-			case 'kEnum.appUpdate.updatePossible.message': return '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
-			case 'kEnum.appUpdate.forceUpdate.message': return 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
-			case 'kEnum.appUpdate.navigateStore': return 'ストアを開く';
-			case 'kEnum.itemOrderKey': return ({required ItemOrderKey context}) {
-				switch (context) {
-					case ItemOrderKey.createdAt:
-						return '作成日時';
-					case ItemOrderKey.name:
-						return '名前';
-					case ItemOrderKey.wishRank:
-						return '欲しい度';
-				}
-			};
-			case 'kEnum.ageGroup': return ({required AgeGroup context}) {
-				switch (context) {
-					case AgeGroup.child:
-						return 'こども';
-					case AgeGroup.adult:
-						return 'おとな';
-				}
-			};
-			case 'kEnum.purchaseStatus': return ({required PurchaseStatus context}) {
-				switch (context) {
-					case PurchaseStatus.notPurchased:
-						return '未購入';
-					case PurchaseStatus.purchasePlan:
-						return '購入予定';
-					case PurchaseStatus.purchased:
-						return '購入済';
-				}
-			};
+			case 'settings.settingsPage.title': return '設定';
+			case 'settings.settingsPage.account.head': return 'アカウント';
+			case 'settings.settingsPage.account.account': return 'アカウント';
+			case 'settings.settingsPage.layout.haed': return 'レイアウト';
+			case 'settings.settingsPage.layout.uiStyle': return 'UIスタイル';
+			case 'settings.settingsPage.layout.themeMode': return 'テーマモード';
+			case 'settings.settingsPage.layout.colorTheme': return 'カラー';
+			case 'settings.settingsPage.help.head': return 'ヘルプ';
+			case 'settings.settingsPage.help.howToUse': return 'つかい方';
+			case 'settings.settingsPage.help.contactUs': return 'お問い合わせ';
+			case 'settings.settingsPage.help.developperTwitter': return '開発者情報';
+			case 'settings.settingsPage.help.privacyPollicy': return 'プライバシーポリシー';
+			case 'settings.settingsPage.help.licencse': return 'ライセンス';
+			case 'settings.accountPage.title': return 'アカウント';
+			case 'settings.accountPage.link.head': return 'アカウント連携';
+			case 'settings.accountPage.link.google': return 'Google';
+			case 'settings.accountPage.link.apple': return 'Apple';
+			case 'settings.accountPage.other.head': return 'その他';
+			case 'settings.accountPage.other.logout': return 'ログアウト';
+			case 'settings.accountPage.other.leave': return '退会';
+			case 'settings.accountPage.leaveConfirmDialog.title': return '退会しますか？';
+			case 'settings.accountPage.leaveConfirmDialog.body': return '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
 			default: return null;
 		}
 	}

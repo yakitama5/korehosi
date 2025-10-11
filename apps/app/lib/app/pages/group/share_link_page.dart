@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class ShareLinkPage extends HookConsumerWidget with PresentationMixin {
   const ShareLinkPage({super.key});
@@ -28,7 +28,6 @@ class ShareLinkPage extends HookConsumerWidget with PresentationMixin {
 
   Future<void> _onBuild(BuildContext context, WidgetRef ref) async {
     await execute(
-      context,
       action: () async {
         // 画面描画時にグループへの参加を行う
         final shareLinkId = ref.read(ShareLinkPageProviders.idProvider);

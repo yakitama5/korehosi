@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
-import 'package:flutter_app/app/pages/presentation_mixin.dart';
 import 'package:flutter_app/gen/assets.gen.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -9,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/theme.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class AccountLinkPage extends HookWidget {
   const AccountLinkPage({super.key});
@@ -53,7 +53,10 @@ class _Image extends HookWidget {
         child: SvgAssetImage(
           path: Assets.images.accountLink,
           replaceColors: svgReplaceColorsPrimary
-              .map((c) => (c, colorScheme.primary))
+              .map(
+                (c) =>
+                    SvgReplaceColors(rawColor: c, color: colorScheme.primary),
+              )
               .toList(),
         ),
       ),
@@ -101,10 +104,7 @@ class _GoogleSignInButton extends HookConsumerWidget with PresentationMixin {
   }
 
   void onSignInWithGoogle(BuildContext context, WidgetRef ref) {
-    execute(
-      context,
-      action: () => ref.read(userUsecaseProvider).signInWithGoogle(),
-    );
+    execute(action: () => ref.read(userUsecaseProvider).signInWithGoogle());
   }
 }
 
@@ -126,9 +126,6 @@ class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
   }
 
   void _onSignInWithApple(BuildContext context, WidgetRef ref) {
-    execute(
-      context,
-      action: () => ref.read(userUsecaseProvider).signInWithApple(),
-    );
+    execute(action: () => ref.read(userUsecaseProvider).signInWithApple());
   }
 }

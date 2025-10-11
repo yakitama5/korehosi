@@ -16,7 +16,6 @@ import 'package:packages_application/src/user/state/token_timestamp_provider.dar
 import 'package:packages_application/src/user/state/user_provider.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
-import 'package:packages_domain/exception.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/notification.dart';
 import 'package:packages_domain/user.dart';
@@ -154,7 +153,9 @@ class UserUsecase with RunUsecaseMixin {
           authUserProvider.selectAsync((data) => data?.id),
         );
         if (userId == null) {
-          throw UpdateTargetNotFoundException();
+          throw const BusinessException(
+            BusinessExceptionType.updateTargetNotFound,
+          );
         }
         await ref.read(userRepositoryProvider).delete(userId: userId);
 

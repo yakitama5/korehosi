@@ -8,6 +8,7 @@ export 'src/dialogs.dart';
 export 'src/error_list_tile.dart';
 export 'src/error_view.dart';
 export 'src/gauge_indicator.dart';
+export 'src/google_icon.dart';
 export 'src/image_aspect_ratio.dart';
 export 'src/linked_scroll_builder.dart';
 export 'src/loader_overlay.dart';
