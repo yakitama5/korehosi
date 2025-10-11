@@ -9,6 +9,7 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/theme.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -17,6 +18,11 @@ class SettingsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // 現在の設定値を取得
+    final uiStyle = ref.watch(uiStyleProvider);
+    final themeColor = ref.watch(themeColorNotifierProvider);
+    final themeMode = ref.watch(themeModeProvider);
+
     // 設定アプリと行き来するため、ライフサイクルを検知してリビルドを行う
     return AppLifecycleBuilder(
       builder: (context, state) {
@@ -75,6 +81,37 @@ class SettingsPage extends HookConsumerWidget {
                       },
                       title: Text(i18n.app.pushNotification),
                       description: Text(i18n.app.pushNotificationDescription),
+                    ),
+                  ],
+                ),
+                SettingsSection(
+                  title: Text(i18n.settings.settingsPage.layout.haed),
+                  tiles: [
+                    SettingsTile.navigation(
+                      leading: const Icon(Icons.style),
+                      title: Text(i18n.settings.settingsPage.layout.uiStyle),
+                      value: Text(commonI18n.kEnum.uiStyle(context: uiStyle)),
+                      onPressed: const SettingsUiStylePageRoute().go,
+                    ),
+                    SettingsTile.navigation(
+                      leading: Icon(switch (themeMode) {
+                        ThemeMode.system => Icons.settings,
+                        ThemeMode.light => Icons.light_mode,
+                        ThemeMode.dark => Icons.dark_mode,
+                      }),
+                      title: Text(i18n.settings.settingsPage.layout.themeMode),
+                      value: Text(
+                        commonI18n.kEnum.themeMode(context: themeMode),
+                      ),
+                      onPressed: const SettingsThemeModePageRoute().go,
+                    ),
+                    SettingsTile.navigation(
+                      leading: const Icon(Icons.color_lens),
+                      title: Text(i18n.settings.settingsPage.layout.colorTheme),
+                      value: Text(
+                        commonI18n.kEnum.themeColor(context: themeColor),
+                      ),
+                      onPressed: const SettingsThemeColorPageRoute().go,
                     ),
                   ],
                 ),

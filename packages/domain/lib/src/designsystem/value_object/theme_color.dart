@@ -1,5 +1,5 @@
 enum ThemeColor {
-  monochrome,
+  appColor,
   dynamicColor,
   blue,
   purple,

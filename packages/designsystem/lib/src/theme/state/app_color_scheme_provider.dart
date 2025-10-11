@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 import 'package:packages_designsystem/src/extension/theme_color_extension.dart';
-import 'package:packages_designsystem/src/theme/state/theme_color_notifier_provider.dart';
 import 'package:packages_designsystem/src/theme/utils/core_pallete_extension.dart';
+import 'package:packages_designsystem/theme.dart';
 import 'package:packages_domain/designsystem.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'core_palette_provider.dart';
 
 part 'app_color_scheme_provider.g.dart';
 
@@ -33,7 +31,7 @@ ColorScheme _colorScheme(
   CorePalette? dynamicCorePalette,
 ) {
   switch (themeColor) {
-    case ThemeColor.monochrome:
+    case ThemeColor.appColor:
       return _defaultColorScheme(brightness);
     case ThemeColor.dynamicColor:
       // DynamicColorに対応していない場合は、アプリのテーマカラーを設定
@@ -61,9 +59,8 @@ ColorScheme _colorScheme(
 }
 
 ColorScheme _defaultColorScheme(Brightness brightness) {
-  return ColorScheme.fromSeed(
-    seedColor: Colors.white,
-    brightness: brightness,
-    dynamicSchemeVariant: DynamicSchemeVariant.monochrome,
-  );
+  return switch (brightness) {
+    Brightness.light => lightColorScheme,
+    Brightness.dark => darkColorScheme,
+  };
 }

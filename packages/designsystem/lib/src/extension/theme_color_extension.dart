@@ -3,7 +3,7 @@ import 'package:packages_domain/designsystem.dart';
 
 extension ThemeColorX on ThemeColor {
   Color? get seedColor => switch (this) {
-    ThemeColor.monochrome => null,
+    ThemeColor.appColor => null,
     ThemeColor.dynamicColor => null,
     ThemeColor.blue => Colors.blue,
     ThemeColor.purple => Colors.purple,
