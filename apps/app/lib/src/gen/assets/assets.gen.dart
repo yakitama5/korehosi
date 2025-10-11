@@ -16,12 +16,6 @@ class $AssetsImagesGen {
   String get accountLink =>
       'packages/flutter_app/assets/images/account_link.svg';
 
-  /// File path: assets/images/apple.svg
-  String get apple => 'packages/flutter_app/assets/images/apple.svg';
-
-  /// File path: assets/images/google.svg
-  String get google => 'packages/flutter_app/assets/images/google.svg';
-
   /// File path: assets/images/onboard_done.svg
   String get onboardDone =>
       'packages/flutter_app/assets/images/onboard_done.svg';
@@ -44,8 +38,6 @@ class $AssetsImagesGen {
   /// List of all assets
   List<String> get values => [
     accountLink,
-    apple,
-    google,
     onboardDone,
     onboardGift,
     onboardProfile,
@@ -60,9 +52,6 @@ class $AssetsLottieGen {
   /// File path: assets/lottie/empty.json
   String get empty => 'packages/flutter_app/assets/lottie/empty.json';
 
-  /// File path: assets/lottie/error.json
-  String get error => 'packages/flutter_app/assets/lottie/error.json';
-
   /// File path: assets/lottie/group.json
   String get group => 'packages/flutter_app/assets/lottie/group.json';
 
@@ -75,13 +64,7 @@ class $AssetsLottieGen {
       'packages/flutter_app/assets/lottie/woman_empty_box.json';
 
   /// List of all assets
-  List<String> get values => [
-    empty,
-    error,
-    group,
-    simpleAnalytics,
-    womanEmptyBox,
-  ];
+  List<String> get values => [empty, group, simpleAnalytics, womanEmptyBox];
 }
 
 class Assets {

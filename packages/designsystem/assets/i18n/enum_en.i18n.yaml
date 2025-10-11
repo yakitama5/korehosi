@@ -3,8 +3,8 @@ uiStyle(context=UIStyle):
   android: Android
   ios: iOS
 themeColor(context=ThemeColor):
+  appColor: AppColor
   dynamicColor: DynamicColor
-  monochrome: Monochrome
   blue: Blue
   purple: Purple
   green: Green

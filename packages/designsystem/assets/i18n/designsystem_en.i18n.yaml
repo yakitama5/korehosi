@@ -1,29 +1,3 @@
-uiStyle(context=UIStyle):
-  system: System
-  android: Android
-  ios: iOS
-themeColor(context=ThemeColor):
-  dynamicColor: DynamicColor
-  monochrome: Monochrome
-  blue: Blue
-  purple: Purple
-  green: Green
-  red: Red
-  pink: Pink
-  yellow: Yellow
-  orange: Orange
-themeMode(context=ThemeMode):
-  system: System
-  light: Light
-  dark: Dark
-viewLayout:
-  name: Layout
-  typeName(context=ViewLayout):
-    grid: Grid
-    list: List
-sortOrder(context=SortOrder):
-  asc: ASC
-  desc: DESC
 appUpdate:
   updatePossible:
     message: A new version has been released.\nBy updating, you can enjoy new features.\nWould you like to update?

@@ -127,6 +127,21 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
 
                   factory: _$LicenseRouteData._fromState,
                 ),
+                GoRouteData.$route(
+                  path: 'ui_style',
+
+                  factory: _$SettingsUiStylePageRoute._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'color_style',
+
+                  factory: _$SettingsThemeColorPageRoute._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'theme_mode',
+
+                  factory: _$SettingsThemeModePageRoute._fromState,
+                ),
               ],
             ),
           ],
@@ -573,6 +588,69 @@ mixin _$LicenseRouteData on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/settings/license');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$SettingsUiStylePageRoute on GoRouteData {
+  static SettingsUiStylePageRoute _fromState(GoRouterState state) =>
+      const SettingsUiStylePageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/settings/ui_style');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$SettingsThemeColorPageRoute on GoRouteData {
+  static SettingsThemeColorPageRoute _fromState(GoRouterState state) =>
+      const SettingsThemeColorPageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/settings/color_style');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin _$SettingsThemeModePageRoute on GoRouteData {
+  static SettingsThemeModePageRoute _fromState(GoRouterState state) =>
+      const SettingsThemeModePageRoute();
+
+  @override
+  String get location => GoRouteData.$location('/settings/theme_mode');
 
   @override
   void go(BuildContext context) => context.go(location);

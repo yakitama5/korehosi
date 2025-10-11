@@ -19,7 +19,7 @@ class SettingsThemeModePage extends HookConsumerWidget {
       title: i18n.settings.settingsPage.layout.themeMode,
       tiles: ThemeMode.values.map((themeMode) {
         return SettingsRadioListTile<ThemeMode>(
-          title: Text(commonI18n.designsystem.themeMode(context: themeMode)),
+          title: Text(commonI18n.kEnum.themeMode(context: themeMode)),
           value: themeMode,
           groupValue: selected.value,
           leading: Icon(switch (themeMode) {

@@ -38,7 +38,7 @@ class SettingsThemeColorPage extends HookConsumerWidget {
       title: i18n.settings.settingsPage.layout.colorTheme,
       tiles: values.map((themeColor) {
         return SettingsRadioListTile<ThemeColor>(
-          title: Text(commonI18n.designsystem.themeColor(context: themeColor)),
+          title: Text(commonI18n.kEnum.themeColor(context: themeColor)),
           value: themeColor,
           groupValue: selected.value,
           leading: switch (themeColor) {

@@ -21,7 +21,7 @@ class SettingsUiStylePage extends HookConsumerWidget {
       title: i18n.settings.settingsPage.layout.uiStyle,
       tiles: UIStyle.values.map((style) {
         return SettingsRadioListTile<UIStyle>(
-          title: Text(commonI18n.designsystem.uiStyle(context: style)),
+          title: Text(commonI18n.kEnum.uiStyle(context: style)),
           value: style,
           groupValue: selected.value,
           leading: Icon(style.iconData),

@@ -6,7 +6,7 @@ part of 'router_observer.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentRouteHash() => r'a4b5b290af8fd8e6cec936ad1328257c13c3326d';
+String _$currentRouteHash() => r'514be6d8bccaf82e73353df331d572b267a797c8';
 
 /// See also [CurrentRoute].
 @ProviderFor(CurrentRoute)

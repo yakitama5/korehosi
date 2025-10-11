@@ -98,7 +98,8 @@ class AccountRouteData extends GoRouteData with _$AccountRouteData {
       const AccountPage();
 }
 
-class SettingsUiStylePageRoute extends GoRouteData {
+class SettingsUiStylePageRoute extends GoRouteData
+    with _$SettingsUiStylePageRoute {
   const SettingsUiStylePageRoute();
 
   static const path = 'ui_style';
@@ -108,7 +109,8 @@ class SettingsUiStylePageRoute extends GoRouteData {
       const SettingsUiStylePage();
 }
 
-class SettingsThemeColorPageRoute extends GoRouteData {
+class SettingsThemeColorPageRoute extends GoRouteData
+    with _$SettingsThemeColorPageRoute {
   const SettingsThemeColorPageRoute();
 
   static const path = 'color_style';
@@ -118,7 +120,8 @@ class SettingsThemeColorPageRoute extends GoRouteData {
       const SettingsThemeColorPage();
 }
 
-class SettingsThemeModePageRoute extends GoRouteData {
+class SettingsThemeModePageRoute extends GoRouteData
+    with _$SettingsThemeModePageRoute {
   const SettingsThemeModePageRoute();
 
   static const path = 'theme_mode';
