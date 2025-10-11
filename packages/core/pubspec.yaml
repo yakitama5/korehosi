@@ -7,14 +7,14 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  logger: any
-  riverpod: any
-  uuid: any
+  logger: ^2.6.1
+  riverpod: ^2.6.1
+  uuid: ^4.5.1
 
 dev_dependencies:
-  custom_lint: any
-  nilts: any
-  pedantic_mono: any
-  riverpod_lint: any
+  custom_lint: ^0.7.6
+  nilts: ^0.23.1
+  pedantic_mono: ^1.12.3
+  riverpod_lint: ^2.6.5
 
 resolution: workspace

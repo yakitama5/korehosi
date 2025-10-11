@@ -7,37 +7,37 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  cloud_firestore: any
-  cloud_functions: any
-  envied: any
+  cloud_firestore: ^5.6.12
+  cloud_functions: ^5.6.2
+  envied: ^1.2.0
   fcm_config: ^3.6.5
-  firebase_analytics: any
-  firebase_app_check: any
-  firebase_auth: any
-  firebase_core: any
-  firebase_crashlytics: any
-  firebase_remote_config: any
-  firebase_storage: any
-  freezed_annotation: any
-  google_sign_in: any
-  intl: any
-  json_serializable: any
-  nested: any
+  firebase_analytics: ^11.6.0
+  firebase_app_check: ^0.3.2+10
+  firebase_auth: ^5.7.0
+  firebase_core: ^3.15.2
+  firebase_crashlytics: ^4.3.10
+  firebase_remote_config: ^5.5.0
+  firebase_storage: ^12.4.10
+  freezed_annotation: ^3.1.0
+  google_sign_in: ^6.3.0
+  intl: ^0.20.2
+  nested: ^1.0.0
   packages_core:
     path: ../../core
   packages_domain:
     path: ../../domain
-  riverpod: any
-  riverpod_annotation: any
+  riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
 
 dev_dependencies:
-  build_runner: any
-  custom_lint: any
-  envied_generator: any
-  freezed: null
+  build_runner: ^2.5.4
+  custom_lint: ^0.7.6
+  envied_generator: ^1.1.1
+  freezed: ^3.1.0
+  json_serializable: ^6.9.5
   nilts: ^0.23.1
-  pedantic_mono: any
-  riverpod_generator: any
-  riverpod_lint: any
+  pedantic_mono: ^1.12.3
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
 
 resolution: workspace

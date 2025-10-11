@@ -7,26 +7,26 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  envied: any
-  freezed_annotation: any
-  json_annotation: any
+  envied: ^1.2.0
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
   packages_core:
     path: ../../core
   packages_domain:
     path: ../../domain
   purchases_flutter: ^9.6.2
-  riverpod: any
-  riverpod_annotation: any
+  riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
 
 dev_dependencies:
-  build_runner: any
-  custom_lint: any
-  envied_generator: any
-  freezed: any
-  json_serializable: any
-  nilts: any
-  pedantic_mono: any
-  riverpod_generator: any
-  riverpod_lint: any
+  build_runner: ^2.5.4
+  custom_lint: ^0.7.6
+  envied_generator: ^1.1.1
+  freezed: ^3.1.0
+  json_serializable: ^6.9.5
+  nilts: ^0.23.1
+  pedantic_mono: ^1.12.3
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
 
 resolution: workspace

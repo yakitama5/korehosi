@@ -10,49 +10,40 @@ environment:
 resolution: workspace
 
 dependencies:
-  collection: any
-  dynamic_color: any
+  collection: ^1.19.1
   flutter:
     sdk: flutter
-  flutter_image_compress: any
-  freezed_annotation: any
-  image_gallery_saver_plus: any
-  json_serializable: any
-  material_color_utilities: any
-  material_design_icons_flutter: any
-  nested: any
+  freezed_annotation: ^3.1.0
+  image_gallery_saver_plus: ^4.0.1
+  material_design_icons_flutter: ^7.0.7296
+  nested: ^1.0.0
   packages_core:
     path: ../../packages/core
   packages_domain:
     path: ../../packages/domain
-  path_provider: any
-  pattern_formatter: any
-  permission_handler: any
-  qr_flutter: any
-  reactive_forms: any
-  reactive_forms_annotations: any
-  riverpod: any
-  riverpod_annotation: any
-  share_plus: any
+  reactive_forms: ^18.1.1
+  reactive_forms_annotations: ^8.0.1
+  riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+  share_plus: ^11.1.0
   slang: ^4.8.1
   slang_flutter: ^4.8.0
-  store_redirect: any
-  url_launcher: any
-  uuid: any
-  version: any
+  url_launcher: ^6.3.2
+  uuid: ^4.5.1
+  version: ^3.0.2
 
 dev_dependencies:
   alchemist: ^0.12.1
-  build_runner: any
-  custom_lint: any
-  flutter_lints: any
+  build_runner: ^2.5.4
+  custom_lint: ^0.7.6
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  freezed: null
-  mocktail: any
+  freezed: ^3.1.0
+  json_serializable: ^6.9.5
   nilts: ^0.23.1
-  pedantic_mono: any
-  reactive_forms_generator: any
-  riverpod_generator: any
-  riverpod_lint: any
+  pedantic_mono: ^1.12.3
+  reactive_forms_generator: ^8.0.3
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
   slang_build_runner: ^4.8.1
