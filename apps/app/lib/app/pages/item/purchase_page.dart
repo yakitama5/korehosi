@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/app/pages/item/components/item_images.dart';
@@ -123,8 +124,8 @@ class _PurchaseForm extends HookConsumerWidget {
     }
 
     // ダイアログを表示して確認
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.confirmDiscardChangesTitle,
       message: i18n.app.confirmDiscardChangesMessage,
       okLabel: i18n.app.discard,
@@ -132,7 +133,7 @@ class _PurchaseForm extends HookConsumerWidget {
     );
 
     // 破棄が選ばれたら画面を閉じる
-    if (result == DialogResult.ok) {
+    if (result == OkCancelResult.ok) {
       navigator.pop();
     }
   }
@@ -207,12 +208,12 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.deleteConfirmTitle,
       message: i18n.app.deleteCofirmMessage(item: i18n.app.purchaseInfoTitle),
     );
-    if (result != DialogResult.ok) {
+    if (result != OkCancelResult.ok) {
       return;
     }
 

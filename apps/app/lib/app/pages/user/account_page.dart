@@ -1,12 +1,11 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_app/app/pages/settings/components/themed_settings_list.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:packages_application/common.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/extension.dart';
 import 'package:packages_designsystem/widgets.dart';
@@ -99,12 +98,12 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
 
   Future<void> _onDeleteAccount(BuildContext context, WidgetRef ref) async {
     // 削除確認
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.deleteAccountConfirmTitle,
       message: i18n.app.deleteAccountConfirmMessage,
     );
-    if (result != DialogResult.ok) {
+    if (result != OkCancelResult.ok) {
       return;
     }
 

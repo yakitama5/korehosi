@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
@@ -16,7 +17,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_application/common.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_designsystem/i18n.dart';
@@ -105,8 +105,8 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
       return;
     }
 
-    await showAdaptiveOkDialog(
-      context,
+    await showOkAlertDialog(
+      context: context,
       title: i18n.app.notSelectedGroupDialogTitle,
       message: i18n.app.notSelectedGroupDialogMessage,
     );
@@ -447,12 +447,12 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
 
   Future<bool> confirmDismiss(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.deleteConfirmTitle,
       message: i18n.app.deleteCofirmMessage(item: item.name),
     );
-    return result == DialogResult.ok;
+    return result == OkCancelResult.ok;
   }
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {

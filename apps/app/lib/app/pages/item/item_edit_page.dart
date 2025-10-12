@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/components/importer.dart';
@@ -10,7 +11,6 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
-import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/item.dart';
@@ -201,12 +201,12 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     if (!context.mounted) {
       return;
     }
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.deleteConfirmTitle,
       message: i18n.app.deleteCofirmMessage(item: item?.name ?? ''),
     );
-    if (result != DialogResult.ok) {
+    if (result != OkCancelResult.ok) {
       return;
     }
 

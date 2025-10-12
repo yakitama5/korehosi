@@ -1,5 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -37,8 +37,8 @@ class ShareLinkPage extends HookConsumerWidget with PresentationMixin {
 
         if (context.mounted) {
           // ダイアログを表示
-          await showAdaptiveOkDialog(
-            context,
+          await showOkAlertDialog(
+            context: context,
             title: i18n.app.joinedGroupTitle,
             message: i18n.app.joinedGroupMessage,
           );

@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
 import 'package:flutter_app/app/pages/group/components/premium_icon_container.dart';
 import 'package:flutter_app/app/pages/group/components/share_group_bottom_sheet.dart';
 import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
@@ -13,7 +13,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:packages_application/common.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/i18n.dart';
@@ -146,8 +145,8 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       if (!context.mounted) {
         return;
       }
-      final result = await showAdaptiveOkCancelDialog(
-        context,
+      final result = await showOkCancelAlertDialog(
+        context: context,
         title: i18n.app.itemPurchase,
         okLabel: i18n.app.purchaseOkLabel(price: price),
         message: i18n.app.itemLimitReleaseMessage(
@@ -156,7 +155,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
         ),
       );
 
-      if (result != DialogResult.ok) {
+      if (result != OkCancelResult.ok) {
         return;
       }
 
@@ -304,23 +303,36 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
         }
 
         // 値の入力 (ダイアログ表示)
-        final result = await showAdaptiveTextDialog(
-          context,
+        final resultList = await showTextInputDialog(
+          context: context,
           title: i18n.app.groupName,
-          initial: prev!.name,
-          labelText: i18n.app.groupName,
-          maxLength: 40,
+          textFields: [
+            DialogTextField(
+              initialText: prev!.name,
+              hintText: i18n.app.groupName,
+              maxLength: 40,
+              validator: (value) {
+                // 必須チェック
+                if (value?.isNotEmpty != true) {
+                  return i18n.app.validErrorMessageRequired;
+                }
+
+                return null;
+              },
+            ),
+          ],
           okLabel: i18n.app.save,
-          isRequired: true,
         );
-        if (result == null || result.isEmpty) {
+        // キャンセルされていれば(入力値がなければ)後続の処理は行わない
+        final inputName = resultList?.firstOrNull;
+        if (inputName == null || inputName.isEmpty) {
           return;
         }
 
         // 更新
         await ref
             .read(groupUsecaseProvider)
-            .update(groupId: prev.name, name: result);
+            .update(groupId: prev.name, name: inputName);
       },
     );
   }
@@ -357,12 +369,12 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
     // 削除確認
     final group = ref.read(GroupDetailProviders.groupProvider).value;
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.deleteConfirmTitle,
       message: i18n.app.deleteGroupCofirmMessage(name: group?.name ?? ''),
     );
-    if (result != DialogResult.ok) {
+    if (result != OkCancelResult.ok) {
       return;
     }
 
@@ -411,12 +423,12 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
 
     // 離脱確認
     final group = ref.read(GroupDetailProviders.groupProvider).value;
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.leaveConfirmTitle,
       message: i18n.app.leaveCofirmMessage(group: group?.name ?? ''),
     );
-    if (result != DialogResult.ok) {
+    if (result != OkCancelResult.ok) {
       return;
     }
 

@@ -1,10 +1,9 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:packages_application/common.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future<bool> requestPermissionPickImage(
@@ -107,15 +106,15 @@ Future<void> showPermissionDeinedDialog({
   };
 
   // ダイアログを表示
-  final result = await showAdaptiveOkDialog(
-    context,
+  final result = await showOkAlertDialog(
+    context: context,
     title: i18n.app.lackOfPermission(permission: cont),
     message: i18n.app.permissionWarnMessage(permission: cont),
     okLabel: i18n.app.openSettingsApp,
   );
 
   // ダイアログの結果に応じて設定アプリを表示
-  if (result == DialogResult.ok) {
+  if (result == OkCancelResult.ok) {
     await openAppSettings();
   }
 }
@@ -133,15 +132,15 @@ Future<void> showPermissionOffDialog({
   };
 
   // ダイアログを表示
-  final result = await showAdaptiveOkDialog(
-    context,
+  final result = await showOkAlertDialog(
+    context: context,
     title: i18n.app.confirmPermissionOffTitle(permission: cont),
     message: i18n.app.confirmPermissionOffMessage(permission: cont),
     okLabel: i18n.app.openSettingsApp,
   );
 
   // ダイアログの結果に応じて設定アプリを表示
-  if (result == DialogResult.ok) {
+  if (result == OkCancelResult.ok) {
     await openAppSettings();
   }
 }

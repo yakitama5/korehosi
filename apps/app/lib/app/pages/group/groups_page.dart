@@ -1,5 +1,5 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
 import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_app/app/pages/group/components/not_group_view.dart';
 import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
@@ -8,7 +8,6 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_application/common.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/widgets.dart';
@@ -45,9 +44,8 @@ class GroupsPage extends HookWidget {
   }
 
   void _onHelp(BuildContext context) {
-    showAdaptiveOkDialog(
-      context,
-      icon: const Icon(Icons.help),
+    showOkAlertDialog(
+      context: context,
       title: i18n.app.shareGroupHelpTitle,
       message: i18n.app.shareGroupHelpMessage,
     );
@@ -97,15 +95,29 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
   Future<void> onAdd(BuildContext context, WidgetRef ref) async {
     // ダイアログを表示して入力を促す
     // 値の入力 (ダイアログ表示)
-    final inputName = await showAdaptiveTextDialog(
-      context,
+    final resultList = await showTextInputDialog(
+      context: context,
       title: i18n.app.groupName,
-      labelText: i18n.app.groupName,
-      maxLength: 40,
+      textFields: [
+        DialogTextField(
+          hintText: i18n.app.groupName,
+          maxLength: 40,
+          validator: (value) {
+            // 必須チェック
+            if (value?.isNotEmpty != true) {
+              return i18n.app.validErrorMessageRequired;
+            }
+
+            return null;
+          },
+        ),
+      ],
       okLabel: i18n.app.save,
-      isRequired: true,
     );
-    if (inputName == null) {
+
+    // キャンセルされていれば(入力がなければ)後続処理を行わない
+    final inputName = resultList?.firstOrNull;
+    if (inputName == null || inputName.isEmpty) {
       return;
     }
 
@@ -218,22 +230,22 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
 
   Future<bool> confirmDelete(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.deleteConfirmTitle,
       message: i18n.app.deleteGroupCofirmMessage(name: group.name),
     );
-    return result == DialogResult.ok;
+    return result == OkCancelResult.ok;
   }
 
   Future<bool> confirmLeave(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
-    final result = await showAdaptiveOkCancelDialog(
-      context,
+    final result = await showOkCancelAlertDialog(
+      context: context,
       title: i18n.app.leaveConfirmTitle,
       message: i18n.app.leaveCofirmMessage(group: group.name),
     );
-    return result == DialogResult.ok;
+    return result == OkCancelResult.ok;
   }
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) => execute(

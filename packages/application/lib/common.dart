@@ -2,7 +2,6 @@ export 'src/common/config/url_config.dart';
 export 'src/common/extension/date_time_extension.dart';
 export 'src/common/extension/number_extension.dart';
 export 'src/common/extension/string_extension.dart';
-export 'src/common/model/dialog_result.dart';
 export 'src/common/state/app_build_config_provider.dart';
 export 'src/common/state/app_latest_version_provider.dart';
 export 'src/common/state/app_maintenance_status_provider.dart';

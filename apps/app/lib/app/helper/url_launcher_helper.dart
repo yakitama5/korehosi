@@ -1,8 +1,7 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
-import '../components/importer.dart';
 
 /// URL文字列に遷移する
 Future<bool> lanchUrlStringSafety(
@@ -10,8 +9,8 @@ Future<bool> lanchUrlStringSafety(
   String url, {
   String? secondUrl,
 }) async {
-  Future<void> showDialog() => showAdaptiveOkDialog(
-    context,
+  Future<void> showDialog() => showOkAlertDialog(
+    context: context,
     title: i18n.app.error,
     message: i18n.app.urlErrorMessageCanNotOpen,
   );

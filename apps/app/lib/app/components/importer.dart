@@ -1,4 +1,3 @@
-export 'src/adaptive_dialog.dart';
 export 'src/animated_switcher_fab.dart';
 export 'src/bottom_sheet_column.dart';
 export 'src/cards.dart';
