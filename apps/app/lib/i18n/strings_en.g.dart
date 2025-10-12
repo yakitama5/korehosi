@@ -44,11 +44,22 @@ class TranslationsEn extends Translations {
 	TranslationsEn $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsEn(meta: meta ?? this.$meta);
 
 	// Translations
+	@override late final _TranslationsAnalyzeEn analyze = _TranslationsAnalyzeEn._(_root);
 	@override late final _TranslationsAppEn app = _TranslationsAppEn._(_root);
 	@override late final _TranslationsGroupEn group = _TranslationsGroupEn._(_root);
 	@override late final _TranslationsItemEn item = _TranslationsItemEn._(_root);
 	@override late final _TranslationsSettingsEn settings = _TranslationsSettingsEn._(_root);
 	@override late final _TranslationsUserEn user = _TranslationsUserEn._(_root);
+}
+
+// Path: analyze
+class _TranslationsAnalyzeEn extends TranslationsAnalyzeJa {
+	_TranslationsAnalyzeEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get hoge => 'hoge';
 }
 
 // Path: app
@@ -207,6 +218,7 @@ class _TranslationsSettingsAccountPageLeaveConfirmDialogEn extends TranslationsS
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'analyze.hoge': return 'hoge';
 			case 'app.hoge': return 'hoge';
 			case 'group.hoge': return 'hoge';
 			case 'item.hoge': return 'hoge';

@@ -39,11 +39,22 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
+	late final TranslationsAnalyzeJa analyze = TranslationsAnalyzeJa.internal(_root);
 	late final TranslationsAppJa app = TranslationsAppJa.internal(_root);
 	late final TranslationsGroupJa group = TranslationsGroupJa.internal(_root);
 	late final TranslationsItemJa item = TranslationsItemJa.internal(_root);
 	late final TranslationsSettingsJa settings = TranslationsSettingsJa.internal(_root);
 	late final TranslationsUserJa user = TranslationsUserJa.internal(_root);
+}
+
+// Path: analyze
+class TranslationsAnalyzeJa {
+	TranslationsAnalyzeJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsAnalyzeAnalyzePageJa analyzePage = TranslationsAnalyzeAnalyzePageJa.internal(_root);
 }
 
 // Path: app
@@ -108,6 +119,29 @@ class TranslationsUserJa {
 	late final TranslationsUserProfilePageJa profilePage = TranslationsUserProfilePageJa.internal(_root);
 	late final TranslationsUserOnboardPageJa onboardPage = TranslationsUserOnboardPageJa.internal(_root);
 	late final TranslationsUserCommonJa common = TranslationsUserCommonJa.internal(_root);
+}
+
+// Path: analyze.analyzePage
+class TranslationsAnalyzeAnalyzePageJa {
+	TranslationsAnalyzeAnalyzePageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ふりかえり'
+	String get title => 'ふりかえり';
+
+	/// ja: '購入率'
+	String get purchaseRate => '購入率';
+
+	/// ja: '購入済'
+	String get purchased => '購入済';
+
+	late final TranslationsAnalyzeAnalyzePageFormatJa format = TranslationsAnalyzeAnalyzePageFormatJa.internal(_root);
+
+	/// ja: '合計金額'
+	String get totalPrice => '合計金額';
 }
 
 // Path: group.common
@@ -455,6 +489,21 @@ class TranslationsUserCommonJa {
 	String get ageGroup => '年齢層';
 }
 
+// Path: analyze.analyzePage.format
+class TranslationsAnalyzeAnalyzePageFormatJa {
+	TranslationsAnalyzeAnalyzePageFormatJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '${molecule:int}/${denominator:int}'
+	String fraction({required int molecule, required int denominator}) => '${molecule}/${denominator}';
+
+	/// ja: '${month:int}月'
+	String month({required int month}) => '${month}月';
+}
+
 // Path: group.common.leaveConfirmDialog
 class TranslationsGroupCommonLeaveConfirmDialogJa {
 	TranslationsGroupCommonLeaveConfirmDialogJa.internal(this._root);
@@ -786,6 +835,12 @@ class TranslationsSettingsSettingsPageAccountPushNotificationJa {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'analyze.analyzePage.title': return 'ふりかえり';
+			case 'analyze.analyzePage.purchaseRate': return '購入率';
+			case 'analyze.analyzePage.purchased': return '購入済';
+			case 'analyze.analyzePage.format.fraction': return ({required int molecule, required int denominator}) => '${molecule}/${denominator}';
+			case 'analyze.analyzePage.format.month': return ({required int month}) => '${month}月';
+			case 'analyze.analyzePage.totalPrice': return '合計金額';
 			case 'app.hoge': return 'hoge';
 			case 'group.common.groupName': return 'グループ名';
 			case 'group.common.leaveGroup': return 'グループから脱退';

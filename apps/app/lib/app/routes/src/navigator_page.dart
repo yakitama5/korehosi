@@ -15,17 +15,17 @@ class NavigatorPage extends HookWidget {
       _NavigationItem(
         icon: const Icon(Icons.shopping_bag_outlined),
         selectedIcon: const Icon(Icons.shopping_bag),
-        label: i18n.app.wishList,
+        label: i18n.item.itemsPage.title,
       ),
       _NavigationItem(
         icon: const Icon(Icons.analytics_outlined),
         selectedIcon: const Icon(Icons.analytics),
-        label: i18n.app.analyze,
+        label: i18n.analyze.analyzePage.title,
       ),
       _NavigationItem(
         icon: const Icon(Icons.settings_outlined),
         selectedIcon: const Icon(Icons.settings),
-        label: i18n.app.settings,
+        label: i18n.settings.settingsPage.title,
       ),
     ];
 

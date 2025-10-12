@@ -4,6 +4,7 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/analyze.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 
 /// 欲しい人の`FilterChip`
@@ -15,8 +16,7 @@ class WanterNameFilterChip extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final defaultTitle = i18n.app.wanterNameChipTitle;
-    final allLabel = i18n.app.all;
+    final defaultTitle = i18n.item.common.wanterName;
 
     final selectName = ref.watch(wanterFilterNotifierProvider);
     final selected = selectName != null;
@@ -34,7 +34,7 @@ class WanterNameFilterChip extends HookConsumerWidget {
 
         final actions = [
           // 選択肢に'すべて'を追加
-          AlertDialogAction<String>(key: _allKey, label: allLabel),
+          AlertDialogAction<String>(key: _allKey, label: commonI18n.common.all),
 
           // 重複を削除しているため、keyも同値を設定
           ...buyerNames.map((e) => AlertDialogAction<String>(key: e, label: e)),

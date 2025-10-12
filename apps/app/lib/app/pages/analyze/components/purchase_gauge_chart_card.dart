@@ -20,7 +20,7 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
     }
 
     return ChartCard(
-      title: i18n.app.purchaseRate,
+      title: i18n.analyze.analyzePage.purchaseRate,
       iconData: Icons.pie_chart,
       onTap: onTap,
       child: Row(
@@ -55,11 +55,14 @@ class _BuyedItemCount extends HookConsumerWidget {
           color: Theme.of(context).colorScheme.secondary,
         ),
         Text(
-          i18n.app.formatFraction(molecule: count, denominator: totalCount),
+          i18n.analyze.analyzePage.format.fraction(
+            molecule: count,
+            denominator: totalCount,
+          ),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         Text(
-          i18n.app.purchased,
+          i18n.analyze.analyzePage.purchased,
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),

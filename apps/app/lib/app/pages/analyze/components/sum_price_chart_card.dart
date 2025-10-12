@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/analyze.dart';
 import 'package:packages_application/common.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 
 /// 購入金額の合計を表すCard
@@ -30,7 +31,7 @@ class SumPriceChartCard extends HookConsumerWidget {
 
     return ChartCard(
       onTap: onTap,
-      title: i18n.app.purchasePrice,
+      title: i18n.analyze.analyzePage.totalPrice,
       iconData: Icons.show_chart,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +146,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
           alignment: Alignment.topLeft,
           child: IconButton(
             icon: const Icon(Icons.keyboard_arrow_left_rounded),
-            tooltip: i18n.app.prev,
+            tooltip: commonI18n.common.prev,
             onPressed: () =>
                 ref.read(monthlySumPriceChartRangeProvider.notifier).prev(),
           ),
@@ -156,7 +157,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
             padding: const EdgeInsets.only(right: 56),
             child: IconButton(
               icon: const Icon(Icons.keyboard_arrow_right_rounded),
-              tooltip: i18n.app.next,
+              tooltip: commonI18n.common.next,
               onPressed: () =>
                   ref.read(monthlySumPriceChartRangeProvider.notifier).next(),
             ),
@@ -204,7 +205,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
           return SideTitleWidget(
             meta: meta,
             child: Text(
-              i18n.app.formatMonth(month: dt.month),
+              i18n.analyze.analyzePage.format.month(month: dt.month),
               style: textTheme.labelLarge,
             ),
           );

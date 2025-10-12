@@ -1,0 +1,8 @@
+analyzePage:
+  title: ふりかえり
+  purchaseRate: 購入率
+  purchased: 購入済
+  format:
+    fraction: '${molecule:int}/${denominator:int}'
+    month: '${month:int}月'
+  totalPrice: 合計金額

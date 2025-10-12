@@ -14,7 +14,10 @@ class AnalyzePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(i18n.app.analyze), centerTitle: true),
+      appBar: AppBar(
+        title: Text(i18n.analyze.analyzePage.title),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: PagePadding(
           child: ListView.separated(
