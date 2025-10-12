@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/app/pages/user/components/age_group_field.dart';
 import 'package:flutter_app/app/pages/user/components/user_name_field.dart';
 import 'package:flutter_app/gen/assets.gen.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class UserNameField extends HookWidget {
   const UserNameField({super.key, this.fieldKey});

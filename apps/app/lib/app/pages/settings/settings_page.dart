@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/src/app_lifecycle_builder.dart';
 import 'package:flutter_app/app/helper/permission_helper.dart';
 import 'package:flutter_app/app/helper/url_launcher_helper.dart';
 import 'package:flutter_app/app/hooks/src/use_theme.dart';
@@ -11,6 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/theme.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SettingsPage extends HookConsumerWidget {

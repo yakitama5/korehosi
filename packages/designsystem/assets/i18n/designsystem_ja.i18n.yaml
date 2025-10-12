@@ -1,6 +1,14 @@
+yes: はい
+no: いいえ
+confirmDiscardChanges:
+  title: 変更を破棄しますか？
+  message: すべての変更は失われます
+  discard: 破棄
+  notDiscard: 破棄しない
 appUpdate:
   updatePossible:
     message: 新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？
   forceUpdate:
     message: ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。
   navigateStore: ストアを開く
+formatPercent: '${percent:String}%'

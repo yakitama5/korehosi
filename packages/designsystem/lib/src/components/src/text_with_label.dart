@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../hooks/importer.dart';
-
-class TextWithLabel extends HookWidget {
+class TextWithLabel extends StatelessWidget {
   const TextWithLabel(this.text, {super.key, this.label});
 
   final String? text;
@@ -12,7 +9,7 @@ class TextWithLabel extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = useTextTheme();
+    final textTheme = Theme.of(context).textTheme;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

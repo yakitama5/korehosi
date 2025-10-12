@@ -1,7 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/app/pages/item/components/empty_item_image.dart';
 import 'package:flutter_app/app/pages/item/components/item_image_carousel_slider.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';

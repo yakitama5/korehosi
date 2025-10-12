@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/analyze.dart';
 
-import '../../components/importer.dart';
 import 'components/analyze_type_switching_card.dart';
 
 /// 「ふりかえり」画面

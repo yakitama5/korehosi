@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/src/reactive_segmented_button.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class AgeGroupField extends HookWidget {
   const AgeGroupField({super.key, this.fieldKey});

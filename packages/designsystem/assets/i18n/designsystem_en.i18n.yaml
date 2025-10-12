@@ -1,6 +1,14 @@
+yes: Yes
+no: No
+confirmDiscardChanges:
+  title: Discard changes?
+  message: All changes will be lost
+  discard: discard
+  notDiscard: not to be discarded
 appUpdate:
   updatePossible:
     message: A new version has been released.\nBy updating, you can enjoy new features.\nWould you like to update?
   forceUpdate:
     message: The version you are using is currently unavailable. \nPlease download a new version from the store.
   navigateStore: Open Store
+formatPercent: '${percent:String}%'

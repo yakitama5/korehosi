@@ -1,8 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
-import '../../../components/importer.dart';
 
 class ItemImageCarouselSlider extends StatelessWidget {
   const ItemImageCarouselSlider({super.key, this.items});
@@ -16,21 +15,13 @@ class ItemImageCarouselSlider extends StatelessWidget {
       context,
       defaultValue: 0.8,
       conditionalValues: [
-        const Condition.equals(
-          name: TABLET,
-          value: 0.6,
-        ),
-        const Condition.equals(
-          name: DESKTOP,
-          value: 0.4,
-        ),
-        const Condition.largerThan(
-          name: DESKTOP,
-          value: 0.2,
-        ),
+        const Condition.equals(name: TABLET, value: 0.6),
+        const Condition.equals(name: DESKTOP, value: 0.4),
+        const Condition.largerThan(name: DESKTOP, value: 0.2),
       ],
     ).value;
-    final viewWidth = (MediaQuery.sizeOf(context).width -
+    final viewWidth =
+        (MediaQuery.sizeOf(context).width -
             (PagePadding.padding.left + PagePadding.padding.right)) *
         viewportFraction;
     final carouselHeight = (viewWidth / 16) * 9;

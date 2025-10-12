@@ -3,8 +3,8 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
+import 'package:packages_designsystem/widgets.dart';
 
-import '../../../components/importer.dart';
 import 'rating_icon.dart';
 
 class WishRankSelectorBottomSheet extends HookWidget {

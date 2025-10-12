@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/importer.dart';
 import 'package:flutter_app/app/pages/group/components/account_dialog.dart';
 import 'package:flutter_app/app/pages/group/components/not_group_view.dart';
 import 'package:flutter_app/app/pages/item/components/item_order_selector_bottom_sheet.dart';

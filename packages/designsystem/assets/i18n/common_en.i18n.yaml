@@ -1,7 +1,0 @@
-yes: Yes
-no: No
-confirmDiscardChanges:
-  title: Discard changes?
-  message: All changes will be lost
-  discard: discard
-  notDiscard: not to be discarded

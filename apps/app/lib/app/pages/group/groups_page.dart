@@ -10,7 +10,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
-import 'package:packages_designsystem/widgets.dart';
+import 'package:packages_designsystem/widgets.dart' hide useColorScheme;
 import 'package:packages_domain/group.dart';
 
 class GroupsPage extends HookWidget {

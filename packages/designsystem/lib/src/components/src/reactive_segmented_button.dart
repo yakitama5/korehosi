@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:packages_designsystem/i18n.dart';
+import 'package:packages_designsystem/src/components/src/expand_width_container.dart';
+import 'package:packages_designsystem/src/hooks/src/use_theme.dart';
 import 'package:packages_domain/user.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../../hooks/importer.dart';
-import 'expand_width_container.dart';
 
 class ReactiveSegmentedButton extends ReactiveFormField<AgeGroup, AgeGroup> {
   ReactiveSegmentedButton({

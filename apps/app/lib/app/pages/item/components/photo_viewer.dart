@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-
-import '../../../components/importer.dart';
 
 class PhotoViewer extends HookWidget {
   PhotoViewer({
@@ -57,11 +56,7 @@ class PhotoViewer extends HookWidget {
               child: Align(
                 alignment: Alignment.topRight,
                 child: IconButton(
-                  icon: const Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 32,
-                  ),
+                  icon: const Icon(Icons.close, color: Colors.white, size: 32),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ),

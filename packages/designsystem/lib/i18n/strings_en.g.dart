@@ -44,22 +44,9 @@ class TranslationsEn extends Translations {
 	TranslationsEn $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsEn(meta: meta ?? this.$meta);
 
 	// Translations
-	@override late final _TranslationsCommonEn common = _TranslationsCommonEn._(_root);
 	@override late final _TranslationsDesignsystemEn designsystem = _TranslationsDesignsystemEn._(_root);
 	@override late final _TranslationsKEnumEn kEnum = _TranslationsKEnumEn._(_root);
 	@override late final _TranslationsExceptionsEn exceptions = _TranslationsExceptionsEn._(_root);
-}
-
-// Path: common
-class _TranslationsCommonEn extends TranslationsCommonJa {
-	_TranslationsCommonEn._(TranslationsEn root) : this._root = root, super.internal(root);
-
-	final TranslationsEn _root; // ignore: unused_field
-
-	// Translations
-	@override String get yes => 'Yes';
-	@override String get no => 'No';
-	@override late final _TranslationsCommonConfirmDiscardChangesEn confirmDiscardChanges = _TranslationsCommonConfirmDiscardChangesEn._(_root);
 }
 
 // Path: designsystem
@@ -69,7 +56,11 @@ class _TranslationsDesignsystemEn extends TranslationsDesignsystemJa {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override String get yes => 'Yes';
+	@override String get no => 'No';
+	@override late final _TranslationsDesignsystemConfirmDiscardChangesEn confirmDiscardChanges = _TranslationsDesignsystemConfirmDiscardChangesEn._(_root);
 	@override late final _TranslationsDesignsystemAppUpdateEn appUpdate = _TranslationsDesignsystemAppUpdateEn._(_root);
+	@override String formatPercent({required String percent}) => '${percent}%';
 }
 
 // Path: kEnum
@@ -199,9 +190,9 @@ class _TranslationsExceptionsEn extends TranslationsExceptionsJa {
 	}
 }
 
-// Path: common.confirmDiscardChanges
-class _TranslationsCommonConfirmDiscardChangesEn extends TranslationsCommonConfirmDiscardChangesJa {
-	_TranslationsCommonConfirmDiscardChangesEn._(TranslationsEn root) : this._root = root, super.internal(root);
+// Path: designsystem.confirmDiscardChanges
+class _TranslationsDesignsystemConfirmDiscardChangesEn extends TranslationsDesignsystemConfirmDiscardChangesJa {
+	_TranslationsDesignsystemConfirmDiscardChangesEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
 	final TranslationsEn _root; // ignore: unused_field
 
@@ -267,15 +258,16 @@ class _TranslationsDesignsystemAppUpdateForceUpdateEn extends TranslationsDesign
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'common.yes': return 'Yes';
-			case 'common.no': return 'No';
-			case 'common.confirmDiscardChanges.title': return 'Discard changes?';
-			case 'common.confirmDiscardChanges.message': return 'All changes will be lost';
-			case 'common.confirmDiscardChanges.discard': return 'discard';
-			case 'common.confirmDiscardChanges.notDiscard': return 'not to be discarded';
+			case 'designsystem.yes': return 'Yes';
+			case 'designsystem.no': return 'No';
+			case 'designsystem.confirmDiscardChanges.title': return 'Discard changes?';
+			case 'designsystem.confirmDiscardChanges.message': return 'All changes will be lost';
+			case 'designsystem.confirmDiscardChanges.discard': return 'discard';
+			case 'designsystem.confirmDiscardChanges.notDiscard': return 'not to be discarded';
 			case 'designsystem.appUpdate.updatePossible.message': return 'A new version has been released.\nBy updating, you can enjoy new features.\nWould you like to update?';
 			case 'designsystem.appUpdate.forceUpdate.message': return 'The version you are using is currently unavailable. \nPlease download a new version from the store.';
 			case 'designsystem.appUpdate.navigateStore': return 'Open Store';
+			case 'designsystem.formatPercent': return ({required String percent}) => '${percent}%';
 			case 'kEnum.uiStyle': return ({required UIStyle context}) {
 				switch (context) {
 					case UIStyle.system:

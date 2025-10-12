@@ -1,7 +1,0 @@
-yes: はい
-no: いいえ
-confirmDiscardChanges:
-  title: 変更を破棄しますか？
-  message: すべての変更は失われます
-  discard: 破棄
-  notDiscard: 破棄しない

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/components/importer.dart';
-import 'package:flutter_app/app/components/src/date_text_with_label.dart';
 import 'package:flutter_app/app/pages/item/components/item_images.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
