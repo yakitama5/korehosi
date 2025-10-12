@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/gen/assets.gen.dart';
-import 'package:packages_designsystem/src/components/src/svg_asset_image.dart';
+import 'package:packages_designsystem/src/gen/assets/assets.gen.dart';
 
 class GoogleIcon extends StatelessWidget {
   const GoogleIcon({super.key, this.size = 24});
@@ -9,6 +8,6 @@ class GoogleIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgAssetImage(path: Assets.images.google, width: size, height: size);
+    return Assets.images.google.svg(width: size, height: size);
   }
 }

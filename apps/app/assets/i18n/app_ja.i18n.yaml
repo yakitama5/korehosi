@@ -34,9 +34,6 @@ sexWoman: おんな
 sexNeither: どちらでもない
 ageGroup: 年齢層
 sex: 性別
-unset: <未設定>
-requiredIcon: '*'
-requiredHelper: '*必須項目'
 signInWithGoogle: Googleでサインイン
 signInWithApple: Appleでサインイン
 wishList: ほしいもの
@@ -51,41 +48,26 @@ reset: リセット
 apply: 適用
 all: すべて
 noName: 名無し
-groupInitialNameSuffix: ' のグループ'
+groupInitialNameSuffix: " のグループ"
 unexpectedErrorMessage: 予期せぬエラーが発生しました。
-searchEmptyMessage: '${item:String}が見つかりませんでした。'
+searchEmptyMessage: "${item:String}が見つかりませんでした。"
 merchandiseName: 商品名
-save: 保存
-editPageTitle: '${item:String}を編集'
-createPageTitle: '${item:String}を作成'
+editPageTitle: "${item:String}を編集"
+createPageTitle: "${item:String}を作成"
 wishSeasonLabel: いつほしい？
 wishSeasonHint: 例：クリスマス、誕生日
 url: URL
 addUrl: URLを追加
 memo: メモ
-shoot: 写真を撮る
-chooseFromLibrary: ライブラリから画像を選択
 star: 星
 delete: 削除
 deletedMessage: 削除済です。
 completeDeleteMessage: 削除しました。
 completeChangeGroupMessage: グループを切り替えました。
 uploadImage: 写真のアップロード
-lackOfPermission: '${permission:String}が許可されていません'
-confirmPermissionOffTitle: '${permission:String}をオフにしますか？'
-confirmPermissionOffMessage: 設定アプリを開いて${permission:String}をオフにしてください
-permissionPhotos: ギャラリーへのアクセス
-permissionCamera: カメラへのアクセス
-permissionPushNotification: プッシュ通知
-permissionWarnMessage: 設定アプリを開いて${permission:String}を許可してください
-openSettingsApp: 設定アプリを開く
 ok: OK
-confirmDiscardChangesTitle: 変更を破棄しますか？
-confirmDiscardChangesMessage: すべての変更は失われます
 discard: 破棄
 notDiscard: 破棄しない
-validErrorMessageRequired: 必須項目を入力して下さい
-validErrorMessageUrlPattern: 正しいURL形式で入力して下さい
 edit: 編集
 purchaseOrpurchasePlan: 購入/購入予定
 deleteConfirmTitle: 削除の確認
@@ -120,7 +102,6 @@ group: グループ
 help: ヘルプ
 developperTwitter: 開発者X (旧Twitter)
 license: ライセンス
-error: エラー
 urlErrorMessageCanNotOpen: >-
   URLを開けませんでした。
 
@@ -168,7 +149,7 @@ notJoinedGroupMessage: >-
 
   招待されたグループに参加して下さい。
 deletedUser: <削除済ユーザー>
-selectNumberText: '${length:int}件選択'
+selectNumberText: "${length:int}件選択"
 authErrorMessageNotExistsProvider: アカウントは1つ以上の外部アカウントとの連携をしておく必要があります。
 authErrorMessagAlreadyInUse: >-
   このアカウントはすでに連携済です。
@@ -224,12 +205,12 @@ darkMode: ダークモード
 lightMode: ライトモード
 purchaseRate: 購入率
 purchaseRateAndPlan: 購入率 (予定込)
-formatPercent: '${percent:String}%'
+formatPercent: "${percent:String}%"
 purchasePrice: 購入金額
-formatMonth: '${month:int}月'
-formatFraction: '${molecule:int}/${denominator:int}'
-notificationAddItemTitle: '${name:String}さんがほしいものを追加しました！'
-notificationAddItemBody: '${name:String}さんがほしいものを追加しました！'
+formatMonth: "${month:int}月"
+formatFraction: "${molecule:int}/${denominator:int}"
+notificationAddItemTitle: "${name:String}さんがほしいものを追加しました！"
+notificationAddItemBody: "${name:String}さんがほしいものを追加しました！"
 pushNotification: プッシュ通知
 pushNotificationDescription: グループ内でほしいものが追加された場合に通知が受け取れます
 purchased: 購入済

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class EmptyItemImage extends HookWidget {
   const EmptyItemImage({super.key, this.radius, this.iconData});

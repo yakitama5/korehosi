@@ -1,6 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_app/app/pages/group/components/not_group_view.dart';
 import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
@@ -10,7 +9,8 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
-import 'package:packages_designsystem/widgets.dart' hide useColorScheme;
+import 'package:packages_designsystem/i18n.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/group.dart';
 
 class GroupsPage extends HookWidget {
@@ -105,14 +105,14 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
           validator: (value) {
             // 必須チェック
             if (value?.isNotEmpty != true) {
-              return i18n.app.validErrorMessageRequired;
+              return commonI18n.designsystem.validationError.required;
             }
 
             return null;
           },
         ),
       ],
-      okLabel: i18n.app.save,
+      okLabel: commonI18n.common.save,
     );
 
     // キャンセルされていれば(入力がなければ)後続処理を行わない
@@ -174,7 +174,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            subtitle: Text(ownerData?.name ?? i18n.app.unset),
+            subtitle: Text(ownerData?.name ?? commonI18n.common.unset),
             // 表示中のグループにアイコンを表示
             leading: group.id == currentGroupData?.id
                 ? Icon(Icons.check_circle_outline, color: colorScheme.primary)

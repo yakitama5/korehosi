@@ -4,12 +4,12 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:packages_application/group.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -87,7 +87,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
             if (!kIsWeb)
               Expanded(
                 child: LabelIconButton(
-                  label: Text(i18n.app.save),
+                  label: Text(commonI18n.common.save),
                   iconData: Icons.save_alt,
                   onPressed: () => onSave(context, ref),
                 ),

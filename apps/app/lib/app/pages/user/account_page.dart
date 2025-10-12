@@ -1,6 +1,5 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/hooks/src/use_theme.dart' hide useColorScheme;
 import 'package:flutter_app/app/pages/settings/components/themed_settings_list.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';

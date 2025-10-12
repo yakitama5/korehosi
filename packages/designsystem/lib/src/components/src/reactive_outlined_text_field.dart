@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import 'my_reactive_raw_autocomplete.dart';
@@ -193,12 +193,15 @@ class _ReactiveOutlinedTextField<T> extends HookWidget {
       keyboardType: textInputType,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(
-        labelText: '$labelText${isRequired ? i18n.app.requiredIcon : ''}',
+        labelText:
+            '''
+$labelText${isRequired ? commonI18n.common.requiredMark : ''}
+''',
         prefixText: prefixText,
         hintText: hintText,
         counterText: counterText,
         alignLabelWithHint: true,
-        helperText: isRequired ? i18n.app.requiredHelper : '',
+        helperText: isRequired ? commonI18n.common.requiredHelper : '',
         border: const OutlineInputBorder(),
         suffixIcon: field.errorText?.isNotEmpty == true
             ? Icon(Icons.error, color: Theme.of(context).colorScheme.error)

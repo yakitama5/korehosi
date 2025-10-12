@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/common.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AppReactiveFormConfig extends SingleChildStatelessWidget {
@@ -13,9 +13,9 @@ class AppReactiveFormConfig extends SingleChildStatelessWidget {
       validationMessages: {
         /// エラーメッセージの共通定義
         ValidationMessage.required: (error) =>
-            i18n.app.validErrorMessageRequired,
+            commonI18n.designsystem.validationError.required,
         CustomValidationMessage.url: (error) =>
-            i18n.app.validErrorMessageUrlPattern,
+            commonI18n.designsystem.validationError.url,
       },
       child: child ?? const SizedBox.shrink(),
     );

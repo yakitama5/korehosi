@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:packages_designsystem/i18n.dart';
 
 class ItemizedText extends StatelessWidget {
   const ItemizedText(this.texts, {super.key});
@@ -23,7 +23,7 @@ class _ItemizedTextRow extends HookWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(i18n.app.bullet, style: text.style),
+        Text(commonI18n.common.itmizedTextPrefix, style: text.style),
         Expanded(child: text),
       ],
     );

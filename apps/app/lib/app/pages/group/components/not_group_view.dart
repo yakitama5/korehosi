@@ -4,8 +4,7 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
-
-import '../../../hooks/importer.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 class NotGroupView extends HookWidget {
   const NotGroupView({super.key});

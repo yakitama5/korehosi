@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
-import 'package:packages_designsystem/i18n/strings.g.dart';
+import 'package:packages_designsystem/i18n.dart';
 
 class GaugeChart extends HookWidget {
   const GaugeChart({
@@ -67,7 +67,9 @@ class GaugeChart extends HookWidget {
           ),
         ),
         Text(
-          i18n.designsystem.formatPercent(percent: value.toStringAsFixed(0)),
+          commonI18n.designsystem.format.percent(
+            percent: value.toStringAsFixed(0),
+          ),
           style: tt.titleLarge,
         ),
       ],

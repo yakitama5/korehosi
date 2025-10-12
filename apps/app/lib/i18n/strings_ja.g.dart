@@ -150,15 +150,6 @@ class TranslationsAppJa {
 	/// ja: '性別'
 	String get sex => '性別';
 
-	/// ja: '<未設定>'
-	String get unset => '<未設定>';
-
-	/// ja: '*'
-	String get requiredIcon => '*';
-
-	/// ja: '*必須項目'
-	String get requiredHelper => '*必須項目';
-
 	/// ja: 'Googleでサインイン'
 	String get signInWithGoogle => 'Googleでサインイン';
 
@@ -213,9 +204,6 @@ class TranslationsAppJa {
 	/// ja: '商品名'
 	String get merchandiseName => '商品名';
 
-	/// ja: '保存'
-	String get save => '保存';
-
 	/// ja: '${item:String}を編集'
 	String editPageTitle({required String item}) => '${item}を編集';
 
@@ -237,12 +225,6 @@ class TranslationsAppJa {
 	/// ja: 'メモ'
 	String get memo => 'メモ';
 
-	/// ja: '写真を撮る'
-	String get shoot => '写真を撮る';
-
-	/// ja: 'ライブラリから画像を選択'
-	String get chooseFromLibrary => 'ライブラリから画像を選択';
-
 	/// ja: '星'
 	String get star => '星';
 
@@ -261,50 +243,14 @@ class TranslationsAppJa {
 	/// ja: '写真のアップロード'
 	String get uploadImage => '写真のアップロード';
 
-	/// ja: '${permission:String}が許可されていません'
-	String lackOfPermission({required String permission}) => '${permission}が許可されていません';
-
-	/// ja: '${permission:String}をオフにしますか？'
-	String confirmPermissionOffTitle({required String permission}) => '${permission}をオフにしますか？';
-
-	/// ja: '設定アプリを開いて${permission:String}をオフにしてください'
-	String confirmPermissionOffMessage({required String permission}) => '設定アプリを開いて${permission}をオフにしてください';
-
-	/// ja: 'ギャラリーへのアクセス'
-	String get permissionPhotos => 'ギャラリーへのアクセス';
-
-	/// ja: 'カメラへのアクセス'
-	String get permissionCamera => 'カメラへのアクセス';
-
-	/// ja: 'プッシュ通知'
-	String get permissionPushNotification => 'プッシュ通知';
-
-	/// ja: '設定アプリを開いて${permission:String}を許可してください'
-	String permissionWarnMessage({required String permission}) => '設定アプリを開いて${permission}を許可してください';
-
-	/// ja: '設定アプリを開く'
-	String get openSettingsApp => '設定アプリを開く';
-
 	/// ja: 'OK'
 	String get ok => 'OK';
-
-	/// ja: '変更を破棄しますか？'
-	String get confirmDiscardChangesTitle => '変更を破棄しますか？';
-
-	/// ja: 'すべての変更は失われます'
-	String get confirmDiscardChangesMessage => 'すべての変更は失われます';
 
 	/// ja: '破棄'
 	String get discard => '破棄';
 
 	/// ja: '破棄しない'
 	String get notDiscard => '破棄しない';
-
-	/// ja: '必須項目を入力して下さい'
-	String get validErrorMessageRequired => '必須項目を入力して下さい';
-
-	/// ja: '正しいURL形式で入力して下さい'
-	String get validErrorMessageUrlPattern => '正しいURL形式で入力して下さい';
 
 	/// ja: '編集'
 	String get edit => '編集';
@@ -383,9 +329,6 @@ class TranslationsAppJa {
 
 	/// ja: 'ライセンス'
 	String get license => 'ライセンス';
-
-	/// ja: 'エラー'
-	String get error => 'エラー';
 
 	/// ja: 'URLを開けませんでした。 頻発する場合はお問い合わせ下さい。'
 	String get urlErrorMessageCanNotOpen => 'URLを開けませんでした。\n頻発する場合はお問い合わせ下さい。';
@@ -775,9 +718,6 @@ extension on Translations {
 			case 'app.sexNeither': return 'どちらでもない';
 			case 'app.ageGroup': return '年齢層';
 			case 'app.sex': return '性別';
-			case 'app.unset': return '<未設定>';
-			case 'app.requiredIcon': return '*';
-			case 'app.requiredHelper': return '*必須項目';
 			case 'app.signInWithGoogle': return 'Googleでサインイン';
 			case 'app.signInWithApple': return 'Appleでサインイン';
 			case 'app.wishList': return 'ほしいもの';
@@ -796,7 +736,6 @@ extension on Translations {
 			case 'app.unexpectedErrorMessage': return '予期せぬエラーが発生しました。';
 			case 'app.searchEmptyMessage': return ({required String item}) => '${item}が見つかりませんでした。';
 			case 'app.merchandiseName': return '商品名';
-			case 'app.save': return '保存';
 			case 'app.editPageTitle': return ({required String item}) => '${item}を編集';
 			case 'app.createPageTitle': return ({required String item}) => '${item}を作成';
 			case 'app.wishSeasonLabel': return 'いつほしい？';
@@ -804,29 +743,15 @@ extension on Translations {
 			case 'app.url': return 'URL';
 			case 'app.addUrl': return 'URLを追加';
 			case 'app.memo': return 'メモ';
-			case 'app.shoot': return '写真を撮る';
-			case 'app.chooseFromLibrary': return 'ライブラリから画像を選択';
 			case 'app.star': return '星';
 			case 'app.delete': return '削除';
 			case 'app.deletedMessage': return '削除済です。';
 			case 'app.completeDeleteMessage': return '削除しました。';
 			case 'app.completeChangeGroupMessage': return 'グループを切り替えました。';
 			case 'app.uploadImage': return '写真のアップロード';
-			case 'app.lackOfPermission': return ({required String permission}) => '${permission}が許可されていません';
-			case 'app.confirmPermissionOffTitle': return ({required String permission}) => '${permission}をオフにしますか？';
-			case 'app.confirmPermissionOffMessage': return ({required String permission}) => '設定アプリを開いて${permission}をオフにしてください';
-			case 'app.permissionPhotos': return 'ギャラリーへのアクセス';
-			case 'app.permissionCamera': return 'カメラへのアクセス';
-			case 'app.permissionPushNotification': return 'プッシュ通知';
-			case 'app.permissionWarnMessage': return ({required String permission}) => '設定アプリを開いて${permission}を許可してください';
-			case 'app.openSettingsApp': return '設定アプリを開く';
 			case 'app.ok': return 'OK';
-			case 'app.confirmDiscardChangesTitle': return '変更を破棄しますか？';
-			case 'app.confirmDiscardChangesMessage': return 'すべての変更は失われます';
 			case 'app.discard': return '破棄';
 			case 'app.notDiscard': return '破棄しない';
-			case 'app.validErrorMessageRequired': return '必須項目を入力して下さい';
-			case 'app.validErrorMessageUrlPattern': return '正しいURL形式で入力して下さい';
 			case 'app.edit': return '編集';
 			case 'app.purchaseOrpurchasePlan': return '購入/購入予定';
 			case 'app.deleteConfirmTitle': return '削除の確認';
@@ -853,7 +778,6 @@ extension on Translations {
 			case 'app.help': return 'ヘルプ';
 			case 'app.developperTwitter': return '開発者X (旧Twitter)';
 			case 'app.license': return 'ライセンス';
-			case 'app.error': return 'エラー';
 			case 'app.urlErrorMessageCanNotOpen': return 'URLを開けませんでした。\n頻発する場合はお問い合わせ下さい。';
 			case 'app.joinGroup': return '参加グループ';
 			case 'app.share': return '共有';

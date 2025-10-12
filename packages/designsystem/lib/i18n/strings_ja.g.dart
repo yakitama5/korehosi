@@ -39,9 +39,76 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
+	late final TranslationsCommonJa common = TranslationsCommonJa.internal(_root);
 	late final TranslationsDesignsystemJa designsystem = TranslationsDesignsystemJa.internal(_root);
 	late final TranslationsKEnumJa kEnum = TranslationsKEnumJa.internal(_root);
 	late final TranslationsExceptionsJa exceptions = TranslationsExceptionsJa.internal(_root);
+}
+
+// Path: common
+class TranslationsCommonJa {
+	TranslationsCommonJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'Yes'
+	String get yes => 'Yes';
+
+	/// ja: 'No'
+	String get no => 'No';
+
+	/// ja: '・'
+	String get itmizedTextPrefix => '・';
+
+	/// ja: '保存'
+	String get save => '保存';
+
+	/// ja: '削除'
+	String get delete => '削除';
+
+	/// ja: '編集'
+	String get edit => '編集';
+
+	/// ja: '<未設定>'
+	String get unset => '<未設定>';
+
+	/// ja: '*'
+	String get requiredMark => '*';
+
+	/// ja: '*必須項目'
+	String get requiredHelper => '*必須項目';
+
+	/// ja: '次へ'
+	String get next => '次へ';
+
+	/// ja: '戻る'
+	String get back => '戻る';
+
+	/// ja: '前へ'
+	String get prev => '前へ';
+
+	/// ja: 'スキップ'
+	String get skip => 'スキップ';
+
+	/// ja: 'OK'
+	String get ok => 'OK';
+
+	/// ja: 'キャンセル'
+	String get cancel => 'キャンセル';
+
+	/// ja: 'リセット'
+	String get reset => 'リセット';
+
+	/// ja: '適用'
+	String get apply => '適用';
+
+	/// ja: 'すべて'
+	String get all => 'すべて';
+
+	/// ja: '名無し'
+	String get noName => '名無し';
 }
 
 // Path: designsystem
@@ -51,18 +118,13 @@ class TranslationsDesignsystemJa {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-
-	/// ja: 'はい'
-	String get yes => 'はい';
-
-	/// ja: 'いいえ'
-	String get no => 'いいえ';
-
+	late final TranslationsDesignsystemImageSourceSelectJa imageSourceSelect = TranslationsDesignsystemImageSourceSelectJa.internal(_root);
 	late final TranslationsDesignsystemConfirmDiscardChangesJa confirmDiscardChanges = TranslationsDesignsystemConfirmDiscardChangesJa.internal(_root);
+	late final TranslationsDesignsystemPermissionMessagesJa permissionMessages = TranslationsDesignsystemPermissionMessagesJa.internal(_root);
+	late final TranslationsDesignsystemSendUrlErrorDialogJa sendUrlErrorDialog = TranslationsDesignsystemSendUrlErrorDialogJa.internal(_root);
 	late final TranslationsDesignsystemAppUpdateJa appUpdate = TranslationsDesignsystemAppUpdateJa.internal(_root);
-
-	/// ja: '${percent:String}%'
-	String formatPercent({required String percent}) => '${percent}%';
+	late final TranslationsDesignsystemValidationErrorJa validationError = TranslationsDesignsystemValidationErrorJa.internal(_root);
+	late final TranslationsDesignsystemFormatJa format = TranslationsDesignsystemFormatJa.internal(_root);
 }
 
 // Path: kEnum
@@ -209,6 +271,21 @@ class TranslationsExceptionsJa {
 	}
 }
 
+// Path: designsystem.imageSourceSelect
+class TranslationsDesignsystemImageSourceSelectJa {
+	TranslationsDesignsystemImageSourceSelectJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '写真を撮る'
+	String get shoot => '写真を撮る';
+
+	/// ja: 'ライブラリから画像を選択'
+	String get chooseFromLibrary => 'ライブラリから画像を選択';
+}
+
 // Path: designsystem.confirmDiscardChanges
 class TranslationsDesignsystemConfirmDiscardChangesJa {
 	TranslationsDesignsystemConfirmDiscardChangesJa.internal(this._root);
@@ -230,6 +307,42 @@ class TranslationsDesignsystemConfirmDiscardChangesJa {
 	String get notDiscard => '破棄しない';
 }
 
+// Path: designsystem.permissionMessages
+class TranslationsDesignsystemPermissionMessagesJa {
+	TranslationsDesignsystemPermissionMessagesJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ギャラリーへのアクセス'
+	String get photos => 'ギャラリーへのアクセス';
+
+	/// ja: 'カメラへのアクセス'
+	String get camera => 'カメラへのアクセス';
+
+	/// ja: 'プッシュ通知'
+	String get pushNotification => 'プッシュ通知';
+
+	late final TranslationsDesignsystemPermissionMessagesPermissionLackDialogJa permissionLackDialog = TranslationsDesignsystemPermissionMessagesPermissionLackDialogJa.internal(_root);
+	late final TranslationsDesignsystemPermissionMessagesPermissionOffDialogJa permissionOffDialog = TranslationsDesignsystemPermissionMessagesPermissionOffDialogJa.internal(_root);
+}
+
+// Path: designsystem.sendUrlErrorDialog
+class TranslationsDesignsystemSendUrlErrorDialogJa {
+	TranslationsDesignsystemSendUrlErrorDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'エラー'
+	String get title => 'エラー';
+
+	/// ja: 'URLを開けませんでした。 頻発する場合はお問い合わせ下さい。'
+	String get message => 'URLを開けませんでした。\n頻発する場合はお問い合わせ下さい。';
+}
+
 // Path: designsystem.appUpdate
 class TranslationsDesignsystemAppUpdateJa {
 	TranslationsDesignsystemAppUpdateJa.internal(this._root);
@@ -242,6 +355,33 @@ class TranslationsDesignsystemAppUpdateJa {
 
 	/// ja: 'ストアを開く'
 	String get navigateStore => 'ストアを開く';
+}
+
+// Path: designsystem.validationError
+class TranslationsDesignsystemValidationErrorJa {
+	TranslationsDesignsystemValidationErrorJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '必須項目を入力して下さい'
+	String get required => '必須項目を入力して下さい';
+
+	/// ja: '正しいURL形式で入力して下さい'
+	String get url => '正しいURL形式で入力して下さい';
+}
+
+// Path: designsystem.format
+class TranslationsDesignsystemFormatJa {
+	TranslationsDesignsystemFormatJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '${percent:String}%'
+	String percent({required String percent}) => '${percent}%';
 }
 
 // Path: kEnum.viewLayout
@@ -266,6 +406,42 @@ class TranslationsKEnumViewLayoutJa {
 	}
 }
 
+// Path: designsystem.permissionMessages.permissionLackDialog
+class TranslationsDesignsystemPermissionMessagesPermissionLackDialogJa {
+	TranslationsDesignsystemPermissionMessagesPermissionLackDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '${permission:String}が許可されていません'
+	String title({required String permission}) => '${permission}が許可されていません';
+
+	/// ja: '設定アプリを開いて${permission:String}を許可してください'
+	String message({required String permission}) => '設定アプリを開いて${permission}を許可してください';
+
+	/// ja: '設定アプリを開く'
+	String get openSettings => '設定アプリを開く';
+}
+
+// Path: designsystem.permissionMessages.permissionOffDialog
+class TranslationsDesignsystemPermissionMessagesPermissionOffDialogJa {
+	TranslationsDesignsystemPermissionMessagesPermissionOffDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '${permission:String}をオフにしますか？'
+	String title({required String permission}) => '${permission}をオフにしますか？';
+
+	/// ja: '設定アプリを開いて${permission:String}をオフにしてください'
+	String message({required String permission}) => '設定アプリを開いて${permission}をオフにしてください';
+
+	/// ja: '設定アプリを開く'
+	String get openSettings => '設定アプリを開く';
+}
+
 // Path: designsystem.appUpdate.updatePossible
 class TranslationsDesignsystemAppUpdateUpdatePossibleJa {
 	TranslationsDesignsystemAppUpdateUpdatePossibleJa.internal(this._root);
@@ -274,8 +450,8 @@ class TranslationsDesignsystemAppUpdateUpdatePossibleJa {
 
 	// Translations
 
-	/// ja: '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？'
-	String get message => '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
+	/// ja: '新しいバージョンが公開されています。 アップデートを行うと、新しい機能をご利用いただけます。 アップデートを行いますか？'
+	String get message => '新しいバージョンが公開されています。 アップデートを行うと、新しい機能をご利用いただけます。 アップデートを行いますか？';
 }
 
 // Path: designsystem.appUpdate.forceUpdate
@@ -286,8 +462,8 @@ class TranslationsDesignsystemAppUpdateForceUpdateJa {
 
 	// Translations
 
-	/// ja: 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。'
-	String get message => 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
+	/// ja: 'ご利用のバージョンは現在ご利用出来ません。 ストアから新しいバージョンをご利用下さい。'
+	String get message => 'ご利用のバージョンは現在ご利用出来ません。 ストアから新しいバージョンをご利用下さい。';
 }
 
 /// Flat map(s) containing all translations.
@@ -295,16 +471,48 @@ class TranslationsDesignsystemAppUpdateForceUpdateJa {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'designsystem.yes': return 'はい';
-			case 'designsystem.no': return 'いいえ';
+			case 'common.yes': return 'Yes';
+			case 'common.no': return 'No';
+			case 'common.itmizedTextPrefix': return '・';
+			case 'common.save': return '保存';
+			case 'common.delete': return '削除';
+			case 'common.edit': return '編集';
+			case 'common.unset': return '<未設定>';
+			case 'common.requiredMark': return '*';
+			case 'common.requiredHelper': return '*必須項目';
+			case 'common.next': return '次へ';
+			case 'common.back': return '戻る';
+			case 'common.prev': return '前へ';
+			case 'common.skip': return 'スキップ';
+			case 'common.ok': return 'OK';
+			case 'common.cancel': return 'キャンセル';
+			case 'common.reset': return 'リセット';
+			case 'common.apply': return '適用';
+			case 'common.all': return 'すべて';
+			case 'common.noName': return '名無し';
+			case 'designsystem.imageSourceSelect.shoot': return '写真を撮る';
+			case 'designsystem.imageSourceSelect.chooseFromLibrary': return 'ライブラリから画像を選択';
 			case 'designsystem.confirmDiscardChanges.title': return '変更を破棄しますか？';
 			case 'designsystem.confirmDiscardChanges.message': return 'すべての変更は失われます';
 			case 'designsystem.confirmDiscardChanges.discard': return '破棄';
 			case 'designsystem.confirmDiscardChanges.notDiscard': return '破棄しない';
-			case 'designsystem.appUpdate.updatePossible.message': return '新しいバージョンが公開されています。\nアップデートを行うと、新しい機能をご利用いただけます。\nアップデートを行いますか？';
-			case 'designsystem.appUpdate.forceUpdate.message': return 'ご利用のバージョンは現在ご利用出来ません。\nストアから新しいバージョンをご利用下さい。';
+			case 'designsystem.permissionMessages.photos': return 'ギャラリーへのアクセス';
+			case 'designsystem.permissionMessages.camera': return 'カメラへのアクセス';
+			case 'designsystem.permissionMessages.pushNotification': return 'プッシュ通知';
+			case 'designsystem.permissionMessages.permissionLackDialog.title': return ({required String permission}) => '${permission}が許可されていません';
+			case 'designsystem.permissionMessages.permissionLackDialog.message': return ({required String permission}) => '設定アプリを開いて${permission}を許可してください';
+			case 'designsystem.permissionMessages.permissionLackDialog.openSettings': return '設定アプリを開く';
+			case 'designsystem.permissionMessages.permissionOffDialog.title': return ({required String permission}) => '${permission}をオフにしますか？';
+			case 'designsystem.permissionMessages.permissionOffDialog.message': return ({required String permission}) => '設定アプリを開いて${permission}をオフにしてください';
+			case 'designsystem.permissionMessages.permissionOffDialog.openSettings': return '設定アプリを開く';
+			case 'designsystem.sendUrlErrorDialog.title': return 'エラー';
+			case 'designsystem.sendUrlErrorDialog.message': return 'URLを開けませんでした。\n頻発する場合はお問い合わせ下さい。';
+			case 'designsystem.appUpdate.updatePossible.message': return '新しいバージョンが公開されています。 アップデートを行うと、新しい機能をご利用いただけます。 アップデートを行いますか？';
+			case 'designsystem.appUpdate.forceUpdate.message': return 'ご利用のバージョンは現在ご利用出来ません。 ストアから新しいバージョンをご利用下さい。';
 			case 'designsystem.appUpdate.navigateStore': return 'ストアを開く';
-			case 'designsystem.formatPercent': return ({required String percent}) => '${percent}%';
+			case 'designsystem.validationError.required': return '必須項目を入力して下さい';
+			case 'designsystem.validationError.url': return '正しいURL形式で入力して下さい';
+			case 'designsystem.format.percent': return ({required String percent}) => '${percent}%';
 			case 'kEnum.uiStyle': return ({required UIStyle context}) {
 				switch (context) {
 					case UIStyle.system:

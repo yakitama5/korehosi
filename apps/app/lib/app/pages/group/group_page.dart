@@ -314,14 +314,14 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
               validator: (value) {
                 // 必須チェック
                 if (value?.isNotEmpty != true) {
-                  return i18n.app.validErrorMessageRequired;
+                  return commonI18n.designsystem.validationError.required;
                 }
 
                 return null;
               },
             ),
           ],
-          okLabel: i18n.app.save,
+          okLabel: commonI18n.common.save,
         );
         // キャンセルされていれば(入力値がなければ)後続の処理は行わない
         final inputName = resultList?.firstOrNull;

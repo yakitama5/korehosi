@@ -50,7 +50,12 @@ class _ItemForm extends HookConsumerWidget {
     return ItemFormModelFormBuilder(
       model: _createModel(),
       builder: (context, formModel, child) => Nested(
-        children: const [ReactiveFormDirtyConfirmPopScope(), UnfocusOnTap()],
+        children: [
+          PopScopeDirtyConfirm(
+            dirty: ReactiveItemFormModelForm.of(context)?.form.dirty,
+          ),
+          const UnfocusOnTap(),
+        ],
         child: Scaffold(
           appBar: AppBar(
             title: Text(titleData ?? ''),

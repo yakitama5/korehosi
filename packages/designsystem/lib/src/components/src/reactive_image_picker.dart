@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/helper/permission_helper.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/i18n.dart';
+import 'package:packages_designsystem/src/helper/permission_helper.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_image_picker/reactive_image_picker.dart';
@@ -162,24 +162,25 @@ class _SourceSelectBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final sourceMessages = commonI18n.designsystem.imageSourceSelect;
     return BottomSheetColumn(
       children: [
         // Web版はカメラがないので非表示
         if (!kIsWeb)
           ListTile(
             leading: const Icon(Icons.add_a_photo),
-            title: Text(i18n.app.shoot),
+            title: Text(sourceMessages.shoot),
             onTap: () => Navigator.pop(context, _EditSource.camera),
           ),
         ListTile(
           leading: const Icon(Icons.photo_library),
-          title: Text(i18n.app.chooseFromLibrary),
+          title: Text(sourceMessages.chooseFromLibrary),
           onTap: () => Navigator.pop(context, _EditSource.gallery),
         ),
         if (showDelete == true)
           ListTile(
             leading: const Icon(Icons.delete),
-            title: Text(i18n.app.delete),
+            title: Text(commonI18n.common.delete),
             onTap: () => Navigator.pop(context, _EditSource.delete),
           ),
       ],

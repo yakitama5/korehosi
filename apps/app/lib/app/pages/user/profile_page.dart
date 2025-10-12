@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 
 class ProfilePage extends HookConsumerWidget {
@@ -37,7 +38,12 @@ class _Form extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Nested(
-      children: const [ReactiveFormDirtyConfirmPopScope(), UnfocusOnTap()],
+      children: [
+        PopScopeDirtyConfirm(
+          dirty: ReactiveUserFormModelForm.of(context)?.form.dirty,
+        ),
+        const UnfocusOnTap(),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: Text(i18n.app.profile),
@@ -65,7 +71,7 @@ class _SaveButton extends HookConsumerWidget with PresentationMixin {
       padding: const EdgeInsets.only(right: 8),
       child: FilledButton(
         onPressed: () => onSave(context, ref),
-        child: Text(i18n.app.save),
+        child: Text(commonI18n.common.save),
       ),
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
+import 'package:packages_designsystem/i18n.dart';
 
 class TextWithLabel extends StatelessWidget {
   const TextWithLabel(this.text, {super.key, this.label});
@@ -16,7 +16,7 @@ class TextWithLabel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label ?? '', style: textTheme.labelMedium),
-        Text(text ?? i18n.app.unset, style: textTheme.bodyLarge),
+        Text(text ?? commonI18n.common.unset, style: textTheme.bodyLarge),
       ],
     );
   }

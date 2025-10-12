@@ -50,10 +50,8 @@ class _PurchaseForm extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return PurchaseFormModelFormBuilder(
       model: _createModel(),
-      builder: (context, formModel, child) => PopScope(
-        canPop: false,
-        onPopInvokedWithResult: (didPop, result) =>
-            _onWillPopScope(context, didPop),
+      builder: (context, formModel, child) => PopScopeDirtyConfirm(
+        dirty: ReactivePurchaseFormModelForm.of(context)?.form.dirty,
         child: UnfocusOnTap(
           child: Scaffold(
             appBar: AppBar(
@@ -103,39 +101,6 @@ class _PurchaseForm extends HookConsumerWidget {
     sentAt: purchase?.sentAt,
     memo: purchase?.memo,
   );
-
-  Future<void> _onWillPopScope(BuildContext context, bool didPop) async {
-    // Notes: 移行ガイドに沿って変更
-    // https://docs.flutter.dev/release/breaking-changes/android-predictive-back#migrating-a-back-confirmation-dialog
-    if (didPop) {
-      return;
-    }
-
-    final navigator = Navigator.of(context);
-
-    // HACK(yakitama5): StatefulShellRouteが検知されない不具合が解消されたら変更する
-    // NavigationBarを検知出来ないのは一旦保留
-    // 内容が変更されていなければ閉じる
-    final dirty = ReactivePurchaseFormModelForm.of(context)?.form.dirty;
-    if (dirty != true) {
-      navigator.pop();
-      return;
-    }
-
-    // ダイアログを表示して確認
-    final result = await showOkCancelAlertDialog(
-      context: context,
-      title: i18n.app.confirmDiscardChangesTitle,
-      message: i18n.app.confirmDiscardChangesMessage,
-      okLabel: i18n.app.discard,
-      cancelLabel: i18n.app.notDiscard,
-    );
-
-    // 破棄が選ばれたら画面を閉じる
-    if (result == OkCancelResult.ok) {
-      navigator.pop();
-    }
-  }
 }
 
 /// 保存ボタン

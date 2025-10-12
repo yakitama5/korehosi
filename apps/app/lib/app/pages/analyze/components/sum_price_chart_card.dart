@@ -1,12 +1,12 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_app/app/pages/analyze/components/chart_card.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/analyze.dart';
 import 'package:packages_application/common.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 /// 購入金額の合計を表すCard
 class SumPriceChartCard extends HookConsumerWidget {

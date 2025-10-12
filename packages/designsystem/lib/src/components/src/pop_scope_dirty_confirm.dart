@@ -32,12 +32,13 @@ class PopScopeDirtyConfirm extends SingleChildStatelessWidget {
         }
 
         // ダイアログを表示して確認
+        final dialogMessages = i18n.designsystem.confirmDiscardChanges;
         final result = await showOkCancelAlertDialog(
           context: context,
-          title: i18n.designsystem.confirmDiscardChanges.title,
-          message: i18n.designsystem.confirmDiscardChanges.message,
-          okLabel: i18n.designsystem.confirmDiscardChanges.discard,
-          cancelLabel: i18n.designsystem.confirmDiscardChanges.notDiscard,
+          title: dialogMessages.title,
+          message: dialogMessages.message,
+          okLabel: dialogMessages.discard,
+          cancelLabel: dialogMessages.notDiscard,
         );
 
         // 破棄が選ばれたら画面を閉じる

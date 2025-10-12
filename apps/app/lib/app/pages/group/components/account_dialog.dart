@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/hooks/src/use_theme.dart';
 import 'package:flutter_app/app/pages/group/components/premium_icon_container.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
@@ -9,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/i18n.dart';
+import 'package:packages_designsystem/widgets.dart';
 
 Future<String?> showAdaptiveAccountDialog(
   BuildContext context, {

@@ -1,9 +1,9 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 Future<bool> requestPermissionPickImage(
@@ -98,19 +98,22 @@ Future<void> showPermissionDeinedDialog({
   required WidgetRef ref,
   required Permission permission,
 }) async {
+  final permissionMessages = commonI18n.designsystem.permissionMessages;
   final cont = switch (permission) {
-    Permission.camera => i18n.app.permissionCamera,
-    Permission.storage || Permission.photos => i18n.app.permissionPhotos,
-    Permission.notification => i18n.app.permissionPushNotification,
+    Permission.camera => permissionMessages.camera,
+    Permission.storage || Permission.photos => permissionMessages.photos,
+    Permission.notification => permissionMessages.pushNotification,
     _ => '',
   };
 
   // ダイアログを表示
+  final dialogI18n =
+      commonI18n.designsystem.permissionMessages.permissionLackDialog;
   final result = await showOkAlertDialog(
     context: context,
-    title: i18n.app.lackOfPermission(permission: cont),
-    message: i18n.app.permissionWarnMessage(permission: cont),
-    okLabel: i18n.app.openSettingsApp,
+    title: dialogI18n.title(permission: cont),
+    message: dialogI18n.message(permission: cont),
+    okLabel: dialogI18n.openSettings,
   );
 
   // ダイアログの結果に応じて設定アプリを表示
@@ -124,19 +127,22 @@ Future<void> showPermissionOffDialog({
   required WidgetRef ref,
   required Permission permission,
 }) async {
+  final permissionMessages = commonI18n.designsystem.permissionMessages;
   final cont = switch (permission) {
-    Permission.camera => i18n.app.permissionCamera,
-    Permission.storage || Permission.photos => i18n.app.permissionPhotos,
-    Permission.notification => i18n.app.permissionPushNotification,
+    Permission.camera => permissionMessages.camera,
+    Permission.storage || Permission.photos => permissionMessages.photos,
+    Permission.notification => permissionMessages.pushNotification,
     _ => '',
   };
 
   // ダイアログを表示
+  final dialogMessages =
+      commonI18n.designsystem.permissionMessages.permissionOffDialog;
   final result = await showOkAlertDialog(
     context: context,
-    title: i18n.app.confirmPermissionOffTitle(permission: cont),
-    message: i18n.app.confirmPermissionOffMessage(permission: cont),
-    okLabel: i18n.app.openSettingsApp,
+    title: dialogMessages.title(permission: cont),
+    message: dialogMessages.message(permission: cont),
+    okLabel: dialogMessages.openSettings,
   );
 
   // ダイアログの結果に応じて設定アプリを表示

@@ -1,181 +1,216 @@
-start: Start
-firstTime: Click here if you are a first time user.
-accountLink: Account Linkage
-contactUs: Contact Us
-termOfService: Terms of Use
-privacyPolicy: Privacy Policy
-accountLinkDescTitle: By linking your account, you will be able to use the following features
-accountLinkDescBodyCloudBackup: Data backup to the cloud
-accountLinkDescBodyMultiDevice: Simultaneous use on multiple terminals
-accountLinkDescBodyDataSend: Data transfer due to device change
-onboardStartTitle: Introduction.
-onboardStartMessage: Register your profile first!
-questionAgeGroup: What about you?
-questionSex: Gender.
-questionName: What is your name?
-questionNameCapiton: or Nickname
-questionConfirm: Is it correct?
-selectChild: Children (Please buy)
-selectAdult: Adult (I want to buy it for you)
-selectMan: man's man
-selectWoman: woman
-selectNeither: Neither.
-nameLabel: Name or Nickname
-name: Name
-next: Next.
-back: return
-prev: Previous
-skip: skip
-sexMan: man's man
-sexWoman: woman
-sexNeither: Neither.
-ageGroup: age-group
-sex: gender
-unset: <Unset
-requiredIcon: "*"
-requiredHelper: "*Required fields"
-signInWithGoogle: Sign in with Google
-signInWithApple: Sign in with Apple
-wishList: wanted article
-analyze: quid pro quo
-settings: posing (a problem)
-addWishList: Add what you want
-sortOrder: sort
-status: status
-wishRank: degree of desirability
-cancel: cancel
-reset: reset
-apply: adoption
-all: all
-noName: nameless
-groupInitialNameSuffix: " group of"
-unexpectedErrorMessage: An unexpected error has occurred.
-searchEmptyMessage: "${item:String}could not be found."
-merchandiseName: trade (brand) name
-save: preservation
-editPageTitle: "${item:String}Edit the"
-createPageTitle: "${item:String}Create a"
-wishSeasonLabel: When do you want it?
-wishSeasonHint: "Examples: Christmas, birthdays"
-url: uniform resouce locator
-addUrl: Add URL
-memo: memo
-shoot: take a picture
-chooseFromLibrary: Select an image from the library
-star: star
-delete: deletion
-deletedMessage: Deleted.
-completeDeleteMessage: Deleted.
-completeChangeGroupMessage: Switched groups.
-uploadImage: Upload Photo
-lackOfPermission: "${permission:String}is not allowed"
-confirmPermissionOffTitle: "${permission:String}to be turned off?"
-confirmPermissionOffMessage: Open the Settings app and turn${permission:String} and turn off the
-permissionPhotos: Gallery Access
-permissionCamera: Access to the camera
-permissionPushNotification: push notification
-permissionWarnMessage: Open the Settings app and${permission:String} Allow the
-openSettingsApp: Open the Settings application
+start: はじめる
+firstTime: はじめての方はこちら
+accountLink: アカウント連携
+contactUs: お問い合わせ
+termOfService: 利用規約
+privacyPolicy: プライバシーポリシー
+accountLinkDescTitle: >-
+  アカウント連携を行うことで、
+
+  下記の機能をご利用いただけます。
+accountLinkDescBodyCloudBackup: クラウドへのデータバックアップ
+accountLinkDescBodyMultiDevice: 複数端末での同時利用
+accountLinkDescBodyDataSend: 端末変更に伴うデータ移行
+onboardStartTitle: はじめに
+onboardStartMessage: まずはプロフィールを登録しましょう
+questionAgeGroup: あなたは？
+questionSex: 性別は？
+questionName: お名前は？
+questionNameCapiton: または ニックネーム
+questionConfirm: あっていますか？
+selectChild: こども (買ってほしい)
+selectAdult: おとな (買ってあげたい)
+selectMan: おとこ
+selectWoman: おんな
+selectNeither: どちらでもない
+nameLabel: 名前 または ニックネーム
+name: 名前
+next: 次へ
+back: 戻る
+prev: 前へ
+skip: スキップ
+sexMan: おとこ
+sexWoman: おんな
+sexNeither: どちらでもない
+ageGroup: 年齢層
+sex: 性別
+signInWithGoogle: Googleでサインイン
+signInWithApple: Appleでサインイン
+wishList: ほしいもの
+analyze: ふりかえり
+settings: せってい
+addWishList: ほしいものを追加
+sortOrder: 並び替え
+status: ステータス
+wishRank: 欲しい度
+cancel: キャンセル
+reset: リセット
+apply: 適用
+all: すべて
+noName: 名無し
+groupInitialNameSuffix: " のグループ"
+unexpectedErrorMessage: 予期せぬエラーが発生しました。
+searchEmptyMessage: "${item:String}が見つかりませんでした。"
+merchandiseName: 商品名
+editPageTitle: "${item:String}を編集"
+createPageTitle: "${item:String}を作成"
+wishSeasonLabel: いつほしい？
+wishSeasonHint: 例：クリスマス、誕生日
+url: URL
+addUrl: URLを追加
+memo: メモ
+star: 星
+delete: 削除
+deletedMessage: 削除済です。
+completeDeleteMessage: 削除しました。
+completeChangeGroupMessage: グループを切り替えました。
+uploadImage: 写真のアップロード
 ok: OK
-confirmDiscardChangesTitle: Discard changes?
-confirmDiscardChangesMessage: All changes will be lost
-discard: discard
-notDiscard: not to be discarded
-validErrorMessageRequired: Please fill in the required fields
-validErrorMessageUrlPattern: Please enter the correct URL format
-edit: editing
-purchaseOrpurchasePlan: Purchase/plan to purchase
-deleteConfirmTitle: Confirmation of deletion
-deleteCofirmMessage: Do you want to delete "${item:String} Do you want to delete "?
-deleteGroupCofirmMessage: Do you want to delete "${name:String} Do you want to delete "? \All the wants registered in the ߋn group will be deleted. \ɑnThis operation cannot be undone.
-leaveConfirmTitle: Confirmation of withdrawal
-leaveCofirmMessage: Do you want to leave the${group:String} Do you wish to leave the
-notSelectedGroupDialogTitle: No group selected
-notSelectedGroupDialogMessage: Please select a group and then add what you want
-purchaseInfoTitle: Purchase/Purchase Information
-purchaseInfoCaption: Subsequent content will only be visible to adults in the group
-price: Amount of money
-purchasePlanDateTime: Expected Date of Purchase
+discard: 破棄
+notDiscard: 破棄しない
+edit: 編集
+purchaseOrpurchasePlan: 購入/購入予定
+deleteConfirmTitle: 削除の確認
+deleteCofirmMessage: 「${item:String}」を削除しますか？
+deleteGroupCofirmMessage: >-
+  「${name:String}」を削除しますか？
+
+  グループに登録している欲しい物は全て削除されます。
+
+  この操作は元に戻すことができません。
+leaveConfirmTitle: 離脱の確認
+leaveCofirmMessage: 「${group:String}」から離脱しますか？
+notSelectedGroupDialogTitle: グループが選択されていません
+notSelectedGroupDialogMessage: グループを選択してからほしいものを追加して下さい
+purchaseInfoTitle: 購入/購入予定情報
+purchaseInfoCaption: 以降の内容はグループ内の大人にだけ表示されます
+price: 金額
+purchasePlanDateTime: 購入予定日
 yenMark: ¥
-surprise: surprise
-surpriseCaption: I don't want my kids to know what's going on.
-purchasePlanDateTimeCaption: Enter "To be purchased".
-sentAtCaption: Entering the information will make it "Purchased".
-sentAt: Date given
-authErrorMessage: An authentication error has occurred. \Please log in after a few moments.
-account: account
-profile: Profile
-group: group (usu. of people)
-help: help
-developperTwitter: Developer X (formerly Twitter)
-license: License
-error: error
-urlErrorMessageCanNotOpen: Could not open URL. \Please contact us if this occurs frequently.
-joinGroup: Participating Groups
-share: share
-copy: copy
-shareCaption: Share and invite members!
-groupShareText: '${user:String}from${group:String} You have been invited to \You can join the Wishlist group by clicking the URL below or scanning the QR code.${url:String}'
-copied: Copied.
-saved: Saved in.
-groupName: Group Name
-deleteErrorMessageRequiredExists: You cannot delete all the groups you have created. \You must have at least one group.
-deleteErrorMessagePermission: You are not authorized to delete.
-shareGroupHelpTitle: Share/join groups
-shareGroupHelpMessage: Please "Share" from the [Share Group] group.
-addGroup: Add Group
-other: Other
-logout: logout
-deleteAccount: withdrawal from a group
-google: Google (WWW search engine)
+surprise: サプライズ
+surpriseCaption: 状況を子供に知られたくない
+purchasePlanDateTimeCaption: 入力すると「購入予定」になります
+sentAtCaption: 入力すると「購入済」になります
+sentAt: 渡した日
+authErrorMessage: >-
+  認証エラーが発生しました。
+
+  しばらく時間を置いてログインして下さい。
+account: アカウント
+profile: プロフィール
+group: グループ
+help: ヘルプ
+developperTwitter: 開発者X (旧Twitter)
+license: ライセンス
+urlErrorMessageCanNotOpen: >-
+  URLを開けませんでした。
+
+  頻発する場合はお問い合わせ下さい。
+joinGroup: 参加グループ
+share: 共有
+copy: コピー
+shareCaption: 共有してメンバーを招待しましょう
+groupShareText: >-
+  ${user:String}さんから${group:String}へ招待されました。
+
+  下記のURLをクリックするか、QRコードを読み取ることで、欲しい物リストのグループに参加できます
+
+  ${url:String}
+copied: コピーしました
+saved: 保存しました
+groupName: グループ名
+deleteErrorMessageRequiredExists: >-
+  作成したグループを全て削除することはできません。
+
+  最低でも1件以上のグループが必要です。
+deleteErrorMessagePermission: 削除を行う権限がありません。
+shareGroupHelpTitle: グループの共有/参加
+shareGroupHelpMessage: >-
+  【グループの共有】
+
+  グループから「共有」を行って下さい
+
+
+  【グループへの参加】
+
+  共有されたURLをクリックするか、
+
+  QRコードを読み取ることで参加できます
+addGroup: グループを追加
+other: その他
+logout: ログアウト
+deleteAccount: 退会
+google: Google
 apple: Apple
-notJoinedGroupMessage: You do not belong to any group. \Please create a group or join a group to which you have been invited.
-deletedUser: <Deleted User>.
-selectNumberText: "${length:int}selecting an option (from a test case, e.g. litmus test)"
-authErrorMessageNotExistsProvider: The account must be linked to one or more external accounts.
-authErrorMessagAlreadyInUse: This account has already been linked. \Please use another account or log out once and link it.
-bullet: interpoint (interword separation)
-notUseAnalytics: Currently, the look-back function is not available.
-analyticsFeatureTitle: The following functions are available in the Reflection function.
-priceAnalytics: Change in Amount
-purchaseUserAnalytics: Percentage of people who bought
-purchasedAnalytics: Percentage of purchases made
-analyticsPublishPlan: We will release it before the developer's child starts kindergarten.
-deleteAccountConfirmTitle: Confirmation of withdrawal from membership
-deleteAccountConfirmMessage: Are you sure you want to cancel your membership? \Ўn this operation cannot be undone.
-joinedGroupTitle: Join Group
-joinedGroupMessage: I joined the group.
-joinGroupErrorMessageInvalidShareLink: The invitation link is incorrect.
-joinGroupErrorMessageJoinedGroup: I have already participated.
-joinGroupErrorMessageInvalidDate: Invitation link has expired.
-joinGroupErrorMessageNotAuth: An authentication error has occurred.
-joinGroupErrorMessageLimitOver: The maximum number of participants (5) in the group has been reached.
-leave: withdrawal
-select: selection
-wanterName: Who do you want?
-wanterNameChipTitle: people who want something
-businessErrorMessageOverItemCount: You have reached your registration limit. \Please delete your ዄn-purchased items or change to a premium plan.
-updateAppTitle: App Update
-updateAppMessage: The latest version of the application has been released. \Would you like to go to the 팀n store?
-goStore: Go to Store
-buyerName: Purchased by
-howToUse: treatment
-joinPremiumGroup: Release the limit on the number of want registrations.
-joinedPremiumGroup: The limit on the number of want registrations has been released. (Unlimited)
-itemPurchase: Purchase Products
-itemLimitReleaseMessage: Purchasing an item will release the restrictions on the items you want to be able to register in the group you are viewing. \You can purchase up to 30 items for the free version.\nPrice:³³)${price:String} (${term:String} )
-purchaseOkLabel: Purchase (¥)${price:String} )
-lifeful: indefinite
-darkMode: dark mode
-lightMode: light mode
-purchaseRate: Purchase rate
-purchaseRateAndPlan: Purchase rate (including planned)
+notJoinedGroupMessage: >-
+  グループに所属していません。
+
+  グループを作成するか、
+
+  招待されたグループに参加して下さい。
+deletedUser: <削除済ユーザー>
+selectNumberText: "${length:int}件選択"
+authErrorMessageNotExistsProvider: アカウントは1つ以上の外部アカウントとの連携をしておく必要があります。
+authErrorMessagAlreadyInUse: >-
+  このアカウントはすでに連携済です。
+
+  別のアカウントを利用するか、一度ログアウトしてから連携して下さい。
+bullet: ・
+notUseAnalytics: 現在、ふりかえり機能はご利用頂けません。
+analyticsFeatureTitle: ふりかえり機能では、以下の機能がご利用頂けます。
+priceAnalytics: 金額の推移
+purchaseUserAnalytics: 買ってくれた人の割合
+purchasedAnalytics: 買ってもらった割合
+analyticsPublishPlan: ※ 開発者のこどもが幼稚園に入るまでには公開します
+deleteAccountConfirmTitle: 退会の確認
+deleteAccountConfirmMessage: >-
+  本当に退会してもよろしいですか？
+
+  この操作は元に戻すことができません。
+joinedGroupTitle: グループへ参加
+joinedGroupMessage: グループに参加しました。
+leave: 離脱
+select: 選択
+wanterName: だれがほしい？
+wanterNameChipTitle: ほしい人
+businessErrorMessageOverItemCount: >-
+  登録数の上限に達しました。
+
+  購入済のものを削除するか、プレミアムプランに変更して下さい。
+updateAppTitle: アプリの更新
+updateAppMessage: >-
+  アプリの最新版がリリースされています。
+
+  ストアへ移動しますか？
+goStore: ストアへ
+buyerName: 購入した人
+howToUse: 使い方
+joinPremiumGroup: 欲しい物の登録数制限を解放
+joinedPremiumGroup: 欲しい物の登録数制限が解放されました。(無制限)
+itemPurchase: 商品の購入
+itemLimitReleaseMessage: >-
+  商品を購入すると
+
+  表示中のグループに登録できる
+
+  欲しい物の制限が解放されます。
+
+  (無料版は30個まで)
+
+
+  価格：¥${price:String}(${term:String})
+purchaseOkLabel: 購入(¥${price:String})
+lifeful: 無期限
+darkMode: ダークモード
+lightMode: ライトモード
+purchaseRate: 購入率
+purchaseRateAndPlan: 購入率 (予定込)
 formatPercent: "${percent:String}%"
-purchasePrice: Purchase price
-formatMonth: "${month:int}month"
+purchasePrice: 購入金額
+formatMonth: "${month:int}月"
 formatFraction: "${molecule:int}/${denominator:int}"
-notificationAddItemTitle: "${name:String}added what you want!"
-notificationAddItemBody: "${name:String}added what you want!"
-pushNotification: push notification
-pushNotificationDescription: Receive notifications when new items you want are added to the group
-purchased: already bought
+notificationAddItemTitle: "${name:String}さんがほしいものを追加しました！"
+notificationAddItemBody: "${name:String}さんがほしいものを追加しました！"
+pushNotification: プッシュ通知
+pushNotificationDescription: グループ内でほしいものが追加された場合に通知が受け取れます
+purchased: 購入済
