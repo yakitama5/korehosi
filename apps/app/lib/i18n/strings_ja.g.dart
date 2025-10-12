@@ -40,7 +40,6 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	late final TranslationsAnalyzeJa analyze = TranslationsAnalyzeJa.internal(_root);
-	late final TranslationsAppJa app = TranslationsAppJa.internal(_root);
 	late final TranslationsGroupJa group = TranslationsGroupJa.internal(_root);
 	late final TranslationsItemJa item = TranslationsItemJa.internal(_root);
 	late final TranslationsSettingsJa settings = TranslationsSettingsJa.internal(_root);
@@ -55,18 +54,6 @@ class TranslationsAnalyzeJa {
 
 	// Translations
 	late final TranslationsAnalyzeAnalyzePageJa analyzePage = TranslationsAnalyzeAnalyzePageJa.internal(_root);
-}
-
-// Path: app
-class TranslationsAppJa {
-	TranslationsAppJa.internal(this._root);
-
-	final Translations _root; // ignore: unused_field
-
-	// Translations
-
-	/// ja: 'hoge'
-	String get hoge => 'hoge';
 }
 
 // Path: group
@@ -841,7 +828,6 @@ extension on Translations {
 			case 'analyze.analyzePage.format.fraction': return ({required int molecule, required int denominator}) => '${molecule}/${denominator}';
 			case 'analyze.analyzePage.format.month': return ({required int month}) => '${month}月';
 			case 'analyze.analyzePage.totalPrice': return '合計金額';
-			case 'app.hoge': return 'hoge';
 			case 'group.common.groupName': return 'グループ名';
 			case 'group.common.leaveGroup': return 'グループから脱退';
 			case 'group.common.leaveConfirmDialog.title': return '離脱の確認';
