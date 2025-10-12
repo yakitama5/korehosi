@@ -15,7 +15,7 @@ class AccountLinkPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(i18n.app.accountLink)),
+      appBar: AppBar(title: Text(i18n.settings.accountLinkPage.title)),
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(8),
@@ -69,18 +69,15 @@ class _Caption extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final messages = i18n.settings.accountLinkPage.meritDescription;
 
     return ExpandWidthContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(i18n.app.accountLinkDescTitle, style: textTheme.titleMedium),
+          Text(messages.title, style: textTheme.titleMedium),
           const Gap(16),
-          ItemizedText([
-            Text(i18n.app.accountLinkDescBodyCloudBackup),
-            Text(i18n.app.accountLinkDescBodyMultiDevice),
-            Text(i18n.app.accountLinkDescBodyDataSend),
-          ]),
+          ItemizedText(messages.itemizedMessages.map(Text.new).toList()),
         ],
       ),
     );
@@ -96,7 +93,7 @@ class _GoogleSignInButton extends HookConsumerWidget with PresentationMixin {
         child: OutlinedButton.icon(
           onPressed: () => onSignInWithGoogle(context, ref),
           icon: const GoogleIcon(),
-          label: Text(i18n.app.signInWithGoogle),
+          label: Text(i18n.settings.accountLinkPage.signInWithGoogle),
         ),
       ),
     );
@@ -118,7 +115,7 @@ class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
         child: OutlinedButton.icon(
           onPressed: () => _onSignInWithApple(context, ref),
           icon: Icon(MdiIcons.apple, color: colorScheme.onSurface),
-          label: Text(i18n.app.signInWithApple),
+          label: Text(i18n.settings.accountLinkPage.signInWithApple),
         ),
       ),
     );

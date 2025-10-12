@@ -39,9 +39,9 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
             ],
             freeze: true,
             showBackButton: true,
-            back: Text(i18n.app.back),
-            next: Text(i18n.app.next),
-            done: Text(i18n.app.start),
+            back: Text(commonI18n.common.back),
+            next: Text(commonI18n.common.next),
+            done: Text(i18n.user.onboardPage.start),
             onDone: () => _onDone(context, ref),
             safeAreaList: const [true, true, true, true],
           ),
@@ -51,16 +51,18 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
   }
 
   PageViewModel _createStartPageVM(BuildContext context) {
+    final messages = i18n.user.onboardPage.introduction;
+
     return _createPageVM(
       context,
       imagePath: Assets.images.onboardGift,
-      title: i18n.app.onboardStartTitle,
+      title: messages.title,
       children: [
-        Text(i18n.app.onboardStartMessage),
+        Text(messages.message),
         const Gap(16),
         _FormFilledButton(
           onPressed: () => introKey.currentState?.next(),
-          label: i18n.app.next,
+          label: commonI18n.common.next,
         ),
       ],
     );
@@ -70,7 +72,7 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
     return _createPageVM(
       context,
       imagePath: Assets.images.onboardProfile,
-      title: i18n.app.questionAgeGroup,
+      title: i18n.user.onboardPage.profile,
       children: [
         const UserNameField(),
         const Gap(8),
@@ -78,7 +80,7 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
         const Gap(32),
         _FormFilledButton(
           onPressed: () => introKey.currentState?.next(),
-          label: i18n.app.next,
+          label: commonI18n.common.next,
         ),
       ],
     );
@@ -90,26 +92,26 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
     return _createPageVM(
       context,
       imagePath: Assets.images.onboardDone,
-      titleWidget: const SizedBox.shrink(),
+      title: i18n.user.onboardPage.confirm,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ReactiveValueListenableBuilder<AgeGroup>(
           formControl: formModel.ageGroupControl,
           builder: (context, control, child) => TextWithLabel(
             commonI18n.kEnum.ageGroup(context: control.value!),
-            label: i18n.app.ageGroup,
+            label: i18n.user.common.ageGroup,
           ),
         ),
         const Gap(8),
         ReactiveValueListenableBuilder<String>(
           formControl: formModel.nameControl,
           builder: (context, control, child) =>
-              TextWithLabel(control.value, label: i18n.app.name),
+              TextWithLabel(control.value, label: i18n.user.common.name),
         ),
         const Gap(8),
         _FormFilledButton(
           onPressed: () => _onDone(context, ref),
-          label: i18n.app.start,
+          label: i18n.user.onboardPage.start,
         ),
       ],
     );

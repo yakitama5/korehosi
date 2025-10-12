@@ -13,7 +13,7 @@ class AgeGroupField extends HookWidget {
   Widget build(BuildContext context) {
     return ReactiveSegmentedButton(
       formControlName: UserFormModelForm.ageGroupControlName,
-      labelText: i18n.app.ageGroup,
+      labelText: i18n.user.common.ageGroup,
     );
   }
 }

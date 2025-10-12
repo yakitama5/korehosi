@@ -72,12 +72,12 @@ class _StartButton extends HookWidget {
           child: ExpandWidthContainer(
             child: FilledButton(
               onPressed: () => onStart(context),
-              child: Text(i18n.app.start),
+              child: Text(i18n.user.welcomePage.start),
             ),
           ),
         ),
         Text(
-          i18n.app.firstTime,
+          i18n.user.welcomePage.forFirstTimers,
           style: textTheme.labelMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
@@ -99,7 +99,7 @@ class _AccountLinkButton extends HookWidget {
       child: ExpandWidthContainer(
         child: OutlinedButton(
           onPressed: () => onAccountLink(context),
-          child: Text(i18n.app.accountLink),
+          child: Text(i18n.user.welcomePage.accountLink),
         ),
       ),
     );
@@ -115,9 +115,10 @@ class _Links extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final helpMessages = i18n.settings.settingsPage.help;
     return Column(
       children: [
-        UrlLink(url: urlConfig.howToUse, label: i18n.app.howToUse),
+        UrlLink(url: urlConfig.howToUse, label: helpMessages.howToUse),
         const Gap(32),
         ExpandWidthContainer(
           child: Row(
@@ -126,13 +127,13 @@ class _Links extends HookWidget {
               Flexible(
                 child: UrlLink(
                   url: urlConfig.contactUs,
-                  label: i18n.app.contactUs,
+                  label: helpMessages.contactUs,
                 ),
               ),
               Flexible(
                 child: UrlLink(
                   url: urlConfig.privacyPolicyJa,
-                  label: i18n.app.privacyPolicy,
+                  label: helpMessages.privacyPolicy,
                 ),
               ),
             ],

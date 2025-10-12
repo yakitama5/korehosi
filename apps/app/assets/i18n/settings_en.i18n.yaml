@@ -13,7 +13,7 @@ settingsPage:
     howToUse: HowToUse
     contactUs: Contact us
     developperTwitter: Developper
-    privacyPollicy: PrivacyPollicy
+    privacyPolicy: PrivacyPolicy
     licencse: License
 accountPage:
   title: Account

@@ -29,14 +29,14 @@ class ContactUsLink extends StatelessWidget {
   }
 }
 
-class PrivacyPollicyLink extends StatelessWidget {
-  const PrivacyPollicyLink({super.key});
+class PrivacyPolicyLink extends StatelessWidget {
+  const PrivacyPolicyLink({super.key});
 
   @override
   Widget build(BuildContext context) {
     return UrlLink(
       url: _dummyUrl,
-      label: i18n.settings.settingsPage.help.privacyPollicy,
+      label: i18n.settings.settingsPage.help.privacyPolicy,
     );
   }
 }

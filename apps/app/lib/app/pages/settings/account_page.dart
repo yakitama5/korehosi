@@ -6,7 +6,6 @@ import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:packages_application/user.dart';
-import 'package:packages_designsystem/extension.dart';
 import 'package:packages_designsystem/widgets.dart';
 
 class AccountPage extends HookConsumerWidget with PresentationMixin {
@@ -15,49 +14,45 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = useColorScheme();
-    final trailing = useTheme().isCupertinoPlatform
-        ? const Icon(Icons.arrow_forward_ios_rounded)
-        : null;
+    final messages = i18n.settings.accountPage;
 
     final authStatus = ref.watch(authStatusProvider);
 
     return authStatus.when(
       data: (data) => Scaffold(
-        appBar: AppBar(title: Text(i18n.app.account)),
+        appBar: AppBar(title: Text(messages.title)),
         body: ThemedSettingsList(
           sections: [
             SettingsSection(
-              title: Text(i18n.app.accountLink),
+              title: Text(messages.link.head),
               tiles: [
                 SettingsTile.switchTile(
                   leading: const GoogleIcon(),
-                  title: Text(i18n.app.google),
+                  title: Text(messages.link.google),
                   initialValue: data?.linkedGoogle,
                   onToggle: (value) => _onToggleGoogle(context, ref, value),
                 ),
                 SettingsTile.switchTile(
                   leading: Icon(MdiIcons.apple, color: colorScheme.onSurface),
-                  title: Text(i18n.app.apple),
+                  title: Text(messages.link.apple),
                   initialValue: data?.linkedApple,
                   onToggle: (value) => _onToggleApple(context, ref, value),
                 ),
               ],
             ),
             SettingsSection(
-              title: Text(i18n.app.other),
+              title: Text(messages.other.head),
               tiles: [
                 // 連携していないユーザーはログアウトしても復帰できないので退会オンリー
                 if (data?.isAnonymous != true)
                   SettingsTile.navigation(
                     leading: const Icon(Icons.logout),
-                    trailing: trailing,
-                    title: Text(i18n.app.logout),
+                    title: Text(messages.other.logout),
                     onPressed: (context) => _onLogout(context, ref),
                   ),
                 SettingsTile.navigation(
                   leading: Icon(Icons.delete, color: colorScheme.error),
-                  trailing: trailing,
-                  title: Text(i18n.app.deleteAccount),
+                  title: Text(messages.other.leave),
                   onPressed: (context) => _onDeleteAccount(context, ref),
                 ),
               ],
@@ -97,10 +92,11 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
 
   Future<void> _onDeleteAccount(BuildContext context, WidgetRef ref) async {
     // 削除確認
+    final messages = i18n.settings.accountPage.leaveConfirmDialog;
     final result = await showOkCancelAlertDialog(
       context: context,
-      title: i18n.app.deleteAccountConfirmTitle,
-      message: i18n.app.deleteAccountConfirmMessage,
+      title: messages.title,
+      message: messages.message,
     );
     if (result != OkCancelResult.ok) {
       return;

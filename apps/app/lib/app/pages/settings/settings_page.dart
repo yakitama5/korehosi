@@ -24,39 +24,33 @@ class SettingsPage extends HookConsumerWidget {
     // 設定アプリと行き来するため、ライフサイクルを検知してリビルドを行う
     return AppLifecycleBuilder(
       builder: (context, state) {
-        // プラットフォームに応じたアイコンの出し訳
-        final trailing = useTheme().isCupertinoPlatform
-            ? const Icon(Icons.arrow_forward_ios_rounded)
-            : null;
+        final messages = i18n.settings.settingsPage;
 
         // 通知権限の可否
         // BUG(yakitama5): Androidで権限OFFにした際に再起動がかかってしまう件を対処したい
         final isNotificationGranted = Permission.notification.status.isGranted;
         return Scaffold(
-          appBar: AppBar(title: Text(i18n.app.settings), centerTitle: true),
+          appBar: AppBar(title: Text(messages.title), centerTitle: true),
           body: FutureBuilder(
             future: isNotificationGranted,
             builder: (_, snap) => ThemedSettingsList(
               sections: [
                 SettingsSection(
-                  title: Text(i18n.app.account),
+                  title: Text(messages.account.head),
                   tiles: [
                     SettingsTile.navigation(
                       leading: const Icon(Icons.person),
-                      trailing: trailing,
-                      title: Text(i18n.app.profile),
+                      title: Text(messages.account.profile),
                       onPressed: (context) => _onProfile(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.group),
-                      trailing: trailing,
-                      title: Text(i18n.app.group),
+                      title: Text(messages.account.group),
                       onPressed: (context) => _onGroup(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.link),
-                      trailing: trailing,
-                      title: Text(i18n.app.account),
+                      title: Text(messages.account.account),
                       onPressed: (context) => _onAccount(context, ref),
                     ),
                     SettingsTile.switchTile(
@@ -77,17 +71,19 @@ class SettingsPage extends HookConsumerWidget {
                           );
                         }
                       },
-                      title: Text(i18n.app.pushNotification),
-                      description: Text(i18n.app.pushNotificationDescription),
+                      title: Text(messages.account.pushNotification.title),
+                      description: Text(
+                        messages.account.pushNotification.caption,
+                      ),
                     ),
                   ],
                 ),
                 SettingsSection(
-                  title: Text(i18n.settings.settingsPage.layout.haed),
+                  title: Text(messages.layout.haed),
                   tiles: [
                     SettingsTile.navigation(
                       leading: const Icon(Icons.style),
-                      title: Text(i18n.settings.settingsPage.layout.uiStyle),
+                      title: Text(messages.layout.uiStyle),
                       value: Text(commonI18n.kEnum.uiStyle(context: uiStyle)),
                       onPressed: const SettingsUiStylePageRoute().go,
                     ),
@@ -97,7 +93,7 @@ class SettingsPage extends HookConsumerWidget {
                         ThemeMode.light => Icons.light_mode,
                         ThemeMode.dark => Icons.dark_mode,
                       }),
-                      title: Text(i18n.settings.settingsPage.layout.themeMode),
+                      title: Text(messages.layout.themeMode),
                       value: Text(
                         commonI18n.kEnum.themeMode(context: themeMode),
                       ),
@@ -105,7 +101,7 @@ class SettingsPage extends HookConsumerWidget {
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.color_lens),
-                      title: Text(i18n.settings.settingsPage.layout.colorTheme),
+                      title: Text(messages.layout.colorTheme),
                       value: Text(
                         commonI18n.kEnum.themeColor(context: themeColor),
                       ),
@@ -114,36 +110,31 @@ class SettingsPage extends HookConsumerWidget {
                   ],
                 ),
                 SettingsSection(
-                  title: Text(i18n.app.help),
+                  title: Text(messages.help.head),
                   tiles: [
                     SettingsTile.navigation(
                       leading: const Icon(CustomIcons.beginner),
-                      trailing: trailing,
-                      title: Text(i18n.app.howToUse),
+                      title: Text(messages.help.howToUse),
                       onPressed: (context) => _onHowToUse(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.help),
-                      trailing: trailing,
-                      title: Text(i18n.app.contactUs),
+                      title: Text(messages.help.contactUs),
                       onPressed: (context) => _onContactUs(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(CustomIcons.x_twitter),
-                      trailing: trailing,
-                      title: Text(i18n.app.developperTwitter),
+                      title: Text(messages.help.developperTwitter),
                       onPressed: (context) =>
                           _onDevelopperTwitter(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.lock),
-                      trailing: trailing,
-                      title: Text(i18n.app.privacyPolicy),
+                      title: Text(messages.help.privacyPolicy),
                       onPressed: (context) => _onPrivacyPolicy(context, ref),
                     ),
                     SettingsTile.navigation(
-                      trailing: trailing,
-                      title: Text(i18n.app.license),
+                      title: Text(messages.help.license),
                       onPressed: (context) => _onLicense(context, ref),
                     ),
                   ],

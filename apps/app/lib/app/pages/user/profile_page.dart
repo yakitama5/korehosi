@@ -46,7 +46,7 @@ class _Form extends HookWidget {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: Text(i18n.app.profile),
+          title: Text(i18n.user.profilePage.profile),
           actions: const [_SaveButton()],
         ),
         body: const SingleChildScrollView(

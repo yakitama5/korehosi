@@ -13,7 +13,7 @@ class UserNameField extends HookWidget {
   Widget build(BuildContext context) {
     return ReactiveOutlinedTextField<String>(
       formControlName: UserFormModelForm.nameControlName,
-      labelText: i18n.app.nameLabel,
+      labelText: i18n.user.common.nameLabelText,
       maxLength: userConfig.maxNameLength,
     );
   }
