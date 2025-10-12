@@ -31,15 +31,11 @@ class $AssetsImagesGen {
   /// File path: assets/images/google.svg
   SvgGenImage get google => const SvgGenImage('assets/images/google.svg');
 
-  /// File path: assets/images/logo_dark.png
-  AssetGenImage get logoDark =>
-      const AssetGenImage('assets/images/logo_dark.png');
-
-  /// File path: assets/images/logo_svg.svg
-  SvgGenImage get logoSvg => const SvgGenImage('assets/images/logo_svg.svg');
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
   /// List of all assets
-  List<dynamic> get values => [google, logoDark, logoSvg];
+  List<dynamic> get values => [google, logo];
 }
 
 class $AssetsLottieGen {
