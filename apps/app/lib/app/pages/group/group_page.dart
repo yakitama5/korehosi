@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/app/components/src/adaptive_dialog.dart';
-import 'package:flutter_app/app/components/src/snackbar/error_snackbar.dart';
 import 'package:flutter_app/app/pages/group/components/premium_icon_container.dart';
 import 'package:flutter_app/app/pages/group/components/share_group_bottom_sheet.dart';
 import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
@@ -132,10 +131,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
   Future<void> onPremium(BuildContext context, WidgetRef ref) async {
     final group = await ref.read(GroupDetailProviders.groupProvider.future);
     if (group == null && context.mounted) {
-      ErrorSnackBar.show(
-        ScaffoldMessenger.of(context),
-        message: i18n.app.unexpectedErrorMessage,
-      );
+      SnackBarManager.showErrorSnackBar(i18n.app.unexpectedErrorMessage);
       return;
     }
     try {
@@ -178,18 +174,12 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
       if (errorCode != PurchasesErrorCode.purchaseCancelledError) {
         if (context.mounted) {
-          ErrorSnackBar.show(
-            ScaffoldMessenger.of(context),
-            message: i18n.app.unexpectedErrorMessage,
-          );
+          SnackBarManager.showErrorSnackBar(i18n.app.unexpectedErrorMessage);
         }
       }
     } on Exception {
       if (context.mounted) {
-        ErrorSnackBar.show(
-          ScaffoldMessenger.of(context),
-          message: i18n.app.unexpectedErrorMessage,
-        );
+        SnackBarManager.showErrorSnackBar(i18n.app.unexpectedErrorMessage);
       }
     }
   }

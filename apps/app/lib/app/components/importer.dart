@@ -18,8 +18,6 @@ export 'src/reactive_outlined_text_field.dart';
 export 'src/reactive_segmented_button.dart';
 export 'src/save_button.dart';
 export 'src/sliver_chips_delegate.dart';
-export 'src/snackbar/error_snackbar.dart';
-export 'src/snackbar/info_snackbar.dart';
 export 'src/storage_image.dart';
 export 'src/text_with_label.dart';
 export 'src/unfocus_on_tap.dart';
