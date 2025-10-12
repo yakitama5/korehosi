@@ -26,12 +26,12 @@ class GroupsPage extends HookWidget {
           controller: scrollController,
           slivers: [
             SliverAppBar(
-              title: Text(i18n.app.joinGroup),
+              title: Text(i18n.group.groupsPage.title),
               actions: [
                 IconButton(
                   onPressed: () => _onHelp(context),
                   icon: const Icon(Icons.help),
-                  tooltip: i18n.app.help,
+                  tooltip: i18n.group.groupsPage.help,
                 ),
               ],
             ),
@@ -44,10 +44,11 @@ class GroupsPage extends HookWidget {
   }
 
   void _onHelp(BuildContext context) {
+    final messages = i18n.group.groupsPage.shareGroupHelpDialog;
     showOkAlertDialog(
       context: context,
-      title: i18n.app.shareGroupHelpTitle,
-      message: i18n.app.shareGroupHelpMessage,
+      title: messages.title,
+      message: messages.message,
     );
   }
 }
@@ -86,7 +87,7 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return FloatingActionButton.extended(
-      label: Text(i18n.app.addGroup),
+      label: Text(i18n.group.groupsPage.createGroup),
       icon: const Icon(Icons.add),
       onPressed: () => onAdd(context, ref),
     );
@@ -97,10 +98,10 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
     // 値の入力 (ダイアログ表示)
     final resultList = await showTextInputDialog(
       context: context,
-      title: i18n.app.groupName,
+      title: i18n.group.common.groupName,
       textFields: [
         DialogTextField(
-          hintText: i18n.app.groupName,
+          hintText: i18n.group.common.groupName,
           maxLength: 40,
           validator: (value) {
             // 必須チェック
@@ -207,7 +208,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
       backgroundColor: colorScheme.error,
       foregroundColor: colorScheme.onError,
       icon: Icons.delete,
-      label: i18n.app.delete,
+      label: commonI18n.common.delete,
     );
   }
 
@@ -224,26 +225,28 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
       backgroundColor: colorScheme.error,
       foregroundColor: colorScheme.onError,
       icon: Icons.person_off,
-      label: i18n.app.leave,
+      label: i18n.group.common.leaveGroup,
     );
   }
 
   Future<bool> confirmDelete(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
+    final messages = commonI18n.common.deleteConfirmDialog;
     final result = await showOkCancelAlertDialog(
       context: context,
-      title: i18n.app.deleteConfirmTitle,
-      message: i18n.app.deleteGroupCofirmMessage(name: group.name),
+      title: messages.title,
+      message: messages.message(name: group.name),
     );
     return result == OkCancelResult.ok;
   }
 
   Future<bool> confirmLeave(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
+    final messages = i18n.group.common.leaveConfirmDialog;
     final result = await showOkCancelAlertDialog(
       context: context,
-      title: i18n.app.leaveConfirmTitle,
-      message: i18n.app.leaveCofirmMessage(group: group.name),
+      title: messages.title,
+      message: messages.message(groupName: group.name),
     );
     return result == OkCancelResult.ok;
   }

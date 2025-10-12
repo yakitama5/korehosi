@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/pages/group/components/premium_icon_container.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
-import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,6 +28,7 @@ class AndroidAccountDialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final messages = commonI18n.common;
     final textTheme = useTextTheme();
     final colorScheme = useColorScheme();
 
@@ -54,7 +54,7 @@ class AndroidAccountDialog extends HookConsumerWidget {
                     Navigator.pop(context);
                   },
                   icon: Icon(Icons.edit, color: colorScheme.onSurfaceVariant),
-                  tooltip: i18n.app.edit,
+                  tooltip: messages.edit,
                 ),
               ],
             ),
@@ -97,13 +97,13 @@ class AndroidAccountDialog extends HookConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(i18n.app.cancel),
+            child: Text(messages.cancel),
           ),
           TextButton(
             onPressed: selectValue.value == null
                 ? null
                 : () => Navigator.pop(context, selectValue.value),
-            child: Text(i18n.app.ok),
+            child: Text(messages.ok),
           ),
         ],
       ),

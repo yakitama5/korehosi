@@ -40,6 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	late final TranslationsAppJa app = TranslationsAppJa.internal(_root);
+	late final TranslationsGroupJa group = TranslationsGroupJa.internal(_root);
 	late final TranslationsItemJa item = TranslationsItemJa.internal(_root);
 	late final TranslationsSettingsJa settings = TranslationsSettingsJa.internal(_root);
 	late final TranslationsUserJa user = TranslationsUserJa.internal(_root);
@@ -55,6 +56,19 @@ class TranslationsAppJa {
 
 	/// ja: 'hoge'
 	String get hoge => 'hoge';
+}
+
+// Path: group
+class TranslationsGroupJa {
+	TranslationsGroupJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsGroupCommonJa common = TranslationsGroupCommonJa.internal(_root);
+	late final TranslationsGroupShareLinkPageJa shareLinkPage = TranslationsGroupShareLinkPageJa.internal(_root);
+	late final TranslationsGroupGroupsPageJa groupsPage = TranslationsGroupGroupsPageJa.internal(_root);
+	late final TranslationsGroupGroupPageJa groupPage = TranslationsGroupGroupPageJa.internal(_root);
 }
 
 // Path: item
@@ -94,6 +108,91 @@ class TranslationsUserJa {
 	late final TranslationsUserProfilePageJa profilePage = TranslationsUserProfilePageJa.internal(_root);
 	late final TranslationsUserOnboardPageJa onboardPage = TranslationsUserOnboardPageJa.internal(_root);
 	late final TranslationsUserCommonJa common = TranslationsUserCommonJa.internal(_root);
+}
+
+// Path: group.common
+class TranslationsGroupCommonJa {
+	TranslationsGroupCommonJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'グループ名'
+	String get groupName => 'グループ名';
+
+	/// ja: 'グループから脱退'
+	String get leaveGroup => 'グループから脱退';
+
+	late final TranslationsGroupCommonLeaveConfirmDialogJa leaveConfirmDialog = TranslationsGroupCommonLeaveConfirmDialogJa.internal(_root);
+}
+
+// Path: group.shareLinkPage
+class TranslationsGroupShareLinkPageJa {
+	TranslationsGroupShareLinkPageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsGroupShareLinkPageJoinedGroupDialogJa joinedGroupDialog = TranslationsGroupShareLinkPageJoinedGroupDialogJa.internal(_root);
+}
+
+// Path: group.groupsPage
+class TranslationsGroupGroupsPageJa {
+	TranslationsGroupGroupsPageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '参加中のグループ'
+	String get title => '参加中のグループ';
+
+	/// ja: 'ヘルプ'
+	String get help => 'ヘルプ';
+
+	late final TranslationsGroupGroupsPageShareGroupHelpDialogJa shareGroupHelpDialog = TranslationsGroupGroupsPageShareGroupHelpDialogJa.internal(_root);
+
+	/// ja: 'グループを作成'
+	String get createGroup => 'グループを作成';
+
+	/// ja: 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。'
+	String get notJoinGroup => 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。';
+}
+
+// Path: group.groupPage
+class TranslationsGroupGroupPageJa {
+	TranslationsGroupGroupPageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ほしい物の登録数制限を解放する'
+	String get limitBreak => 'ほしい物の登録数制限を解放する';
+
+	late final TranslationsGroupGroupPageAppInPurchaseConfirmDialogJa appInPurchaseConfirmDialog = TranslationsGroupGroupPageAppInPurchaseConfirmDialogJa.internal(_root);
+
+	/// ja: '欲しい物の登録数制限が解放されました。(無制限)'
+	String get limitBreakPurchased => '欲しい物の登録数制限が解放されました。(無制限)';
+
+	/// ja: '共有'
+	String get shareGroup => '共有';
+
+	/// ja: '共有してメンバーを招待しましょう'
+	String get shareGroupCaption => '共有してメンバーを招待しましょう';
+
+	/// ja: 'コピー'
+	String get copyLink => 'コピー';
+
+	/// ja: 'コピーしました'
+	String get copiedLink => 'コピーしました';
+
+	/// ja: '選択'
+	String get select => '選択';
+
+	/// ja: '画像を保存しました。'
+	String get savedImage => '画像を保存しました。';
 }
 
 // Path: item.common
@@ -354,6 +453,69 @@ class TranslationsUserCommonJa {
 
 	/// ja: '年齢層'
 	String get ageGroup => '年齢層';
+}
+
+// Path: group.common.leaveConfirmDialog
+class TranslationsGroupCommonLeaveConfirmDialogJa {
+	TranslationsGroupCommonLeaveConfirmDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '離脱の確認'
+	String get title => '離脱の確認';
+
+	/// ja: '「${groupName:String}」から離脱しますか？'
+	String message({required String groupName}) => '「${groupName}」から離脱しますか？';
+}
+
+// Path: group.shareLinkPage.joinedGroupDialog
+class TranslationsGroupShareLinkPageJoinedGroupDialogJa {
+	TranslationsGroupShareLinkPageJoinedGroupDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'グループへ参加'
+	String get title => 'グループへ参加';
+
+	/// ja: 'グループに参加しました。'
+	String get message => 'グループに参加しました。';
+}
+
+// Path: group.groupsPage.shareGroupHelpDialog
+class TranslationsGroupGroupsPageShareGroupHelpDialogJa {
+	TranslationsGroupGroupsPageShareGroupHelpDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'グループの共有/参加'
+	String get title => 'グループの共有/参加';
+
+	/// ja: '【グループの共有】 グループから「共有」を行って下さい 【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます'
+	String get message => '【グループの共有】 グループから「共有」を行って下さい\n\n【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます';
+}
+
+// Path: group.groupPage.appInPurchaseConfirmDialog
+class TranslationsGroupGroupPageAppInPurchaseConfirmDialogJa {
+	TranslationsGroupGroupPageAppInPurchaseConfirmDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '購入の確認'
+	String get title => '購入の確認';
+
+	/// ja: '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで) 価格：¥${price:String}(無期限)'
+	String message({required String price}) => '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで)\n価格：¥${price}(無期限)';
+
+	/// ja: '購入(¥${price:String})'
+	String okLabel({required String price}) => '購入(¥${price})';
 }
 
 // Path: item.itemsPage.notSelectedGroupDialog
@@ -625,6 +787,29 @@ extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app.hoge': return 'hoge';
+			case 'group.common.groupName': return 'グループ名';
+			case 'group.common.leaveGroup': return 'グループから脱退';
+			case 'group.common.leaveConfirmDialog.title': return '離脱の確認';
+			case 'group.common.leaveConfirmDialog.message': return ({required String groupName}) => '「${groupName}」から離脱しますか？';
+			case 'group.shareLinkPage.joinedGroupDialog.title': return 'グループへ参加';
+			case 'group.shareLinkPage.joinedGroupDialog.message': return 'グループに参加しました。';
+			case 'group.groupsPage.title': return '参加中のグループ';
+			case 'group.groupsPage.help': return 'ヘルプ';
+			case 'group.groupsPage.shareGroupHelpDialog.title': return 'グループの共有/参加';
+			case 'group.groupsPage.shareGroupHelpDialog.message': return '【グループの共有】 グループから「共有」を行って下さい\n\n【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます';
+			case 'group.groupsPage.createGroup': return 'グループを作成';
+			case 'group.groupsPage.notJoinGroup': return 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。';
+			case 'group.groupPage.limitBreak': return 'ほしい物の登録数制限を解放する';
+			case 'group.groupPage.appInPurchaseConfirmDialog.title': return '購入の確認';
+			case 'group.groupPage.appInPurchaseConfirmDialog.message': return ({required String price}) => '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで)\n価格：¥${price}(無期限)';
+			case 'group.groupPage.appInPurchaseConfirmDialog.okLabel': return ({required String price}) => '購入(¥${price})';
+			case 'group.groupPage.limitBreakPurchased': return '欲しい物の登録数制限が解放されました。(無制限)';
+			case 'group.groupPage.shareGroup': return '共有';
+			case 'group.groupPage.shareGroupCaption': return '共有してメンバーを招待しましょう';
+			case 'group.groupPage.copyLink': return 'コピー';
+			case 'group.groupPage.copiedLink': return 'コピーしました';
+			case 'group.groupPage.select': return '選択';
+			case 'group.groupPage.savedImage': return '画像を保存しました。';
 			case 'item.common.wishList': return 'ほしいもの';
 			case 'item.common.status': return 'ステータス';
 			case 'item.common.wishRank': return 'ほしい度';

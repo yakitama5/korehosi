@@ -57,7 +57,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
               ),
               const Gap(4),
               Text(
-                i18n.app.shareCaption,
+                i18n.group.groupPage.shareGroupCaption,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
@@ -72,14 +72,14 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
           children: [
             Expanded(
               child: LabelIconButton(
-                label: Text(i18n.app.copy),
+                label: Text(i18n.group.groupPage.copyLink),
                 iconData: Icons.copy,
                 onPressed: () => onCopy(context, ref),
               ),
             ),
             Expanded(
               child: LabelIconButton(
-                label: Text(i18n.app.share),
+                label: Text(i18n.group.groupPage.shareGroup),
                 iconData: Icons.share,
                 onPressed: () => onShare(context, ref),
               ),
@@ -105,7 +105,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
       action: () => ref
           .read(groupShareUsecaseProvider)
           .copyMessage(shareUrl: shareUrl, groupName: groupName),
-      successMessage: i18n.app.copied,
+      successMessage: i18n.group.groupPage.copiedLink,
     );
   }
 
@@ -134,7 +134,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
         // 保存
         await ref.read(groupShareUsecaseProvider).saveQrCode(xFile: xFile!);
       },
-      successMessage: i18n.app.saved,
+      successMessage: i18n.group.groupPage.savedImage,
     );
   }
 

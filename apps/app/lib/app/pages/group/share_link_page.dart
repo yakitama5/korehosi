@@ -37,10 +37,11 @@ class ShareLinkPage extends HookConsumerWidget with PresentationMixin {
 
         if (context.mounted) {
           // ダイアログを表示
+          final messages = i18n.group.shareLinkPage.joinedGroupDialog;
           await showOkAlertDialog(
             context: context,
-            title: i18n.app.joinedGroupTitle,
-            message: i18n.app.joinedGroupMessage,
+            title: messages.title,
+            message: messages.message,
           );
         }
       },

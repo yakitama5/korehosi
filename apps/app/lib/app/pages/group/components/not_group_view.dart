@@ -34,7 +34,7 @@ class NotGroupView extends HookWidget {
             ),
           ),
           Text(
-            i18n.app.notJoinedGroupMessage,
+            i18n.group.groupsPage.notJoinGroup,
             style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
           const Gap(40),

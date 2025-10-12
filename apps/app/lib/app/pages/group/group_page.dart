@@ -119,7 +119,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
         sliver: SliverToBoxAdapter(
           child: FilledButton.icon(
             onPressed: () => onPremium(context, ref),
-            label: Text(i18n.app.joinPremiumGroup),
+            label: Text(i18n.group.groupPage.limitBreak),
             icon: Icon(MdiIcons.crown),
           ),
         ),
@@ -130,7 +130,9 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
   Future<void> onPremium(BuildContext context, WidgetRef ref) async {
     final group = await ref.read(GroupDetailProviders.groupProvider.future);
     if (group == null && context.mounted) {
-      SnackBarManager.showErrorSnackBar(i18n.app.unexpectedErrorMessage);
+      SnackBarManager.showErrorSnackBar(
+        commonI18n.exceptions.errorMessage.unexpected,
+      );
       return;
     }
     try {
@@ -145,14 +147,12 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       if (!context.mounted) {
         return;
       }
+      final messages = i18n.group.groupPage.appInPurchaseConfirmDialog;
       final result = await showOkCancelAlertDialog(
         context: context,
-        title: i18n.app.itemPurchase,
-        okLabel: i18n.app.purchaseOkLabel(price: price),
-        message: i18n.app.itemLimitReleaseMessage(
-          term: i18n.app.lifeful,
-          price: price,
-        ),
+        title: messages.title,
+        okLabel: messages.okLabel(price: price),
+        message: messages.message(price: price),
       );
 
       if (result != OkCancelResult.ok) {
@@ -165,7 +165,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
           action: () => ref
               .read(groupUsecaseProvider)
               .upgradeLimitedReleasePlan(groupId: group!.id),
-          successMessage: i18n.app.joinedPremiumGroup,
+          successMessage: i18n.group.groupPage.limitBreakPurchased,
         );
       }
     } on PlatformException catch (e) {
@@ -173,12 +173,16 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       final errorCode = PurchasesErrorHelper.getErrorCode(e);
       if (errorCode != PurchasesErrorCode.purchaseCancelledError) {
         if (context.mounted) {
-          SnackBarManager.showErrorSnackBar(i18n.app.unexpectedErrorMessage);
+          SnackBarManager.showErrorSnackBar(
+            commonI18n.exceptions.errorMessage.unexpected,
+          );
         }
       }
     } on Exception {
       if (context.mounted) {
-        SnackBarManager.showErrorSnackBar(i18n.app.unexpectedErrorMessage);
+        SnackBarManager.showErrorSnackBar(
+          commonI18n.exceptions.errorMessage.unexpected,
+        );
       }
     }
   }
@@ -197,7 +201,7 @@ class _Fab extends HookConsumerWidget with PresentationMixin {
     return FloatingActionButton.extended(
       onPressed: () => onShare(context, ref),
       icon: const Icon(Icons.share),
-      label: Text(i18n.app.share),
+      label: Text(i18n.group.groupPage.shareGroup),
     );
   }
 
@@ -260,7 +264,7 @@ class _SelectButton extends HookConsumerWidget with PresentationMixin {
     return IconButton(
       onPressed: () => onSelect(context, ref),
       icon: const Icon(Icons.check_circle_outline_outlined),
-      tooltip: i18n.app.select,
+      tooltip: i18n.group.groupPage.select,
     );
   }
 
@@ -289,7 +293,7 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
     return IconButton(
       onPressed: () => onEdit(context, ref),
       icon: const Icon(Icons.edit),
-      tooltip: i18n.app.edit,
+      tooltip: commonI18n.common.edit,
     );
   }
 
@@ -305,11 +309,11 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
         // 値の入力 (ダイアログ表示)
         final resultList = await showTextInputDialog(
           context: context,
-          title: i18n.app.groupName,
+          title: i18n.group.common.groupName,
           textFields: [
             DialogTextField(
               initialText: prev!.name,
-              hintText: i18n.app.groupName,
+              hintText: i18n.group.common.groupName,
               maxLength: 40,
               validator: (value) {
                 // 必須チェック
@@ -360,7 +364,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     return IconButton(
       onPressed: () => onDelete(context, ref),
       icon: Icon(Icons.delete, color: colorScheme.error),
-      tooltip: i18n.app.delete,
+      tooltip: commonI18n.common.delete,
     );
   }
 
@@ -368,11 +372,12 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     final navigator = Navigator.of(context);
 
     // 削除確認
+    final messages = commonI18n.common.deleteConfirmDialog;
     final group = ref.read(GroupDetailProviders.groupProvider).value;
     final result = await showOkCancelAlertDialog(
       context: context,
-      title: i18n.app.deleteConfirmTitle,
-      message: i18n.app.deleteGroupCofirmMessage(name: group?.name ?? ''),
+      title: messages.title,
+      message: messages.message(name: group?.name ?? ''),
     );
     if (result != OkCancelResult.ok) {
       return;
@@ -414,7 +419,7 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
     return IconButton(
       onPressed: () => onLeave(context, ref),
       icon: Icon(Icons.person_off, color: colorScheme.error),
-      tooltip: i18n.app.leave,
+      tooltip: i18n.group.common.leaveGroup,
     );
   }
 
@@ -422,11 +427,12 @@ class _LeaveButton extends HookConsumerWidget with PresentationMixin {
     final navigator = Navigator.of(context);
 
     // 離脱確認
+    final messages = i18n.group.common.leaveConfirmDialog;
     final group = ref.read(GroupDetailProviders.groupProvider).value;
     final result = await showOkCancelAlertDialog(
       context: context,
-      title: i18n.app.leaveConfirmTitle,
-      message: i18n.app.leaveCofirmMessage(group: group?.name ?? ''),
+      title: messages.title,
+      message: messages.message(groupName: group?.name ?? ''),
     );
     if (result != OkCancelResult.ok) {
       return;

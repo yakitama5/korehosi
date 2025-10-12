@@ -274,6 +274,8 @@ class TranslationsExceptionsJa {
 				return '購入処理に失敗しました。';
 		}
 	}
+
+	late final TranslationsExceptionsErrorMessageJa errorMessage = TranslationsExceptionsErrorMessageJa.internal(_root);
 }
 
 // Path: common.deleteConfirmDialog
@@ -424,6 +426,18 @@ class TranslationsKEnumViewLayoutJa {
 				return 'リスト表示';
 		}
 	}
+}
+
+// Path: exceptions.errorMessage
+class TranslationsExceptionsErrorMessageJa {
+	TranslationsExceptionsErrorMessageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '予期せぬエラーが発生しました。'
+	String get unexpected => '予期せぬエラーが発生しました。';
 }
 
 // Path: designsystem.permissionMessages.permissionLackDialog
@@ -653,6 +667,7 @@ extension on Translations {
 						return '購入処理に失敗しました。';
 				}
 			};
+			case 'exceptions.errorMessage.unexpected': return '予期せぬエラーが発生しました。';
 			default: return null;
 		}
 	}

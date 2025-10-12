@@ -1,0 +1,47 @@
+common:
+  groupName: グループ名
+  leaveGroup: グループから脱退
+  leaveConfirmDialog:
+    title: 離脱の確認
+    message: 「${groupName:String}」から離脱しますか？
+shareLinkPage:
+  joinedGroupDialog:
+    title: グループへ参加
+    message: グループに参加しました。
+groupsPage:
+  title: 参加中のグループ
+  help: ヘルプ
+  shareGroupHelpDialog:
+    title: グループの共有/参加
+    message: >-
+      【グループの共有】
+      グループから「共有」を行って下さい
+
+
+      【グループへの参加】
+      共有されたURLをクリックするか、
+      QRコードを読み取ることで参加できます
+  createGroup: グループを作成
+  notJoinGroup: >-
+    グループに所属していません。
+    グループを作成するか、
+    招待されたグループに参加して下さい。
+groupPage:
+  limitBreak: ほしい物の登録数制限を解放する
+  appInPurchaseConfirmDialog:
+    title: 購入の確認
+    message: >-
+      商品を購入すると
+      表示中のグループに登録できる
+      欲しい物の制限が解放されます。
+      (無料版は30個まで)
+
+      価格：¥${price:String}(無期限)
+    okLabel: 購入(¥${price:String})
+  limitBreakPurchased: 欲しい物の登録数制限が解放されました。(無制限)
+  shareGroup: 共有
+  shareGroupCaption: 共有してメンバーを招待しましょう
+  copyLink: コピー
+  copiedLink: コピーしました
+  select: 選択
+  savedImage: 画像を保存しました。

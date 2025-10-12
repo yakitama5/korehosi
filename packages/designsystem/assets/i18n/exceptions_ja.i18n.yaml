@@ -15,3 +15,5 @@ businessException(context=BusinessExceptionType):
   googleSignInUnknown: Google認証に失敗しました。
   appInPurchasePolicyPackageNotExist: 購入処理に失敗しました。
   appInPurchasePolicyPackageNotActive: 購入処理に失敗しました。
+errorMessage:
+  unexpected: 予期せぬエラーが発生しました。
