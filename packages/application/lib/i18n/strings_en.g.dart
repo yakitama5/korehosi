@@ -4,27 +4,27 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 
-part of 'strings.g.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:packages_domain/user.dart';
+import 'package:slang/generated.dart';
+import 'strings.g.dart';
 
 // Path: <root>
-typedef TranslationsEn = Translations; // ignore: unused_element
-class Translations implements BaseTranslations<AppLocale, Translations> {
-	/// Returns the current translations of the given [context].
-	///
-	/// Usage:
-	/// final i18n = Translations.of(context);
-	static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
-
+class TranslationsEn extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
-	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
+	TranslationsEn({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
 		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
 		  $meta = meta ?? TranslationMetadata(
 		    locale: AppLocale.en,
 		    overrides: overrides ?? {},
 		    cardinalResolver: cardinalResolver,
 		    ordinalResolver: ordinalResolver,
-		  ) {
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
 		$meta.setFlatMapFunction(_flatMapFunction);
 	}
 
@@ -32,79 +32,57 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	@override final TranslationMetadata<AppLocale, Translations> $meta;
 
 	/// Access flat map
-	dynamic operator[](String key) => $meta.getTranslation(key);
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
 
-	late final Translations _root = this; // ignore: unused_field
+	late final TranslationsEn _root = this; // ignore: unused_field
 
-	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
+	@override 
+	TranslationsEn $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsEn(meta: meta ?? this.$meta);
 
 	// Translations
-	late final TranslationsAppEn app = TranslationsAppEn.internal(_root);
+	@override late final _TranslationsGroupEn group = _TranslationsGroupEn._(_root);
+	@override late final _TranslationsItemEn item = _TranslationsItemEn._(_root);
+	@override late final _TranslationsUserEn user = _TranslationsUserEn._(_root);
 }
 
-// Path: app
-class TranslationsAppEn {
-	TranslationsAppEn.internal(this._root);
+// Path: group
+class _TranslationsGroupEn extends TranslationsGroupJa {
+	_TranslationsGroupEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-
-	/// en: '<Deleted User>.'
-	String get deletedUser => '<Deleted User>.';
-
-	/// en: '<Unset>'
-	String get unset => '<Unset>';
-
-	/// en: '${user:String}from${group:String} You have been invited to \You can join the Wishlist group by clicking the URL below or scanning the QR code.${url:String}'
-	String groupShareText({required String user, required String group, required String url}) => '${user}from${group} You have been invited to \You can join the Wishlist group by clicking the URL below or scanning the QR code.${url}';
-
-	/// en: '${name:String}added what you want!'
-	String notificationAddItemTitle({required String name}) => '${name}added what you want!';
-
-	/// en: '${name:String}added what you want!'
-	String notificationAddItemBody({required String name}) => '${name}added what you want!';
-
-	late final TranslationsAppUserEn user = TranslationsAppUserEn.internal(_root);
-	late final TranslationsAppGroupEn group = TranslationsAppGroupEn.internal(_root);
+	@override String get hoge => 'hoge';
 }
 
-// Path: app.user
-class TranslationsAppUserEn {
-	TranslationsAppUserEn.internal(this._root);
+// Path: item
+class _TranslationsItemEn extends TranslationsItemJa {
+	_TranslationsItemEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-
-	/// en: '名無し'
-	String get noname => '名無し';
+	@override String get hoge => 'hoge';
 }
 
-// Path: app.group
-class TranslationsAppGroupEn {
-	TranslationsAppGroupEn.internal(this._root);
+// Path: user
+class _TranslationsUserEn extends TranslationsUserJa {
+	_TranslationsUserEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
-	final Translations _root; // ignore: unused_field
+	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-
-	/// en: '${userName: String}のグループ'
-	String templateName({required String userName}) => '${userName}のグループ';
+	@override String get hoge => 'hoge';
 }
 
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
-extension on Translations {
+extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'app.deletedUser': return '<Deleted User>.';
-			case 'app.unset': return '<Unset>';
-			case 'app.groupShareText': return ({required String user, required String group, required String url}) => '${user}from${group} You have been invited to \You can join the Wishlist group by clicking the URL below or scanning the QR code.${url}';
-			case 'app.notificationAddItemTitle': return ({required String name}) => '${name}added what you want!';
-			case 'app.notificationAddItemBody': return ({required String name}) => '${name}added what you want!';
-			case 'app.user.noname': return '名無し';
-			case 'app.group.templateName': return ({required String userName}) => '${userName}のグループ';
+			case 'group.hoge': return 'hoge';
+			case 'item.hoge': return 'hoge';
+			case 'user.hoge': return 'hoge';
 			default: return null;
 		}
 	}

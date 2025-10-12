@@ -91,7 +91,7 @@ class ItemUsecase with RunUsecaseMixin {
           .read(messagingServiceProvider)
           .sendMessage(
             groupId: groupId,
-            title: i18n.app.notificationAddItemBody(name: user.dispName),
+            title: i18n.item.notificationAddItemBody(name: user.dispName),
             body: name,
             uid: user!.id,
             target: NotificationTarget.all,

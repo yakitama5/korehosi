@@ -71,7 +71,7 @@ class GroupShareUsecase with RunUsecaseMixin {
       authUserProvider.selectAsync((user) => user.dispName),
     );
 
-    return i18n.app.groupShareText(
+    return i18n.group.groupShareText(
       user: userName,
       group: groupName,
       url: shareUrl,

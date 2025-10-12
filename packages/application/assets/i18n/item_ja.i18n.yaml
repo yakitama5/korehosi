@@ -1,0 +1,2 @@
+notificationAddItemTitle: "${name:String}さんがほしいものを追加しました！"
+notificationAddItemBody: "${name:String}さんがほしいものを追加しました！"

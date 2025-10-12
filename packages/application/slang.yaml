@@ -1,3 +1,4 @@
+base_locale: ja
 fallback_strategy: base_locale
 input_directory: assets/i18n
 output_directory: lib/i18n

@@ -1,9 +1,0 @@
-deletedUser: <Deleted User>.
-unset: <Unset>
-groupShareText: '${user:String}from${group:String} You have been invited to \You can join the Wishlist group by clicking the URL below or scanning the QR code.${url:String}'
-notificationAddItemTitle: "${name:String}added what you want!"
-notificationAddItemBody: "${name:String}added what you want!"
-user:
-  noname: 名無し
-group:
-  templateName: '${userName: String}のグループ'
