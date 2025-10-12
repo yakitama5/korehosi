@@ -45,6 +45,7 @@ class TranslationsEn extends Translations {
 
 	// Translations
 	@override late final _TranslationsAppEn app = _TranslationsAppEn._(_root);
+	@override late final _TranslationsItemEn item = _TranslationsItemEn._(_root);
 	@override late final _TranslationsSettingsEn settings = _TranslationsSettingsEn._(_root);
 	@override late final _TranslationsUserEn user = _TranslationsUserEn._(_root);
 }
@@ -52,6 +53,16 @@ class TranslationsEn extends Translations {
 // Path: app
 class _TranslationsAppEn extends TranslationsAppJa {
 	_TranslationsAppEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get hoge => 'hoge';
+}
+
+// Path: item
+class _TranslationsItemEn extends TranslationsItemJa {
+	_TranslationsItemEn._(TranslationsEn root) : this._root = root, super.internal(root);
 
 	final TranslationsEn _root; // ignore: unused_field
 
@@ -186,6 +197,7 @@ extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app.hoge': return 'hoge';
+			case 'item.hoge': return 'hoge';
 			case 'settings.settingsPage.title': return 'Settings';
 			case 'settings.settingsPage.account.head': return 'Account';
 			case 'settings.settingsPage.account.account': return 'Account';

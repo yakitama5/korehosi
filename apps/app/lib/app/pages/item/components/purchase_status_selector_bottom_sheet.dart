@@ -26,7 +26,7 @@ class PurchaseStatusSelectorBottomSheet extends HookWidget {
     final selected = useState(initial ?? {});
 
     return BottomSheetColumn(
-      titleData: i18n.app.status,
+      titleData: i18n.item.common.status,
       children: [
         ExpandWidthContainer(
           child: SegmentedButton<PurchaseStatus>(
@@ -49,12 +49,12 @@ class PurchaseStatusSelectorBottomSheet extends HookWidget {
           children: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text(i18n.app.cancel),
+              child: Text(commonI18n.common.cancel),
             ),
             const Gap(8),
             FilledButton.tonal(
               onPressed: () => Navigator.of(context).pop(selected.value),
-              child: Text(i18n.app.apply),
+              child: Text(commonI18n.common.apply),
             ),
           ],
         ),

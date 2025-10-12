@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/item.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
@@ -55,7 +56,7 @@ class _PurchaseForm extends HookConsumerWidget {
         child: UnfocusOnTap(
           child: Scaffold(
             appBar: AppBar(
-              title: Text(i18n.app.purchaseOrpurchasePlan),
+              title: Text(i18n.item.purchasePage.purchase),
               actions: [
                 const _Submit(),
                 const Gap(8),
@@ -69,7 +70,7 @@ class _PurchaseForm extends HookConsumerWidget {
                   children: [
                     ItemImages(imagesPath: item.imagesPath),
                     const Gap(16),
-                    TextWithLabel(item.name, label: i18n.app.name),
+                    TextWithLabel(item.name, label: i18n.item.common.itemName),
                     const Gap(16),
                     const _SurpriseField(),
                     const Gap(16),
@@ -172,10 +173,11 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     // 削除確認
+    final messages = commonI18n.common.deleteConfirmDialog;
     final result = await showOkCancelAlertDialog(
       context: context,
-      title: i18n.app.deleteConfirmTitle,
-      message: i18n.app.deleteCofirmMessage(item: i18n.app.purchaseInfoTitle),
+      title: messages.title,
+      message: messages.message(name: i18n.item.purchasePage.purchase),
     );
     if (result != OkCancelResult.ok) {
       return;
@@ -208,6 +210,7 @@ class _SurpriseField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final formModel = ReactivePurchaseFormModelForm.of(context)!;
+    final messages = i18n.item.purchasePage.surprise;
 
     return ReactiveSwitchListTile.adaptive(
       formControl: formModel.surpriseControl,
@@ -215,8 +218,8 @@ class _SurpriseField extends HookConsumerWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(i18n.app.surprise),
-          Text(i18n.app.surpriseCaption, style: textTheme.labelMedium),
+          Text(messages.label),
+          Text(messages.caption, style: textTheme.labelMedium),
         ],
       ),
     );
@@ -231,10 +234,10 @@ class _PriceField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ReactiveOutlinedTextField<String>(
       formControlName: PurchaseFormModelForm.priceControlName,
-      labelText: i18n.app.price,
+      labelText: i18n.item.common.price,
       maxLength: purchaseConfig.maxPriceLength,
       textInputType: TextInputType.number,
-      prefixText: i18n.app.yenMark,
+      prefixText: i18n.item.common.currency,
       // 金額はカンマ区切りで整形する
       inputFormatters: [ThousandsFormatter()],
     );
@@ -249,13 +252,13 @@ class _PurchaseDateField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ReactiveDateTimePicker(
       formControlName: PurchaseFormModelForm.planDateControlName,
-      fieldLabelText: i18n.app.purchasePlanDateTime,
+      fieldLabelText: i18n.item.common.purchasePlanDate,
       keyboardType: TextInputType.datetime,
       decoration: InputDecoration(
-        labelText: i18n.app.purchasePlanDateTime,
+        labelText: i18n.item.common.purchasePlanDate,
         border: const OutlineInputBorder(),
         suffixIcon: const Icon(Icons.calendar_today),
-        helperText: i18n.app.purchasePlanDateTimeCaption,
+        helperText: i18n.item.purchasePage.purchasePlanDate.hint,
       ),
     );
   }
@@ -269,13 +272,13 @@ class _SentAtField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ReactiveDateTimePicker(
       formControlName: PurchaseFormModelForm.sentAtControlName,
-      fieldLabelText: i18n.app.sentAt,
+      fieldLabelText: i18n.item.common.sentDate,
       keyboardType: TextInputType.datetime,
       decoration: InputDecoration(
-        labelText: i18n.app.sentAt,
+        labelText: i18n.item.common.sentDate,
         border: const OutlineInputBorder(),
         suffixIcon: const Icon(Icons.calendar_today),
-        helperText: i18n.app.sentAtCaption,
+        helperText: i18n.item.purchasePage.sentDate.hint,
       ),
     );
   }
@@ -295,7 +298,7 @@ class _BuyerNameField extends HookConsumerWidget {
 
     return ReactiveOutlinedRawAutocomplete(
       formControlName: PurchaseFormModelForm.buyerNameControlName,
-      labelText: i18n.app.buyerName,
+      labelText: i18n.item.common.buyerName,
       maxLength: purchaseConfig.maxBuyerNameLength,
       options: userNames ?? [],
     );
@@ -309,7 +312,7 @@ class _MemoField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ReactiveOutlinedTextField<String>(
       formControlName: PurchaseFormModelForm.memoControlName,
-      labelText: i18n.app.memo,
+      labelText: i18n.item.common.memo,
       maxLines: 5,
       maxLength: purchaseConfig.maxMemoLength,
     );

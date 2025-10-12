@@ -45,7 +45,7 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
             controller: scrollController,
             slivers: [
               SliverAppBar(
-                title: Text(i18n.app.wishList),
+                title: Text(i18n.item.itemsPage.title),
                 centerTitle: true,
                 actions: const [_AccountButton()],
               ),
@@ -86,7 +86,7 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
           duration: const Duration(milliseconds: 150),
           onPressed: () => _onAdd(context, ref),
           icon: const Icon(Icons.add),
-          label: Text(i18n.app.addWishList),
+          label: Text(i18n.item.itemsPage.add),
           controller: scrollController,
         ),
       ),
@@ -104,10 +104,11 @@ class ItemsPage extends HookConsumerWidget with PresentationMixin {
       return;
     }
 
+    final messages = i18n.item.itemsPage.notSelectedGroupDialog;
     await showOkAlertDialog(
       context: context,
-      title: i18n.app.notSelectedGroupDialogTitle,
-      message: i18n.app.notSelectedGroupDialogMessage,
+      title: messages.title,
+      message: messages.message,
     );
   }
 }
@@ -173,7 +174,7 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
     return IconButton(
       icon: const Icon(Icons.account_circle),
       onPressed: () => onAccount(context, ref),
-      tooltip: i18n.app.account,
+      tooltip: i18n.item.itemsPage.account,
     );
   }
 
@@ -189,7 +190,7 @@ class _AccountButton extends HookConsumerWidget with PresentationMixin {
       await execute(
         action: () async =>
             ref.read(groupUsecaseProvider).setCurrentGroupId(groupId: groupId),
-        successMessage: i18n.app.completeChangeGroupMessage,
+        successMessage: i18n.item.itemsPage.completeChangeGroup,
       );
     }
   }
@@ -231,9 +232,7 @@ class _ItemListView extends HookWidget {
     if (filterdItems.isEmpty) {
       return SliverFillRemaining(
         hasScrollBody: false,
-        child: ListEmptyView(
-          message: i18n.app.searchEmptyMessage(item: i18n.app.wishList),
-        ),
+        child: ListEmptyView(message: i18n.item.itemsPage.itemEmpty),
       );
     }
 
@@ -339,9 +338,9 @@ class _PurchaseStatusChip extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final dispName = value.isEmpty
-        ? i18n.app.status
+        ? i18n.item.common.status
         : value.length > 1
-        ? i18n.app.selectNumberText(length: value.length)
+        ? i18n.item.itemsPage.selectNumberText(length: value.length)
         : commonI18n.kEnum.purchaseStatus(context: value.first);
 
     return LeadingIconInputChip(
@@ -377,8 +376,12 @@ class _WishRankChip extends HookWidget {
 
     return LeadingIconInputChip(
       label: selected
-          ? Text('${i18n.app.star}${value?.toStringAsFixed(1)}')
-          : Text(i18n.app.wishRank),
+          ? Text(
+              i18n.item.itemsPage.wishRankFormat(
+                value: value!.toStringAsFixed(1),
+              ),
+            )
+          : Text(i18n.item.common.wishRank),
       iconData: Icons.arrow_drop_down,
       onPressed: () async {
         // BottomSheetの表示
@@ -428,7 +431,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
             backgroundColor: colorScheme.error,
             foregroundColor: colorScheme.onError,
             icon: Icons.delete,
-            label: i18n.app.delete,
+            label: commonI18n.common.delete,
           ),
         ],
       ),
@@ -446,10 +449,11 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
 
   Future<bool> confirmDismiss(BuildContext context, WidgetRef ref) async {
     // ダイアログの表示
+    final messages = commonI18n.common.deleteConfirmDialog;
     final result = await showOkCancelAlertDialog(
       context: context,
-      title: i18n.app.deleteConfirmTitle,
-      message: i18n.app.deleteCofirmMessage(item: item.name),
+      title: messages.title,
+      message: messages.message(name: item.name),
     );
     return result == OkCancelResult.ok;
   }
@@ -457,7 +461,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
   Future<void> onDelete(BuildContext context, WidgetRef ref) async {
     await execute(
       action: () => ref.read(itemUsecaseProvider).delete(itemId: item.id),
-      successMessage: i18n.app.completeDeleteMessage,
+      successMessage: commonI18n.common.deletionComplete,
     );
   }
 }

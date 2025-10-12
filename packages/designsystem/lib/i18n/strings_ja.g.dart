@@ -68,6 +68,9 @@ class TranslationsCommonJa {
 	/// ja: '削除'
 	String get delete => '削除';
 
+	/// ja: '削除しました。'
+	String get deletionComplete => '削除しました。';
+
 	/// ja: '編集'
 	String get edit => '編集';
 
@@ -109,6 +112,8 @@ class TranslationsCommonJa {
 
 	/// ja: '名無し'
 	String get noName => '名無し';
+
+	late final TranslationsCommonDeleteConfirmDialogJa deleteConfirmDialog = TranslationsCommonDeleteConfirmDialogJa.internal(_root);
 }
 
 // Path: designsystem
@@ -269,6 +274,21 @@ class TranslationsExceptionsJa {
 				return '購入処理に失敗しました。';
 		}
 	}
+}
+
+// Path: common.deleteConfirmDialog
+class TranslationsCommonDeleteConfirmDialogJa {
+	TranslationsCommonDeleteConfirmDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '削除の確認'
+	String get title => '削除の確認';
+
+	/// ja: '「${name:String}」を削除しますか？'
+	String message({required String name}) => '「${name}」を削除しますか？';
 }
 
 // Path: designsystem.imageSourceSelect
@@ -476,6 +496,7 @@ extension on Translations {
 			case 'common.itmizedTextPrefix': return '・';
 			case 'common.save': return '保存';
 			case 'common.delete': return '削除';
+			case 'common.deletionComplete': return '削除しました。';
 			case 'common.edit': return '編集';
 			case 'common.unset': return '<未設定>';
 			case 'common.requiredMark': return '*';
@@ -490,6 +511,8 @@ extension on Translations {
 			case 'common.apply': return '適用';
 			case 'common.all': return 'すべて';
 			case 'common.noName': return '名無し';
+			case 'common.deleteConfirmDialog.title': return '削除の確認';
+			case 'common.deleteConfirmDialog.message': return ({required String name}) => '「${name}」を削除しますか？';
 			case 'designsystem.imageSourceSelect.shoot': return '写真を撮る';
 			case 'designsystem.imageSourceSelect.chooseFromLibrary': return 'ライブラリから画像を選択';
 			case 'designsystem.confirmDiscardChanges.title': return '変更を破棄しますか？';

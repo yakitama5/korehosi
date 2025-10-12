@@ -40,6 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 	late final TranslationsAppJa app = TranslationsAppJa.internal(_root);
+	late final TranslationsItemJa item = TranslationsItemJa.internal(_root);
 	late final TranslationsSettingsJa settings = TranslationsSettingsJa.internal(_root);
 	late final TranslationsUserJa user = TranslationsUserJa.internal(_root);
 }
@@ -54,6 +55,20 @@ class TranslationsAppJa {
 
 	/// ja: 'hoge'
 	String get hoge => 'hoge';
+}
+
+// Path: item
+class TranslationsItemJa {
+	TranslationsItemJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsItemCommonJa common = TranslationsItemCommonJa.internal(_root);
+	late final TranslationsItemItemsPageJa itemsPage = TranslationsItemItemsPageJa.internal(_root);
+	late final TranslationsItemItemPageJa itemPage = TranslationsItemItemPageJa.internal(_root);
+	late final TranslationsItemItemEditPageJa itemEditPage = TranslationsItemItemEditPageJa.internal(_root);
+	late final TranslationsItemPurchasePageJa purchasePage = TranslationsItemPurchasePageJa.internal(_root);
 }
 
 // Path: settings
@@ -79,6 +94,146 @@ class TranslationsUserJa {
 	late final TranslationsUserProfilePageJa profilePage = TranslationsUserProfilePageJa.internal(_root);
 	late final TranslationsUserOnboardPageJa onboardPage = TranslationsUserOnboardPageJa.internal(_root);
 	late final TranslationsUserCommonJa common = TranslationsUserCommonJa.internal(_root);
+}
+
+// Path: item.common
+class TranslationsItemCommonJa {
+	TranslationsItemCommonJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ほしいもの'
+	String get wishList => 'ほしいもの';
+
+	/// ja: 'ステータス'
+	String get status => 'ステータス';
+
+	/// ja: 'ほしい度'
+	String get wishRank => 'ほしい度';
+
+	/// ja: 'ほしいものの名前'
+	String get itemName => 'ほしいものの名前';
+
+	/// ja: 'ほしい人'
+	String get wanterName => 'ほしい人';
+
+	/// ja: 'だれがほしい？'
+	String get wanterNameLabel => 'だれがほしい？';
+
+	/// ja: 'メモ'
+	String get memo => 'メモ';
+
+	/// ja: 'いつほしい？'
+	String get wishSeason => 'いつほしい？';
+
+	/// ja: 'URL'
+	String get url => 'URL';
+
+	/// ja: '価格'
+	String get price => '価格';
+
+	/// ja: 'かう予定の日'
+	String get purchasePlanDate => 'かう予定の日';
+
+	/// ja: 'わたした日'
+	String get sentDate => 'わたした日';
+
+	/// ja: 'かった人'
+	String get buyerName => 'かった人';
+
+	/// ja: '¥'
+	String get currency => '¥';
+}
+
+// Path: item.itemsPage
+class TranslationsItemItemsPageJa {
+	TranslationsItemItemsPageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ほしいもの'
+	String get title => 'ほしいもの';
+
+	/// ja: 'ほしいものを追加'
+	String get add => 'ほしいものを追加';
+
+	late final TranslationsItemItemsPageNotSelectedGroupDialogJa notSelectedGroupDialog = TranslationsItemItemsPageNotSelectedGroupDialogJa.internal(_root);
+
+	/// ja: 'アカウント'
+	String get account => 'アカウント';
+
+	/// ja: 'グループを切り替えました。'
+	String get completeChangeGroup => 'グループを切り替えました。';
+
+	/// ja: 'ほしいものが見つかりませんでした。'
+	String get itemEmpty => 'ほしいものが見つかりませんでした。';
+
+	/// ja: '${length:int}件選択'
+	String selectNumberText({required int length}) => '${length}件選択';
+
+	/// ja: '星${value:String}'
+	String wishRankFormat({required String value}) => '星${value}';
+
+	/// ja: '並び替え'
+	String get sortOrder => '並び替え';
+}
+
+// Path: item.itemPage
+class TranslationsItemItemPageJa {
+	TranslationsItemItemPageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ほしいものが見つかりませんでした。 削除された可能性があります。 再度操作して下さい。'
+	String get deletedItem => 'ほしいものが見つかりませんでした。 削除された可能性があります。\n再度操作して下さい。';
+
+	late final TranslationsItemItemPageWishSeasonJa wishSeason = TranslationsItemItemPageWishSeasonJa.internal(_root);
+	late final TranslationsItemItemPagePurchaseSectionJa purchaseSection = TranslationsItemItemPagePurchaseSectionJa.internal(_root);
+
+	/// ja: '購入/購入予定'
+	String get purchase => '購入/購入予定';
+}
+
+// Path: item.itemEditPage
+class TranslationsItemItemEditPageJa {
+	TranslationsItemItemEditPageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ほしいものを編集'
+	String get editTitle => 'ほしいものを編集';
+
+	/// ja: 'ほしいものを作成'
+	String get createTitle => 'ほしいものを作成';
+
+	late final TranslationsItemItemEditPageWishSeasonJa wishSeason = TranslationsItemItemEditPageWishSeasonJa.internal(_root);
+
+	/// ja: 'URLを追加'
+	String get addUrl => 'URLを追加';
+}
+
+// Path: item.purchasePage
+class TranslationsItemPurchasePageJa {
+	TranslationsItemPurchasePageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '購入/購入予定情報'
+	String get purchase => '購入/購入予定情報';
+
+	late final TranslationsItemPurchasePageSurpriseJa surprise = TranslationsItemPurchasePageSurpriseJa.internal(_root);
+	late final TranslationsItemPurchasePagePurchasePlanDateJa purchasePlanDate = TranslationsItemPurchasePagePurchasePlanDateJa.internal(_root);
+	late final TranslationsItemPurchasePageSentDateJa sentDate = TranslationsItemPurchasePageSentDateJa.internal(_root);
 }
 
 // Path: settings.settingsPage
@@ -199,6 +354,99 @@ class TranslationsUserCommonJa {
 
 	/// ja: '年齢層'
 	String get ageGroup => '年齢層';
+}
+
+// Path: item.itemsPage.notSelectedGroupDialog
+class TranslationsItemItemsPageNotSelectedGroupDialogJa {
+	TranslationsItemItemsPageNotSelectedGroupDialogJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'グループが選択されていません'
+	String get title => 'グループが選択されていません';
+
+	/// ja: 'グループを選択してからほしいものを追加して下さい'
+	String get message => 'グループを選択してからほしいものを追加して下さい';
+}
+
+// Path: item.itemPage.wishSeason
+class TranslationsItemItemPageWishSeasonJa {
+	TranslationsItemItemPageWishSeasonJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '例：クリスマス、誕生日'
+	String get hint => '例：クリスマス、誕生日';
+}
+
+// Path: item.itemPage.purchaseSection
+class TranslationsItemItemPagePurchaseSectionJa {
+	TranslationsItemItemPagePurchaseSectionJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '購入/購入予定情報'
+	String get title => '購入/購入予定情報';
+
+	/// ja: '以降の内容はグループ内の大人にだけ表示されます'
+	String get message => '以降の内容はグループ内の大人にだけ表示されます';
+}
+
+// Path: item.itemEditPage.wishSeason
+class TranslationsItemItemEditPageWishSeasonJa {
+	TranslationsItemItemEditPageWishSeasonJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '例：クリスマス、誕生日'
+	String get hint => '例：クリスマス、誕生日';
+}
+
+// Path: item.purchasePage.surprise
+class TranslationsItemPurchasePageSurpriseJa {
+	TranslationsItemPurchasePageSurpriseJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'サプライズ'
+	String get label => 'サプライズ';
+
+	/// ja: '状況を子供に知られたくない'
+	String get caption => '状況を子供に知られたくない';
+}
+
+// Path: item.purchasePage.purchasePlanDate
+class TranslationsItemPurchasePagePurchasePlanDateJa {
+	TranslationsItemPurchasePagePurchasePlanDateJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '入力すると「購入予定」になります'
+	String get hint => '入力すると「購入予定」になります';
+}
+
+// Path: item.purchasePage.sentDate
+class TranslationsItemPurchasePageSentDateJa {
+	TranslationsItemPurchasePageSentDateJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '入力すると「購入済」になります'
+	String get hint => '入力すると「購入済」になります';
 }
 
 // Path: settings.settingsPage.account
@@ -377,6 +625,44 @@ extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
 			case 'app.hoge': return 'hoge';
+			case 'item.common.wishList': return 'ほしいもの';
+			case 'item.common.status': return 'ステータス';
+			case 'item.common.wishRank': return 'ほしい度';
+			case 'item.common.itemName': return 'ほしいものの名前';
+			case 'item.common.wanterName': return 'ほしい人';
+			case 'item.common.wanterNameLabel': return 'だれがほしい？';
+			case 'item.common.memo': return 'メモ';
+			case 'item.common.wishSeason': return 'いつほしい？';
+			case 'item.common.url': return 'URL';
+			case 'item.common.price': return '価格';
+			case 'item.common.purchasePlanDate': return 'かう予定の日';
+			case 'item.common.sentDate': return 'わたした日';
+			case 'item.common.buyerName': return 'かった人';
+			case 'item.common.currency': return '¥';
+			case 'item.itemsPage.title': return 'ほしいもの';
+			case 'item.itemsPage.add': return 'ほしいものを追加';
+			case 'item.itemsPage.notSelectedGroupDialog.title': return 'グループが選択されていません';
+			case 'item.itemsPage.notSelectedGroupDialog.message': return 'グループを選択してからほしいものを追加して下さい';
+			case 'item.itemsPage.account': return 'アカウント';
+			case 'item.itemsPage.completeChangeGroup': return 'グループを切り替えました。';
+			case 'item.itemsPage.itemEmpty': return 'ほしいものが見つかりませんでした。';
+			case 'item.itemsPage.selectNumberText': return ({required int length}) => '${length}件選択';
+			case 'item.itemsPage.wishRankFormat': return ({required String value}) => '星${value}';
+			case 'item.itemsPage.sortOrder': return '並び替え';
+			case 'item.itemPage.deletedItem': return 'ほしいものが見つかりませんでした。 削除された可能性があります。\n再度操作して下さい。';
+			case 'item.itemPage.wishSeason.hint': return '例：クリスマス、誕生日';
+			case 'item.itemPage.purchaseSection.title': return '購入/購入予定情報';
+			case 'item.itemPage.purchaseSection.message': return '以降の内容はグループ内の大人にだけ表示されます';
+			case 'item.itemPage.purchase': return '購入/購入予定';
+			case 'item.itemEditPage.editTitle': return 'ほしいものを編集';
+			case 'item.itemEditPage.createTitle': return 'ほしいものを作成';
+			case 'item.itemEditPage.wishSeason.hint': return '例：クリスマス、誕生日';
+			case 'item.itemEditPage.addUrl': return 'URLを追加';
+			case 'item.purchasePage.purchase': return '購入/購入予定情報';
+			case 'item.purchasePage.surprise.label': return 'サプライズ';
+			case 'item.purchasePage.surprise.caption': return '状況を子供に知られたくない';
+			case 'item.purchasePage.purchasePlanDate.hint': return '入力すると「購入予定」になります';
+			case 'item.purchasePage.sentDate.hint': return '入力すると「購入済」になります';
 			case 'settings.settingsPage.title': return '設定';
 			case 'settings.settingsPage.account.head': return 'アカウント';
 			case 'settings.settingsPage.account.profile': return 'プロフィール';

@@ -3,6 +3,7 @@ no: 'No'
 itmizedTextPrefix: '・'
 save: '保存'
 delete: '削除'
+deletionComplete: '削除しました。'
 edit: '編集'
 unset: '<未設定>'
 requiredMark: '*'
@@ -17,3 +18,6 @@ reset: リセット
 apply: 適用
 all: すべて
 noName: 名無し
+deleteConfirmDialog: 
+  title: 削除の確認
+  message: 「${name:String}」を削除しますか？

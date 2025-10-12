@@ -32,7 +32,7 @@ class ItemPage extends HookConsumerWidget {
         AsyncData(value: final _),
         AsyncData(value: final _),
       ) =>
-        ErrorView(i18n.app.deletedMessage, null),
+        ErrorView(i18n.item.itemPage.deletedItem, null),
 
       // 欲しい物が存在する場合は明細を表示
       (
@@ -84,17 +84,20 @@ class _ItemDetailView extends HookWidget {
               const Gap(8),
               _PurchaseStatus(purchaseStatus: purchase.status),
               const Gap(32),
-              TextWithLabel(item.name, label: i18n.app.name),
+              TextWithLabel(item.name, label: i18n.user.common.name),
               const Gap(16),
-              TextWithLabel(item.wanterName, label: i18n.app.wanterName),
+              TextWithLabel(item.wanterName, label: i18n.item.common.itemName),
               const Gap(16),
               _WishRank(wishRank: item.wishRank),
               const Gap(16),
-              TextWithLabel(item.wishSeason, label: i18n.app.wishSeasonLabel),
+              TextWithLabel(
+                item.wishSeason,
+                label: i18n.item.itemPage.wishSeason.hint,
+              ),
               const Gap(16),
               _Urls(urls: item.urls),
               const Gap(16),
-              TextWithLabel(item.memo, label: i18n.app.memo),
+              TextWithLabel(item.memo, label: i18n.item.common.memo),
               const Gap(40),
               _PurchaseInfo(purchase: purchase, user: user),
               const Gap(160),
@@ -150,7 +153,7 @@ class _WishRank extends HookWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(i18n.app.wishRank, style: textTheme.labelMedium),
+        Text(i18n.item.common.wishRank, style: textTheme.labelMedium),
         RatingBar.builder(
           itemBuilder: (context, index) => const RatingIcon(),
           initialRating: wishRank ?? 0,
@@ -175,13 +178,13 @@ class _Urls extends HookWidget {
 
     // 未設定の場合はダミー要素だけ表示
     if (urls == null || urls!.isEmpty) {
-      return TextWithLabel(null, label: i18n.app.url);
+      return TextWithLabel(null, label: i18n.item.common.url);
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(i18n.app.url, style: textTheme.labelMedium),
+        Text(i18n.item.common.url, style: textTheme.labelMedium),
         ...urls!.map(
           (url) => Padding(
             padding: const EdgeInsets.only(bottom: 8),
@@ -226,19 +229,22 @@ class _PurchaseInfo extends HookWidget {
           purchase?.price?.formatCurrency(
             locale: AppLocaleUtils.findDeviceLocale().languageCode,
           ),
-          label: i18n.app.price,
+          label: i18n.item.common.price,
         ),
         const Gap(16),
         DateTextWithLabel(
           dateTime: purchase?.planDate,
-          label: i18n.app.purchasePlanDateTime,
+          label: i18n.item.common.purchasePlanDate,
         ),
         const Gap(16),
-        DateTextWithLabel(dateTime: purchase?.sentAt, label: i18n.app.sentAt),
+        DateTextWithLabel(
+          dateTime: purchase?.sentAt,
+          label: i18n.item.common.sentDate,
+        ),
         const Gap(16),
-        TextWithLabel(purchase?.buyerName, label: i18n.app.buyerName),
+        TextWithLabel(purchase?.buyerName, label: i18n.item.common.buyerName),
         const Gap(16),
-        TextWithLabel(purchase?.memo, label: i18n.app.memo),
+        TextWithLabel(purchase?.memo, label: i18n.item.common.memo),
       ],
     );
   }
@@ -252,13 +258,14 @@ class _PurchaseInfoTitle extends HookWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    final messages = i18n.item.itemPage.purchaseSection;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(i18n.app.purchaseInfoTitle, style: textTheme.titleMedium),
+        Text(messages.title, style: textTheme.titleMedium),
         Text(
-          i18n.app.purchaseInfoCaption,
+          messages.message,
           style: textTheme.labelMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
@@ -289,7 +296,7 @@ class _PurchaseFab extends HookConsumerWidget {
     return FloatingActionButton.extended(
       onPressed: () => _onPurchase(context),
       icon: const Icon(Icons.shopping_bag),
-      label: Text(i18n.app.purchaseOrpurchasePlan),
+      label: Text(i18n.item.itemPage.purchase),
     );
   }
 

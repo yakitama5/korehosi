@@ -28,7 +28,7 @@ class ItemOrderSelectorBottomSheet extends HookWidget {
     final sortOrder = useState(initial.sortOrder);
 
     return BottomSheetColumn(
-      titleData: i18n.app.sortOrder,
+      titleData: i18n.item.itemsPage.sortOrder,
       children: [
         _OrderKeySegmentedButton(
           value: orderKey.value,
@@ -123,7 +123,7 @@ class _ApplyButton extends HookWidget {
   Widget build(BuildContext context) {
     return FilledButton.tonal(
       onPressed: onPressed,
-      child: Text(i18n.app.apply),
+      child: Text(commonI18n.common.apply),
     );
   }
 }
@@ -137,7 +137,7 @@ class _CancelButton extends HookWidget {
       onPressed: () {
         Navigator.pop(context);
       },
-      child: Text(i18n.app.cancel),
+      child: Text(commonI18n.common.cancel),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 
 import 'rating_icon.dart';
@@ -27,7 +28,7 @@ class WishRankSelectorBottomSheet extends HookWidget {
     final wishRank = useState(initial ?? 0);
 
     return BottomSheetColumn(
-      titleData: i18n.app.wishRank,
+      titleData: i18n.item.common.wishRank,
       children: [
         RatingBar.builder(
           initialRating: wishRank.value,
@@ -59,7 +60,7 @@ class _CancelButton extends HookWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => Navigator.of(context).pop(),
-      child: Text(i18n.app.cancel),
+      child: Text(commonI18n.common.cancel),
     );
   }
 }
@@ -71,7 +72,7 @@ class _ResetButton extends HookWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => Navigator.of(context).pop<double>(-1),
-      child: Text(i18n.app.reset),
+      child: Text(commonI18n.common.reset),
     );
   }
 }
@@ -85,7 +86,7 @@ class _ApplyButton extends HookWidget {
   Widget build(BuildContext context) {
     return FilledButton.tonal(
       onPressed: onPressed,
-      child: Text(i18n.app.apply),
+      child: Text(commonI18n.common.apply),
     );
   }
 }

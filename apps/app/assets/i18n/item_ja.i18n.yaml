@@ -1,0 +1,54 @@
+common:
+  wishList: ほしいもの
+  status: ステータス
+  wishRank: ほしい度
+  itemName: ほしいものの名前
+  wanterName: ほしい人
+  wanterNameLabel: だれがほしい？
+  memo: メモ
+  wishSeason: いつほしい？
+  url: URL
+  price: 価格
+  purchasePlanDate: かう予定の日
+  sentDate: わたした日
+  buyerName: かった人
+  currency: ¥
+itemsPage:
+  title: ほしいもの
+  add: ほしいものを追加
+  notSelectedGroupDialog:
+    title: グループが選択されていません
+    message: グループを選択してからほしいものを追加して下さい
+  account: アカウント
+  completeChangeGroup: グループを切り替えました。
+  itemEmpty: ほしいものが見つかりませんでした。
+  selectNumberText: "${length:int}件選択"
+  wishRankFormat: "星${value:String}"
+  sortOrder: 並び替え
+itemPage:
+  deletedItem: >-
+    ほしいものが見つかりませんでした。
+    削除された可能性があります。
+
+    再度操作して下さい。
+  wishSeason:
+    hint: 例：クリスマス、誕生日
+  purchaseSection:
+    title: 購入/購入予定情報
+    message: 以降の内容はグループ内の大人にだけ表示されます
+  purchase: 購入/購入予定
+itemEditPage:
+  editTitle: ほしいものを編集
+  createTitle: ほしいものを作成
+  wishSeason:
+    hint: 例：クリスマス、誕生日
+  addUrl: URLを追加
+purchasePage:
+  purchase: 購入/購入予定情報
+  surprise:
+    label: サプライズ
+    caption: 状況を子供に知られたくない
+  purchasePlanDate:
+    hint: 入力すると「購入予定」になります
+  sentDate:
+    hint: 入力すると「購入済」になります

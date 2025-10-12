@@ -11,6 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/item.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
@@ -21,15 +22,15 @@ class ItemEditPage extends HookConsumerWidget with RouteAware {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final messages = i18n.item.itemEditPage;
+
     final itemId = ref.watch(ItemDetailProviders.itemIdProvider);
     final item = ref.watch(ItemDetailProviders.itemProvider);
 
     return item.when(
       data: (itemData) => _ItemForm(
         item: itemData,
-        titleData: itemId == null
-            ? i18n.app.createPageTitle(item: i18n.app.wishList)
-            : i18n.app.editPageTitle(item: i18n.app.wishList),
+        titleData: itemId == null ? messages.createTitle : messages.editTitle,
       ),
       error: ErrorView.new,
       // すぐ表示されるはずなので、何も表示しない
@@ -205,10 +206,12 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
     if (!context.mounted) {
       return;
     }
+
+    final messages = commonI18n.common.deleteConfirmDialog;
     final result = await showOkCancelAlertDialog(
       context: context,
-      title: i18n.app.deleteConfirmTitle,
-      message: i18n.app.deleteCofirmMessage(item: item?.name ?? ''),
+      title: messages.title,
+      message: messages.message(name: item?.name ?? ''),
     );
     if (result != OkCancelResult.ok) {
       return;
@@ -228,7 +231,7 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
           const ItemsRouteData().go(context);
         }
       },
-      successMessage: i18n.app.completeDeleteMessage,
+      successMessage: commonI18n.common.deletionComplete,
     );
   }
 }
@@ -290,7 +293,7 @@ class _NameField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ReactiveOutlinedTextField<String>(
       formControlName: ItemFormModelForm.nameControlName,
-      labelText: i18n.app.merchandiseName,
+      labelText: i18n.item.common.itemName,
       maxLength: itemConfig.maxNameLength,
       isRequired: true,
     );
@@ -313,7 +316,7 @@ class _WanterNameField extends HookConsumerWidget {
 
     return ReactiveOutlinedRawAutocomplete(
       formControlName: ItemFormModelForm.wanterNameControlName,
-      labelText: i18n.app.wanterName,
+      labelText: i18n.item.common.wanterName,
       maxLength: itemConfig.maxWanterNameLength,
       options: userNames ?? [],
     );
@@ -328,7 +331,7 @@ class _WishRankField extends HookConsumerWidget {
     return ReactiveRatingBarBuilder<double>(
       formControlName: ItemFormModelForm.wishRankControlName,
       decoration: InputDecoration(
-        label: Text(i18n.app.wishRank),
+        label: Text(i18n.item.common.wishRank),
         border: InputBorder.none,
         enabledBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
@@ -346,8 +349,8 @@ class _WishSeasonField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ReactiveOutlinedTextField<String>(
       formControlName: ItemFormModelForm.wishSeasonControlName,
-      labelText: i18n.app.wishSeasonLabel,
-      hintText: i18n.app.wishSeasonHint,
+      labelText: i18n.item.common.wishSeason,
+      hintText: i18n.item.itemEditPage.wishSeason.hint,
       maxLength: itemConfig.maxWishSeasonLength,
     );
   }
@@ -365,7 +368,7 @@ class _UrlFields extends HookConsumerWidget {
       itemBuilder: (_, i, _, _, formModel) => ReactiveOutlinedTextField<String>(
         key: ObjectKey(formModel.urlsControl.control('$i')),
         formControlName: '$i',
-        labelText: i18n.app.url,
+        labelText: i18n.item.common.url,
         maxLength: itemConfig.maxUrlLength,
         textInputType: TextInputType.url,
         counterText: '',
@@ -384,7 +387,7 @@ class _UrlAddButton extends HookConsumerWidget {
     return TextButton.icon(
       onPressed: onAdd,
       icon: const Icon(Icons.add),
-      label: Text(i18n.app.addUrl),
+      label: Text(i18n.item.itemEditPage.addUrl),
     );
   }
 }
@@ -396,7 +399,7 @@ class _MemoField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ReactiveOutlinedTextField<String>(
       formControlName: ItemFormModelForm.memoControlName,
-      labelText: i18n.app.memo,
+      labelText: i18n.item.common.memo,
       maxLines: 5,
       maxLength: itemConfig.maxMemoLength,
     );
