@@ -40,4 +40,4 @@ runs:
         echo -n $DEV_ENV_FILE | base64 -d > ${ENV_PATH}/.env.dev
       shell: bash
       env: 
-        ENV_PATH: packages/infrastructure/firebase/scripts/env
+        ENV_PATH: packages/infrastructure/revenue_cat/scripts/env
