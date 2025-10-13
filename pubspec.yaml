@@ -139,6 +139,8 @@ melos:
         orderDependents: true
       packageFilters:
         dependsOn: alchemist
+        dirExists:
+        - test
 
     test_update_golden:
       run: flutter test --update-goldens
@@ -146,6 +148,16 @@ melos:
         orderDependents: true
       packageFilters:
         dependsOn: alchemist
+        dirExists:
+        - test
+    
+    test_ci: 
+      run: flutter test --dart-define=CI=true
+      exec:
+        failFast: true
+      packageFilters:
+        dirExists:
+        - test
 
   ide:
     intellij:
