@@ -35,4 +35,4 @@ jobs:
 
       # 実行
       - run: melos run regenerate_code
-      - run: dart run melos exec -- flutter test --dart-define=CI=true
+      - run: melos run test_ci
