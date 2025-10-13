@@ -33,7 +33,6 @@ dependencies:
   version: ^3.0.2
 
 dev_dependencies:
-  alchemist: ^0.12.1
   build_runner: ^2.5.4
   custom_lint: ^0.7.6
   flutter_lints: ^6.0.0
