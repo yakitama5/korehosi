@@ -1,0 +1,42 @@
+imageSourceSelect:
+  shoot: '写真を撮る'
+  chooseFromLibrary: 'ライブラリから画像を選択'
+confirmDiscardChanges:
+  title: '変更を破棄しますか？'
+  message: 'すべての変更は失われます'
+  discard: '破棄'
+  notDiscard: '破棄しない'
+permissionMessages:
+  photos: 'ギャラリーへのアクセス'
+  camera: 'カメラへのアクセス'
+  pushNotification: 'プッシュ通知'
+  permissionLackDialog:
+    title: '${permission:String}が許可されていません'
+    message: '設定アプリを開いて${permission:String}を許可してください'
+    openSettings: '設定アプリを開く'
+  permissionOffDialog:
+    title: '${permission:String}をオフにしますか？'
+    message: '設定アプリを開いて${permission:String}をオフにしてください'
+    openSettings: '設定アプリを開く'
+sendUrlErrorDialog:
+  title: 'エラー'
+  message: >-
+    URLを開けませんでした。
+
+    頻発する場合はお問い合わせ下さい。
+appUpdate:
+  updatePossible:
+    message: >-
+      新しいバージョンが公開されています。
+      アップデートを行うと、新しい機能をご利用いただけます。
+      アップデートを行いますか？
+  forceUpdate:
+    message: >-
+      ご利用のバージョンは現在ご利用出来ません。
+      ストアから新しいバージョンをご利用下さい。
+  navigateStore: 'ストアを開く'
+validationError:
+  required: '必須項目を入力して下さい'
+  url: '正しいURL形式で入力して下さい'
+format:
+  percent: '${percent:String}%'

@@ -1,0 +1,49 @@
+settingsPage:
+  title: 設定
+  account:
+    head: アカウント
+    profile: プロフィール
+    group: グループ
+    account: アカウント
+    pushNotification:
+      title: プッシュ通知
+      caption: グループないでほしいものが追加された場合に通知が受け取れます
+  layout:
+    haed: レイアウト
+    uiStyle: UIスタイル
+    themeMode: テーマモード
+    colorTheme: カラー
+  help:
+    head: ヘルプ
+    howToUse: つかい方
+    contactUs: お問い合わせ
+    developperTwitter: 開発者X (旧Twitter)
+    privacyPolicy: プライバシーポリシー
+    license: ライセンス
+accountPage:
+  title: アカウント
+  link:
+    head: アカウント連携
+    google: Google
+    apple: Apple
+  other:
+    head: その他
+    logout: ログアウト
+    leave: 退会
+  leaveConfirmDialog:
+    title: 退会しますか？
+    message: 本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。
+accountLinkPage:
+  title: アカウント連携
+  meritDescription:
+    title: >-
+      アカウント連携を行うことで、
+
+      下記の機能をご利用いただけます。
+    itemizedMessages: [
+      'クラウドへのデータバックアップ',
+      '複数端末での同時利用',
+      '端末変更に伴うデータ移行',
+    ]
+  signInWithGoogle: Googleアカウントでサインイン
+  signInWithApple: Appleアカウントでサインイン

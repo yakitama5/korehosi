@@ -10,102 +10,84 @@ environment:
 resolution: workspace
 
 dependencies:
-  adaptive_dialog: any
-  cached_network_image: any
-  carousel_slider: any
-  cloud_firestore: any
-  cloud_functions: any
-  collection: any
-  device_info_plus: any
-  dynamic_color: any
-  envied: any
-  fcm_config: ^3.6.5
-  firebase_analytics: any
-  firebase_app_check: any
-  firebase_auth: any
-  firebase_core: any
-  firebase_crashlytics: any
-  firebase_remote_config: any
-  firebase_storage: any
-  fl_chart: any
+  adaptive_dialog: ^2.4.2
+  cached_network_image: ^3.4.1
+  carousel_slider: ^5.1.1
+  collection: ^1.19.1
+  cupertino_icons: ^1.0.8
+  device_preview: ^1.3.1
+  fl_chart: ^1.0.0
   flutter:
     sdk: flutter
-  flutter_branch_sdk: ^8.6.0
-  flutter_hooks: any
-  flutter_image_compress: any
+  flutter_hooks: ^0.21.3+1
+  flutter_image_compress: ^2.4.0
   flutter_localizations:
     sdk: flutter
-  flutter_rating_bar: any
-  flutter_slidable: any
-  flutter_svg: any
+  flutter_rating_bar: ^4.0.1
+  flutter_settings_ui: ^3.0.1
+  flutter_slidable: ^4.0.1
+  flutter_svg: ^2.0.13
   flutter_web_plugins:
     sdk: flutter
-  freezed_annotation: any
-  gap: any
-  gauge_indicator: any
-  go_router: any
-  google_fonts: any
-  google_sign_in: any
-  hooks_riverpod: any
-  image_gallery_saver_plus: any
-  image_picker: any
-  intl: any
-  introduction_screen: any
-  json_serializable: any
-  logger: any
-  lottie: any
-  material_color_utilities: any
-  material_design_icons_flutter: any
-  nested: any
-  package_info_plus: any
-  path_provider: any
-  pattern_formatter: any
-  permission_handler: any
-  photo_view: any
-  purchases_flutter: any
-  qr_flutter: any
-  reactive_cupertino_text_field: any
-  reactive_date_time_picker: any
-  reactive_flutter_rating_bar: any
-  reactive_forms: any
-  reactive_forms_annotations: any
-  reactive_image_picker: any
-  responsive_framework: any
-  riverpod_annotation: any
-  settings_ui: any
-  share_plus: any
-  shared_preferences: any
-  shimmer: any
+  freezed_annotation: ^3.1.0
+  gap: ^3.0.1
+  gauge_indicator: ^0.4.3
+  go_router: ^16.2.0
+  hooks_riverpod: ^2.6.1
+  image_picker: ^1.2.0
+  intl: ^0.20.2
+  introduction_screen: ^3.1.17
+  lottie: ^3.3.2
+  material_design_icons_flutter: ^7.0.7296
+  nested: ^1.0.0
+  package_info_plus: ^9.0.0
+  packages_application:
+    path: ../../packages/application
+  packages_core:
+    path: ../../packages/core
+  packages_dependency_override:
+    path: ../../packages/dependency_override
+  packages_designsystem:
+    path: ../../packages/designsystem
+  packages_domain:
+    path: ../../packages/domain
+  path_provider: ^2.1.5
+  pattern_formatter: ^4.0.1
+  permission_handler: ^12.0.1
+  photo_view: ^0.15.0
+  qr_flutter: ^4.1.0
+  reactive_cupertino_text_field: ^2.1.2
+  reactive_date_time_picker: ^5.0.1
+  reactive_flutter_rating_bar: ^2.0.2
+  reactive_forms: ^18.1.1
+  reactive_image_picker: ^8.0.1
+  responsive_framework: ^1.5.1
+  riverpod_annotation: ^2.6.1
+  shimmer: ^3.0.0
   slang: ^4.8.1
   slang_flutter: ^4.8.0
-  store_redirect: any
-  url_launcher: any
-  uuid: any
-  version: any
+  url_launcher: ^6.3.2
+  uuid: ^4.5.1
+  version: ^3.0.2
 
 dev_dependencies:
   alchemist: ^0.12.1
-  build_runner: any
-  custom_lint: any
-  envied_generator: any
-  fake_cloud_firestore: any
-  firebase_auth_mocks: any
-  firebase_storage_mocks: any
-  flutter_gen_runner: any
-  flutter_launcher_icons: any
-  flutter_lints: any
+  build_runner: ^2.5.4
+  custom_lint: ^0.7.6
+  flutter_gen_runner: ^5.11.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  freezed: null
-  go_router_builder: any
-  google_sign_in_mocks: any
-  lint:
-    path: ./../../lint
-  mocktail: any
+  freezed: ^3.1.0
+  go_router_builder: ^3.0.0
+  json_serializable: ^6.9.5
   nilts: ^0.23.1
-  pedantic_mono: any
-  reactive_forms_generator: any
-  riverpod_generator: any
+  pedantic_mono: ^1.12.3
+  reactive_forms_generator: ^8.0.3
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
+  slang_build_runner: ^4.8.1
 
 flutter:
   uses-material-design: true

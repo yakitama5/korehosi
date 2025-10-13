@@ -74,7 +74,7 @@
 2. 下記のコマンドを実行して、`env.g.dart`ファイルを生成する
 
    ```sh
-   fvm flutter pub run build_runner build --build-filter 'lib/env/*.dart'
+   fvm flutter pub run build_runner build --build-filter '**/env/*.dart'
    ```
 
 #### AppStoreリリース用

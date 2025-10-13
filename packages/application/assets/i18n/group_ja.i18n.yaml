@@ -1,0 +1,7 @@
+groupShareText: >-
+  ${user:String}さんから${group:String}へ招待されました。
+
+  下記のURLをクリックするか、QRコードを読み取ることで、欲しい物リストのグループに参加できます
+
+  ${url:String}
+initialGroupName: "${userName: String}のグループ"

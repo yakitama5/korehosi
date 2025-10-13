@@ -5,42 +5,93 @@ environment:
 
 workspace:
   - apps/app
+  - packages/core
+  - packages/domain
+  - packages/application
+  - packages/designsystem
+  - packages/dependency_override
+  - packages/infrastructure/firebase
+  - packages/infrastructure/revenue_cat
+  - packages/infrastructure/branch
+  # - packages/infrastructure/mock
+  - packages/infrastructure/shared_preferences
 
 dev_dependencies:
-  custom_lint: any
-  flutter_lints:
+  custom_lint: ^0.7.6
+  flutter_lints: ^6.0.0
   grinder: ^0.9.5
   melos: ^7.0.0-dev.7
-  nilts: any
+  nilts: ^0.23.1
   path: ^1.9.0
-  pedantic_mono: any
+  pedantic_mono: ^1.12.3
+  riverpod_lint: ^2.6.5
   yaml: ^3.1.2
   yaml_edit: ^2.2.1
 
-melos: 
+melos:
   command:
     bootstrap:
       environment:
         sdk: ^3.9.0
         flutter: ^3.35.1
+      dependencies:
+        collection: ^1.19.1
+        envied: ^1.2.0
+        flutter_hooks: ^0.21.3+1
+        flutter_svg: ^2.0.13
+        freezed_annotation: ^3.1.0
+        gap: ^3.0.1
+        hooks_riverpod: ^2.6.1
+        intl: ^0.20.2
+        json_annotation: ^4.9.0
+        material_design_icons_flutter: ^7.0.7296
+        nested: ^1.0.0
+        reactive_forms: ^18.1.1
+        responsive_framework: ^1.5.1
+        riverpod: ^2.6.1
+        riverpod_annotation: ^2.6.1
+        shimmer: ^3.0.0
+        slang: ^4.8.1
+        slang_flutter: ^4.8.0
+        url_launcher: ^6.3.2
+        uuid: ^4.5.1
+        version: ^3.0.2
+      dev_dependencies:
+        build_runner: ^2.5.4
+        custom_lint: ^0.7.6
+        envied_generator: ^1.1.1
+        flutter_gen_runner: ^5.11.0
+        flutter_lints: ^6.0.0
+        freezed: ^3.1.0
+        json_serializable: ^6.9.5
+        nilts: ^0.23.1
+        pedantic_mono: ^1.12.3
+        reactive_forms_generator: ^8.0.3
+        riverpod_generator: ^2.6.5
+        riverpod_lint: ^2.6.5
+        slang_build_runner: ^4.8.1
     clean:
       hooks:
         post: melos exec --flutter --concurrency=3 -- "flutter clean"
-          melos exec --flutter --file-exists="ios/Podfile.lock" -- "cd ios && rm Podfile.lock"
-          melos exec --flutter --file-exists="macos/Podfile.lock" -- "cd macos && rm Podfile.lock"
 
   scripts:
     build_app: melos run build_app_android && melos run build_app_ios
     build_app_dev: melos run build_app_android_dev && melos run build_app_ios_dev
 
-    build_app_ios: melos exec --scope="flutter_app" -- fvm flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=flavor/prod.json
-    build_app_ios_dev: melos exec --scope="flutter_app" -- fvm flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=flavor/dev.json
-    build_app_android: melos exec --scope="flutter_app" -- fvm flutter build appbundle --dart-define-from-file=flavor/prod.json
-    build_app_android_dev: melos exec --scope="flutter_app" -- fvm flutter build appbundle --dart-define-from-file=flavor/dev.json
+    build_app_ios: melos exec --scope="flutter_app" -- fvm flutter build ipa
+      --export-options-plist=ExportOptions.plist
+      --dart-define-from-file=flavor/prod.json
+    build_app_ios_dev: melos exec --scope="flutter_app" -- fvm flutter build ipa
+      --export-options-plist=ExportOptions.plist
+      --dart-define-from-file=flavor/dev.json
+    build_app_android: melos exec --scope="flutter_app" -- fvm flutter build
+      appbundle --dart-define-from-file=flavor/prod.json
+    build_app_android_dev: melos exec --scope="flutter_app" -- fvm flutter build
+      appbundle --dart-define-from-file=flavor/dev.json
 
     report_test:
-        flutter: true
-        dependsOn: test
+      flutter: true
+      dependsOn: test
 
     # ローカルでフォーマットとdart fix --applyを実行する
     format_and_fix:
@@ -51,10 +102,18 @@ melos:
       packageFilters:
         dependsOn: custom_lint
 
-    regenerate_code: melos run regenerate_by_using_build_runner && melos run regenerate_by_using_gen_slang
+    regenerate_code: melos run regenerate_by_using_build_runner && melos run
+      regenerate_by_using_gen_slang
 
     regenerate_by_using_build_runner:
       run: dart run build_runner build -d
+      exec:
+        orderDependents: true
+      packageFilters:
+        dependsOn: build_runner
+        
+    watch_build_runner:
+      run: dart run build_runner watch -d
       exec:
         orderDependents: true
       packageFilters:
@@ -67,12 +126,12 @@ melos:
       packageFilters:
         dependsOn: slang
 
-    watch_build_runner:
-      run: dart run build_runner watch -d
+    watch_slang:
+      run: dart run slang watch
       exec:
         orderDependents: true
       packageFilters:
-        dependsOn: build_runner
+        dependsOn: slang
 
     test_golden:
       run: flutter test --tags=golden
@@ -80,6 +139,8 @@ melos:
         orderDependents: true
       packageFilters:
         dependsOn: alchemist
+        dirExists:
+        - test
 
     test_update_golden:
       run: flutter test --update-goldens
@@ -87,6 +148,16 @@ melos:
         orderDependents: true
       packageFilters:
         dependsOn: alchemist
+        dirExists:
+        - test
+    
+    test_ci: 
+      run: flutter test --dart-define=CI=true
+      exec:
+        failFast: true
+      packageFilters:
+        dirExists:
+        - test
 
   ide:
     intellij:

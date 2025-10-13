@@ -1,0 +1,28 @@
+name: packages_dependency_override
+description: "This package provides core features of app."
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  infrastructure_branch:
+    path: ../infrastructure/branch
+  infrastructure_firebase:
+    path: ../infrastructure/firebase
+  infrastructure_revenue_cat:
+    path: ../infrastructure/revenue_cat
+  infrastructure_shared_preferences:
+    path: ../infrastructure/shared_preferences
+  packages_domain:
+    path: ../domain
+  riverpod: ^2.6.1
+
+dev_dependencies:
+  custom_lint: ^0.7.6
+  nilts: ^0.23.1
+  pedantic_mono: ^1.12.3
+  riverpod_lint: ^2.6.5
+
+resolution: workspace

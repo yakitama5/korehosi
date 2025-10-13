@@ -1,0 +1,36 @@
+base_locale: ja
+fallback_strategy: base_locale
+input_directory: assets/i18n
+output_directory: lib/i18n
+translate_var: i18n
+input_file_pattern: .i18n.yaml
+namespaces: true
+lazy: false
+
+# Config
+imports:
+  - "package:flutter/material.dart"
+  - "package:packages_domain/user.dart"
+  - "package:packages_domain/item.dart"
+  - "package:packages_domain/common.dart"
+  - "package:packages_domain/designsystem.dart"
+  - "package:packages_application/item.dart"
+contexts:
+  AgeGroup:
+    generate_enum: false
+  ItemOrderKey:
+    generate_enum: false
+  SortOrder:
+    generate_enum: false
+  PurchaseStatus:
+    generate_enum: false
+  ViewLayout:
+    generate_enum: false
+  ThemeMode:
+    generate_enum: false
+  ThemeColor:
+    generate_enum: false
+  UIStyle:
+    generate_enum: false
+  BusinessExceptionType:
+    generate_enum: false

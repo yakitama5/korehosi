@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_app/i18n/strings.g.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:packages_application/user.dart';
+import 'package:packages_designsystem/widgets.dart';
+
+class UserNameField extends HookWidget {
+  const UserNameField({super.key, this.fieldKey});
+
+  final Key? fieldKey;
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveOutlinedTextField<String>(
+      formControlName: UserFormModelForm.nameControlName,
+      labelText: i18n.user.common.nameLabelText,
+      maxLength: userConfig.maxNameLength,
+    );
+  }
+}

@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nested/nested.dart';
+import 'package:packages_core/util.dart';
+import 'package:packages_domain/common.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'router.dart';
+
+part 'router_observer.g.dart';
+
+@riverpod
+class CurrentRoute extends _$CurrentRoute {
+  @override
+  Uri build() {
+    final router = ref.watch(routerProvider);
+    void listener() {
+      ref.invalidateSelf();
+    }
+
+    router.routerDelegate.addListener(listener);
+    ref.onDispose(() {
+      router.routerDelegate.removeListener(listener);
+    });
+
+    final uri = router.routeInformationProvider.value.uri;
+    return uri;
+  }
+}
+
+class RouteObserverContainer extends SingleChildStatelessWidget {
+  const RouteObserverContainer({super.key, super.child});
+
+  @override
+  Widget buildWithChild(BuildContext context, Widget? child) {
+    return Consumer(
+      builder: (_, ref, _) {
+        // 現在のパスを検知し続ける
+        ref.listen(currentRouteProvider, (_, uri) {
+          logger.i(uri);
+
+          // FirebaseAnalyticsに反映
+          ref.read(analyticsServiceProvider).screenView(screenName: uri.path);
+        });
+
+        return child ?? const SizedBox.shrink();
+      },
+    );
+  }
+}

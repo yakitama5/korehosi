@@ -1,0 +1,17 @@
+welcomePage:
+  start: はじめる
+  forFirstTimers: はじめての方はこちら
+  accountLink: アカウント連携
+profilePage:
+  profile: プロフィール
+onboardPage:
+  start: はじめる
+  introduction: 
+    title: はじめに
+    message: まずはプロフィールを登録しましょう
+  profile: あなたは？
+  confirm: あっていますか？
+common:
+  name: 名前
+  nameLabelText: 名前 または ニックネーム
+  ageGroup: 年齢層

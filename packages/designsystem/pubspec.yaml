@@ -1,0 +1,72 @@
+name: packages_designsystem
+description: "This package provides style definitions, themes, etc."
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ^3.9.0
+  flutter: ^3.35.1
+
+resolution: workspace
+
+dependencies:
+  adaptive_dialog: ^2.4.2
+  animations: ^2.0.11
+  collection: ^1.19.1
+  dynamic_color: ^1.8.1
+  flutter:
+    sdk: flutter
+  flutter_hooks: ^0.21.3+1
+  flutter_svg: ^2.0.13
+  freezed_annotation: ^3.1.0
+  gap: ^3.0.1
+  google_fonts: ^6.3.0
+  hooks_riverpod: ^2.6.1
+  linked_scroll_controller: ^0.2.0
+  lottie: ^3.3.2
+  material_color_utilities: ^0.11.1
+  nested: ^1.0.0
+  packages_application:
+    path: ../application
+  packages_domain:
+    path: ../domain
+  responsive_framework: ^1.5.1
+  riverpod_annotation: ^2.6.1
+  shimmer: ^3.0.0
+  slang: ^4.8.1
+  slang_flutter: ^4.8.0
+  sliver_tools: ^0.2.12
+  store_redirect: ^2.0.4
+  url_launcher: ^6.3.2
+
+dev_dependencies:
+  build_runner: ^2.5.4
+  custom_lint: ^0.7.6
+  flutter_gen_runner: ^5.11.0
+  flutter_test:
+    sdk: flutter
+  freezed: ^3.1.0
+  nilts: ^0.23.1
+  pedantic_mono: ^1.12.3
+  riverpod_generator: ^2.6.5
+  riverpod_lint: ^2.6.5
+  slang_build_runner: ^4.8.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/lottie/
+  fonts:
+    - family: CustomIcons
+      fonts:
+        - asset: assets/icons/CustomIcons.ttf
+
+flutter_gen:
+  output: lib/src/gen/assets
+  integrations:
+    flutter_svg: true
+  assets:
+    outputs:
+      package_parameter_enabled: true
