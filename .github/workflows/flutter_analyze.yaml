@@ -34,7 +34,7 @@ jobs:
     steps:
       # チェックアウト
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # セットアップ
       - name: Setup Config Files
