@@ -4,8 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../../test_utils/importer.dart';
 import '../../../../test_utils/src/device_size.dart';
+import '../../../../test_utils/src/prepare_golden_file_comparator_with_threshold.dart';
 
 void main() {
+  prepareGoldenFileComparatorWithThreshold();
+
   group('Welcome', () {
     goldenTest(
       'Initial',
