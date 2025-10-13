@@ -30,7 +30,6 @@ class App extends HookConsumerWidget {
       title: appBuildConfig.appName,
       builder: (_, child) => Nested(
         children: const [
-          // TODO(yakitama5): TEST
           ResponsiveAutoScaleBox(),
           LoaderOverlay(),
           AppUpdateListner(),
