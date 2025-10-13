@@ -12,7 +12,7 @@ runs:
 
     - name: Create Firebase Conf
       run: |
-        echo -n $FIREBASE_OPTIONS | base64 -d > ${CONF_PATH}firebase_options.dart
+        echo -n $FIREBASE_OPTIONS | base64 -d > ${CONF_PATH}/firebase_options.dart
         echo -n $FIREBASE_OPTIONS_DEV | base64 -d > ${CONF_PATH}/firebase_options_dev.dart
         mkdir -p apps/app/android/app/src/prod/
         echo -n $GOOGLE_SERVICES_JSON | base64 -d > apps/app/android/app/src/prod/google-services.json
