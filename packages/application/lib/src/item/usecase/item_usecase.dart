@@ -4,11 +4,13 @@ import 'package:packages_application/group.dart';
 import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
+import 'package:packages_application/src/item/state/search_items_provider.dart';
 import 'package:packages_application/src/user/extension/user_mixin.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/notification.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -25,6 +27,32 @@ class ItemUsecase with RunUsecaseMixin {
   ItemUsecase(this.ref);
 
   final Ref ref;
+
+  /// 欲しいものの検索
+  Future<PageInfo<Item>> searchItems({
+    required int page,
+    required String groupId,
+    required AgeGroup ageGroup,
+    required ItemsSearchQuery query,
+  }) {
+    return ref
+        .read(itemRepositoryProvider)
+        .searchItems(
+          page: page,
+          groupId: groupId,
+          ageGroup: ageGroup,
+          query: query,
+        );
+  }
+
+  /// ほしいもの一覧を再読み込みする.
+  Future<void> refreshSearchItems() async {
+    // すべての要素を再読み込み
+    ref.invalidate(searchItemsProvider);
+
+    // 最初のページ文のデータが取得できるまでは待機
+    return ref.read(searchItemsProvider(page: 1).future);
+  }
 
   /// 欲しい物一覧の取得
   Stream<List<Item>> fetchAll({required String groupId}) =>
