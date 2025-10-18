@@ -13,23 +13,18 @@ class FirebasePurchaseRepository implements PurchaseRepository {
   final Ref ref;
 
   @override
-  Stream<Purchase?> fetchByItemId({
+  Future<Purchase?> fetchByItemId({
     required String groupId,
     required String itemId,
   }) {
     return ref
         .read(purchaseDocumentRefProvider(groupId: groupId, purchaseId: itemId))
-        .snapshots()
-        .where((s) {
-          // 読み込み中のドキュメントが存在する場合はスキップ
-          final doc = s.data();
-          return doc == null || !doc.fieldValuePending;
-        })
-        .map((snap) => snap.data()?.toDomainModel());
+        .get()
+        .then((snap) => snap.data()?.toDomainModel());
   }
 
   @override
-  Stream<Purchase?> fetchByItemIdForChild({
+  Future<Purchase?> fetchByItemIdForChild({
     required String groupId,
     required String itemId,
   }) {
@@ -37,13 +32,8 @@ class FirebasePurchaseRepository implements PurchaseRepository {
         .read(
           cpurchaseDocumentRefProvider(groupId: groupId, purchaseId: itemId),
         )
-        .snapshots()
-        .where((s) {
-          // 読み込み中のドキュメントが存在する場合はスキップ
-          final doc = s.data();
-          return doc == null || !doc.fieldValuePending;
-        })
-        .map((snap) => snap.data()?.toDomainModel());
+        .get()
+        .then((snap) => snap.data()?.toDomainModel());
   }
 
   @override

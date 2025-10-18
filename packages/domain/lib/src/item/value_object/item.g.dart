@@ -13,8 +13,8 @@ _Item _$ItemFromJson(
 ) => $checkedCreate('_Item', json, ($checkedConvert) {
   final val = _Item(
     id: $checkedConvert('id', (v) => v as String),
-    imageUrls: $checkedConvert(
-      'imageUrls',
+    imagesPath: $checkedConvert(
+      'imagesPath',
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
     ),
     name: $checkedConvert('name', (v) => v as String),
@@ -26,10 +26,6 @@ _Item _$ItemFromJson(
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
     ),
     memo: $checkedConvert('memo', (v) => v as String?),
-    purchase: $checkedConvert(
-      'purchase',
-      (v) => v == null ? null : Purchase.fromJson(v as Map<String, dynamic>),
-    ),
     createdAt: $checkedConvert('createdAt', (v) => DateTime.parse(v as String)),
     updatedAt: $checkedConvert('updatedAt', (v) => DateTime.parse(v as String)),
   );
@@ -38,14 +34,13 @@ _Item _$ItemFromJson(
 
 Map<String, dynamic> _$ItemToJson(_Item instance) => <String, dynamic>{
   'id': instance.id,
-  'imageUrls': instance.imageUrls,
+  'imagesPath': instance.imagesPath,
   'name': instance.name,
   'wanterName': instance.wanterName,
   'wishRank': instance.wishRank,
   'wishSeason': instance.wishSeason,
   'urls': instance.urls,
   'memo': instance.memo,
-  'purchase': instance.purchase,
   'createdAt': instance.createdAt.toIso8601String(),
   'updatedAt': instance.updatedAt.toIso8601String(),
 };

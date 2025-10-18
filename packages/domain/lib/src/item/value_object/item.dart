@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:packages_domain/item.dart';
 
 part 'item.freezed.dart';
 part 'item.g.dart';
@@ -9,14 +8,13 @@ part 'item.g.dart';
 abstract class Item with _$Item {
   const factory Item({
     required String id,
-    List<String>? imageUrls,
+    List<String>? imagesPath,
     required String name,
     String? wanterName,
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
     String? memo,
-    Purchase? purchase,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _Item;

@@ -15,14 +15,14 @@ PurchaseRepository purchaseRepository(Ref ref) =>
 abstract class PurchaseRepository {
   /// 欲しい物の購入情報を取得
   /// (更新 および 大人参照用の情報)
-  Stream<Purchase?> fetchByItemId({
+  Future<Purchase?> fetchByItemId({
     required String groupId,
     required String itemId,
   });
 
   /// 欲しい物の購入情報を取得
   /// (子供が参照する情報の取得)
-  Stream<Purchase?> fetchByItemIdForChild({
+  Future<Purchase?> fetchByItemIdForChild({
     required String groupId,
     required String itemId,
   });
@@ -54,8 +54,5 @@ abstract class PurchaseRepository {
   });
 
   /// 購入情報を削除
-  Future<void> delete({
-    required String groupId,
-    required String purchaseId,
-  });
+  Future<void> delete({required String groupId, required String purchaseId});
 }

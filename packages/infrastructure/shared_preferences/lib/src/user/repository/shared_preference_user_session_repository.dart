@@ -2,6 +2,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_shared_preferences/common.dart';
 import 'package:infrastructure_shared_preferences/src/common/enum/preferences.dart';
 import 'package:intl/intl.dart';
+import 'package:packages_core/extension.dart';
+import 'package:packages_domain/src/designsystem/value_object/view_layout.dart';
 import 'package:packages_domain/user.dart';
 
 /// FCMトークンタイムスタンプの日付形式
@@ -65,5 +67,24 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
           ).notifier,
         )
         .remove();
+  }
+
+  @override
+  ViewLayout? fetchItemsPageViewLayout() {
+    final prefValue = ref.watch(
+      stringPreferenceProvider(Preferences.itemsViewLayout),
+    );
+    if (prefValue.isEmpty) {
+      return null;
+    }
+
+    return ViewLayout.values.byNameOrNull(prefValue);
+  }
+
+  @override
+  Future<void> updateItemsPageViewLayout({required ViewLayout viewLayout}) {
+    return ref
+        .watch(stringPreferenceProvider(Preferences.itemsViewLayout).notifier)
+        .update(viewLayout.name);
   }
 }

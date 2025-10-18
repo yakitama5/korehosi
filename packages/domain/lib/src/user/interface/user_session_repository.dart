@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/designsystem.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_session_repository.g.dart';
@@ -34,4 +35,10 @@ abstract class UserSessionRepository {
     required String uid,
     required DateTime dateTime,
   });
+
+  // ほしいもの一覧画面の表示形式を取得
+  ViewLayout? fetchItemsPageViewLayout();
+
+  /// ほしいもの一覧画面の表示形式を更新
+  Future<void> updateItemsPageViewLayout({required ViewLayout viewLayout});
 }

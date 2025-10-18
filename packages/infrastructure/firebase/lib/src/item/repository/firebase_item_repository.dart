@@ -1,16 +1,82 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
+import 'package:infrastructure_firebase/src/common/state/firebase_storage_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_item_model.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_deleted_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/item.dart';
+import 'package:packages_domain/user.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebaseItemRepository implements ItemRepository {
   const FirebaseItemRepository(this.ref);
 
   final Ref ref;
+
+  PurchaseRepository get _purchaseRepository =>
+      ref.read(purchaseRepositoryProvider);
+
+  @override
+  Future<PageInfo<Item>> searchItems({
+    required int page,
+    required String groupId,
+    required AgeGroup ageGroup,
+    required ItemsSearchQuery query,
+  }) async {
+    final sortFieldName = switch (query.itemsOrder.key) {
+      ItemOrderKey.name => 'name',
+      ItemOrderKey.wishRank => 'wishRank',
+      ItemOrderKey.createdAt => FirestoreColumns.createdAt.fieldName,
+    };
+    final descending = query.itemsOrder.sortOrder == SortOrder.desc;
+
+    const pageSize = 10;
+    final limit = page * pageSize;
+    final offset = page - 1 * pageSize;
+
+    final totalQuery = ref
+        .read(itemCollectionRefProvider(groupId: groupId))
+        .where('wishRank', isGreaterThanOrEqualTo: query.minimumWishRank)
+        .orderBy(sortFieldName, descending: descending);
+
+    final totalCount = await totalQuery.count().get();
+
+    final snap = await ref
+        .read(itemCollectionRefProvider(groupId: groupId))
+        .where('wishRank', isGreaterThanOrEqualTo: query.minimumWishRank)
+        .orderBy(sortFieldName, descending: descending)
+        // ページング
+        .startAt([offset])
+        .limit(limit)
+        .get();
+
+    final items = await Future.wait(
+      snap.docs.map((e) async {
+        // 購入情報の取得
+        final purchase = await _purchaseRepository.fetchByItemId(
+          groupId: groupId,
+          itemId: e.id,
+        );
+
+        // 画像をURL化
+        final storage = ref.read(firebaseStorageProvider);
+        final imageUrls = await Future.wait<String>(
+          e
+                  .data()
+                  .imagesPath
+                  ?.map((path) => storage.ref(path).getDownloadURL())
+                  .toList() ??
+              List.empty(),
+        );
+
+        return e.data().toDomainModel(purchase: purchase, imageUrls: imageUrls);
+      }).toList(),
+    );
+    return PageInfo(items: items, totalCount: totalCount.count ?? 0);
+  }
 
   @override
   Stream<List<Item>> fetchByGroupId({required String groupId}) {

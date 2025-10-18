@@ -1,4 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/src/common/value_object/page_info.dart';
+import 'package:packages_domain/src/item/value_object/items_search_query.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entity/item.dart';
@@ -13,6 +16,14 @@ ItemRepository itemRepository(Ref ref) =>
 
 /// ほしい物を管理するリポジトリ
 abstract class ItemRepository {
+  // グループ内のほしいものを検索
+  Future<PageInfo<Item>> searchItems({
+    required int page,
+    required String groupId,
+    required AgeGroup ageGroup,
+    required ItemsSearchQuery query,
+  });
+
   /// グループ内のほしい物を取得
   Stream<List<Item>> fetchByGroupId({required String groupId});
 
@@ -54,8 +65,5 @@ abstract class ItemRepository {
   });
 
   /// ほしい物を削除
-  Future<void> delete({
-    required String groupId,
-    required String itemId,
-  });
+  Future<void> delete({required String groupId, required String itemId});
 }
