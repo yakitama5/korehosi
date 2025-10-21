@@ -1,14 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, duplicate_ignore
-
 part of 'purchase_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchaseHash() => r'e512a62242c81b3913a2ebb03884e2ac2e27ccba';
+String _$purchaseHash() => r'90815ef1adc4a742fd5c902a748d0667b15c6faa';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -81,7 +79,7 @@ class PurchaseFamily extends Family<AsyncValue<Purchase?>> {
 /// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [purchase].
-class PurchaseProvider extends StreamProvider<Purchase?> {
+class PurchaseProvider extends FutureProvider<Purchase?> {
   /// 購入情報
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
@@ -116,7 +114,7 @@ class PurchaseProvider extends StreamProvider<Purchase?> {
 
   @override
   Override overrideWith(
-    Stream<Purchase?> Function(PurchaseRef provider) create,
+    FutureOr<Purchase?> Function(PurchaseRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -134,7 +132,7 @@ class PurchaseProvider extends StreamProvider<Purchase?> {
   }
 
   @override
-  StreamProviderElement<Purchase?> createElement() {
+  FutureProviderElement<Purchase?> createElement() {
     return _PurchaseProviderElement(this);
   }
 
@@ -157,7 +155,7 @@ class PurchaseProvider extends StreamProvider<Purchase?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin PurchaseRef on StreamProviderRef<Purchase?> {
+mixin PurchaseRef on FutureProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
   String get groupId;
 
@@ -165,7 +163,7 @@ mixin PurchaseRef on StreamProviderRef<Purchase?> {
   String get itemId;
 }
 
-class _PurchaseProviderElement extends StreamProviderElement<Purchase?>
+class _PurchaseProviderElement extends FutureProviderElement<Purchase?>
     with PurchaseRef {
   _PurchaseProviderElement(super.provider);
 

@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, duplicate_ignore
-
 part of 'current_group_age_applicable_purchase_provider.dart';
 
 // **************************************************************************

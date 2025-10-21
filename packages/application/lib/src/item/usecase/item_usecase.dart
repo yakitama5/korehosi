@@ -4,7 +4,6 @@ import 'package:packages_application/group.dart';
 import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
-import 'package:packages_application/src/item/state/search_items_provider.dart';
 import 'package:packages_application/src/user/extension/user_mixin.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
 import 'package:packages_domain/common.dart';

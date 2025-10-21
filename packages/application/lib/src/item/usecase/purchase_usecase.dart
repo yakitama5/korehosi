@@ -18,7 +18,7 @@ class PurchaseUsecase with RunUsecaseMixin {
   final Ref ref;
 
   /// 購入情報の取得
-  Stream<Purchase?> fetchByItemId({
+  Future<Purchase?> fetchByItemId({
     required String groupId,
     required String itemId,
   }) => ref
@@ -26,7 +26,7 @@ class PurchaseUsecase with RunUsecaseMixin {
       .fetchByItemId(groupId: groupId, itemId: itemId);
 
   /// (子供参照用)購入情報の取得
-  Stream<Purchase?> fetchByItemIdForChild({
+  Future<Purchase?> fetchByItemIdForChild({
     required String groupId,
     required String itemId,
   }) => ref

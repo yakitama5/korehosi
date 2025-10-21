@@ -1,14 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: type=lint, duplicate_ignore
-
 part of 'child_view_purchase_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$childViewPurchaseHash() => r'29ce6a92a2e613c992d65f72961f75fdeb8127b7';
+String _$childViewPurchaseHash() => r'233d2a50c7ad3e4a077184757073a242e85bdfeb';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -86,7 +84,7 @@ class ChildViewPurchaseFamily extends Family<AsyncValue<Purchase?>> {
 /// データの参照頻度を減らすため、`keepAlive`を指定
 ///
 /// Copied from [childViewPurchase].
-class ChildViewPurchaseProvider extends StreamProvider<Purchase?> {
+class ChildViewPurchaseProvider extends FutureProvider<Purchase?> {
   /// (子供参照用)購入情報
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
@@ -126,7 +124,7 @@ class ChildViewPurchaseProvider extends StreamProvider<Purchase?> {
 
   @override
   Override overrideWith(
-    Stream<Purchase?> Function(ChildViewPurchaseRef provider) create,
+    FutureOr<Purchase?> Function(ChildViewPurchaseRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -144,7 +142,7 @@ class ChildViewPurchaseProvider extends StreamProvider<Purchase?> {
   }
 
   @override
-  StreamProviderElement<Purchase?> createElement() {
+  FutureProviderElement<Purchase?> createElement() {
     return _ChildViewPurchaseProviderElement(this);
   }
 
@@ -167,7 +165,7 @@ class ChildViewPurchaseProvider extends StreamProvider<Purchase?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ChildViewPurchaseRef on StreamProviderRef<Purchase?> {
+mixin ChildViewPurchaseRef on FutureProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
   String get groupId;
 
@@ -175,7 +173,7 @@ mixin ChildViewPurchaseRef on StreamProviderRef<Purchase?> {
   String get itemId;
 }
 
-class _ChildViewPurchaseProviderElement extends StreamProviderElement<Purchase?>
+class _ChildViewPurchaseProviderElement extends FutureProviderElement<Purchase?>
     with ChildViewPurchaseRef {
   _ChildViewPurchaseProviderElement(super.provider);
 
