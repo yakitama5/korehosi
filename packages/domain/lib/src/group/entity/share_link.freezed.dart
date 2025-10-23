@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ShareLink {
 
- String get id; String get groupId; int get validDays; DateTime get createdAt; DateTime get updatedAt;
+ ShareLinkId get id; GroupId get groupId; int get validDays; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of ShareLink
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $ShareLinkCopyWith<$Res>  {
   factory $ShareLinkCopyWith(ShareLink value, $Res Function(ShareLink) _then) = _$ShareLinkCopyWithImpl;
 @useResult
 $Res call({
- String id, String groupId, int validDays, DateTime createdAt, DateTime updatedAt
+ ShareLinkId id, GroupId groupId, int validDays, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -65,8 +65,8 @@ class _$ShareLinkCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? groupId = null,Object? validDays = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
-as String,validDays: null == validDays ? _self.validDays : validDays // ignore: cast_nullable_to_non_nullable
+as ShareLinkId,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
+as GroupId,validDays: null == validDays ? _self.validDays : validDays // ignore: cast_nullable_to_non_nullable
 as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
@@ -154,7 +154,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String groupId,  int validDays,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ShareLinkId id,  GroupId groupId,  int validDays,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ShareLink() when $default != null:
 return $default(_that.id,_that.groupId,_that.validDays,_that.createdAt,_that.updatedAt);case _:
@@ -175,7 +175,7 @@ return $default(_that.id,_that.groupId,_that.validDays,_that.createdAt,_that.upd
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String groupId,  int validDays,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ShareLinkId id,  GroupId groupId,  int validDays,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _ShareLink():
 return $default(_that.id,_that.groupId,_that.validDays,_that.createdAt,_that.updatedAt);case _:
@@ -195,7 +195,7 @@ return $default(_that.id,_that.groupId,_that.validDays,_that.createdAt,_that.upd
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String groupId,  int validDays,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ShareLinkId id,  GroupId groupId,  int validDays,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _ShareLink() when $default != null:
 return $default(_that.id,_that.groupId,_that.validDays,_that.createdAt,_that.updatedAt);case _:
@@ -213,8 +213,8 @@ class _ShareLink implements ShareLink {
   const _ShareLink({required this.id, required this.groupId, required this.validDays, required this.createdAt, required this.updatedAt});
   
 
-@override final  String id;
-@override final  String groupId;
+@override final  ShareLinkId id;
+@override final  GroupId groupId;
 @override final  int validDays;
 @override final  DateTime createdAt;
 @override final  DateTime updatedAt;
@@ -249,7 +249,7 @@ abstract mixin class _$ShareLinkCopyWith<$Res> implements $ShareLinkCopyWith<$Re
   factory _$ShareLinkCopyWith(_ShareLink value, $Res Function(_ShareLink) _then) = __$ShareLinkCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String groupId, int validDays, DateTime createdAt, DateTime updatedAt
+ ShareLinkId id, GroupId groupId, int validDays, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -269,8 +269,8 @@ class __$ShareLinkCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? groupId = null,Object? validDays = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_ShareLink(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
-as String,validDays: null == validDays ? _self.validDays : validDays // ignore: cast_nullable_to_non_nullable
+as ShareLinkId,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
+as GroupId,validDays: null == validDays ? _self.validDays : validDays // ignore: cast_nullable_to_non_nullable
 as int,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime,

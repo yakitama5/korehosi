@@ -11,33 +11,30 @@ part of 'group_message.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$GroupMessage {
 
- String get id; String get title; String get body; NotificationTarget get target; NotificationEvent get event; String? get path; String get uid; DateTime? get createdAt; DateTime? get updatedAt;
+ GroupMessageId get id; String get title; String get body; NotificationTarget get target; NotificationEvent get event; String? get path; UserId get userId; DateTime? get createdAt; DateTime? get updatedAt;
 /// Create a copy of GroupMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $GroupMessageCopyWith<GroupMessage> get copyWith => _$GroupMessageCopyWithImpl<GroupMessage>(this as GroupMessage, _$identity);
 
-  /// Serializes this GroupMessage to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GroupMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.target, target) || other.target == target)&&(identical(other.event, event) || other.event == event)&&(identical(other.path, path) || other.path == path)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GroupMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.target, target) || other.target == target)&&(identical(other.event, event) || other.event == event)&&(identical(other.path, path) || other.path == path)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,id,title,body,target,event,path,uid,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,title,body,target,event,path,userId,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'GroupMessage(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'GroupMessage(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, userId: $userId, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -48,7 +45,7 @@ abstract mixin class $GroupMessageCopyWith<$Res>  {
   factory $GroupMessageCopyWith(GroupMessage value, $Res Function(GroupMessage) _then) = _$GroupMessageCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, String body, NotificationTarget target, NotificationEvent event, String? path, String uid, DateTime? createdAt, DateTime? updatedAt
+ GroupMessageId id, String title, String body, NotificationTarget target, NotificationEvent event, String? path, UserId userId, DateTime? createdAt, DateTime? updatedAt
 });
 
 
@@ -65,16 +62,16 @@ class _$GroupMessageCopyWithImpl<$Res>
 
 /// Create a copy of GroupMessage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? body = null,Object? target = null,Object? event = null,Object? path = freezed,Object? uid = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? body = null,Object? target = null,Object? event = null,Object? path = freezed,Object? userId = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as GroupMessageId,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
 as String,target: null == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
 as NotificationTarget,event: null == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
 as NotificationEvent,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
-as String?,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as UserId,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));
@@ -161,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  String body,  NotificationTarget target,  NotificationEvent event,  String? path,  String uid,  DateTime? createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( GroupMessageId id,  String title,  String body,  NotificationTarget target,  NotificationEvent event,  String? path,  UserId userId,  DateTime? createdAt,  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GroupMessage() when $default != null:
-return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.path,_that.uid,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.path,_that.userId,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -182,10 +179,10 @@ return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.p
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  String body,  NotificationTarget target,  NotificationEvent event,  String? path,  String uid,  DateTime? createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( GroupMessageId id,  String title,  String body,  NotificationTarget target,  NotificationEvent event,  String? path,  UserId userId,  DateTime? createdAt,  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _GroupMessage():
-return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.path,_that.uid,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.path,_that.userId,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +199,10 @@ return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.p
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  String body,  NotificationTarget target,  NotificationEvent event,  String? path,  String uid,  DateTime? createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( GroupMessageId id,  String title,  String body,  NotificationTarget target,  NotificationEvent event,  String? path,  UserId userId,  DateTime? createdAt,  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _GroupMessage() when $default != null:
-return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.path,_that.uid,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.path,_that.userId,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -214,19 +211,19 @@ return $default(_that.id,_that.title,_that.body,_that.target,_that.event,_that.p
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _GroupMessage implements GroupMessage {
-  const _GroupMessage({required this.id, required this.title, required this.body, required this.target, required this.event, this.path, required this.uid, this.createdAt, this.updatedAt});
-  factory _GroupMessage.fromJson(Map<String, dynamic> json) => _$GroupMessageFromJson(json);
+  const _GroupMessage({required this.id, required this.title, required this.body, required this.target, required this.event, this.path, required this.userId, this.createdAt, this.updatedAt});
+  
 
-@override final  String id;
+@override final  GroupMessageId id;
 @override final  String title;
 @override final  String body;
 @override final  NotificationTarget target;
 @override final  NotificationEvent event;
 @override final  String? path;
-@override final  String uid;
+@override final  UserId userId;
 @override final  DateTime? createdAt;
 @override final  DateTime? updatedAt;
 
@@ -236,23 +233,20 @@ class _GroupMessage implements GroupMessage {
 @pragma('vm:prefer-inline')
 _$GroupMessageCopyWith<_GroupMessage> get copyWith => __$GroupMessageCopyWithImpl<_GroupMessage>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$GroupMessageToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GroupMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.target, target) || other.target == target)&&(identical(other.event, event) || other.event == event)&&(identical(other.path, path) || other.path == path)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GroupMessage&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.body, body) || other.body == body)&&(identical(other.target, target) || other.target == target)&&(identical(other.event, event) || other.event == event)&&(identical(other.path, path) || other.path == path)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,id,title,body,target,event,path,uid,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,title,body,target,event,path,userId,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'GroupMessage(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, uid: $uid, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'GroupMessage(id: $id, title: $title, body: $body, target: $target, event: $event, path: $path, userId: $userId, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -263,7 +257,7 @@ abstract mixin class _$GroupMessageCopyWith<$Res> implements $GroupMessageCopyWi
   factory _$GroupMessageCopyWith(_GroupMessage value, $Res Function(_GroupMessage) _then) = __$GroupMessageCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, String body, NotificationTarget target, NotificationEvent event, String? path, String uid, DateTime? createdAt, DateTime? updatedAt
+ GroupMessageId id, String title, String body, NotificationTarget target, NotificationEvent event, String? path, UserId userId, DateTime? createdAt, DateTime? updatedAt
 });
 
 
@@ -280,16 +274,16 @@ class __$GroupMessageCopyWithImpl<$Res>
 
 /// Create a copy of GroupMessage
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? body = null,Object? target = null,Object? event = null,Object? path = freezed,Object? uid = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? body = null,Object? target = null,Object? event = null,Object? path = freezed,Object? userId = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(_GroupMessage(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as GroupMessageId,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
 as String,target: null == target ? _self.target : target // ignore: cast_nullable_to_non_nullable
 as NotificationTarget,event: null == event ? _self.event : event // ignore: cast_nullable_to_non_nullable
 as NotificationEvent,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
-as String?,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as UserId,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,
   ));

@@ -3,13 +3,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../value_object/purchase_status.dart';
 
 part 'purchase.freezed.dart';
-part 'purchase.g.dart';
+
+extension type PurchaseId(String value) {}
 
 /// ほしい物の購入情報
 @freezed
 abstract class Purchase with _$Purchase {
   const factory Purchase({
-    required String id,
+    required PurchaseId id,
     int? price,
     String? buyerName,
     DateTime? planDate,
@@ -20,9 +21,6 @@ abstract class Purchase with _$Purchase {
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _Purchase;
-
-  factory Purchase.fromJson(Map<String, dynamic> json) =>
-      _$PurchaseFromJson(json);
 }
 
 /// ほしい物の購入情報を利用しやすい形にするための拡張

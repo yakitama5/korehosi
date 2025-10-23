@@ -11,19 +11,16 @@ part of 'group.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$Group {
 
- String get id; String get name; List<String> get joinUids; String get ownerUid; int? get itemCount; bool get premium; DateTime get createdAt; DateTime get updatedAt;
+ GroupId get id; String get name; List<UserId> get joinUids; UserId get ownerUid; int? get itemCount; bool get premium; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of Group
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $GroupCopyWith<Group> get copyWith => _$GroupCopyWithImpl<Group>(this as Group, _$identity);
 
-  /// Serializes this Group to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -31,7 +28,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Group&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.joinUids, joinUids)&&(identical(other.ownerUid, ownerUid) || other.ownerUid == ownerUid)&&(identical(other.itemCount, itemCount) || other.itemCount == itemCount)&&(identical(other.premium, premium) || other.premium == premium)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(joinUids),ownerUid,itemCount,premium,createdAt,updatedAt);
 
@@ -48,7 +45,7 @@ abstract mixin class $GroupCopyWith<$Res>  {
   factory $GroupCopyWith(Group value, $Res Function(Group) _then) = _$GroupCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, List<String> joinUids, String ownerUid, int? itemCount, bool premium, DateTime createdAt, DateTime updatedAt
+ GroupId id, String name, List<UserId> joinUids, UserId ownerUid, int? itemCount, bool premium, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -68,10 +65,10 @@ class _$GroupCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? joinUids = null,Object? ownerUid = null,Object? itemCount = freezed,Object? premium = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as GroupId,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,joinUids: null == joinUids ? _self.joinUids : joinUids // ignore: cast_nullable_to_non_nullable
-as List<String>,ownerUid: null == ownerUid ? _self.ownerUid : ownerUid // ignore: cast_nullable_to_non_nullable
-as String,itemCount: freezed == itemCount ? _self.itemCount : itemCount // ignore: cast_nullable_to_non_nullable
+as List<UserId>,ownerUid: null == ownerUid ? _self.ownerUid : ownerUid // ignore: cast_nullable_to_non_nullable
+as UserId,itemCount: freezed == itemCount ? _self.itemCount : itemCount // ignore: cast_nullable_to_non_nullable
 as int?,premium: null == premium ? _self.premium : premium // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -160,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  List<String> joinUids,  String ownerUid,  int? itemCount,  bool premium,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( GroupId id,  String name,  List<UserId> joinUids,  UserId ownerUid,  int? itemCount,  bool premium,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Group() when $default != null:
 return $default(_that.id,_that.name,_that.joinUids,_that.ownerUid,_that.itemCount,_that.premium,_that.createdAt,_that.updatedAt);case _:
@@ -181,7 +178,7 @@ return $default(_that.id,_that.name,_that.joinUids,_that.ownerUid,_that.itemCoun
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  List<String> joinUids,  String ownerUid,  int? itemCount,  bool premium,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( GroupId id,  String name,  List<UserId> joinUids,  UserId ownerUid,  int? itemCount,  bool premium,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Group():
 return $default(_that.id,_that.name,_that.joinUids,_that.ownerUid,_that.itemCount,_that.premium,_that.createdAt,_that.updatedAt);case _:
@@ -201,7 +198,7 @@ return $default(_that.id,_that.name,_that.joinUids,_that.ownerUid,_that.itemCoun
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  List<String> joinUids,  String ownerUid,  int? itemCount,  bool premium,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( GroupId id,  String name,  List<UserId> joinUids,  UserId ownerUid,  int? itemCount,  bool premium,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Group() when $default != null:
 return $default(_that.id,_that.name,_that.joinUids,_that.ownerUid,_that.itemCount,_that.premium,_that.createdAt,_that.updatedAt);case _:
@@ -213,22 +210,22 @@ return $default(_that.id,_that.name,_that.joinUids,_that.ownerUid,_that.itemCoun
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _Group implements Group {
-  const _Group({required this.id, required this.name, required final  List<String> joinUids, required this.ownerUid, this.itemCount, required this.premium, required this.createdAt, required this.updatedAt}): _joinUids = joinUids;
-  factory _Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
+  const _Group({required this.id, required this.name, required final  List<UserId> joinUids, required this.ownerUid, this.itemCount, required this.premium, required this.createdAt, required this.updatedAt}): _joinUids = joinUids;
+  
 
-@override final  String id;
+@override final  GroupId id;
 @override final  String name;
- final  List<String> _joinUids;
-@override List<String> get joinUids {
+ final  List<UserId> _joinUids;
+@override List<UserId> get joinUids {
   if (_joinUids is EqualUnmodifiableListView) return _joinUids;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_joinUids);
 }
 
-@override final  String ownerUid;
+@override final  UserId ownerUid;
 @override final  int? itemCount;
 @override final  bool premium;
 @override final  DateTime createdAt;
@@ -240,17 +237,14 @@ class _Group implements Group {
 @pragma('vm:prefer-inline')
 _$GroupCopyWith<_Group> get copyWith => __$GroupCopyWithImpl<_Group>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$GroupToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Group&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._joinUids, _joinUids)&&(identical(other.ownerUid, ownerUid) || other.ownerUid == ownerUid)&&(identical(other.itemCount, itemCount) || other.itemCount == itemCount)&&(identical(other.premium, premium) || other.premium == premium)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(_joinUids),ownerUid,itemCount,premium,createdAt,updatedAt);
 
@@ -267,7 +261,7 @@ abstract mixin class _$GroupCopyWith<$Res> implements $GroupCopyWith<$Res> {
   factory _$GroupCopyWith(_Group value, $Res Function(_Group) _then) = __$GroupCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, List<String> joinUids, String ownerUid, int? itemCount, bool premium, DateTime createdAt, DateTime updatedAt
+ GroupId id, String name, List<UserId> joinUids, UserId ownerUid, int? itemCount, bool premium, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -287,10 +281,10 @@ class __$GroupCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? joinUids = null,Object? ownerUid = null,Object? itemCount = freezed,Object? premium = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_Group(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as GroupId,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,joinUids: null == joinUids ? _self._joinUids : joinUids // ignore: cast_nullable_to_non_nullable
-as List<String>,ownerUid: null == ownerUid ? _self.ownerUid : ownerUid // ignore: cast_nullable_to_non_nullable
-as String,itemCount: freezed == itemCount ? _self.itemCount : itemCount // ignore: cast_nullable_to_non_nullable
+as List<UserId>,ownerUid: null == ownerUid ? _self.ownerUid : ownerUid // ignore: cast_nullable_to_non_nullable
+as UserId,itemCount: freezed == itemCount ? _self.itemCount : itemCount // ignore: cast_nullable_to_non_nullable
 as int?,premium: null == premium ? _self.premium : premium // ignore: cast_nullable_to_non_nullable
 as bool,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable

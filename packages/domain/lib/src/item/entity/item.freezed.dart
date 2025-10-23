@@ -11,33 +11,30 @@ part of 'item.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$Item {
 
- String get id; List<String>? get imageUrls; String get name; String? get wanterName; double get wishRank; String? get wishSeason; List<String>? get urls; String? get memo; Purchase? get purchase; DateTime get createdAt; DateTime get updatedAt;
+ ItemId get id; List<ItemImage>? get images; String get name; String? get wanterName; double get wishRank; String? get wishSeason; List<String>? get urls; String? get memo; Purchase? get purchase; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $ItemCopyWith<Item> get copyWith => _$ItemCopyWithImpl<Item>(this as Item, _$identity);
 
-  /// Serializes this Item to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.imageUrls, imageUrls)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&const DeepCollectionEquality().equals(other.urls, urls)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchase, purchase) || other.purchase == purchase)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.images, images)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&const DeepCollectionEquality().equals(other.urls, urls)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchase, purchase) || other.purchase == purchase)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(imageUrls),name,wanterName,wishRank,wishSeason,const DeepCollectionEquality().hash(urls),memo,purchase,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(images),name,wanterName,wishRank,wishSeason,const DeepCollectionEquality().hash(urls),memo,purchase,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Item(id: $id, imageUrls: $imageUrls, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, urls: $urls, memo: $memo, purchase: $purchase, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Item(id: $id, images: $images, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, urls: $urls, memo: $memo, purchase: $purchase, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -48,7 +45,7 @@ abstract mixin class $ItemCopyWith<$Res>  {
   factory $ItemCopyWith(Item value, $Res Function(Item) _then) = _$ItemCopyWithImpl;
 @useResult
 $Res call({
- String id, List<String>? imageUrls, String name, String? wanterName, double wishRank, String? wishSeason, List<String>? urls, String? memo, Purchase? purchase, DateTime createdAt, DateTime updatedAt
+ ItemId id, List<ItemImage>? images, String name, String? wanterName, double wishRank, String? wishSeason, List<String>? urls, String? memo, Purchase? purchase, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -65,11 +62,11 @@ class _$ItemCopyWithImpl<$Res>
 
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? imageUrls = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? urls = freezed,Object? memo = freezed,Object? purchase = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? images = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? urls = freezed,Object? memo = freezed,Object? purchase = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,imageUrls: freezed == imageUrls ? _self.imageUrls : imageUrls // ignore: cast_nullable_to_non_nullable
-as List<String>?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as ItemId,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
+as List<ItemImage>?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,wanterName: freezed == wanterName ? _self.wanterName : wanterName // ignore: cast_nullable_to_non_nullable
 as String?,wishRank: null == wishRank ? _self.wishRank : wishRank // ignore: cast_nullable_to_non_nullable
 as double,wishSeason: freezed == wishSeason ? _self.wishSeason : wishSeason // ignore: cast_nullable_to_non_nullable
@@ -175,10 +172,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  List<String>? imageUrls,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  String? memo,  Purchase? purchase,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ItemId id,  List<ItemImage>? images,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  String? memo,  Purchase? purchase,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Item() when $default != null:
-return $default(_that.id,_that.imageUrls,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.memo,_that.purchase,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.images,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.memo,_that.purchase,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -196,10 +193,10 @@ return $default(_that.id,_that.imageUrls,_that.name,_that.wanterName,_that.wishR
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  List<String>? imageUrls,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  String? memo,  Purchase? purchase,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ItemId id,  List<ItemImage>? images,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  String? memo,  Purchase? purchase,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Item():
-return $default(_that.id,_that.imageUrls,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.memo,_that.purchase,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.images,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.memo,_that.purchase,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -216,10 +213,10 @@ return $default(_that.id,_that.imageUrls,_that.name,_that.wanterName,_that.wishR
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  List<String>? imageUrls,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  String? memo,  Purchase? purchase,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ItemId id,  List<ItemImage>? images,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  String? memo,  Purchase? purchase,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Item() when $default != null:
-return $default(_that.id,_that.imageUrls,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.memo,_that.purchase,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.images,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.memo,_that.purchase,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -228,18 +225,18 @@ return $default(_that.id,_that.imageUrls,_that.name,_that.wanterName,_that.wishR
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _Item implements Item {
-  const _Item({required this.id, final  List<String>? imageUrls, required this.name, this.wanterName, required this.wishRank, this.wishSeason, final  List<String>? urls, this.memo, this.purchase, required this.createdAt, required this.updatedAt}): _imageUrls = imageUrls,_urls = urls;
-  factory _Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
+  const _Item({required this.id, final  List<ItemImage>? images, required this.name, this.wanterName, required this.wishRank, this.wishSeason, final  List<String>? urls, this.memo, this.purchase, required this.createdAt, required this.updatedAt}): _images = images,_urls = urls;
+  
 
-@override final  String id;
- final  List<String>? _imageUrls;
-@override List<String>? get imageUrls {
-  final value = _imageUrls;
+@override final  ItemId id;
+ final  List<ItemImage>? _images;
+@override List<ItemImage>? get images {
+  final value = _images;
   if (value == null) return null;
-  if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+  if (_images is EqualUnmodifiableListView) return _images;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(value);
 }
@@ -268,23 +265,20 @@ class _Item implements Item {
 @pragma('vm:prefer-inline')
 _$ItemCopyWith<_Item> get copyWith => __$ItemCopyWithImpl<_Item>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$ItemToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._imageUrls, _imageUrls)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&const DeepCollectionEquality().equals(other._urls, _urls)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchase, purchase) || other.purchase == purchase)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._images, _images)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&const DeepCollectionEquality().equals(other._urls, _urls)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchase, purchase) || other.purchase == purchase)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_imageUrls),name,wanterName,wishRank,wishSeason,const DeepCollectionEquality().hash(_urls),memo,purchase,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_images),name,wanterName,wishRank,wishSeason,const DeepCollectionEquality().hash(_urls),memo,purchase,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'Item(id: $id, imageUrls: $imageUrls, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, urls: $urls, memo: $memo, purchase: $purchase, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'Item(id: $id, images: $images, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, urls: $urls, memo: $memo, purchase: $purchase, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -295,7 +289,7 @@ abstract mixin class _$ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
   factory _$ItemCopyWith(_Item value, $Res Function(_Item) _then) = __$ItemCopyWithImpl;
 @override @useResult
 $Res call({
- String id, List<String>? imageUrls, String name, String? wanterName, double wishRank, String? wishSeason, List<String>? urls, String? memo, Purchase? purchase, DateTime createdAt, DateTime updatedAt
+ ItemId id, List<ItemImage>? images, String name, String? wanterName, double wishRank, String? wishSeason, List<String>? urls, String? memo, Purchase? purchase, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -312,11 +306,11 @@ class __$ItemCopyWithImpl<$Res>
 
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? imageUrls = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? urls = freezed,Object? memo = freezed,Object? purchase = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? images = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? urls = freezed,Object? memo = freezed,Object? purchase = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_Item(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,imageUrls: freezed == imageUrls ? _self._imageUrls : imageUrls // ignore: cast_nullable_to_non_nullable
-as List<String>?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as ItemId,images: freezed == images ? _self._images : images // ignore: cast_nullable_to_non_nullable
+as List<ItemImage>?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,wanterName: freezed == wanterName ? _self.wanterName : wanterName // ignore: cast_nullable_to_non_nullable
 as String?,wishRank: null == wishRank ? _self.wishRank : wishRank // ignore: cast_nullable_to_non_nullable
 as double,wishSeason: freezed == wishSeason ? _self.wishSeason : wishSeason // ignore: cast_nullable_to_non_nullable

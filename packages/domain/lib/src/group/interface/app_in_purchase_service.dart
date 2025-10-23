@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entity/app_in_purchase_product.dart';
@@ -8,7 +9,7 @@ part 'app_in_purchase_service.g.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 @Riverpod(keepAlive: true)
 AppInPurchaseService appInPurchaseService(Ref ref) =>
-// アプリ起動時 or テスト時に `override` することを前提に利用
+    // アプリ起動時 or テスト時に `override` することを前提に利用
     throw UnimplementedError();
 
 /// アプリ内課金を提供するサービス
@@ -20,7 +21,7 @@ abstract class AppInPurchaseService {
   Future<void> purchaseLimitedReleasePlan();
 
   /// サインイン
-  Future<void> signIn({required String userId});
+  Future<void> signIn({required UserId userId});
 
   /// サインアウト
   Future<void> signOut();

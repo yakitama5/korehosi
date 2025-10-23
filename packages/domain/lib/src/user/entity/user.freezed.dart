@@ -11,19 +11,16 @@ part of 'user.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$User {
 
- String get id; AgeGroup get ageGroup; String? get name; List<String>? get joinGroupIds; DateTime get createdAt; DateTime get updatedAt;
+ UserId get id; AgeGroup get ageGroup; String? get name; List<String>? get joinGroupIds; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$identity);
 
-  /// Serializes this User to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -31,7 +28,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.id, id) || other.id == id)&&(identical(other.ageGroup, ageGroup) || other.ageGroup == ageGroup)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.joinGroupIds, joinGroupIds)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,ageGroup,name,const DeepCollectionEquality().hash(joinGroupIds),createdAt,updatedAt);
 
@@ -48,7 +45,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String id, AgeGroup ageGroup, String? name, List<String>? joinGroupIds, DateTime createdAt, DateTime updatedAt
+ UserId id, AgeGroup ageGroup, String? name, List<String>? joinGroupIds, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -68,7 +65,7 @@ class _$UserCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? ageGroup = null,Object? name = freezed,Object? joinGroupIds = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,ageGroup: null == ageGroup ? _self.ageGroup : ageGroup // ignore: cast_nullable_to_non_nullable
+as UserId,ageGroup: null == ageGroup ? _self.ageGroup : ageGroup // ignore: cast_nullable_to_non_nullable
 as AgeGroup,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,joinGroupIds: freezed == joinGroupIds ? _self.joinGroupIds : joinGroupIds // ignore: cast_nullable_to_non_nullable
 as List<String>?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -158,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserId id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.createdAt,_that.updatedAt);case _:
@@ -179,7 +176,7 @@ return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.crea
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserId id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _User():
 return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.createdAt,_that.updatedAt);case _:
@@ -199,7 +196,7 @@ return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.crea
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserId id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.createdAt,_that.updatedAt);case _:
@@ -211,13 +208,13 @@ return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.crea
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _User implements User {
   const _User({required this.id, required this.ageGroup, this.name, final  List<String>? joinGroupIds, required this.createdAt, required this.updatedAt}): _joinGroupIds = joinGroupIds;
-  factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  
 
-@override final  String id;
+@override final  UserId id;
 @override final  AgeGroup ageGroup;
 @override final  String? name;
  final  List<String>? _joinGroupIds;
@@ -238,17 +235,14 @@ class _User implements User {
 @pragma('vm:prefer-inline')
 _$UserCopyWith<_User> get copyWith => __$UserCopyWithImpl<_User>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$UserToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.id, id) || other.id == id)&&(identical(other.ageGroup, ageGroup) || other.ageGroup == ageGroup)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._joinGroupIds, _joinGroupIds)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,ageGroup,name,const DeepCollectionEquality().hash(_joinGroupIds),createdAt,updatedAt);
 
@@ -265,7 +259,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String id, AgeGroup ageGroup, String? name, List<String>? joinGroupIds, DateTime createdAt, DateTime updatedAt
+ UserId id, AgeGroup ageGroup, String? name, List<String>? joinGroupIds, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -285,7 +279,7 @@ class __$UserCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? ageGroup = null,Object? name = freezed,Object? joinGroupIds = freezed,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_User(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,ageGroup: null == ageGroup ? _self.ageGroup : ageGroup // ignore: cast_nullable_to_non_nullable
+as UserId,ageGroup: null == ageGroup ? _self.ageGroup : ageGroup // ignore: cast_nullable_to_non_nullable
 as AgeGroup,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,joinGroupIds: freezed == joinGroupIds ? _self._joinGroupIds : joinGroupIds // ignore: cast_nullable_to_non_nullable
 as List<String>?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable

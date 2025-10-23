@@ -11,19 +11,16 @@ part of 'notification_message.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$NotificationMessage {
 
- String? get senderId; String? get category; Map<String, dynamic> get data; String? get from; String? get messageId; String? get messageType;
+ UserId? get senderId; String? get category; Map<String, dynamic> get data; String? get from; GroupMessageId? get messageId; String? get messageType;
 /// Create a copy of NotificationMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $NotificationMessageCopyWith<NotificationMessage> get copyWith => _$NotificationMessageCopyWithImpl<NotificationMessage>(this as NotificationMessage, _$identity);
 
-  /// Serializes this NotificationMessage to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -31,7 +28,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,senderId,category,const DeepCollectionEquality().hash(data),from,messageId,messageType);
 
@@ -48,7 +45,7 @@ abstract mixin class $NotificationMessageCopyWith<$Res>  {
   factory $NotificationMessageCopyWith(NotificationMessage value, $Res Function(NotificationMessage) _then) = _$NotificationMessageCopyWithImpl;
 @useResult
 $Res call({
- String? senderId, String? category, Map<String, dynamic> data, String? from, String? messageId, String? messageType
+ UserId? senderId, String? category, Map<String, dynamic> data, String? from, GroupMessageId? messageId, String? messageType
 });
 
 
@@ -68,11 +65,11 @@ class _$NotificationMessageCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? senderId = freezed,Object? category = freezed,Object? data = null,Object? from = freezed,Object? messageId = freezed,Object? messageType = freezed,}) {
   return _then(_self.copyWith(
 senderId: freezed == senderId ? _self.senderId : senderId // ignore: cast_nullable_to_non_nullable
-as String?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as UserId?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String?,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,from: freezed == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
 as String?,messageId: freezed == messageId ? _self.messageId : messageId // ignore: cast_nullable_to_non_nullable
-as String?,messageType: freezed == messageType ? _self.messageType : messageType // ignore: cast_nullable_to_non_nullable
+as GroupMessageId?,messageType: freezed == messageType ? _self.messageType : messageType // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -158,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? senderId,  String? category,  Map<String, dynamic> data,  String? from,  String? messageId,  String? messageType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserId? senderId,  String? category,  Map<String, dynamic> data,  String? from,  GroupMessageId? messageId,  String? messageType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NotificationMessage() when $default != null:
 return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messageId,_that.messageType);case _:
@@ -179,7 +176,7 @@ return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messag
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? senderId,  String? category,  Map<String, dynamic> data,  String? from,  String? messageId,  String? messageType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserId? senderId,  String? category,  Map<String, dynamic> data,  String? from,  GroupMessageId? messageId,  String? messageType)  $default,) {final _that = this;
 switch (_that) {
 case _NotificationMessage():
 return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messageId,_that.messageType);case _:
@@ -199,7 +196,7 @@ return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messag
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? senderId,  String? category,  Map<String, dynamic> data,  String? from,  String? messageId,  String? messageType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserId? senderId,  String? category,  Map<String, dynamic> data,  String? from,  GroupMessageId? messageId,  String? messageType)?  $default,) {final _that = this;
 switch (_that) {
 case _NotificationMessage() when $default != null:
 return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messageId,_that.messageType);case _:
@@ -211,13 +208,13 @@ return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messag
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _NotificationMessage implements NotificationMessage {
   const _NotificationMessage({this.senderId, this.category, required final  Map<String, dynamic> data, this.from, this.messageId, this.messageType}): _data = data;
-  factory _NotificationMessage.fromJson(Map<String, dynamic> json) => _$NotificationMessageFromJson(json);
+  
 
-@override final  String? senderId;
+@override final  UserId? senderId;
 @override final  String? category;
  final  Map<String, dynamic> _data;
 @override Map<String, dynamic> get data {
@@ -227,7 +224,7 @@ class _NotificationMessage implements NotificationMessage {
 }
 
 @override final  String? from;
-@override final  String? messageId;
+@override final  GroupMessageId? messageId;
 @override final  String? messageType;
 
 /// Create a copy of NotificationMessage
@@ -236,17 +233,14 @@ class _NotificationMessage implements NotificationMessage {
 @pragma('vm:prefer-inline')
 _$NotificationMessageCopyWith<_NotificationMessage> get copyWith => __$NotificationMessageCopyWithImpl<_NotificationMessage>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$NotificationMessageToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,senderId,category,const DeepCollectionEquality().hash(_data),from,messageId,messageType);
 
@@ -263,7 +257,7 @@ abstract mixin class _$NotificationMessageCopyWith<$Res> implements $Notificatio
   factory _$NotificationMessageCopyWith(_NotificationMessage value, $Res Function(_NotificationMessage) _then) = __$NotificationMessageCopyWithImpl;
 @override @useResult
 $Res call({
- String? senderId, String? category, Map<String, dynamic> data, String? from, String? messageId, String? messageType
+ UserId? senderId, String? category, Map<String, dynamic> data, String? from, GroupMessageId? messageId, String? messageType
 });
 
 
@@ -283,11 +277,11 @@ class __$NotificationMessageCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? senderId = freezed,Object? category = freezed,Object? data = null,Object? from = freezed,Object? messageId = freezed,Object? messageType = freezed,}) {
   return _then(_NotificationMessage(
 senderId: freezed == senderId ? _self.senderId : senderId // ignore: cast_nullable_to_non_nullable
-as String?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as UserId?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String?,data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,from: freezed == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
 as String?,messageId: freezed == messageId ? _self.messageId : messageId // ignore: cast_nullable_to_non_nullable
-as String?,messageType: freezed == messageType ? _self.messageType : messageType // ignore: cast_nullable_to_non_nullable
+as GroupMessageId?,messageType: freezed == messageType ? _self.messageType : messageType // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

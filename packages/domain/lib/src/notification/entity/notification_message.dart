@@ -1,20 +1,18 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/notification.dart';
+import 'package:packages_domain/user.dart';
 
 part 'notification_message.freezed.dart';
-part 'notification_message.g.dart';
 
 /// 通知メッセージ
 @freezed
 abstract class NotificationMessage with _$NotificationMessage {
   const factory NotificationMessage({
-    String? senderId,
+    UserId? senderId,
     String? category,
     required Map<String, dynamic> data,
     String? from,
-    String? messageId,
+    GroupMessageId? messageId,
     String? messageType,
   }) = _NotificationMessage;
-
-  factory NotificationMessage.fromJson(Map<String, dynamic> json) =>
-      _$NotificationMessageFromJson(json);
 }
