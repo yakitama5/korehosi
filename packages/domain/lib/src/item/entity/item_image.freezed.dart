@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ItemImage {
 
- ItemImageId get id; String get url;
+ ImageId get id; String get url;
 /// Create a copy of ItemImage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $ItemImageCopyWith<$Res>  {
   factory $ItemImageCopyWith(ItemImage value, $Res Function(ItemImage) _then) = _$ItemImageCopyWithImpl;
 @useResult
 $Res call({
- ItemImageId id, String url
+ ImageId id, String url
 });
 
 
@@ -65,7 +65,7 @@ class _$ItemImageCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? url = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as ItemImageId,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as ImageId,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -151,7 +151,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ItemImageId id,  String url)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ImageId id,  String url)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ItemImage() when $default != null:
 return $default(_that.id,_that.url);case _:
@@ -172,7 +172,7 @@ return $default(_that.id,_that.url);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ItemImageId id,  String url)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ImageId id,  String url)  $default,) {final _that = this;
 switch (_that) {
 case _ItemImage():
 return $default(_that.id,_that.url);case _:
@@ -192,7 +192,7 @@ return $default(_that.id,_that.url);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ItemImageId id,  String url)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ImageId id,  String url)?  $default,) {final _that = this;
 switch (_that) {
 case _ItemImage() when $default != null:
 return $default(_that.id,_that.url);case _:
@@ -210,7 +210,7 @@ class _ItemImage implements ItemImage {
   const _ItemImage({required this.id, required this.url});
   
 
-@override final  ItemImageId id;
+@override final  ImageId id;
 @override final  String url;
 
 /// Create a copy of ItemImage
@@ -243,7 +243,7 @@ abstract mixin class _$ItemImageCopyWith<$Res> implements $ItemImageCopyWith<$Re
   factory _$ItemImageCopyWith(_ItemImage value, $Res Function(_ItemImage) _then) = __$ItemImageCopyWithImpl;
 @override @useResult
 $Res call({
- ItemImageId id, String url
+ ImageId id, String url
 });
 
 
@@ -263,7 +263,7 @@ class __$ItemImageCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? url = null,}) {
   return _then(_ItemImage(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as ItemImageId,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as ImageId,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

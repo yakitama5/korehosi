@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- UserId get id; AgeGroup get ageGroup; String? get name; List<String>? get joinGroupIds; DateTime get createdAt; DateTime get updatedAt;
+ UserId get id; AgeGroup get ageGroup; String? get name; List<GroupId>? get joinGroupIds; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- UserId id, AgeGroup ageGroup, String? name, List<String>? joinGroupIds, DateTime createdAt, DateTime updatedAt
+ UserId id, AgeGroup ageGroup, String? name, List<GroupId>? joinGroupIds, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -68,7 +68,7 @@ id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as UserId,ageGroup: null == ageGroup ? _self.ageGroup : ageGroup // ignore: cast_nullable_to_non_nullable
 as AgeGroup,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,joinGroupIds: freezed == joinGroupIds ? _self.joinGroupIds : joinGroupIds // ignore: cast_nullable_to_non_nullable
-as List<String>?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as List<GroupId>?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));
@@ -155,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserId id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserId id,  AgeGroup ageGroup,  String? name,  List<GroupId>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.createdAt,_that.updatedAt);case _:
@@ -176,7 +176,7 @@ return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.crea
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserId id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserId id,  AgeGroup ageGroup,  String? name,  List<GroupId>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _User():
 return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.createdAt,_that.updatedAt);case _:
@@ -196,7 +196,7 @@ return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.crea
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserId id,  AgeGroup ageGroup,  String? name,  List<String>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserId id,  AgeGroup ageGroup,  String? name,  List<GroupId>? joinGroupIds,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
 return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.createdAt,_that.updatedAt);case _:
@@ -211,14 +211,14 @@ return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.crea
 
 
 class _User implements User {
-  const _User({required this.id, required this.ageGroup, this.name, final  List<String>? joinGroupIds, required this.createdAt, required this.updatedAt}): _joinGroupIds = joinGroupIds;
+  const _User({required this.id, required this.ageGroup, this.name, final  List<GroupId>? joinGroupIds, required this.createdAt, required this.updatedAt}): _joinGroupIds = joinGroupIds;
   
 
 @override final  UserId id;
 @override final  AgeGroup ageGroup;
 @override final  String? name;
- final  List<String>? _joinGroupIds;
-@override List<String>? get joinGroupIds {
+ final  List<GroupId>? _joinGroupIds;
+@override List<GroupId>? get joinGroupIds {
   final value = _joinGroupIds;
   if (value == null) return null;
   if (_joinGroupIds is EqualUnmodifiableListView) return _joinGroupIds;
@@ -259,7 +259,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- UserId id, AgeGroup ageGroup, String? name, List<String>? joinGroupIds, DateTime createdAt, DateTime updatedAt
+ UserId id, AgeGroup ageGroup, String? name, List<GroupId>? joinGroupIds, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -282,7 +282,7 @@ id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as UserId,ageGroup: null == ageGroup ? _self.ageGroup : ageGroup // ignore: cast_nullable_to_non_nullable
 as AgeGroup,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,joinGroupIds: freezed == joinGroupIds ? _self._joinGroupIds : joinGroupIds // ignore: cast_nullable_to_non_nullable
-as List<String>?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as List<GroupId>?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));
