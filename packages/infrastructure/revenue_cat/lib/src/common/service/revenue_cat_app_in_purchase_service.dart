@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
+import 'package:packages_domain/user.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 /// 欲しい物の登録数上限解除プロダクトのキー
@@ -31,7 +32,7 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
 
     // 変換
     return AppInPurchaseProduct(
-      id: package.storeProduct.identifier,
+      id: AppImPurchaseProductId(package.storeProduct.identifier),
       title: package.storeProduct.title,
       price: package.storeProduct.price,
     );
@@ -65,7 +66,8 @@ class RevenueCatAppInPurchaseService implements AppInPurchaseService {
   }
 
   @override
-  Future<void> signIn({required String userId}) => Purchases.logIn(userId);
+  Future<void> signIn({required UserId userId}) =>
+      Purchases.logIn(userId.value);
 
   @override
   Future<void> signOut() => Purchases.logOut();
