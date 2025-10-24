@@ -16,7 +16,7 @@ GroupRepository groupRepository(Ref ref) =>
 
 /// グループモデル および グループの共有に関するリポジトリ
 abstract class GroupRepository {
-  Stream<Group?> fetch({required String groupId});
+  Stream<Group?> fetch({required GroupId groupId});
 
   /// グループを追加
   Future<void> add({
@@ -31,7 +31,7 @@ abstract class GroupRepository {
   Future<void> update({required GroupId groupId, required String name});
 
   /// グループの削除
-  Future<void> delete({required String groupId});
+  Future<void> delete({required GroupId groupId});
 
   /// グループからの脱退
   Future<void> leave({required GroupId groupId, required UserId userId});

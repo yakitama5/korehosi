@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:packages_domain/notification.dart';
-import 'package:packages_domain/user.dart';
 
 part 'notification_message.freezed.dart';
 
