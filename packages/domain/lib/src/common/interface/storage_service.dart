@@ -17,6 +17,9 @@ abstract class StorageService {
   /// ダウンロードURLを生成する
   Future<String> downloadUrl(ImageId id);
 
+  /// 画像をダウンロードするを生成する
+  Future<XFile> downloadImage(ImageId id);
+
   /// 画像をアップロードする
-  Future<ImageId> uploadImage(ImageId? id, XFile xfile);
+  Future<ImageId> uploadImage(ImageId id, XFile xfile);
 }
