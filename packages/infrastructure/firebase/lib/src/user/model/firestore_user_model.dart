@@ -24,7 +24,7 @@ abstract class FirestoreUserModel with _$FirestoreUserModel {
 extension FirestoreUserModelX on FirestoreUserModel {
   /// ドメイン層への変換
   User toDomainModel() => User(
-    id: id,
+    id: UserId(id),
     ageGroup: ageGroup,
     name: name,
     joinGroupIds: joinGroupIds,

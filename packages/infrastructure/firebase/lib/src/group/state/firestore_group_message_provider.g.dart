@@ -9,7 +9,7 @@ part of 'firestore_group_message_provider.dart';
 // **************************************************************************
 
 String _$groupMessageCollectionRefHash() =>
-    r'e3f681953009c129a5be2ae02d88f14614582dc5';
+    r'e8e0f00fa9dd6f2367c52fec4be4ea8deb38cf7e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,7 +51,7 @@ class GroupMessageCollectionRefFamily
   /// 通知メッセージコレクションの参照
   ///
   /// Copied from [groupMessageCollectionRef].
-  GroupMessageCollectionRefProvider call({required String groupId}) {
+  GroupMessageCollectionRefProvider call({required GroupId groupId}) {
     return GroupMessageCollectionRefProvider(groupId: groupId);
   }
 
@@ -86,7 +86,7 @@ class GroupMessageCollectionRefProvider
   /// 通知メッセージコレクションの参照
   ///
   /// Copied from [groupMessageCollectionRef].
-  GroupMessageCollectionRefProvider({required String groupId})
+  GroupMessageCollectionRefProvider({required GroupId groupId})
     : this._internal(
         (ref) => groupMessageCollectionRef(
           ref as GroupMessageCollectionRefRef,
@@ -113,7 +113,7 @@ class GroupMessageCollectionRefProvider
     required this.groupId,
   }) : super.internal();
 
-  final String groupId;
+  final GroupId groupId;
 
   @override
   Override overrideWith(
@@ -162,7 +162,7 @@ class GroupMessageCollectionRefProvider
 mixin GroupMessageCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestoreGroupMessageModel>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 }
 
 class _GroupMessageCollectionRefProviderElement
@@ -174,11 +174,11 @@ class _GroupMessageCollectionRefProviderElement
   _GroupMessageCollectionRefProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as GroupMessageCollectionRefProvider).groupId;
+  GroupId get groupId => (origin as GroupMessageCollectionRefProvider).groupId;
 }
 
 String _$groupMessageDocumentRefHash() =>
-    r'fa7ad07a5090a44adaa2fc46fa74f364a22657ec';
+    r'7f0dabfaa21c31f97c60aa9d7e7c09565103d90a';
 
 /// 通知メッセージドキュメントの参照
 ///
@@ -200,8 +200,8 @@ class GroupMessageDocumentRefFamily
   ///
   /// Copied from [groupMessageDocumentRef].
   GroupMessageDocumentRefProvider call({
-    required String groupId,
-    String? notificationMessageId,
+    required GroupId groupId,
+    NotificationMessageId? notificationMessageId,
   }) {
     return GroupMessageDocumentRefProvider(
       groupId: groupId,
@@ -243,8 +243,8 @@ class GroupMessageDocumentRefProvider
   ///
   /// Copied from [groupMessageDocumentRef].
   GroupMessageDocumentRefProvider({
-    required String groupId,
-    String? notificationMessageId,
+    required GroupId groupId,
+    NotificationMessageId? notificationMessageId,
   }) : this._internal(
          (ref) => groupMessageDocumentRef(
            ref as GroupMessageDocumentRefRef,
@@ -274,8 +274,8 @@ class GroupMessageDocumentRefProvider
     required this.notificationMessageId,
   }) : super.internal();
 
-  final String groupId;
-  final String? notificationMessageId;
+  final GroupId groupId;
+  final NotificationMessageId? notificationMessageId;
 
   @override
   Override overrideWith(
@@ -327,10 +327,10 @@ class GroupMessageDocumentRefProvider
 mixin GroupMessageDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreGroupMessageModel>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 
   /// The parameter `notificationMessageId` of this provider.
-  String? get notificationMessageId;
+  NotificationMessageId? get notificationMessageId;
 }
 
 class _GroupMessageDocumentRefProviderElement
@@ -342,9 +342,9 @@ class _GroupMessageDocumentRefProviderElement
   _GroupMessageDocumentRefProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as GroupMessageDocumentRefProvider).groupId;
+  GroupId get groupId => (origin as GroupMessageDocumentRefProvider).groupId;
   @override
-  String? get notificationMessageId =>
+  NotificationMessageId? get notificationMessageId =>
       (origin as GroupMessageDocumentRefProvider).notificationMessageId;
 }
 

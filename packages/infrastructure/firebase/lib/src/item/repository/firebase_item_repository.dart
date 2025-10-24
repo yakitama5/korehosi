@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_storage_provider.dart';
@@ -6,7 +7,9 @@ import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart
 import 'package:infrastructure_firebase/src/item/model/firestore_item_model.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_deleted_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
+import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
 
@@ -22,7 +25,7 @@ class FirebaseItemRepository implements ItemRepository {
   @override
   Future<PageInfo<Item>> searchItems({
     required int page,
-    required String groupId,
+    required GroupId groupId,
     required AgeGroup ageGroup,
     required ItemsSearchQuery query,
   }) async {
@@ -56,30 +59,32 @@ class FirebaseItemRepository implements ItemRepository {
     final items = await Future.wait(
       snap.docs.map((e) async {
         // 購入情報の取得
+        final itemId = ItemId(e.id);
         final purchase = await _purchaseRepository.fetchByItemId(
           groupId: groupId,
-          itemId: e.id,
+          itemId: itemId,
         );
 
         // 画像をURL化
         final storage = ref.read(firebaseStorageProvider);
-        final imageUrls = await Future.wait<String>(
-          e
-                  .data()
-                  .imagesPath
-                  ?.map((path) => storage.ref(path).getDownloadURL())
-                  .toList() ??
+        final images = await Future.wait<ItemImage>(
+          e.data().imagesPath?.map((path) async {
+                final id = ImageId(path);
+                final url = await storage.ref(path).getDownloadURL();
+
+                return ItemImage(id: id, url: url);
+              }).toList() ??
               List.empty(),
         );
 
-        return e.data().toDomainModel(purchase: purchase, imageUrls: imageUrls);
+        return e.data().toDomainModel(purchase: purchase, images: images);
       }).toList(),
     );
     return PageInfo(items: items, totalCount: totalCount.count ?? 0);
   }
 
   @override
-  Stream<List<Item>> fetchByGroupId({required String groupId}) {
+  Stream<List<Item>> fetchByGroupId({required GroupId groupId}) {
     return ref
         .read(itemCollectionRefProvider(groupId: groupId))
         .snapshots()
@@ -94,8 +99,8 @@ class FirebaseItemRepository implements ItemRepository {
 
   @override
   Stream<Item?> fetchByGroupIdAndItemId({
-    required String groupId,
-    required String itemId,
+    required GroupId groupId,
+    required ItemId itemId,
   }) {
     return ref
         .read(itemDocumentRefProvider(groupId: groupId, itemId: itemId))
@@ -109,16 +114,16 @@ class FirebaseItemRepository implements ItemRepository {
   }
 
   @override
-  Future<String> generateItemId({required String groupId}) {
+  Future<String> generateItemId({required GroupId groupId}) {
     final docRef = ref.read(itemDocumentRefProvider(groupId: groupId));
     return Future.value(docRef.id);
   }
 
   @override
   Future<Item> add({
-    String? itemId,
-    required String groupId,
-    List<String>? imagesPath,
+    ItemId? itemId,
+    required GroupId groupId,
+    List<XFile>? uploadImages,
     required String name,
     String? wanterName,
     required double wishRank,
@@ -131,12 +136,19 @@ class FirebaseItemRepository implements ItemRepository {
       itemDocumentRefProvider(groupId: groupId, itemId: itemId),
     );
 
+    // 新規画像分をアップロード
+    final imageIds = await _uploadItemImage(
+      uploadImages,
+      groupId,
+      ItemId(docRef.id),
+    );
+
     // Firestore用のモデルに変換
     final docModel = FirestoreItemModel(
       id: docRef.id,
       name: name,
       wishRank: wishRank,
-      imagesPath: imagesPath,
+      imagesPath: imageIds.map((e) => e.value).toList(),
       memo: memo,
       urls: urls,
       wanterName: wanterName,
@@ -157,22 +169,33 @@ class FirebaseItemRepository implements ItemRepository {
 
   @override
   Future<void> update({
-    required String groupId,
-    required String itemId,
-    List<String>? imagesPath,
+    required GroupId groupId,
+    required ItemId itemId,
+    List<ItemImage>? images,
+    List<XFile>? uploadImages,
     required String name,
     String? wanterName,
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
     String? memo,
-  }) {
+  }) async {
+    // 新規画像分をアップロード
+    final uploadImageIds = await _uploadItemImage(
+      uploadImages,
+      groupId,
+      itemId,
+    );
+    // 既存画像分の末尾に追加
+    final imageIds = images?.map((e) => e.id).toList() ?? List<ImageId>.empty();
+    final joinImageIds = imageIds + uploadImageIds;
+
     // Firestore用のモデルに変換
     final docModel = FirestoreItemModel(
-      id: itemId,
+      id: itemId.value,
       name: name,
       wishRank: wishRank,
-      imagesPath: imagesPath,
+      imagesPath: joinImageIds.map((e) => e.value).toList(),
       memo: memo,
       urls: urls,
       wanterName: wanterName,
@@ -186,7 +209,10 @@ class FirebaseItemRepository implements ItemRepository {
   }
 
   @override
-  Future<void> delete({required String groupId, required String itemId}) async {
+  Future<void> delete({
+    required GroupId groupId,
+    required ItemId itemId,
+  }) async {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
       // 削除前の状態を保持
@@ -204,5 +230,21 @@ class FirebaseItemRepository implements ItemRepository {
           // 削除用ドキュメントの追加
           .set<FirestoreItemModel>(delDocRef, doc.data()!);
     });
+  }
+
+  Future<List<ImageId>> _uploadItemImage(
+    List<XFile>? uploadImages,
+    GroupId groupId,
+    ItemId itemId,
+  ) async {
+    return Future.wait<ImageId>(
+      uploadImages?.map((e) async {
+            final path = 'group/$groupId/item/$itemId/${uuid.v4()}';
+            return ref
+                .read(storageServiceProvider)
+                .uploadImage(ImageId(path), e);
+          }).toList() ??
+          [],
+    );
   }
 }

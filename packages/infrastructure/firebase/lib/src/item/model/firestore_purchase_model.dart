@@ -28,7 +28,7 @@ abstract class FirestorePurchaseModel with _$FirestorePurchaseModel {
 extension FirestorePurchaseModelX on FirestorePurchaseModel {
   /// ドメイン層への変換
   Purchase toDomainModel() => Purchase(
-    id: id,
+    id: PurchaseId(id),
     price: price,
     buyerName: buyerName,
     planDate: planDate,

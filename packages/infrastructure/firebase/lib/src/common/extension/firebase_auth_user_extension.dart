@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:packages_domain/user.dart' show AuthStatus;
+import 'package:packages_domain/user.dart' show AuthStatus, UserId;
 
 /// FirebaseAuthの認証ユーザー拡張
 extension FirebaseAuthUserX on User {
@@ -15,7 +15,7 @@ extension FirebaseAuthUserX on User {
 
   /// ドメイン層への変換を記載
   AuthStatus get authStatus => AuthStatus(
-    uid: uid,
+    userId: UserId(uid),
     isAnonymous: isAnonymous,
     linkedGoogle: linkedGoogle,
     linkedApple: linkedApple,

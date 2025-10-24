@@ -4,6 +4,8 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/user/model/firestore_user_model.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_participant_provider.g.dart';
@@ -12,7 +14,7 @@ part 'firestore_participant_provider.g.dart';
 @riverpod
 CollectionReference<FirestoreUserModel> participantCollectionRef(
   Ref ref, {
-  required String groupId,
+  required GroupId groupId,
 }) {
   return ref
       .watch(firestoreProvider)
@@ -35,8 +37,8 @@ CollectionReference<FirestoreUserModel> participantCollectionRef(
 @riverpod
 DocumentReference<FirestoreUserModel> participantDocumentRef(
   Ref ref, {
-  required String groupId,
-  String? participantId,
+  required GroupId groupId,
+  UserId? participantId,
 }) => ref
     .watch(participantCollectionRefProvider(groupId: groupId))
-    .doc(participantId);
+    .doc(participantId?.value);

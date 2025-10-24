@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:infrastructure_firebase/src/common/converter/json_key.dart';
 import 'package:packages_domain/notification.dart';
+import 'package:packages_domain/user.dart';
 
 part 'firestore_group_message_model.freezed.dart';
 part 'firestore_group_message_model.g.dart';
@@ -27,13 +28,13 @@ abstract class FirestoreGroupMessageModel with _$FirestoreGroupMessageModel {
 extension FirestoreGroupMessageModelX on FirestoreGroupMessageModel {
   /// ドメイン層で定義しているエンティティへの変換
   GroupMessage toDomainModel() => GroupMessage(
-    id: id,
+    id: GroupMessageId(id),
     title: title,
     body: body,
     target: target,
     event: event,
     path: path,
-    uid: uid,
+    userId: UserId(uid),
     createdAt: createdAt,
     updatedAt: updatedAt,
   );

@@ -5,7 +5,9 @@ import 'package:infrastructure_firebase/src/common/extension/remote_message_exte
 import 'package:infrastructure_firebase/src/common/state/fcm_config_provider.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_group_message_model.dart';
 import 'package:infrastructure_firebase/src/group/state/firestore_group_message_provider.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/notification.dart';
+import 'package:packages_domain/user.dart';
 
 /// Firebaseを利用したサービスの実装
 class FirebaseMessagingMessagingService implements MessagingService {
@@ -47,8 +49,8 @@ class FirebaseMessagingMessagingService implements MessagingService {
 
   @override
   Future<void> sendMessage({
-    required String groupId,
-    required String uid,
+    required GroupId groupId,
+    required UserId userId,
     required String title,
     required String body,
     required NotificationTarget target,
@@ -66,7 +68,7 @@ class FirebaseMessagingMessagingService implements MessagingService {
       target: target,
       event: event,
       path: path,
-      uid: uid,
+      uid: userId.value,
     );
 
     // 登録

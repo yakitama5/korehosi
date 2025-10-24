@@ -4,6 +4,7 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/user/model/firestore_user_model.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_deleted_user_provider.g.dart';
@@ -32,5 +33,5 @@ CollectionReference<FirestoreUserModel> duserCollectionRef(Ref ref) {
 @riverpod
 DocumentReference<FirestoreUserModel> duserDocumentRef(
   Ref ref, {
-  String? userId,
-}) => ref.watch(duserCollectionRefProvider).doc(userId);
+  UserId? userId,
+}) => ref.watch(duserCollectionRefProvider).doc(userId?.value);

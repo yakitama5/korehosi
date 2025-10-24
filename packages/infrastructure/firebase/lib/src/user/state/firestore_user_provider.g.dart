@@ -29,7 +29,7 @@ final userCollectionRefProvider =
 // ignore: unused_element
 typedef UserCollectionRefRef =
     AutoDisposeProviderRef<CollectionReference<FirestoreUserModel>>;
-String _$userDocumentRefHash() => r'7b43f3c7454b7d1e9ab09dc23d4ec344b1bd31bc';
+String _$userDocumentRefHash() => r'b38ba0f7fbe0e0d4e4daa7190481e4123f794bdf';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -71,7 +71,7 @@ class UserDocumentRefFamily
   /// ユーザードキュメントの参照
   ///
   /// Copied from [userDocumentRef].
-  UserDocumentRefProvider call({String? userId}) {
+  UserDocumentRefProvider call({UserId? userId}) {
     return UserDocumentRefProvider(userId: userId);
   }
 
@@ -105,7 +105,7 @@ class UserDocumentRefProvider
   /// ユーザードキュメントの参照
   ///
   /// Copied from [userDocumentRef].
-  UserDocumentRefProvider({String? userId})
+  UserDocumentRefProvider({UserId? userId})
     : this._internal(
         (ref) => userDocumentRef(ref as UserDocumentRefRef, userId: userId),
         from: userDocumentRefProvider,
@@ -129,7 +129,7 @@ class UserDocumentRefProvider
     required this.userId,
   }) : super.internal();
 
-  final String? userId;
+  final UserId? userId;
 
   @override
   Override overrideWith(
@@ -175,7 +175,7 @@ class UserDocumentRefProvider
 mixin UserDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreUserModel>> {
   /// The parameter `userId` of this provider.
-  String? get userId;
+  UserId? get userId;
 }
 
 class _UserDocumentRefProviderElement
@@ -184,7 +184,7 @@ class _UserDocumentRefProviderElement
   _UserDocumentRefProviderElement(super.provider);
 
   @override
-  String? get userId => (origin as UserDocumentRefProvider).userId;
+  UserId? get userId => (origin as UserDocumentRefProvider).userId;
 }
 
 // ignore_for_file: type=lint

@@ -9,7 +9,7 @@ part of 'firestore_deleted_group_message_provider.dart';
 // **************************************************************************
 
 String _$dgroupMessageCollectionRefHash() =>
-    r'07d3f7f4ce51d587dcd6c5d17759d8515303443f';
+    r'b5225ee299ecd2a8a6e38ffb3ece25fb6077ad5b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,7 +51,7 @@ class DgroupMessageCollectionRefFamily
   /// 削除済通知メッセージコレクションの参照
   ///
   /// Copied from [dgroupMessageCollectionRef].
-  DgroupMessageCollectionRefProvider call({required String groupId}) {
+  DgroupMessageCollectionRefProvider call({required GroupId groupId}) {
     return DgroupMessageCollectionRefProvider(groupId: groupId);
   }
 
@@ -86,7 +86,7 @@ class DgroupMessageCollectionRefProvider
   /// 削除済通知メッセージコレクションの参照
   ///
   /// Copied from [dgroupMessageCollectionRef].
-  DgroupMessageCollectionRefProvider({required String groupId})
+  DgroupMessageCollectionRefProvider({required GroupId groupId})
     : this._internal(
         (ref) => dgroupMessageCollectionRef(
           ref as DgroupMessageCollectionRefRef,
@@ -113,7 +113,7 @@ class DgroupMessageCollectionRefProvider
     required this.groupId,
   }) : super.internal();
 
-  final String groupId;
+  final GroupId groupId;
 
   @override
   Override overrideWith(
@@ -162,7 +162,7 @@ class DgroupMessageCollectionRefProvider
 mixin DgroupMessageCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestoreGroupMessageModel>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 }
 
 class _DgroupMessageCollectionRefProviderElement
@@ -174,11 +174,11 @@ class _DgroupMessageCollectionRefProviderElement
   _DgroupMessageCollectionRefProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as DgroupMessageCollectionRefProvider).groupId;
+  GroupId get groupId => (origin as DgroupMessageCollectionRefProvider).groupId;
 }
 
 String _$dgroupMessageDocumentRefHash() =>
-    r'80976af009830b4e51651bb520da017c9d7d2079';
+    r'0fa6d8ac40505b10c6758a0b1ea2ec14517e433c';
 
 /// 削除済通知メッセージドキュメントの参照
 ///
@@ -200,8 +200,8 @@ class DgroupMessageDocumentRefFamily
   ///
   /// Copied from [dgroupMessageDocumentRef].
   DgroupMessageDocumentRefProvider call({
-    required String groupId,
-    String? dnotificationMessageId,
+    required GroupId groupId,
+    NotificationMessageId? dnotificationMessageId,
   }) {
     return DgroupMessageDocumentRefProvider(
       groupId: groupId,
@@ -243,8 +243,8 @@ class DgroupMessageDocumentRefProvider
   ///
   /// Copied from [dgroupMessageDocumentRef].
   DgroupMessageDocumentRefProvider({
-    required String groupId,
-    String? dnotificationMessageId,
+    required GroupId groupId,
+    NotificationMessageId? dnotificationMessageId,
   }) : this._internal(
          (ref) => dgroupMessageDocumentRef(
            ref as DgroupMessageDocumentRefRef,
@@ -274,8 +274,8 @@ class DgroupMessageDocumentRefProvider
     required this.dnotificationMessageId,
   }) : super.internal();
 
-  final String groupId;
-  final String? dnotificationMessageId;
+  final GroupId groupId;
+  final NotificationMessageId? dnotificationMessageId;
 
   @override
   Override overrideWith(
@@ -327,10 +327,10 @@ class DgroupMessageDocumentRefProvider
 mixin DgroupMessageDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreGroupMessageModel>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 
   /// The parameter `dnotificationMessageId` of this provider.
-  String? get dnotificationMessageId;
+  NotificationMessageId? get dnotificationMessageId;
 }
 
 class _DgroupMessageDocumentRefProviderElement
@@ -342,9 +342,9 @@ class _DgroupMessageDocumentRefProviderElement
   _DgroupMessageDocumentRefProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as DgroupMessageDocumentRefProvider).groupId;
+  GroupId get groupId => (origin as DgroupMessageDocumentRefProvider).groupId;
   @override
-  String? get dnotificationMessageId =>
+  NotificationMessageId? get dnotificationMessageId =>
       (origin as DgroupMessageDocumentRefProvider).dnotificationMessageId;
 }
 

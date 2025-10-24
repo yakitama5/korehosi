@@ -23,8 +23,8 @@ abstract class FirestoreShareLinkModel with _$FirestoreShareLinkModel {
 extension FirestoreShareLinkModelX on FirestoreShareLinkModel {
   /// ドメイン層への変換
   ShareLink toDomainModel() => ShareLink(
-    id: id,
-    groupId: groupId,
+    id: ShareLinkId(id),
+    groupId: GroupId(groupId),
     validDays: validDays,
     createdAt: createdAt!,
     updatedAt: updatedAt!,
