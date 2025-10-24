@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:infrastructure_firebase/src/common/converter/json_key.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
 
 part 'firestore_user_model.freezed.dart';
@@ -27,7 +28,7 @@ extension FirestoreUserModelX on FirestoreUserModel {
     id: UserId(id),
     ageGroup: ageGroup,
     name: name,
-    joinGroupIds: joinGroupIds,
+    joinGroupIds: joinGroupIds?.map(GroupId.new).toList(),
     createdAt: createdAt!,
     updatedAt: updatedAt!,
   );
