@@ -4,15 +4,18 @@ import 'package:packages_domain/user.dart';
 
 part 'notification_message.freezed.dart';
 
+extension type NotificationMessageSenderId(String value) {}
+extension type NotificationMessageId(String value) {}
+
 /// 通知メッセージ
 @freezed
 abstract class NotificationMessage with _$NotificationMessage {
   const factory NotificationMessage({
-    UserId? senderId,
+    NotificationMessageSenderId? senderId,
     String? category,
     required Map<String, dynamic> data,
     String? from,
-    GroupMessageId? messageId,
+    NotificationMessageId? messageId,
     String? messageType,
   }) = _NotificationMessage;
 }
