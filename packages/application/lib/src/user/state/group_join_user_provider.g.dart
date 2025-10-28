@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'group_join_user_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupJoinUserHash() => r'6d8832b41894fb232bdb37ed04a3f55664af94b2';
+String _$groupJoinUserHash() => r'f082c93ca38b21e5733930102d21708b93356769';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -48,8 +50,8 @@ class GroupJoinUserFamily extends Family<AsyncValue<User?>> {
   ///
   /// Copied from [groupJoinUser].
   GroupJoinUserProvider call({
-    required String groupId,
-    required String userId,
+    required GroupId groupId,
+    required UserId userId,
   }) {
     return GroupJoinUserProvider(groupId: groupId, userId: userId);
   }
@@ -83,7 +85,7 @@ class GroupJoinUserProvider extends AutoDisposeFutureProvider<User?> {
   /// グループに参加中のユーザー情報
   ///
   /// Copied from [groupJoinUser].
-  GroupJoinUserProvider({required String groupId, required String userId})
+  GroupJoinUserProvider({required GroupId groupId, required UserId userId})
     : this._internal(
         (ref) => groupJoinUser(
           ref as GroupJoinUserRef,
@@ -113,8 +115,8 @@ class GroupJoinUserProvider extends AutoDisposeFutureProvider<User?> {
     required this.userId,
   }) : super.internal();
 
-  final String groupId;
-  final String userId;
+  final GroupId groupId;
+  final UserId userId;
 
   @override
   Override overrideWith(
@@ -161,10 +163,10 @@ class GroupJoinUserProvider extends AutoDisposeFutureProvider<User?> {
 // ignore: unused_element
 mixin GroupJoinUserRef on AutoDisposeFutureProviderRef<User?> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 
   /// The parameter `userId` of this provider.
-  String get userId;
+  UserId get userId;
 }
 
 class _GroupJoinUserProviderElement
@@ -173,9 +175,9 @@ class _GroupJoinUserProviderElement
   _GroupJoinUserProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as GroupJoinUserProvider).groupId;
+  GroupId get groupId => (origin as GroupJoinUserProvider).groupId;
   @override
-  String get userId => (origin as GroupJoinUserProvider).userId;
+  UserId get userId => (origin as GroupJoinUserProvider).userId;
 }
 
 // ignore_for_file: type=lint

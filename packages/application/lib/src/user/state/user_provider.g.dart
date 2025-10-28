@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'user_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userHash() => r'24ce11c2326fd6ae0b5a30ccdf5fad723e3a2bdc';
+String _$userHash() => r'956e4dec3579a70e5d76087201d3e742136f708f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,7 +53,7 @@ class UserFamily extends Family<AsyncValue<User?>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [user].
-  UserProvider call({required String userId}) {
+  UserProvider call({required UserId userId}) {
     return UserProvider(userId: userId);
   }
 
@@ -84,7 +86,7 @@ class UserProvider extends StreamProvider<User?> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [user].
-  UserProvider({required String userId})
+  UserProvider({required UserId userId})
     : this._internal(
         (ref) => user(ref as UserRef, userId: userId),
         from: userProvider,
@@ -107,7 +109,7 @@ class UserProvider extends StreamProvider<User?> {
     required this.userId,
   }) : super.internal();
 
-  final String userId;
+  final UserId userId;
 
   @override
   Override overrideWith(Stream<User?> Function(UserRef provider) create) {
@@ -148,14 +150,14 @@ class UserProvider extends StreamProvider<User?> {
 // ignore: unused_element
 mixin UserRef on StreamProviderRef<User?> {
   /// The parameter `userId` of this provider.
-  String get userId;
+  UserId get userId;
 }
 
 class _UserProviderElement extends StreamProviderElement<User?> with UserRef {
   _UserProviderElement(super.provider);
 
   @override
-  String get userId => (origin as UserProvider).userId;
+  UserId get userId => (origin as UserProvider).userId;
 }
 
 // ignore_for_file: type=lint

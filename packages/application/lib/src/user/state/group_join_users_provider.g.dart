@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'group_join_users_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupJoinUsersHash() => r'3f58d912439ca7f5d3b56b646e5ac397fbafabba';
+String _$groupJoinUsersHash() => r'd72df2b96387fcbae2fe379ba8fb14e69c72af5f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,7 +53,7 @@ class GroupJoinUsersFamily extends Family<AsyncValue<List<User>>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [groupJoinUsers].
-  GroupJoinUsersProvider call({required String groupId}) {
+  GroupJoinUsersProvider call({required GroupId groupId}) {
     return GroupJoinUsersProvider(groupId: groupId);
   }
 
@@ -86,7 +88,7 @@ class GroupJoinUsersProvider extends StreamProvider<List<User>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [groupJoinUsers].
-  GroupJoinUsersProvider({required String groupId})
+  GroupJoinUsersProvider({required GroupId groupId})
     : this._internal(
         (ref) => groupJoinUsers(ref as GroupJoinUsersRef, groupId: groupId),
         from: groupJoinUsersProvider,
@@ -110,7 +112,7 @@ class GroupJoinUsersProvider extends StreamProvider<List<User>> {
     required this.groupId,
   }) : super.internal();
 
-  final String groupId;
+  final GroupId groupId;
 
   @override
   Override overrideWith(
@@ -153,7 +155,7 @@ class GroupJoinUsersProvider extends StreamProvider<List<User>> {
 // ignore: unused_element
 mixin GroupJoinUsersRef on StreamProviderRef<List<User>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 }
 
 class _GroupJoinUsersProviderElement extends StreamProviderElement<List<User>>
@@ -161,7 +163,7 @@ class _GroupJoinUsersProviderElement extends StreamProviderElement<List<User>>
   _GroupJoinUsersProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as GroupJoinUsersProvider).groupId;
+  GroupId get groupId => (origin as GroupJoinUsersProvider).groupId;
 }
 
 // ignore_for_file: type=lint

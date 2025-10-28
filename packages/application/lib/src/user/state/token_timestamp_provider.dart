@@ -15,5 +15,5 @@ Future<DateTime?> tokenTimestamp(Ref ref, {required String token}) async {
 
   return ref
       .read(userSessionRepositoryProvider)
-      .fetchTokenTimestamp(uid: authStatus.uid);
+      .fetchTokenTimestamp(userId: authStatus.userId);
 }
