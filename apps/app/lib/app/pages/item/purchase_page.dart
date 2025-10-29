@@ -68,7 +68,7 @@ class _PurchaseForm extends HookConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ItemImages(imagesPath: item.imagesPath),
+                    ItemImages(images: item.images),
                     const Gap(16),
                     TextWithLabel(item.name, label: i18n.item.common.itemName),
                     const Gap(16),
@@ -237,7 +237,7 @@ class _PriceField extends HookConsumerWidget {
       labelText: i18n.item.common.price,
       maxLength: purchaseConfig.maxPriceLength,
       textInputType: TextInputType.number,
-      prefixText: i18n.item.common.currency,
+      prefixText: i18n.item.common.currencySymbol,
       // 金額はカンマ区切りで整形する
       inputFormatters: [ThousandsFormatter()],
     );

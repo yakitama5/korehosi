@@ -5,6 +5,7 @@ import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_core/util.dart';
+import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router_notifier.g.dart';
@@ -71,7 +72,7 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
       final itemId = routeState.pathParameters['itemId']!;
       final exists = await ref.watch(
         currentGroupItemProvider(
-          itemId: itemId,
+          itemId: ItemId(itemId),
         ).selectAsync((data) => data != null),
       );
 

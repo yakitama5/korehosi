@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'current_group_age_applicable_purchase_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'current_group_age_applicable_purchase_provider.dart';
 // **************************************************************************
 
 String _$currentGroupAgeApplicablePurchaseHash() =>
-    r'0f336c7f25c815e2106131a9b012073e8fcd4db4';
+    r'dcb5c37589507b9ef2ec4e2b77ca227c655f055b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -50,7 +52,7 @@ class CurrentGroupAgeApplicablePurchaseFamily
   /// グループ内の年齢に応じた購入情報
   ///
   /// Copied from [currentGroupAgeApplicablePurchase].
-  CurrentGroupAgeApplicablePurchaseProvider call({required String itemId}) {
+  CurrentGroupAgeApplicablePurchaseProvider call({required ItemId itemId}) {
     return CurrentGroupAgeApplicablePurchaseProvider(itemId: itemId);
   }
 
@@ -84,7 +86,7 @@ class CurrentGroupAgeApplicablePurchaseProvider
   /// グループ内の年齢に応じた購入情報
   ///
   /// Copied from [currentGroupAgeApplicablePurchase].
-  CurrentGroupAgeApplicablePurchaseProvider({required String itemId})
+  CurrentGroupAgeApplicablePurchaseProvider({required ItemId itemId})
     : this._internal(
         (ref) => currentGroupAgeApplicablePurchase(
           ref as CurrentGroupAgeApplicablePurchaseRef,
@@ -111,7 +113,7 @@ class CurrentGroupAgeApplicablePurchaseProvider
     required this.itemId,
   }) : super.internal();
 
-  final String itemId;
+  final ItemId itemId;
 
   @override
   Override overrideWith(
@@ -157,7 +159,7 @@ class CurrentGroupAgeApplicablePurchaseProvider
 mixin CurrentGroupAgeApplicablePurchaseRef
     on AutoDisposeFutureProviderRef<Purchase?> {
   /// The parameter `itemId` of this provider.
-  String get itemId;
+  ItemId get itemId;
 }
 
 class _CurrentGroupAgeApplicablePurchaseProviderElement
@@ -166,7 +168,7 @@ class _CurrentGroupAgeApplicablePurchaseProviderElement
   _CurrentGroupAgeApplicablePurchaseProviderElement(super.provider);
 
   @override
-  String get itemId =>
+  ItemId get itemId =>
       (origin as CurrentGroupAgeApplicablePurchaseProvider).itemId;
 }
 

@@ -11,7 +11,7 @@ part 'current_group_age_applicable_purchase_provider.g.dart';
 @riverpod
 Future<Purchase?> currentGroupAgeApplicablePurchase(
   Ref ref, {
-  required String itemId,
+  required ItemId itemId,
 }) async {
   // 現在のグループ情報を取得
   final groupId = await ref.watch(

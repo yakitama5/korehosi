@@ -1,19 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'item_detail_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemIdHash() => r'a3ee906db5df5a1aac622eba5ecbfb6c33a332b2';
+String _$itemIdHash() => r'19e83d47e77503ef00c8f11eaa7639f61c41962b';
 
 /// 明細表示対象となる欲しい物のIDを管理するProvider
 /// `override`前提の利用を強制する
 ///
 /// Copied from [_itemId].
 @ProviderFor(_itemId)
-final _itemIdProvider = AutoDisposeProvider<String?>.internal(
+final _itemIdProvider = AutoDisposeProvider<ItemId?>.internal(
   _itemId,
   name: r'_itemIdProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -25,7 +27,7 @@ final _itemIdProvider = AutoDisposeProvider<String?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef _ItemIdRef = AutoDisposeProviderRef<String?>;
+typedef _ItemIdRef = AutoDisposeProviderRef<ItemId?>;
 String _$itemHash() => r'eeb8aba393b91ebd02124be9914a963969cf61af';
 
 /// 明細表示対象となる欲しい物のEntityを管理するProvider

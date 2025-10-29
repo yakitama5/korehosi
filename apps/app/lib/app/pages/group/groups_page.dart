@@ -169,7 +169,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
             ],
           ),
           child: ListTile(
-            onTap: () => GroupRouteData(group.id).go(context),
+            onTap: () => GroupRouteData(group.id.value).go(context),
             title: Text(
               group.name,
               maxLines: 2,

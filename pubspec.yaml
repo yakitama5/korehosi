@@ -18,6 +18,7 @@ workspace:
 
 dev_dependencies:
   custom_lint: ^0.7.6
+  cross_file: ^0.3.4+2
   flutter_lints: ^6.0.0
   grinder: ^0.9.5
   melos: ^7.0.0-dev.7

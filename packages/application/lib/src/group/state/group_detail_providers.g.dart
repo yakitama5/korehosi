@@ -1,19 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'group_detail_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupIdHash() => r'18532e7c3bcce2f437bdcf124bbc0f90b500a3d6';
+String _$groupIdHash() => r'9cddd6708ef349e2336dc5e88428196185329fcd';
 
 /// 明細表示対象となるグループのIDを管理するProvider
 /// `override`前提の利用を強制する
 ///
 /// Copied from [_groupId].
 @ProviderFor(_groupId)
-final _groupIdProvider = AutoDisposeProvider<String?>.internal(
+final _groupIdProvider = AutoDisposeProvider<GroupId?>.internal(
   _groupId,
   name: r'_groupIdProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -25,7 +27,7 @@ final _groupIdProvider = AutoDisposeProvider<String?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef _GroupIdRef = AutoDisposeProviderRef<String?>;
+typedef _GroupIdRef = AutoDisposeProviderRef<GroupId?>;
 String _$groupHash() => r'9b114a42e29290d0b7a315739e99b593c7c97459';
 
 /// 明細表示対象となるグループのEntityを管理するProvider

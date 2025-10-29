@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'current_group_id_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentGroupIdHash() => r'bc06b3a55a661697f4c21121c510e2f498ca60d4';
+String _$currentGroupIdHash() => r'907b104288ec36c50c379a52489cde298096ddeb';
 
 /// 現在のグループID
 /// 現在のグループID
@@ -14,7 +16,7 @@ String _$currentGroupIdHash() => r'bc06b3a55a661697f4c21121c510e2f498ca60d4';
 /// Copied from [CurrentGroupId].
 @ProviderFor(CurrentGroupId)
 final currentGroupIdProvider =
-    AsyncNotifierProvider<CurrentGroupId, String?>.internal(
+    AsyncNotifierProvider<CurrentGroupId, GroupId?>.internal(
       CurrentGroupId.new,
       name: r'currentGroupIdProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -24,6 +26,6 @@ final currentGroupIdProvider =
       allTransitiveDependencies: null,
     );
 
-typedef _$CurrentGroupId = AsyncNotifier<String?>;
+typedef _$CurrentGroupId = AsyncNotifier<GroupId?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

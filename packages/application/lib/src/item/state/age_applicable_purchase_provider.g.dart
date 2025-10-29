@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'age_applicable_purchase_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'age_applicable_purchase_provider.dart';
 // **************************************************************************
 
 String _$ageApplicablePurchaseHash() =>
-    r'21e3a6c13f1f26ad3f4f2c8f93f802f5bd2070ff';
+    r'fbc7e803ca513eb50e31e89a08dc6bb3cd32e768';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -49,8 +51,8 @@ class AgeApplicablePurchaseFamily extends Family<AsyncValue<Purchase?>> {
   ///
   /// Copied from [ageApplicablePurchase].
   AgeApplicablePurchaseProvider call({
-    required String groupId,
-    required String itemId,
+    required GroupId groupId,
+    required ItemId itemId,
   }) {
     return AgeApplicablePurchaseProvider(groupId: groupId, itemId: itemId);
   }
@@ -86,8 +88,8 @@ class AgeApplicablePurchaseProvider
   ///
   /// Copied from [ageApplicablePurchase].
   AgeApplicablePurchaseProvider({
-    required String groupId,
-    required String itemId,
+    required GroupId groupId,
+    required ItemId itemId,
   }) : this._internal(
          (ref) => ageApplicablePurchase(
            ref as AgeApplicablePurchaseRef,
@@ -117,8 +119,8 @@ class AgeApplicablePurchaseProvider
     required this.itemId,
   }) : super.internal();
 
-  final String groupId;
-  final String itemId;
+  final GroupId groupId;
+  final ItemId itemId;
 
   @override
   Override overrideWith(
@@ -165,10 +167,10 @@ class AgeApplicablePurchaseProvider
 // ignore: unused_element
 mixin AgeApplicablePurchaseRef on AutoDisposeFutureProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 
   /// The parameter `itemId` of this provider.
-  String get itemId;
+  ItemId get itemId;
 }
 
 class _AgeApplicablePurchaseProviderElement
@@ -177,9 +179,9 @@ class _AgeApplicablePurchaseProviderElement
   _AgeApplicablePurchaseProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as AgeApplicablePurchaseProvider).groupId;
+  GroupId get groupId => (origin as AgeApplicablePurchaseProvider).groupId;
   @override
-  String get itemId => (origin as AgeApplicablePurchaseProvider).itemId;
+  ItemId get itemId => (origin as AgeApplicablePurchaseProvider).itemId;
 }
 
 // ignore_for_file: type=lint

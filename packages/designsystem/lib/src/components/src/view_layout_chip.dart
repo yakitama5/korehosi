@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:packages_designsystem/i18n/strings.g.dart';
-import 'package:packages_designsystem/src/components/src/bottom_sheet_action_chip.dart';
+import 'package:packages_designsystem/src/components/src/bottom_sheet_select_action_chip.dart';
 import 'package:packages_designsystem/src/components/src/model/bottom_sheet_action.dart';
 import 'package:packages_designsystem/src/extension/view_layout_extension.dart';
 import 'package:packages_domain/designsystem.dart';

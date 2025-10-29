@@ -98,30 +98,18 @@ class FirebaseItemRepository implements ItemRepository {
   }
 
   @override
-  Stream<Item?> fetchByGroupIdAndItemId({
+  Future<Item?> fetchByGroupIdAndItemId({
     required GroupId groupId,
     required ItemId itemId,
   }) {
     return ref
         .read(itemDocumentRefProvider(groupId: groupId, itemId: itemId))
-        .snapshots()
-        .where((s) {
-          // 読み込み中のドキュメントが存在する場合はスキップ
-          final doc = s.data();
-          return doc == null || !doc.fieldValuePending;
-        })
-        .map((snap) => snap.data()?.toDomainModel());
-  }
-
-  @override
-  Future<String> generateItemId({required GroupId groupId}) {
-    final docRef = ref.read(itemDocumentRefProvider(groupId: groupId));
-    return Future.value(docRef.id);
+        .get()
+        .then((snap) => snap.data()?.toDomainModel());
   }
 
   @override
   Future<Item> add({
-    ItemId? itemId,
     required GroupId groupId,
     List<XFile>? uploadImages,
     required String name,
@@ -131,21 +119,16 @@ class FirebaseItemRepository implements ItemRepository {
     List<String>? urls,
     String? memo,
   }) async {
-    // IDが指定されていなければ、新しいドキュメントを取得
-    final docRef = ref.read(
-      itemDocumentRefProvider(groupId: groupId, itemId: itemId),
-    );
+    // 新しいドキュメントを取得
+    final docRef = ref.read(itemDocumentRefProvider(groupId: groupId));
+    final itemId = ItemId(docRef.id);
 
     // 新規画像分をアップロード
-    final imageIds = await _uploadItemImage(
-      uploadImages,
-      groupId,
-      ItemId(docRef.id),
-    );
+    final imageIds = await _uploadItemImage(uploadImages, groupId, itemId);
 
     // Firestore用のモデルに変換
     final docModel = FirestoreItemModel(
-      id: docRef.id,
+      id: itemId.value,
       name: name,
       wishRank: wishRank,
       imagesPath: imageIds.map((e) => e.value).toList(),

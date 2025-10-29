@@ -12,3 +12,4 @@ export 'src/common/value_object/flavor.dart';
 export 'src/common/value_object/page_info.dart';
 export 'src/common/value_object/sort_order.dart';
 export 'src/common/value_object/year_month.dart';
+export 'src/common/value_object/year_month_range.dart';

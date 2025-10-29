@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'child_view_purchase_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$childViewPurchaseHash() => r'233d2a50c7ad3e4a077184757073a242e85bdfeb';
+String _$childViewPurchaseHash() => r'ebfad48f06041528103f0779268c7d7e6b387480';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -52,8 +54,8 @@ class ChildViewPurchaseFamily extends Family<AsyncValue<Purchase?>> {
   ///
   /// Copied from [childViewPurchase].
   ChildViewPurchaseProvider call({
-    required String groupId,
-    required String itemId,
+    required GroupId groupId,
+    required ItemId itemId,
   }) {
     return ChildViewPurchaseProvider(groupId: groupId, itemId: itemId);
   }
@@ -89,7 +91,7 @@ class ChildViewPurchaseProvider extends FutureProvider<Purchase?> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [childViewPurchase].
-  ChildViewPurchaseProvider({required String groupId, required String itemId})
+  ChildViewPurchaseProvider({required GroupId groupId, required ItemId itemId})
     : this._internal(
         (ref) => childViewPurchase(
           ref as ChildViewPurchaseRef,
@@ -119,8 +121,8 @@ class ChildViewPurchaseProvider extends FutureProvider<Purchase?> {
     required this.itemId,
   }) : super.internal();
 
-  final String groupId;
-  final String itemId;
+  final GroupId groupId;
+  final ItemId itemId;
 
   @override
   Override overrideWith(
@@ -167,10 +169,10 @@ class ChildViewPurchaseProvider extends FutureProvider<Purchase?> {
 // ignore: unused_element
 mixin ChildViewPurchaseRef on FutureProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 
   /// The parameter `itemId` of this provider.
-  String get itemId;
+  ItemId get itemId;
 }
 
 class _ChildViewPurchaseProviderElement extends FutureProviderElement<Purchase?>
@@ -178,9 +180,9 @@ class _ChildViewPurchaseProviderElement extends FutureProviderElement<Purchase?>
   _ChildViewPurchaseProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as ChildViewPurchaseProvider).groupId;
+  GroupId get groupId => (origin as ChildViewPurchaseProvider).groupId;
   @override
-  String get itemId => (origin as ChildViewPurchaseProvider).itemId;
+  ItemId get itemId => (origin as ChildViewPurchaseProvider).itemId;
 }
 
 // ignore_for_file: type=lint

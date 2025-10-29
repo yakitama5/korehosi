@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,8 +14,8 @@ part 'age_applicable_purchase_provider.g.dart';
 @riverpod
 Future<Purchase?> ageApplicablePurchase(
   Ref ref, {
-  required String groupId,
-  required String itemId,
+  required GroupId groupId,
+  required ItemId itemId,
 }) async {
   // 自身の年齢層を取得
   final ageGroup = await ref.watch(

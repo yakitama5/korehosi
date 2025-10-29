@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'purchase_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchaseHash() => r'90815ef1adc4a742fd5c902a748d0667b15c6faa';
+String _$purchaseHash() => r'bd9dac1aa114aee244986c4fe6762f9e19bfa0e2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,7 +53,7 @@ class PurchaseFamily extends Family<AsyncValue<Purchase?>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [purchase].
-  PurchaseProvider call({required String groupId, required String itemId}) {
+  PurchaseProvider call({required GroupId groupId, required ItemId itemId}) {
     return PurchaseProvider(groupId: groupId, itemId: itemId);
   }
 
@@ -84,7 +86,7 @@ class PurchaseProvider extends FutureProvider<Purchase?> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [purchase].
-  PurchaseProvider({required String groupId, required String itemId})
+  PurchaseProvider({required GroupId groupId, required ItemId itemId})
     : this._internal(
         (ref) => purchase(ref as PurchaseRef, groupId: groupId, itemId: itemId),
         from: purchaseProvider,
@@ -109,8 +111,8 @@ class PurchaseProvider extends FutureProvider<Purchase?> {
     required this.itemId,
   }) : super.internal();
 
-  final String groupId;
-  final String itemId;
+  final GroupId groupId;
+  final ItemId itemId;
 
   @override
   Override overrideWith(
@@ -157,10 +159,10 @@ class PurchaseProvider extends FutureProvider<Purchase?> {
 // ignore: unused_element
 mixin PurchaseRef on FutureProviderRef<Purchase?> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 
   /// The parameter `itemId` of this provider.
-  String get itemId;
+  ItemId get itemId;
 }
 
 class _PurchaseProviderElement extends FutureProviderElement<Purchase?>
@@ -168,9 +170,9 @@ class _PurchaseProviderElement extends FutureProviderElement<Purchase?>
   _PurchaseProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as PurchaseProvider).groupId;
+  GroupId get groupId => (origin as PurchaseProvider).groupId;
   @override
-  String get itemId => (origin as PurchaseProvider).itemId;
+  ItemId get itemId => (origin as PurchaseProvider).itemId;
 }
 
 // ignore_for_file: type=lint

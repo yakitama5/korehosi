@@ -2,30 +2,31 @@
 
 // ignore_for_file: type=lint, duplicate_ignore
 
-part of 'buyer_filter_notifier_provider.dart';
+part of 'item_analyze_query_notifier_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$buyerFilterNotifierHash() =>
-    r'cac3a52a962c7fa582f7c5fb4af4ee026c29362f';
+String _$itemAnalyzeQueryNotifierHash() =>
+    r'a7e1f2bdde3ecc2ff5992b5d8649511252fc88ca';
 
-/// 購入した人の名前フィルタの値
-///
-/// Copied from [BuyerFilterNotifier].
-@ProviderFor(BuyerFilterNotifier)
-final buyerFilterNotifierProvider =
-    AutoDisposeNotifierProvider<BuyerFilterNotifier, String?>.internal(
-      BuyerFilterNotifier.new,
-      name: r'buyerFilterNotifierProvider',
+/// See also [ItemAnalyzeQueryNotifier].
+@ProviderFor(ItemAnalyzeQueryNotifier)
+final itemAnalyzeQueryNotifierProvider =
+    AutoDisposeNotifierProvider<
+      ItemAnalyzeQueryNotifier,
+      ItemAnalyzeQuery
+    >.internal(
+      ItemAnalyzeQueryNotifier.new,
+      name: r'itemAnalyzeQueryNotifierProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$buyerFilterNotifierHash,
+          : _$itemAnalyzeQueryNotifierHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$BuyerFilterNotifier = AutoDisposeNotifier<String?>;
+typedef _$ItemAnalyzeQueryNotifier = AutoDisposeNotifier<ItemAnalyzeQuery>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

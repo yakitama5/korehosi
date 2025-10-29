@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'group_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupHash() => r'93c7aa03923752a4cf891c58cd39dda4883045ee';
+String _$groupHash() => r'65fdd35912a186d27d2097211ae7035445f02894';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,7 +53,7 @@ class GroupFamily extends Family<AsyncValue<Group?>> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [group].
-  GroupProvider call({required String groupId}) {
+  GroupProvider call({required GroupId groupId}) {
     return GroupProvider(groupId: groupId);
   }
 
@@ -84,7 +86,7 @@ class GroupProvider extends StreamProvider<Group?> {
   /// データの参照頻度を減らすため、`keepAlive`を指定
   ///
   /// Copied from [group].
-  GroupProvider({required String groupId})
+  GroupProvider({required GroupId groupId})
     : this._internal(
         (ref) => group(ref as GroupRef, groupId: groupId),
         from: groupProvider,
@@ -107,7 +109,7 @@ class GroupProvider extends StreamProvider<Group?> {
     required this.groupId,
   }) : super.internal();
 
-  final String groupId;
+  final GroupId groupId;
 
   @override
   Override overrideWith(Stream<Group?> Function(GroupRef provider) create) {
@@ -148,7 +150,7 @@ class GroupProvider extends StreamProvider<Group?> {
 // ignore: unused_element
 mixin GroupRef on StreamProviderRef<Group?> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 }
 
 class _GroupProviderElement extends StreamProviderElement<Group?>
@@ -156,7 +158,7 @@ class _GroupProviderElement extends StreamProviderElement<Group?>
   _GroupProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as GroupProvider).groupId;
+  GroupId get groupId => (origin as GroupProvider).groupId;
 }
 
 // ignore_for_file: type=lint

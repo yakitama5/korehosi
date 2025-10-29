@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'current_group_item_provider.dart';
+// ignore_for_file: type=lint, duplicate_ignore
+
+part of 'item_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentGroupItemHash() => r'65307d81fe65498afd0a68a7c96d7ee862d6c0d4';
+String _$itemHash() => r'9a0b91e0d0d60ab8a3cbba2addff8f2c208daf2d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,30 +33,28 @@ class _SystemHash {
 
 /// 現在のグループ内の欲しい物
 ///
-/// Copied from [currentGroupItem].
-@ProviderFor(currentGroupItem)
-const currentGroupItemProvider = CurrentGroupItemFamily();
+/// Copied from [item].
+@ProviderFor(item)
+const itemProvider = ItemFamily();
 
 /// 現在のグループ内の欲しい物
 ///
-/// Copied from [currentGroupItem].
-class CurrentGroupItemFamily extends Family<AsyncValue<Item?>> {
+/// Copied from [item].
+class ItemFamily extends Family<AsyncValue<Item?>> {
   /// 現在のグループ内の欲しい物
   ///
-  /// Copied from [currentGroupItem].
-  const CurrentGroupItemFamily();
+  /// Copied from [item].
+  const ItemFamily();
 
   /// 現在のグループ内の欲しい物
   ///
-  /// Copied from [currentGroupItem].
-  CurrentGroupItemProvider call({required String itemId}) {
-    return CurrentGroupItemProvider(itemId: itemId);
+  /// Copied from [item].
+  ItemProvider call({required ItemId itemId}) {
+    return ItemProvider(itemId: itemId);
   }
 
   @override
-  CurrentGroupItemProvider getProviderOverride(
-    covariant CurrentGroupItemProvider provider,
-  ) {
+  ItemProvider getProviderOverride(covariant ItemProvider provider) {
     return call(itemId: provider.itemId);
   }
 
@@ -70,31 +70,30 @@ class CurrentGroupItemFamily extends Family<AsyncValue<Item?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'currentGroupItemProvider';
+  String? get name => r'itemProvider';
 }
 
 /// 現在のグループ内の欲しい物
 ///
-/// Copied from [currentGroupItem].
-class CurrentGroupItemProvider extends AutoDisposeFutureProvider<Item?> {
+/// Copied from [item].
+class ItemProvider extends AutoDisposeFutureProvider<Item?> {
   /// 現在のグループ内の欲しい物
   ///
-  /// Copied from [currentGroupItem].
-  CurrentGroupItemProvider({required String itemId})
+  /// Copied from [item].
+  ItemProvider({required ItemId itemId})
     : this._internal(
-        (ref) => currentGroupItem(ref as CurrentGroupItemRef, itemId: itemId),
-        from: currentGroupItemProvider,
-        name: r'currentGroupItemProvider',
+        (ref) => item(ref as ItemRef, itemId: itemId),
+        from: itemProvider,
+        name: r'itemProvider',
         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
             ? null
-            : _$currentGroupItemHash,
-        dependencies: CurrentGroupItemFamily._dependencies,
-        allTransitiveDependencies:
-            CurrentGroupItemFamily._allTransitiveDependencies,
+            : _$itemHash,
+        dependencies: ItemFamily._dependencies,
+        allTransitiveDependencies: ItemFamily._allTransitiveDependencies,
         itemId: itemId,
       );
 
-  CurrentGroupItemProvider._internal(
+  ItemProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -104,16 +103,14 @@ class CurrentGroupItemProvider extends AutoDisposeFutureProvider<Item?> {
     required this.itemId,
   }) : super.internal();
 
-  final String itemId;
+  final ItemId itemId;
 
   @override
-  Override overrideWith(
-    FutureOr<Item?> Function(CurrentGroupItemRef provider) create,
-  ) {
+  Override overrideWith(FutureOr<Item?> Function(ItemRef provider) create) {
     return ProviderOverride(
       origin: this,
-      override: CurrentGroupItemProvider._internal(
-        (ref) => create(ref as CurrentGroupItemRef),
+      override: ItemProvider._internal(
+        (ref) => create(ref as ItemRef),
         from: from,
         name: null,
         dependencies: null,
@@ -126,12 +123,12 @@ class CurrentGroupItemProvider extends AutoDisposeFutureProvider<Item?> {
 
   @override
   AutoDisposeFutureProviderElement<Item?> createElement() {
-    return _CurrentGroupItemProviderElement(this);
+    return _ItemProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is CurrentGroupItemProvider && other.itemId == itemId;
+    return other is ItemProvider && other.itemId == itemId;
   }
 
   @override
@@ -145,18 +142,17 @@ class CurrentGroupItemProvider extends AutoDisposeFutureProvider<Item?> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin CurrentGroupItemRef on AutoDisposeFutureProviderRef<Item?> {
+mixin ItemRef on AutoDisposeFutureProviderRef<Item?> {
   /// The parameter `itemId` of this provider.
-  String get itemId;
+  ItemId get itemId;
 }
 
-class _CurrentGroupItemProviderElement
-    extends AutoDisposeFutureProviderElement<Item?>
-    with CurrentGroupItemRef {
-  _CurrentGroupItemProviderElement(super.provider);
+class _ItemProviderElement extends AutoDisposeFutureProviderElement<Item?>
+    with ItemRef {
+  _ItemProviderElement(super.provider);
 
   @override
-  String get itemId => (origin as CurrentGroupItemProvider).itemId;
+  ItemId get itemId => (origin as ItemProvider).itemId;
 }
 
 // ignore_for_file: type=lint

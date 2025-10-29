@@ -21,11 +21,14 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
   }) async {
     // コレクション定義
     final itemCol = ref.read(itemCollectionRefProvider(groupId: groupId));
+    final purchaseCol = ref.read(
+      purchaseCollectionRefProvider(groupId: groupId),
+    );
 
     // 各件数の取得
     final itemCount = await itemCol.count().get().then((doc) => doc.count);
     final buyedItemCount =
-        await itemCol
+        await purchaseCol
             .where('sentAt', isNull: false)
             .count()
             .get()
@@ -46,8 +49,7 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
   Future<MonthlyTotalsPurchases> exploreMonthlyTotals({
     required GroupId groupId,
     required AgeGroup ageGroup,
-    required YearMonth fromYearMonth,
-    required YearMonth toYearMonth,
+    required YearMonthRange range,
     required ItemAnalyzeQuery query,
   }) async {
     // コレクション定義
@@ -56,8 +58,8 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
     );
 
     // 月初めに正規化
-    var currentDate = DateTime(fromYearMonth.year, fromYearMonth.month);
-    final lastDate = DateTime(toYearMonth.year, toYearMonth.month);
+    var currentDate = DateTime(range.from.year, range.from.month);
+    final lastDate = DateTime(range.to.year, range.to.month);
 
     final totals = <MonthlyTotals>[];
     while (currentDate.isBefore(lastDate) ||

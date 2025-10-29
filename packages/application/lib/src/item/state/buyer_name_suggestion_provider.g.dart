@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: type=lint, duplicate_ignore
+
 part of 'buyer_name_suggestion_provider.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'buyer_name_suggestion_provider.dart';
 // **************************************************************************
 
 String _$buyerNameSuggestionHash() =>
-    r'f8d3eecf1b97a80914905e3074195bde4fcdbfba';
+    r'ed77f8d2c2279099023ad82e5c28a42876ddf9c2';
 
 /// 購入者のサジェストリスト
 /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー

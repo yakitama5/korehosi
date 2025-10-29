@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/src/analyze/value_object/item_analyze_query.dart';
 import 'package:packages_domain/src/analyze/value_object/item_buyed_rate.dart';
 import 'package:packages_domain/src/analyze/value_object/monthly_totals_purchases.dart';
-import 'package:packages_domain/src/common/value_object/year_month.dart';
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,8 +28,7 @@ abstract class AnalyzeRepository {
   Future<MonthlyTotalsPurchases> exploreMonthlyTotals({
     required GroupId groupId,
     required AgeGroup ageGroup,
-    required YearMonth fromYearMonth,
-    required YearMonth toYearMonth,
+    required YearMonthRange range,
     required ItemAnalyzeQuery query,
   });
 }

@@ -29,18 +29,14 @@ abstract class ItemRepository {
 
   /// グループ内のほしい物を取得
   /// (一意指定)
-  Stream<Item?> fetchByGroupIdAndItemId({
+  Future<Item?> fetchByGroupIdAndItemId({
     required GroupId groupId,
     required ItemId itemId,
   });
 
-  /// ほしい物の一意IDを発番する
-  Future<String> generateItemId({required GroupId groupId});
-
   /// ほしい物を追加
   /// ID項目は任意指定とし、指定されなかったら発番する
   Future<Item> add({
-    ItemId? itemId,
     required GroupId groupId,
     List<XFile>? uploadImages,
     required String name,

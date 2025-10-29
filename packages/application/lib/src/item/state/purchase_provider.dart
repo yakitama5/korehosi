@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/src/item/usecase/purchase_usecase.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,8 +11,8 @@ part 'purchase_provider.g.dart';
 @Riverpod(keepAlive: true)
 Future<Purchase?> purchase(
   Ref ref, {
-  required String groupId,
-  required String itemId,
+  required GroupId groupId,
+  required ItemId itemId,
 }) {
   return ref
       .read(purchaseUsecaseProvider)

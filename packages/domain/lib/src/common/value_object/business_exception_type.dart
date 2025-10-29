@@ -3,6 +3,10 @@ enum BusinessExceptionType {
   deleted,
   // 更新対象なし
   updateTargetNotFound,
+  // グループ未選択
+  notSelectedGroup,
+  // 未認証
+  notAuth,
   // DynamicLink生成時の原因不明エラー
   createDynamicLinkUnknown,
   // グループ参加ポリシーエラー:参加済

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SelectedImageModel {
 
- String? get imagePath; XFile? get uploadFile;
+ ItemImage? get savedImage; XFile? get uploadFile;
 /// Create a copy of SelectedImageModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SelectedImageModelCopyWith<SelectedImageModel> get copyWith => _$SelectedImageM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectedImageModel&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,imagePath,uploadFile);
+int get hashCode => Object.hash(runtimeType,savedImage,uploadFile);
 
 @override
 String toString() {
-  return 'SelectedImageModel(imagePath: $imagePath, uploadFile: $uploadFile)';
+  return 'SelectedImageModel(savedImage: $savedImage, uploadFile: $uploadFile)';
 }
 
 
@@ -45,11 +45,11 @@ abstract mixin class $SelectedImageModelCopyWith<$Res>  {
   factory $SelectedImageModelCopyWith(SelectedImageModel value, $Res Function(SelectedImageModel) _then) = _$SelectedImageModelCopyWithImpl;
 @useResult
 $Res call({
- String? imagePath, XFile? uploadFile
+ ItemImage? savedImage, XFile? uploadFile
 });
 
 
-
+$ItemImageCopyWith<$Res>? get savedImage;
 
 }
 /// @nodoc
@@ -62,14 +62,26 @@ class _$SelectedImageModelCopyWithImpl<$Res>
 
 /// Create a copy of SelectedImageModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? imagePath = freezed,Object? uploadFile = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? savedImage = freezed,Object? uploadFile = freezed,}) {
   return _then(_self.copyWith(
-imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
-as String?,uploadFile: freezed == uploadFile ? _self.uploadFile : uploadFile // ignore: cast_nullable_to_non_nullable
+savedImage: freezed == savedImage ? _self.savedImage : savedImage // ignore: cast_nullable_to_non_nullable
+as ItemImage?,uploadFile: freezed == uploadFile ? _self.uploadFile : uploadFile // ignore: cast_nullable_to_non_nullable
 as XFile?,
   ));
 }
+/// Create a copy of SelectedImageModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ItemImageCopyWith<$Res>? get savedImage {
+    if (_self.savedImage == null) {
+    return null;
+  }
 
+  return $ItemImageCopyWith<$Res>(_self.savedImage!, (value) {
+    return _then(_self.copyWith(savedImage: value));
+  });
+}
 }
 
 
@@ -151,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? imagePath,  XFile? uploadFile)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ItemImage? savedImage,  XFile? uploadFile)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SelectedImageModel() when $default != null:
-return $default(_that.imagePath,_that.uploadFile);case _:
+return $default(_that.savedImage,_that.uploadFile);case _:
   return orElse();
 
 }
@@ -172,10 +184,10 @@ return $default(_that.imagePath,_that.uploadFile);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? imagePath,  XFile? uploadFile)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ItemImage? savedImage,  XFile? uploadFile)  $default,) {final _that = this;
 switch (_that) {
 case _SelectedImageModel():
-return $default(_that.imagePath,_that.uploadFile);case _:
+return $default(_that.savedImage,_that.uploadFile);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +204,10 @@ return $default(_that.imagePath,_that.uploadFile);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? imagePath,  XFile? uploadFile)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ItemImage? savedImage,  XFile? uploadFile)?  $default,) {final _that = this;
 switch (_that) {
 case _SelectedImageModel() when $default != null:
-return $default(_that.imagePath,_that.uploadFile);case _:
+return $default(_that.savedImage,_that.uploadFile);case _:
   return null;
 
 }
@@ -207,10 +219,10 @@ return $default(_that.imagePath,_that.uploadFile);case _:
 
 
 class _SelectedImageModel implements SelectedImageModel {
-  const _SelectedImageModel({this.imagePath, this.uploadFile}): assert(imagePath != null || uploadFile != null);
+  const _SelectedImageModel({this.savedImage, this.uploadFile}): assert(imageUrl != null || uploadFile != null);
   
 
-@override final  String? imagePath;
+@override final  ItemImage? savedImage;
 @override final  XFile? uploadFile;
 
 /// Create a copy of SelectedImageModel
@@ -223,16 +235,16 @@ _$SelectedImageModelCopyWith<_SelectedImageModel> get copyWith => __$SelectedIma
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectedImageModel&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,imagePath,uploadFile);
+int get hashCode => Object.hash(runtimeType,savedImage,uploadFile);
 
 @override
 String toString() {
-  return 'SelectedImageModel(imagePath: $imagePath, uploadFile: $uploadFile)';
+  return 'SelectedImageModel(savedImage: $savedImage, uploadFile: $uploadFile)';
 }
 
 
@@ -243,11 +255,11 @@ abstract mixin class _$SelectedImageModelCopyWith<$Res> implements $SelectedImag
   factory _$SelectedImageModelCopyWith(_SelectedImageModel value, $Res Function(_SelectedImageModel) _then) = __$SelectedImageModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? imagePath, XFile? uploadFile
+ ItemImage? savedImage, XFile? uploadFile
 });
 
 
-
+@override $ItemImageCopyWith<$Res>? get savedImage;
 
 }
 /// @nodoc
@@ -260,15 +272,27 @@ class __$SelectedImageModelCopyWithImpl<$Res>
 
 /// Create a copy of SelectedImageModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? imagePath = freezed,Object? uploadFile = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? savedImage = freezed,Object? uploadFile = freezed,}) {
   return _then(_SelectedImageModel(
-imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
-as String?,uploadFile: freezed == uploadFile ? _self.uploadFile : uploadFile // ignore: cast_nullable_to_non_nullable
+savedImage: freezed == savedImage ? _self.savedImage : savedImage // ignore: cast_nullable_to_non_nullable
+as ItemImage?,uploadFile: freezed == uploadFile ? _self.uploadFile : uploadFile // ignore: cast_nullable_to_non_nullable
 as XFile?,
   ));
 }
 
+/// Create a copy of SelectedImageModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ItemImageCopyWith<$Res>? get savedImage {
+    if (_self.savedImage == null) {
+    return null;
+  }
 
+  return $ItemImageCopyWith<$Res>(_self.savedImage!, (value) {
+    return _then(_self.copyWith(savedImage: value));
+  });
+}
 }
 
 // dart format on
