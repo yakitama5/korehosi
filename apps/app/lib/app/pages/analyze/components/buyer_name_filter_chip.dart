@@ -18,11 +18,14 @@ class BuyerNameFilterChip extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final defaultTitle = i18n.item.common.buyerName;
 
-    final selectName = ref.watch(buyerFilterNotifierProvider);
-    final selected = selectName != null;
+    final query = ref.watch(itemAnalyzeQueryNotifierProvider);
+    final selected = query.buyerName != null;
 
     return LeadingIconInputChip(
-      label: Text(selectName ?? defaultTitle, overflow: TextOverflow.ellipsis),
+      label: Text(
+        query.buyerName ?? defaultTitle,
+        overflow: TextOverflow.ellipsis,
+      ),
       iconData: Icons.arrow_drop_down,
       selected: selected,
       showCheckmark: selected,
@@ -40,23 +43,23 @@ class BuyerNameFilterChip extends HookConsumerWidget {
           ...buyerNames.map((e) => AlertDialogAction<String>(key: e, label: e)),
         ];
 
-        final input = await showConfirmationDialog<String>(
+        final buyerName = await showConfirmationDialog<String>(
           context: context,
           title: defaultTitle,
           // 未選択であれば、'すべて'を選択した状態がデフォルト
-          initialSelectedActionKey: selectName ?? _allKey,
+          initialSelectedActionKey: query.buyerName ?? _allKey,
           actions: actions,
         );
 
         // 入力内容に応じて状態を更新
-        final notifier = ref.read(buyerFilterNotifierProvider.notifier);
-        switch (input) {
+        final notifier = ref.read(itemAnalyzeQueryNotifierProvider.notifier);
+        switch (buyerName) {
           case null:
             return;
           case _allKey:
-            notifier.reset();
+            notifier.copyWith(buyerName: null);
           default:
-            notifier.update(input);
+            notifier.copyWith(buyerName: buyerName);
         }
       },
     );

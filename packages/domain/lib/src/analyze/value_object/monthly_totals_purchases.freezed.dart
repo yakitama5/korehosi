@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MonthlyTotalsPurchases {
 
- List<MonthlyTotals> get monthlyTotals;
+ List<MonthlyTotals> get monthlyTotals; int get allTimeTotalPrice;
 /// Create a copy of MonthlyTotalsPurchases
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $MonthlyTotalsPurchasesCopyWith<MonthlyTotalsPurchases> get copyWith => _$Monthl
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthlyTotalsPurchases&&const DeepCollectionEquality().equals(other.monthlyTotals, monthlyTotals));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthlyTotalsPurchases&&const DeepCollectionEquality().equals(other.monthlyTotals, monthlyTotals)&&(identical(other.allTimeTotalPrice, allTimeTotalPrice) || other.allTimeTotalPrice == allTimeTotalPrice));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(monthlyTotals));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(monthlyTotals),allTimeTotalPrice);
 
 @override
 String toString() {
-  return 'MonthlyTotalsPurchases(monthlyTotals: $monthlyTotals)';
+  return 'MonthlyTotalsPurchases(monthlyTotals: $monthlyTotals, allTimeTotalPrice: $allTimeTotalPrice)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $MonthlyTotalsPurchasesCopyWith<$Res>  {
   factory $MonthlyTotalsPurchasesCopyWith(MonthlyTotalsPurchases value, $Res Function(MonthlyTotalsPurchases) _then) = _$MonthlyTotalsPurchasesCopyWithImpl;
 @useResult
 $Res call({
- List<MonthlyTotals> monthlyTotals
+ List<MonthlyTotals> monthlyTotals, int allTimeTotalPrice
 });
 
 
@@ -62,10 +62,11 @@ class _$MonthlyTotalsPurchasesCopyWithImpl<$Res>
 
 /// Create a copy of MonthlyTotalsPurchases
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? monthlyTotals = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? monthlyTotals = null,Object? allTimeTotalPrice = null,}) {
   return _then(_self.copyWith(
 monthlyTotals: null == monthlyTotals ? _self.monthlyTotals : monthlyTotals // ignore: cast_nullable_to_non_nullable
-as List<MonthlyTotals>,
+as List<MonthlyTotals>,allTimeTotalPrice: null == allTimeTotalPrice ? _self.allTimeTotalPrice : allTimeTotalPrice // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -150,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MonthlyTotals> monthlyTotals)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MonthlyTotals> monthlyTotals,  int allTimeTotalPrice)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MonthlyTotalsPurchases() when $default != null:
-return $default(_that.monthlyTotals);case _:
+return $default(_that.monthlyTotals,_that.allTimeTotalPrice);case _:
   return orElse();
 
 }
@@ -171,10 +172,10 @@ return $default(_that.monthlyTotals);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MonthlyTotals> monthlyTotals)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MonthlyTotals> monthlyTotals,  int allTimeTotalPrice)  $default,) {final _that = this;
 switch (_that) {
 case _MonthlyTotalsPurchases():
-return $default(_that.monthlyTotals);case _:
+return $default(_that.monthlyTotals,_that.allTimeTotalPrice);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +192,10 @@ return $default(_that.monthlyTotals);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MonthlyTotals> monthlyTotals)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MonthlyTotals> monthlyTotals,  int allTimeTotalPrice)?  $default,) {final _that = this;
 switch (_that) {
 case _MonthlyTotalsPurchases() when $default != null:
-return $default(_that.monthlyTotals);case _:
+return $default(_that.monthlyTotals,_that.allTimeTotalPrice);case _:
   return null;
 
 }
@@ -206,7 +207,7 @@ return $default(_that.monthlyTotals);case _:
 
 
 class _MonthlyTotalsPurchases implements MonthlyTotalsPurchases {
-  const _MonthlyTotalsPurchases({required final  List<MonthlyTotals> monthlyTotals}): _monthlyTotals = monthlyTotals;
+  const _MonthlyTotalsPurchases({required final  List<MonthlyTotals> monthlyTotals, required this.allTimeTotalPrice}): _monthlyTotals = monthlyTotals;
   
 
  final  List<MonthlyTotals> _monthlyTotals;
@@ -216,6 +217,7 @@ class _MonthlyTotalsPurchases implements MonthlyTotalsPurchases {
   return EqualUnmodifiableListView(_monthlyTotals);
 }
 
+@override final  int allTimeTotalPrice;
 
 /// Create a copy of MonthlyTotalsPurchases
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +229,16 @@ _$MonthlyTotalsPurchasesCopyWith<_MonthlyTotalsPurchases> get copyWith => __$Mon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MonthlyTotalsPurchases&&const DeepCollectionEquality().equals(other._monthlyTotals, _monthlyTotals));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MonthlyTotalsPurchases&&const DeepCollectionEquality().equals(other._monthlyTotals, _monthlyTotals)&&(identical(other.allTimeTotalPrice, allTimeTotalPrice) || other.allTimeTotalPrice == allTimeTotalPrice));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_monthlyTotals));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_monthlyTotals),allTimeTotalPrice);
 
 @override
 String toString() {
-  return 'MonthlyTotalsPurchases(monthlyTotals: $monthlyTotals)';
+  return 'MonthlyTotalsPurchases(monthlyTotals: $monthlyTotals, allTimeTotalPrice: $allTimeTotalPrice)';
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$MonthlyTotalsPurchasesCopyWith<$Res> implements $MonthlyT
   factory _$MonthlyTotalsPurchasesCopyWith(_MonthlyTotalsPurchases value, $Res Function(_MonthlyTotalsPurchases) _then) = __$MonthlyTotalsPurchasesCopyWithImpl;
 @override @useResult
 $Res call({
- List<MonthlyTotals> monthlyTotals
+ List<MonthlyTotals> monthlyTotals, int allTimeTotalPrice
 });
 
 
@@ -264,10 +266,11 @@ class __$MonthlyTotalsPurchasesCopyWithImpl<$Res>
 
 /// Create a copy of MonthlyTotalsPurchases
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? monthlyTotals = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? monthlyTotals = null,Object? allTimeTotalPrice = null,}) {
   return _then(_MonthlyTotalsPurchases(
 monthlyTotals: null == monthlyTotals ? _self._monthlyTotals : monthlyTotals // ignore: cast_nullable_to_non_nullable
-as List<MonthlyTotals>,
+as List<MonthlyTotals>,allTimeTotalPrice: null == allTimeTotalPrice ? _self.allTimeTotalPrice : allTimeTotalPrice // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

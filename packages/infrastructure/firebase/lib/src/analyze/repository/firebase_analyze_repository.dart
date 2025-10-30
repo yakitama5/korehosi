@@ -57,10 +57,17 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
       purchaseCollectionRefProvider(groupId: groupId),
     );
 
+    // 全期間の購入金額の合計を先に取得
+    final allTimeTotalPrice = await purchaseCol
+        .aggregate(sum('price'))
+        .get()
+        .then((res) => res.getSum('price'));
+
     // 月初めに正規化
     var currentDate = DateTime(range.from.year, range.from.month);
     final lastDate = DateTime(range.to.year, range.to.month);
 
+    // 月別の合計金額の取得
     final totals = <MonthlyTotals>[];
     while (currentDate.isBefore(lastDate) ||
         currentDate.isAtSameMomentAs(lastDate)) {
@@ -87,6 +94,9 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
       currentDate = DateTime(currentDate.year, currentDate.month + 1);
     }
 
-    return MonthlyTotalsPurchases(monthlyTotals: totals);
+    return MonthlyTotalsPurchases(
+      monthlyTotals: totals,
+      allTimeTotalPrice: (allTimeTotalPrice ?? 0.0).toInt(),
+    );
   }
 }

@@ -18,6 +18,9 @@ abstract class YearMonth with _$YearMonth {
   /// DateTimeへ変換
   DateTime toDateTime() => DateTime(year, month);
 
+  /// double型へ変換 (chart用)
+  double toDouble() => (year * 100 + month).toDouble();
+
   /// 年月同士の比較
   int compareTo(YearMonth other) {
     final a = DateTime(year, month);

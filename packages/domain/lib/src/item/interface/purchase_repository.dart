@@ -44,7 +44,7 @@ abstract class PurchaseRepository {
   /// 購入情報を更新
   Future<void> update({
     required GroupId groupId,
-    required PurchaseId purchaseId,
+    required ItemId itemId,
     int? price,
     String? buyerName,
     DateTime? planDate,
@@ -55,8 +55,5 @@ abstract class PurchaseRepository {
   });
 
   /// 購入情報を削除
-  Future<void> delete({
-    required GroupId groupId,
-    required PurchaseId purchaseId,
-  });
+  Future<void> delete({required GroupId groupId, required ItemId itemId});
 }

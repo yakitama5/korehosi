@@ -8,5 +8,6 @@ part 'monthly_totals_purchases.freezed.dart';
 abstract class MonthlyTotalsPurchases with _$MonthlyTotalsPurchases {
   const factory MonthlyTotalsPurchases({
     required List<MonthlyTotals> monthlyTotals,
+    required int allTimeTotalPrice,
   }) = _MonthlyTotalsPurchases;
 }

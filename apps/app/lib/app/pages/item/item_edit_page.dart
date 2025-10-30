@@ -169,7 +169,8 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
             wishSeason: wishSeason,
             urls: urls,
             memo: memo,
-            generateItemDetailRoute: (itemId) => ItemRouteData(itemId).location,
+            generateItemDetailRoute: (itemId) =>
+                ItemRouteData(itemId.value).location,
           );
         } else {
           await usecase.update(

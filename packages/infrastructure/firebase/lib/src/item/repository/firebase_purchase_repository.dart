@@ -88,7 +88,7 @@ class FirebasePurchaseRepository implements PurchaseRepository {
   @override
   Future<void> update({
     required GroupId groupId,
-    required PurchaseId purchaseId,
+    required ItemId itemId,
     int? price,
     String? buyerName,
     DateTime? planDate,
@@ -99,7 +99,7 @@ class FirebasePurchaseRepository implements PurchaseRepository {
   }) {
     // Firestore用のモデルに変換
     final docModel = FirestorePurchaseModel(
-      id: purchaseId.value,
+      id: itemId.value,
       memo: memo,
       surprise: surprise,
       uid: userId.value,
@@ -109,7 +109,8 @@ class FirebasePurchaseRepository implements PurchaseRepository {
       sentAt: sentAt,
     );
 
-    // 登録
+    // 登録 (Itemコレクションと同一IDを利用)
+    final purchaseId = PurchaseId(itemId.value);
     return ref
         .read(
           purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
@@ -120,10 +121,12 @@ class FirebasePurchaseRepository implements PurchaseRepository {
   @override
   Future<void> delete({
     required GroupId groupId,
-    required PurchaseId purchaseId,
+    required ItemId itemId,
   }) async {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
+      // Itemコレクションと同一IDを利用
+      final purchaseId = PurchaseId(itemId.value);
       // 削除前の状態を保持
       final docRef = ref.read(
         purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),

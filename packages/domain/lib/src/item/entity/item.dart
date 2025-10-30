@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:packages_domain/item.dart';
-import 'package:packages_domain/src/item/entity/item_image.dart';
 
 part 'item.freezed.dart';
 

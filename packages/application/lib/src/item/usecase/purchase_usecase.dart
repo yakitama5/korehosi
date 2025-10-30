@@ -78,7 +78,7 @@ class PurchaseUsecase with RunUsecaseMixin {
 
   /// 欲しい物の更新
   Future<void> update({
-    required PurchaseId purchaseId,
+    required ItemId itemId,
     int? price,
     String? buyerName,
     DateTime? planDate,
@@ -103,7 +103,7 @@ class PurchaseUsecase with RunUsecaseMixin {
       await ref
           .read(purchaseRepositoryProvider)
           .update(
-            purchaseId: purchaseId,
+            itemId: itemId,
             groupId: groupId,
             price: price,
             buyerName: buyerName,
@@ -117,7 +117,7 @@ class PurchaseUsecase with RunUsecaseMixin {
   );
 
   /// 購入情報の削除
-  Future<void> delete({required PurchaseId purchaseId}) => execute(
+  Future<void> delete({required ItemId itemId}) => execute(
     ref,
     action: () async {
       // グループ所属判定
@@ -132,7 +132,7 @@ class PurchaseUsecase with RunUsecaseMixin {
 
       await ref
           .read(purchaseRepositoryProvider)
-          .delete(groupId: groupId, purchaseId: purchaseId);
+          .delete(groupId: groupId, itemId: itemId);
     },
   );
 }

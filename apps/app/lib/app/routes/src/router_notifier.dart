@@ -71,7 +71,7 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
     if (routeState.pathParameters.containsKey('itemId')) {
       final itemId = routeState.pathParameters['itemId']!;
       final exists = await ref.watch(
-        currentGroupItemProvider(
+        itemProvider(
           itemId: ItemId(itemId),
         ).selectAsync((data) => data != null),
       );

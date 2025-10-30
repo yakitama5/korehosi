@@ -3,8 +3,8 @@ import 'package:infrastructure_shared_preferences/common.dart';
 import 'package:infrastructure_shared_preferences/src/common/enum/preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:packages_core/extension.dart';
+import 'package:packages_domain/designsystem.dart';
 import 'package:packages_domain/group.dart';
-import 'package:packages_domain/src/designsystem/value_object/view_layout.dart';
 import 'package:packages_domain/user.dart';
 
 /// FCMトークンタイムスタンプの日付形式

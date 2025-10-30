@@ -9,9 +9,9 @@ import 'package:packages_application/common.dart';
 import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 
-/// 購入金額の合計を表すCard
-class SumPriceChartCard extends HookConsumerWidget {
-  const SumPriceChartCard({super.key, this.onTap});
+/// 月別に購入金額の合計を表すCard
+class MonthlyTotalsPurchasesChartCard extends HookConsumerWidget {
+  const MonthlyTotalsPurchasesChartCard({super.key, this.onTap});
 
   final VoidCallback? onTap;
 
@@ -19,15 +19,15 @@ class SumPriceChartCard extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = useTextTheme();
 
-    final price = ref.watch(buyedSumPriceProvider).value;
-    final currencyPrice = price?.formatCurrency(
-      locale: AppLocaleUtils.findDeviceLocale().languageCode,
-    );
-    final spots = ref.watch(monthlySumPriceChartSpotsProvider).value;
+    // チャートデータを取得
+    final data = ref.watch(monthlyTotalsPurchasesChartDataProvider).value;
     // 一瞬なのでローディング表示は行わない
-    if (currencyPrice == null || spots == null) {
+    if (data == null) {
       return const SizedBox.shrink();
     }
+
+    final currencyPrice = data.monthlyTotalsPurchases.allTimeTotalPrice
+        .formatCurrency(locale: AppLocaleUtils.findDeviceLocale().languageCode);
 
     return ChartCard(
       onTap: onTap,
@@ -41,7 +41,7 @@ class SumPriceChartCard extends HookConsumerWidget {
             child: Text(currencyPrice, style: textTheme.headlineLarge),
           ),
           const Gap(16),
-          SizedBox(height: 240, child: _TotalPriceLinerChart(spots: spots)),
+          SizedBox(height: 240, child: _TotalPriceLinerChart(chartData: data)),
         ],
       ),
     );
@@ -50,22 +50,24 @@ class SumPriceChartCard extends HookConsumerWidget {
 
 /// 購入金額の合計を表す折れ線グラフ
 class _TotalPriceLinerChart extends HookConsumerWidget {
-  const _TotalPriceLinerChart({required this.spots});
+  const _TotalPriceLinerChart({required this.chartData});
 
-  final List<FlSpot> spots;
+  final MonthlyTotalsPurchasesChartData chartData;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // 期間を取得
+    final range = ref.watch(monthlyTotalsYearMonthRangeNotifierProvider);
+
     final colorScheme = useColorScheme();
     final textTheme = useTextTheme();
-    final range = ref.watch(monthlySumPriceChartRangeProvider);
 
     return Stack(
       children: [
         GestureDetector(
           onHorizontalDragEnd: (details) {
             final notifier = ref.read(
-              monthlySumPriceChartRangeProvider.notifier,
+              monthlyTotalsYearMonthRangeNotifierProvider.notifier,
             );
             if (details.primaryVelocity == null) {
               return;
@@ -96,15 +98,15 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
               ),
 
               // 期間は変更可能
-              minX: range.$1,
-              maxX: range.$2,
+              minX: range.from.toDouble(),
+              maxX: range.to.toDouble(),
 
               // 実際の線グラフ
               lineBarsData: [
                 LineChartBarData(
                   isStrokeCapRound: true,
                   color: colorScheme.primary,
-                  spots: spots,
+                  spots: chartData.spots,
                 ),
               ],
 
@@ -147,8 +149,9 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
           child: IconButton(
             icon: const Icon(Icons.keyboard_arrow_left_rounded),
             tooltip: commonI18n.common.prev,
-            onPressed: () =>
-                ref.read(monthlySumPriceChartRangeProvider.notifier).prev(),
+            onPressed: () => ref
+                .read(monthlyTotalsYearMonthRangeNotifierProvider.notifier)
+                .prev(),
           ),
         ),
         Align(
@@ -158,8 +161,9 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
             child: IconButton(
               icon: const Icon(Icons.keyboard_arrow_right_rounded),
               tooltip: commonI18n.common.next,
-              onPressed: () =>
-                  ref.read(monthlySumPriceChartRangeProvider.notifier).next(),
+              onPressed: () => ref
+                  .read(monthlyTotalsYearMonthRangeNotifierProvider.notifier)
+                  .next(),
             ),
           ),
         ),
