@@ -2,33 +2,34 @@
 
 // ignore_for_file: type=lint, duplicate_ignore
 
-part of 'monthly_sum_price_chart_range_provider.dart';
+part of 'monthly_totals_year_month_range_notifier_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$monthlySumPriceChartRangeHash() =>
-    r'9f8017591ce3634a96bd40bf360d72c78c449d80';
+String _$monthlyTotalsYearMonthRangeNotifierHash() =>
+    r'47b2a28826a40b461e662bbc91463d6e9aaf2046';
 
 /// 月間合計金額グラフの範囲
 ///
-/// Copied from [MonthlySumPriceChartRange].
-@ProviderFor(MonthlySumPriceChartRange)
-final monthlySumPriceChartRangeProvider =
+/// Copied from [MonthlyTotalsYearMonthRangeNotifier].
+@ProviderFor(MonthlyTotalsYearMonthRangeNotifier)
+final monthlyTotalsYearMonthRangeNotifierProvider =
     AutoDisposeNotifierProvider<
-      MonthlySumPriceChartRange,
-      (double, double)
+      MonthlyTotalsYearMonthRangeNotifier,
+      YearMonthRange
     >.internal(
-      MonthlySumPriceChartRange.new,
-      name: r'monthlySumPriceChartRangeProvider',
+      MonthlyTotalsYearMonthRangeNotifier.new,
+      name: r'monthlyTotalsYearMonthRangeNotifierProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$monthlySumPriceChartRangeHash,
+          : _$monthlyTotalsYearMonthRangeNotifierHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$MonthlySumPriceChartRange = AutoDisposeNotifier<(double, double)>;
+typedef _$MonthlyTotalsYearMonthRangeNotifier =
+    AutoDisposeNotifier<YearMonthRange>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

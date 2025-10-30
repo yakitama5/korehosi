@@ -11,6 +11,13 @@ abstract class YearMonth with _$YearMonth {
   @Assert('month >= 1 && month <= 12')
   const factory YearMonth({required int year, required int month}) = _YearMonth;
 
+  /// DateTimeからYearMonthを生成
+  factory YearMonth.fromDateTime(DateTime dt) =>
+      YearMonth(year: dt.year, month: dt.month);
+
+  /// DateTimeへ変換
+  DateTime toDateTime() => DateTime(year, month);
+
   /// 年月同士の比較
   int compareTo(YearMonth other) {
     final a = DateTime(year, month);

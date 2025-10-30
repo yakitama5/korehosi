@@ -1,9 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_application/src/analyze/state/monthly_sum_price_chart_date_range_provider.dart';
-import 'package:packages_application/src/analyze/state/monthly_sum_price_provider.dart';
-import 'package:packages_application/src/common/extension/date_time_extension.dart';
-import 'package:packages_application/src/common/extension/date_time_range_extension.dart';
+import 'package:packages_application/analyze.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'monthly_sum_price_chart_spots_provider.g.dart';
@@ -11,15 +8,16 @@ part 'monthly_sum_price_chart_spots_provider.g.dart';
 /// 分析で利用する月別の購入金額のグラフデータを管理
 @riverpod
 Future<List<FlSpot>> monthlySumPriceChartSpots(Ref ref) async {
-  // グラフ用データを取得
-  final data = await ref.watch(monthlySumPriceProvider.future);
+  // 集計する期間のデータを取得
+  final range = ref.watch(monthlyTotalsYearMonthRangeNotifierProvider);
+  final monthlyTotals = await ref.watch(
+    monthlyTotalsPurchasesProvider(range: range).future,
+  );
 
-  // 月別に集計
-  final now = DateTime.now().firstDayOfTheMonth;
-  final range = ref.watch(monthlySumPriceChartDateRangeProvider);
-  return range.mapByMonthly((dt, index) {
-    final monthlyData = data[dt];
-    final diff = now.diffMonth(dt);
-    return FlSpot(diff.toDouble(), monthlyData?.sumPrice.toDouble() ?? 0);
-  });
+  // 各軸用のデータに変換
+  return monthlyTotals.monthlyTotals.map((e) {
+    final x = (e.yearMonth.year * 100 + e.yearMonth.month).toDouble();
+    final y = e.totalPrice.toDouble();
+    return FlSpot(x, y);
+  }).toList();
 }

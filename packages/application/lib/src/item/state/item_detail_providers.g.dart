@@ -28,7 +28,7 @@ final _itemIdProvider = AutoDisposeProvider<ItemId?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef _ItemIdRef = AutoDisposeProviderRef<ItemId?>;
-String _$itemHash() => r'eeb8aba393b91ebd02124be9914a963969cf61af';
+String _$itemHash() => r'e111dd95b1e7280f6c9b87b3948437c0c2754779';
 
 /// 明細表示対象となる欲しい物のEntityを管理するProvider
 /// `_itemIdProvider`に依存する
