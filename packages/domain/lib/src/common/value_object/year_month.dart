@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'year_month.freezed.dart';
@@ -10,6 +12,7 @@ abstract class YearMonth with _$YearMonth {
   @Assert('year >= 1990')
   @Assert('month >= 1 && month <= 12')
   const factory YearMonth({required int year, required int month}) = _YearMonth;
+  const YearMonth._();
 
   /// DateTimeからYearMonthを生成
   factory YearMonth.fromDateTime(DateTime dt) =>

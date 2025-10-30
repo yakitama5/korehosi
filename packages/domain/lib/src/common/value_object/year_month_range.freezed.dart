@@ -224,8 +224,8 @@ return $default(_that.from,_that.to);case _:
 /// @nodoc
 
 
-class _YearMonthRange implements YearMonthRange {
-  const _YearMonthRange({required this.from, required this.to}): assert(from.compareTo(to) > 0);
+class _YearMonthRange extends YearMonthRange {
+   _YearMonthRange({required this.from, required this.to}): assert(from.compareTo(to) > 0),super._();
   
 
 @override final  YearMonth from;

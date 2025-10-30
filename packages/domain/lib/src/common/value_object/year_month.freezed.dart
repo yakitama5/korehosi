@@ -206,8 +206,8 @@ return $default(_that.year,_that.month);case _:
 /// @nodoc
 
 
-class _YearMonth implements YearMonth {
-  const _YearMonth({required this.year, required this.month}): assert(year >= 1990),assert(month >= 1 && month <= 12);
+class _YearMonth extends YearMonth {
+  const _YearMonth({required this.year, required this.month}): assert(year >= 1990),assert(month >= 1 && month <= 12),super._();
   
 
 @override final  int year;

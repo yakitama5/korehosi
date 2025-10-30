@@ -10,10 +10,9 @@ typedef YearMonthRangeMapper<T> = T Function(YearMonth yearMonth, int index);
 abstract class YearMonthRange with _$YearMonthRange {
   // From/Toの逆転はNG
   @Assert('from.compareTo(to) > 0')
-  const factory YearMonthRange({
-    required YearMonth from,
-    required YearMonth to,
-  }) = _YearMonthRange;
+  factory YearMonthRange({required YearMonth from, required YearMonth to}) =
+      _YearMonthRange;
+  YearMonthRange._();
 
   /// 月別に変換処理を行う
   List<T> mapByMonthly<T>(YearMonthRangeMapper<T> mapper) {

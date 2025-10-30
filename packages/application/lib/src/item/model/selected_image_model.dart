@@ -8,7 +8,7 @@ part 'selected_image_model.freezed.dart';
 @freezed
 abstract class SelectedImageModel with _$SelectedImageModel {
   // どちらか片方は必ず値を設定することを保証する
-  @Assert('imageUrl != null || uploadFile != null')
+  @Assert('savedImage != null || uploadFile != null')
   const factory SelectedImageModel({ItemImage? savedImage, XFile? uploadFile}) =
       _SelectedImageModel;
 }

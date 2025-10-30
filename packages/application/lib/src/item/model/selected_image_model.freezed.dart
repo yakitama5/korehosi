@@ -219,7 +219,7 @@ return $default(_that.savedImage,_that.uploadFile);case _:
 
 
 class _SelectedImageModel implements SelectedImageModel {
-  const _SelectedImageModel({this.savedImage, this.uploadFile}): assert(imageUrl != null || uploadFile != null);
+  const _SelectedImageModel({this.savedImage, this.uploadFile}): assert(savedImage != null || uploadFile != null);
   
 
 @override final  ItemImage? savedImage;
