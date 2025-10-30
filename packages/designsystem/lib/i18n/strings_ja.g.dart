@@ -243,13 +243,17 @@ class TranslationsExceptionsJa {
 
 	// Translations
 
-	/// ja: '(deleted) {削除済です。} (updateTargetNotFound) {保存に失敗しました、あらためて操作を行ってください。} (createDynamicLinkUnknown) {招待リンクの作成に失敗しました。} (joinGroupPolicyJoinedGroup) {すでに参加しています。} (joinGroupPolicyExpired) {招待リンクの有効期限が切れています。} (joinGroupPolicyNotAuth) {認証エラーが発生しました。} (joinGroupPolicyLimitOver) {グループの参加上限(5件)に達しました。} (joinGroupPolicyInvalidShareLink) {招待リンクが正しくありません。} (registrationItemPolicyLimitOver) {登録数の上限に達しました。 購入済のものを削除するか、プレミアムプランに変更して下さい。} (signInPolicyLinkedAccount) {すでに連携済のアカウントです。} (googleSignInUnknown) {Google認証に失敗しました。} (appInPurchasePolicyPackageNotExist) {購入処理に失敗しました。} (appInPurchasePolicyPackageNotActive) {購入処理に失敗しました。}'
+	/// ja: '(deleted) {削除済です。} (updateTargetNotFound) {保存に失敗しました、あらためて操作を行ってください。} (notSelectedGroup) {グループが選択されていません。 グループを選択してください。} (notAuth) {ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。} (createDynamicLinkUnknown) {招待リンクの作成に失敗しました。} (joinGroupPolicyJoinedGroup) {すでに参加しています。} (joinGroupPolicyExpired) {招待リンクの有効期限が切れています。} (joinGroupPolicyNotAuth) {認証エラーが発生しました。} (joinGroupPolicyLimitOver) {グループの参加上限(5件)に達しました。} (joinGroupPolicyInvalidShareLink) {招待リンクが正しくありません。} (registrationItemPolicyLimitOver) {登録数の上限に達しました。 購入済のものを削除するか、プレミアムプランに変更して下さい。} (signInPolicyLinkedAccount) {すでに連携済のアカウントです。} (googleSignInUnknown) {Google認証に失敗しました。} (appInPurchasePolicyPackageNotExist) {購入処理に失敗しました。} (appInPurchasePolicyPackageNotActive) {購入処理に失敗しました。}'
 	String businessException({required BusinessExceptionType context}) {
 		switch (context) {
 			case BusinessExceptionType.deleted:
 				return '削除済です。';
 			case BusinessExceptionType.updateTargetNotFound:
 				return '保存に失敗しました、あらためて操作を行ってください。';
+			case BusinessExceptionType.notSelectedGroup:
+				return 'グループが選択されていません。 グループを選択してください。';
+			case BusinessExceptionType.notAuth:
+				return 'ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。';
 			case BusinessExceptionType.createDynamicLinkUnknown:
 				return '招待リンクの作成に失敗しました。';
 			case BusinessExceptionType.joinGroupPolicyJoinedGroup:
@@ -643,6 +647,10 @@ extension on Translations {
 						return '削除済です。';
 					case BusinessExceptionType.updateTargetNotFound:
 						return '保存に失敗しました、あらためて操作を行ってください。';
+					case BusinessExceptionType.notSelectedGroup:
+						return 'グループが選択されていません。 グループを選択してください。';
+					case BusinessExceptionType.notAuth:
+						return 'ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。';
 					case BusinessExceptionType.createDynamicLinkUnknown:
 						return '招待リンクの作成に失敗しました。';
 					case BusinessExceptionType.joinGroupPolicyJoinedGroup:

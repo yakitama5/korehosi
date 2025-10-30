@@ -195,6 +195,10 @@ class _TranslationsExceptionsEn extends TranslationsExceptionsJa {
 				return '削除済です。';
 			case BusinessExceptionType.updateTargetNotFound:
 				return '保存に失敗しました、あらためて操作を行ってください。';
+			case BusinessExceptionType.notSelectedGroup:
+				return 'グループが選択されていません。 グループを選択してください。';
+			case BusinessExceptionType.notAuth:
+				return 'ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。';
 			case BusinessExceptionType.createDynamicLinkUnknown:
 				return '招待リンクの作成に失敗しました。';
 			case BusinessExceptionType.joinGroupPolicyJoinedGroup:
@@ -505,6 +509,10 @@ extension on TranslationsEn {
 						return '削除済です。';
 					case BusinessExceptionType.updateTargetNotFound:
 						return '保存に失敗しました、あらためて操作を行ってください。';
+					case BusinessExceptionType.notSelectedGroup:
+						return 'グループが選択されていません。 グループを選択してください。';
+					case BusinessExceptionType.notAuth:
+						return 'ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。';
 					case BusinessExceptionType.createDynamicLinkUnknown:
 						return '招待リンクの作成に失敗しました。';
 					case BusinessExceptionType.joinGroupPolicyJoinedGroup:

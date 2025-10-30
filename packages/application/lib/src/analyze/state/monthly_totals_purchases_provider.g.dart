@@ -9,7 +9,7 @@ part of 'monthly_totals_purchases_provider.dart';
 // **************************************************************************
 
 String _$monthlyTotalsPurchasesHash() =>
-    r'484148b142c50f546bc0cfb8126ee956cd0b99fa';
+    r'7ef72722198027695976129fa8867f2590e70572';
 
 /// Copied from Dart SDK
 class _SystemHash {
