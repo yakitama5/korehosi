@@ -20,13 +20,19 @@ class ItemsSearchQueryNotifier extends _$ItemsSearchQueryNotifier {
     ),
   );
 
-  ItemsSearchQuery copyWith({
-    double? minimumWishRank,
-    List<PurchaseStatus>? purchaseStatuses,
-    ItemsOrder? itemsOrder,
-  }) => state.copyWith(
-    itemsOrder: itemsOrder ?? state.itemsOrder,
-    purchaseStatuses: purchaseStatuses ?? state.purchaseStatuses,
-    minimumWishRank: minimumWishRank ?? state.minimumWishRank,
-  );
+  void changePurchaseStatus(List<PurchaseStatus> purchaseStatuses) {
+    state = state.copyWith(purchaseStatuses: purchaseStatuses);
+  }
+
+  void changeItemsOrder(ItemsOrder itemsOrder) {
+    state = state.copyWith(itemsOrder: itemsOrder);
+  }
+
+  void changeMinimumWishRank(double minimumWishRank) {
+    state = state.copyWith(minimumWishRank: minimumWishRank);
+  }
+
+  void resetMinimumWishRank() {
+    state = state.copyWith(minimumWishRank: null);
+  }
 }

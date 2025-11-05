@@ -38,26 +38,35 @@ class FirebaseItemRepository implements ItemRepository {
 
     const pageSize = 10;
     final limit = page * pageSize;
-    final offset = page - 1 * pageSize;
+    final offset = (page - 1) * pageSize;
 
-    final totalQuery = ref
+    // 明細の取得
+    var itemsQuery = ref
         .read(itemCollectionRefProvider(groupId: groupId))
-        .where('wishRank', isGreaterThanOrEqualTo: query.minimumWishRank)
         .orderBy(sortFieldName, descending: descending);
 
-    final totalCount = await totalQuery.count().get();
+    // 絞り込み
+    if (query.minimumWishRank != null) {
+      itemsQuery = itemsQuery.where(
+        'wishRank',
+        isGreaterThanOrEqualTo: query.minimumWishRank,
+      );
+    }
 
-    final snap = await ref
-        .read(itemCollectionRefProvider(groupId: groupId))
-        .where('wishRank', isGreaterThanOrEqualTo: query.minimumWishRank)
-        .orderBy(sortFieldName, descending: descending)
-        // ページング
-        .startAt([offset])
-        .limit(limit)
-        .get();
+    // 全件数の取得
+    final totalCount = await itemsQuery.count().get();
+
+    // データの取得
+    final docs =
+        (await itemsQuery
+                // ページング (読み取りコストはかかるが、オフセット方を採用する)
+                .limit(limit)
+                .get())
+            .docs
+            .skip(offset);
 
     final items = await Future.wait(
-      snap.docs.map((e) async {
+      docs.map((e) async {
         // 購入情報の取得
         final itemId = ItemId(e.id);
         final purchase = await _purchaseRepository.fetchByItemId(

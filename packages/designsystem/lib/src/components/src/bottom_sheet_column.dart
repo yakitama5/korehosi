@@ -46,10 +46,8 @@ class BottomSheetCancelButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(BuildContext context) => TextButton(
-    onPressed: () => Navigator.of(context).pop(),
-    child: Text(commonI18n.common.cancel),
-  );
+  Widget build(BuildContext context) =>
+      TextButton(onPressed: onPressed, child: Text(commonI18n.common.cancel));
 }
 
 /// BottomSheetで利用を想定する共通の「リセット」ボタン
@@ -61,7 +59,7 @@ class BottomSheetResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => Navigator.of(context).pop<double>(-1),
+      onPressed: onPressed,
       child: Text(commonI18n.common.reset),
     );
   }

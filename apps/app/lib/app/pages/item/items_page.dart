@@ -13,6 +13,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_core/util.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/designsystem.dart';
 import 'package:packages_domain/item.dart';
@@ -23,8 +24,8 @@ class ItemsPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 初期状態はドメイン層に定義
-    const viewLayout = ViewLayout.list;
-    final query = ref.read(itemsSearchQueryNotifierProvider);
+    final viewLayout = ref.watch(itemsViewLayoutNotifierProvider);
+    final query = ref.watch(itemsSearchQueryNotifierProvider);
     final scrollController = useScrollController();
 
     return Scaffold(
@@ -45,45 +46,48 @@ class ItemsPage extends HookConsumerWidget {
               child: Material(
                 child: Padding(
                   padding: const EdgeInsetsDirectional.only(start: 8, end: 8),
-                  child: Row(
-                    children: [
-                      ItemSortKeyChip(
-                        onChanged: (orderKey) => onSortChanged(
-                          ref,
-                          orderKey: orderKey,
-                          itemsOrder: query.itemsOrder,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ItemSortKeyChip(
+                          onChanged: (orderKey) => onSortChanged(
+                            ref,
+                            orderKey: orderKey,
+                            itemsOrder: query.itemsOrder,
+                          ),
+                          sortKey: query.itemsOrder.key,
+                          sortOrder: query.itemsOrder.sortOrder,
                         ),
-                        sortKey: query.itemsOrder.key,
-                        sortOrder: query.itemsOrder.sortOrder,
-                      ),
-                      const Gap(12),
-                      PurchaseStatusChip(
-                        purchaseStatuses: query.purchaseStatuses,
-                        onApply: (value) => onApplyPurchaseStatuses(
-                          ref,
-                          purchaseStatuses: value,
+                        const Gap(12),
+                        PurchaseStatusChip(
+                          purchaseStatuses: query.purchaseStatuses,
+                          onApply: (value) => onApplyPurchaseStatuses(
+                            ref,
+                            purchaseStatuses: value,
+                          ),
                         ),
-                      ),
-                      const Gap(12),
-                      WishRankChip(
-                        wishRank: query.minimumWishRank,
-                        onApply: (value) =>
-                            onChangeWishRank(ref, wishRank: value),
-                        onReset: () => onChangeWishRank(ref, wishRank: null),
-                      ),
-                      const Gap(12),
-                      ViewLayoutChip(
-                        viewLayout: viewLayout,
-                        onChanged: (v) => ref
-                            .read(itemsViewLayoutNotifierProvider.notifier)
-                            .updateViewLayout(viewLayout: v),
-                      ),
-                    ],
+                        const Gap(12),
+                        WishRankChip(
+                          wishRank: query.minimumWishRank,
+                          onApply: (value) =>
+                              onChangeWishRank(ref, wishRank: value),
+                          onReset: () => onResetWishRank(ref),
+                        ),
+                        const Gap(12),
+                        ViewLayoutChip(
+                          viewLayout: viewLayout,
+                          onChanged: (v) => ref
+                              .read(itemsViewLayoutNotifierProvider.notifier)
+                              .updateViewLayout(viewLayout: v),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-            const _SliverBody(viewLayout: viewLayout),
+            _SliverBody(viewLayout: viewLayout),
           ],
         ),
       ),
@@ -107,9 +111,11 @@ class ItemsPage extends HookConsumerWidget {
     required ItemsOrder itemsOrder,
   }) {
     // Providerに変更を通知
+    logger.d('onSortChanged');
+    final selectOrderKey = itemsOrder.selectOrderKey(orderKey);
     ref
         .read(itemsSearchQueryNotifierProvider.notifier)
-        .copyWith(itemsOrder: itemsOrder.selectOrderKey(orderKey));
+        .changeItemsOrder(selectOrderKey);
   }
 
   /// 購入状況が選択されたイベント
@@ -120,15 +126,21 @@ class ItemsPage extends HookConsumerWidget {
     // Providerに変更を通知
     ref
         .read(itemsSearchQueryNotifierProvider.notifier)
-        .copyWith(purchaseStatuses: purchaseStatuses.toList());
+        .changePurchaseStatus(purchaseStatuses.toList());
   }
 
   /// ほしい度が変更されたイベント
-  void onChangeWishRank(WidgetRef ref, {required double? wishRank}) {
+  void onChangeWishRank(WidgetRef ref, {required double wishRank}) {
     // Providerに変更を通知
     ref
         .read(itemsSearchQueryNotifierProvider.notifier)
-        .copyWith(minimumWishRank: wishRank);
+        .changeMinimumWishRank(wishRank);
+  }
+
+  /// ほしい度がリセットされたイベント
+  void onResetWishRank(WidgetRef ref) {
+    // Providerに変更を通知
+    ref.read(itemsSearchQueryNotifierProvider.notifier).resetMinimumWishRank();
   }
 
   /// 追加ボタンが押下されたイベント
@@ -178,6 +190,11 @@ class _SliverBody extends HookConsumerWidget {
 
         return response.when(
           data: (data) {
+            // TODO(yakitama5): 空表示を実装
+            if (data.items.isEmpty) {
+              return const SizedBox.shrink();
+            }
+
             final item = data.items[indexInPage];
             return switch (viewLayout) {
               ViewLayout.grid => ItemsCard(

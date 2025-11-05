@@ -7,29 +7,33 @@ class NetworkImageWithPlaceholder extends StatelessWidget {
     super.key,
     required this.imageUrl,
     this.semanticLabel,
+    this.height = double.infinity,
+    this.width = double.infinity,
+    this.fit,
   });
-
-  static const _imageHeight = 120.0;
 
   final String? imageUrl;
   final String? semanticLabel;
+  final double height;
+  final double width;
+  final BoxFit? fit;
 
   @override
   Widget build(BuildContext context) {
     // 画像指定無しの場合はダミー表示
     if (imageUrl?.isEmpty ?? true) {
-      return const _EmptyImage(height: _imageHeight, width: double.infinity);
+      return _EmptyImage(height: height, width: width);
     }
 
     return Semantics(
       label: semanticLabel,
       child: CachedNetworkImage(
         imageUrl: imageUrl!,
-        height: _imageHeight,
-        width: double.infinity,
-        fit: BoxFit.fitWidth,
+        height: height,
+        width: width,
+        fit: fit,
         placeholder: (context, url) =>
-            const ShimmerWidget.rectangular(height: _imageHeight),
+            ShimmerWidget.rectangular(height: height, width: width),
       ),
     );
   }

@@ -35,9 +35,9 @@ class BottomSheetMultiSelectActionChip<T> extends StatelessWidget {
     return LeadingIconInputChip(
       label: label,
       iconData: iconData,
-      onPressed: () async {
+      onPressed: () {
         // BottomSheetの表示
-        await showModalBottomSheet<T>(
+        showModalBottomSheet<T>(
           context: context,
           builder: (context) => _MultiSelectBottomSheet(
             title: title,
@@ -98,11 +98,21 @@ class _MultiSelectBottomSheet<T> extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             BottomSheetCancelButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                Navigator.of(context).pop();
+                if (onCancel != null) {
+                  onCancel!();
+                }
+              },
             ),
             const Gap(8),
             BottomSheetApplyButton(
-              onPressed: () => Navigator.of(context).pop(selected.value),
+              onPressed: () {
+                Navigator.of(context).pop();
+                if (onApply != null) {
+                  onApply!(selected.value);
+                }
+              },
             ),
           ],
         ),

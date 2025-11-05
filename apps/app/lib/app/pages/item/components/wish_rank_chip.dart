@@ -33,9 +33,9 @@ class WishRankChip extends StatelessWidget {
     return LeadingIconInputChip(
       label: Text(label),
       iconData: Icons.arrow_drop_down,
-      onPressed: () async {
+      onPressed: () {
         // BottomSheetの表示
-        await showModalBottomSheet<double>(
+        showModalBottomSheet<double>(
           context: context,
           builder: (context) => _BottomSheet(
             title: BottomSheetTitleText(i18n.item.common.wishRank),
@@ -70,6 +70,7 @@ class _BottomSheet extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final wishRank = useState<double>(initial ?? 0);
+    final navigator = Navigator.of(context);
 
     return BottomSheetColumn(
       title: title,
@@ -83,16 +84,30 @@ class _BottomSheet extends HookWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            BottomSheetCancelButton(onPressed: onCancel),
+            BottomSheetCancelButton(
+              onPressed: () {
+                navigator.pop();
+                if (onCancel != null) {
+                  onCancel!();
+                }
+              },
+            ),
             const Gap(8),
-            BottomSheetResetButton(onPressed: onReset),
+            BottomSheetResetButton(
+              onPressed: () {
+                navigator.pop();
+                if (onReset != null) {
+                  onReset!();
+                }
+              },
+            ),
             const Gap(8),
             BottomSheetApplyButton(
               onPressed: () {
-                if (onApply == null) {
-                  return;
+                navigator.pop();
+                if (onApply != null) {
+                  onApply!(wishRank.value);
                 }
-                onApply!(wishRank.value);
               },
             ),
           ],

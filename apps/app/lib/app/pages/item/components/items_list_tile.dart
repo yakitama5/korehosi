@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/pages/item/components/item_images.dart';
 import 'package:flutter_app/app/pages/item/components/items_empty_image.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:packages_designsystem/widgets.dart';
@@ -13,14 +12,22 @@ class ItemsListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 画像は先頭1件を利用する
+    final image = item.images?.first;
+    // TODO(yakitama5): レイアウト調整
+
     return ListTile(
       onTap: onTap,
       title: Text(item.name),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-        child: (item.images?.isEmpty ?? true)
+        child: (image == null)
             ? const ItemsEmptyImage(width: 64, height: 64)
-            : ItemImages(images: item.images, autoPlay: true),
+            : NetworkImageWithPlaceholder(
+                imageUrl: image.url,
+                width: 64,
+                height: 64,
+              ),
       ),
       subtitle: Text(
         i18n.item.common.currencyFormat(price: item.purchase?.price ?? 0),

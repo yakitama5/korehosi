@@ -8,9 +8,10 @@ class ItemAnalyzeQueryNotifier extends _$ItemAnalyzeQueryNotifier {
   @override
   ItemAnalyzeQuery build() => const ItemAnalyzeQuery();
 
-  ItemAnalyzeQuery copyWith({String? wanterName, String? buyerName}) =>
-      state.copyWith(
-        wanterName: wanterName ?? state.wanterName,
-        buyerName: buyerName ?? state.buyerName,
-      );
+  void copyWith({String? wanterName, String? buyerName}) {
+    state = state.copyWith(
+      wanterName: wanterName ?? state.wanterName,
+      buyerName: buyerName ?? state.buyerName,
+    );
+  }
 }

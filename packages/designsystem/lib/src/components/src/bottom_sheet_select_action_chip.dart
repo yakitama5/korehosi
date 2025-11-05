@@ -42,12 +42,8 @@ class BottomSheetSelectActionChip<T> extends StatelessWidget {
         // BottomSheetの表示
         final response = await showModalBottomSheet<T>(
           context: context,
-          builder: (context) => _BottomSheet(
-            title: title,
-            initial: initial,
-            actions: actions,
-            onChanged: onChanged,
-          ),
+          builder: (context) =>
+              _BottomSheet(title: title, initial: initial, actions: actions),
         );
 
         // 値の変更
@@ -60,16 +56,10 @@ class BottomSheetSelectActionChip<T> extends StatelessWidget {
 }
 
 class _BottomSheet<T> extends StatelessWidget {
-  const _BottomSheet({
-    required this.actions,
-    this.onChanged,
-    this.title,
-    this.initial,
-  });
+  const _BottomSheet({required this.actions, this.title, this.initial});
 
   final Widget? title;
   final List<BottomSheetAction<T>> actions;
-  final ValueChanged<T>? onChanged;
   final T? initial;
 
   @override
