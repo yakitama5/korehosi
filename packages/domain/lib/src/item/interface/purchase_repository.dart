@@ -28,6 +28,14 @@ abstract class PurchaseRepository {
     required ItemId itemId,
   });
 
+  /// 欲しい物の購入情報を取得
+  /// (更新 および 大人参照用の情報)
+  Future<Purchase?> fetchByItemIdWithAgeGroup({
+    required GroupId groupId,
+    required ItemId itemId,
+    required AgeGroup ageGroup,
+  });
+
   /// 購入情報を追加
   Future<void> add({
     required GroupId groupId,

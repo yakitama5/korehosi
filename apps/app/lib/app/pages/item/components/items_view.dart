@@ -23,9 +23,9 @@ class ItemsView extends HookConsumerWidget {
     final result = ref.watch(searchItemsProvider(page: 1)).valueOrNull;
 
     return Nested(
-      children: [
-        const ItemsGroupSelectionWarningListner(),
-        ItemsEmptyListner(totalCount: result?.totalCount),
+      children: const [
+        ItemsGroupSelectionWarningListner(),
+        ItemsEmptyListner(),
       ],
       child: SliverSwitchLayoutViewBuilder(
         viewLayout: viewLayout,

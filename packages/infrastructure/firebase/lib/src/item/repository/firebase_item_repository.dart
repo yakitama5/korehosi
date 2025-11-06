@@ -41,9 +41,17 @@ class FirebaseItemRepository implements ItemRepository {
     final offset = (page - 1) * pageSize;
 
     // 明細の取得
+    final purchaseStatusField = switch (ageGroup) {
+      AgeGroup.child => 'childViewPurchaseStatus',
+      AgeGroup.adult => 'purchaseStatus',
+    };
     var itemsQuery = ref
         .read(itemCollectionRefProvider(groupId: groupId))
-        .orderBy(sortFieldName, descending: descending);
+        .orderBy(sortFieldName, descending: descending)
+        .where(
+          purchaseStatusField,
+          whereIn: query.purchaseStatuses.map((e) => e.name),
+        );
 
     // 絞り込み
     if (query.minimumWishRank != null) {
@@ -69,9 +77,10 @@ class FirebaseItemRepository implements ItemRepository {
       docs.map((e) async {
         // 購入情報の取得
         final itemId = ItemId(e.id);
-        final purchase = await _purchaseRepository.fetchByItemId(
+        final purchase = await _purchaseRepository.fetchByItemIdWithAgeGroup(
           groupId: groupId,
           itemId: itemId,
+          ageGroup: ageGroup,
         );
 
         // 画像をURL化
@@ -86,41 +95,55 @@ class FirebaseItemRepository implements ItemRepository {
               List.empty(),
         );
 
-        return e.data().toDomainModel(purchase: purchase, images: images);
+        return e.data().toDomainModel(
+          purchase: purchase,
+          images: images,
+          purchaseStatus: purchase.status,
+        );
       }).toList(),
     );
 
-    final filterdItems = items.where((e) {
-      final purchaseStatus = e.purchase.status;
-      return query.purchaseStatuses.contains(purchaseStatus);
-    }).toList();
-
-    return PageInfo(items: filterdItems, totalCount: totalCount.count ?? 0);
-  }
-
-  @override
-  Stream<List<Item>> fetchByGroupId({required GroupId groupId}) {
-    return ref
-        .read(itemCollectionRefProvider(groupId: groupId))
-        .snapshots()
-        // 読み込み中のドキュメントが存在する場合はスキップ
-        .where(
-          (s) => s.docs
-              .where((element) => element.data().fieldValuePending)
-              .isEmpty,
-        )
-        .map((snap) => snap.docs.map((e) => e.data().toDomainModel()).toList());
+    return PageInfo(items: items, totalCount: totalCount.count ?? 0);
   }
 
   @override
   Future<Item?> fetchByGroupIdAndItemId({
     required GroupId groupId,
     required ItemId itemId,
-  }) {
-    return ref
+    required AgeGroup ageGroup,
+  }) async {
+    final snap = await ref
         .read(itemDocumentRefProvider(groupId: groupId, itemId: itemId))
-        .get()
-        .then((snap) => snap.data()?.toDomainModel());
+        .get();
+
+    if (!snap.exists) {
+      return null;
+    }
+
+    // 購入情報の取得
+    final item = snap.data()!;
+    final purchase = await _purchaseRepository.fetchByItemIdWithAgeGroup(
+      groupId: groupId,
+      itemId: itemId,
+      ageGroup: ageGroup,
+    );
+
+    // 画像をURL化
+    final storage = ref.read(firebaseStorageProvider);
+    final images = await Future.wait<ItemImage>(
+      item.imagesPath?.map((path) async {
+            final id = ImageId(path);
+            final url = await storage.ref(path).getDownloadURL();
+
+            return ItemImage(id: id, url: url);
+          }).toList() ??
+          List.empty(),
+    );
+    return item.toDomainModel(
+      purchaseStatus: purchase.status,
+      purchase: purchase,
+      images: images,
+    );
   }
 
   @override
@@ -151,6 +174,8 @@ class FirebaseItemRepository implements ItemRepository {
       urls: urls,
       wanterName: wanterName,
       wishSeason: wishSeason,
+      purchaseStatus: PurchaseStatus.notPurchased,
+      childViewPurchaseStatus: PurchaseStatus.notPurchased,
     );
 
     // 登録
@@ -162,7 +187,9 @@ class FirebaseItemRepository implements ItemRepository {
         serverTimestampBehavior: ServerTimestampBehavior.estimate,
       ),
     );
-    return addedDoc.data()!.toDomainModel();
+    return addedDoc.data()!.toDomainModel(
+      purchaseStatus: PurchaseStatus.notPurchased,
+    );
   }
 
   @override
@@ -178,12 +205,22 @@ class FirebaseItemRepository implements ItemRepository {
     List<String>? urls,
     String? memo,
   }) async {
+    // 更新前の内容を取得
+    final prevItem = await ref
+        .watch(itemDocumentRefProvider(groupId: groupId, itemId: itemId))
+        .get();
+
+    if (!prevItem.exists) {
+      throw const BusinessException(BusinessExceptionType.updateTargetNotFound);
+    }
+
     // 新規画像分をアップロード
     final uploadImageIds = await _uploadItemImage(
       uploadImages,
       groupId,
       itemId,
     );
+
     // 既存画像分の末尾に追加
     final imageIds = images?.map((e) => e.id).toList() ?? List<ImageId>.empty();
     final joinImageIds = imageIds + uploadImageIds;
@@ -197,6 +234,8 @@ class FirebaseItemRepository implements ItemRepository {
       memo: memo,
       urls: urls,
       wanterName: wanterName,
+      purchaseStatus: prevItem.data()!.purchaseStatus,
+      childViewPurchaseStatus: prevItem.data()!.childViewPurchaseStatus,
       wishSeason: wishSeason,
     );
 

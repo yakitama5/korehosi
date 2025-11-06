@@ -18,6 +18,7 @@ abstract class Item with _$Item {
     List<String>? urls,
     String? memo,
     Purchase? purchase,
+    required PurchaseStatus purchaseStatus,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _Item;

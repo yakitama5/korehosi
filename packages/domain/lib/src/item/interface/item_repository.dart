@@ -26,13 +26,11 @@ abstract class ItemRepository {
   });
 
   /// グループ内のほしい物を取得
-  Stream<List<Item>> fetchByGroupId({required GroupId groupId});
-
-  /// グループ内のほしい物を取得
   /// (一意指定)
   Future<Item?> fetchByGroupIdAndItemId({
     required GroupId groupId,
     required ItemId itemId,
+    required AgeGroup ageGroup,
   });
 
   /// ほしい物を追加

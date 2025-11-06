@@ -54,14 +54,22 @@ class ItemUsecase with RunUsecaseMixin {
   }
 
   /// 欲しい物の取得
-  Future<Item?> fetch({required GroupId? groupId, required ItemId itemId}) {
+  Future<Item?> fetch({
+    required GroupId? groupId,
+    required ItemId itemId,
+    required AgeGroup ageGroup,
+  }) {
     if (groupId == null) {
       throw const BusinessException(BusinessExceptionType.notSelectedGroup);
     }
 
     return ref
         .read(itemRepositoryProvider)
-        .fetchByGroupIdAndItemId(groupId: groupId, itemId: itemId);
+        .fetchByGroupIdAndItemId(
+          groupId: groupId,
+          itemId: itemId,
+          ageGroup: ageGroup,
+        );
   }
 
   /// 欲しい物の追加

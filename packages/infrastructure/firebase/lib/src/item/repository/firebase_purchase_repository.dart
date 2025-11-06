@@ -143,4 +143,18 @@ class FirebasePurchaseRepository implements PurchaseRepository {
           .set<FirestorePurchaseModel>(delDocRef, doc.data()!);
     });
   }
+
+  @override
+  Future<Purchase?> fetchByItemIdWithAgeGroup({
+    required GroupId groupId,
+    required ItemId itemId,
+    required AgeGroup ageGroup,
+  }) {
+    switch (ageGroup) {
+      case AgeGroup.child:
+        return fetchByItemIdForChild(groupId: groupId, itemId: itemId);
+      case AgeGroup.adult:
+        return fetchByItemId(groupId: groupId, itemId: itemId);
+    }
+  }
 }
