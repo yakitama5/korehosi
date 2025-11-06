@@ -14,7 +14,6 @@ class ItemsListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     // 画像は先頭1件を利用する
     final image = item.images?.first;
-    // TODO(yakitama5): レイアウト調整
 
     return ListTile(
       onTap: onTap,
@@ -22,11 +21,11 @@ class ItemsListTile extends StatelessWidget {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: (image == null)
-            ? const ItemsEmptyImage(width: 64, height: 64)
+            ? const ItemsEmptyImage(width: 96, height: double.infinity)
             : NetworkImageWithPlaceholder(
                 imageUrl: image.url,
-                width: 64,
-                height: 64,
+                width: 96,
+                fit: BoxFit.cover,
               ),
       ),
       subtitle: Text(
@@ -41,6 +40,6 @@ class ItemsShimmerListTileLeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ShimmerWidget.rectangular(height: 64, width: 64);
+    return const ShimmerWidget.rectangular(height: double.infinity, width: 96);
   }
 }

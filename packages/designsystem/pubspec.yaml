@@ -29,6 +29,8 @@ dependencies:
   nested: ^1.0.0
   packages_application:
     path: ../application
+  packages_core:
+    path: ../core
   packages_domain:
     path: ../domain
   responsive_framework: ^1.5.1

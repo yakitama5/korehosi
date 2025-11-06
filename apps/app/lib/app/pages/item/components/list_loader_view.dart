@@ -52,7 +52,7 @@ class _LoaderListTile extends StatelessWidget {
               width: double.infinity,
               height: ListLoaderView.boneHeight,
             ),
-          const LoaderBone(width: 64, height: ListLoaderView.boneHeight),
+          const LoaderBone(width: 96, height: ListLoaderView.boneHeight),
         ],
       ),
     );
