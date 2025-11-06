@@ -25,6 +25,7 @@ class FirebaseItemRepository implements ItemRepository {
   @override
   Future<PageInfo<Item>> searchItems({
     required int page,
+    required int pageSize,
     required GroupId groupId,
     required AgeGroup ageGroup,
     required ItemsSearchQuery query,
@@ -36,7 +37,6 @@ class FirebaseItemRepository implements ItemRepository {
     };
     final descending = query.itemsOrder.sortOrder == SortOrder.desc;
 
-    const pageSize = 10;
     final limit = page * pageSize;
     final offset = (page - 1) * pageSize;
 
@@ -89,7 +89,13 @@ class FirebaseItemRepository implements ItemRepository {
         return e.data().toDomainModel(purchase: purchase, images: images);
       }).toList(),
     );
-    return PageInfo(items: items, totalCount: totalCount.count ?? 0);
+
+    final filterdItems = items.where((e) {
+      final purchaseStatus = e.purchase.status;
+      return query.purchaseStatuses.contains(purchaseStatus);
+    }).toList();
+
+    return PageInfo(items: filterdItems, totalCount: totalCount.count ?? 0);
   }
 
   @override

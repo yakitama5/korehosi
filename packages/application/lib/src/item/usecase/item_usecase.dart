@@ -37,6 +37,7 @@ class ItemUsecase with RunUsecaseMixin {
         .read(itemRepositoryProvider)
         .searchItems(
           page: page,
+          pageSize: itemsPageConfig.pageSize,
           groupId: groupId,
           ageGroup: ageGroup,
           query: query,

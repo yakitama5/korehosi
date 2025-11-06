@@ -19,6 +19,7 @@ abstract class ItemRepository {
   // グループ内のほしいものを検索
   Future<PageInfo<Item>> searchItems({
     required int page,
+    required int pageSize,
     required GroupId groupId,
     required AgeGroup ageGroup,
     required ItemsSearchQuery query,
