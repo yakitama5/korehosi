@@ -3,11 +3,13 @@ import 'package:flutter_app/app/pages/item/components/items_card.dart';
 import 'package:flutter_app/app/pages/item/components/items_empty_view.dart';
 import 'package:flutter_app/app/pages/item/components/items_group_selection_warning_listner.dart';
 import 'package:flutter_app/app/pages/item/components/items_list_tile.dart';
+import 'package:flutter_app/app/routes/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/designsystem.dart';
+import 'package:packages_domain/item.dart';
 
 class ItemsView extends HookConsumerWidget {
   const ItemsView({super.key, required this.viewLayout});
@@ -45,12 +47,12 @@ class ItemsView extends HookConsumerWidget {
                 ViewLayout.grid => ItemsCard(
                   key: ValueKey(item),
                   item: item,
-                  onTap: () => onSelect(context, ref),
+                  onTap: () => onSelect(context, ref, item.id),
                 ),
                 ViewLayout.list => ItemsListTile(
                   key: ValueKey(item),
                   item: item,
-                  onTap: () => onSelect(context, ref),
+                  onTap: () => onSelect(context, ref, item.id),
                 ),
               };
             },
@@ -70,8 +72,8 @@ class ItemsView extends HookConsumerWidget {
     );
   }
 
-  void onSelect(BuildContext context, WidgetRef ref) {
-    // TODO(yakitama5): 後から実装
+  void onSelect(BuildContext context, WidgetRef ref, ItemId itemId) {
+    ItemRouteData(itemId.value).go(context);
   }
 }
 

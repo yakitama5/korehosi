@@ -20,7 +20,7 @@ class ItemsCard extends StatelessWidget {
     // 画像は先頭1件を利用する
     final image = item.images?.first;
 
-    return OutlinedCard(
+    return ElevatedCard(
       onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,

@@ -61,7 +61,7 @@ class ItemsPage extends HookConsumerWidget {
     }
 
     // グループが選択されていなければ、警告ダイアログを表示
-    if (currentGroup != null) {
+    if (currentGroup == null) {
       final messages = i18n.item.itemsPage.notSelectedGroupDialog;
       await showOkAlertDialog(
         context: context,
