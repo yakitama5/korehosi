@@ -10,7 +10,6 @@ export 'src/item/state/item_detail_providers.dart';
 export 'src/item/state/item_provider.dart';
 export 'src/item/state/items_search_query_notifier_provider.dart';
 export 'src/item/state/items_view_layout_notifier_provider.dart';
-export 'src/item/state/purchase_provider.dart';
 export 'src/item/state/search_items_provider.dart';
 export 'src/item/state/wanter_name_suggestion_provider.dart';
 export 'src/item/usecase/item_usecase.dart';
