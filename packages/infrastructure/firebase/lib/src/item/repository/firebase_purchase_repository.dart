@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_purchase_model.dart';
-import 'package:infrastructure_firebase/src/item/state/firestore_deleted_purchase_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
 import 'package:packages_domain/common.dart';
@@ -158,24 +157,17 @@ class FirebasePurchaseRepository implements PurchaseRepository {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
       final itemDocRef = ref.watch(
-        ItemDocumentRefProvider(groupId: groupId, itemId: itemId),
+        itemDocumentRefProvider(groupId: groupId, itemId: itemId),
       );
       // Itemコレクションと同一IDを利用
       final purchaseId = PurchaseId(itemId.value);
-      // 削除前の状態を保持
       final purchaseDocRef = ref.read(
         purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
       );
-      final delDocRef = ref.read(
-        dpurchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
-      );
-      final doc = await transaction.get(purchaseDocRef);
 
       transaction
           // ドキュメントの削除
           .delete(purchaseDocRef)
-          // 削除用ドキュメントの追加
-          .set<FirestorePurchaseModel>(delDocRef, doc.data()!)
           // 購入状況の更新
           .update(itemDocRef, {
             'purchaseStatus': PurchaseStatus.notPurchased.name,
