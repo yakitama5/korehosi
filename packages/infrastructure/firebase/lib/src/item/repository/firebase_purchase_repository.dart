@@ -73,15 +73,20 @@ class FirebasePurchaseRepository implements PurchaseRepository {
     );
 
     // 購入状況取得
-    final domainModel = purchase.toDomainModel();
+    final purchaseStatus = purchase
+        .purchaseStatus(ageGroup: AgeGroup.adult)
+        .name;
+    final childViewPurchaseStatus = purchase
+        .purchaseStatus(ageGroup: AgeGroup.child)
+        .name;
 
     return ref.watch(firestoreProvider).runTransaction((transaction) async {
       // 購入状況の登録
       transaction.set(purchaseDocRef, purchase)
       // 欲しいものドキュメントの購入状況を同時に更新する
       .update(itemDocRef, {
-        'purchaseStatus': domainModel.status(AgeGroup.adult),
-        'childViewPurchaseStatus': domainModel.status(AgeGroup.child),
+        'purchaseStatus': purchaseStatus,
+        'childViewPurchaseStatus': childViewPurchaseStatus,
       });
     });
   }
@@ -127,15 +132,20 @@ class FirebasePurchaseRepository implements PurchaseRepository {
     );
 
     // 購入状況取得
-    final domainModel = purchase.toDomainModel();
+    final purchaseStatus = purchase
+        .purchaseStatus(ageGroup: AgeGroup.adult)
+        .name;
+    final childViewPurchaseStatus = purchase
+        .purchaseStatus(ageGroup: AgeGroup.child)
+        .name;
 
     return ref.watch(firestoreProvider).runTransaction((transaction) async {
       // 購入状況の登録
       transaction.set(purchaseDocRef, purchase)
       // 欲しいものドキュメントの購入状況を同時に更新する
       .update(itemDocRef, {
-        'purchaseStatus': domainModel.status(AgeGroup.adult),
-        'childViewPurchaseStatus': domainModel.status(AgeGroup.child),
+        'purchaseStatus': purchaseStatus,
+        'childViewPurchaseStatus': childViewPurchaseStatus,
       });
     });
   }
@@ -147,22 +157,30 @@ class FirebasePurchaseRepository implements PurchaseRepository {
   }) async {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
+      final itemDocRef = ref.watch(
+        ItemDocumentRefProvider(groupId: groupId, itemId: itemId),
+      );
       // Itemコレクションと同一IDを利用
       final purchaseId = PurchaseId(itemId.value);
       // 削除前の状態を保持
-      final docRef = ref.read(
+      final purchaseDocRef = ref.read(
         purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
       );
       final delDocRef = ref.read(
         dpurchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
       );
-      final doc = await transaction.get(docRef);
+      final doc = await transaction.get(purchaseDocRef);
 
       transaction
           // ドキュメントの削除
-          .delete(docRef)
+          .delete(purchaseDocRef)
           // 削除用ドキュメントの追加
-          .set<FirestorePurchaseModel>(delDocRef, doc.data()!);
+          .set<FirestorePurchaseModel>(delDocRef, doc.data()!)
+          // 購入状況の更新
+          .update(itemDocRef, {
+            'purchaseStatus': PurchaseStatus.notPurchased.name,
+            'childViewPurchaseStatus': PurchaseStatus.notPurchased.name,
+          });
     });
   }
 }

@@ -116,6 +116,11 @@ class ItemUsecase with RunUsecaseMixin {
             memo: memo,
           );
 
+      // Providerへの反映
+      ref
+        ..invalidate(itemProvider)
+        ..invalidate(searchItemsProvider);
+
       // 通知処理
       final itemDetailPath = generateItemDetailRoute(item.id);
       final user = ref.read(authUserProvider).value;
@@ -176,6 +181,9 @@ class ItemUsecase with RunUsecaseMixin {
             urls: urls,
             memo: memo,
           );
+
+      // Providerへの反映
+      refreshItemProvideres();
     },
   );
 
@@ -193,9 +201,12 @@ class ItemUsecase with RunUsecaseMixin {
         );
       }
 
-      return ref
+      await ref
           .read(itemRepositoryProvider)
           .delete(groupId: groupId, itemId: itemId);
+
+      // Providerへの反映
+      refreshItemProvideres();
     },
   );
 
@@ -213,5 +224,14 @@ class ItemUsecase with RunUsecaseMixin {
         BusinessExceptionType.registrationItemPolicyLimitOver,
       );
     }
+  }
+
+  /// 各種欲しいものを管理しているProviderのリフレッシュ
+  void refreshItemProvideres() {
+    // Providerへの反映
+    ref
+      ..invalidate(itemProvider)
+      ..invalidate(searchItemsProvider)
+      ..invalidate(ItemDetailProviders.itemProvider);
   }
 }

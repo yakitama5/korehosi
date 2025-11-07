@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/item.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/state/current_group_provider.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
@@ -17,6 +18,8 @@ class PurchaseUsecase with RunUsecaseMixin {
   PurchaseUsecase(this.ref);
 
   final Ref ref;
+
+  ItemUsecase get _itemUsecase => ref.read(itemUsecaseProvider);
 
   /// 購入情報の取得
   Future<Purchase?> fetchByItemId({
@@ -65,6 +68,9 @@ class PurchaseUsecase with RunUsecaseMixin {
             memo: memo,
             userId: userId!,
           );
+
+      // Providerへの反映
+      _itemUsecase.refreshItemProvideres();
     },
   );
 
@@ -105,6 +111,9 @@ class PurchaseUsecase with RunUsecaseMixin {
             memo: memo,
             userId: userId!,
           );
+
+      // Providerへの反映
+      _itemUsecase.refreshItemProvideres();
     },
   );
 
@@ -125,6 +134,9 @@ class PurchaseUsecase with RunUsecaseMixin {
       await ref
           .read(purchaseRepositoryProvider)
           .delete(groupId: groupId, itemId: itemId);
+
+      // Providerへの反映
+      _itemUsecase.refreshItemProvideres();
     },
   );
 }
