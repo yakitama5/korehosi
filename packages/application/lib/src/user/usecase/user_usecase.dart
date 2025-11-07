@@ -7,7 +7,6 @@ import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/common/state/app_build_config_provider.dart';
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
 import 'package:packages_application/src/group/state/group_provider.dart';
-import 'package:packages_application/src/item/state/purchase_provider.dart';
 import 'package:packages_application/src/user/state/auth_status_provider.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
 import 'package:packages_application/src/user/state/group_join_users_provider.dart';
@@ -290,7 +289,6 @@ class UserUsecase with RunUsecaseMixin {
     logger.d('Refresh Firestore instance');
     ref
       ..invalidate(userProvider)
-      ..invalidate(purchaseProvider)
       ..invalidate(groupProvider)
       ..invalidate(groupJoinUsersProvider);
   }
