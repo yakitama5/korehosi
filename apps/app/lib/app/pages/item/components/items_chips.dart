@@ -25,6 +25,14 @@ class ItemsChips extends ConsumerWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
+                // 表示形式
+                ViewLayoutChip(
+                  viewLayout: viewLayout,
+                  onChanged: (v) => ref
+                      .read(itemsViewLayoutNotifierProvider.notifier)
+                      .updateViewLayout(viewLayout: v),
+                ),
+                const Gap(12),
                 // 並び替え
                 ItemSortKeyChip(
                   onChanged: (orderKey) => onSortChanged(
@@ -49,14 +57,7 @@ class ItemsChips extends ConsumerWidget {
                   onApply: (value) => onChangeWishRank(ref, wishRank: value),
                   onReset: () => onResetWishRank(ref),
                 ),
-                const Gap(12),
-                // 表示形式
-                ViewLayoutChip(
-                  viewLayout: viewLayout,
-                  onChanged: (v) => ref
-                      .read(itemsViewLayoutNotifierProvider.notifier)
-                      .updateViewLayout(viewLayout: v),
-                ),
+                const Gap(24),
               ],
             ),
           ),

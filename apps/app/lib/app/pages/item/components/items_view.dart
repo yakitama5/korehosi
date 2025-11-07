@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/pages/item/components/items_card.dart';
 import 'package:flutter_app/app/pages/item/components/items_empty_view.dart';
+import 'package:flutter_app/app/pages/item/components/items_error_list_tile.dart';
 import 'package:flutter_app/app/pages/item/components/items_group_selection_warning_listner.dart';
 import 'package:flutter_app/app/pages/item/components/items_list_tile.dart';
 import 'package:flutter_app/app/routes/importer.dart';
@@ -57,14 +58,12 @@ class ItemsView extends HookConsumerWidget {
               };
             },
             loading: () => _ShimmerTile(viewLayout: viewLayout),
-            // TODO(yakitama5): エラー表示を分けて記載
-            error: (error, __) => ErrorListTile(
-              indexInPage: indexInPage,
+            error: (error, __) => _ErrorView(
+              viewLayout: viewLayout,
+              error: error,
               isLoading: response.isLoading,
-              error: error.toString(),
-              onRetry: () {
-                ref.invalidate(searchItemsProvider(page: page));
-              },
+              indexInPage: indexInPage,
+              onRetry: ref.read(itemUsecaseProvider).refreshSearchItems,
             ),
           );
         },
@@ -74,6 +73,41 @@ class ItemsView extends HookConsumerWidget {
 
   void onSelect(BuildContext context, WidgetRef ref, ItemId itemId) {
     ItemRouteData(itemId.value).go(context);
+  }
+}
+
+class _ErrorView extends StatelessWidget {
+  const _ErrorView({
+    required this.viewLayout,
+    required this.error,
+    required this.isLoading,
+    required this.indexInPage,
+    this.onRetry,
+  });
+
+  final ViewLayout viewLayout;
+  final bool isLoading;
+  final int indexInPage;
+  final Object error;
+  final VoidCallback? onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    return switch (viewLayout) {
+      // TODO(yakitama5): エラー表示を分けて記載
+      ViewLayout.grid => ItemsErrorCard(
+        indexInPage: indexInPage,
+        isLoading: isLoading,
+        error: error.toString(),
+        onRetry: onRetry,
+      ),
+      ViewLayout.list => ItemsErrorListTile(
+        indexInPage: indexInPage,
+        isLoading: isLoading,
+        error: error.toString(),
+        onRetry: onRetry,
+      ),
+    };
   }
 }
 

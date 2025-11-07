@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:packages_core/util.dart';
 
-class ErrorListTile extends StatelessWidget {
-  const ErrorListTile({
+class ItemsErrorListTile extends StatelessWidget {
+  const ItemsErrorListTile({
     super.key,
     required this.indexInPage,
     required this.isLoading,

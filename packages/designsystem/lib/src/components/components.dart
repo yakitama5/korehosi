@@ -16,7 +16,6 @@ export 'src/delete_button.dart';
 export 'src/dialogs.dart';
 export 'src/edit_icon_button.dart';
 export 'src/edit_icon_container.dart';
-export 'src/error_list_tile.dart';
 export 'src/error_view.dart';
 export 'src/expand_width_container.dart';
 export 'src/gauge_chart.dart';
