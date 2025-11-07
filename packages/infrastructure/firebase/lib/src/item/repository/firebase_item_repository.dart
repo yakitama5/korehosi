@@ -77,10 +77,9 @@ class FirebaseItemRepository implements ItemRepository {
       docs.map((e) async {
         // 購入情報の取得
         final itemId = ItemId(e.id);
-        final purchase = await _purchaseRepository.fetchByItemIdWithAgeGroup(
+        final purchase = await _purchaseRepository.fetchByItemId(
           groupId: groupId,
           itemId: itemId,
-          ageGroup: ageGroup,
         );
 
         // 画像をURL化
@@ -98,7 +97,7 @@ class FirebaseItemRepository implements ItemRepository {
         return e.data().toDomainModel(
           purchase: purchase,
           images: images,
-          purchaseStatus: purchase.status,
+          purchaseStatus: purchase.status(ageGroup),
         );
       }).toList(),
     );
@@ -122,10 +121,9 @@ class FirebaseItemRepository implements ItemRepository {
 
     // 購入情報の取得
     final item = snap.data()!;
-    final purchase = await _purchaseRepository.fetchByItemIdWithAgeGroup(
+    final purchase = await _purchaseRepository.fetchByItemId(
       groupId: groupId,
       itemId: itemId,
-      ageGroup: ageGroup,
     );
 
     // 画像をURL化
@@ -140,7 +138,7 @@ class FirebaseItemRepository implements ItemRepository {
           List.empty(),
     );
     return item.toDomainModel(
-      purchaseStatus: purchase.status,
+      purchaseStatus: purchase.status(ageGroup),
       purchase: purchase,
       images: images,
     );

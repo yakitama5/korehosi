@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/user.dart';
 
 import '../value_object/purchase_status.dart';
 
@@ -26,7 +27,21 @@ abstract class Purchase with _$Purchase {
 /// ほしい物の購入情報を利用しやすい形にするための拡張
 extension PurchaseX on Purchase? {
   /// 購入状況
-  PurchaseStatus get status {
+  PurchaseStatus status(AgeGroup ageGroup) {
+    final adultStatus = _adultStatus;
+    final childStatus = switch (adultStatus) {
+      PurchaseStatus.purchased => PurchaseStatus.purchased,
+      PurchaseStatus.notPurchased || PurchaseStatus.purchasePlan =>
+        this?.surprise == true ? PurchaseStatus.notPurchased : adultStatus,
+    };
+
+    return switch (ageGroup) {
+      AgeGroup.adult => adultStatus,
+      AgeGroup.child => childStatus,
+    };
+  }
+
+  PurchaseStatus get _adultStatus {
     if (this == null) {
       return PurchaseStatus.notPurchased;
     }

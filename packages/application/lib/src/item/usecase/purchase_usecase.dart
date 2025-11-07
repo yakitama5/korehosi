@@ -26,14 +26,6 @@ class PurchaseUsecase with RunUsecaseMixin {
       .read(purchaseRepositoryProvider)
       .fetchByItemId(groupId: groupId, itemId: itemId);
 
-  /// (子供参照用)購入情報の取得
-  Future<Purchase?> fetchByItemIdForChild({
-    required GroupId groupId,
-    required ItemId itemId,
-  }) => ref
-      .read(purchaseRepositoryProvider)
-      .fetchByItemIdForChild(groupId: groupId, itemId: itemId);
-
   /// 購入情報の登録
   Future<void> add({
     required ItemId itemId,

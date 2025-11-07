@@ -13,6 +13,7 @@ export 'src/constrained_adaptive_box.dart';
 export 'src/custom_reorderable_list_view.dart';
 export 'src/date_text_with_label.dart';
 export 'src/delete_button.dart';
+export 'src/deleted_safety_builder.dart';
 export 'src/dialogs.dart';
 export 'src/edit_icon_button.dart';
 export 'src/edit_icon_container.dart';

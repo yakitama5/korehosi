@@ -18,72 +18,61 @@ class PurchasePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final item = ref.watch(ItemDetailProviders.itemProvider);
-    final purchase = ref.watch(ItemDetailProviders.purchaseProvider);
+    final asyncItem = ref.watch(ItemDetailProviders.itemProvider);
 
-    return switch ((item, purchase)) {
-      (
-        AsyncData(value: final Item itemData),
-        AsyncData(value: final Purchase? purchaseData),
-      ) =>
-        _PurchaseForm(item: itemData, purchase: purchaseData),
-
-      // エラー表示
-      (AsyncError(error: final error, stackTrace: final stackTrace), _) ||
-      (
-        _,
-        AsyncError(error: final error, stackTrace: final stackTrace),
-      ) => ErrorView(error, stackTrace),
-
+    return asyncItem.when(
+      data: (item) => _PurchaseForm(item: item),
+      error: ErrorView.new,
       // 一瞬なのでローディング中は何も表示しない
-      _ => const SizedBox.shrink(),
-    };
+      loading: () => const SizedBox.shrink(),
+    );
   }
 }
 
 class _PurchaseForm extends HookConsumerWidget {
-  const _PurchaseForm({required this.item, this.purchase});
+  const _PurchaseForm({required this.item});
 
-  final Item item;
-  final Purchase? purchase;
+  final Item? item;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return PurchaseFormModelFormBuilder(
-      model: _createModel(),
-      builder: (context, formModel, child) => PopScopeDirtyConfirm(
-        dirty: ReactivePurchaseFormModelForm.of(context)?.form.dirty,
-        child: UnfocusOnTap(
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(i18n.item.purchasePage.purchase),
-              actions: [
-                const _Submit(),
-                const Gap(8),
-                if (purchase != null) const _DeleteButton(),
-              ],
-            ),
-            body: SingleChildScrollView(
-              child: PagePadding(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ItemImages(images: item.images),
-                    const Gap(16),
-                    TextWithLabel(item.name, label: i18n.item.common.itemName),
-                    const Gap(16),
-                    const _SurpriseField(),
-                    const Gap(16),
-                    const _PriceField(),
-                    const Gap(16),
-                    const _PurchaseDateField(),
-                    const Gap(16),
-                    const _SentAtField(),
-                    const Gap(16),
-                    const _BuyerNameField(),
-                    const Gap(16),
-                    const _MemoField(),
-                  ],
+    return DeletedSafetyBuilder<Item>(
+      nullableValue: item,
+      builder: (context, value) => PurchaseFormModelFormBuilder(
+        model: _createModel(value.purchase),
+        builder: (context, formModel, child) => PopScopeDirtyConfirm(
+          dirty: ReactivePurchaseFormModelForm.of(context)?.form.dirty,
+          child: UnfocusOnTap(
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text(i18n.item.purchasePage.purchase),
+                actions: const [_Submit(), Gap(8), _DeleteButton()],
+              ),
+              body: SingleChildScrollView(
+                child: PagePadding(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ItemImages(images: value.images),
+                      const Gap(16),
+                      TextWithLabel(
+                        value.name,
+                        label: i18n.item.common.itemName,
+                      ),
+                      const Gap(16),
+                      const _SurpriseField(),
+                      const Gap(16),
+                      const _PriceField(),
+                      const Gap(16),
+                      const _PurchaseDateField(),
+                      const Gap(16),
+                      const _SentAtField(),
+                      const Gap(16),
+                      const _BuyerNameField(),
+                      const Gap(16),
+                      const _MemoField(),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -94,7 +83,7 @@ class _PurchaseForm extends HookConsumerWidget {
   }
 
   /// FormGroupを生成する
-  PurchaseFormModel _createModel() => PurchaseFormModel(
+  PurchaseFormModel _createModel(Purchase? purchase) => PurchaseFormModel(
     price: purchase?.price?.formatComma(),
     buyerName: purchase?.buyerName,
     surprise: purchase?.surprise ?? true,
@@ -133,7 +122,9 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
     // 登録 or 更新
     final itemId = ref.read(ItemDetailProviders.itemIdProvider);
     final isAdd = await ref.read(
-      ItemDetailProviders.purchaseProvider.selectAsync((data) => data == null),
+      ItemDetailProviders.itemProvider.selectAsync(
+        (data) => data?.purchase == null,
+      ),
     );
     final usecase = ref.read(purchaseUsecaseProvider);
     if (isAdd) {

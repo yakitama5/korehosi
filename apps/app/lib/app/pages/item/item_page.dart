@@ -71,7 +71,7 @@ class _ItemDetailView extends HookWidget {
             children: [
               ItemImages(images: item.images),
               const Gap(8),
-              _PurchaseStatus(purchaseStatus: item.purchase.status),
+              _PurchaseStatus(purchaseStatus: item.purchaseStatus),
               const Gap(32),
               TextWithLabel(item.name, label: i18n.user.common.name),
               const Gap(16),

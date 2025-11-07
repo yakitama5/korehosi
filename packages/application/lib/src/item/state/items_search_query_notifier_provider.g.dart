@@ -9,7 +9,7 @@ part of 'items_search_query_notifier_provider.dart';
 // **************************************************************************
 
 String _$itemsSearchQueryNotifierHash() =>
-    r'33bfb36ea4a7e7ea5161f3499b6e64a96f82a912';
+    r'ba9b34338098e116c5701d36ac823f0b0b0dda57';
 
 /// ほしいものの検索条件を管理するProvider
 ///

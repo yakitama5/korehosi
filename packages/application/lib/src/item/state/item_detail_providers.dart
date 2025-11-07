@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_application/src/item/state/current_group_age_applicable_purchase_provider.dart';
 import 'package:packages_application/src/item/state/item_provider.dart';
 import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -13,8 +12,6 @@ part 'item_detail_providers.g.dart';
 class ItemDetailProviders {
   static AutoDisposeProvider<ItemId?> get itemIdProvider => _itemIdProvider;
   static AutoDisposeFutureProvider<Item?> get itemProvider => _itemProvider;
-  static AutoDisposeFutureProvider<Purchase?> get purchaseProvider =>
-      _purchaseProvider;
 }
 
 /// 明細表示対象となる欲しい物のIDを管理するProvider
@@ -31,18 +28,4 @@ Future<Item?> _item(Ref ref) async {
     return null;
   }
   return ref.watch(itemProvider(itemId: itemId).future);
-}
-
-/// 明細表示対象となる欲しい物に属する購入情報のEntityを管理するProvider
-/// `_itemIdProvider`に依存する
-@Riverpod(dependencies: [_itemId])
-Future<Purchase?> _purchase(Ref ref) async {
-  final itemId = ref.watch(_itemIdProvider);
-  if (itemId == null) {
-    return null;
-  }
-
-  return ref.watch(
-    currentGroupAgeApplicablePurchaseProvider(itemId: itemId).future,
-  );
 }
