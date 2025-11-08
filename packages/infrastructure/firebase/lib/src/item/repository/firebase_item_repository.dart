@@ -5,8 +5,8 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_storage_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_item_model.dart';
-import 'package:infrastructure_firebase/src/item/state/firestore_deleted_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
+import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
@@ -251,19 +251,20 @@ class FirebaseItemRepository implements ItemRepository {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
       // 削除前の状態を保持
-      final docRef = ref.read(
+      final itemDocRef = ref.read(
         itemDocumentRefProvider(groupId: groupId, itemId: itemId),
       );
-      final delDocRef = ref.read(
-        ditemDocumentRefProvider(groupId: groupId, itemId: itemId),
+      // 購入状況が存在すれば同時に削除
+      final purchaseId = PurchaseId(itemId.value);
+      final purchaseDocRef = ref.read(
+        purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
       );
-      final doc = await transaction.get(docRef);
 
       transaction
           // ドキュメントの削除
-          .delete(docRef)
-          // 削除用ドキュメントの追加
-          .set<FirestoreItemModel>(delDocRef, doc.data()!);
+          .delete(itemDocRef)
+          // 購入状況の削除
+          .delete(purchaseDocRef);
     });
   }
 

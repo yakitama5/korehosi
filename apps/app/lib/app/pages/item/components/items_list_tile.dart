@@ -13,7 +13,7 @@ class ItemsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 画像は先頭1件を利用する
-    final image = item.images?.first;
+    final image = item.images?.firstOrNull;
 
     return ListTile(
       onTap: onTap,

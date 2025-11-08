@@ -19,7 +19,7 @@ class ItemsCard extends StatelessWidget {
     final tt = Theme.of(context).textTheme;
 
     // 画像は先頭1件を利用する
-    final image = item.images?.first;
+    final image = item.images?.firstOrNull;
 
     return _ItemsCommonStyleCard(
       onTap: onTap,

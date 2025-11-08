@@ -1,11 +1,21 @@
 const admin = require('firebase-admin');
-const functions = require('firebase-functions');
+const {
+  setGlobalOptions,
+} = require('firebase-functions/v2');
+const {
+  onCall,
+} = require('firebase-functions/v2/https');
+const {
+  onDocumentWritten,
+  onDocumentDeleted,
+  onDocumentCreated,
+} = require('firebase-functions/v2/firestore');
+const {
+  log,
+  error,
+} = require('firebase-functions/logger');
 
 admin.initializeApp();
-const db = admin.firestore();
-const remoteConfig = admin.remoteConfig();
-
-const jpRegion = 'asia-northeast1';
 const tokyoTimeZone = 'Asia/Tokyo';
 
 // コレクションパス
@@ -17,6 +27,12 @@ const TOKENS_PATH = 'fcmTokens';
 // 処理内のTimeZone指定
 process.env.TZ = tokyoTimeZone;
 
+// グローバルオプションの設定
+setGlobalOptions({region: 'asia-northeast1'});
+
+const db = admin.firestore();
+const remoteConfig = admin.remoteConfig();
+
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
@@ -24,14 +40,12 @@ process.env.TZ = tokyoTimeZone;
  * 【呼び出し】
  * グループへの参加
  */
-exports.joinGroup = functions
-  .runWith({
-    enforceAppCheck: true,
-  })
-  .region(jpRegion)
-  .https.onCall(async (data, context) => {
+exports.v2JoinGroup = onCall(
+  {enforceAppCheck: true},
+  async (request) => {
     // 認証済か否か
-    const user = await admin.auth().getUser(context.auth.uid);
+    const uid = request.auth.uid;
+    const user = await admin.auth().getUser(uid);
     if (!user) {
       return {
         'errorCode': 'not-auth',
@@ -39,7 +53,7 @@ exports.joinGroup = functions
     }
 
     // パラメタが設定されているか
-    const shareLinkId = data.shareLinkId;
+    const shareLinkId = request.data.shareLinkId;
     if (!shareLinkId) {
       return {
         'errorCode': 'invalid-param',
@@ -95,19 +109,17 @@ exports.joinGroup = functions
     });
 
     return {};
-  });
+  },
+);
 
 
 /**
  * 【監視処理】
  * ユーザー情報が変更された場合にグループ内情報へ反映させる.
  */
-exports.onWriteUser = functions
-  .region(jpRegion)
-  .firestore
-  .document('users/{userId}')
-  .onWrite(async (event, context) => {
-    // db.onDocumentWritten('users/{userId}', async (event) => {
+exports.v2OnWriteUser = onDocumentWritten(
+  'users/{userId}',
+  async (event) => {
     const getUniqueElementsInSource = (source, target) => {
       const set2 = new Set(target);
       return source.filter((element) => !set2.has(element));
@@ -120,12 +132,12 @@ exports.onWriteUser = functions
       // 登録 or 更新時は変更後の内容を所属しているグループへ反映する
       const user = after.data();
       if (user.joinGroupIds == null) {
-        console.log('Empty joinGroupIds');
+        log('Empty joinGroupIds');
         return;
       }
 
       for (const groupId of user.joinGroupIds) {
-        console.log('Update from GroupId: ${groupId}');
+        log(`Update from GroupId: ${groupId}`);
         const groupRef = db.collection(GROUPS_PATH).doc(groupId);
         const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(user.id);
         await userRef.set(user);
@@ -147,7 +159,7 @@ exports.onWriteUser = functions
     };
 
     const removeBeforeGroup = async (before, after) => {
-      // 前回の情報が存在しない場合はスキップ
+      // 前回の情報が存在しない、またはjoinGroupIdsに変更がない場合はスキップ
       if (!before.exists ||
         before.data().joinGroupIds == after.data().joinGroupIds) {
         return;
@@ -158,7 +170,7 @@ exports.onWriteUser = functions
       const afJoinGroupIds = after.data().joinGroupIds;
       const leavedJoinGroupIds =
         getUniqueElementsInSource(b4JoinGroupIds, afJoinGroupIds);
-      console.log('LeavedJoinGroupIds is ${leavedJoinGroupIds}');
+      log(`LeavedJoinGroupIds is ${leavedJoinGroupIds}`);
 
       // 脱退したグループが存在しない場合はスキップ
       if (leavedJoinGroupIds == null || leavedJoinGroupIds.length === 0) {
@@ -168,7 +180,7 @@ exports.onWriteUser = functions
       // 脱退したグループの参加者情報を削除する
       const userId = after.data().id;
       for (const groupId of leavedJoinGroupIds) {
-        console.log('Leave from GroupId: ${groupId}');
+        log(`Leave from GroupId: ${groupId}`);
         const groupRef = db.collection(GROUPS_PATH).doc(groupId);
         const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
         await userRef.delete();
@@ -176,9 +188,9 @@ exports.onWriteUser = functions
     };
 
     const toEventType = (event) => {
-      if (!event.before.exists) {
+      if (!event.data.before.exists) {
         return 'create';
-      } else if (event.after.exists) {
+      } else if (event.data.after.exists) {
         return 'update';
       } else {
         return 'delete';
@@ -187,33 +199,53 @@ exports.onWriteUser = functions
 
     // 判定
     const eventType = toEventType(event);
-    console.log(eventType);
+    log(eventType);
 
     switch (eventType) {
     case 'create':
     case 'update': {
-      onGroupSet(event.before, event.after);
+      onGroupSet(event.data.before, event.data.after);
       break;
     }
     case 'delete':
-      onGroupDelete(event.before);
+      onGroupDelete(event.data.before);
       break;
     default:
-      // do nothing
+    // do nothing
     }
-  });
+  },
+);
 
 /**
  * 【監視処理】
- * ユーザー情報が変更された場合にグループ内情報へ反映させる.
+ * グループが削除された場合にグループ配下の情報を削除する.
  */
-exports.onCreateMessage = functions
-  .region(jpRegion)
-  .firestore
-  .document('groups/{groupId}/messages/{messageId}')
-  .onCreate(async (snap, context) => {
+exports.v2OnDeleteGroup = onDocumentDeleted(
+  'groups/{groupId}',
+  async (event) => {
+    try {
+      // 対象グループのパスを取得
+      const groupId = event.data.data().id;
+      const groupRef = db.collection(GROUPS_PATH).doc(groupId);
+
+      // 配下のサブコレクションを再帰的に削除する
+      await db.recursiveDelete(groupRef);
+      log('Recursive deleted.');
+    } catch (err) {
+      error('Error deleting collection and subcollection:', err);
+    }
+  },
+);
+
+/**
+ * 【監視処理】
+ * 通知メッセージが登録された場合、プッシュ通知を送る.
+ */
+exports.v2OnCreateMessage = onDocumentCreated(
+  'groups/{groupId}/messages/{messageId}',
+  async (event) => {
     // グループ内のユーザー一覧を取得する
-    const groupRef = db.collection(GROUPS_PATH).doc(context.params.groupId);
+    const groupRef = db.collection(GROUPS_PATH).doc(event.params.groupId);
     const groupSnap = await groupRef.get();
     const groupData = groupSnap.data();
     const joinUids = groupData.joinUids;
@@ -222,9 +254,9 @@ exports.onCreateMessage = functions
       const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
       const userSnap = await userRef.get();
       const user = userSnap.data();
-      const target = snap.data().target;
+      const target = event.data.data().target;
 
-      const messageData = snap.data();
+      const messageData = event.data.data();
       const isMyOperation = user.id == messageData.uid;
       const isTargetGroup = target == 'all' || target == user.ageGroup;
       if (isMyOperation || !isTargetGroup) {
@@ -273,7 +305,8 @@ exports.onCreateMessage = functions
         }
       });
     }
-  });
+  },
+);
 
 /**
  * 通知処理
@@ -282,12 +315,13 @@ exports.onCreateMessage = functions
  */
 function pushToDevice(token, payload) {
   admin.messaging().send(payload)
-    .then((_pushResponse) => {
+    .then((pushResponse) => {
       return {
         text: token,
       };
     })
-    .catch((error) => {
-      throw new functions.https.HttpsError('unknown', error.message, error);
+    .catch((err) => {
+      // HttpsErrorはv1の遺物なので、一般的なErrorをthrowするか、ロギングに留めます。
+      error('Failed to send push notification:', err);
     });
 }
