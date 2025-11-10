@@ -72,9 +72,16 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
     while (currentDate.isBefore(lastDate) ||
         currentDate.isAtSameMomentAs(lastDate)) {
       // 単月の結果を取得
-      final currentTimestamp = Timestamp.fromDate(currentDate);
+      final from = Timestamp.fromDate(currentDate);
+      final to = Timestamp.fromDate(
+        DateTime(
+          currentDate.year,
+          currentDate.month + 1,
+        ).add(const Duration(microseconds: -1)),
+      );
       final price = await purchaseCol
-          .where('sentAt', isGreaterThanOrEqualTo: currentTimestamp)
+          .where('sentAt', isGreaterThanOrEqualTo: from)
+          .where('sentAt', isLessThanOrEqualTo: to)
           .aggregate(sum('price'))
           .get()
           .then((res) => res.getSum('price'));

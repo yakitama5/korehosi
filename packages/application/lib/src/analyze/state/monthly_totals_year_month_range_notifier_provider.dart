@@ -19,22 +19,22 @@ class MonthlyTotalsYearMonthRangeNotifier
   }
 
   /// 期間を前へ
-  YearMonthRange prev() {
+  void prev() {
     final dt = state.from.toDateTime();
 
     final from = YearMonth.fromDateTime(DateTime(dt.year, dt.month - 6));
     final to = YearMonth.fromDateTime(DateTime(dt.year, dt.month - 1));
 
-    return YearMonthRange(from: from, to: to);
+    state = YearMonthRange(from: from, to: to);
   }
 
   /// 期間を前へ
-  YearMonthRange next() {
+  void next() {
     final dt = state.to.toDateTime();
 
     final from = YearMonth.fromDateTime(DateTime(dt.year, dt.month + 1));
     final to = YearMonth.fromDateTime(DateTime(dt.year, dt.month + 6));
 
-    return YearMonthRange(from: from, to: to);
+    state = YearMonthRange(from: from, to: to);
   }
 }

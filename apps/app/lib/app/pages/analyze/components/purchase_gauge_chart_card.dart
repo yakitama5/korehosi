@@ -20,6 +20,8 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
       return const SizedBox.shrink();
     }
 
+    final percent = itemBuyedRate.buyedRate * 100.0;
+
     return ChartCard(
       title: i18n.analyze.analyzePage.purchaseRate,
       iconData: Icons.pie_chart,
@@ -27,7 +29,7 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          GaugeChart(value: itemBuyedRate.buyedRate, radius: 80),
+          GaugeChart(value: percent, radius: 80),
           _BuyedItemCount(itemBuyedRate),
         ],
       ),

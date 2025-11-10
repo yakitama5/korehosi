@@ -62,6 +62,10 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
     final colorScheme = useColorScheme();
     final textTheme = useTextTheme();
 
+    final now = DateTime.now();
+    final minX = now.diffMonth(range.from.toDateTime()).toDouble();
+    final maxX = now.diffMonth(range.to.toDateTime()).toDouble();
+
     return Stack(
       children: [
         GestureDetector(
@@ -98,8 +102,9 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
               ),
 
               // 期間は変更可能
-              minX: range.from.toDouble(),
-              maxX: range.to.toDouble(),
+              minX: minX,
+              maxX: maxX,
+              minY: 0,
 
               // 実際の線グラフ
               lineBarsData: [

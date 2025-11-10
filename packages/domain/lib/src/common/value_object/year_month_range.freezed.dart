@@ -225,7 +225,7 @@ return $default(_that.from,_that.to);case _:
 
 
 class _YearMonthRange extends YearMonthRange {
-   _YearMonthRange({required this.from, required this.to}): assert(from.compareTo(to) > 0),super._();
+   _YearMonthRange({required this.from, required this.to}): assert(from.compareTo(to) <= 0),super._();
   
 
 @override final  YearMonth from;

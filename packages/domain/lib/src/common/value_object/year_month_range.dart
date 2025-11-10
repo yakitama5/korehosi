@@ -9,7 +9,7 @@ typedef YearMonthRangeMapper<T> = T Function(YearMonth yearMonth, int index);
 @freezed
 abstract class YearMonthRange with _$YearMonthRange {
   // From/Toの逆転はNG
-  @Assert('from.compareTo(to) > 0')
+  @Assert('from.compareTo(to) <= 0')
   factory YearMonthRange({required YearMonth from, required YearMonth to}) =
       _YearMonthRange;
   YearMonthRange._();
