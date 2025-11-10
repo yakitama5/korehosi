@@ -14,6 +14,9 @@ const {
   log,
   error,
 } = require('firebase-functions/logger');
+const {
+  onSchedule,
+} = require('firebase-functions/scheduler');
 
 admin.initializeApp();
 const tokyoTimeZone = 'Asia/Tokyo';
@@ -24,11 +27,18 @@ const PARTICIPANTS_PATH = 'participants';
 const USERS_PATH = 'users';
 const TOKENS_PATH = 'fcmTokens';
 
+// 購入状況
+const NOT_PURCHASED = 'notPurchased';
+const PURCHASE_PLAN = 'purchasePlan;';
+const PURCHASED = 'purchased';
+
 // 処理内のTimeZone指定
 process.env.TZ = tokyoTimeZone;
 
 // グローバルオプションの設定
-setGlobalOptions({region: 'asia-northeast1'});
+setGlobalOptions({
+  region: 'asia-northeast1',
+});
 
 const db = admin.firestore();
 const remoteConfig = admin.remoteConfig();
@@ -41,7 +51,9 @@ const remoteConfig = admin.remoteConfig();
  * グループへの参加
  */
 exports.v2JoinGroup = onCall(
-  {enforceAppCheck: true},
+  {
+    enforceAppCheck: true,
+  },
   async (request) => {
     // 認証済か否か
     const uid = request.auth.uid;
@@ -203,10 +215,9 @@ exports.v2OnWriteUser = onDocumentWritten(
 
     switch (eventType) {
     case 'create':
-    case 'update': {
+    case 'update':
       onGroupSet(event.data.before, event.data.after);
       break;
-    }
     case 'delete':
       onGroupDelete(event.data.before);
       break;
@@ -308,6 +319,85 @@ exports.v2OnCreateMessage = onDocumentCreated(
   },
 );
 
+// Firestoreのバッチ書き込みの最大操作数 (上限は500)
+const BATCH_SIZE = 499;
+
+/**
+ * Firestoreのitemsコレクションのhogeフィールドを一括更新するスケジュール関数
+ * 毎日0時0分に実行されます。
+ * * ⚠️ Cron式のタイムゾーンに注意してください。
+ * FirebaseのデフォルトではUTCですが、デプロイ時にタイムゾーンを設定できます。
+ * (例: .timeZone('Asia/Tokyo'))
+ */
+exports.scheduledBatchUpdate = onSchedule('every day 00:00', async (event) => {
+  try {
+    log('--- スケジュールされた一括更新を開始します ---');
+
+    // 1. すべての 'items' コレクションのドキュメントを取得
+    // Collection Group Query を使用 (要インデックス設定)
+    const itemsSnapshot = await db.collectionGroup('items').get();
+    const itemDocs = itemsSnapshot.docs;
+
+    if (itemDocs.length === 0) {
+      log('更新対象のitemsドキュメントが見つかりませんでした。');
+      return null;
+    }
+
+    log(`合計 ${itemDocs.length} 件のitemsドキュメントを処理します。`);
+
+    let updatedCount = 0;
+    let batchCount = 0;
+    let currentBatch = db.batch();
+
+    // 2. ドキュメントをチャンクに分けて処理
+    for (let i = 0; i < itemDocs.length; i++) {
+      const itemDoc = itemDocs[i];
+
+      // itemsドキュメントの参照とIDを取得
+      const itemRef = itemDoc.ref;
+      // itemRef.parent -> itemsコレクション参照
+      // itemRef.parent.parent -> groups/{groupId}ドキュメント参照
+      const groupId = itemRef.parent.parent.id;
+      const itemId = itemRef.id;
+
+      // 3. 対応する purchases ドキュメントを取得
+      // コレクションパス: groups/{groupId}/purchases/{itemsId}
+      const purchaseRef = db.doc(`groups/${groupId}/purchases/${itemId}`);
+      const purchaseDoc = await purchaseRef.get();
+
+      // 購入状況を取得
+      const purchaseStatus = getPurchaseStatus(purchaseDoc);
+
+      // 4. バッチに更新操作を追加
+      currentBatch.update(itemRef, {
+        'purchaseStatus': purchaseStatus,
+      });
+      batchCount++;
+
+      // 5. バッチサイズの上限に達したらコミットし、新しいバッチを開始
+      if (batchCount === BATCH_SIZE || i === itemDocs.length - 1) {
+        await currentBatch.commit();
+        updatedCount += batchCount;
+        log(`✅ ${updatedCount} 件までバッチコミットが完了しました。`);
+
+        // 最後のコミットでなければ、新しいバッチを準備
+        if (i !== itemDocs.length - 1) {
+          currentBatch = db.batch();
+          batchCount = 0;
+        }
+      }
+    }
+
+    // スケジュール関数は Promise を解決して終了
+    log(`--- すべての更新が完了しました。合計 ${updatedCount} 件のドキュメントを更新 ---`);
+    return null;
+  } catch (err) {
+    error('致命的なエラーが発生しました:', err);
+    // エラーが発生した場合も、処理を終了するためにnullを返す
+    return null;
+  }
+});
+
 /**
  * 通知処理
  * @param {String} token FCMトークン
@@ -324,4 +414,21 @@ function pushToDevice(token, payload) {
       // HttpsErrorはv1の遺物なので、一般的なErrorをthrowするか、ロギングに留めます。
       error('Failed to send push notification:', err);
     });
+}
+
+/**
+ * 購入状況を取得する.
+ * @param {DocumentSnapshot} purchaseDoc 購入状況のドキュメントスナップショット
+ * @return {String} 購入状況
+ */
+function getPurchaseStatus(purchaseDoc) {
+  if (purchaseDoc.exists) {
+    return NOT_PURCHASED;
+  } else if (purchaseDoc.data.sentAt != null) {
+    return PURCHASED;
+  } else if (purchaseDoc.data.planDate != null) {
+    return PURCHASE_PLAN;
+  } else {
+    return NOT_PURCHASED;
+  }
 }
