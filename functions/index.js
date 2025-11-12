@@ -1,11 +1,24 @@
 const admin = require('firebase-admin');
-const functions = require('firebase-functions');
+const {
+  setGlobalOptions,
+} = require('firebase-functions/v2');
+const {
+  onCall,
+} = require('firebase-functions/v2/https');
+const {
+  onDocumentWritten,
+  onDocumentDeleted,
+  onDocumentCreated,
+} = require('firebase-functions/v2/firestore');
+const {
+  log,
+  error,
+} = require('firebase-functions/logger');
+const {
+  onSchedule,
+} = require('firebase-functions/scheduler');
 
 admin.initializeApp();
-const db = admin.firestore();
-const remoteConfig = admin.remoteConfig();
-
-const jpRegion = 'asia-northeast1';
 const tokyoTimeZone = 'Asia/Tokyo';
 
 // コレクションパス
@@ -14,8 +27,24 @@ const PARTICIPANTS_PATH = 'participants';
 const USERS_PATH = 'users';
 const TOKENS_PATH = 'fcmTokens';
 
+// 購入状況
+const NOT_PURCHASED = 'notPurchased';
+const PURCHASE_PLAN = 'purchasePlan;';
+const PURCHASED = 'purchased';
+
+// Firestoreのバッチ書き込みの最大操作数 (上限は500)
+const BATCH_SIZE = 499;
+
 // 処理内のTimeZone指定
 process.env.TZ = tokyoTimeZone;
+
+// グローバルオプションの設定
+setGlobalOptions({
+  region: 'asia-northeast1',
+});
+
+const db = admin.firestore();
+const remoteConfig = admin.remoteConfig();
 
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -24,14 +53,14 @@ process.env.TZ = tokyoTimeZone;
  * 【呼び出し】
  * グループへの参加
  */
-exports.joinGroup = functions
-  .runWith({
+exports.v2JoinGroup = onCall(
+  {
     enforceAppCheck: true,
-  })
-  .region(jpRegion)
-  .https.onCall(async (data, context) => {
+  },
+  async (request) => {
     // 認証済か否か
-    const user = await admin.auth().getUser(context.auth.uid);
+    const uid = request.auth.uid;
+    const user = await admin.auth().getUser(uid);
     if (!user) {
       return {
         'errorCode': 'not-auth',
@@ -39,7 +68,7 @@ exports.joinGroup = functions
     }
 
     // パラメタが設定されているか
-    const shareLinkId = data.shareLinkId;
+    const shareLinkId = request.data.shareLinkId;
     if (!shareLinkId) {
       return {
         'errorCode': 'invalid-param',
@@ -95,19 +124,17 @@ exports.joinGroup = functions
     });
 
     return {};
-  });
+  },
+);
 
 
 /**
  * 【監視処理】
  * ユーザー情報が変更された場合にグループ内情報へ反映させる.
  */
-exports.onWriteUser = functions
-  .region(jpRegion)
-  .firestore
-  .document('users/{userId}')
-  .onWrite(async (event, context) => {
-    // db.onDocumentWritten('users/{userId}', async (event) => {
+exports.v2OnWriteUser = onDocumentWritten(
+  'users/{userId}',
+  async (event) => {
     const getUniqueElementsInSource = (source, target) => {
       const set2 = new Set(target);
       return source.filter((element) => !set2.has(element));
@@ -120,12 +147,12 @@ exports.onWriteUser = functions
       // 登録 or 更新時は変更後の内容を所属しているグループへ反映する
       const user = after.data();
       if (user.joinGroupIds == null) {
-        console.log('Empty joinGroupIds');
+        log('Empty joinGroupIds');
         return;
       }
 
       for (const groupId of user.joinGroupIds) {
-        console.log('Update from GroupId: ${groupId}');
+        log(`Update from GroupId: ${groupId}`);
         const groupRef = db.collection(GROUPS_PATH).doc(groupId);
         const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(user.id);
         await userRef.set(user);
@@ -147,7 +174,7 @@ exports.onWriteUser = functions
     };
 
     const removeBeforeGroup = async (before, after) => {
-      // 前回の情報が存在しない場合はスキップ
+      // 前回の情報が存在しない、またはjoinGroupIdsに変更がない場合はスキップ
       if (!before.exists ||
         before.data().joinGroupIds == after.data().joinGroupIds) {
         return;
@@ -158,7 +185,7 @@ exports.onWriteUser = functions
       const afJoinGroupIds = after.data().joinGroupIds;
       const leavedJoinGroupIds =
         getUniqueElementsInSource(b4JoinGroupIds, afJoinGroupIds);
-      console.log('LeavedJoinGroupIds is ${leavedJoinGroupIds}');
+      log(`LeavedJoinGroupIds is ${leavedJoinGroupIds}`);
 
       // 脱退したグループが存在しない場合はスキップ
       if (leavedJoinGroupIds == null || leavedJoinGroupIds.length === 0) {
@@ -168,7 +195,7 @@ exports.onWriteUser = functions
       // 脱退したグループの参加者情報を削除する
       const userId = after.data().id;
       for (const groupId of leavedJoinGroupIds) {
-        console.log('Leave from GroupId: ${groupId}');
+        log(`Leave from GroupId: ${groupId}`);
         const groupRef = db.collection(GROUPS_PATH).doc(groupId);
         const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
         await userRef.delete();
@@ -176,9 +203,9 @@ exports.onWriteUser = functions
     };
 
     const toEventType = (event) => {
-      if (!event.before.exists) {
+      if (!event.data.before.exists) {
         return 'create';
-      } else if (event.after.exists) {
+      } else if (event.data.after.exists) {
         return 'update';
       } else {
         return 'delete';
@@ -187,33 +214,52 @@ exports.onWriteUser = functions
 
     // 判定
     const eventType = toEventType(event);
-    console.log(eventType);
+    log(eventType);
 
     switch (eventType) {
     case 'create':
-    case 'update': {
-      onGroupSet(event.before, event.after);
+    case 'update':
+      onGroupSet(event.data.before, event.data.after);
       break;
-    }
     case 'delete':
-      onGroupDelete(event.before);
+      onGroupDelete(event.data.before);
       break;
     default:
-      // do nothing
+    // do nothing
     }
-  });
+  },
+);
 
 /**
  * 【監視処理】
- * ユーザー情報が変更された場合にグループ内情報へ反映させる.
+ * グループが削除された場合にグループ配下の情報を削除する.
  */
-exports.onCreateMessage = functions
-  .region(jpRegion)
-  .firestore
-  .document('groups/{groupId}/messages/{messageId}')
-  .onCreate(async (snap, context) => {
+exports.v2OnDeleteGroup = onDocumentDeleted(
+  'groups/{groupId}',
+  async (event) => {
+    try {
+      // 対象グループのパスを取得
+      const groupId = event.data.data().id;
+      const groupRef = db.collection(GROUPS_PATH).doc(groupId);
+
+      // 配下のサブコレクションを再帰的に削除する
+      await db.recursiveDelete(groupRef);
+      log('Recursive deleted.');
+    } catch (err) {
+      error('Error deleting collection and subcollection:', err);
+    }
+  },
+);
+
+/**
+ * 【監視処理】
+ * 通知メッセージが登録された場合、プッシュ通知を送る.
+ */
+exports.v2OnCreateMessage = onDocumentCreated(
+  'groups/{groupId}/messages/{messageId}',
+  async (event) => {
     // グループ内のユーザー一覧を取得する
-    const groupRef = db.collection(GROUPS_PATH).doc(context.params.groupId);
+    const groupRef = db.collection(GROUPS_PATH).doc(event.params.groupId);
     const groupSnap = await groupRef.get();
     const groupData = groupSnap.data();
     const joinUids = groupData.joinUids;
@@ -222,9 +268,9 @@ exports.onCreateMessage = functions
       const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
       const userSnap = await userRef.get();
       const user = userSnap.data();
-      const target = snap.data().target;
+      const target = event.data.data().target;
 
-      const messageData = snap.data();
+      const messageData = event.data.data();
       const isMyOperation = user.id == messageData.uid;
       const isTargetGroup = target == 'all' || target == user.ageGroup;
       if (isMyOperation || !isTargetGroup) {
@@ -273,6 +319,84 @@ exports.onCreateMessage = functions
         }
       });
     }
+  },
+);
+
+/**
+ * FirestoreのitemsコレクションのpurchaseStatusフィールドを一括更新するスケジュール関数
+ * 毎日0時0分に実行されます。
+ * * ⚠️ Cron式のタイムゾーンに注意してください。
+ * FirebaseのデフォルトではUTCですが、デプロイ時にタイムゾーンを設定できます。
+ * (例: .timeZone('Asia/Tokyo'))
+ */
+exports.scheduledBatchUpdatePurchaseStatus =
+  onSchedule('every day 00:00', async (event) => {
+    try {
+      log('--- スケジュールされた一括更新を開始します ---');
+
+      // 1. すべての 'items' コレクションのドキュメントを取得
+      // Collection Group Query を使用 (要インデックス設定)
+      const itemsSnapshot = await db.collectionGroup('items').get();
+      const itemDocs = itemsSnapshot.docs;
+
+      if (itemDocs.length === 0) {
+        log('更新対象のitemsドキュメントが見つかりませんでした。');
+        return null;
+      }
+
+      log(`合計 ${itemDocs.length} 件のitemsドキュメントを処理します。`);
+
+      let updatedCount = 0;
+      let batchCount = 0;
+      let currentBatch = db.batch();
+
+      // 2. ドキュメントをチャンクに分けて処理
+      for (let i = 0; i < itemDocs.length; i++) {
+        const itemDoc = itemDocs[i];
+
+        // itemsドキュメントの参照とIDを取得
+        const itemRef = itemDoc.ref;
+        // itemRef.parent -> itemsコレクション参照
+        // itemRef.parent.parent -> groups/{groupId}ドキュメント参照
+        const groupId = itemRef.parent.parent.id;
+        const itemId = itemRef.id;
+
+        // 3. 対応する purchases ドキュメントを取得
+        // コレクションパス: groups/{groupId}/purchases/{itemsId}
+        const purchaseRef = db.doc(`groups/${groupId}/purchases/${itemId}`);
+        const purchaseDoc = await purchaseRef.get();
+
+        // 購入状況を取得
+        const purchaseStatus = getPurchaseStatus(purchaseDoc);
+
+        // 4. バッチに更新操作を追加
+        currentBatch.update(itemRef, {
+          'purchaseStatus': purchaseStatus,
+        });
+        batchCount++;
+
+        // 5. バッチサイズの上限に達したらコミットし、新しいバッチを開始
+        if (batchCount === BATCH_SIZE || i === itemDocs.length - 1) {
+          await currentBatch.commit();
+          updatedCount += batchCount;
+          log(`✅ ${updatedCount} 件までバッチコミットが完了しました。`);
+
+          // 最後のコミットでなければ、新しいバッチを準備
+          if (i !== itemDocs.length - 1) {
+            currentBatch = db.batch();
+            batchCount = 0;
+          }
+        }
+      }
+
+      // スケジュール関数は Promise を解決して終了
+      log(`--- すべての更新が完了しました。合計 ${updatedCount} 件のドキュメントを更新 ---`);
+      return null;
+    } catch (err) {
+      error('致命的なエラーが発生しました:', err);
+      // エラーが発生した場合も、処理を終了するためにnullを返す
+      return null;
+    }
   });
 
 /**
@@ -282,12 +406,30 @@ exports.onCreateMessage = functions
  */
 function pushToDevice(token, payload) {
   admin.messaging().send(payload)
-    .then((_pushResponse) => {
+    .then((pushResponse) => {
       return {
         text: token,
       };
     })
-    .catch((error) => {
-      throw new functions.https.HttpsError('unknown', error.message, error);
+    .catch((err) => {
+      // HttpsErrorはv1の遺物なので、一般的なErrorをthrowするか、ロギングに留めます。
+      error('Failed to send push notification:', err);
     });
+}
+
+/**
+ * 購入状況を取得する.
+ * @param {DocumentSnapshot} purchaseDoc 購入状況のドキュメントスナップショット
+ * @return {String} 購入状況
+ */
+function getPurchaseStatus(purchaseDoc) {
+  if (purchaseDoc.exists) {
+    return NOT_PURCHASED;
+  } else if (purchaseDoc.data.sentAt != null) {
+    return PURCHASED;
+  } else if (purchaseDoc.data.planDate != null) {
+    return PURCHASE_PLAN;
+  } else {
+    return NOT_PURCHASED;
+  }
 }

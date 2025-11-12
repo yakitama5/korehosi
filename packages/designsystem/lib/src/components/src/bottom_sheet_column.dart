@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:packages_designsystem/i18n.dart';
 
+/// BottomSheetで利用を想定する共通のColumn
 class BottomSheetColumn extends StatelessWidget {
-  const BottomSheetColumn({
-    super.key,
-    this.children,
-    this.titleData,
-  });
+  const BottomSheetColumn({super.key, this.children, this.title});
 
   final List<Widget>? children;
-  final String? titleData;
+  final Widget? title;
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Column(
@@ -22,19 +18,49 @@ class BottomSheetColumn extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Gap(8),
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Text(
-              titleData ?? '',
-              style: textTheme.titleMedium,
-            ),
-          ),
-          ...[
-            const Gap(8),
-            if (children != null) ...children!,
-          ],
+          title ?? const SizedBox.shrink(),
+          ...[const Gap(8), if (children != null) ...children!],
         ],
       ),
+    );
+  }
+}
+
+/// BottomSheetで利用を想定する共通の「適用」ボタン
+class BottomSheetApplyButton extends StatelessWidget {
+  const BottomSheetApplyButton({super.key, required this.onPressed});
+
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) => FilledButton.tonal(
+    onPressed: onPressed,
+    child: Text(commonI18n.common.apply),
+  );
+}
+
+/// BottomSheetで利用を想定する共通の「キャンセル」ボタン
+class BottomSheetCancelButton extends StatelessWidget {
+  const BottomSheetCancelButton({super.key, required this.onPressed});
+
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) =>
+      TextButton(onPressed: onPressed, child: Text(commonI18n.common.cancel));
+}
+
+/// BottomSheetで利用を想定する共通の「リセット」ボタン
+class BottomSheetResetButton extends StatelessWidget {
+  const BottomSheetResetButton({super.key, required this.onPressed});
+
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(commonI18n.common.reset),
     );
   }
 }

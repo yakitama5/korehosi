@@ -16,12 +16,10 @@
         "oderwat.indent-rainbow",
         "MS-CEINTL.vscode-language-pack-ja",
         "ZainChen.json",
-        "nickdemayo.vscode-json-editor",
         "ryanolsonx.solarized",
         "Gruntfuggly.todo-tree",
         "pflannery.vscode-versionlens",
         "rioukkevin.vscode-git-commit",
         "redhat.vscode-yaml",
-        "sourcegraph.cody-ai"
     ]
 }

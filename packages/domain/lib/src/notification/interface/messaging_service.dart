@@ -1,4 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entity/notification_message.dart';
@@ -11,7 +13,7 @@ part 'messaging_service.g.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 @Riverpod(keepAlive: true)
 MessagingService messagingService(Ref ref) =>
-// アプリ起動時 or テスト時に `override` することを前提に利用
+    // アプリ起動時 or テスト時に `override` することを前提に利用
     throw UnimplementedError();
 
 abstract class MessagingService {
@@ -24,8 +26,8 @@ abstract class MessagingService {
   Stream<NotificationMessage> onMessageOpenedApp();
 
   Future<void> sendMessage({
-    required String groupId,
-    required String uid,
+    required GroupId groupId,
+    required UserId userId,
     required String title,
     required String body,
     required NotificationTarget target,

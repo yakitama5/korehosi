@@ -24,16 +24,16 @@ class GroupUsecase with RunUsecaseMixin {
   final Ref ref;
 
   /// グループを取得
-  Stream<Group?> fetch({required String groupId}) =>
+  Stream<Group?> fetch({required GroupId groupId}) =>
       ref.read(groupRepositoryProvider).fetch(groupId: groupId);
 
   /// 現在のグループを取得
-  Future<String?> fetchCurrentGroupId() async {
+  Future<GroupId?> fetchCurrentGroupId() async {
     return ref.read(userSessionRepositoryProvider).fetchCurrentGroupId();
   }
 
   /// 現在のグループを設定
-  Future<void> setCurrentGroupId({required String groupId}) => execute(
+  Future<void> setCurrentGroupId({required GroupId groupId}) => execute(
     ref,
     action: () =>
         ref.read(currentGroupIdProvider.notifier).set(groupId: groupId),
@@ -73,7 +73,7 @@ class GroupUsecase with RunUsecaseMixin {
   }
 
   /// グループを更新
-  Future<void> update({required String groupId, required String name}) async {
+  Future<void> update({required GroupId groupId, required String name}) async {
     // 更新
     await execute(
       ref,
@@ -84,19 +84,19 @@ class GroupUsecase with RunUsecaseMixin {
   }
 
   /// グループを削除
-  Future<void> delete({required String groupId}) => execute(
+  Future<void> delete({required GroupId groupId}) => execute(
     ref,
     action: () => ref.read(groupRepositoryProvider).delete(groupId: groupId),
   );
 
   /// グループから脱退
-  Future<void> leave({required String groupId}) => execute(
+  Future<void> leave({required GroupId groupId}) => execute(
     ref,
     action: () => ref.read(groupUsecaseProvider).leave(groupId: groupId),
   );
 
   /// グループの欲しい物上限を解放する
-  Future<void> upgradeLimitedReleasePlan({required String groupId}) async {
+  Future<void> upgradeLimitedReleasePlan({required GroupId groupId}) async {
     await execute(
       ref,
       action: () async {
@@ -122,7 +122,7 @@ class GroupUsecase with RunUsecaseMixin {
   }
 
   /// グループに参加する
-  Future<void> joinGroup({required String shareLinkId}) => execute(
+  Future<void> joinGroup({required ShareLinkId shareLinkId}) => execute(
     ref,
     action: () async {
       final code = await ref
@@ -161,7 +161,7 @@ class GroupUsecase with RunUsecaseMixin {
 
   /// グループの共有リンクを生成する
   Future<String> buildShareLink({
-    required String groupId,
+    required GroupId groupId,
     // 画面のパスはあくまでプレゼンテーション層に依存するので、builderで指定してもらう
     required LocationBuilder locationBuilder,
   }) => execute(

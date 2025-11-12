@@ -17,6 +17,8 @@ abstract class FirestoreItemModel with _$FirestoreItemModel {
     String? wishSeason,
     List<String>? urls,
     String? memo,
+    required PurchaseStatus purchaseStatus,
+    required PurchaseStatus childViewPurchaseStatus,
     @timestampKey DateTime? createdAt,
     @timestampKey DateTime? updatedAt,
   }) = _FirestoreItemModel;
@@ -27,15 +29,21 @@ abstract class FirestoreItemModel with _$FirestoreItemModel {
 
 extension FirestoreItemModelX on FirestoreItemModel {
   /// ドメイン層への変換
-  Item toDomainModel() => Item(
-    id: id,
-    imagesPath: imagesPath,
+  Item toDomainModel({
+    Purchase? purchase,
+    List<ItemImage>? images,
+    required PurchaseStatus purchaseStatus,
+  }) => Item(
+    id: ItemId(id),
+    images: images,
     name: name,
     wanterName: wanterName,
     wishRank: wishRank,
     wishSeason: wishSeason,
     urls: urls,
     memo: memo,
+    purchase: purchase,
+    purchaseStatus: purchaseStatus,
     createdAt: createdAt!,
     updatedAt: updatedAt!,
   );

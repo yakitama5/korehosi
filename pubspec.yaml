@@ -36,6 +36,7 @@ melos:
         flutter: ^3.35.1
       dependencies:
         collection: ^1.19.1
+        cross_file: ^0.3.4+2
         envied: ^1.2.0
         flutter_hooks: ^0.21.3+1
         flutter_svg: ^2.0.13

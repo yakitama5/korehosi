@@ -11,6 +11,7 @@ resolution: workspace
 
 dependencies:
   collection: ^1.19.1
+  fl_chart: ^1.0.0
   flutter:
     sdk: flutter
   freezed_annotation: ^3.1.0

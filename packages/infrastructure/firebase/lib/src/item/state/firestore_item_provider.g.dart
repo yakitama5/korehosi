@@ -8,7 +8,7 @@ part of 'firestore_item_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemCollectionRefHash() => r'878270116cb5ccfc5407466c6f69b15abb8312dc';
+String _$itemCollectionRefHash() => r'0b9e812983963abf2c36429dd1bf4e9f9ba38ea0';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -50,7 +50,7 @@ class ItemCollectionRefFamily
   /// 欲しい物コレクションの参照
   ///
   /// Copied from [itemCollectionRef].
-  ItemCollectionRefProvider call({required String groupId}) {
+  ItemCollectionRefProvider call({required GroupId groupId}) {
     return ItemCollectionRefProvider(groupId: groupId);
   }
 
@@ -84,7 +84,7 @@ class ItemCollectionRefProvider
   /// 欲しい物コレクションの参照
   ///
   /// Copied from [itemCollectionRef].
-  ItemCollectionRefProvider({required String groupId})
+  ItemCollectionRefProvider({required GroupId groupId})
     : this._internal(
         (ref) =>
             itemCollectionRef(ref as ItemCollectionRefRef, groupId: groupId),
@@ -109,7 +109,7 @@ class ItemCollectionRefProvider
     required this.groupId,
   }) : super.internal();
 
-  final String groupId;
+  final GroupId groupId;
 
   @override
   Override overrideWith(
@@ -157,7 +157,7 @@ class ItemCollectionRefProvider
 mixin ItemCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestoreItemModel>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 }
 
 class _ItemCollectionRefProviderElement
@@ -166,10 +166,10 @@ class _ItemCollectionRefProviderElement
   _ItemCollectionRefProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as ItemCollectionRefProvider).groupId;
+  GroupId get groupId => (origin as ItemCollectionRefProvider).groupId;
 }
 
-String _$itemDocumentRefHash() => r'1c580cff3356afb7bd69d7917314fe9a8aa3f3de';
+String _$itemDocumentRefHash() => r'b3acbc542c3b7f17d0111d050196e98eed2ba3ac';
 
 /// 欲しい物ドキュメントの参照
 ///
@@ -190,7 +190,7 @@ class ItemDocumentRefFamily
   /// 欲しい物ドキュメントの参照
   ///
   /// Copied from [itemDocumentRef].
-  ItemDocumentRefProvider call({required String groupId, String? itemId}) {
+  ItemDocumentRefProvider call({required GroupId groupId, ItemId? itemId}) {
     return ItemDocumentRefProvider(groupId: groupId, itemId: itemId);
   }
 
@@ -224,7 +224,7 @@ class ItemDocumentRefProvider
   /// 欲しい物ドキュメントの参照
   ///
   /// Copied from [itemDocumentRef].
-  ItemDocumentRefProvider({required String groupId, String? itemId})
+  ItemDocumentRefProvider({required GroupId groupId, ItemId? itemId})
     : this._internal(
         (ref) => itemDocumentRef(
           ref as ItemDocumentRefRef,
@@ -254,8 +254,8 @@ class ItemDocumentRefProvider
     required this.itemId,
   }) : super.internal();
 
-  final String groupId;
-  final String? itemId;
+  final GroupId groupId;
+  final ItemId? itemId;
 
   @override
   Override overrideWith(
@@ -305,10 +305,10 @@ class ItemDocumentRefProvider
 mixin ItemDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreItemModel>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 
   /// The parameter `itemId` of this provider.
-  String? get itemId;
+  ItemId? get itemId;
 }
 
 class _ItemDocumentRefProviderElement
@@ -317,9 +317,9 @@ class _ItemDocumentRefProviderElement
   _ItemDocumentRefProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as ItemDocumentRefProvider).groupId;
+  GroupId get groupId => (origin as ItemDocumentRefProvider).groupId;
   @override
-  String? get itemId => (origin as ItemDocumentRefProvider).itemId;
+  ItemId? get itemId => (origin as ItemDocumentRefProvider).itemId;
 }
 
 // ignore_for_file: type=lint

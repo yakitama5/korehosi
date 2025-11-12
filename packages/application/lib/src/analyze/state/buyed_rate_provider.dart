@@ -1,27 +1,25 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:packages_application/src/analyze/state/analyze_buyed_count_provider.dart';
-import 'package:packages_application/src/analyze/state/analyze_source_items_provider.dart';
+import 'package:packages_application/group.dart';
+import 'package:packages_application/src/analyze/state/item_analyze_query_notifier_provider.dart';
+import 'package:packages_application/src/analyze/usecase/analyze_usecase.dart';
+import 'package:packages_application/src/user/state/auth_user_provider.dart';
+import 'package:packages_domain/analyze.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'buyed_rate_provider.g.dart';
 
-/// 購入率
+/// 購入率を管理するProvider
 @riverpod
-Future<double> buyedRate(Ref ref) async {
-  // 購入済の欲しい物に絞り込む
-  final asyncAllItemsCount = ref.watch(
-    analyzeSourceItemsProvider.selectAsync((items) => items.length),
+Future<ItemBuyedRate> buyedRate(Ref ref) async {
+  // 検索に必要な情報を取得
+  final query = ref.watch(itemAnalyzeQueryNotifierProvider);
+  final groupId = await ref.watch(currentGroupIdProvider.future);
+  final user = await ref.watch(authUserProvider.future);
+
+  final usecase = ref.watch(analyzeUsecaseProvider);
+  return usecase.exploreBuyedRate(
+    groupId: groupId,
+    ageGroup: user?.ageGroup,
+    query: query,
   );
-  final asyncBuyedCount = ref.watch(analyzeBuyedCountProvider.future);
-  final allItemsCount = await asyncAllItemsCount;
-  final buyedCount = await asyncBuyedCount;
-
-  // 欲しい物が0件の場合、計算しない
-  if (allItemsCount <= 0) {
-    return 0;
-  }
-
-  // 割合を求める
-  final percent = (buyedCount / allItemsCount) * 100;
-  return percent;
 }

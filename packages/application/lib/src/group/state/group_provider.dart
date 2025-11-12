@@ -7,6 +7,6 @@ part 'group_provider.g.dart';
 /// グループ情報
 /// データの参照頻度を減らすため、`keepAlive`を指定
 @Riverpod(keepAlive: true)
-Stream<Group?> group(Ref ref, {required String groupId}) {
+Stream<Group?> group(Ref ref, {required GroupId groupId}) {
   return ref.read(groupRepositoryProvider).fetch(groupId: groupId);
 }

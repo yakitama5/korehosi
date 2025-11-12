@@ -26,6 +26,14 @@ _FirestoreItemModel _$FirestoreItemModelFromJson(
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
     ),
     memo: $checkedConvert('memo', (v) => v as String?),
+    purchaseStatus: $checkedConvert(
+      'purchaseStatus',
+      (v) => $enumDecode(_$PurchaseStatusEnumMap, v),
+    ),
+    childViewPurchaseStatus: $checkedConvert(
+      'childViewPurchaseStatus',
+      (v) => $enumDecode(_$PurchaseStatusEnumMap, v),
+    ),
     createdAt: $checkedConvert('createdAt', (v) => dateFromTimestampValue(v)),
     updatedAt: $checkedConvert('updatedAt', (v) => dateFromTimestampValue(v)),
   );
@@ -42,6 +50,15 @@ Map<String, dynamic> _$FirestoreItemModelToJson(_FirestoreItemModel instance) =>
       'wishSeason': instance.wishSeason,
       'urls': instance.urls,
       'memo': instance.memo,
+      'purchaseStatus': _$PurchaseStatusEnumMap[instance.purchaseStatus]!,
+      'childViewPurchaseStatus':
+          _$PurchaseStatusEnumMap[instance.childViewPurchaseStatus]!,
       'createdAt': timestampFromDateValue(instance.createdAt),
       'updatedAt': timestampFromDateValue(instance.updatedAt),
     };
+
+const _$PurchaseStatusEnumMap = {
+  PurchaseStatus.notPurchased: 'notPurchased',
+  PurchaseStatus.purchasePlan: 'purchasePlan',
+  PurchaseStatus.purchased: 'purchased',
+};

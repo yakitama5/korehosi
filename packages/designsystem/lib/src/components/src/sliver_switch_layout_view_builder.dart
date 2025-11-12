@@ -41,9 +41,10 @@ class SliverSwitchLayoutViewBuilder extends StatelessWidget {
                 maxCrossAxisExtent: 240,
                 mainAxisSpacing: 4,
                 crossAxisSpacing: 4,
-                childAspectRatio: 0.75,
+                childAspectRatio: 0.9,
               ),
           itemBuilder: itemBuilder,
+          itemCount: itemCount,
         ),
       },
     );

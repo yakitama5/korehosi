@@ -1,10 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_purchase_model.dart';
-import 'package:infrastructure_firebase/src/item/state/firestore_child_view_purchase_provider.dart';
-import 'package:infrastructure_firebase/src/item/state/firestore_deleted_purchase_provider.dart';
+import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
+import 'package:packages_domain/common.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
+import 'package:packages_domain/user.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebasePurchaseRepository implements PurchaseRepository {
@@ -13,125 +15,164 @@ class FirebasePurchaseRepository implements PurchaseRepository {
   final Ref ref;
 
   @override
-  Stream<Purchase?> fetchByItemId({
-    required String groupId,
-    required String itemId,
+  Future<Purchase?> fetchByItemId({
+    required GroupId groupId,
+    required ItemId itemId,
   }) {
-    return ref
-        .read(purchaseDocumentRefProvider(groupId: groupId, purchaseId: itemId))
-        .snapshots()
-        .where((s) {
-          // 読み込み中のドキュメントが存在する場合はスキップ
-          final doc = s.data();
-          return doc == null || !doc.fieldValuePending;
-        })
-        .map((snap) => snap.data()?.toDomainModel());
-  }
+    // `Purchase`は`Item`と同ID形態を利用する
+    final purchaseId = PurchaseId(itemId.value);
 
-  @override
-  Stream<Purchase?> fetchByItemIdForChild({
-    required String groupId,
-    required String itemId,
-  }) {
-    return ref
-        .read(
-          cpurchaseDocumentRefProvider(groupId: groupId, purchaseId: itemId),
-        )
-        .snapshots()
-        .where((s) {
-          // 読み込み中のドキュメントが存在する場合はスキップ
-          final doc = s.data();
-          return doc == null || !doc.fieldValuePending;
-        })
-        .map((snap) => snap.data()?.toDomainModel());
-  }
-
-  @override
-  Future<void> add({
-    required String groupId,
-    required String itemId,
-    int? price,
-    String? buyerName,
-    DateTime? planDate,
-    required bool surprise,
-    DateTime? sentAt,
-    String? memo,
-    required String uid,
-  }) async {
-    // 新しいドキュメントを取得
-    final docRef = ref.read(
-      purchaseDocumentRefProvider(groupId: groupId, purchaseId: itemId),
-    );
-
-    // Firestore用のモデルに変換
-    final docModel = FirestorePurchaseModel(
-      id: docRef.id,
-      memo: memo,
-      surprise: surprise,
-      uid: uid,
-      buyerName: buyerName,
-      planDate: planDate,
-      price: price,
-      sentAt: sentAt,
-    );
-
-    // 登録
-    await docRef.set(docModel);
-  }
-
-  @override
-  Future<void> update({
-    required String groupId,
-    required String purchaseId,
-    int? price,
-    String? buyerName,
-    DateTime? planDate,
-    required bool surprise,
-    DateTime? sentAt,
-    String? memo,
-    required String uid,
-  }) {
-    // Firestore用のモデルに変換
-    final docModel = FirestorePurchaseModel(
-      id: purchaseId,
-      memo: memo,
-      surprise: surprise,
-      uid: uid,
-      buyerName: buyerName,
-      planDate: planDate,
-      price: price,
-      sentAt: sentAt,
-    );
-
-    // 登録
     return ref
         .read(
           purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
         )
-        .set(docModel);
+        .get()
+        .then((snap) => snap.data()?.toDomainModel());
+  }
+
+  @override
+  Future<void> add({
+    required GroupId groupId,
+    required ItemId itemId,
+    int? price,
+    String? buyerName,
+    DateTime? planDate,
+    required bool surprise,
+    DateTime? sentAt,
+    String? memo,
+    required UserId userId,
+  }) async {
+    // 更新対象の欲しいものの存在チェック
+    final itemDocRef = ref.watch(
+      itemDocumentRefProvider(groupId: groupId, itemId: itemId),
+    );
+    final itemSnap = await itemDocRef.get();
+    if (!itemSnap.exists) {
+      throw const BusinessException(BusinessExceptionType.updateTargetNotFound);
+    }
+
+    // `Purchase`は`Item`と同ID形態を利用する
+    final purchaseId = PurchaseId(itemId.value);
+
+    // 新しいドキュメントを取得
+    final purchaseDocRef = ref.read(
+      purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
+    );
+
+    // Firestore用のモデルに変換
+    final purchase = FirestorePurchaseModel(
+      id: purchaseDocRef.id,
+      memo: memo,
+      surprise: surprise,
+      uid: userId.value,
+      buyerName: buyerName,
+      planDate: planDate,
+      price: price,
+      sentAt: sentAt,
+    );
+
+    // 購入状況取得
+    final purchaseStatus = purchase
+        .purchaseStatus(ageGroup: AgeGroup.adult)
+        .name;
+    final childViewPurchaseStatus = purchase
+        .purchaseStatus(ageGroup: AgeGroup.child)
+        .name;
+
+    return ref.watch(firestoreProvider).runTransaction((transaction) async {
+      // 購入状況の登録
+      transaction.set(purchaseDocRef, purchase)
+      // 欲しいものドキュメントの購入状況を同時に更新する
+      .update(itemDocRef, {
+        'purchaseStatus': purchaseStatus,
+        'childViewPurchaseStatus': childViewPurchaseStatus,
+      });
+    });
+  }
+
+  @override
+  Future<void> update({
+    required GroupId groupId,
+    required ItemId itemId,
+    int? price,
+    String? buyerName,
+    DateTime? planDate,
+    required bool surprise,
+    DateTime? sentAt,
+    String? memo,
+    required UserId userId,
+  }) async {
+    // `Purchase`は`Item`と同ID形態を利用する
+    final purchaseId = PurchaseId(itemId.value);
+
+    // 更新対象の存在チェック
+    final itemDocRef = ref.watch(
+      itemDocumentRefProvider(groupId: groupId, itemId: itemId),
+    );
+    final purchaseDocRef = ref.read(
+      purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
+    );
+    final itemSnap = await itemDocRef.get();
+    final purchaseSnap = await purchaseDocRef.get();
+    if (!itemSnap.exists || !purchaseSnap.exists) {
+      throw const BusinessException(BusinessExceptionType.updateTargetNotFound);
+    }
+
+    // Firestore用のモデルに変換
+    final purchase = FirestorePurchaseModel(
+      id: purchaseId.value,
+      memo: memo,
+      surprise: surprise,
+      uid: userId.value,
+      buyerName: buyerName,
+      planDate: planDate,
+      price: price,
+      sentAt: sentAt,
+    );
+
+    // 購入状況取得
+    final purchaseStatus = purchase
+        .purchaseStatus(ageGroup: AgeGroup.adult)
+        .name;
+    final childViewPurchaseStatus = purchase
+        .purchaseStatus(ageGroup: AgeGroup.child)
+        .name;
+
+    return ref.watch(firestoreProvider).runTransaction((transaction) async {
+      // 購入状況の登録
+      transaction.set(purchaseDocRef, purchase)
+      // 欲しいものドキュメントの購入状況を同時に更新する
+      .update(itemDocRef, {
+        'purchaseStatus': purchaseStatus,
+        'childViewPurchaseStatus': childViewPurchaseStatus,
+      });
+    });
   }
 
   @override
   Future<void> delete({
-    required String groupId,
-    required String purchaseId,
+    required GroupId groupId,
+    required ItemId itemId,
   }) async {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
-      // 削除前の状態を保持
-      final docRef = ref.read(
+      final itemDocRef = ref.watch(
+        itemDocumentRefProvider(groupId: groupId, itemId: itemId),
+      );
+      // Itemコレクションと同一IDを利用
+      final purchaseId = PurchaseId(itemId.value);
+      final purchaseDocRef = ref.read(
         purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
       );
-      final delDocRef = ref.read(
-        dpurchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
-      );
-      final doc = await transaction.get(docRef);
 
       transaction
           // ドキュメントの削除
-          .delete(docRef)
-          // 削除用ドキュメントの追加
-          .set<FirestorePurchaseModel>(delDocRef, doc.data()!);
+          .delete(purchaseDocRef)
+          // 購入状況の更新
+          .update(itemDocRef, {
+            'purchaseStatus': PurchaseStatus.notPurchased.name,
+            'childViewPurchaseStatus': PurchaseStatus.notPurchased.name,
+          });
     });
   }
 }

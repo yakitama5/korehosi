@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppInPurchaseProduct {
 
- String get id; String get title; double get price;
+ AppImPurchaseProductId get id; String get title; double get price;
 /// Create a copy of AppInPurchaseProduct
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $AppInPurchaseProductCopyWith<$Res>  {
   factory $AppInPurchaseProductCopyWith(AppInPurchaseProduct value, $Res Function(AppInPurchaseProduct) _then) = _$AppInPurchaseProductCopyWithImpl;
 @useResult
 $Res call({
- String id, String title, double price
+ AppImPurchaseProductId id, String title, double price
 });
 
 
@@ -65,7 +65,7 @@ class _$AppInPurchaseProductCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? price = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as AppImPurchaseProductId,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double,
   ));
@@ -152,7 +152,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String title,  double price)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AppImPurchaseProductId id,  String title,  double price)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppInPurchaseProduct() when $default != null:
 return $default(_that.id,_that.title,_that.price);case _:
@@ -173,7 +173,7 @@ return $default(_that.id,_that.title,_that.price);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String title,  double price)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AppImPurchaseProductId id,  String title,  double price)  $default,) {final _that = this;
 switch (_that) {
 case _AppInPurchaseProduct():
 return $default(_that.id,_that.title,_that.price);case _:
@@ -193,7 +193,7 @@ return $default(_that.id,_that.title,_that.price);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String title,  double price)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AppImPurchaseProductId id,  String title,  double price)?  $default,) {final _that = this;
 switch (_that) {
 case _AppInPurchaseProduct() when $default != null:
 return $default(_that.id,_that.title,_that.price);case _:
@@ -211,7 +211,7 @@ class _AppInPurchaseProduct implements AppInPurchaseProduct {
   const _AppInPurchaseProduct({required this.id, required this.title, required this.price});
   
 
-@override final  String id;
+@override final  AppImPurchaseProductId id;
 @override final  String title;
 @override final  double price;
 
@@ -245,7 +245,7 @@ abstract mixin class _$AppInPurchaseProductCopyWith<$Res> implements $AppInPurch
   factory _$AppInPurchaseProductCopyWith(_AppInPurchaseProduct value, $Res Function(_AppInPurchaseProduct) _then) = __$AppInPurchaseProductCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String title, double price
+ AppImPurchaseProductId id, String title, double price
 });
 
 
@@ -265,7 +265,7 @@ class __$AppInPurchaseProductCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? price = null,}) {
   return _then(_AppInPurchaseProduct(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as AppImPurchaseProductId,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double,
   ));

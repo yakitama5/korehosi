@@ -7,8 +7,6 @@ import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/common/state/app_build_config_provider.dart';
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
 import 'package:packages_application/src/group/state/group_provider.dart';
-import 'package:packages_application/src/item/state/items_provider.dart';
-import 'package:packages_application/src/item/state/purchase_provider.dart';
 import 'package:packages_application/src/user/state/auth_status_provider.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
 import 'package:packages_application/src/user/state/group_join_users_provider.dart';
@@ -44,11 +42,11 @@ class UserUsecase with RunUsecaseMixin {
       ref.read(userRepositoryProvider).fetchAuthStatus();
 
   /// ユーザーの取得
-  Stream<User?> fetch({required String userId}) =>
+  Stream<User?> fetch({required UserId userId}) =>
       ref.read(userRepositoryProvider).fetch(userId: userId);
 
   /// グループ内のユーザーの取得
-  Stream<List<User>> fetchByGroup({required String groupId}) =>
+  Stream<List<User>> fetchByGroup({required GroupId groupId}) =>
       ref.read(userRepositoryProvider).fetchByGroupId(groupId: groupId);
 
   /// ユーザーの登録
@@ -212,7 +210,7 @@ class UserUsecase with RunUsecaseMixin {
     }
 
     final userId = await ref.read(
-      authStatusProvider.selectAsync((auth) => auth?.uid),
+      authStatusProvider.selectAsync((auth) => auth?.userId),
     );
     await ref.read(appInPurchaseServiceProvider).signIn(userId: userId!);
   }
@@ -253,11 +251,11 @@ class UserUsecase with RunUsecaseMixin {
     unawaited(ref.read(messagingServiceProvider).requestPermission());
 
     // トークンのリフレッシュ
-    await refreshFCMToken(user.uid);
+    await refreshFCMToken(user.userId);
   }
 
   /// トークンのリフレッシュ
-  Future<void> refreshFCMToken(String uid) async {
+  Future<void> refreshFCMToken(UserId userId) async {
     // トークンを取得する
     final token = await ref.read(messagingServiceProvider).getToken();
     logger.d('FCM Token is $token');
@@ -278,12 +276,12 @@ class UserUsecase with RunUsecaseMixin {
     // トークンが存在しなければ追加、存在すればタイムスタンプを更新する
     await ref
         .read(notificationTokenRepositoryProvider)
-        .set(userId: uid, token: token);
+        .set(userId: userId, token: token);
 
     // ローカル上にタイムスタンプを設定
     await ref
         .read(userSessionRepositoryProvider)
-        .updateTokenTimestamp(uid: uid, dateTime: now);
+        .updateTokenTimestamp(userId: userId, dateTime: now);
   }
 
   /// Permissionエラーを避けるために、キャッシュしていた取得データをリフレッシュする
@@ -291,8 +289,6 @@ class UserUsecase with RunUsecaseMixin {
     logger.d('Refresh Firestore instance');
     ref
       ..invalidate(userProvider)
-      ..invalidate(itemsProvider)
-      ..invalidate(purchaseProvider)
       ..invalidate(groupProvider)
       ..invalidate(groupJoinUsersProvider);
   }

@@ -4,6 +4,7 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_group_model.dart';
+import 'package:packages_domain/group.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_deleted_group_provider.g.dart';
@@ -32,5 +33,5 @@ CollectionReference<FirestoreGroupModel> dgroupCollectionRef(Ref ref) {
 @riverpod
 DocumentReference<FirestoreGroupModel> dgroupDocumentRef(
   Ref ref, {
-  String? groupId,
-}) => ref.watch(dgroupCollectionRefProvider).doc(groupId);
+  GroupId? groupId,
+}) => ref.watch(dgroupCollectionRefProvider).doc(groupId?.value);

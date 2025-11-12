@@ -263,8 +263,11 @@ class TranslationsItemCommonJa {
 	/// ja: 'かった人'
 	String get buyerName => 'かった人';
 
+	/// ja: '¥${price:int}'
+	String currencyFormat({required int price}) => '¥${price}';
+
 	/// ja: '¥'
-	String get currency => '¥';
+	String get currencySymbol => '¥';
 }
 
 // Path: item.itemsPage
@@ -864,7 +867,8 @@ extension on Translations {
 			case 'item.common.purchasePlanDate': return 'かう予定の日';
 			case 'item.common.sentDate': return 'わたした日';
 			case 'item.common.buyerName': return 'かった人';
-			case 'item.common.currency': return '¥';
+			case 'item.common.currencyFormat': return ({required int price}) => '¥${price}';
+			case 'item.common.currencySymbol': return '¥';
 			case 'item.itemsPage.title': return 'ほしいもの';
 			case 'item.itemsPage.add': return 'ほしいものを追加';
 			case 'item.itemsPage.notSelectedGroupDialog.title': return 'グループが選択されていません';

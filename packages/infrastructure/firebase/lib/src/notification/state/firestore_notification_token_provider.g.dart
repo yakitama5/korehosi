@@ -9,7 +9,7 @@ part of 'firestore_notification_token_provider.dart';
 // **************************************************************************
 
 String _$notificationTokenCollectionRefHash() =>
-    r'057437d8ad03a98b9d8f44d503b43fd5797af3c7';
+    r'81fd226347bc7e957498d58c707b38d244eaa5f9';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -52,7 +52,7 @@ class NotificationTokenCollectionRefFamily
   /// 通知FCMトークンコレクションの参照
   ///
   /// Copied from [notificationTokenCollectionRef].
-  NotificationTokenCollectionRefProvider call({required String userId}) {
+  NotificationTokenCollectionRefProvider call({required UserId userId}) {
     return NotificationTokenCollectionRefProvider(userId: userId);
   }
 
@@ -89,7 +89,7 @@ class NotificationTokenCollectionRefProvider
   /// 通知FCMトークンコレクションの参照
   ///
   /// Copied from [notificationTokenCollectionRef].
-  NotificationTokenCollectionRefProvider({required String userId})
+  NotificationTokenCollectionRefProvider({required UserId userId})
     : this._internal(
         (ref) => notificationTokenCollectionRef(
           ref as NotificationTokenCollectionRefRef,
@@ -116,7 +116,7 @@ class NotificationTokenCollectionRefProvider
     required this.userId,
   }) : super.internal();
 
-  final String userId;
+  final UserId userId;
 
   @override
   Override overrideWith(
@@ -170,7 +170,7 @@ mixin NotificationTokenCollectionRefRef
           CollectionReference<FirestoreNotificationTokenModel>
         > {
   /// The parameter `userId` of this provider.
-  String get userId;
+  UserId get userId;
 }
 
 class _NotificationTokenCollectionRefProviderElement
@@ -182,12 +182,12 @@ class _NotificationTokenCollectionRefProviderElement
   _NotificationTokenCollectionRefProviderElement(super.provider);
 
   @override
-  String get userId =>
+  UserId get userId =>
       (origin as NotificationTokenCollectionRefProvider).userId;
 }
 
 String _$notificationTokenDocumentRefHash() =>
-    r'baabc9e00325872694a06f7f40be3042ba904049';
+    r'c8eb6eb1bc70391accafdc15ceabb075df5d7408';
 
 /// 通知FCMトークンドキュメントの参照
 ///
@@ -210,7 +210,7 @@ class NotificationTokenDocumentRefFamily
   ///
   /// Copied from [notificationTokenDocumentRef].
   NotificationTokenDocumentRefProvider call({
-    required String userId,
+    required UserId userId,
     String? token,
   }) {
     return NotificationTokenDocumentRefProvider(userId: userId, token: token);
@@ -249,7 +249,7 @@ class NotificationTokenDocumentRefProvider
   /// 通知FCMトークンドキュメントの参照
   ///
   /// Copied from [notificationTokenDocumentRef].
-  NotificationTokenDocumentRefProvider({required String userId, String? token})
+  NotificationTokenDocumentRefProvider({required UserId userId, String? token})
     : this._internal(
         (ref) => notificationTokenDocumentRef(
           ref as NotificationTokenDocumentRefRef,
@@ -279,7 +279,7 @@ class NotificationTokenDocumentRefProvider
     required this.token,
   }) : super.internal();
 
-  final String userId;
+  final UserId userId;
   final String? token;
 
   @override
@@ -335,7 +335,7 @@ mixin NotificationTokenDocumentRefRef
           DocumentReference<FirestoreNotificationTokenModel>
         > {
   /// The parameter `userId` of this provider.
-  String get userId;
+  UserId get userId;
 
   /// The parameter `token` of this provider.
   String? get token;
@@ -350,7 +350,7 @@ class _NotificationTokenDocumentRefProviderElement
   _NotificationTokenDocumentRefProviderElement(super.provider);
 
   @override
-  String get userId => (origin as NotificationTokenDocumentRefProvider).userId;
+  UserId get userId => (origin as NotificationTokenDocumentRefProvider).userId;
   @override
   String? get token => (origin as NotificationTokenDocumentRefProvider).token;
 }

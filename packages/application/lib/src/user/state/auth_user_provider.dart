@@ -12,7 +12,7 @@ part 'auth_user_provider.g.dart';
 @Riverpod(keepAlive: true)
 Future<User?> authUser(Ref ref) async {
   final userId = await ref.watch(
-    authStatusProvider.selectAsync((value) => value?.uid),
+    authStatusProvider.selectAsync((value) => value?.userId),
   );
   if (userId == null) {
     return null;

@@ -336,7 +336,7 @@ class _EditButton extends HookConsumerWidget with PresentationMixin {
         // 更新
         await ref
             .read(groupUsecaseProvider)
-            .update(groupId: prev.name, name: inputName);
+            .update(groupId: prev.id, name: inputName);
       },
     );
   }

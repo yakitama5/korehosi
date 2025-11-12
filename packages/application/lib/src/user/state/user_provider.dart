@@ -8,6 +8,6 @@ part 'user_provider.g.dart';
 /// ユーザー
 /// データの参照頻度を減らすため、`keepAlive`を指定
 @Riverpod(keepAlive: true)
-Stream<User?> user(Ref ref, {required String userId}) {
+Stream<User?> user(Ref ref, {required UserId userId}) {
   return ref.read(userUsecaseProvider).fetch(userId: userId);
 }

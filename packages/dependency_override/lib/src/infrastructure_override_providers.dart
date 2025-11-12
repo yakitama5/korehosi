@@ -1,4 +1,5 @@
 import 'package:infrastructure_branch/core.dart';
+import 'package:infrastructure_firebase/analyze.dart';
 import 'package:infrastructure_firebase/common.dart';
 import 'package:infrastructure_firebase/group.dart';
 import 'package:infrastructure_firebase/item.dart';
@@ -8,6 +9,7 @@ import 'package:infrastructure_revenue_cat/common.dart';
 import 'package:infrastructure_shared_preferences/designsystem.dart';
 import 'package:infrastructure_shared_preferences/init.dart';
 import 'package:infrastructure_shared_preferences/user.dart';
+import 'package:packages_domain/analyze.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/designsystem.dart';
 import 'package:packages_domain/group.dart';
@@ -30,6 +32,7 @@ Future<List<Override>> initializeInfrastructureProviders() async {
     groupRepositoryProvider.overrideWith(FirebaseGroupRepository.new),
     itemRepositoryProvider.overrideWith(FirebaseItemRepository.new),
     purchaseRepositoryProvider.overrideWith(FirebasePurchaseRepository.new),
+    analyzeRepositoryProvider.overrideWith(FirebaseAnalyzeRepository.new),
     storageServiceProvider.overrideWith(FirebaseStorageService.new),
     analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
     messagingServiceProvider.overrideWith(

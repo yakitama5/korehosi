@@ -13,7 +13,7 @@ part 'group_detail_providers.g.dart';
 /// 明細を表示する画面郡で横断して利用する状態を管理する
 /// IDを管理するProviderを `override`することを前提に処理を組む
 class GroupDetailProviders {
-  static AutoDisposeProvider<String?> get groupIdProvider => _groupIdProvider;
+  static AutoDisposeProvider<GroupId?> get groupIdProvider => _groupIdProvider;
   static AutoDisposeFutureProvider<Group?> get groupProvider => _groupProvider;
   static AutoDisposeFutureProvider<List<User>> get usersProvider =>
       _usersProvider;
@@ -22,7 +22,7 @@ class GroupDetailProviders {
 /// 明細表示対象となるグループのIDを管理するProvider
 /// `override`前提の利用を強制する
 @riverpod
-String? _groupId(Ref ref) => throw UnimplementedError();
+GroupId? _groupId(Ref ref) => throw UnimplementedError();
 
 /// 明細表示対象となるグループのEntityを管理するProvider
 /// `_groupIdProvider`に依存する

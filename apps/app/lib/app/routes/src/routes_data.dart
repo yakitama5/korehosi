@@ -24,6 +24,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/item.dart';
 
 part 'analyze_branch.dart';
 part 'item_branch.dart';
@@ -129,7 +131,9 @@ class ShareLinkRouteData extends GoRouteData with _$ShareLinkRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) => ProviderScope(
     overrides: [
-      ShareLinkPageProviders.idProvider.overrideWithValue(shareLinkId),
+      ShareLinkPageProviders.idProvider.overrideWithValue(
+        ShareLinkId(shareLinkId),
+      ),
     ],
     child: const ShareLinkPage(),
   );
@@ -147,7 +151,7 @@ class PhotoPreviewRouteData extends GoRouteData with _$PhotoPreviewRouteData {
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return MaterialPage(
       child: PhotoViewer(
-        imagesPath: $extra ?? [],
+        imageUrls: $extra ?? [],
         initialIndex: index ?? 0,
         backgroundDecoration: const BoxDecoration(color: Colors.black),
       ),

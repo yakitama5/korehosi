@@ -1,8 +1,8 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/pages/item/components/empty_item_image.dart';
 import 'package:flutter_app/app/pages/item/components/item_image_carousel_slider.dart';
+import 'package:flutter_app/app/pages/item/components/items_empty_image.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
@@ -110,9 +110,9 @@ class _ItemForm extends HookConsumerWidget {
       urls: (item?.urls?.isEmpty ?? true) ? [''] : item?.urls,
       images: [
         // 新規アップロード用に項目を+1定義
-        ...item?.imagesPath
+        ...item?.images
                 // 画像はアップロード済のものと分けて管理するためモデルに変換
-                ?.map((path) => SelectedImageModel(imagePath: path))
+                ?.map((image) => SelectedImageModel(savedImage: image))
                 .toList() ??
             [],
         null,
@@ -169,7 +169,8 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
             wishSeason: wishSeason,
             urls: urls,
             memo: memo,
-            generateItemDetailRoute: (itemId) => ItemRouteData(itemId).location,
+            generateItemDetailRoute: (itemId) =>
+                ItemRouteData(itemId.value).location,
           );
         } else {
           await usecase.update(
@@ -252,30 +253,39 @@ class _ImageFields extends HookConsumerWidget {
         return ItemImageCarouselSlider(
           items: formArray.controls
               .mapIndexed(
-                (i, key) => ReactiveImagePicker(
-                  key: ObjectKey(formArray.control('$i')),
-                  formControlName: '$i',
-                  inputBuilder: (onPressed) => InkWell(
-                    borderRadius: radius,
-                    onTap: onPressed,
-                    child: EmptyItemImage(
-                      iconData: MdiIcons.imagePlus,
-                      radius: radius,
-                    ),
-                  ),
-                  onSelected: () => formModel.addImagesItem(null),
-                  onDeleted: () => formModel.imagesControl.removeAt(i),
-                  selectedBuilder: (onPressed, selectedFile) {
-                    final uploaded = selectedFile.imagePath != null;
-                    return InkWell(
-                      borderRadius: radius,
+                (i, key) => ClipRRect(
+                  borderRadius: radius,
+                  child: ReactiveImagePicker(
+                    key: ObjectKey(formArray.control('$i')),
+                    formControlName: '$i',
+                    inputBuilder: (onPressed) => InkWell(
                       onTap: onPressed,
-                      // ファイル種別に応じてWidgetを切り替える
-                      child: uploaded
-                          ? StorageImage(imagePath: selectedFile.imagePath)
-                          : XFileImage(xFile: selectedFile.uploadFile!),
-                    );
-                  },
+                      child: Stack(
+                        children: [
+                          Icon(MdiIcons.imagePlus),
+                          const ItemsEmptyImage(
+                            width: double.infinity,
+                            height: double.infinity,
+                          ),
+                        ],
+                      ),
+                    ),
+                    onSelected: () => formModel.addImagesItem(null),
+                    onDeleted: () => formModel.imagesControl.removeAt(i),
+                    selectedBuilder: (onPressed, selectedFile) {
+                      final uploaded = selectedFile.savedImage != null;
+                      return InkWell(
+                        borderRadius: radius,
+                        onTap: onPressed,
+                        // ファイル種別に応じてWidgetを切り替える
+                        child: uploaded
+                            ? NetworkImageWithPlaceholder(
+                                imageUrl: selectedFile.savedImage!.url,
+                              )
+                            : XFileImage(xFile: selectedFile.uploadFile!),
+                      );
+                    },
+                  ),
                 ),
               )
               .toList(),

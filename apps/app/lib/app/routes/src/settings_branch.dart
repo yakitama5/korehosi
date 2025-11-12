@@ -62,7 +62,7 @@ class GroupRouteData extends GoRouteData with _$GroupRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) => ProviderScope(
     overrides: [
-      GroupDetailProviders.groupIdProvider.overrideWithValue(groupId),
+      GroupDetailProviders.groupIdProvider.overrideWithValue(GroupId(groupId)),
     ],
     child: const GroupPage(),
   );

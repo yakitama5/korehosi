@@ -4,6 +4,7 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_share_link_model.dart';
+import 'package:packages_domain/group.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_share_link_provider.g.dart';
@@ -32,5 +33,5 @@ CollectionReference<FirestoreShareLinkModel> shareLinkCollectionRef(Ref ref) {
 @riverpod
 DocumentReference<FirestoreShareLinkModel> shareLinkDocumentRef(
   Ref ref, {
-  String? shareLinkId,
-}) => ref.watch(shareLinkCollectionRefProvider).doc(shareLinkId);
+  ShareLinkId? shareLinkId,
+}) => ref.watch(shareLinkCollectionRefProvider).doc(shareLinkId?.value);

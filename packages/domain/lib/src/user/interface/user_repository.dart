@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/group.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../entity/auth_status.dart';
@@ -16,15 +17,15 @@ UserRepository userRepository(Ref ref) =>
 /// ユーザーモデル および ユーザーの認証に関するリポジトリ
 abstract class UserRepository {
   /// ユーザーモデルの取得
-  Stream<User?> fetch({required String userId});
+  Stream<User?> fetch({required UserId userId});
 
   /// ユーザーモデルの取得
   /// グループに所属しているユーザーの取得
-  Stream<List<User>> fetchByGroupId({required String groupId});
+  Stream<List<User>> fetchByGroupId({required GroupId groupId});
 
   /// ユーザーモデルの更新
   Future<void> update({
-    required String userId,
+    required UserId userId,
     required AgeGroup ageGroup,
     String? name,
   });
@@ -38,7 +39,7 @@ abstract class UserRepository {
   });
 
   /// ユーザーモデル および 認証アカウントの削除
-  Future<void> delete({required String userId});
+  Future<void> delete({required UserId userId});
 
   /// 認証状態の取得
   Stream<AuthStatus?> fetchAuthStatus();

@@ -9,7 +9,7 @@ part of 'buyer_name_suggestion_provider.dart';
 // **************************************************************************
 
 String _$buyerNameSuggestionHash() =>
-    r'f8d3eecf1b97a80914905e3074195bde4fcdbfba';
+    r'7006d3487e56b18f386192765997be5c7565fe9f';
 
 /// 購入者のサジェストリスト
 /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー

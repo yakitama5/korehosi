@@ -1,4 +1,5 @@
 import 'package:packages_application/src/group/usecase/group_usecase.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,11 +14,11 @@ part 'current_group_id_provider.g.dart';
 @Riverpod(keepAlive: true)
 class CurrentGroupId extends _$CurrentGroupId {
   @override
-  FutureOr<String?> build() async {
+  FutureOr<GroupId?> build() async {
     return ref.read(groupUsecaseProvider).fetchCurrentGroupId();
   }
 
-  Future<void> set({required String groupId}) async {
+  Future<void> set({required GroupId groupId}) async {
     await ref
         .read(userSessionRepositoryProvider)
         .setCurrentGroupId(groupId: groupId);

@@ -4,6 +4,7 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/user/model/firestore_user_model.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_user_provider.g.dart';
@@ -32,5 +33,5 @@ CollectionReference<FirestoreUserModel> userCollectionRef(Ref ref) {
 @riverpod
 DocumentReference<FirestoreUserModel> userDocumentRef(
   Ref ref, {
-  String? userId,
-}) => ref.watch(userCollectionRefProvider).doc(userId);
+  UserId? userId,
+}) => ref.watch(userCollectionRefProvider).doc(userId?.value);

@@ -1,23 +1,25 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/item.dart';
 
 part 'item.freezed.dart';
-part 'item.g.dart';
+
+extension type ItemId(String value) {}
 
 /// ほしい物
 @freezed
 abstract class Item with _$Item {
   const factory Item({
-    required String id,
-    List<String>? imagesPath,
+    required ItemId id,
+    List<ItemImage>? images,
     required String name,
     String? wanterName,
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
     String? memo,
+    Purchase? purchase,
+    required PurchaseStatus purchaseStatus,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _Item;
-
-  factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
 }

@@ -22,31 +22,25 @@ class ItemPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authUserProvider);
     final item = ref.watch(ItemDetailProviders.itemProvider);
-    final purchase = ref.watch(ItemDetailProviders.purchaseProvider);
 
     // 欲しい物と購入情報に応じて判定を行う
-    return switch ((item, purchase, user)) {
+    return switch ((item, user)) {
       // 欲しい物が見つからない場合は削除された扱い
-      (
-        AsyncData(value: null),
-        AsyncData(value: final _),
-        AsyncData(value: final _),
-      ) =>
-        ErrorView(i18n.item.itemPage.deletedItem, null),
+      (AsyncData(value: null), AsyncData(value: final _)) => ErrorView(
+        i18n.item.itemPage.deletedItem,
+        null,
+      ),
 
       // 欲しい物が存在する場合は明細を表示
       (
         AsyncData(value: final Item itemData),
-        AsyncData(value: final Purchase? purchaseData),
         AsyncData(value: final User userData),
       ) =>
-        _ItemDetailView(item: itemData, purchase: purchaseData, user: userData),
+        _ItemDetailView(item: itemData, user: userData),
 
-      // いずれかがエラーの場合はエラー
-      (AsyncError(error: final error, stackTrace: final stackTrace), _, _) ||
-      (_, AsyncError(error: final error, stackTrace: final stackTrace), _) ||
+      // どちらかがエラーの場合はエラー
+      (AsyncError(error: final error, stackTrace: final stackTrace), _) ||
       (
-        _,
         _,
         AsyncError(error: final error, stackTrace: final stackTrace),
       ) => ErrorView(error, stackTrace),
@@ -58,14 +52,9 @@ class ItemPage extends HookConsumerWidget {
 }
 
 class _ItemDetailView extends HookWidget {
-  const _ItemDetailView({
-    required this.item,
-    this.purchase,
-    required this.user,
-  });
+  const _ItemDetailView({required this.item, required this.user});
 
   final Item item;
-  final Purchase? purchase;
   final User user;
 
   @override
@@ -80,9 +69,9 @@ class _ItemDetailView extends HookWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ItemImages(imagesPath: item.imagesPath),
+              ItemImages(images: item.images),
               const Gap(8),
-              _PurchaseStatus(purchaseStatus: purchase.status),
+              _PurchaseStatus(purchaseStatus: item.purchaseStatus),
               const Gap(32),
               TextWithLabel(item.name, label: i18n.user.common.name),
               const Gap(16),
@@ -99,7 +88,7 @@ class _ItemDetailView extends HookWidget {
               const Gap(16),
               TextWithLabel(item.memo, label: i18n.item.common.memo),
               const Gap(40),
-              _PurchaseInfo(purchase: purchase, user: user),
+              _PurchaseInfo(purchase: item.purchase, user: user),
               const Gap(160),
             ],
           ),
@@ -112,7 +101,9 @@ class _ItemDetailView extends HookWidget {
   /// 編集押下
   ///
   /// 編集画面に遷移する
-  void _onEdit(BuildContext context) => ItemEditRouteData(item.id).go(context);
+  // TODO(yakitama5): ItemIDに切り替える
+  void _onEdit(BuildContext context) =>
+      ItemEditRouteData(item.id.value).go(context);
 }
 
 /// 購入状況
@@ -301,5 +292,5 @@ class _PurchaseFab extends HookConsumerWidget {
   }
 
   void _onPurchase(BuildContext context) =>
-      PurchaseRouteData(item.id).go(context);
+      PurchaseRouteData(item.id.value).go(context);
 }

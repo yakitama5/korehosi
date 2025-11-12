@@ -4,6 +4,8 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_item_model.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_item_provider.g.dart';
@@ -12,7 +14,7 @@ part 'firestore_item_provider.g.dart';
 @riverpod
 CollectionReference<FirestoreItemModel> itemCollectionRef(
   Ref ref, {
-  required String groupId,
+  required GroupId groupId,
 }) {
   return ref
       .watch(firestoreProvider)
@@ -35,6 +37,6 @@ CollectionReference<FirestoreItemModel> itemCollectionRef(
 @riverpod
 DocumentReference<FirestoreItemModel> itemDocumentRef(
   Ref ref, {
-  required String groupId,
-  String? itemId,
-}) => ref.watch(itemCollectionRefProvider(groupId: groupId)).doc(itemId);
+  required GroupId groupId,
+  ItemId? itemId,
+}) => ref.watch(itemCollectionRefProvider(groupId: groupId)).doc(itemId?.value);

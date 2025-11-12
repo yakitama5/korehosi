@@ -12,6 +12,7 @@ resolution: workspace
 dependencies:
   adaptive_dialog: ^2.4.2
   animations: ^2.0.11
+  cached_network_image: ^3.4.1
   collection: ^1.19.1
   dynamic_color: ^1.8.1
   flutter:
@@ -28,6 +29,8 @@ dependencies:
   nested: ^1.0.0
   packages_application:
     path: ../application
+  packages_core:
+    path: ../core
   packages_domain:
     path: ../domain
   responsive_framework: ^1.5.1

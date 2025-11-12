@@ -12,6 +12,7 @@ import 'package:infrastructure_firebase/src/user/state/firestore_deleted_user_pr
 import 'package:infrastructure_firebase/src/user/state/firestore_participant_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_user_provider.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
 
 /// Firebaseを利用したリポジトリの実装
@@ -24,7 +25,7 @@ class FirebaseUserRepository implements UserRepository {
   auth.User? get _currentUser => ref.read(firebaseAuthProvider).currentUser;
 
   @override
-  Stream<User?> fetch({required String userId}) {
+  Stream<User?> fetch({required UserId userId}) {
     return ref
         .read(userDocumentRefProvider(userId: userId))
         .snapshots()
@@ -37,7 +38,7 @@ class FirebaseUserRepository implements UserRepository {
   }
 
   @override
-  Stream<List<User>> fetchByGroupId({required String groupId}) => ref
+  Stream<List<User>> fetchByGroupId({required GroupId groupId}) => ref
       // グループの参加者はセキュリティの観点からユーザーコレクションではなく、専用のコレクションからアクセスする
       .read(participantCollectionRefProvider(groupId: groupId))
       .snapshots()
@@ -87,7 +88,7 @@ class FirebaseUserRepository implements UserRepository {
 
   @override
   Future<void> update({
-    required String userId,
+    required UserId userId,
     required AgeGroup ageGroup,
     String? name,
   }) async {
@@ -99,7 +100,7 @@ class FirebaseUserRepository implements UserRepository {
     }
 
     final param = prev.data()!.copyWith(
-      id: userId,
+      id: userId.value,
       ageGroup: ageGroup,
       name: name,
     );
@@ -109,7 +110,7 @@ class FirebaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<void> delete({required String userId}) async {
+  Future<void> delete({required UserId userId}) async {
     // ユーザーモデルの削除
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
@@ -182,16 +183,16 @@ class FirebaseUserRepository implements UserRepository {
   }
 
   /// 認証状態に関するSignUp処理
-  Future<String> _authSignUp() async {
+  Future<UserId> _authSignUp() async {
     // 認証済の場合は現在の認証情報を返して終わり
     final currentUser = _currentUser;
     if (currentUser != null) {
-      return currentUser.uid;
+      return UserId(currentUser.uid);
     }
 
     // 未認証の場合は匿名ログインを行う
     final user = await signInAnonymously();
-    return user.uid;
+    return user.userId;
   }
 
   /// モバイル用のAppleサインイン

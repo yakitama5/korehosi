@@ -31,7 +31,7 @@ final shareLinkCollectionRefProvider =
 typedef ShareLinkCollectionRefRef =
     AutoDisposeProviderRef<CollectionReference<FirestoreShareLinkModel>>;
 String _$shareLinkDocumentRefHash() =>
-    r'478b824de60435fad7d9a94683b199bd7b16bedd';
+    r'29aeeb1352ab454e4ab15348b5d30db519ae2f30';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -73,7 +73,7 @@ class ShareLinkDocumentRefFamily
   /// グループ共有リンクドキュメントの参照
   ///
   /// Copied from [shareLinkDocumentRef].
-  ShareLinkDocumentRefProvider call({String? shareLinkId}) {
+  ShareLinkDocumentRefProvider call({ShareLinkId? shareLinkId}) {
     return ShareLinkDocumentRefProvider(shareLinkId: shareLinkId);
   }
 
@@ -107,7 +107,7 @@ class ShareLinkDocumentRefProvider
   /// グループ共有リンクドキュメントの参照
   ///
   /// Copied from [shareLinkDocumentRef].
-  ShareLinkDocumentRefProvider({String? shareLinkId})
+  ShareLinkDocumentRefProvider({ShareLinkId? shareLinkId})
     : this._internal(
         (ref) => shareLinkDocumentRef(
           ref as ShareLinkDocumentRefRef,
@@ -134,7 +134,7 @@ class ShareLinkDocumentRefProvider
     required this.shareLinkId,
   }) : super.internal();
 
-  final String? shareLinkId;
+  final ShareLinkId? shareLinkId;
 
   @override
   Override overrideWith(
@@ -183,7 +183,7 @@ class ShareLinkDocumentRefProvider
 mixin ShareLinkDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreShareLinkModel>> {
   /// The parameter `shareLinkId` of this provider.
-  String? get shareLinkId;
+  ShareLinkId? get shareLinkId;
 }
 
 class _ShareLinkDocumentRefProviderElement
@@ -193,7 +193,7 @@ class _ShareLinkDocumentRefProviderElement
   _ShareLinkDocumentRefProviderElement(super.provider);
 
   @override
-  String? get shareLinkId =>
+  ShareLinkId? get shareLinkId =>
       (origin as ShareLinkDocumentRefProvider).shareLinkId;
 }
 

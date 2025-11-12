@@ -12,6 +12,7 @@ import 'package:infrastructure_firebase/src/group/state/firestore_share_link_pro
 import 'package:infrastructure_firebase/src/user/state/firestore_user_provider.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
+import 'package:packages_domain/user.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebaseGroupRepository implements GroupRepository {
@@ -20,7 +21,7 @@ class FirebaseGroupRepository implements GroupRepository {
   final Ref ref;
 
   @override
-  Stream<Group?> fetch({required String groupId}) {
+  Stream<Group?> fetch({required GroupId groupId}) {
     return ref
         .read(groupDocumentRefProvider(groupId: groupId))
         .snapshots()
@@ -35,8 +36,8 @@ class FirebaseGroupRepository implements GroupRepository {
   @override
   Future<void> add({
     required String name,
-    required List<String> joinUids,
-    required String ownerUid,
+    required List<UserId> joinUids,
+    required UserId ownerUid,
     int? itemCount,
     required bool premium,
   }) async {
@@ -48,9 +49,9 @@ class FirebaseGroupRepository implements GroupRepository {
     final group = FirestoreGroupModel(
       id: groupDocRef.id,
       name: name,
-      joinUids: joinUids,
+      joinUids: joinUids.map((e) => e.value).toList(),
       premium: premium,
-      ownerUid: ownerUid,
+      ownerUid: ownerUid.value,
       itemCount: itemCount,
     );
 
@@ -69,7 +70,7 @@ class FirebaseGroupRepository implements GroupRepository {
   }
 
   @override
-  Future<void> update({required String groupId, required String name}) async {
+  Future<void> update({required GroupId groupId, required String name}) async {
     // Firestore用のモデルに変換
     final docRef = ref.read(groupDocumentRefProvider(groupId: groupId));
     final prev = await docRef.get();
@@ -83,7 +84,7 @@ class FirebaseGroupRepository implements GroupRepository {
   }
 
   @override
-  Future<void> delete({required String groupId}) async {
+  Future<void> delete({required GroupId groupId}) async {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
       // 削除前の状態を保持
@@ -100,7 +101,7 @@ class FirebaseGroupRepository implements GroupRepository {
   }
 
   @override
-  Stream<ShareLink?> fetchShareLink({required String shareLinkId}) {
+  Stream<ShareLink?> fetchShareLink({required ShareLinkId shareLinkId}) {
     return ref
         .read(shareLinkDocumentRefProvider(shareLinkId: shareLinkId))
         .snapshots()
@@ -113,10 +114,12 @@ class FirebaseGroupRepository implements GroupRepository {
   }
 
   @override
-  Future<JoinGroupErrorCode?> joinGroup({required String shareLinkId}) async {
+  Future<JoinGroupErrorCode?> joinGroup({
+    required ShareLinkId shareLinkId,
+  }) async {
     // 参加用のFunctionsをコール (権限を考慮してFunctionsで定義)
     final functions = ref.read(firebaseFunctionsProvider);
-    final param = JoinGroupRequest(shareLinkId: shareLinkId);
+    final param = JoinGroupRequest(shareLinkId: shareLinkId.value);
     final result = await functions
         .httpsCallable('joinGroup')
         .call<Map<String, dynamic>>(param.toJson());
@@ -136,7 +139,7 @@ class FirebaseGroupRepository implements GroupRepository {
   }
 
   @override
-  Future<void> leave({required String groupId, required String userId}) async {
+  Future<void> leave({required GroupId groupId, required UserId userId}) async {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
       // ドキュメントの取得
@@ -157,14 +160,14 @@ class FirebaseGroupRepository implements GroupRepository {
 
   @override
   Future<String> addShareLink({
-    required String groupId,
+    required GroupId groupId,
     required int validDays,
   }) async {
     final docRef = ref.read(shareLinkDocumentRefProvider());
     // 登録
     final param = FirestoreShareLinkModel(
       id: docRef.id,
-      groupId: groupId,
+      groupId: groupId.value,
       validDays: validDays,
     );
     await docRef.set(param);

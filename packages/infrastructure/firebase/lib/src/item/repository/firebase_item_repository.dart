@@ -1,10 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
+import 'package:infrastructure_firebase/src/common/state/firebase_storage_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_item_model.dart';
-import 'package:infrastructure_firebase/src/item/state/firestore_deleted_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
+import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
+import 'package:packages_core/util.dart';
+import 'package:packages_domain/common.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
+import 'package:packages_domain/user.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebaseItemRepository implements ItemRepository {
@@ -12,47 +19,135 @@ class FirebaseItemRepository implements ItemRepository {
 
   final Ref ref;
 
+  PurchaseRepository get _purchaseRepository =>
+      ref.read(purchaseRepositoryProvider);
+
   @override
-  Stream<List<Item>> fetchByGroupId({required String groupId}) {
-    return ref
+  Future<PageInfo<Item>> searchItems({
+    required int page,
+    required int pageSize,
+    required GroupId groupId,
+    required AgeGroup ageGroup,
+    required ItemsSearchQuery query,
+  }) async {
+    final sortFieldName = switch (query.itemsOrder.key) {
+      ItemOrderKey.name => 'name',
+      ItemOrderKey.wishRank => 'wishRank',
+      ItemOrderKey.createdAt => FirestoreColumns.createdAt.fieldName,
+    };
+    final descending = query.itemsOrder.sortOrder == SortOrder.desc;
+
+    final limit = page * pageSize;
+    final offset = (page - 1) * pageSize;
+
+    // 明細の取得
+    final purchaseStatusField = switch (ageGroup) {
+      AgeGroup.child => 'childViewPurchaseStatus',
+      AgeGroup.adult => 'purchaseStatus',
+    };
+    var itemsQuery = ref
         .read(itemCollectionRefProvider(groupId: groupId))
-        .snapshots()
-        // 読み込み中のドキュメントが存在する場合はスキップ
+        .orderBy(sortFieldName, descending: descending)
         .where(
-          (s) => s.docs
-              .where((element) => element.data().fieldValuePending)
-              .isEmpty,
-        )
-        .map((snap) => snap.docs.map((e) => e.data().toDomainModel()).toList());
+          purchaseStatusField,
+          whereIn: query.purchaseStatuses.map((e) => e.name),
+        );
+
+    // 絞り込み
+    if (query.minimumWishRank != null) {
+      itemsQuery = itemsQuery.where(
+        'wishRank',
+        isGreaterThanOrEqualTo: query.minimumWishRank,
+      );
+    }
+
+    // 全件数の取得
+    final totalCount = await itemsQuery.count().get();
+
+    // データの取得
+    final docs =
+        (await itemsQuery
+                // ページング (読み取りコストはかかるが、オフセット方を採用する)
+                .limit(limit)
+                .get())
+            .docs
+            .skip(offset);
+
+    final items = await Future.wait(
+      docs.map((e) async {
+        // 購入情報の取得
+        final itemId = ItemId(e.id);
+        final purchase = await _purchaseRepository.fetchByItemId(
+          groupId: groupId,
+          itemId: itemId,
+        );
+
+        // 画像をURL化
+        final storage = ref.read(firebaseStorageProvider);
+        final images = await Future.wait<ItemImage>(
+          e.data().imagesPath?.map((path) async {
+                final id = ImageId(path);
+                final url = await storage.ref(path).getDownloadURL();
+
+                return ItemImage(id: id, url: url);
+              }).toList() ??
+              List.empty(),
+        );
+
+        return e.data().toDomainModel(
+          purchase: purchase,
+          images: images,
+          purchaseStatus: purchase.status(ageGroup),
+        );
+      }).toList(),
+    );
+
+    return PageInfo(items: items, totalCount: totalCount.count ?? 0);
   }
 
   @override
-  Stream<Item?> fetchByGroupIdAndItemId({
-    required String groupId,
-    required String itemId,
-  }) {
-    return ref
+  Future<Item?> fetchByGroupIdAndItemId({
+    required GroupId groupId,
+    required ItemId itemId,
+    required AgeGroup ageGroup,
+  }) async {
+    final snap = await ref
         .read(itemDocumentRefProvider(groupId: groupId, itemId: itemId))
-        .snapshots()
-        .where((s) {
-          // 読み込み中のドキュメントが存在する場合はスキップ
-          final doc = s.data();
-          return doc == null || !doc.fieldValuePending;
-        })
-        .map((snap) => snap.data()?.toDomainModel());
-  }
+        .get();
 
-  @override
-  Future<String> generateItemId({required String groupId}) {
-    final docRef = ref.read(itemDocumentRefProvider(groupId: groupId));
-    return Future.value(docRef.id);
+    if (!snap.exists) {
+      return null;
+    }
+
+    // 購入情報の取得
+    final item = snap.data()!;
+    final purchase = await _purchaseRepository.fetchByItemId(
+      groupId: groupId,
+      itemId: itemId,
+    );
+
+    // 画像をURL化
+    final storage = ref.read(firebaseStorageProvider);
+    final images = await Future.wait<ItemImage>(
+      item.imagesPath?.map((path) async {
+            final id = ImageId(path);
+            final url = await storage.ref(path).getDownloadURL();
+
+            return ItemImage(id: id, url: url);
+          }).toList() ??
+          List.empty(),
+    );
+    return item.toDomainModel(
+      purchaseStatus: purchase.status(ageGroup),
+      purchase: purchase,
+      images: images,
+    );
   }
 
   @override
   Future<Item> add({
-    String? itemId,
-    required String groupId,
-    List<String>? imagesPath,
+    required GroupId groupId,
+    List<XFile>? uploadImages,
     required String name,
     String? wanterName,
     required double wishRank,
@@ -60,21 +155,25 @@ class FirebaseItemRepository implements ItemRepository {
     List<String>? urls,
     String? memo,
   }) async {
-    // IDが指定されていなければ、新しいドキュメントを取得
-    final docRef = ref.read(
-      itemDocumentRefProvider(groupId: groupId, itemId: itemId),
-    );
+    // 新しいドキュメントを取得
+    final docRef = ref.read(itemDocumentRefProvider(groupId: groupId));
+    final itemId = ItemId(docRef.id);
+
+    // 新規画像分をアップロード
+    final imageIds = await _uploadItemImage(uploadImages, groupId, itemId);
 
     // Firestore用のモデルに変換
     final docModel = FirestoreItemModel(
-      id: docRef.id,
+      id: itemId.value,
       name: name,
       wishRank: wishRank,
-      imagesPath: imagesPath,
+      imagesPath: imageIds.map((e) => e.value).toList(),
       memo: memo,
       urls: urls,
       wanterName: wanterName,
       wishSeason: wishSeason,
+      purchaseStatus: PurchaseStatus.notPurchased,
+      childViewPurchaseStatus: PurchaseStatus.notPurchased,
     );
 
     // 登録
@@ -86,30 +185,55 @@ class FirebaseItemRepository implements ItemRepository {
         serverTimestampBehavior: ServerTimestampBehavior.estimate,
       ),
     );
-    return addedDoc.data()!.toDomainModel();
+    return addedDoc.data()!.toDomainModel(
+      purchaseStatus: PurchaseStatus.notPurchased,
+    );
   }
 
   @override
   Future<void> update({
-    required String groupId,
-    required String itemId,
-    List<String>? imagesPath,
+    required GroupId groupId,
+    required ItemId itemId,
+    List<ItemImage>? images,
+    List<XFile>? uploadImages,
     required String name,
     String? wanterName,
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
     String? memo,
-  }) {
+  }) async {
+    // 更新前の内容を取得
+    final prevItem = await ref
+        .watch(itemDocumentRefProvider(groupId: groupId, itemId: itemId))
+        .get();
+
+    if (!prevItem.exists) {
+      throw const BusinessException(BusinessExceptionType.updateTargetNotFound);
+    }
+
+    // 新規画像分をアップロード
+    final uploadImageIds = await _uploadItemImage(
+      uploadImages,
+      groupId,
+      itemId,
+    );
+
+    // 既存画像分の末尾に追加
+    final imageIds = images?.map((e) => e.id).toList() ?? List<ImageId>.empty();
+    final joinImageIds = imageIds + uploadImageIds;
+
     // Firestore用のモデルに変換
     final docModel = FirestoreItemModel(
-      id: itemId,
+      id: itemId.value,
       name: name,
       wishRank: wishRank,
-      imagesPath: imagesPath,
+      imagesPath: joinImageIds.map((e) => e.value).toList(),
       memo: memo,
       urls: urls,
       wanterName: wanterName,
+      purchaseStatus: prevItem.data()!.purchaseStatus,
+      childViewPurchaseStatus: prevItem.data()!.childViewPurchaseStatus,
       wishSeason: wishSeason,
     );
 
@@ -120,23 +244,43 @@ class FirebaseItemRepository implements ItemRepository {
   }
 
   @override
-  Future<void> delete({required String groupId, required String itemId}) async {
+  Future<void> delete({
+    required GroupId groupId,
+    required ItemId itemId,
+  }) async {
     final firestore = ref.read(firestoreProvider);
     await firestore.runTransaction((transaction) async {
       // 削除前の状態を保持
-      final docRef = ref.read(
+      final itemDocRef = ref.read(
         itemDocumentRefProvider(groupId: groupId, itemId: itemId),
       );
-      final delDocRef = ref.read(
-        ditemDocumentRefProvider(groupId: groupId, itemId: itemId),
+      // 購入状況が存在すれば同時に削除
+      final purchaseId = PurchaseId(itemId.value);
+      final purchaseDocRef = ref.read(
+        purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
       );
-      final doc = await transaction.get(docRef);
 
       transaction
           // ドキュメントの削除
-          .delete(docRef)
-          // 削除用ドキュメントの追加
-          .set<FirestoreItemModel>(delDocRef, doc.data()!);
+          .delete(itemDocRef)
+          // 購入状況の削除
+          .delete(purchaseDocRef);
     });
+  }
+
+  Future<List<ImageId>> _uploadItemImage(
+    List<XFile>? uploadImages,
+    GroupId groupId,
+    ItemId itemId,
+  ) async {
+    return Future.wait<ImageId>(
+      uploadImages?.map((e) async {
+            final path = 'group/$groupId/item/$itemId/${uuid.v4()}';
+            return ref
+                .read(storageServiceProvider)
+                .uploadImage(ImageId(path), e);
+          }).toList() ??
+          [],
+    );
   }
 }

@@ -1,7 +1,10 @@
+import 'package:cross_file/cross_file.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/item.dart';
+import 'package:packages_domain/src/common/value_object/page_info.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../entity/item.dart';
 
 part 'item_repository.g.dart';
 
@@ -13,25 +16,28 @@ ItemRepository itemRepository(Ref ref) =>
 
 /// ほしい物を管理するリポジトリ
 abstract class ItemRepository {
-  /// グループ内のほしい物を取得
-  Stream<List<Item>> fetchByGroupId({required String groupId});
+  // グループ内のほしいものを検索
+  Future<PageInfo<Item>> searchItems({
+    required int page,
+    required int pageSize,
+    required GroupId groupId,
+    required AgeGroup ageGroup,
+    required ItemsSearchQuery query,
+  });
 
   /// グループ内のほしい物を取得
   /// (一意指定)
-  Stream<Item?> fetchByGroupIdAndItemId({
-    required String groupId,
-    required String itemId,
+  Future<Item?> fetchByGroupIdAndItemId({
+    required GroupId groupId,
+    required ItemId itemId,
+    required AgeGroup ageGroup,
   });
-
-  /// ほしい物の一意IDを発番する
-  Future<String> generateItemId({required String groupId});
 
   /// ほしい物を追加
   /// ID項目は任意指定とし、指定されなかったら発番する
   Future<Item> add({
-    String? itemId,
-    required String groupId,
-    List<String>? imagesPath,
+    required GroupId groupId,
+    List<XFile>? uploadImages,
     required String name,
     String? wanterName,
     required double wishRank,
@@ -42,9 +48,10 @@ abstract class ItemRepository {
 
   /// ほしい物を更新
   Future<void> update({
-    required String groupId,
-    required String itemId,
-    List<String>? imagesPath,
+    required GroupId groupId,
+    required ItemId itemId,
+    List<ItemImage>? images,
+    List<XFile>? uploadImages,
     required String name,
     String? wanterName,
     required double wishRank,
@@ -54,8 +61,5 @@ abstract class ItemRepository {
   });
 
   /// ほしい物を削除
-  Future<void> delete({
-    required String groupId,
-    required String itemId,
-  });
+  Future<void> delete({required GroupId groupId, required ItemId itemId});
 }

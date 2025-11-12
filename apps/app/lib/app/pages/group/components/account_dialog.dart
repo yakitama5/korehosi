@@ -8,8 +8,9 @@ import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
+import 'package:packages_domain/group.dart';
 
-Future<String?> showAdaptiveAccountDialog(
+Future<GroupId?> showAdaptiveAccountDialog(
   BuildContext context, {
   String? title,
   String? okLabel,
@@ -76,9 +77,9 @@ class AndroidAccountDialog extends HookConsumerWidget {
               itemCount: groups?.length ?? 0,
               itemBuilder: (context, i) {
                 final group = groups![i];
-                return RadioGroup<String>(
+                return RadioGroup<GroupId>(
                   groupValue: selectValue.value,
-                  onChanged: (String? value) {
+                  onChanged: (GroupId? value) {
                     selectValue.value = value;
                   },
                   child: RadioListTile(

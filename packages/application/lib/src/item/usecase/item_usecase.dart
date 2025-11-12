@@ -1,4 +1,3 @@
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/i18n/strings.g.dart';
@@ -7,15 +6,16 @@ import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/user/extension/user_mixin.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/notification.dart';
+import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:uuid/uuid.dart';
 
 part 'item_usecase.g.dart';
 
 /// 欲しいもの詳細ページのパスを生成するためのファンクション
-typedef GenerateItemDetailRoute = String Function(String itemId);
+typedef GenerateItemDetailRoute = String Function(ItemId itemId);
 
 @riverpod
 ItemUsecase itemUsecase(Ref ref) => ItemUsecase(ref);
@@ -26,9 +26,51 @@ class ItemUsecase with RunUsecaseMixin {
 
   final Ref ref;
 
-  /// 欲しい物一覧の取得
-  Stream<List<Item>> fetchAll({required String groupId}) =>
-      ref.read(itemRepositoryProvider).fetchByGroupId(groupId: groupId);
+  /// 欲しいものの検索
+  Future<PageInfo<Item>> searchItems({
+    required int page,
+    required GroupId groupId,
+    required AgeGroup ageGroup,
+    required ItemsSearchQuery query,
+  }) {
+    return ref
+        .read(itemRepositoryProvider)
+        .searchItems(
+          page: page,
+          pageSize: itemsPageConfig.pageSize,
+          groupId: groupId,
+          ageGroup: ageGroup,
+          query: query,
+        );
+  }
+
+  /// ほしいもの一覧を再読み込みする.
+  Future<void> refreshSearchItems() async {
+    // すべての要素を再読み込み
+    ref.invalidate(searchItemsProvider);
+
+    // 最初のページ文のデータが取得できるまでは待機
+    return ref.read(searchItemsProvider(page: 1).future);
+  }
+
+  /// 欲しい物の取得
+  Future<Item?> fetch({
+    required GroupId? groupId,
+    required ItemId itemId,
+    required AgeGroup ageGroup,
+  }) {
+    if (groupId == null) {
+      throw const BusinessException(BusinessExceptionType.notSelectedGroup);
+    }
+
+    return ref
+        .read(itemRepositoryProvider)
+        .fetchByGroupIdAndItemId(
+          groupId: groupId,
+          itemId: itemId,
+          ageGroup: ageGroup,
+        );
+  }
 
   /// 欲しい物の追加
   Future<void> add({
@@ -51,31 +93,21 @@ class ItemUsecase with RunUsecaseMixin {
         currentGroupProvider.selectAsync((group) => group?.id),
       );
       if (groupId == null) {
-        throw const BusinessException(
-          BusinessExceptionType.updateTargetNotFound,
-        );
+        throw const BusinessException(BusinessExceptionType.notSelectedGroup);
       }
 
-      // 画像をアップロードするため、先にIDを発番する
-      final itemId = await ref
-          .read(itemRepositoryProvider)
-          .generateItemId(groupId: groupId);
-
-      // 画像をアップロードして、ストレージのパスに変換する
-      final imagesPath = await _uploadImages(
-        groupId: groupId,
-        itemId: itemId,
-        selectedImages: selectedImages,
-      );
+      // アップロード画像の変換(登録時は全件新規登録)
+      final uploadImages = selectedImages
+          ?.map((e) => e.uploadFile)
+          .nonNulls
+          .toList();
 
       // ドキュメントの登録
-      await ref
+      final item = await ref
           .read(itemRepositoryProvider)
           .add(
-            // 先に取得していたIDを指定して登録
-            itemId: itemId,
             groupId: groupId,
-            imagesPath: imagesPath,
+            uploadImages: uploadImages,
             name: name,
             wanterName: wanterName,
             wishRank: wishRank,
@@ -84,8 +116,13 @@ class ItemUsecase with RunUsecaseMixin {
             memo: memo,
           );
 
+      // Providerへの反映
+      ref
+        ..invalidate(itemProvider)
+        ..invalidate(searchItemsProvider);
+
       // 通知処理
-      final itemDetailPath = generateItemDetailRoute(itemId);
+      final itemDetailPath = generateItemDetailRoute(item.id);
       final user = ref.read(authUserProvider).value;
       await ref
           .read(messagingServiceProvider)
@@ -93,7 +130,7 @@ class ItemUsecase with RunUsecaseMixin {
             groupId: groupId,
             title: i18n.item.notificationAddItemBody(name: user.dispName),
             body: name,
-            uid: user!.id,
+            userId: user!.id,
             target: NotificationTarget.all,
             event: NotificationEvent.addWishItem,
             path: itemDetailPath,
@@ -103,7 +140,7 @@ class ItemUsecase with RunUsecaseMixin {
 
   /// 欲しい物の更新
   Future<void> update({
-    required String itemId,
+    required ItemId itemId,
     List<SelectedImageModel>? selectedImages,
     required String name,
     String? wanterName,
@@ -119,17 +156,15 @@ class ItemUsecase with RunUsecaseMixin {
         currentGroupProvider.selectAsync((group) => group?.id),
       );
       if (groupId == null) {
-        throw const BusinessException(
-          BusinessExceptionType.updateTargetNotFound,
-        );
+        throw const BusinessException(BusinessExceptionType.notSelectedGroup);
       }
 
-      // 画像をアップロードして、ストレージのパスに変換する
-      final imagesPath = await _uploadImages(
-        groupId: groupId,
-        itemId: itemId,
-        selectedImages: selectedImages,
-      );
+      // 既存画像とアップロード済画像に分ける
+      final images = selectedImages?.map((e) => e.savedImage).nonNulls.toList();
+      final uploadImages = selectedImages
+          ?.map((e) => e.uploadFile)
+          .nonNulls
+          .toList();
 
       // ドキュメントの更新
       await ref
@@ -137,7 +172,8 @@ class ItemUsecase with RunUsecaseMixin {
           .update(
             itemId: itemId,
             groupId: groupId,
-            imagesPath: imagesPath,
+            images: images,
+            uploadImages: uploadImages,
             name: name,
             wanterName: wanterName,
             wishRank: wishRank,
@@ -145,11 +181,14 @@ class ItemUsecase with RunUsecaseMixin {
             urls: urls,
             memo: memo,
           );
+
+      // Providerへの反映
+      refreshItemProvideres();
     },
   );
 
   /// 欲しい物の削除
-  Future<void> delete({required String itemId}) => execute(
+  Future<void> delete({required ItemId itemId}) => execute(
     ref,
     action: () async {
       // グループ所属判定
@@ -162,9 +201,12 @@ class ItemUsecase with RunUsecaseMixin {
         );
       }
 
-      return ref
+      await ref
           .read(itemRepositoryProvider)
           .delete(groupId: groupId, itemId: itemId);
+
+      // Providerへの反映
+      refreshItemProvideres();
     },
   );
 
@@ -184,38 +226,12 @@ class ItemUsecase with RunUsecaseMixin {
     }
   }
 
-  /// 画像のアップロード
-  Future<List<String>?> _uploadImages({
-    required String groupId,
-    required String itemId,
-    required List<SelectedImageModel>? selectedImages,
-  }) async {
-    if (selectedImages == null) {
-      return null;
-    }
-
-    // 画像をアップロードして、ストレージのパスに変換する
-    const uuid = Uuid();
-    final asyncImagesPath = selectedImages.map((model) async {
-      if (model.imagePath != null) {
-        // アップロード済の場合はそのまま利用する
-        return model.imagePath!;
-      }
-
-      // パスを設定
-      final path = 'group/$groupId/item/$itemId/${uuid.v4()}';
-
-      // 画像を圧縮
-      final uint8List = await FlutterImageCompress.compressWithList(
-        await model.uploadFile!.readAsBytes(),
-        minWidth: itemIamgeConfig.minWidth,
-        minHeight: itemIamgeConfig.minHeight,
-        quality: itemIamgeConfig.quality,
-      );
-
-      // アップロード
-      return ref.read(storageServiceProvider).uploadImage(path, uint8List);
-    });
-    return Future.wait(asyncImagesPath);
+  /// 各種欲しいものを管理しているProviderのリフレッシュ
+  void refreshItemProvideres() {
+    // Providerへの反映
+    ref
+      ..invalidate(itemProvider)
+      ..invalidate(searchItemsProvider)
+      ..invalidate(ItemDetailProviders.itemProvider);
   }
 }

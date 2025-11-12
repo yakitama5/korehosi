@@ -30,7 +30,7 @@ final groupCollectionRefProvider =
 // ignore: unused_element
 typedef GroupCollectionRefRef =
     AutoDisposeProviderRef<CollectionReference<FirestoreGroupModel>>;
-String _$groupDocumentRefHash() => r'e0084394835c4e1ee873a6e281b6ea3b32c561b6';
+String _$groupDocumentRefHash() => r'2d0927960b13e6dc164d6d5e5ef27e87adf9a300';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -72,7 +72,7 @@ class GroupDocumentRefFamily
   /// グループドキュメントの参照
   ///
   /// Copied from [groupDocumentRef].
-  GroupDocumentRefProvider call({String? groupId}) {
+  GroupDocumentRefProvider call({GroupId? groupId}) {
     return GroupDocumentRefProvider(groupId: groupId);
   }
 
@@ -106,7 +106,7 @@ class GroupDocumentRefProvider
   /// グループドキュメントの参照
   ///
   /// Copied from [groupDocumentRef].
-  GroupDocumentRefProvider({String? groupId})
+  GroupDocumentRefProvider({GroupId? groupId})
     : this._internal(
         (ref) => groupDocumentRef(ref as GroupDocumentRefRef, groupId: groupId),
         from: groupDocumentRefProvider,
@@ -130,7 +130,7 @@ class GroupDocumentRefProvider
     required this.groupId,
   }) : super.internal();
 
-  final String? groupId;
+  final GroupId? groupId;
 
   @override
   Override overrideWith(
@@ -178,7 +178,7 @@ class GroupDocumentRefProvider
 mixin GroupDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreGroupModel>> {
   /// The parameter `groupId` of this provider.
-  String? get groupId;
+  GroupId? get groupId;
 }
 
 class _GroupDocumentRefProviderElement
@@ -187,7 +187,7 @@ class _GroupDocumentRefProviderElement
   _GroupDocumentRefProviderElement(super.provider);
 
   @override
-  String? get groupId => (origin as GroupDocumentRefProvider).groupId;
+  GroupId? get groupId => (origin as GroupDocumentRefProvider).groupId;
 }
 
 // ignore_for_file: type=lint

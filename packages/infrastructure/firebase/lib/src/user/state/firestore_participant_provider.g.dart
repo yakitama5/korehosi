@@ -9,7 +9,7 @@ part of 'firestore_participant_provider.dart';
 // **************************************************************************
 
 String _$participantCollectionRefHash() =>
-    r'9a48b4b70c0647eb7c7383436fcba431b6e1f039';
+    r'96d30390a45d92058efd5cfdab3b18a47dd918ae';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -51,7 +51,7 @@ class ParticipantCollectionRefFamily
   /// グループ参加者コレクションの参照
   ///
   /// Copied from [participantCollectionRef].
-  ParticipantCollectionRefProvider call({required String groupId}) {
+  ParticipantCollectionRefProvider call({required GroupId groupId}) {
     return ParticipantCollectionRefProvider(groupId: groupId);
   }
 
@@ -85,7 +85,7 @@ class ParticipantCollectionRefProvider
   /// グループ参加者コレクションの参照
   ///
   /// Copied from [participantCollectionRef].
-  ParticipantCollectionRefProvider({required String groupId})
+  ParticipantCollectionRefProvider({required GroupId groupId})
     : this._internal(
         (ref) => participantCollectionRef(
           ref as ParticipantCollectionRefRef,
@@ -112,7 +112,7 @@ class ParticipantCollectionRefProvider
     required this.groupId,
   }) : super.internal();
 
-  final String groupId;
+  final GroupId groupId;
 
   @override
   Override overrideWith(
@@ -161,7 +161,7 @@ class ParticipantCollectionRefProvider
 mixin ParticipantCollectionRefRef
     on AutoDisposeProviderRef<CollectionReference<FirestoreUserModel>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 }
 
 class _ParticipantCollectionRefProviderElement
@@ -170,11 +170,11 @@ class _ParticipantCollectionRefProviderElement
   _ParticipantCollectionRefProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as ParticipantCollectionRefProvider).groupId;
+  GroupId get groupId => (origin as ParticipantCollectionRefProvider).groupId;
 }
 
 String _$participantDocumentRefHash() =>
-    r'b4ad7b511c71f31ce2dc71f7f58069e4b13b60d6';
+    r'ecc1ff8e5d45b351b0ce28b70793000ce624cd3a';
 
 /// グループ参加者ドキュメントの参照
 ///
@@ -196,8 +196,8 @@ class ParticipantDocumentRefFamily
   ///
   /// Copied from [participantDocumentRef].
   ParticipantDocumentRefProvider call({
-    required String groupId,
-    String? participantId,
+    required GroupId groupId,
+    UserId? participantId,
   }) {
     return ParticipantDocumentRefProvider(
       groupId: groupId,
@@ -239,8 +239,8 @@ class ParticipantDocumentRefProvider
   ///
   /// Copied from [participantDocumentRef].
   ParticipantDocumentRefProvider({
-    required String groupId,
-    String? participantId,
+    required GroupId groupId,
+    UserId? participantId,
   }) : this._internal(
          (ref) => participantDocumentRef(
            ref as ParticipantDocumentRefRef,
@@ -270,8 +270,8 @@ class ParticipantDocumentRefProvider
     required this.participantId,
   }) : super.internal();
 
-  final String groupId;
-  final String? participantId;
+  final GroupId groupId;
+  final UserId? participantId;
 
   @override
   Override overrideWith(
@@ -323,10 +323,10 @@ class ParticipantDocumentRefProvider
 mixin ParticipantDocumentRefRef
     on AutoDisposeProviderRef<DocumentReference<FirestoreUserModel>> {
   /// The parameter `groupId` of this provider.
-  String get groupId;
+  GroupId get groupId;
 
   /// The parameter `participantId` of this provider.
-  String? get participantId;
+  UserId? get participantId;
 }
 
 class _ParticipantDocumentRefProviderElement
@@ -335,9 +335,9 @@ class _ParticipantDocumentRefProviderElement
   _ParticipantDocumentRefProviderElement(super.provider);
 
   @override
-  String get groupId => (origin as ParticipantDocumentRefProvider).groupId;
+  GroupId get groupId => (origin as ParticipantDocumentRefProvider).groupId;
   @override
-  String? get participantId =>
+  UserId? get participantId =>
       (origin as ParticipantDocumentRefProvider).participantId;
 }
 

@@ -8,7 +8,7 @@ part of 'auth_user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authUserHash() => r'df4af207839d28c017692189fce47b42e80502f5';
+String _$authUserHash() => r'd41eb032c3a6756672432c840fa5fd09c4ac4999';
 
 /// 認証済のユーザー
 /// データの参照頻度を減らすため、`keepAlive`を指定

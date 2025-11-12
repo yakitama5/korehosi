@@ -12,7 +12,8 @@ common:
   purchasePlanDate: かう予定の日
   sentDate: わたした日
   buyerName: かった人
-  currency: ¥
+  currencyFormat: "¥${price:int}"
+  currencySymbol: "¥"
 itemsPage:
   title: ほしいもの
   add: ほしいものを追加

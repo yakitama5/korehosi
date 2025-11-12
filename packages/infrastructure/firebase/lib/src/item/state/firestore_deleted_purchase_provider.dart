@@ -4,6 +4,8 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_purchase_model.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_deleted_purchase_provider.g.dart';
@@ -12,7 +14,7 @@ part 'firestore_deleted_purchase_provider.g.dart';
 @riverpod
 CollectionReference<FirestorePurchaseModel> dpurchaseCollectionRef(
   Ref ref, {
-  required String groupId,
+  required GroupId groupId,
 }) {
   return ref
       .watch(firestoreProvider)
@@ -35,7 +37,8 @@ CollectionReference<FirestorePurchaseModel> dpurchaseCollectionRef(
 @riverpod
 DocumentReference<FirestorePurchaseModel> dpurchaseDocumentRef(
   Ref ref, {
-  required String groupId,
-  String? purchaseId,
-}) =>
-    ref.watch(dpurchaseCollectionRefProvider(groupId: groupId)).doc(purchaseId);
+  required GroupId groupId,
+  PurchaseId? purchaseId,
+}) => ref
+    .watch(dpurchaseCollectionRefProvider(groupId: groupId))
+    .doc(purchaseId?.value);

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:infrastructure_firebase/src/common/converter/json_key.dart';
 import 'package:packages_domain/group.dart';
+import 'package:packages_domain/user.dart';
 
 part 'firestore_group_model.freezed.dart';
 part 'firestore_group_model.g.dart';
@@ -26,10 +27,10 @@ abstract class FirestoreGroupModel with _$FirestoreGroupModel {
 extension FirestoreGroupModelX on FirestoreGroupModel {
   /// ドメイン層で定義しているエンティティへの変換
   Group toDomainModel() => Group(
-    id: id,
+    id: GroupId(id),
     name: name,
-    joinUids: joinUids,
-    ownerUid: ownerUid,
+    joinUids: joinUids.map(UserId.new).toList(),
+    ownerUid: UserId(ownerUid),
     itemCount: itemCount,
     premium: premium,
     createdAt: createdAt!,

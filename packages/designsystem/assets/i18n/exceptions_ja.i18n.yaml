@@ -1,6 +1,12 @@
 businessException(context=BusinessExceptionType):
   deleted: 削除済です。
   updateTargetNotFound: 保存に失敗しました、あらためて操作を行ってください。
+  notSelectedGroup: >-
+    グループが選択されていません。
+    グループを選択してください。
+  notAuth: >- 
+    ログイン情報が取得できませんでした。
+    ログインし直して、再度実行して下さい。
   createDynamicLinkUnknown: 招待リンクの作成に失敗しました。
   joinGroupPolicyJoinedGroup: すでに参加しています。
   joinGroupPolicyExpired: 招待リンクの有効期限が切れています。

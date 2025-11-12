@@ -15,7 +15,6 @@ module.exports = {
     'prefer-arrow-callback': 'error',
     'quotes': ['error', 'single', {'allowTemplateLiterals': true}],
     'indent': ['error', 2],
-    'max-len': ['error', {'ignoreStrings': true}],
   },
   overrides: [
     {
@@ -23,8 +22,7 @@ module.exports = {
       env: {
         mocha: true,
       },
-      rules: {
-      },
+      rules: {},
     },
   ],
   globals: {},

@@ -11,19 +11,16 @@ part of 'purchase.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$Purchase {
 
- String get id; int? get price; String? get buyerName; DateTime? get planDate; bool get surprise; DateTime? get sentAt; String? get memo; String get uid; DateTime get createdAt; DateTime get updatedAt;
+ PurchaseId get id; int? get price; String? get buyerName; DateTime? get planDate; bool get surprise; DateTime? get sentAt; String? get memo; String get uid; DateTime get createdAt; DateTime get updatedAt;
 /// Create a copy of Purchase
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $PurchaseCopyWith<Purchase> get copyWith => _$PurchaseCopyWithImpl<Purchase>(this as Purchase, _$identity);
 
-  /// Serializes this Purchase to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -31,7 +28,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is Purchase&&(identical(other.id, id) || other.id == id)&&(identical(other.price, price) || other.price == price)&&(identical(other.buyerName, buyerName) || other.buyerName == buyerName)&&(identical(other.planDate, planDate) || other.planDate == planDate)&&(identical(other.surprise, surprise) || other.surprise == surprise)&&(identical(other.sentAt, sentAt) || other.sentAt == sentAt)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,price,buyerName,planDate,surprise,sentAt,memo,uid,createdAt,updatedAt);
 
@@ -48,7 +45,7 @@ abstract mixin class $PurchaseCopyWith<$Res>  {
   factory $PurchaseCopyWith(Purchase value, $Res Function(Purchase) _then) = _$PurchaseCopyWithImpl;
 @useResult
 $Res call({
- String id, int? price, String? buyerName, DateTime? planDate, bool surprise, DateTime? sentAt, String? memo, String uid, DateTime createdAt, DateTime updatedAt
+ PurchaseId id, int? price, String? buyerName, DateTime? planDate, bool surprise, DateTime? sentAt, String? memo, String uid, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -68,7 +65,7 @@ class _$PurchaseCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? price = freezed,Object? buyerName = freezed,Object? planDate = freezed,Object? surprise = null,Object? sentAt = freezed,Object? memo = freezed,Object? uid = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as PurchaseId,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int?,buyerName: freezed == buyerName ? _self.buyerName : buyerName // ignore: cast_nullable_to_non_nullable
 as String?,planDate: freezed == planDate ? _self.planDate : planDate // ignore: cast_nullable_to_non_nullable
 as DateTime?,surprise: null == surprise ? _self.surprise : surprise // ignore: cast_nullable_to_non_nullable
@@ -162,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  int? price,  String? buyerName,  DateTime? planDate,  bool surprise,  DateTime? sentAt,  String? memo,  String uid,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PurchaseId id,  int? price,  String? buyerName,  DateTime? planDate,  bool surprise,  DateTime? sentAt,  String? memo,  String uid,  DateTime createdAt,  DateTime updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Purchase() when $default != null:
 return $default(_that.id,_that.price,_that.buyerName,_that.planDate,_that.surprise,_that.sentAt,_that.memo,_that.uid,_that.createdAt,_that.updatedAt);case _:
@@ -183,7 +180,7 @@ return $default(_that.id,_that.price,_that.buyerName,_that.planDate,_that.surpri
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  int? price,  String? buyerName,  DateTime? planDate,  bool surprise,  DateTime? sentAt,  String? memo,  String uid,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PurchaseId id,  int? price,  String? buyerName,  DateTime? planDate,  bool surprise,  DateTime? sentAt,  String? memo,  String uid,  DateTime createdAt,  DateTime updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _Purchase():
 return $default(_that.id,_that.price,_that.buyerName,_that.planDate,_that.surprise,_that.sentAt,_that.memo,_that.uid,_that.createdAt,_that.updatedAt);case _:
@@ -203,7 +200,7 @@ return $default(_that.id,_that.price,_that.buyerName,_that.planDate,_that.surpri
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  int? price,  String? buyerName,  DateTime? planDate,  bool surprise,  DateTime? sentAt,  String? memo,  String uid,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PurchaseId id,  int? price,  String? buyerName,  DateTime? planDate,  bool surprise,  DateTime? sentAt,  String? memo,  String uid,  DateTime createdAt,  DateTime updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _Purchase() when $default != null:
 return $default(_that.id,_that.price,_that.buyerName,_that.planDate,_that.surprise,_that.sentAt,_that.memo,_that.uid,_that.createdAt,_that.updatedAt);case _:
@@ -215,13 +212,13 @@ return $default(_that.id,_that.price,_that.buyerName,_that.planDate,_that.surpri
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _Purchase implements Purchase {
   const _Purchase({required this.id, this.price, this.buyerName, this.planDate, required this.surprise, this.sentAt, this.memo, required this.uid, required this.createdAt, required this.updatedAt});
-  factory _Purchase.fromJson(Map<String, dynamic> json) => _$PurchaseFromJson(json);
+  
 
-@override final  String id;
+@override final  PurchaseId id;
 @override final  int? price;
 @override final  String? buyerName;
 @override final  DateTime? planDate;
@@ -238,17 +235,14 @@ class _Purchase implements Purchase {
 @pragma('vm:prefer-inline')
 _$PurchaseCopyWith<_Purchase> get copyWith => __$PurchaseCopyWithImpl<_Purchase>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$PurchaseToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _Purchase&&(identical(other.id, id) || other.id == id)&&(identical(other.price, price) || other.price == price)&&(identical(other.buyerName, buyerName) || other.buyerName == buyerName)&&(identical(other.planDate, planDate) || other.planDate == planDate)&&(identical(other.surprise, surprise) || other.surprise == surprise)&&(identical(other.sentAt, sentAt) || other.sentAt == sentAt)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,price,buyerName,planDate,surprise,sentAt,memo,uid,createdAt,updatedAt);
 
@@ -265,7 +259,7 @@ abstract mixin class _$PurchaseCopyWith<$Res> implements $PurchaseCopyWith<$Res>
   factory _$PurchaseCopyWith(_Purchase value, $Res Function(_Purchase) _then) = __$PurchaseCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int? price, String? buyerName, DateTime? planDate, bool surprise, DateTime? sentAt, String? memo, String uid, DateTime createdAt, DateTime updatedAt
+ PurchaseId id, int? price, String? buyerName, DateTime? planDate, bool surprise, DateTime? sentAt, String? memo, String uid, DateTime createdAt, DateTime updatedAt
 });
 
 
@@ -285,7 +279,7 @@ class __$PurchaseCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? price = freezed,Object? buyerName = freezed,Object? planDate = freezed,Object? surprise = null,Object? sentAt = freezed,Object? memo = freezed,Object? uid = null,Object? createdAt = null,Object? updatedAt = null,}) {
   return _then(_Purchase(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as PurchaseId,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int?,buyerName: freezed == buyerName ? _self.buyerName : buyerName // ignore: cast_nullable_to_non_nullable
 as String?,planDate: freezed == planDate ? _self.planDate : planDate // ignore: cast_nullable_to_non_nullable
 as DateTime?,surprise: null == surprise ? _self.surprise : surprise // ignore: cast_nullable_to_non_nullable

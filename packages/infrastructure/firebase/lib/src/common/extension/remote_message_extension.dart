@@ -4,11 +4,11 @@ import 'package:packages_domain/notification.dart';
 extension RemoteMessageX on RemoteMessage {
   /// ドメインモデルへの変換
   NotificationMessage toDomainModel() => NotificationMessage(
-    senderId: senderId,
+    senderId: senderId == null ? null : NotificationMessageSenderId(senderId!),
     category: category,
     data: data,
     from: from,
-    messageId: messageId,
+    messageId: messageId == null ? null : NotificationMessageId(messageId!),
     messageType: messageType,
   );
 }

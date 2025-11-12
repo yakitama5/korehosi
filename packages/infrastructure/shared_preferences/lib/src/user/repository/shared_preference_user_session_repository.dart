@@ -2,6 +2,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_shared_preferences/common.dart';
 import 'package:infrastructure_shared_preferences/src/common/enum/preferences.dart';
 import 'package:intl/intl.dart';
+import 'package:packages_core/extension.dart';
+import 'package:packages_domain/designsystem.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
 
 /// FCMトークンタイムスタンプの日付形式
@@ -14,13 +17,21 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
   final Ref ref;
 
   @override
-  String? fetchCurrentGroupId() =>
-      ref.watch(stringPreferenceProvider(Preferences.curentGroup));
+  GroupId? fetchCurrentGroupId() {
+    final value = ref.watch(stringPreferenceProvider(Preferences.curentGroup));
+
+    // 未設定の場合はNULLを返却
+    if (value == Preferences.curentGroup.defaultValue) {
+      return null;
+    }
+
+    return GroupId(value);
+  }
 
   @override
-  Future<void> setCurrentGroupId({required String groupId}) => ref
+  Future<void> setCurrentGroupId({required GroupId groupId}) => ref
       .watch(stringPreferenceProvider(Preferences.curentGroup).notifier)
-      .update(groupId);
+      .update(groupId.value);
 
   @override
   Future<void> removeCurrentGroupId() => ref
@@ -28,9 +39,12 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
       .remove();
 
   @override
-  DateTime? fetchTokenTimestamp({required String uid}) {
+  DateTime? fetchTokenTimestamp({required UserId userId}) {
     final str = ref.watch(
-      stringWithStringFamilyPreferenceProvider(Preferences.curentGroup, uid),
+      stringWithStringFamilyPreferenceProvider(
+        Preferences.curentGroup,
+        userId.value,
+      ),
     );
     final formatter = DateFormat(_tokenTimestampFormat);
     return formatter.parse(str);
@@ -38,7 +52,7 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
 
   @override
   Future<void> updateTokenTimestamp({
-    required String uid,
+    required UserId userId,
     required DateTime dateTime,
   }) {
     final formatter = DateFormat(_tokenTimestampFormat);
@@ -46,7 +60,7 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
         .watch(
           stringWithStringFamilyPreferenceProvider(
             Preferences.curentGroup,
-            uid,
+            userId.value,
           ).notifier,
         )
         .update(formatter.format(dateTime));
@@ -54,16 +68,35 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
 
   @override
   Future<void> removeTokenTimestamp({
-    required String uid,
+    required UserId userId,
     required DateTime dateTime,
   }) async {
     return ref
         .watch(
           stringWithStringFamilyPreferenceProvider(
             Preferences.curentGroup,
-            uid,
+            userId.value,
           ).notifier,
         )
         .remove();
+  }
+
+  @override
+  ViewLayout? fetchItemsPageViewLayout() {
+    final prefValue = ref.watch(
+      stringPreferenceProvider(Preferences.itemsViewLayout),
+    );
+    if (prefValue.isEmpty) {
+      return null;
+    }
+
+    return ViewLayout.values.byNameOrNull(prefValue);
+  }
+
+  @override
+  Future<void> updateItemsPageViewLayout({required ViewLayout viewLayout}) {
+    return ref
+        .watch(stringPreferenceProvider(Preferences.itemsViewLayout).notifier)
+        .update(viewLayout.name);
   }
 }

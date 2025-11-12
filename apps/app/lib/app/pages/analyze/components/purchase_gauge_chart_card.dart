@@ -4,6 +4,7 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/analyze.dart';
 import 'package:packages_designsystem/widgets.dart';
+import 'package:packages_domain/analyze.dart';
 
 /// 購入率を表すCard
 class PurchaseGaugeChartCard extends HookConsumerWidget {
@@ -13,11 +14,13 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final percent = ref.watch(buyedRateProvider).value;
+    final itemBuyedRate = ref.watch(buyedRateProvider).value;
     // 一瞬なのでローディング表示は行わない
-    if (percent == null) {
+    if (itemBuyedRate == null) {
       return const SizedBox.shrink();
     }
+
+    final percent = itemBuyedRate.buyedRate * 100.0;
 
     return ChartCard(
       title: i18n.analyze.analyzePage.purchaseRate,
@@ -27,7 +30,7 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GaugeChart(value: percent, radius: 80),
-          const _BuyedItemCount(),
+          _BuyedItemCount(itemBuyedRate),
         ],
       ),
     );
@@ -35,18 +38,12 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
 }
 
 class _BuyedItemCount extends HookConsumerWidget {
-  const _BuyedItemCount();
+  const _BuyedItemCount(this.itemBuyedRate);
+
+  final ItemBuyedRate itemBuyedRate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final count = ref.watch(analyzeBuyedCountProvider).value;
-    final totalCount = ref.watch(
-      analyzeSourceItemsProvider.select((value) => value.value?.length),
-    );
-    if (count == null || totalCount == null) {
-      return const SizedBox.shrink();
-    }
-
     return Column(
       children: [
         Icon(
@@ -56,8 +53,8 @@ class _BuyedItemCount extends HookConsumerWidget {
         ),
         Text(
           i18n.analyze.analyzePage.format.fraction(
-            molecule: count,
-            denominator: totalCount,
+            molecule: itemBuyedRate.buyedItemCount,
+            denominator: itemBuyedRate.itemCount,
           ),
           style: Theme.of(context).textTheme.titleLarge,
         ),

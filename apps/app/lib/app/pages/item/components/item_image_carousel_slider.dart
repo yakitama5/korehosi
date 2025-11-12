@@ -4,9 +4,10 @@ import 'package:packages_designsystem/widgets.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ItemImageCarouselSlider extends StatelessWidget {
-  const ItemImageCarouselSlider({super.key, this.items});
+  const ItemImageCarouselSlider({super.key, this.items, this.autoPlay = false});
 
   final List<Widget>? items;
+  final bool autoPlay;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class ItemImageCarouselSlider extends StatelessWidget {
         height: carouselHeight,
         viewportFraction: viewportFraction,
         enableInfiniteScroll: false,
+        autoPlay: true,
         enlargeCenterPage: true,
       ),
       items: items,

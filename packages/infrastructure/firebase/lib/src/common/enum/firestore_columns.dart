@@ -1,6 +1,6 @@
 enum FirestoreColumns {
-  updatedAt('updated_at'),
-  createdAt('created_at');
+  updatedAt('updatedAt'),
+  createdAt('createdAt');
 
   const FirestoreColumns(this.fieldName);
 

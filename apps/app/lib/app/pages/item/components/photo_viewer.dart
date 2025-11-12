@@ -12,7 +12,7 @@ class PhotoViewer extends HookWidget {
     this.minScale,
     this.maxScale,
     this.initialIndex = 0,
-    required this.imagesPath,
+    required this.imageUrls,
     this.scrollDirection = Axis.horizontal,
   }) : pageController = PageController(initialPage: initialIndex);
 
@@ -22,7 +22,7 @@ class PhotoViewer extends HookWidget {
   final dynamic maxScale;
   final int initialIndex;
   final PageController pageController;
-  final List<String> imagesPath;
+  final List<String> imageUrls;
   final Axis scrollDirection;
 
   @override
@@ -41,7 +41,7 @@ class PhotoViewer extends HookWidget {
             PhotoViewGallery.builder(
               scrollPhysics: const BouncingScrollPhysics(),
               builder: _buildItem,
-              itemCount: imagesPath.length,
+              itemCount: imageUrls.length,
               loadingBuilder: loadingBuilder,
               backgroundDecoration: backgroundDecoration,
               pageController: pageController,
@@ -68,13 +68,13 @@ class PhotoViewer extends HookWidget {
   }
 
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
-    final imagePath = imagesPath[index];
+    final imageUrl = imageUrls[index];
     return PhotoViewGalleryPageOptions.customChild(
-      child: StorageImage(imagePath: imagePath),
+      child: NetworkImageWithPlaceholder(imageUrl: imageUrl),
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 4.1,
-      heroAttributes: PhotoViewHeroAttributes(tag: imagePath),
+      heroAttributes: PhotoViewHeroAttributes(tag: imageUrl),
     );
   }
 }

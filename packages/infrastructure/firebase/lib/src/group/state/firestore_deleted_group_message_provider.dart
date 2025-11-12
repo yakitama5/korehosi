@@ -4,6 +4,8 @@ import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/collection_reference.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_group_message_model.dart';
+import 'package:packages_domain/group.dart';
+import 'package:packages_domain/notification.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_deleted_group_message_provider.g.dart';
@@ -12,7 +14,7 @@ part 'firestore_deleted_group_message_provider.g.dart';
 @riverpod
 CollectionReference<FirestoreGroupMessageModel> dgroupMessageCollectionRef(
   Ref ref, {
-  required String groupId,
+  required GroupId groupId,
 }) {
   return ref
       .watch(firestoreProvider)
@@ -35,8 +37,8 @@ CollectionReference<FirestoreGroupMessageModel> dgroupMessageCollectionRef(
 @riverpod
 DocumentReference<FirestoreGroupMessageModel> dgroupMessageDocumentRef(
   Ref ref, {
-  required String groupId,
-  String? dnotificationMessageId,
+  required GroupId groupId,
+  NotificationMessageId? dnotificationMessageId,
 }) => ref
     .watch(dgroupMessageCollectionRefProvider(groupId: groupId))
-    .doc(dnotificationMessageId);
+    .doc(dnotificationMessageId?.value);

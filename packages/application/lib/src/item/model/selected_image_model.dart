@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:packages_domain/item.dart';
 
 part 'selected_image_model.freezed.dart';
 
@@ -7,9 +8,7 @@ part 'selected_image_model.freezed.dart';
 @freezed
 abstract class SelectedImageModel with _$SelectedImageModel {
   // どちらか片方は必ず値を設定することを保証する
-  @Assert('imagePath != null || uploadFile != null')
-  const factory SelectedImageModel({
-    String? imagePath,
-    XFile? uploadFile,
-  }) = _SelectedImageModel;
+  @Assert('savedImage != null || uploadFile != null')
+  const factory SelectedImageModel({ItemImage? savedImage, XFile? uploadFile}) =
+      _SelectedImageModel;
 }

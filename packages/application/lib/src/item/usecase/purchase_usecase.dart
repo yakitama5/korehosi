@@ -1,8 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:packages_application/item.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/state/current_group_provider.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,25 +19,19 @@ class PurchaseUsecase with RunUsecaseMixin {
 
   final Ref ref;
 
+  ItemUsecase get _itemUsecase => ref.read(itemUsecaseProvider);
+
   /// 購入情報の取得
-  Stream<Purchase?> fetchByItemId({
-    required String groupId,
-    required String itemId,
+  Future<Purchase?> fetchByItemId({
+    required GroupId groupId,
+    required ItemId itemId,
   }) => ref
       .read(purchaseRepositoryProvider)
       .fetchByItemId(groupId: groupId, itemId: itemId);
 
-  /// (子供参照用)購入情報の取得
-  Stream<Purchase?> fetchByItemIdForChild({
-    required String groupId,
-    required String itemId,
-  }) => ref
-      .read(purchaseRepositoryProvider)
-      .fetchByItemIdForChild(groupId: groupId, itemId: itemId);
-
   /// 購入情報の登録
   Future<void> add({
-    required String itemId,
+    required ItemId itemId,
     int? price,
     String? buyerName,
     DateTime? planDate,
@@ -70,14 +66,17 @@ class PurchaseUsecase with RunUsecaseMixin {
             surprise: surprise,
             sentAt: sentAt,
             memo: memo,
-            uid: userId!,
+            userId: userId!,
           );
+
+      // Providerへの反映
+      _itemUsecase.refreshItemProvideres();
     },
   );
 
   /// 欲しい物の更新
   Future<void> update({
-    required String itemId,
+    required ItemId itemId,
     int? price,
     String? buyerName,
     DateTime? planDate,
@@ -92,9 +91,7 @@ class PurchaseUsecase with RunUsecaseMixin {
         currentGroupProvider.selectAsync((group) => group?.id),
       );
       if (groupId == null) {
-        throw const BusinessException(
-          BusinessExceptionType.updateTargetNotFound,
-        );
+        throw const BusinessException(BusinessExceptionType.notSelectedGroup);
       }
 
       // ドキュメントの登録
@@ -104,7 +101,7 @@ class PurchaseUsecase with RunUsecaseMixin {
       await ref
           .read(purchaseRepositoryProvider)
           .update(
-            purchaseId: itemId,
+            itemId: itemId,
             groupId: groupId,
             price: price,
             buyerName: buyerName,
@@ -112,13 +109,16 @@ class PurchaseUsecase with RunUsecaseMixin {
             surprise: surprise,
             sentAt: sentAt,
             memo: memo,
-            uid: userId!,
+            userId: userId!,
           );
+
+      // Providerへの反映
+      _itemUsecase.refreshItemProvideres();
     },
   );
 
   /// 購入情報の削除
-  Future<void> delete({required String itemId}) => execute(
+  Future<void> delete({required ItemId itemId}) => execute(
     ref,
     action: () async {
       // グループ所属判定
@@ -133,7 +133,10 @@ class PurchaseUsecase with RunUsecaseMixin {
 
       await ref
           .read(purchaseRepositoryProvider)
-          .delete(groupId: groupId, purchaseId: itemId);
+          .delete(groupId: groupId, itemId: itemId);
+
+      // Providerへの反映
+      _itemUsecase.refreshItemProvideres();
     },
   );
 }

@@ -11,33 +11,30 @@ part of 'auth_status.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$AuthStatus {
 
- String get uid; bool get isAnonymous; bool get linkedGoogle; bool get linkedApple;
+ UserId get userId; bool get isAnonymous; bool get linkedGoogle; bool get linkedApple;
 /// Create a copy of AuthStatus
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $AuthStatusCopyWith<AuthStatus> get copyWith => _$AuthStatusCopyWithImpl<AuthStatus>(this as AuthStatus, _$identity);
 
-  /// Serializes this AuthStatus to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthStatus&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.linkedGoogle, linkedGoogle) || other.linkedGoogle == linkedGoogle)&&(identical(other.linkedApple, linkedApple) || other.linkedApple == linkedApple));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.linkedGoogle, linkedGoogle) || other.linkedGoogle == linkedGoogle)&&(identical(other.linkedApple, linkedApple) || other.linkedApple == linkedApple));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,uid,isAnonymous,linkedGoogle,linkedApple);
+int get hashCode => Object.hash(runtimeType,userId,isAnonymous,linkedGoogle,linkedApple);
 
 @override
 String toString() {
-  return 'AuthStatus(uid: $uid, isAnonymous: $isAnonymous, linkedGoogle: $linkedGoogle, linkedApple: $linkedApple)';
+  return 'AuthStatus(userId: $userId, isAnonymous: $isAnonymous, linkedGoogle: $linkedGoogle, linkedApple: $linkedApple)';
 }
 
 
@@ -48,7 +45,7 @@ abstract mixin class $AuthStatusCopyWith<$Res>  {
   factory $AuthStatusCopyWith(AuthStatus value, $Res Function(AuthStatus) _then) = _$AuthStatusCopyWithImpl;
 @useResult
 $Res call({
- String uid, bool isAnonymous, bool linkedGoogle, bool linkedApple
+ UserId userId, bool isAnonymous, bool linkedGoogle, bool linkedApple
 });
 
 
@@ -65,10 +62,10 @@ class _$AuthStatusCopyWithImpl<$Res>
 
 /// Create a copy of AuthStatus
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? isAnonymous = null,Object? linkedGoogle = null,Object? linkedApple = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? isAnonymous = null,Object? linkedGoogle = null,Object? linkedApple = null,}) {
   return _then(_self.copyWith(
-uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as UserId,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
 as bool,linkedGoogle: null == linkedGoogle ? _self.linkedGoogle : linkedGoogle // ignore: cast_nullable_to_non_nullable
 as bool,linkedApple: null == linkedApple ? _self.linkedApple : linkedApple // ignore: cast_nullable_to_non_nullable
 as bool,
@@ -156,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String uid,  bool isAnonymous,  bool linkedGoogle,  bool linkedApple)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( UserId userId,  bool isAnonymous,  bool linkedGoogle,  bool linkedApple)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthStatus() when $default != null:
-return $default(_that.uid,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple);case _:
+return $default(_that.userId,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple);case _:
   return orElse();
 
 }
@@ -177,10 +174,10 @@ return $default(_that.uid,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String uid,  bool isAnonymous,  bool linkedGoogle,  bool linkedApple)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( UserId userId,  bool isAnonymous,  bool linkedGoogle,  bool linkedApple)  $default,) {final _that = this;
 switch (_that) {
 case _AuthStatus():
-return $default(_that.uid,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple);case _:
+return $default(_that.userId,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +194,10 @@ return $default(_that.uid,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String uid,  bool isAnonymous,  bool linkedGoogle,  bool linkedApple)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( UserId userId,  bool isAnonymous,  bool linkedGoogle,  bool linkedApple)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthStatus() when $default != null:
-return $default(_that.uid,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple);case _:
+return $default(_that.userId,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple);case _:
   return null;
 
 }
@@ -209,13 +206,13 @@ return $default(_that.uid,_that.isAnonymous,_that.linkedGoogle,_that.linkedApple
 }
 
 /// @nodoc
-@JsonSerializable()
+
 
 class _AuthStatus implements AuthStatus {
-  const _AuthStatus({required this.uid, required this.isAnonymous, required this.linkedGoogle, required this.linkedApple});
-  factory _AuthStatus.fromJson(Map<String, dynamic> json) => _$AuthStatusFromJson(json);
+  const _AuthStatus({required this.userId, required this.isAnonymous, required this.linkedGoogle, required this.linkedApple});
+  
 
-@override final  String uid;
+@override final  UserId userId;
 @override final  bool isAnonymous;
 @override final  bool linkedGoogle;
 @override final  bool linkedApple;
@@ -226,23 +223,20 @@ class _AuthStatus implements AuthStatus {
 @pragma('vm:prefer-inline')
 _$AuthStatusCopyWith<_AuthStatus> get copyWith => __$AuthStatusCopyWithImpl<_AuthStatus>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$AuthStatusToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthStatus&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.linkedGoogle, linkedGoogle) || other.linkedGoogle == linkedGoogle)&&(identical(other.linkedApple, linkedApple) || other.linkedApple == linkedApple));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.linkedGoogle, linkedGoogle) || other.linkedGoogle == linkedGoogle)&&(identical(other.linkedApple, linkedApple) || other.linkedApple == linkedApple));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
-int get hashCode => Object.hash(runtimeType,uid,isAnonymous,linkedGoogle,linkedApple);
+int get hashCode => Object.hash(runtimeType,userId,isAnonymous,linkedGoogle,linkedApple);
 
 @override
 String toString() {
-  return 'AuthStatus(uid: $uid, isAnonymous: $isAnonymous, linkedGoogle: $linkedGoogle, linkedApple: $linkedApple)';
+  return 'AuthStatus(userId: $userId, isAnonymous: $isAnonymous, linkedGoogle: $linkedGoogle, linkedApple: $linkedApple)';
 }
 
 
@@ -253,7 +247,7 @@ abstract mixin class _$AuthStatusCopyWith<$Res> implements $AuthStatusCopyWith<$
   factory _$AuthStatusCopyWith(_AuthStatus value, $Res Function(_AuthStatus) _then) = __$AuthStatusCopyWithImpl;
 @override @useResult
 $Res call({
- String uid, bool isAnonymous, bool linkedGoogle, bool linkedApple
+ UserId userId, bool isAnonymous, bool linkedGoogle, bool linkedApple
 });
 
 
@@ -270,10 +264,10 @@ class __$AuthStatusCopyWithImpl<$Res>
 
 /// Create a copy of AuthStatus
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? isAnonymous = null,Object? linkedGoogle = null,Object? linkedApple = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = null,Object? isAnonymous = null,Object? linkedGoogle = null,Object? linkedApple = null,}) {
   return _then(_AuthStatus(
-uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
+userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as UserId,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
 as bool,linkedGoogle: null == linkedGoogle ? _self.linkedGoogle : linkedGoogle // ignore: cast_nullable_to_non_nullable
 as bool,linkedApple: null == linkedApple ? _self.linkedApple : linkedApple // ignore: cast_nullable_to_non_nullable
 as bool,

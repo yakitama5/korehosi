@@ -46,7 +46,7 @@ class ItemRouteData extends GoRouteData with _$ItemRouteData {
     overrides: [
       // 欲しい物のIDだけを指定
       // 明細は依存Providerが勝手に処理してくれる
-      ItemDetailProviders.itemIdProvider.overrideWithValue(itemId),
+      ItemDetailProviders.itemIdProvider.overrideWithValue(ItemId(itemId)),
     ],
     child: const ItemPage(),
   );
@@ -64,7 +64,7 @@ class PurchaseRouteData extends GoRouteData with _$PurchaseRouteData {
     overrides: [
       // 欲しい物のIDだけを指定
       // 明細は依存Providerが勝手に処理してくれる
-      ItemDetailProviders.itemIdProvider.overrideWithValue(itemId),
+      ItemDetailProviders.itemIdProvider.overrideWithValue(ItemId(itemId)),
     ],
     child: const PurchasePage(),
   );
@@ -98,16 +98,18 @@ class ItemEditRouteData extends GoRouteData with _$ItemEditRouteData {
   final String itemId;
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      MaterialPage(
-        child: ProviderScope(
-          overrides: [
-            // 欲しい物のIDだけを指定
-            // 明細は依存Providerが勝手に処理してくれる
-            ItemDetailProviders.itemIdProvider.overrideWithValue(itemId),
-          ],
-          child: const ItemEditPage(),
-        ),
-        fullscreenDialog: true,
-      );
+  Page<void> buildPage(
+    BuildContext context,
+    GoRouterState state,
+  ) => MaterialPage(
+    child: ProviderScope(
+      overrides: [
+        // 欲しい物のIDだけを指定
+        // 明細は依存Providerが勝手に処理してくれる
+        ItemDetailProviders.itemIdProvider.overrideWithValue(ItemId(itemId)),
+      ],
+      child: const ItemEditPage(),
+    ),
+    fullscreenDialog: true,
+  );
 }
