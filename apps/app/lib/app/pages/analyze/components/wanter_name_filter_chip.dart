@@ -57,9 +57,9 @@ class WanterNameFilterChip extends HookConsumerWidget {
           case null:
             return;
           case _allKey:
-            notifier.copyWith(wanterName: null);
+            notifier.resetWanterName();
           default:
-            notifier.copyWith(wanterName: wanterName);
+            notifier.changeWanterName(wanterName);
         }
       },
     );

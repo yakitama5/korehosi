@@ -57,9 +57,9 @@ class BuyerNameFilterChip extends HookConsumerWidget {
           case null:
             return;
           case _allKey:
-            notifier.copyWith(buyerName: null);
+            notifier.resetBuyerName();
           default:
-            notifier.copyWith(buyerName: buyerName);
+            notifier.changeBuyerName(buyerName);
         }
       },
     );

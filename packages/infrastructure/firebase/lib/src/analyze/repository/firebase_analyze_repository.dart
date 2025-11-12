@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:infrastructure_firebase/src/item/model/firestore_purchase_model.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
 import 'package:packages_domain/analyze.dart';
@@ -21,14 +22,12 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
   }) async {
     // コレクション定義
     final itemCol = ref.read(itemCollectionRefProvider(groupId: groupId));
-    final purchaseCol = ref.read(
-      purchaseCollectionRefProvider(groupId: groupId),
-    );
+    final purchaseQuery = createAnalyzeQuery(groupId: groupId, query: query);
 
     // 各件数の取得
     final itemCount = await itemCol.count().get().then((doc) => doc.count);
     final buyedItemCount =
-        await purchaseCol
+        await purchaseQuery
             .where('sentAt', isNull: false)
             .count()
             .get()
@@ -52,13 +51,14 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
     required YearMonthRange range,
     required ItemAnalyzeQuery query,
   }) async {
-    // コレクション定義
-    final purchaseCol = ref.read(
-      purchaseCollectionRefProvider(groupId: groupId),
+    // クエリー定義
+    final allTimeTotalQuery = createAnalyzeQuery(
+      groupId: groupId,
+      query: query,
     );
 
     // 全期間の購入金額の合計を先に取得
-    final allTimeTotalPrice = await purchaseCol
+    final allTimeTotalPrice = await allTimeTotalQuery
         .aggregate(sum('price'))
         .get()
         .then((res) => res.getSum('price'));
@@ -79,7 +79,7 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
           currentDate.month + 1,
         ).add(const Duration(microseconds: -1)),
       );
-      final price = await purchaseCol
+      final price = await allTimeTotalQuery
           .where('sentAt', isGreaterThanOrEqualTo: from)
           .where('sentAt', isLessThanOrEqualTo: to)
           .aggregate(sum('price'))
@@ -105,5 +105,34 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
       monthlyTotals: totals,
       allTimeTotalPrice: (allTimeTotalPrice ?? 0.0).toInt(),
     );
+  }
+
+  Query<FirestorePurchaseModel> createAnalyzeQuery({
+    required GroupId groupId,
+    required ItemAnalyzeQuery query,
+  }) {
+    final collection = ref.read(
+      purchaseCollectionRefProvider(groupId: groupId),
+    );
+
+    Query<FirestorePurchaseModel> firestoreQuery = collection;
+
+    // かった人の絞り込み条件
+    if (query.buyerName?.isNotEmpty == true) {
+      firestoreQuery = firestoreQuery.where(
+        'buyerName',
+        isEqualTo: query.buyerName,
+      );
+    }
+
+    // 欲しい人の絞り込み条件
+    if (query.wanterName?.isNotEmpty == true) {
+      firestoreQuery = firestoreQuery.where(
+        'wanterName',
+        isEqualTo: query.wanterName,
+      );
+    }
+
+    return firestoreQuery;
   }
 }
