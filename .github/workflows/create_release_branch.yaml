@@ -38,7 +38,7 @@ jobs:
       - name: Bump version
         run: |
           cd apps/app
-          cider bump ${{ github.event.inputs.release_type }}
+          cider bump ${{ github.event.inputs.release_type }} --bump-build
 
       # バージョンを取得
       - name: Get new version
