@@ -18,91 +18,70 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
+      # チェックアウト
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Create dart-define
-        run: |
-          mkdir -p dart_defines
-          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
-      - name: Create Firebase Conf
-        run: |
-          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
-          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > lib/firebase_options_dev.dart
-          mkdir -p android/app/src/prod/
-          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > android/app/src/prod/google-services.json
-          mkdir -p ios/prod/
-          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > ios/prod/GoogleService-Info.plist
-      - name: Create env
-        run: |
-          mkdir -p scripts
-          mkdir -p scripts/env
-          echo -n ${{ secrets.ENV_FILE }} | base64 -d > scripts/env/.env
-          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > scripts/env/.env.dev
-      - name: Setup Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ vars.FLUTTER_VERSION }}
-          channel: ${{ vars.FLUTTER_CHANNEL }}
-          cache: true
+        uses: actions/checkout@v4
+
+      # セットアップ
+      - name: Setup Config Files
+        uses: ./.github/actions/setup-config-files
+        env: # Set the secret as an input
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+      - name: Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
 
       # Key情報の設定
       - name: Create key.jks
-        run: echo -n ${{ secrets.ANDROID_KEY_JKS }} | base64 -d > android/app/key.jks
+        run: echo -n ${{ secrets.ANDROID_KEY_JKS }} | base64 -d > apps/app/android/app/key.jks
 
       # Secrets から key.properties を生成
       # key.properties には各種シークレットな文字列なり file name なりを渡している
       - name: Create key.properties
         run: |
           echo 'storeFile=./key.jks' > android/key.properties
-          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> android/key.properties
-          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> android/key.properties
-          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> android/key.properties
+          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> apps/app/android/key.properties
+          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> apps/app/android/key.properties
+          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> apps/app/android/key.properties
 
       # ビルド
       - run: flutter pub get
       - run: flutter gen-l10n
       - run: flutter build appbundle --dart-define-from-file=dart_defines/prod.json
 
-      # GoogleCloudは課金対象になってしまうので、ビルドまでで止める
-
 
   # iOS
   flutter_build_ios:
-    # if: ${{ false }}
+    if: ${{ false }}
     name: Build(iOS)
     runs-on: macos-latest
     timeout-minutes: 60
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-      - name: Create dart-define
-        run: |
-          mkdir -p dart_defines
-          echo -n ${{ secrets.DART_DEFINE_JSON }} | base64 -d > dart_defines/prod.json
-      - name: Create Firebase Conf
-        run: |
-          echo -n ${{ secrets.FIREBASE_OPTIONS }} | base64 -d > lib/firebase_options.dart
-          echo -n ${{ secrets.FIREBASE_OPTIONS_DEV }} | base64 -d > lib/firebase_options_dev.dart
-          mkdir -p android/app/src/prod/
-          echo -n ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 -d > android/app/src/prod/google-services.json
-          mkdir -p ios/prod/
-          echo -n ${{ secrets.GOOGLE_INFO_PLIST }} | base64 -d > ios/prod/GoogleService-Info.plist
-          echo -n ${{ secrets.FIREBASE_APP_ID_FILE }} | base64 -d > ios/prod/firebase_app_id_file.json
-      - name: Create env
-        run: |
-          mkdir -p scripts
-          mkdir -p scripts/env
-          echo -n ${{ secrets.ENV_FILE }} | base64 -d > scripts/env/.env
-          echo -n ${{ secrets.DEV_ENV_FILE }} | base64 -d > scripts/env/.env.dev
+        uses: actions/checkout@v4
+      
+      # セットアップ
+      - name: Setup Config Files
+        uses: ./.github/actions/setup-config-files
+        env: # Set the secret as an input
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+      - name: Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
+        
       - name: Create ExportOptions
         run: |
           echo -n ${{ secrets.EXPORT_OPTIONS }} | base64 -d > ExportOptions.plist
-      - name: Setup Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ vars.FLUTTER_VERSION }}
-          channel: ${{ vars.FLUTTER_CHANNEL }}
-          cache: true
 
       # プロビジョニングファイルの取り込み
       - name: Import Provisioning Profile

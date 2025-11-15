@@ -1,0 +1,43 @@
+name: "Setup Config Files"
+description: "setup-config-files"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Create dart-define
+      run: |
+        mkdir -p apps/app/dart_defines
+        echo -n $DART_DEFINE_JSON | base64 -d > apps/app/dart_defines/prod.json
+      shell: bash
+
+    - name: Create Firebase Conf
+      run: |
+        echo -n $FIREBASE_OPTIONS | base64 -d > ${CONF_PATH}/firebase_options.dart
+        echo -n $FIREBASE_OPTIONS_DEV | base64 -d > ${CONF_PATH}/firebase_options_dev.dart
+        mkdir -p apps/app/android/app/src/prod/
+        echo -n $GOOGLE_SERVICES_JSON | base64 -d > apps/app/android/app/src/prod/google-services.json
+        mkdir -p apps/app/ios/prod/
+        echo -n $GOOGLE_INFO_PLIST | base64 -d > apps/app/ios/prod/GoogleService-Info.plist
+      shell: bash
+      env: 
+        CONF_PATH: packages/infrastructure/firebase/lib/src/common/config
+
+    - name: Create Firebase env
+      run: |
+        mkdir -p packages/infrastructure/firebase/scripts
+        mkdir -p packages/infrastructure/firebase/scripts/env
+        echo -n $ENV_FILE | base64 -d > ${ENV_PATH}/.env
+        echo -n $DEV_ENV_FILE | base64 -d > ${ENV_PATH}/.env.dev
+      shell: bash
+      env: 
+        ENV_PATH: packages/infrastructure/firebase/scripts/env
+
+    - name: Create RevenueCat env
+      run: |
+        mkdir -p packages/infrastructure/revenue_cat/scripts
+        mkdir -p packages/infrastructure/revenue_cat/scripts/env
+        echo -n $ENV_FILE | base64 -d > ${ENV_PATH}/.env
+        echo -n $DEV_ENV_FILE | base64 -d > ${ENV_PATH}/.env.dev
+      shell: bash
+      env: 
+        ENV_PATH: packages/infrastructure/revenue_cat/scripts/env
