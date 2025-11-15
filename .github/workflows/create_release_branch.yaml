@@ -30,7 +30,7 @@ jobs:
       # Rubyセットアップ(git-pr-release利用のため)
       # Notes: https://zenn.dev/pharmax/articles/9f7f45ab2d502a
       - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
 
