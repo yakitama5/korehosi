@@ -27,13 +27,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Rubyセットアップ(git-pr-release利用のため)
-      # Notes: https://zenn.dev/pharmax/articles/9f7f45ab2d502a
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.1
-
       - name: Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
@@ -71,11 +64,4 @@ jobs:
       - run: gem install --no-document git-pr-release
       # PRを作成
       - name: Create PR for release
-        run: git-pr-release --squash
-        env:
-          GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_PR_RELEASE_BRANCH_PRODUCTION: main
-          GIT_PR_RELEASE_BRANCH_STAGING: "release/v${{ env.new_version }}"
-          GIT_PR_RELEASE_LABELS: release
-          GIT_PR_RELEASE_TEMPLATE: pr-release.template.erb
-          TZ: Asia/Tokyo
+        run: gh pr create --base main --head release/v${{ env.new_version }} --title "Release v${{ env.new_version }}" --body ""
