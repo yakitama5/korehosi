@@ -50,9 +50,8 @@ jobs:
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> apps/app/android/key.properties
 
       # ビルド
-      - run: flutter pub get
-      - run: flutter gen-l10n
-      - run: flutter build appbundle --dart-define-from-file=dart_defines/prod.json
+      - run: melos run regenerate_code
+      - run: build_app_android
 
 
   # iOS
