@@ -44,7 +44,7 @@ jobs:
       # key.properties には各種シークレットな文字列なり file name なりを渡している
       - name: Create key.properties
         run: |
-          echo 'storeFile=./key.jks' > android/key.properties
+          echo 'storeFile=./key.jks' > apps/app/android/key.properties
           echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> apps/app/android/key.properties
           echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> apps/app/android/key.properties
           echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> apps/app/android/key.properties
