@@ -1,14 +1,19 @@
 name: Flutter Build
 on:
-  push:
-    # tagの作成時にビルド実行
-    tags:
-      - 'v*'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        required: true
+        type: choice
+        description: ビルド対象のプラットフォームを指定します
+        options:
+          - all
+          - android
+          - ios
 jobs:
 
   # Android
   flutter_build_android:
-    if: ${{ false }}
     name: Build(Android)
     runs-on: ubuntu-latest
     timeout-minutes: 60
