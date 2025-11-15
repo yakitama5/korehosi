@@ -51,7 +51,7 @@ jobs:
 
       # ビルド
       - run: melos run regenerate_code
-      - run: build_app_android
+      - run: melos run build_app_android
 
 
   # iOS
