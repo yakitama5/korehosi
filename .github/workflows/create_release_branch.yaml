@@ -16,10 +16,13 @@ on:
 
 jobs:
   create_release_branch:
-    # if: ${{ false }}
     name: Create Release Branch
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      packages: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -45,6 +48,18 @@ jobs:
       # バージョンを取得
       - name: Get new version
         run: echo "new_version=$(cider version)" >> $GITHUB_ENV
+
+      # Git設定
+      - name: Configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # バージョンアップの変更をコミット
+      - name: Commit version bump
+        run: |
+          git add .
+          git commit -m "chore: bump version to ${{ env.new_version }}"
 
       # releasブランチを作成
       - name: Create and push release branch
