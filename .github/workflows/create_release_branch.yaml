@@ -1,0 +1,79 @@
+name: Create Release Branch and PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        required: true
+        type: choice
+        description: バージョンアップする対象を指定します。
+        options:
+          - major
+          - minor
+          - patch
+          - build
+        default: "build"
+
+jobs:
+  create_release_branch:
+    name: Create Release Branch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      packages: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Rubyセットアップ(git-pr-release利用のため)
+      # Notes: https://zenn.dev/pharmax/articles/9f7f45ab2d502a
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+
+      - name: Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
+
+      # Ciderセットアップ
+      - name: Activate cider
+        run: dart pub global activate cider
+
+      # バージョンアップ
+      - name: Bump version
+        run: cider bump ${{ github.event.inputs.release_type }}
+
+      # バージョンを取得
+      - name: Get new version
+        run: echo "new_version=$(cider version)" >> $GITHUB_ENV
+
+      # Git設定
+      - name: Configure git user
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # バージョンアップの変更をコミット
+      - name: Commit version bump
+        run: |
+          git add .
+          git commit -m "chore: bump version to ${{ env.new_version }}"
+
+      # releasブランチを作成
+      - name: Create and push release branch
+        run: |
+          git checkout -b "release/v${{ env.new_version }}"
+          git push origin "release/v${{ env.new_version }}"
+      - run: gem install --no-document git-pr-release
+      # PRを作成
+      - name: Create PR for release
+        run: git-pr-release --squash
+        env:
+          GIT_PR_RELEASE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_PR_RELEASE_BRANCH_PRODUCTION: main
+          GIT_PR_RELEASE_BRANCH_STAGING: "release/v${{ env.new_version }}"
+          GIT_PR_RELEASE_LABELS: release
+          GIT_PR_RELEASE_TEMPLATE: pr-release.template.erb
+          TZ: Asia/Tokyo
