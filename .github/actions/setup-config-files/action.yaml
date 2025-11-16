@@ -15,7 +15,7 @@ runs:
         echo -n $FIREBASE_OPTIONS | base64 -d > ${CONF_PATH}/firebase_options.dart
         echo -n $FIREBASE_OPTIONS_DEV | base64 -d > ${CONF_PATH}/firebase_options_dev.dart
         mkdir -p apps/app/android/app/src/prod/
-        echo -n $GOOGLE_SERVICES_JSON | base64 -d > apps/app/android/app/src/prod/google-services.json
+        echo -n $GOOGLE_SERVICES_JSON | base64 -d > apps/app/android/app/src/prod/res/google-services.json
         mkdir -p apps/app/ios/prod/
         echo -n $GOOGLE_INFO_PLIST | base64 -d > apps/app/ios/prod/GoogleService-Info.plist
       shell: bash
