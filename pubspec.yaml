@@ -79,16 +79,16 @@ melos:
     build_app: melos run build_app_android && melos run build_app_ios
     build_app_dev: melos run build_app_android_dev && melos run build_app_ios_dev
 
-    build_app_ios: melos exec --scope="flutter_app" -- fvm flutter build ipa
+    build_app_ios: melos exec --scope="flutter_app" -- flutter build ipa
       --export-options-plist=ExportOptions.plist
-      --dart-define-from-file=flavor/prod.json
-    build_app_ios_dev: melos exec --scope="flutter_app" -- fvm flutter build ipa
+      --dart-define-from-file=dart_defines/prod.json
+    build_app_ios_dev: melos exec --scope="flutter_app" -- flutter build ipa
       --export-options-plist=ExportOptions.plist
-      --dart-define-from-file=flavor/dev.json
-    build_app_android: melos exec --scope="flutter_app" -- fvm flutter build
-      appbundle --dart-define-from-file=flavor/prod.json
-    build_app_android_dev: melos exec --scope="flutter_app" -- fvm flutter build
-      appbundle --dart-define-from-file=flavor/dev.json
+      --dart-define-from-file=dart_defines/dev.json
+    build_app_android: melos exec --scope="flutter_app" -- flutter build
+      appbundle --dart-define-from-file=dart_defines/prod.json
+    build_app_android_dev: melos exec --scope="flutter_app" -- flutter build
+      appbundle --dart-define-from-file=dart_defines/dev.json
 
     report_test:
       flutter: true
