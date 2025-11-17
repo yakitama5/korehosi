@@ -50,6 +50,14 @@ jobs:
       - name: Build for Android
         run: melos run build_app_android
 
+    # ビルドしたaabをGithub Actionsにアップロード
+      - name: "Deploy aab 🚀"
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
+          retention-days: 7
+
   # iOS
   flutter_build_ios:
     if: ${{ false }}
