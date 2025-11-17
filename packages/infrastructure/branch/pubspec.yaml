@@ -7,7 +7,7 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  flutter_branch_sdk: ^8.6.0
+  flutter_branch_sdk: ^8.10.0
   freezed_annotation: ^3.1.0
   intl: ^0.20.2
   json_annotation: ^4.9.0
