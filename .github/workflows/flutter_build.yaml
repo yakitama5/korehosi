@@ -11,7 +11,6 @@ on:
           - android
           - ios
 jobs:
-
   # Android
   flutter_build_android:
     name: Build(Android)
@@ -36,23 +35,20 @@ jobs:
       - name: Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
-      # Key情報の設定
-      - name: Create key.jks
-        run: echo -n ${{ secrets.ANDROID_KEY_JKS }} | base64 -d > apps/app/android/app/key.jks
-
-      # Secrets から key.properties を生成
-      # key.properties には各種シークレットな文字列なり file name なりを渡している
-      - name: Create key.properties
-        run: |
-          echo 'storeFile=./key.jks' > apps/app/android/key.properties
-          echo 'storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}' >> apps/app/android/key.properties
-          echo 'keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}' >> apps/app/android/key.properties
-          echo 'keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}' >> apps/app/android/key.properties
+      # Android用の設定ファイルを設定
+      - name: Setup Android Config
+        uses: ./.github/actions/setup-android-config-files
+        env: # Set the secret as an input
+          KEY_JKS: ${{ secrets.ANDROID_KEY_JKS }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
 
       # ビルド
-      - run: melos run regenerate_code
-      - run: melos run build_app_android
-
+      - name: Regenerate Code
+        run: melos run regenerate_code
+      - name: Build for Android
+        run: melos run build_app_android
 
   # iOS
   flutter_build_ios:
@@ -63,7 +59,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       # セットアップ
       - name: Setup Config Files
         uses: ./.github/actions/setup-config-files
@@ -77,7 +73,7 @@ jobs:
           DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
       - name: Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
-        
+
       - name: Create ExportOptions
         run: |
           echo -n ${{ secrets.EXPORT_OPTIONS }} | base64 -d > ExportOptions.plist
