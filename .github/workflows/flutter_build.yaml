@@ -10,14 +10,101 @@ on:
           - all
           - android
           - ios
+
+# 共通の環境変数
+env:
+  DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+  FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+  FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+  GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+  GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
+  ENV_FILE: ${{ secrets.ENV_FILE }}
+  DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+
 jobs:
   # Android
   flutter_build_android:
     name: 🤖Build for Android
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # Android用の環境変数
+    env:
+      # Google Play 認証用サービスアカウント JSON キー
+      GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
+
+      # Android 署名用情報
+      ANDROID_KEYSTORE_FILENAME: ${{ vars.ANDROID_KEYSTORE_FILENAME }}
+      ANDROID_KEY_ALIAS: ${{ vars.ANDROID_KEY_ALIAS }}
+      ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+      # Google Play アプリの設定
+      GOOGLE_PLAY_PACKAGE_NAME: ${{ vars.GOOGLE_PLAY_PACKAGE_NAME }}
     steps:
       # チェックアウト
+      - name: 💾Checkout
+        uses: actions/checkout@v4
+
+      - name: 🪄Install Codemagic CLI tools
+        run: pip install codemagic-cli-tools
+
+      # セットアップ
+      - name: ⚙️Setup Config Files
+        uses: ./.github/actions/setup-config-files
+        env: # Set the secret as an input
+          DART_DEFINE_JSON: $DART_DEFINE_JSON
+          FIREBASE_OPTIONS: $FIREBASE_OPTIONS
+          FIREBASE_OPTIONS_DEV: $FIREBASE_OPTIONS_DEV
+          GOOGLE_SERVICES_JSON: $GOOGLE_SERVICES_JSON
+          GOOGLE_INFO_PLIST: $GOOGLE_INFO_PLIST
+          ENV_FILE: $ENV_FILE
+          DEV_ENV_FILE: $DEV_ENV_FILE
+      - name: ⚙️Setup Application Runtime
+        uses: ./.github/actions/setup-application-runtime
+
+      # Android用の設定ファイルを設定
+      - name: ⚙️Setup Android keystore
+        run: |
+          echo "$ANDROID_KEYSTORE" | base64 --decode > android/app/$ANDROID_KEYSTORE_FILENAME
+
+      - name: ⚙️Create key.properties
+        run: |
+          cat > android/key.properties << EOF
+          storePassword=$ANDROID_KEYSTORE_PASSWORD
+          keyPassword=$ANDROID_KEY_PASSWORD
+          keyAlias=$ANDROID_KEY_ALIAS
+          storeFile=$ANDROID_KEYSTORE_FILENAME
+          EOF
+
+      # ビルド
+      - name: ♻️Regenerate Code
+        run: melos run regenerate_code
+      - name: 🛠️Build for Android
+        run: melos run build_app_android
+
+      # ビルドしたaabをGithub Actionsにアップロード
+      - name: "🚀Deploy Bundle"
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-aab
+          path: apps/app/build/app/outputs/bundle/release/app-release.aab
+          retention-days: 7
+
+      - name: 🚀Publish to Google Play
+        run: |
+          google-play bundles publish \
+          --bundle "apps/app/build/app/outputs/bundle/release/app-release.aab" \
+          --track internal \
+          --draft   
+
+  # iOS
+  flutter_build_ios:
+    if: ${{ false }}
+    name: 🍎Build for iOS
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
       - name: 💾Checkout
         uses: actions/checkout@v4
 
@@ -35,52 +122,58 @@ jobs:
       - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
-      # Android用の設定ファイルを設定
-      - name: ⚙️Setup Android Config
-        uses: ./.github/actions/setup-android-config-files
-        env: # Set the secret as an input
-          KEY_JKS: ${{ secrets.ANDROID_KEY_JKS }}
-          STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      # ---------------------------------------------------
+      - name: "Install codemagic-cli-tools"
+        run: |
+          pip3 install codemagic-cli-tools --break-system-packages
 
-      # ビルド
-      - name: ♻️Regenerate Code
-        run: melos run regenerate_code
-      - name: 🛠️Build for Android
-        run: melos run build_app_android
+      - name: "Install the Apple certificate"
+        run: |
+          echo -n "$CERT_KEY" >> $RUNNER_TEMP/cert_key
 
-    # ビルドしたaabをGithub Actionsにアップロード
-      - name: "🚀Deploy Bundle"
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-aab
-          path: build/app/outputs/bundle/release/app-release.aab
-          retention-days: 7
+      - name: "Install the Apple provisioning profile"
+        run: |
+          app-store-connect fetch-signing-files "$APP_BUNDLE_ID" \
+            --platform $PLATFORM \
+            --type IOS_APP_STORE \
+            --certificate-key=@file:$RUNNER_TEMP/cert_key \
+            --create
 
-  # iOS
-  flutter_build_ios:
-    if: ${{ false }}
-    name: 🍎Build for iOS
-    runs-on: macos-latest
-    timeout-minutes: 60
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: "Install the Certificates"
+        run: |
+          app-store-connect certificates list \
+            --type DISTRIBUTION \
+            --certificate-key=@file:$RUNNER_TEMP/cert_key \
+            --save
 
-      # セットアップ
-      - name: Setup Config Files
-        uses: ./.github/actions/setup-config-files
-        env: # Set the secret as an input
-          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
-          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
-          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
-      - name: Setup Application Runtime
-        uses: ./.github/actions/setup-application-runtime
+      - name: "keychain initialize"
+        run: |
+          keychain delete
+          keychain initialize
+
+      - name: "keychain add-certificates"
+        run: |
+          keychain add-certificates
+
+      - name: "xcode-project use-profiles"
+        working-directory: packages/mobile
+        run: |
+          /usr/bin/plutil -replace CFBundleIdentifier -string $APP_BUNDLE_ID ios/Runner/Info.plist
+          find **/*.xcodeproj -type f | xargs sed -i "" -E 's/PRODUCT_BUNDLE_IDENTIFIER = ".+";//g'
+          xcode-project use-profiles
+
+      - name: Build iOS app
+        working-directory: packages/mobile
+        run: |
+          build_number=$(app-store-connect get-latest-build-number $APPLE_APP_ID --platform=IOS)
+          new_build_number=$((build_number + 1))
+          echo "$new_build_number"
+          flutter build ipa --release \
+            --export-options-plist=/Users/runner/export_options.plist \
+            --dart-define-from-file=dart_defines/prod.json \
+            --build-number=$new_build_number
+
+      # ---------------------------------------------------
 
       - name: Create ExportOptions
         run: |
@@ -100,9 +193,8 @@ jobs:
           p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
           p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
 
-      # Build + Upload
-      - name: Build for iOS
-        run: |
-          flutter pub get
-          flutter pub run build_runner build --delete-conflicting-outputs
-          flutter build ipa --export-options-plist=ExportOptions.plist --dart-define-from-file=dart_defines/prod.json
+      # ビルド
+      - name: ♻️Regenerate Code
+        run: melos run regenerate_code
+      - name: 🛠️Build for iOS
+        run: melos run build_app_ios
