@@ -7,7 +7,7 @@ runs:
     # key.jksファイルの生成(base64で受け取る)
     - name: Create key.jks
       shell: bash
-      run: echo -n $ANDROID_KEY_JKS | base64 -d > apps/app/android/app/key.jks
+      run: echo -n $KEY_JKS | base64 -d > apps/app/android/app/key.jks
 
     # Secrets から key.properties を生成
     # key.properties には各種シークレットな文字列なり file name なりを渡している
