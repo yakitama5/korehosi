@@ -56,11 +56,11 @@ jobs:
       # Android用の設定ファイルを設定
       - name: ⚙️Setup Android keystore
         run: |
-          echo "$ANDROID_KEYSTORE" | base64 --decode > android/app/$ANDROID_KEYSTORE_FILENAME
+          echo "$ANDROID_KEYSTORE" | base64 --decode > apps/app/android/app/$ANDROID_KEYSTORE_FILENAME
 
       - name: ⚙️Create key.properties
         run: |
-          cat > android/key.properties << EOF
+          cat > apps/app/android/key.properties << EOF
           storePassword=$ANDROID_KEYSTORE_PASSWORD
           keyPassword=$ANDROID_KEY_PASSWORD
           keyAlias=$ANDROID_KEY_ALIAS
