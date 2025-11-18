@@ -14,6 +14,7 @@ on:
 jobs:
   # Android
   flutter_build_android:
+    if: ${{ github.event.inputs.release_type }} == 'android' || ${{ github.event.inputs.release_type }} == 'all'
     name: 🤖Build for Android
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -43,13 +44,13 @@ jobs:
       - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
         env: # Set the secret as an input
-            DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
-            FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
-            FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-            GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-            GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
-            ENV_FILE: ${{ secrets.ENV_FILE }}
-            DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
+          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
       - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
@@ -86,17 +87,29 @@ jobs:
           google-play bundles publish \
           --bundle "apps/app/build/app/outputs/bundle/release/app-release.aab" \
           --track internal \
-          --draft   
+          --draft
 
   # iOS
   flutter_build_ios:
-    if: ${{ false }}
+    if: ${{ github.event.inputs.release_type }} == 'ios' || ${{ github.event.inputs.release_type }} == 'all'
     name: 🍎Build for iOS
     runs-on: macos-latest
     timeout-minutes: 60
+    env:
+      APP_STORE_CONNECT_ISSUER_ID: ${{ vars.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ vars.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+      APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+      DIST_CERTIFICATE: ${{ secrets.CERTIFICATE_P12 }}
+      DIST_CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+      DIST_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
+      APP_STORE_APPLE_ID: ${{ vars.APP_STORE_APPLE_ID }}
     steps:
+      # チェックアウト
       - name: 💾Checkout
         uses: actions/checkout@v4
+
+      - name: 🪄Install Codemagic CLI tools
+        run: pip install codemagic-cli-tools
 
       # セットアップ
       - name: ⚙️Setup Config Files
@@ -112,79 +125,37 @@ jobs:
       - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
-      # ---------------------------------------------------
-      - name: "Install codemagic-cli-tools"
+      - name: ⚙️Set up keychain
+        run: keychain initialize
+
+      - name: ⚙️Set up Provisioning profiles
         run: |
-          pip3 install codemagic-cli-tools --break-system-packages
-
-      - name: "Install the Apple certificate"
+          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILES_HOME"
+          PROFILE_PATH="$(mktemp "$PROFILES_HOME"/$(uuidgen).mobileprovision)"
+          echo ${DIST_PROFILE} | base64 --decode > "$PROFILE_PATH"
+          echo "Saved provisioning profile $PROFILE_PATH"
+      - name: ⚙️Set up signing certificate
         run: |
-          echo -n "$CERT_KEY" >> $RUNNER_TEMP/cert_key
+          echo $DIST_CERTIFICATE | base64 --decode > /tmp/certificate.p12
+          keychain add-certificates --certificate /tmp/certificate.p12 --certificate-password $DIST_CERTIFICATE_PASSWORD
 
-      - name: "Install the Apple provisioning profile"
-        run: |
-          app-store-connect fetch-signing-files "$APP_BUNDLE_ID" \
-            --platform $PLATFORM \
-            --type IOS_APP_STORE \
-            --certificate-key=@file:$RUNNER_TEMP/cert_key \
-            --create
+      - name: ⚙️Set up code signing settings on Xcode project
+        run: xcode-project use-profiles
 
-      - name: "Install the Certificates"
-        run: |
-          app-store-connect certificates list \
-            --type DISTRIBUTION \
-            --certificate-key=@file:$RUNNER_TEMP/cert_key \
-            --save
-
-      - name: "keychain initialize"
-        run: |
-          keychain delete
-          keychain initialize
-
-      - name: "keychain add-certificates"
-        run: |
-          keychain add-certificates
-
-      - name: "xcode-project use-profiles"
-        working-directory: packages/mobile
-        run: |
-          /usr/bin/plutil -replace CFBundleIdentifier -string $APP_BUNDLE_ID ios/Runner/Info.plist
-          find **/*.xcodeproj -type f | xargs sed -i "" -E 's/PRODUCT_BUNDLE_IDENTIFIER = ".+";//g'
-          xcode-project use-profiles
-
-      - name: Build iOS app
-        working-directory: packages/mobile
-        run: |
-          build_number=$(app-store-connect get-latest-build-number $APPLE_APP_ID --platform=IOS)
-          new_build_number=$((build_number + 1))
-          echo "$new_build_number"
-          flutter build ipa --release \
-            --export-options-plist=/Users/runner/export_options.plist \
-            --dart-define-from-file=dart_defines/prod.json \
-            --build-number=$new_build_number
-
-      # ---------------------------------------------------
-
-      - name: Create ExportOptions
+      - name: ⚙️Create ExportOptions
         run: |
           echo -n ${{ secrets.EXPORT_OPTIONS }} | base64 -d > ExportOptions.plist
 
-      # プロビジョニングファイルの取り込み
-      - name: Import Provisioning Profile
-        run: |
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          touch ~/Library/MobileDevice/Provisioning\ Profiles/decoded.mobileprovision
-          echo -n '${{ secrets.PROVISIONING_PROFILE }}' | base64 -d -o ~/Library/MobileDevice/Provisioning\ Profiles/decoded.mobileprovision
-
-      # 証明書の取り込み
-      - name: Import Code-Signing Certificates
-        uses: Apple-Actions/import-codesign-certs@v1
-        with:
-          p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
-          p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
-
-      # ビルド
       - name: ♻️Regenerate Code
         run: melos run regenerate_code
       - name: 🛠️Build for iOS
-        run: melos run build_app_ios
+        run: |
+          melos run build_app_ios
+          flutter build ipa --release --export-options-plist=ExportOptions.plist
+
+      - name: 🚀Publish the app to App Store Connect
+        run: |
+          APP_FILE=$(find $(pwd) -name "*.ipa")
+          app-store-connect publish \
+          --path "$APP_FILE"
