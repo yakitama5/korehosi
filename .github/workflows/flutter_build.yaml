@@ -14,7 +14,7 @@ on:
 jobs:
   # Android
   flutter_build_android:
-    if: ${{ github.event.inputs.release_type }} == 'android' || ${{ github.event.inputs.release_type }} == 'all'
+    if: ${{ github.event.inputs.release_type == 'android' || github.event.inputs.release_type == 'all'}}
     name: 🤖Build for Android
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -91,7 +91,7 @@ jobs:
 
   # iOS
   flutter_build_ios:
-    if: ${{ github.event.inputs.release_type }} == 'ios' || ${{ github.event.inputs.release_type }} == 'all'
+    if: ${{ github.event.inputs.release_type == 'ios' || github.event.inputs.release_type == 'all'}}
     name: 🍎Build for iOS
     runs-on: macos-latest
     timeout-minutes: 60
