@@ -243,7 +243,6 @@ class _ImageFields extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formModel = ReactiveItemFormModelForm.of(context)!;
-    final cs = Theme.of(context).colorScheme;
 
     return ReactiveFormArray<SelectedImageModel>(
       formArray: formModel.imagesControl,
