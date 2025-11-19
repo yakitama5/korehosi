@@ -17,7 +17,7 @@ class _Wrapper extends SingleChildStatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           brightness: Brightness.light,
-          colorScheme: lightColorScheme,
+          colorScheme: MaterialTheme.lightScheme(),
           fontFamily: 'Murecho',
         ),
         home: Nested(

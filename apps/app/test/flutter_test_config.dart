@@ -19,7 +19,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
     config: AlchemistConfig(
       theme: ThemeData(
         brightness: Brightness.light,
-        colorScheme: lightColorScheme,
+        colorScheme: MaterialTheme.lightScheme(),
         fontFamily: 'Murecho',
       ),
       platformGoldensConfig: const PlatformGoldensConfig(
