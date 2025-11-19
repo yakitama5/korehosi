@@ -426,7 +426,7 @@ function pushToDevice(token, payload) {
  * @return {String} 購入状況
  */
 function getPurchaseStatus(purchaseDoc) {
-  if (purchaseDoc.exists) {
+  if (!purchaseDoc.exists) {
     return NOT_PURCHASED;
   } else if (purchaseDoc.data.sentAt != null) {
     return PURCHASED;
@@ -445,7 +445,7 @@ function getPurchaseStatus(purchaseDoc) {
  * @return {PurchaseStatus} 子供用の購入ステータス
  */
 function getChildPurchaseStatus(purchaseDoc, purchaseStatus) {
-  if (purchaseDoc.exists) {
+  if (!purchaseDoc.exists) {
     return NOT_PURCHASED;
   }
 
