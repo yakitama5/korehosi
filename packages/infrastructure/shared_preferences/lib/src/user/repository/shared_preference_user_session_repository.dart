@@ -42,10 +42,15 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
   DateTime? fetchTokenTimestamp({required UserId userId}) {
     final str = ref.watch(
       stringWithStringFamilyPreferenceProvider(
-        Preferences.curentGroup,
+        Preferences.fcmTokenTimestamp,
         userId.value,
       ),
     );
+
+    if (str.isEmpty) {
+      return null;
+    }
+
     final formatter = DateFormat(_tokenTimestampFormat);
     return formatter.parse(str);
   }
