@@ -103,6 +103,7 @@ jobs:
       DIST_CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
       DIST_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
       APP_STORE_APPLE_ID: ${{ vars.APP_STORE_APPLE_ID }}
+      EXPORT_OPTIONS: ${{ secrets.EXPORT_OPTIONS }}
     steps:
       # チェックアウト
       - name: 💾Checkout
@@ -145,14 +146,13 @@ jobs:
 
       - name: ⚙️Create ExportOptions
         run: |
-          echo -n ${{ secrets.EXPORT_OPTIONS }} | base64 -d > ExportOptions.plist
+          echo -n $EXPORT_OPTIONS | base64 -d > apps/app/ExportOptions.plist
 
       - name: ♻️Regenerate Code
         run: melos run regenerate_code
       - name: 🛠️Build for iOS
         run: |
           melos run build_app_ios
-          flutter build ipa --release --export-options-plist=ExportOptions.plist
 
       - name: 🚀Publish the app to App Store Connect
         run: |
