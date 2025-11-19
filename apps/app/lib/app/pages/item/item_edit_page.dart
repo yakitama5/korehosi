@@ -8,7 +8,6 @@ import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_designsystem/i18n.dart';
@@ -244,6 +243,7 @@ class _ImageFields extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formModel = ReactiveItemFormModelForm.of(context)!;
+    final cs = Theme.of(context).colorScheme;
 
     return ReactiveFormArray<SelectedImageModel>(
       formArray: formModel.imagesControl,
@@ -259,15 +259,12 @@ class _ImageFields extends HookConsumerWidget {
                     key: ObjectKey(formArray.control('$i')),
                     formControlName: '$i',
                     inputBuilder: (onPressed) => InkWell(
+                      borderRadius: radius,
                       onTap: onPressed,
-                      child: Stack(
-                        children: [
-                          Icon(MdiIcons.imagePlus),
-                          const ItemsEmptyImage(
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
-                        ],
+                      child: const ItemsEmptyImage(
+                        width: double.infinity,
+                        height: double.infinity,
+                        showAddIcon: true,
                       ),
                     ),
                     onSelected: () => formModel.addImagesItem(null),
