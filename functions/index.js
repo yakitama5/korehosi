@@ -368,10 +368,13 @@ exports.scheduledBatchUpdatePurchaseStatus =
 
         // 購入状況を取得
         const purchaseStatus = getPurchaseStatus(purchaseDoc);
+        const childViewPurchaseStatus =
+          getChildPurchaseStatus(purchaseDoc, purchaseStatus);
 
         // 4. バッチに更新操作を追加
         currentBatch.update(itemRef, {
           'purchaseStatus': purchaseStatus,
+          'childViewPurchaseStatus': childViewPurchaseStatus,
         });
         batchCount++;
 
@@ -430,6 +433,33 @@ function getPurchaseStatus(purchaseDoc) {
   } else if (purchaseDoc.data.planDate != null) {
     return PURCHASE_PLAN;
   } else {
+    return NOT_PURCHASED;
+  }
+}
+
+
+/**
+ * 子供用の購入ステータスを取得する.
+ * @param {DocumentSnapshot} purchaseDoc 購入状況のドキュメントスナップショット
+ * @param {PurchaseStatus} purchaseStatus 購入ステータス
+ * @return {PurchaseStatus} 子供用の購入ステータス
+ */
+function getChildPurchaseStatus(purchaseDoc, purchaseStatus) {
+  if (purchaseDoc.exists) {
+    return NOT_PURCHASED;
+  }
+
+  // サプライズでなければそのまま設定
+  if (!purchaseDoc.data.surprise) {
+    return purchaseStatus;
+  }
+
+  switch (purchaseStatus) {
+  case PURCHASED:
+    return PURCHASED;
+  case NOT_PURCHASED:
+  case PURCHASE_PLAN:
+  default:
     return NOT_PURCHASED;
   }
 }
