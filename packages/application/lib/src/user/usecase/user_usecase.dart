@@ -35,7 +35,7 @@ class UserUsecase with RunUsecaseMixin {
 
   /// アプリ内購入対応プラットフォームか否か
   bool get _appInPurchasePlatform =>
-      !kIsWeb && _appBuildConfig.flavor == Flavor.prd;
+      !kIsWeb && _appBuildConfig.flavor == Flavor.prod;
 
   /// 認証状態の取得
   Stream<AuthStatus?> fetchAuthStatus() =>

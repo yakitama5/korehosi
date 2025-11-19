@@ -18,7 +18,7 @@ final class FirebaseInitializer {
     // Flavor に応じた FirebaseOptions を準備する
     final firebaseOptions = switch (flavor) {
       Flavor.dev => dev.DefaultFirebaseOptions.currentPlatform,
-      Flavor.prd => DefaultFirebaseOptions.currentPlatform,
+      Flavor.prod => DefaultFirebaseOptions.currentPlatform,
     };
 
     // Firebase core
@@ -27,16 +27,16 @@ final class FirebaseInitializer {
     // App Check
     // 公開しているWebサイトのサイトキー
     final recpthaSiteKey = switch (flavor) {
-      Flavor.prd => ProductionEnv.recpthaSiteKey,
+      Flavor.prod => ProductionEnv.recpthaSiteKey,
       Flavor.dev => DevEnv.recpthaSiteKey,
     };
     await FirebaseAppCheck.instance.activate(
       androidProvider: switch (flavor) {
-        Flavor.prd => AndroidProvider.playIntegrity,
+        Flavor.prod => AndroidProvider.playIntegrity,
         Flavor.dev => AndroidProvider.debug,
       },
       appleProvider: switch (flavor) {
-        Flavor.prd => AppleProvider.deviceCheck,
+        Flavor.prod => AppleProvider.deviceCheck,
         Flavor.dev => AppleProvider.debug,
       },
       webProvider: ReCaptchaV3Provider(recpthaSiteKey),
