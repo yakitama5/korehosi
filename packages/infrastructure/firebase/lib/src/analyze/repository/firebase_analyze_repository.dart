@@ -25,7 +25,8 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
     final purchaseQuery = createAnalyzeQuery(groupId: groupId, query: query);
 
     // 各件数の取得
-    final itemCount = await itemCol.count().get().then((doc) => doc.count);
+    final itemCount =
+        (await itemCol.count().get().then((doc) => doc.count)) ?? 0;
     final buyedItemCount =
         await purchaseQuery
             .where('sentAt', isNull: false)
@@ -35,11 +36,11 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
         0;
 
     // 購入率を計算
-    final buyedRate = itemCount == null ? 0.0 : buyedItemCount / itemCount;
+    final buyedRate = itemCount == 0 ? 0.0 : buyedItemCount / itemCount;
 
     return ItemBuyedRate(
       buyedItemCount: buyedItemCount,
-      itemCount: itemCount ?? 0,
+      itemCount: itemCount,
       buyedRate: buyedRate,
     );
   }
