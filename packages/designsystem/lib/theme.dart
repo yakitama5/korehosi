@@ -2,7 +2,6 @@ export 'src/theme/color_schemes.g.dart';
 export 'src/theme/colors.dart';
 export 'src/theme/custom_icons.dart';
 export 'src/theme/extension/theme_data_extension.dart';
-export 'src/theme/helper/theme_helper.dart';
 export 'src/theme/model/dynamic_color_support_status.dart';
 export 'src/theme/state/app_theme_provider.dart';
 export 'src/theme/state/core_palette_provider.dart';

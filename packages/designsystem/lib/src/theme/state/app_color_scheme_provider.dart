@@ -60,7 +60,7 @@ ColorScheme _colorScheme(
 
 ColorScheme _defaultColorScheme(Brightness brightness) {
   return switch (brightness) {
-    Brightness.light => lightColorScheme,
-    Brightness.dark => darkColorScheme,
+    Brightness.light => MaterialTheme.lightScheme(),
+    Brightness.dark => MaterialTheme.darkScheme(),
   };
 }
