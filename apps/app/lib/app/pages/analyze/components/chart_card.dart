@@ -25,21 +25,24 @@ class ChartCard extends SingleChildStatelessWidget {
 
       return ElevatedCard(
         onTap: onTap,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                if (iconData != null)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4),
-                    child: Icon(iconData),
-                  ),
-                Text(title, style: textTheme.titleLarge),
-              ],
-            ),
-            const Gap(4),
-            PagePadding(child: child),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  if (iconData != null)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4),
+                      child: Icon(iconData),
+                    ),
+                  Text(title, style: textTheme.titleLarge),
+                ],
+              ),
+              const Gap(4),
+              PagePadding(child: child),
+            ],
+          ),
         ),
       );
     },
