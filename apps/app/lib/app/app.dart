@@ -2,8 +2,9 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/debug/components/device_preview_wrapper.dart';
 import 'package:flutter_app/app/routes/importer.dart';
+import 'package:flutter_app/app/routes/src/background_notification_click_listner.dart';
 import 'package:flutter_app/app/routes/src/dynamic_link_listner.dart';
-import 'package:flutter_app/app/routes/src/notification_click_listner.dart';
+import 'package:flutter_app/app/routes/src/foreground_notification_click_listner.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -37,7 +38,8 @@ class App extends HookConsumerWidget {
           AppReactiveFormConfig(),
           RouteObserverContainer(),
           DynamicLinkListner(),
-          NotificationClickListner(),
+          ForegroundNotificationClickListner(),
+          BackgroundNotificationClickListner(),
         ],
         child: child,
       ),
