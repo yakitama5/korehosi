@@ -44,9 +44,8 @@ class FirebaseMessagingMessagingService implements MessagingService {
       .then((value) => value?.toDomainModel());
 
   @override
-  Stream<NotificationMessage> onMessageOpenedApp() => ref
-      .read(fcmConfigProvider)
-      .onMessage
+  Stream<NotificationMessage> onMessageOpenedApp() => FirebaseMessaging
+      .onMessageOpenedApp
       .map((event) => event.toDomainModel());
 
   @override
