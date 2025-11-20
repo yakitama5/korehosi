@@ -9,7 +9,7 @@ part of 'monthly_totals_purchases_chart_data_provider.dart';
 // **************************************************************************
 
 String _$monthlyTotalsPurchasesChartDataHash() =>
-    r'62289b226500a4c87d633f85061e192db4f44614';
+    r'825aa0a0af85a69f9b3fba0a8dce635afb80bb85';
 
 /// 分析で利用する月別の購入金額のグラフデータを管理
 ///

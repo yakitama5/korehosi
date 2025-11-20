@@ -9,7 +9,7 @@ part of 'item_analyze_query_notifier_provider.dart';
 // **************************************************************************
 
 String _$itemAnalyzeQueryNotifierHash() =>
-    r'f6326e80e83cdd9269d185c4384d8c49a160adac';
+    r'd424ea29429cdb52befdc08c8f56a7a035ac459d';
 
 /// See also [ItemAnalyzeQueryNotifier].
 @ProviderFor(ItemAnalyzeQueryNotifier)
