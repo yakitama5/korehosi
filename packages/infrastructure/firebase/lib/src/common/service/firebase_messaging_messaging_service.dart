@@ -38,6 +38,8 @@ class FirebaseMessagingMessagingService implements MessagingService {
   @override
   Future<NotificationMessage?> getInitialMessage() => ref
       .read(fcmConfigProvider)
+      // FCMConfig側でキャッシュされてしまうため、FirebaseMessaging側のインスタンスから取得する
+      .messaging
       .getInitialMessage()
       .then((value) => value?.toDomainModel());
 

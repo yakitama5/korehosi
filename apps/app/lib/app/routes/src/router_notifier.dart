@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:go_router/go_router.dart';
@@ -64,7 +66,8 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
       initialNotificationMessageProvider.future,
     );
     if (initialMessage != null && initialMessage.data['path'] != null) {
-      return initialMessage.data['path'] as String;
+      final path = initialMessage.data['path'] as String;
+      return path;
     }
 
     // ほしいもの画面場合、パス指定されている項目IDが現在のグループ情報に存在するかを判定
