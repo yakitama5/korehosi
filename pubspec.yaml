@@ -10,6 +10,7 @@ workspace:
   - packages/application
   - packages/designsystem
   - packages/dependency_override
+  - packages/infra_ui
   - packages/infrastructure/firebase
   - packages/infrastructure/revenue_cat
   - packages/infrastructure/branch

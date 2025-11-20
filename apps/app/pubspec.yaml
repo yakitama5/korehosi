@@ -16,7 +16,6 @@ dependencies:
   collection: ^1.19.1
   cupertino_icons: ^1.0.8
   device_preview: ^1.3.1
-  fcm_config: ^3.6.5
   fl_chart: ^1.0.0
   flutter:
     sdk: flutter
@@ -52,6 +51,8 @@ dependencies:
     path: ../../packages/designsystem
   packages_domain:
     path: ../../packages/domain
+  packages_infra_ui:
+    path: ../../packages/infra_ui
   path_provider: ^2.1.5
   pattern_formatter: ^4.0.1
   permission_handler: ^12.0.1
