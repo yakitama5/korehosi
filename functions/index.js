@@ -361,6 +361,8 @@ exports.scheduledBatchUpdatePurchaseStatus =
         const groupId = itemRef.parent.parent.id;
         const itemId = itemRef.id;
 
+        log(`"groups/${groupId}/purchases/${itemId}"のドキュメントを処理します。`);
+
         // 3. 対応する purchases ドキュメントを取得
         // コレクションパス: groups/{groupId}/purchases/{itemsId}
         const purchaseRef = db.doc(`groups/${groupId}/purchases/${itemId}`);
@@ -370,6 +372,9 @@ exports.scheduledBatchUpdatePurchaseStatus =
         const purchaseStatus = getPurchaseStatus(purchaseDoc);
         const childViewPurchaseStatus =
           getChildPurchaseStatus(purchaseDoc, purchaseStatus);
+
+        log(`purchaseStatus is ${purchaseStatus}`);
+        log(`childViewPurchaseStatus is ${childViewPurchaseStatus}`);
 
         // 4. バッチに更新操作を追加
         currentBatch.update(itemRef, {
@@ -426,11 +431,14 @@ function pushToDevice(token, payload) {
  * @return {String} 購入状況
  */
 function getPurchaseStatus(purchaseDoc) {
+  log(`is Exists ${purchaseDoc.exists}`);
   if (!purchaseDoc.exists) {
     return NOT_PURCHASED;
-  } else if (purchaseDoc.data.sentAt != null) {
+  } else if (purchaseDoc.data().sentAt != null) {
+    log(`sentAt is ${purchaseDoc.data().sentAt}`);
     return PURCHASED;
-  } else if (purchaseDoc.data.planDate != null) {
+  } else if (purchaseDoc.data().planDate != null) {
+    log(`planDate is ${purchaseDoc.data().planDate}`);
     return PURCHASE_PLAN;
   } else {
     return NOT_PURCHASED;
@@ -450,7 +458,7 @@ function getChildPurchaseStatus(purchaseDoc, purchaseStatus) {
   }
 
   // サプライズでなければそのまま設定
-  if (!purchaseDoc.data.surprise) {
+  if (!purchaseDoc.data().surprise) {
     return purchaseStatus;
   }
 
