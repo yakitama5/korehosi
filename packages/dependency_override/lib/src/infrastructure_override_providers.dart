@@ -55,6 +55,6 @@ Future<List<Override>> initializeInfrastructureProviders() async {
     ),
 
     // Mock
-    // goodsRepositoryProvider.overrideWith(MockGoodsRepository.new),
+    // messagingServiceProvider.overrideWith((ref) => MockMessagingService()),
   ];
 }
