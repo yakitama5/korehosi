@@ -60,15 +60,6 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
       }
     }
 
-    // プッシュ通知からのアプリ表示を判定
-    // final initialMessage = await ref.read(
-    //   initialNotificationMessageProvider.future,
-    // );
-    // if (initialMessage != null && initialMessage.data['path'] != null) {
-    //   final path = initialMessage.data['path'] as String;
-    //   return path;
-    // }
-
     // ほしいもの画面場合、パス指定されている項目IDが現在のグループ情報に存在するかを判定
     if (routeState.pathParameters.containsKey('itemId')) {
       final itemId = routeState.pathParameters['itemId']!;
