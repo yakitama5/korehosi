@@ -18,14 +18,14 @@ class ForegroundNotificationClickListner extends SingleChildStatelessWidget {
           onNotificationClick: (message) {
             logger.d('Foreground Click');
 
-            final path = message.data['path'];
+            final path = message.path;
 
             if (path == null) {
               return;
             }
 
             // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
-            ref.read(routerProvider).go(path as String);
+            ref.read(routerProvider).go(path);
           },
         );
       },

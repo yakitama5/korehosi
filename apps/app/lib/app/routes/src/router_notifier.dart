@@ -65,8 +65,8 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
     final initialMessage = await ref.read(
       initialNotificationMessageProvider.future,
     );
-    if (initialMessage != null && initialMessage.data['path'] != null) {
-      return initialMessage.data['path'] as String;
+    if (initialMessage != null && initialMessage.path != null) {
+      return initialMessage.path;
     }
 
     // ほしいもの画面場合、パス指定されている項目IDが現在のグループ情報に存在するかを判定

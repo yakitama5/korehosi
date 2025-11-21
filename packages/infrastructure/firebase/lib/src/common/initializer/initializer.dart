@@ -3,6 +3,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:infrastructure_firebase/common.dart';
 import 'package:infrastructure_firebase/env/env.dart';
 import 'package:infrastructure_firebase/env/env.dev.dart';
 import 'package:infrastructure_firebase/src/common/config/firebase_options.dart';
@@ -10,11 +11,14 @@ import 'package:infrastructure_firebase/src/common/config/firebase_options_dev.d
     as dev;
 import 'package:infrastructure_firebase/src/common/state/background_handler.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/notification.dart';
+
+typedef FirebaseInitializedValues = ({NotificationMessage? initialMessage});
 
 final class FirebaseInitializer {
   FirebaseInitializer._();
 
-  static Future<void> initialize(Flavor flavor) async {
+  static Future<FirebaseInitializedValues> initialize(Flavor flavor) async {
     // Flavor に応じた FirebaseOptions を準備する
     final firebaseOptions = switch (flavor) {
       Flavor.dev => dev.DefaultFirebaseOptions.currentPlatform,
@@ -63,5 +67,9 @@ final class FirebaseInitializer {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
     };
+
+    // InitialMessage
+    final remoteMessage = await FCMConfig.instance.getInitialMessage();
+    return (initialMessage: remoteMessage?.toDomainModel());
   }
 }

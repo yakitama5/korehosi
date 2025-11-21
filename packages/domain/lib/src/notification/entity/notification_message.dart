@@ -11,7 +11,7 @@ abstract class NotificationMessage with _$NotificationMessage {
   const factory NotificationMessage({
     NotificationMessageSenderId? senderId,
     String? category,
-    required Map<String, dynamic> data,
+    required String? path,
     String? from,
     NotificationMessageId? messageId,
     String? messageType,

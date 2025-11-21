@@ -33,13 +33,13 @@ class BackgroundNotificationClickListner extends SingleChildStatelessWidget {
     WidgetRef ref,
     NotificationMessage? message,
   ) async {
-    final path = message?.data['path'];
+    final path = message?.path;
     logger.d('Background Click');
     if (path == null) {
       return;
     }
 
     // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
-    ref.read(routerProvider).go(path as String);
+    ref.read(routerProvider).go(path);
   }
 }

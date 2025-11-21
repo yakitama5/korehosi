@@ -6,7 +6,7 @@ extension RemoteMessageX on RemoteMessage {
   NotificationMessage toDomainModel() => NotificationMessage(
     senderId: senderId == null ? null : NotificationMessageSenderId(senderId!),
     category: category,
-    data: data,
+    path: data['path'],
     from: from,
     messageId: messageId == null ? null : NotificationMessageId(messageId!),
     messageType: messageType,
