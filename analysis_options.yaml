@@ -1,8 +1,5 @@
 include: package:pedantic_mono/analysis_options.yaml
 
-linter:
-  rules:
-
 analyzer:
   plugins:
     - custom_lint
@@ -18,3 +15,9 @@ analyzer:
     invalid_annotation_target: ignore
     todo: ignore
     hack: ignore
+    
+custom_lint:
+  enable_all_lint_rules: false
+  rules:
+    - unsafe_null_assertion: false
+    - unstable_enum_values: false
