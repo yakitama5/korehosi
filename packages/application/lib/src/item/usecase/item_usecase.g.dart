@@ -8,22 +8,46 @@ part of 'item_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemUsecaseHash() => r'9383f73136ec5015f5dcddf7d9a9441d20a064f8';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [itemUsecase].
 @ProviderFor(itemUsecase)
-final itemUsecaseProvider = AutoDisposeProvider<ItemUsecase>.internal(
-  itemUsecase,
-  name: r'itemUsecaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$itemUsecaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const itemUsecaseProvider = ItemUsecaseProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ItemUsecaseRef = AutoDisposeProviderRef<ItemUsecase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class ItemUsecaseProvider
+    extends $FunctionalProvider<ItemUsecase, ItemUsecase, ItemUsecase>
+    with $Provider<ItemUsecase> {
+  const ItemUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'itemUsecaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$itemUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<ItemUsecase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  ItemUsecase create(Ref ref) {
+    return itemUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ItemUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ItemUsecase>(value),
+    );
+  }
+}
+
+String _$itemUsecaseHash() => r'9383f73136ec5015f5dcddf7d9a9441d20a064f8';

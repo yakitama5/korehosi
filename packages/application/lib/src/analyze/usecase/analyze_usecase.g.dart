@@ -8,22 +8,46 @@ part of 'analyze_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$analyzeUsecaseHash() => r'bdffaa855bfd9d0dc3ca01056239fdf456931a73';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [analyzeUsecase].
 @ProviderFor(analyzeUsecase)
-final analyzeUsecaseProvider = AutoDisposeProvider<AnalyzeUsecase>.internal(
-  analyzeUsecase,
-  name: r'analyzeUsecaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$analyzeUsecaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const analyzeUsecaseProvider = AnalyzeUsecaseProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AnalyzeUsecaseRef = AutoDisposeProviderRef<AnalyzeUsecase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AnalyzeUsecaseProvider
+    extends $FunctionalProvider<AnalyzeUsecase, AnalyzeUsecase, AnalyzeUsecase>
+    with $Provider<AnalyzeUsecase> {
+  const AnalyzeUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'analyzeUsecaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$analyzeUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<AnalyzeUsecase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AnalyzeUsecase create(Ref ref) {
+    return analyzeUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AnalyzeUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AnalyzeUsecase>(value),
+    );
+  }
+}
+
+String _$analyzeUsecaseHash() => r'bdffaa855bfd9d0dc3ca01056239fdf456931a73';

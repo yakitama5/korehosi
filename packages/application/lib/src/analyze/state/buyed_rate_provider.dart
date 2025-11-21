@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/src/analyze/state/item_analyze_query_notifier_provider.dart';
 import 'package:packages_application/src/analyze/usecase/analyze_usecase.dart';
@@ -12,7 +11,7 @@ part 'buyed_rate_provider.g.dart';
 @riverpod
 Future<ItemBuyedRate> buyedRate(Ref ref) async {
   // 検索に必要な情報を取得
-  final query = ref.watch(itemAnalyzeQueryNotifierProvider);
+  final query = ref.watch(itemAnalyzeQueryProvider);
   final groupId = await ref.watch(currentGroupIdProvider.future);
   final user = await ref.watch(authUserProvider.future);
 

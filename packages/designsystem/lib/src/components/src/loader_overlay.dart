@@ -13,7 +13,7 @@ class LoaderOverlay extends SingleChildStatelessWidget {
         child ?? const SizedBox.shrink(),
         Consumer(
           builder: (context, ref, child) {
-            final loading = ref.watch(loadingNotifierProvider);
+            final loading = ref.watch(loadingProvider);
             if (!loading) {
               return const SizedBox.shrink();
             }

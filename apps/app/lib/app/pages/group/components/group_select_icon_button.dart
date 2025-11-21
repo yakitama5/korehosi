@@ -27,7 +27,7 @@ class GroupSelectIconButton extends HookConsumerWidget with PresentationMixin {
     // 選択結果に応じてグループを切り替える
     if (context.mounted) {
       await execute(
-        action: () async =>
+        action: () =>
             ref.read(groupUsecaseProvider).setCurrentGroupId(groupId: groupId),
         successMessage: i18n.item.itemsPage.completeChangeGroup,
       );

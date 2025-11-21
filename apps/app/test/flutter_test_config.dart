@@ -7,8 +7,7 @@ import 'package:packages_designsystem/theme.dart';
 import 'test_utils/src/prepare_golden_file_comparator_with_threshold.dart';
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
-  // ignore: do_not_use_environment
-  const isRunningInCi = bool.fromEnvironment('CI', defaultValue: false);
+  const isRunningInCi = bool.fromEnvironment('CI');
 
   // CIの場合だけ誤差をある程度許容する
   if (isRunningInCi) {
@@ -23,8 +22,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
         fontFamily: 'Murecho',
       ),
       platformGoldensConfig: const PlatformGoldensConfig(
-        enabled: !isRunningInCi,
-        renderShadows: !isRunningInCi,
+        
       ),
     ),
     run: testMain,

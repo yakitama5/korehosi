@@ -8,24 +8,71 @@ part of 'current_group_id_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentGroupIdHash() => r'907b104288ec36c50c379a52489cde298096ddeb';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 現在のグループID
+// @Riverpod(keepAlive: true)
+// Future<String?> currentGroupId(CurrentGroupIdRef ref) =>
+//     ref.read(groupUsecaseProvider).fetchCurrentGroupId();
+/// 現在のグループID
 
-/// 現在のグループID
-/// 現在のグループID
-///
-/// Copied from [CurrentGroupId].
 @ProviderFor(CurrentGroupId)
-final currentGroupIdProvider =
-    AsyncNotifierProvider<CurrentGroupId, GroupId?>.internal(
-      CurrentGroupId.new,
-      name: r'currentGroupIdProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$currentGroupIdHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+const currentGroupIdProvider = CurrentGroupIdProvider._();
 
-typedef _$CurrentGroupId = AsyncNotifier<GroupId?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+/// 現在のグループID
+// @Riverpod(keepAlive: true)
+// Future<String?> currentGroupId(CurrentGroupIdRef ref) =>
+//     ref.read(groupUsecaseProvider).fetchCurrentGroupId();
+/// 現在のグループID
+final class CurrentGroupIdProvider
+    extends $AsyncNotifierProvider<CurrentGroupId, GroupId?> {
+  /// 現在のグループID
+  // @Riverpod(keepAlive: true)
+  // Future<String?> currentGroupId(CurrentGroupIdRef ref) =>
+  //     ref.read(groupUsecaseProvider).fetchCurrentGroupId();
+  /// 現在のグループID
+  const CurrentGroupIdProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentGroupIdProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentGroupIdHash();
+
+  @$internal
+  @override
+  CurrentGroupId create() => CurrentGroupId();
+}
+
+String _$currentGroupIdHash() => r'e5a949fab98258d4b7543cb4f468f76e265b624c';
+
+/// 現在のグループID
+// @Riverpod(keepAlive: true)
+// Future<String?> currentGroupId(CurrentGroupIdRef ref) =>
+//     ref.read(groupUsecaseProvider).fetchCurrentGroupId();
+/// 現在のグループID
+
+abstract class _$CurrentGroupId extends $AsyncNotifier<GroupId?> {
+  FutureOr<GroupId?> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<GroupId?>, GroupId?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<GroupId?>, GroupId?>,
+              AsyncValue<GroupId?>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

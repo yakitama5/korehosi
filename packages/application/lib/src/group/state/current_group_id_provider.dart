@@ -14,7 +14,7 @@ part 'current_group_id_provider.g.dart';
 @Riverpod(keepAlive: true)
 class CurrentGroupId extends _$CurrentGroupId {
   @override
-  FutureOr<GroupId?> build() async {
+  FutureOr<GroupId?> build() {
     return ref.read(groupUsecaseProvider).fetchCurrentGroupId();
   }
 

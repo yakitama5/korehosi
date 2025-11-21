@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/user/usecase/user_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,6 +16,6 @@ class AppUsecase with RunUsecaseMixin {
   final Ref ref;
 
   /// アプリ起動時
-  Future<void> onLanched() async =>
+  Future<void> onLanched() =>
       ref.read(userUsecaseProvider).refreshFCMTokenAndCheckPushPermission();
 }

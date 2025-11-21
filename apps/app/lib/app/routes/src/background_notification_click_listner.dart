@@ -17,11 +17,11 @@ class BackgroundNotificationClickListner extends SingleChildStatelessWidget {
         ref
           ..listen(
             notificationMessageProvider,
-            (_, next) async => onNotificationClick(ref, next.value),
+            (_, next) => onNotificationClick(ref, next.value),
           )
           ..listen(
             initialNotificationMessageProvider,
-            (_, next) async => onNotificationClick(ref, next.value),
+            (_, next) => onNotificationClick(ref, next.value),
           );
 
         return child ?? const SizedBox.shrink();
@@ -40,6 +40,6 @@ class BackgroundNotificationClickListner extends SingleChildStatelessWidget {
     }
 
     // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
-    ref.read(routerProvider).go(path);
+    ref.read(goRouterProvider).go(path);
   }
 }

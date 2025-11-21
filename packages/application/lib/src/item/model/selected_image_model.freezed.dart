@@ -25,12 +25,12 @@ $SelectedImageModelCopyWith<SelectedImageModel> get copyWith => _$SelectedImageM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&const DeepCollectionEquality().equals(other.uploadFile, uploadFile));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,savedImage,uploadFile);
+int get hashCode => Object.hash(runtimeType,savedImage,const DeepCollectionEquality().hash(uploadFile));
 
 @override
 String toString() {
@@ -235,12 +235,12 @@ _$SelectedImageModelCopyWith<_SelectedImageModel> get copyWith => __$SelectedIma
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&const DeepCollectionEquality().equals(other.uploadFile, uploadFile));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,savedImage,uploadFile);
+int get hashCode => Object.hash(runtimeType,savedImage,const DeepCollectionEquality().hash(uploadFile));
 
 @override
 String toString() {

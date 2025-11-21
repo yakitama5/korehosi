@@ -8,157 +8,88 @@ part of 'search_items_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchItemsHash() => r'87df603865cf21c2d1a2618a581eff0ad6450ba7';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// ほしい物の一覧
-///
-/// Copied from [searchItems].
+
 @ProviderFor(searchItems)
-const searchItemsProvider = SearchItemsFamily();
+const searchItemsProvider = SearchItemsFamily._();
 
 /// ほしい物の一覧
-///
-/// Copied from [searchItems].
-class SearchItemsFamily extends Family<AsyncValue<PageInfo<Item>>> {
-  /// ほしい物の一覧
-  ///
-  /// Copied from [searchItems].
-  const SearchItemsFamily();
 
+final class SearchItemsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<PageInfo<Item>>,
+          PageInfo<Item>,
+          FutureOr<PageInfo<Item>>
+        >
+    with $FutureModifier<PageInfo<Item>>, $FutureProvider<PageInfo<Item>> {
   /// ほしい物の一覧
-  ///
-  /// Copied from [searchItems].
-  SearchItemsProvider call({required int page}) {
-    return SearchItemsProvider(page: page);
+  const SearchItemsProvider._({
+    required SearchItemsFamily super.from,
+    required int super.argument,
+  }) : super(
+         retry: null,
+         name: r'searchItemsProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$searchItemsHash();
+
+  @override
+  String toString() {
+    return r'searchItemsProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  SearchItemsProvider getProviderOverride(
-    covariant SearchItemsProvider provider,
-  ) {
-    return call(page: provider.page);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  $FutureProviderElement<PageInfo<Item>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'searchItemsProvider';
-}
-
-/// ほしい物の一覧
-///
-/// Copied from [searchItems].
-class SearchItemsProvider extends AutoDisposeFutureProvider<PageInfo<Item>> {
-  /// ほしい物の一覧
-  ///
-  /// Copied from [searchItems].
-  SearchItemsProvider({required int page})
-    : this._internal(
-        (ref) => searchItems(ref as SearchItemsRef, page: page),
-        from: searchItemsProvider,
-        name: r'searchItemsProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$searchItemsHash,
-        dependencies: SearchItemsFamily._dependencies,
-        allTransitiveDependencies: SearchItemsFamily._allTransitiveDependencies,
-        page: page,
-      );
-
-  SearchItemsProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.page,
-  }) : super.internal();
-
-  final int page;
-
-  @override
-  Override overrideWith(
-    FutureOr<PageInfo<Item>> Function(SearchItemsRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: SearchItemsProvider._internal(
-        (ref) => create(ref as SearchItemsRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        page: page,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<PageInfo<Item>> createElement() {
-    return _SearchItemsProviderElement(this);
+  FutureOr<PageInfo<Item>> create(Ref ref) {
+    final argument = this.argument as int;
+    return searchItems(ref, page: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is SearchItemsProvider && other.page == page;
+    return other is SearchItemsProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, page.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin SearchItemsRef on AutoDisposeFutureProviderRef<PageInfo<Item>> {
-  /// The parameter `page` of this provider.
-  int get page;
-}
+String _$searchItemsHash() => r'824173ad11f72aeccc06f6be3abf907af205d7d8';
 
-class _SearchItemsProviderElement
-    extends AutoDisposeFutureProviderElement<PageInfo<Item>>
-    with SearchItemsRef {
-  _SearchItemsProviderElement(super.provider);
+/// ほしい物の一覧
+
+final class SearchItemsFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<PageInfo<Item>>, int> {
+  const SearchItemsFamily._()
+    : super(
+        retry: null,
+        name: r'searchItemsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// ほしい物の一覧
+
+  SearchItemsProvider call({required int page}) =>
+      SearchItemsProvider._(argument: page, from: this);
 
   @override
-  int get page => (origin as SearchItemsProvider).page;
+  String toString() => r'searchItemsProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

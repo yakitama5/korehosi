@@ -8,23 +8,67 @@ part of 'ui_style_notifier_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$uiStyleHash() => r'b771ccec73dffa1b44fa4b80f06cf6b03e48d113';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// UIスタイルを管理するProvider
+/// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
+
+@ProviderFor(UiStyleNotifier)
+const uiStyleProvider = UiStyleNotifierProvider._();
 
 /// UIスタイルを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
-///
-/// Copied from [UiStyle].
-@ProviderFor(UiStyle)
-final uiStyleProvider = AutoDisposeNotifierProvider<UiStyle, UIStyle>.internal(
-  UiStyle.new,
-  name: r'uiStyleProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$uiStyleHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final class UiStyleNotifierProvider
+    extends $NotifierProvider<UiStyleNotifier, UIStyle> {
+  /// UIスタイルを管理するProvider
+  /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
+  const UiStyleNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'uiStyleProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
-typedef _$UiStyle = AutoDisposeNotifier<UIStyle>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+  @override
+  String debugGetCreateSourceHash() => _$uiStyleNotifierHash();
+
+  @$internal
+  @override
+  UiStyleNotifier create() => UiStyleNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UIStyle value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UIStyle>(value),
+    );
+  }
+}
+
+String _$uiStyleNotifierHash() => r'790b4e26de4474c79b28b101480dcaf63efd301b';
+
+/// UIスタイルを管理するProvider
+/// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
+
+abstract class _$UiStyleNotifier extends $Notifier<UIStyle> {
+  UIStyle build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<UIStyle, UIStyle>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<UIStyle, UIStyle>,
+              UIStyle,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

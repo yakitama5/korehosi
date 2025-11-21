@@ -13,7 +13,7 @@ part 'router_observer.g.dart';
 class CurrentRoute extends _$CurrentRoute {
   @override
   Uri build() {
-    final router = ref.watch(routerProvider);
+    final router = ref.watch(goRouterProvider);
     void listener() {
       ref.invalidateSelf();
     }

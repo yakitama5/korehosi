@@ -25,7 +25,7 @@ class ForegroundNotificationClickListner extends SingleChildStatelessWidget {
             }
 
             // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
-            ref.read(routerProvider).go(path);
+            ref.read(goRouterProvider).go(path);
           },
         );
       },

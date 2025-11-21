@@ -14,8 +14,8 @@ class ItemsChips extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewLayout = ref.watch(itemsViewLayoutNotifierProvider);
-    final query = ref.watch(itemsSearchQueryNotifierProvider);
+    final viewLayout = ref.watch(itemsViewLayoutProvider);
+    final query = ref.watch(itemsSearchQueryProvider);
 
     return PinnedHeaderSliver(
       child: Material(
@@ -29,7 +29,7 @@ class ItemsChips extends ConsumerWidget {
                 ViewLayoutChip(
                   viewLayout: viewLayout,
                   onChanged: (v) => ref
-                      .read(itemsViewLayoutNotifierProvider.notifier)
+                      .read(itemsViewLayoutProvider.notifier)
                       .updateViewLayout(viewLayout: v),
                 ),
                 const Gap(12),
@@ -76,7 +76,7 @@ class ItemsChips extends ConsumerWidget {
     logger.d('onSortChanged');
     final selectOrderKey = itemsOrder.selectOrderKey(orderKey);
     ref
-        .read(itemsSearchQueryNotifierProvider.notifier)
+        .read(itemsSearchQueryProvider.notifier)
         .changeItemsOrder(selectOrderKey);
   }
 
@@ -87,21 +87,19 @@ class ItemsChips extends ConsumerWidget {
   }) {
     // Providerに変更を通知
     ref
-        .read(itemsSearchQueryNotifierProvider.notifier)
+        .read(itemsSearchQueryProvider.notifier)
         .changePurchaseStatus(purchaseStatuses.toList());
   }
 
   /// ほしい度が変更されたイベント
   void onChangeWishRank(WidgetRef ref, {required double wishRank}) {
     // Providerに変更を通知
-    ref
-        .read(itemsSearchQueryNotifierProvider.notifier)
-        .changeMinimumWishRank(wishRank);
+    ref.read(itemsSearchQueryProvider.notifier).changeMinimumWishRank(wishRank);
   }
 
   /// ほしい度がリセットされたイベント
   void onResetWishRank(WidgetRef ref) {
     // Providerに変更を通知
-    ref.read(itemsSearchQueryNotifierProvider.notifier).resetMinimumWishRank();
+    ref.read(itemsSearchQueryProvider.notifier).resetMinimumWishRank();
   }
 }

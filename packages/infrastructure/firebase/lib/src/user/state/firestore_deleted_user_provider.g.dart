@@ -8,185 +8,155 @@ part of 'firestore_deleted_user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 削除済ユーザーコレクションの参照
+
+@ProviderFor(duserCollectionRef)
+const duserCollectionRefProvider = DuserCollectionRefProvider._();
+
+/// 削除済ユーザーコレクションの参照
+
+final class DuserCollectionRefProvider
+    extends
+        $FunctionalProvider<
+          CollectionReference<FirestoreUserModel>,
+          CollectionReference<FirestoreUserModel>,
+          CollectionReference<FirestoreUserModel>
+        >
+    with $Provider<CollectionReference<FirestoreUserModel>> {
+  /// 削除済ユーザーコレクションの参照
+  const DuserCollectionRefProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'duserCollectionRefProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$duserCollectionRefHash();
+
+  @$internal
+  @override
+  $ProviderElement<CollectionReference<FirestoreUserModel>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  CollectionReference<FirestoreUserModel> create(Ref ref) {
+    return duserCollectionRef(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(CollectionReference<FirestoreUserModel> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<CollectionReference<FirestoreUserModel>>(value),
+    );
+  }
+}
+
 String _$duserCollectionRefHash() =>
     r'878bc3333c7897a50e8ddab8f7d4799a73bcdd75';
 
-/// 削除済ユーザーコレクションの参照
-///
-/// Copied from [duserCollectionRef].
-@ProviderFor(duserCollectionRef)
-final duserCollectionRefProvider =
-    AutoDisposeProvider<CollectionReference<FirestoreUserModel>>.internal(
-      duserCollectionRef,
-      name: r'duserCollectionRefProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$duserCollectionRefHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef DuserCollectionRefRef =
-    AutoDisposeProviderRef<CollectionReference<FirestoreUserModel>>;
-String _$duserDocumentRefHash() => r'60e283c2ea8de6d5e92cacec225f2f3bae7beeb9';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
 /// 削除済ユーザードキュメントの参照
-///
-/// Copied from [duserDocumentRef].
+
 @ProviderFor(duserDocumentRef)
-const duserDocumentRefProvider = DuserDocumentRefFamily();
+const duserDocumentRefProvider = DuserDocumentRefFamily._();
 
 /// 削除済ユーザードキュメントの参照
-///
-/// Copied from [duserDocumentRef].
-class DuserDocumentRefFamily
-    extends Family<DocumentReference<FirestoreUserModel>> {
-  /// 削除済ユーザードキュメントの参照
-  ///
-  /// Copied from [duserDocumentRef].
-  const DuserDocumentRefFamily();
 
+final class DuserDocumentRefProvider
+    extends
+        $FunctionalProvider<
+          DocumentReference<FirestoreUserModel>,
+          DocumentReference<FirestoreUserModel>,
+          DocumentReference<FirestoreUserModel>
+        >
+    with $Provider<DocumentReference<FirestoreUserModel>> {
   /// 削除済ユーザードキュメントの参照
-  ///
-  /// Copied from [duserDocumentRef].
-  DuserDocumentRefProvider call({UserId? userId}) {
-    return DuserDocumentRefProvider(userId: userId);
+  const DuserDocumentRefProvider._({
+    required DuserDocumentRefFamily super.from,
+    required UserId? super.argument,
+  }) : super(
+         retry: null,
+         name: r'duserDocumentRefProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$duserDocumentRefHash();
+
+  @override
+  String toString() {
+    return r'duserDocumentRefProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  DuserDocumentRefProvider getProviderOverride(
-    covariant DuserDocumentRefProvider provider,
-  ) {
-    return call(userId: provider.userId);
+  $ProviderElement<DocumentReference<FirestoreUserModel>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  DocumentReference<FirestoreUserModel> create(Ref ref) {
+    final argument = this.argument as UserId?;
+    return duserDocumentRef(ref, userId: argument);
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'duserDocumentRefProvider';
-}
-
-/// 削除済ユーザードキュメントの参照
-///
-/// Copied from [duserDocumentRef].
-class DuserDocumentRefProvider
-    extends AutoDisposeProvider<DocumentReference<FirestoreUserModel>> {
-  /// 削除済ユーザードキュメントの参照
-  ///
-  /// Copied from [duserDocumentRef].
-  DuserDocumentRefProvider({UserId? userId})
-    : this._internal(
-        (ref) => duserDocumentRef(ref as DuserDocumentRefRef, userId: userId),
-        from: duserDocumentRefProvider,
-        name: r'duserDocumentRefProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$duserDocumentRefHash,
-        dependencies: DuserDocumentRefFamily._dependencies,
-        allTransitiveDependencies:
-            DuserDocumentRefFamily._allTransitiveDependencies,
-        userId: userId,
-      );
-
-  DuserDocumentRefProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.userId,
-  }) : super.internal();
-
-  final UserId? userId;
-
-  @override
-  Override overrideWith(
-    DocumentReference<FirestoreUserModel> Function(DuserDocumentRefRef provider)
-    create,
-  ) {
-    return ProviderOverride(
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DocumentReference<FirestoreUserModel> value) {
+    return $ProviderOverride(
       origin: this,
-      override: DuserDocumentRefProvider._internal(
-        (ref) => create(ref as DuserDocumentRefRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        userId: userId,
-      ),
+      providerOverride:
+          $SyncValueProvider<DocumentReference<FirestoreUserModel>>(value),
     );
-  }
-
-  @override
-  AutoDisposeProviderElement<DocumentReference<FirestoreUserModel>>
-  createElement() {
-    return _DuserDocumentRefProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is DuserDocumentRefProvider && other.userId == userId;
+    return other is DuserDocumentRefProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, userId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin DuserDocumentRefRef
-    on AutoDisposeProviderRef<DocumentReference<FirestoreUserModel>> {
-  /// The parameter `userId` of this provider.
-  UserId? get userId;
-}
+String _$duserDocumentRefHash() => r'60e283c2ea8de6d5e92cacec225f2f3bae7beeb9';
 
-class _DuserDocumentRefProviderElement
-    extends AutoDisposeProviderElement<DocumentReference<FirestoreUserModel>>
-    with DuserDocumentRefRef {
-  _DuserDocumentRefProviderElement(super.provider);
+/// 削除済ユーザードキュメントの参照
+
+final class DuserDocumentRefFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          DocumentReference<FirestoreUserModel>,
+          UserId?
+        > {
+  const DuserDocumentRefFamily._()
+    : super(
+        retry: null,
+        name: r'duserDocumentRefProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// 削除済ユーザードキュメントの参照
+
+  DuserDocumentRefProvider call({UserId? userId}) =>
+      DuserDocumentRefProvider._(argument: userId, from: this);
 
   @override
-  UserId? get userId => (origin as DuserDocumentRefProvider).userId;
+  String toString() => r'duserDocumentRefProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

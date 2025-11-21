@@ -18,16 +18,21 @@ workspace:
   - packages/infrastructure/shared_preferences
 
 dev_dependencies:
-  custom_lint: ^0.7.6
+  custom_lint: ^0.8.1
   flutter_lints: ^6.0.0
   grinder: ^0.9.5
   melos: ^7.3.0
-  nilts: ^0.23.1
+  nilts: ^0.25.1
   path: ^1.9.0
   pedantic_mono: ^1.12.3
-  riverpod_lint: ^2.6.5
+  riverpod_lint: ^3.0.3
   yaml: ^3.1.2
   yaml_edit: ^2.2.1
+
+# dependency_overrides:
+#   _fe_analyzer_shared: ^89.0.0
+#   analyzer: ^8.4.0
+#   build: ^4.0.0
 
 melos:
   command:
@@ -65,10 +70,10 @@ melos:
         flutter_gen_runner: ^5.12.0
         flutter_lints: ^6.0.0
         freezed: ^3.2.3
-        json_serializable: ^6.11.3
+        json_serializable: ^6.11.2
         nilts: ^0.25.1
         pedantic_mono: ^1.35.0
-        reactive_forms_generator: ^8.0.3
+        # reactive_forms_generator: ^8.1.0-beta0
         riverpod_generator: ^3.0.3
         riverpod_lint: ^3.0.3
         slang_build_runner: ^4.10.0

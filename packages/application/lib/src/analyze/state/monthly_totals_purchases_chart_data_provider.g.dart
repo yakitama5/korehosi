@@ -8,27 +8,52 @@ part of 'monthly_totals_purchases_chart_data_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$monthlyTotalsPurchasesChartDataHash() =>
-    r'825aa0a0af85a69f9b3fba0a8dce635afb80bb85';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 分析で利用する月別の購入金額のグラフデータを管理
+
+@ProviderFor(monthlyTotalsPurchasesChartData)
+const monthlyTotalsPurchasesChartDataProvider =
+    MonthlyTotalsPurchasesChartDataProvider._();
 
 /// 分析で利用する月別の購入金額のグラフデータを管理
-///
-/// Copied from [monthlyTotalsPurchasesChartData].
-@ProviderFor(monthlyTotalsPurchasesChartData)
-final monthlyTotalsPurchasesChartDataProvider =
-    AutoDisposeFutureProvider<MonthlyTotalsPurchasesChartData>.internal(
-      monthlyTotalsPurchasesChartData,
-      name: r'monthlyTotalsPurchasesChartDataProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$monthlyTotalsPurchasesChartDataHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef MonthlyTotalsPurchasesChartDataRef =
-    AutoDisposeFutureProviderRef<MonthlyTotalsPurchasesChartData>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class MonthlyTotalsPurchasesChartDataProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<MonthlyTotalsPurchasesChartData>,
+          MonthlyTotalsPurchasesChartData,
+          FutureOr<MonthlyTotalsPurchasesChartData>
+        >
+    with
+        $FutureModifier<MonthlyTotalsPurchasesChartData>,
+        $FutureProvider<MonthlyTotalsPurchasesChartData> {
+  /// 分析で利用する月別の購入金額のグラフデータを管理
+  const MonthlyTotalsPurchasesChartDataProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'monthlyTotalsPurchasesChartDataProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$monthlyTotalsPurchasesChartDataHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<MonthlyTotalsPurchasesChartData> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<MonthlyTotalsPurchasesChartData> create(Ref ref) {
+    return monthlyTotalsPurchasesChartData(ref);
+  }
+}
+
+String _$monthlyTotalsPurchasesChartDataHash() =>
+    r'8557602062e9c4394098c136813f26c3e0a31ded';

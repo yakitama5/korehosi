@@ -8,158 +8,87 @@ part of 'group_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupHash() => r'65fdd35912a186d27d2097211ae7035445f02894';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// グループ情報
 /// データの参照頻度を減らすため、`keepAlive`を指定
-///
-/// Copied from [group].
+
 @ProviderFor(group)
-const groupProvider = GroupFamily();
+const groupProvider = GroupFamily._();
 
 /// グループ情報
 /// データの参照頻度を減らすため、`keepAlive`を指定
-///
-/// Copied from [group].
-class GroupFamily extends Family<AsyncValue<Group?>> {
+
+final class GroupProvider
+    extends $FunctionalProvider<AsyncValue<Group?>, Group?, Stream<Group?>>
+    with $FutureModifier<Group?>, $StreamProvider<Group?> {
   /// グループ情報
   /// データの参照頻度を減らすため、`keepAlive`を指定
-  ///
-  /// Copied from [group].
-  const GroupFamily();
+  const GroupProvider._({
+    required GroupFamily super.from,
+    required GroupId super.argument,
+  }) : super(
+         retry: null,
+         name: r'groupProvider',
+         isAutoDispose: false,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
-  /// グループ情報
-  /// データの参照頻度を減らすため、`keepAlive`を指定
-  ///
-  /// Copied from [group].
-  GroupProvider call({required GroupId groupId}) {
-    return GroupProvider(groupId: groupId);
+  @override
+  String debugGetCreateSourceHash() => _$groupHash();
+
+  @override
+  String toString() {
+    return r'groupProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  GroupProvider getProviderOverride(covariant GroupProvider provider) {
-    return call(groupId: provider.groupId);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  $StreamProviderElement<Group?> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'groupProvider';
-}
-
-/// グループ情報
-/// データの参照頻度を減らすため、`keepAlive`を指定
-///
-/// Copied from [group].
-class GroupProvider extends StreamProvider<Group?> {
-  /// グループ情報
-  /// データの参照頻度を減らすため、`keepAlive`を指定
-  ///
-  /// Copied from [group].
-  GroupProvider({required GroupId groupId})
-    : this._internal(
-        (ref) => group(ref as GroupRef, groupId: groupId),
-        from: groupProvider,
-        name: r'groupProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$groupHash,
-        dependencies: GroupFamily._dependencies,
-        allTransitiveDependencies: GroupFamily._allTransitiveDependencies,
-        groupId: groupId,
-      );
-
-  GroupProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.groupId,
-  }) : super.internal();
-
-  final GroupId groupId;
-
-  @override
-  Override overrideWith(Stream<Group?> Function(GroupRef provider) create) {
-    return ProviderOverride(
-      origin: this,
-      override: GroupProvider._internal(
-        (ref) => create(ref as GroupRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        groupId: groupId,
-      ),
-    );
-  }
-
-  @override
-  StreamProviderElement<Group?> createElement() {
-    return _GroupProviderElement(this);
+  Stream<Group?> create(Ref ref) {
+    final argument = this.argument as GroupId;
+    return group(ref, groupId: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is GroupProvider && other.groupId == groupId;
+    return other is GroupProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, groupId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin GroupRef on StreamProviderRef<Group?> {
-  /// The parameter `groupId` of this provider.
-  GroupId get groupId;
-}
+String _$groupHash() => r'65fdd35912a186d27d2097211ae7035445f02894';
 
-class _GroupProviderElement extends StreamProviderElement<Group?>
-    with GroupRef {
-  _GroupProviderElement(super.provider);
+/// グループ情報
+/// データの参照頻度を減らすため、`keepAlive`を指定
+
+final class GroupFamily extends $Family
+    with $FunctionalFamilyOverride<Stream<Group?>, GroupId> {
+  const GroupFamily._()
+    : super(
+        retry: null,
+        name: r'groupProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: false,
+      );
+
+  /// グループ情報
+  /// データの参照頻度を減らすため、`keepAlive`を指定
+
+  GroupProvider call({required GroupId groupId}) =>
+      GroupProvider._(argument: groupId, from: this);
 
   @override
-  GroupId get groupId => (origin as GroupProvider).groupId;
+  String toString() => r'groupProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

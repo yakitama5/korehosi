@@ -3,6 +3,7 @@
 ///
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
+// dart format off
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -75,16 +76,23 @@ class _TranslationsUserEn extends TranslationsUserJa {
 	@override String get hoge => 'hoge';
 }
 
-/// Flat map(s) containing all translations.
+/// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
+///
+/// The Dart AOT compiler has issues with very large switch statements,
+/// so the map is split into smaller functions (512 entries each).
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
-		switch (path) {
-			case 'group.hoge': return 'hoge';
-			case 'item.hoge': return 'hoge';
-			case 'user.hoge': return 'hoge';
-			default: return null;
-		}
+		return _flatMapFunction$0(path);
+	}
+
+	dynamic _flatMapFunction$0(String path) {
+		return switch (path) {
+			'group.hoge' => 'hoge',
+			'item.hoge' => 'hoge',
+			'user.hoge' => 'hoge',
+			_ => null,
+		};
 	}
 }
 

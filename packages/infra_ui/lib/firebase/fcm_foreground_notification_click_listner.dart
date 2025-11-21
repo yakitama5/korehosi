@@ -1,6 +1,6 @@
 import 'package:fcm_config/fcm_config.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infrastructure_firebase/common.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_domain/notification.dart';

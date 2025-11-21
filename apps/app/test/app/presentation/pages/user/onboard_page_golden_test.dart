@@ -17,7 +17,7 @@ void main() {
                 (device) => GoldenTestScenario(
                   name: device.name,
                   constraints: device.constraints,
-                  child: testableWidget(OnboardPage(initialPage: 0)),
+                  child: testableWidget(OnboardPage()),
                 ),
               )
               .toList(),

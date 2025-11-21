@@ -18,7 +18,7 @@ class SettingsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // 現在の設定値を取得
     final uiStyle = ref.watch(uiStyleProvider);
-    final themeColor = ref.watch(themeColorNotifierProvider);
+    final themeColor = ref.watch(themeColorProvider);
     final themeMode = ref.watch(themeModeProvider);
 
     // 設定アプリと行き来するため、ライフサイクルを検知してリビルドを行う
@@ -171,7 +171,7 @@ class SettingsPage extends HookConsumerWidget {
     return lanchUrlStringSafety(context, urlConfig.contactUs);
   }
 
-  Future<bool> _onDevelopperTwitter(BuildContext context, WidgetRef ref) async {
+  Future<bool> _onDevelopperTwitter(BuildContext context, WidgetRef ref) {
     // Notes: https://pub.dev/packages/url_launcher#configuration
     return lanchUrlStringSafety(
       context,
@@ -180,7 +180,7 @@ class SettingsPage extends HookConsumerWidget {
     );
   }
 
-  Future<bool> _onPrivacyPolicy(BuildContext context, WidgetRef ref) async {
+  Future<bool> _onPrivacyPolicy(BuildContext context, WidgetRef ref) {
     return lanchUrlStringSafety(context, urlConfig.privacyPolicyJa);
   }
 

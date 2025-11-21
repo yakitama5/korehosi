@@ -27,7 +27,7 @@ Future<bool> requestPermissionPickImage(
 Future<bool> requestPermissionCamera(
   BuildContext context,
   WidgetRef ref,
-) async {
+) {
   // 必要な権限を設定
   const requestPermission = Permission.camera;
 

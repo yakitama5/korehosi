@@ -8,27 +8,52 @@ part of 'buyer_name_suggestion_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$buyerNameSuggestionHash() =>
-    r'7006d3487e56b18f386192765997be5c7565fe9f';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 購入者のサジェストリスト
+/// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー
+
+@ProviderFor(buyerNameSuggestion)
+const buyerNameSuggestionProvider = BuyerNameSuggestionProvider._();
 
 /// 購入者のサジェストリスト
 /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー
-///
-/// Copied from [buyerNameSuggestion].
-@ProviderFor(buyerNameSuggestion)
-final buyerNameSuggestionProvider =
-    AutoDisposeFutureProvider<List<String>>.internal(
-      buyerNameSuggestion,
-      name: r'buyerNameSuggestionProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$buyerNameSuggestionHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef BuyerNameSuggestionRef = AutoDisposeFutureProviderRef<List<String>>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class BuyerNameSuggestionProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<String>>,
+          List<String>,
+          FutureOr<List<String>>
+        >
+    with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
+  /// 購入者のサジェストリスト
+  /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー
+  const BuyerNameSuggestionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'buyerNameSuggestionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$buyerNameSuggestionHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<String>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<String>> create(Ref ref) {
+    return buyerNameSuggestion(ref);
+  }
+}
+
+String _$buyerNameSuggestionHash() =>
+    r'7006d3487e56b18f386192765997be5c7565fe9f';

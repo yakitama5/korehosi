@@ -8,22 +8,46 @@ part of 'group_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupUsecaseHash() => r'7052184c4e41784c33d7f048a5b41b2fee5263c0';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [groupUsecase].
 @ProviderFor(groupUsecase)
-final groupUsecaseProvider = AutoDisposeProvider<GroupUsecase>.internal(
-  groupUsecase,
-  name: r'groupUsecaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$groupUsecaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const groupUsecaseProvider = GroupUsecaseProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GroupUsecaseRef = AutoDisposeProviderRef<GroupUsecase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class GroupUsecaseProvider
+    extends $FunctionalProvider<GroupUsecase, GroupUsecase, GroupUsecase>
+    with $Provider<GroupUsecase> {
+  const GroupUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'groupUsecaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$groupUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GroupUsecase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  GroupUsecase create(Ref ref) {
+    return groupUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GroupUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GroupUsecase>(value),
+    );
+  }
+}
+
+String _$groupUsecaseHash() => r'7052184c4e41784c33d7f048a5b41b2fee5263c0';

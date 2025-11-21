@@ -8,23 +8,44 @@ part of 'app_update_status_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appUpdateStatusHash() => r'78c98efea1f6ffa5a103a7e7ac3fdbae30f7710f';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [appUpdateStatus].
 @ProviderFor(appUpdateStatus)
-final appUpdateStatusProvider =
-    AutoDisposeFutureProvider<AppUpdateStatus>.internal(
-      appUpdateStatus,
-      name: r'appUpdateStatusProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$appUpdateStatusHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+const appUpdateStatusProvider = AppUpdateStatusProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AppUpdateStatusRef = AutoDisposeFutureProviderRef<AppUpdateStatus>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AppUpdateStatusProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<AppUpdateStatus>,
+          AppUpdateStatus,
+          FutureOr<AppUpdateStatus>
+        >
+    with $FutureModifier<AppUpdateStatus>, $FutureProvider<AppUpdateStatus> {
+  const AppUpdateStatusProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appUpdateStatusProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appUpdateStatusHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<AppUpdateStatus> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<AppUpdateStatus> create(Ref ref) {
+    return appUpdateStatus(ref);
+  }
+}
+
+String _$appUpdateStatusHash() => r'78c98efea1f6ffa5a103a7e7ac3fdbae30f7710f';

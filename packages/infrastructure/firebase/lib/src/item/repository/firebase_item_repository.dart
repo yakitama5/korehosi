@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cross_file/cross_file.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_storage_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
@@ -12,6 +11,7 @@ import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebaseItemRepository implements ItemRepository {
@@ -272,9 +272,9 @@ class FirebaseItemRepository implements ItemRepository {
     List<XFile>? uploadImages,
     GroupId groupId,
     ItemId itemId,
-  ) async {
+  ) {
     return Future.wait<ImageId>(
-      uploadImages?.map((e) async {
+      uploadImages?.map((e) {
             final path = 'group/$groupId/item/$itemId/${uuid.v4()}';
             return ref
                 .read(storageServiceProvider)

@@ -14,6 +14,7 @@ dependencies:
   animations: ^2.0.11
   cached_network_image: ^3.4.1
   collection: ^1.19.1
+  cross_file: ^0.3.5+1
   dynamic_color: ^1.8.1
   flutter:
     sdk: flutter
@@ -21,8 +22,11 @@ dependencies:
   flutter_svg: ^2.2.3
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
+  gauge_indicator: ^0.4.3
   google_fonts: ^6.3.0
   hooks_riverpod: ^3.0.3
+  image_picker: ^1.2.1
+  intl: ^0.20.2
   linked_scroll_controller: ^0.2.0
   lottie: ^3.3.2
   material_color_utilities: ^0.11.1
@@ -33,6 +37,9 @@ dependencies:
     path: ../core
   packages_domain:
     path: ../domain
+  permission_handler: ^12.0.1
+  reactive_forms: ^18.2.0
+  reactive_image_picker: ^8.0.1
   responsive_framework: ^1.5.1
   riverpod_annotation: ^3.0.3
   shimmer: ^3.0.0

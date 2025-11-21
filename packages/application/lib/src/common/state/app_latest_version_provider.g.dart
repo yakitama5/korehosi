@@ -8,22 +8,38 @@ part of 'app_latest_version_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appLatestVersionHash() => r'f65b69fc9217b01d86b567a74be8b7813f5e668f';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [appLatestVersion].
 @ProviderFor(appLatestVersion)
-final appLatestVersionProvider = AutoDisposeStreamProvider<Version>.internal(
-  appLatestVersion,
-  name: r'appLatestVersionProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appLatestVersionHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const appLatestVersionProvider = AppLatestVersionProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AppLatestVersionRef = AutoDisposeStreamProviderRef<Version>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AppLatestVersionProvider
+    extends $FunctionalProvider<AsyncValue<Version>, Version, Stream<Version>>
+    with $FutureModifier<Version>, $StreamProvider<Version> {
+  const AppLatestVersionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appLatestVersionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appLatestVersionHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<Version> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
+
+  @override
+  Stream<Version> create(Ref ref) {
+    return appLatestVersion(ref);
+  }
+}
+
+String _$appLatestVersionHash() => r'f65b69fc9217b01d86b567a74be8b7813f5e668f';

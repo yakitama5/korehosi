@@ -1,6 +1,6 @@
 part of 'routes_data.dart';
 
-final _settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'SETTINGS');
+final settingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'SETTINGS');
 
 const settingsBranch = TypedStatefulShellBranch<BranchSettingsData>(
   routes: [
@@ -32,10 +32,10 @@ class BranchSettingsData extends StatefulShellBranchData {
   const BranchSettingsData();
 }
 
-class SettingsRouteData extends GoRouteData with _$SettingsRouteData {
+class SettingsRouteData extends GoRouteData with $SettingsRouteData {
   const SettingsRouteData();
 
-  static final GlobalKey<NavigatorState> $navigatorKey = _settingsNavigatorKey;
+  static final GlobalKey<NavigatorState> $navigatorKey = settingsNavigatorKey;
   static const path = '/settings';
 
   @override
@@ -43,7 +43,7 @@ class SettingsRouteData extends GoRouteData with _$SettingsRouteData {
       const SettingsPage();
 }
 
-class GroupsRouteData extends GoRouteData with _$GroupsRouteData {
+class GroupsRouteData extends GoRouteData with $GroupsRouteData {
   const GroupsRouteData();
 
   static const path = 'groups';
@@ -52,7 +52,7 @@ class GroupsRouteData extends GoRouteData with _$GroupsRouteData {
   Widget build(BuildContext context, GoRouterState state) => const GroupsPage();
 }
 
-class GroupRouteData extends GoRouteData with _$GroupRouteData {
+class GroupRouteData extends GoRouteData with $GroupRouteData {
   const GroupRouteData(this.groupId);
 
   static const path = 'group/:groupId';
@@ -68,7 +68,7 @@ class GroupRouteData extends GoRouteData with _$GroupRouteData {
   );
 }
 
-class ProfileRouteData extends GoRouteData with _$ProfileRouteData {
+class ProfileRouteData extends GoRouteData with $ProfileRouteData {
   const ProfileRouteData();
 
   static const path = 'profile';
@@ -78,7 +78,7 @@ class ProfileRouteData extends GoRouteData with _$ProfileRouteData {
       const ProfilePage();
 }
 
-class LicenseRouteData extends GoRouteData with _$LicenseRouteData {
+class LicenseRouteData extends GoRouteData with $LicenseRouteData {
   const LicenseRouteData();
 
   static const path = 'license';
@@ -88,7 +88,7 @@ class LicenseRouteData extends GoRouteData with _$LicenseRouteData {
       const MyLincensePage();
 }
 
-class AccountRouteData extends GoRouteData with _$AccountRouteData {
+class AccountRouteData extends GoRouteData with $AccountRouteData {
   const AccountRouteData();
 
   static const path = 'account';
@@ -99,7 +99,7 @@ class AccountRouteData extends GoRouteData with _$AccountRouteData {
 }
 
 class SettingsUiStylePageRoute extends GoRouteData
-    with _$SettingsUiStylePageRoute {
+    with $SettingsUiStylePageRoute {
   const SettingsUiStylePageRoute();
 
   static const path = 'ui_style';
@@ -110,7 +110,7 @@ class SettingsUiStylePageRoute extends GoRouteData
 }
 
 class SettingsThemeColorPageRoute extends GoRouteData
-    with _$SettingsThemeColorPageRoute {
+    with $SettingsThemeColorPageRoute {
   const SettingsThemeColorPageRoute();
 
   static const path = 'color_style';
@@ -121,7 +121,7 @@ class SettingsThemeColorPageRoute extends GoRouteData
 }
 
 class SettingsThemeModePageRoute extends GoRouteData
-    with _$SettingsThemeModePageRoute {
+    with $SettingsThemeModePageRoute {
   const SettingsThemeModePageRoute();
 
   static const path = 'theme_mode';

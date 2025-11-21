@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_domain/group.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -20,7 +19,7 @@ Future<List<Group>?> joinGroups(Ref ref) async {
 
   // IDを元にグループを取得
   final asyncGroups = joinGroupIds
-      .map((groupId) async => ref.watch(groupProvider(groupId: groupId).future))
+      .map((groupId) => ref.watch(groupProvider(groupId: groupId).future))
       .toList();
   return (await Future.wait(asyncGroups)).nonNulls.toList();
 }

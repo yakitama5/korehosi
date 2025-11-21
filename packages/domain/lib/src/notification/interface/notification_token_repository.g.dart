@@ -8,27 +8,58 @@ part of 'notification_token_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$notificationTokenRepositoryHash() =>
-    r'c1c4598d30645e724caa8d60d19c8c4c38022e5d';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// DI用 (依存性逆転のためドメイン層に定義)
+
+@ProviderFor(notificationTokenRepository)
+const notificationTokenRepositoryProvider =
+    NotificationTokenRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
-///
-/// Copied from [notificationTokenRepository].
-@ProviderFor(notificationTokenRepository)
-final notificationTokenRepositoryProvider =
-    Provider<NotificationTokenRepository>.internal(
-      notificationTokenRepository,
-      name: r'notificationTokenRepositoryProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$notificationTokenRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef NotificationTokenRepositoryRef =
-    ProviderRef<NotificationTokenRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class NotificationTokenRepositoryProvider
+    extends
+        $FunctionalProvider<
+          NotificationTokenRepository,
+          NotificationTokenRepository,
+          NotificationTokenRepository
+        >
+    with $Provider<NotificationTokenRepository> {
+  /// DI用 (依存性逆転のためドメイン層に定義)
+  const NotificationTokenRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'notificationTokenRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$notificationTokenRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<NotificationTokenRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  NotificationTokenRepository create(Ref ref) {
+    return notificationTokenRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(NotificationTokenRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<NotificationTokenRepository>(value),
+    );
+  }
+}
+
+String _$notificationTokenRepositoryHash() =>
+    r'c1c4598d30645e724caa8d60d19c8c4c38022e5d';

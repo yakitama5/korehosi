@@ -23,7 +23,7 @@ class SettingsThemeColorPage extends HookConsumerWidget {
         },
       ),
     );
-    final initialValue = ref.watch(themeColorNotifierProvider);
+    final initialValue = ref.watch(themeColorProvider);
     final selected = useState<ThemeColor?>(initialValue);
 
     // ダイナミックカラーが対象外の場合は除外する
@@ -62,7 +62,7 @@ class SettingsThemeColorPage extends HookConsumerWidget {
           },
           onChanged: (value) {
             selected.value = themeColor;
-            ref.read(themeColorNotifierProvider.notifier).update(themeColor);
+            ref.read(themeColorProvider.notifier).update(themeColor);
           },
         );
       }).toList(),

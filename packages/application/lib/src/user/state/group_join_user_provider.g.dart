@@ -8,177 +8,95 @@ part of 'group_join_user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupJoinUserHash() => r'f082c93ca38b21e5733930102d21708b93356769';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// グループに参加中のユーザー情報
-///
-/// Copied from [groupJoinUser].
+
 @ProviderFor(groupJoinUser)
-const groupJoinUserProvider = GroupJoinUserFamily();
+const groupJoinUserProvider = GroupJoinUserFamily._();
 
 /// グループに参加中のユーザー情報
-///
-/// Copied from [groupJoinUser].
-class GroupJoinUserFamily extends Family<AsyncValue<User?>> {
-  /// グループに参加中のユーザー情報
-  ///
-  /// Copied from [groupJoinUser].
-  const GroupJoinUserFamily();
 
+final class GroupJoinUserProvider
+    extends $FunctionalProvider<AsyncValue<User?>, User?, FutureOr<User?>>
+    with $FutureModifier<User?>, $FutureProvider<User?> {
   /// グループに参加中のユーザー情報
-  ///
-  /// Copied from [groupJoinUser].
-  GroupJoinUserProvider call({
-    required GroupId groupId,
-    required UserId userId,
-  }) {
-    return GroupJoinUserProvider(groupId: groupId, userId: userId);
+  const GroupJoinUserProvider._({
+    required GroupJoinUserFamily super.from,
+    required ({GroupId groupId, UserId userId}) super.argument,
+  }) : super(
+         retry: null,
+         name: r'groupJoinUserProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$groupJoinUserHash();
+
+  @override
+  String toString() {
+    return r'groupJoinUserProvider'
+        ''
+        '$argument';
   }
 
+  @$internal
   @override
-  GroupJoinUserProvider getProviderOverride(
-    covariant GroupJoinUserProvider provider,
-  ) {
-    return call(groupId: provider.groupId, userId: provider.userId);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  $FutureProviderElement<User?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'groupJoinUserProvider';
-}
-
-/// グループに参加中のユーザー情報
-///
-/// Copied from [groupJoinUser].
-class GroupJoinUserProvider extends AutoDisposeFutureProvider<User?> {
-  /// グループに参加中のユーザー情報
-  ///
-  /// Copied from [groupJoinUser].
-  GroupJoinUserProvider({required GroupId groupId, required UserId userId})
-    : this._internal(
-        (ref) => groupJoinUser(
-          ref as GroupJoinUserRef,
-          groupId: groupId,
-          userId: userId,
-        ),
-        from: groupJoinUserProvider,
-        name: r'groupJoinUserProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$groupJoinUserHash,
-        dependencies: GroupJoinUserFamily._dependencies,
-        allTransitiveDependencies:
-            GroupJoinUserFamily._allTransitiveDependencies,
-        groupId: groupId,
-        userId: userId,
-      );
-
-  GroupJoinUserProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.groupId,
-    required this.userId,
-  }) : super.internal();
-
-  final GroupId groupId;
-  final UserId userId;
-
-  @override
-  Override overrideWith(
-    FutureOr<User?> Function(GroupJoinUserRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: GroupJoinUserProvider._internal(
-        (ref) => create(ref as GroupJoinUserRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        groupId: groupId,
-        userId: userId,
-      ),
+  FutureOr<User?> create(Ref ref) {
+    final argument = this.argument as ({GroupId groupId, UserId userId});
+    return groupJoinUser(
+      ref,
+      groupId: argument.groupId,
+      userId: argument.userId,
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<User?> createElement() {
-    return _GroupJoinUserProviderElement(this);
-  }
-
-  @override
   bool operator ==(Object other) {
-    return other is GroupJoinUserProvider &&
-        other.groupId == groupId &&
-        other.userId == userId;
+    return other is GroupJoinUserProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, groupId.hashCode);
-    hash = _SystemHash.combine(hash, userId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin GroupJoinUserRef on AutoDisposeFutureProviderRef<User?> {
-  /// The parameter `groupId` of this provider.
-  GroupId get groupId;
+String _$groupJoinUserHash() => r'f082c93ca38b21e5733930102d21708b93356769';
 
-  /// The parameter `userId` of this provider.
-  UserId get userId;
-}
+/// グループに参加中のユーザー情報
 
-class _GroupJoinUserProviderElement
-    extends AutoDisposeFutureProviderElement<User?>
-    with GroupJoinUserRef {
-  _GroupJoinUserProviderElement(super.provider);
+final class GroupJoinUserFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          FutureOr<User?>,
+          ({GroupId groupId, UserId userId})
+        > {
+  const GroupJoinUserFamily._()
+    : super(
+        retry: null,
+        name: r'groupJoinUserProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// グループに参加中のユーザー情報
+
+  GroupJoinUserProvider call({
+    required GroupId groupId,
+    required UserId userId,
+  }) => GroupJoinUserProvider._(
+    argument: (groupId: groupId, userId: userId),
+    from: this,
+  );
 
   @override
-  GroupId get groupId => (origin as GroupJoinUserProvider).groupId;
-  @override
-  UserId get userId => (origin as GroupJoinUserProvider).userId;
+  String toString() => r'groupJoinUserProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -8,24 +8,67 @@ part of 'theme_mode_notifier_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$themeModeHash() => r'49029efa46de61765d868407914237fc8ad28699';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// テーマを管理するProvider
+/// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
+
+@ProviderFor(ThemeModeNotifier)
+const themeModeProvider = ThemeModeNotifierProvider._();
 
 /// テーマを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
-///
-/// Copied from [_ThemeMode].
-@ProviderFor(_ThemeMode)
-final _themeModeProvider =
-    AutoDisposeNotifierProvider<_ThemeMode, ThemeMode>.internal(
-      _ThemeMode.new,
-      name: r'_themeModeProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$themeModeHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+final class ThemeModeNotifierProvider
+    extends $NotifierProvider<ThemeModeNotifier, ThemeMode> {
+  /// テーマを管理するProvider
+  /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
+  const ThemeModeNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'themeModeProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
-typedef _$ThemeMode = AutoDisposeNotifier<ThemeMode>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+  @override
+  String debugGetCreateSourceHash() => _$themeModeNotifierHash();
+
+  @$internal
+  @override
+  ThemeModeNotifier create() => ThemeModeNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ThemeMode value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ThemeMode>(value),
+    );
+  }
+}
+
+String _$themeModeNotifierHash() => r'dfd849278cc37563fe0ca96389e938f23aa8d7dd';
+
+/// テーマを管理するProvider
+/// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
+
+abstract class _$ThemeModeNotifier extends $Notifier<ThemeMode> {
+  ThemeMode build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<ThemeMode, ThemeMode>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<ThemeMode, ThemeMode>,
+              ThemeMode,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

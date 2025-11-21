@@ -8,23 +8,52 @@ part of 'group_share_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groupShareUsecaseHash() => r'6dceeca26d8d37421a23b7879728b49c7d63f379';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [groupShareUsecase].
 @ProviderFor(groupShareUsecase)
-final groupShareUsecaseProvider =
-    AutoDisposeProvider<GroupShareUsecase>.internal(
-      groupShareUsecase,
-      name: r'groupShareUsecaseProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$groupShareUsecaseHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+const groupShareUsecaseProvider = GroupShareUsecaseProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GroupShareUsecaseRef = AutoDisposeProviderRef<GroupShareUsecase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class GroupShareUsecaseProvider
+    extends
+        $FunctionalProvider<
+          GroupShareUsecase,
+          GroupShareUsecase,
+          GroupShareUsecase
+        >
+    with $Provider<GroupShareUsecase> {
+  const GroupShareUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'groupShareUsecaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$groupShareUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GroupShareUsecase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GroupShareUsecase create(Ref ref) {
+    return groupShareUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GroupShareUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GroupShareUsecase>(value),
+    );
+  }
+}
+
+String _$groupShareUsecaseHash() => r'6dceeca26d8d37421a23b7879728b49c7d63f379';

@@ -8,22 +8,46 @@ part of 'user_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userUsecaseHash() => r'bfac8058a5261b29428848589f17e0900d6817b2';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [userUsecase].
 @ProviderFor(userUsecase)
-final userUsecaseProvider = AutoDisposeProvider<UserUsecase>.internal(
-  userUsecase,
-  name: r'userUsecaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$userUsecaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const userUsecaseProvider = UserUsecaseProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef UserUsecaseRef = AutoDisposeProviderRef<UserUsecase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class UserUsecaseProvider
+    extends $FunctionalProvider<UserUsecase, UserUsecase, UserUsecase>
+    with $Provider<UserUsecase> {
+  const UserUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'userUsecaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$userUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<UserUsecase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  UserUsecase create(Ref ref) {
+    return userUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(UserUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<UserUsecase>(value),
+    );
+  }
+}
+
+String _$userUsecaseHash() => r'bfac8058a5261b29428848589f17e0900d6817b2';

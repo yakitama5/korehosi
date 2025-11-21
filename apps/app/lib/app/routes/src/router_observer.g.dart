@@ -6,21 +6,57 @@ part of 'router_observer.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentRouteHash() => r'514be6d8bccaf82e73353df331d572b267a797c8';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [CurrentRoute].
 @ProviderFor(CurrentRoute)
-final currentRouteProvider =
-    AutoDisposeNotifierProvider<CurrentRoute, Uri>.internal(
-      CurrentRoute.new,
-      name: r'currentRouteProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$currentRouteHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+const currentRouteProvider = CurrentRouteProvider._();
 
-typedef _$CurrentRoute = AutoDisposeNotifier<Uri>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class CurrentRouteProvider extends $NotifierProvider<CurrentRoute, Uri> {
+  const CurrentRouteProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentRouteProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentRouteHash();
+
+  @$internal
+  @override
+  CurrentRoute create() => CurrentRoute();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Uri value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Uri>(value),
+    );
+  }
+}
+
+String _$currentRouteHash() => r'bfc2c9587857b58cf69cf77fce618e99d8c8cf32';
+
+abstract class _$CurrentRoute extends $Notifier<Uri> {
+  Uri build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<Uri, Uri>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<Uri, Uri>,
+              Uri,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

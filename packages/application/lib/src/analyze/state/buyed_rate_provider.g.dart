@@ -8,24 +8,48 @@ part of 'buyed_rate_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$buyedRateHash() => r'a6c86e8cfd0bcf88534f76e327280ac53acb7471';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 購入率を管理するProvider
+
+@ProviderFor(buyedRate)
+const buyedRateProvider = BuyedRateProvider._();
 
 /// 購入率を管理するProvider
-///
-/// Copied from [buyedRate].
-@ProviderFor(buyedRate)
-final buyedRateProvider = AutoDisposeFutureProvider<ItemBuyedRate>.internal(
-  buyedRate,
-  name: r'buyedRateProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$buyedRateHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef BuyedRateRef = AutoDisposeFutureProviderRef<ItemBuyedRate>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class BuyedRateProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<ItemBuyedRate>,
+          ItemBuyedRate,
+          FutureOr<ItemBuyedRate>
+        >
+    with $FutureModifier<ItemBuyedRate>, $FutureProvider<ItemBuyedRate> {
+  /// 購入率を管理するProvider
+  const BuyedRateProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'buyedRateProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$buyedRateHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<ItemBuyedRate> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<ItemBuyedRate> create(Ref ref) {
+    return buyedRate(ref);
+  }
+}
+
+String _$buyedRateHash() => r'9887ffbdf6f42a083f82049d111a53bc7d7b9847';

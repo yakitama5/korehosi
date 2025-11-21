@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_shared_preferences/common.dart';
 import 'package:infrastructure_shared_preferences/src/common/enum/preferences.dart';
 import 'package:intl/intl.dart';
@@ -6,6 +5,7 @@ import 'package:packages_core/extension.dart';
 import 'package:packages_domain/designsystem.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// FCMトークンタイムスタンプの日付形式
 const _tokenTimestampFormat = 'yyyy-MM-dd';
@@ -75,7 +75,7 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
   Future<void> removeTokenTimestamp({
     required UserId userId,
     required DateTime dateTime,
-  }) async {
+  }) {
     return ref
         .watch(
           stringWithStringFamilyPreferenceProvider(

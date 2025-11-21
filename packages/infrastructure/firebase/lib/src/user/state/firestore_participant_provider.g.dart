@@ -8,338 +8,212 @@ part of 'firestore_participant_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$participantCollectionRefHash() =>
-    r'96d30390a45d92058efd5cfdab3b18a47dd918ae';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// グループ参加者コレクションの参照
-///
-/// Copied from [participantCollectionRef].
+
 @ProviderFor(participantCollectionRef)
-const participantCollectionRefProvider = ParticipantCollectionRefFamily();
+const participantCollectionRefProvider = ParticipantCollectionRefFamily._();
 
 /// グループ参加者コレクションの参照
-///
-/// Copied from [participantCollectionRef].
-class ParticipantCollectionRefFamily
-    extends Family<CollectionReference<FirestoreUserModel>> {
-  /// グループ参加者コレクションの参照
-  ///
-  /// Copied from [participantCollectionRef].
-  const ParticipantCollectionRefFamily();
 
+final class ParticipantCollectionRefProvider
+    extends
+        $FunctionalProvider<
+          CollectionReference<FirestoreUserModel>,
+          CollectionReference<FirestoreUserModel>,
+          CollectionReference<FirestoreUserModel>
+        >
+    with $Provider<CollectionReference<FirestoreUserModel>> {
   /// グループ参加者コレクションの参照
-  ///
-  /// Copied from [participantCollectionRef].
-  ParticipantCollectionRefProvider call({required GroupId groupId}) {
-    return ParticipantCollectionRefProvider(groupId: groupId);
+  const ParticipantCollectionRefProvider._({
+    required ParticipantCollectionRefFamily super.from,
+    required GroupId super.argument,
+  }) : super(
+         retry: null,
+         name: r'participantCollectionRefProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$participantCollectionRefHash();
+
+  @override
+  String toString() {
+    return r'participantCollectionRefProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  ParticipantCollectionRefProvider getProviderOverride(
-    covariant ParticipantCollectionRefProvider provider,
-  ) {
-    return call(groupId: provider.groupId);
+  $ProviderElement<CollectionReference<FirestoreUserModel>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  CollectionReference<FirestoreUserModel> create(Ref ref) {
+    final argument = this.argument as GroupId;
+    return participantCollectionRef(ref, groupId: argument);
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'participantCollectionRefProvider';
-}
-
-/// グループ参加者コレクションの参照
-///
-/// Copied from [participantCollectionRef].
-class ParticipantCollectionRefProvider
-    extends AutoDisposeProvider<CollectionReference<FirestoreUserModel>> {
-  /// グループ参加者コレクションの参照
-  ///
-  /// Copied from [participantCollectionRef].
-  ParticipantCollectionRefProvider({required GroupId groupId})
-    : this._internal(
-        (ref) => participantCollectionRef(
-          ref as ParticipantCollectionRefRef,
-          groupId: groupId,
-        ),
-        from: participantCollectionRefProvider,
-        name: r'participantCollectionRefProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$participantCollectionRefHash,
-        dependencies: ParticipantCollectionRefFamily._dependencies,
-        allTransitiveDependencies:
-            ParticipantCollectionRefFamily._allTransitiveDependencies,
-        groupId: groupId,
-      );
-
-  ParticipantCollectionRefProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.groupId,
-  }) : super.internal();
-
-  final GroupId groupId;
-
-  @override
-  Override overrideWith(
-    CollectionReference<FirestoreUserModel> Function(
-      ParticipantCollectionRefRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(CollectionReference<FirestoreUserModel> value) {
+    return $ProviderOverride(
       origin: this,
-      override: ParticipantCollectionRefProvider._internal(
-        (ref) => create(ref as ParticipantCollectionRefRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        groupId: groupId,
-      ),
+      providerOverride:
+          $SyncValueProvider<CollectionReference<FirestoreUserModel>>(value),
     );
-  }
-
-  @override
-  AutoDisposeProviderElement<CollectionReference<FirestoreUserModel>>
-  createElement() {
-    return _ParticipantCollectionRefProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
     return other is ParticipantCollectionRefProvider &&
-        other.groupId == groupId;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, groupId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin ParticipantCollectionRefRef
-    on AutoDisposeProviderRef<CollectionReference<FirestoreUserModel>> {
-  /// The parameter `groupId` of this provider.
-  GroupId get groupId;
-}
+String _$participantCollectionRefHash() =>
+    r'96d30390a45d92058efd5cfdab3b18a47dd918ae';
 
-class _ParticipantCollectionRefProviderElement
-    extends AutoDisposeProviderElement<CollectionReference<FirestoreUserModel>>
-    with ParticipantCollectionRefRef {
-  _ParticipantCollectionRefProviderElement(super.provider);
+/// グループ参加者コレクションの参照
+
+final class ParticipantCollectionRefFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          CollectionReference<FirestoreUserModel>,
+          GroupId
+        > {
+  const ParticipantCollectionRefFamily._()
+    : super(
+        retry: null,
+        name: r'participantCollectionRefProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// グループ参加者コレクションの参照
+
+  ParticipantCollectionRefProvider call({required GroupId groupId}) =>
+      ParticipantCollectionRefProvider._(argument: groupId, from: this);
 
   @override
-  GroupId get groupId => (origin as ParticipantCollectionRefProvider).groupId;
+  String toString() => r'participantCollectionRefProvider';
+}
+
+/// グループ参加者ドキュメントの参照
+
+@ProviderFor(participantDocumentRef)
+const participantDocumentRefProvider = ParticipantDocumentRefFamily._();
+
+/// グループ参加者ドキュメントの参照
+
+final class ParticipantDocumentRefProvider
+    extends
+        $FunctionalProvider<
+          DocumentReference<FirestoreUserModel>,
+          DocumentReference<FirestoreUserModel>,
+          DocumentReference<FirestoreUserModel>
+        >
+    with $Provider<DocumentReference<FirestoreUserModel>> {
+  /// グループ参加者ドキュメントの参照
+  const ParticipantDocumentRefProvider._({
+    required ParticipantDocumentRefFamily super.from,
+    required ({GroupId groupId, UserId? participantId}) super.argument,
+  }) : super(
+         retry: null,
+         name: r'participantDocumentRefProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$participantDocumentRefHash();
+
+  @override
+  String toString() {
+    return r'participantDocumentRefProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $ProviderElement<DocumentReference<FirestoreUserModel>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  DocumentReference<FirestoreUserModel> create(Ref ref) {
+    final argument =
+        this.argument as ({GroupId groupId, UserId? participantId});
+    return participantDocumentRef(
+      ref,
+      groupId: argument.groupId,
+      participantId: argument.participantId,
+    );
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DocumentReference<FirestoreUserModel> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<DocumentReference<FirestoreUserModel>>(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ParticipantDocumentRefProvider &&
+        other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$participantDocumentRefHash() =>
     r'ecc1ff8e5d45b351b0ce28b70793000ce624cd3a';
 
 /// グループ参加者ドキュメントの参照
-///
-/// Copied from [participantDocumentRef].
-@ProviderFor(participantDocumentRef)
-const participantDocumentRefProvider = ParticipantDocumentRefFamily();
 
-/// グループ参加者ドキュメントの参照
-///
-/// Copied from [participantDocumentRef].
-class ParticipantDocumentRefFamily
-    extends Family<DocumentReference<FirestoreUserModel>> {
-  /// グループ参加者ドキュメントの参照
-  ///
-  /// Copied from [participantDocumentRef].
-  const ParticipantDocumentRefFamily();
+final class ParticipantDocumentRefFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          DocumentReference<FirestoreUserModel>,
+          ({GroupId groupId, UserId? participantId})
+        > {
+  const ParticipantDocumentRefFamily._()
+    : super(
+        retry: null,
+        name: r'participantDocumentRefProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
   /// グループ参加者ドキュメントの参照
-  ///
-  /// Copied from [participantDocumentRef].
+
   ParticipantDocumentRefProvider call({
     required GroupId groupId,
     UserId? participantId,
-  }) {
-    return ParticipantDocumentRefProvider(
-      groupId: groupId,
-      participantId: participantId,
-    );
-  }
+  }) => ParticipantDocumentRefProvider._(
+    argument: (groupId: groupId, participantId: participantId),
+    from: this,
+  );
 
   @override
-  ParticipantDocumentRefProvider getProviderOverride(
-    covariant ParticipantDocumentRefProvider provider,
-  ) {
-    return call(
-      groupId: provider.groupId,
-      participantId: provider.participantId,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'participantDocumentRefProvider';
+  String toString() => r'participantDocumentRefProvider';
 }
-
-/// グループ参加者ドキュメントの参照
-///
-/// Copied from [participantDocumentRef].
-class ParticipantDocumentRefProvider
-    extends AutoDisposeProvider<DocumentReference<FirestoreUserModel>> {
-  /// グループ参加者ドキュメントの参照
-  ///
-  /// Copied from [participantDocumentRef].
-  ParticipantDocumentRefProvider({
-    required GroupId groupId,
-    UserId? participantId,
-  }) : this._internal(
-         (ref) => participantDocumentRef(
-           ref as ParticipantDocumentRefRef,
-           groupId: groupId,
-           participantId: participantId,
-         ),
-         from: participantDocumentRefProvider,
-         name: r'participantDocumentRefProvider',
-         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-             ? null
-             : _$participantDocumentRefHash,
-         dependencies: ParticipantDocumentRefFamily._dependencies,
-         allTransitiveDependencies:
-             ParticipantDocumentRefFamily._allTransitiveDependencies,
-         groupId: groupId,
-         participantId: participantId,
-       );
-
-  ParticipantDocumentRefProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.groupId,
-    required this.participantId,
-  }) : super.internal();
-
-  final GroupId groupId;
-  final UserId? participantId;
-
-  @override
-  Override overrideWith(
-    DocumentReference<FirestoreUserModel> Function(
-      ParticipantDocumentRefRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: ParticipantDocumentRefProvider._internal(
-        (ref) => create(ref as ParticipantDocumentRefRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        groupId: groupId,
-        participantId: participantId,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeProviderElement<DocumentReference<FirestoreUserModel>>
-  createElement() {
-    return _ParticipantDocumentRefProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is ParticipantDocumentRefProvider &&
-        other.groupId == groupId &&
-        other.participantId == participantId;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, groupId.hashCode);
-    hash = _SystemHash.combine(hash, participantId.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin ParticipantDocumentRefRef
-    on AutoDisposeProviderRef<DocumentReference<FirestoreUserModel>> {
-  /// The parameter `groupId` of this provider.
-  GroupId get groupId;
-
-  /// The parameter `participantId` of this provider.
-  UserId? get participantId;
-}
-
-class _ParticipantDocumentRefProviderElement
-    extends AutoDisposeProviderElement<DocumentReference<FirestoreUserModel>>
-    with ParticipantDocumentRefRef {
-  _ParticipantDocumentRefProviderElement(super.provider);
-
-  @override
-  GroupId get groupId => (origin as ParticipantDocumentRefProvider).groupId;
-  @override
-  UserId? get participantId =>
-      (origin as ParticipantDocumentRefProvider).participantId;
-}
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

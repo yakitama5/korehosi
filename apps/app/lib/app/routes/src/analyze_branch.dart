@@ -17,7 +17,7 @@ class BranchAnalyzeData extends StatefulShellBranchData {
   const BranchAnalyzeData();
 }
 
-class AnalyzeRouteData extends GoRouteData with _$AnalyzeRouteData {
+class AnalyzeRouteData extends GoRouteData with $AnalyzeRouteData {
   const AnalyzeRouteData();
 
   static final GlobalKey<NavigatorState> $navigatorKey = _analyzeNavigatorKey;
@@ -28,7 +28,7 @@ class AnalyzeRouteData extends GoRouteData with _$AnalyzeRouteData {
       const AnalyzePage();
 }
 
-class AnalyzeDetailRouteData extends GoRouteData with _$AnalyzeDetailRouteData {
+class AnalyzeDetailRouteData extends GoRouteData with $AnalyzeDetailRouteData {
   const AnalyzeDetailRouteData({this.index});
 
   static const path = 'analyze_detail';

@@ -48,7 +48,7 @@ class App extends HookConsumerWidget {
       ).copyWith(physics: const BouncingScrollPhysics()),
 
       // Router
-      routerConfig: ref.watch(routerProvider),
+      routerConfig: ref.watch(goRouterProvider),
 
       // Slang
       locale:

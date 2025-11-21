@@ -5,7 +5,6 @@ import 'package:packages_application/user.dart';
 import 'package:packages_core/extension.dart';
 import 'package:packages_domain/analyze.dart';
 import 'package:packages_domain/common.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'monthly_totals_purchases_provider.g.dart';
@@ -19,7 +18,7 @@ Future<MonthlyTotalsPurchases> monthlyTotalsPurchases(
   required YearMonthRange range,
 }) async {
   // 検索に必要な情報を取得
-  final query = ref.watch(itemAnalyzeQueryNotifierProvider);
+  final query = ref.watch(itemAnalyzeQueryProvider);
   final groupId = await ref.watch(currentGroupIdProvider.future);
   final user = await ref.watch(authUserProvider.future);
 

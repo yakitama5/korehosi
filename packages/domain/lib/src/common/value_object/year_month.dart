@@ -1,4 +1,3 @@
-// ignore_for_file: unused_element
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 

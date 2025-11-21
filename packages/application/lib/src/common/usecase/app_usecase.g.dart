@@ -8,22 +8,46 @@ part of 'app_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appUsecaseHash() => r'0cfa5fbee4d6a8a8ab5827576c1b55451a4a3888';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [appUsecase].
 @ProviderFor(appUsecase)
-final appUsecaseProvider = AutoDisposeProvider<AppUsecase>.internal(
-  appUsecase,
-  name: r'appUsecaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appUsecaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const appUsecaseProvider = AppUsecaseProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AppUsecaseRef = AutoDisposeProviderRef<AppUsecase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AppUsecaseProvider
+    extends $FunctionalProvider<AppUsecase, AppUsecase, AppUsecase>
+    with $Provider<AppUsecase> {
+  const AppUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appUsecaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<AppUsecase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AppUsecase create(Ref ref) {
+    return appUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AppUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AppUsecase>(value),
+    );
+  }
+}
+
+String _$appUsecaseHash() => r'0cfa5fbee4d6a8a8ab5827576c1b55451a4a3888';

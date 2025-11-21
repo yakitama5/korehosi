@@ -1,8 +1,8 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/notification/model/firestore_notification_token_model.dart';
 import 'package:infrastructure_firebase/src/notification/state/firestore_notification_token_provider.dart';
 import 'package:packages_domain/notification.dart';
 import 'package:packages_domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebaseNotificationTokenRepository

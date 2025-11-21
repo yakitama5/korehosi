@@ -49,7 +49,6 @@ final class FirebaseInitializer {
     // FCM Config
     await FCMConfig.instance.init(
       options: firebaseOptions,
-      defaultAndroidForegroundIcon: '@mipmap/ic_launcher',
       onBackgroundMessage: firebaseMessagingBackgroundHandler,
       defaultAndroidChannel: const AndroidNotificationChannel(
         'high_importance_channel',

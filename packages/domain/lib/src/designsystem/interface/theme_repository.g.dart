@@ -8,24 +8,51 @@ part of 'theme_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$themeRepositoryHash() => r'92b1f4091bdaecc4eab8c092fe4218d478eb16df';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// DI用 (依存性逆転のためドメイン層に定義)
+
+@ProviderFor(themeRepository)
+const themeRepositoryProvider = ThemeRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
-///
-/// Copied from [themeRepository].
-@ProviderFor(themeRepository)
-final themeRepositoryProvider = Provider<ThemeRepository>.internal(
-  themeRepository,
-  name: r'themeRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$themeRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ThemeRepositoryRef = ProviderRef<ThemeRepository>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class ThemeRepositoryProvider
+    extends
+        $FunctionalProvider<ThemeRepository, ThemeRepository, ThemeRepository>
+    with $Provider<ThemeRepository> {
+  /// DI用 (依存性逆転のためドメイン層に定義)
+  const ThemeRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'themeRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$themeRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<ThemeRepository> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  ThemeRepository create(Ref ref) {
+    return themeRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ThemeRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ThemeRepository>(value),
+    );
+  }
+}
+
+String _$themeRepositoryHash() => r'92b1f4091bdaecc4eab8c092fe4218d478eb16df';

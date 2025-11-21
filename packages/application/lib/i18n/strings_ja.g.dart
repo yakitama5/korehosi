@@ -3,6 +3,7 @@
 ///
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
+// dart format off
 
 part of 'strings.g.dart';
 
@@ -103,20 +104,27 @@ class TranslationsUserUserJa {
 	String get noname => '名無し';
 }
 
-/// Flat map(s) containing all translations.
+/// The flat map containing all translations for locale <ja>.
 /// Only for edge cases! For simple maps, use the map function of this library.
+///
+/// The Dart AOT compiler has issues with very large switch statements,
+/// so the map is split into smaller functions (512 entries each).
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
-		switch (path) {
-			case 'group.groupShareText': return ({required String user, required String group, required String url}) => '${user}さんから${group}へ招待されました。\n下記のURLをクリックするか、QRコードを読み取ることで、欲しい物リストのグループに参加できます\n${url}';
-			case 'group.initialGroupName': return ({required String userName}) => '${userName}のグループ';
-			case 'item.notificationAddItemTitle': return ({required String name}) => '${name}さんがほしいものを追加しました！';
-			case 'item.notificationAddItemBody': return ({required String name}) => '${name}さんがほしいものを追加しました！';
-			case 'user.deletedUser': return '<削除済ユーザー>';
-			case 'user.unset': return '<未設定>';
-			case 'user.user.noname': return '名無し';
-			default: return null;
-		}
+		return _flatMapFunction$0(path);
+	}
+
+	dynamic _flatMapFunction$0(String path) {
+		return switch (path) {
+			'group.groupShareText' => ({required String user, required String group, required String url}) => '${user}さんから${group}へ招待されました。\n下記のURLをクリックするか、QRコードを読み取ることで、欲しい物リストのグループに参加できます\n${url}',
+			'group.initialGroupName' => ({required String userName}) => '${userName}のグループ',
+			'item.notificationAddItemTitle' => ({required String name}) => '${name}さんがほしいものを追加しました！',
+			'item.notificationAddItemBody' => ({required String name}) => '${name}さんがほしいものを追加しました！',
+			'user.deletedUser' => '<削除済ユーザー>',
+			'user.unset' => '<未設定>',
+			'user.user.noname' => '名無し',
+			_ => null,
+		};
 	}
 }
 

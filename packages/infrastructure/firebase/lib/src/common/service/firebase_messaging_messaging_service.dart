@@ -1,6 +1,4 @@
 import 'package:fcm_config/fcm_config.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/extension/remote_message_extension.dart';
 import 'package:infrastructure_firebase/src/common/state/fcm_config_provider.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_group_message_model.dart';
@@ -8,6 +6,7 @@ import 'package:infrastructure_firebase/src/group/state/firestore_group_message_
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/notification.dart';
 import 'package:packages_domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したサービスの実装
 class FirebaseMessagingMessagingService implements MessagingService {

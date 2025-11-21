@@ -8,22 +8,46 @@ part of 'fcm_config_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fcmConfigHash() => r'6f8dd18d4b5218bcb06d380fc61ecff154252d6a';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [fcmConfig].
 @ProviderFor(fcmConfig)
-final fcmConfigProvider = AutoDisposeProvider<FCMConfig>.internal(
-  fcmConfig,
-  name: r'fcmConfigProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fcmConfigHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const fcmConfigProvider = FcmConfigProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FcmConfigRef = AutoDisposeProviderRef<FCMConfig>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FcmConfigProvider
+    extends $FunctionalProvider<FCMConfig, FCMConfig, FCMConfig>
+    with $Provider<FCMConfig> {
+  const FcmConfigProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fcmConfigProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fcmConfigHash();
+
+  @$internal
+  @override
+  $ProviderElement<FCMConfig> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  FCMConfig create(Ref ref) {
+    return fcmConfig(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FCMConfig value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FCMConfig>(value),
+    );
+  }
+}
+
+String _$fcmConfigHash() => r'6f8dd18d4b5218bcb06d380fc61ecff154252d6a';

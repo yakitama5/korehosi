@@ -12,33 +12,28 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
   navigatorKey: BaseShellSrouteData.$navigatorKey,
   factory: $BaseShellSrouteDataExtension._fromState,
   routes: [
-    GoRouteData.$route(path: '/', factory: _$RootRouteData._fromState),
+    GoRouteData.$route(path: '/', factory: $RootRouteData._fromState),
     GoRouteData.$route(
       path: '/start',
-
-      factory: _$OnboardStartRouteData._fromState,
+      factory: $OnboardStartRouteData._fromState,
       routes: [
         GoRouteData.$route(
           path: 'account_link',
-
-          factory: _$AccountLinkRouteData._fromState,
+          factory: $AccountLinkRouteData._fromState,
         ),
       ],
     ),
     GoRouteData.$route(
       path: '/share_link/:shareLinkId',
-
-      factory: _$ShareLinkRouteData._fromState,
+      factory: $ShareLinkRouteData._fromState,
     ),
     GoRouteData.$route(
       path: '/preview',
-
-      factory: _$PhotoPreviewRouteData._fromState,
+      factory: $PhotoPreviewRouteData._fromState,
     ),
     GoRouteData.$route(
       path: '/onboard_form',
-
-      factory: _$OnboardFormRouteData._fromState,
+      factory: $OnboardFormRouteData._fromState,
     ),
     StatefulShellRouteData.$route(
       restorationScopeId: BottomNavitorShellRouteData.$restorationScopeId,
@@ -48,30 +43,25 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/items',
-
-              factory: _$ItemsRouteData._fromState,
+              factory: $ItemsRouteData._fromState,
               routes: [
                 GoRouteData.$route(
                   path: 'item/:itemId',
-
-                  factory: _$ItemRouteData._fromState,
+                  factory: $ItemRouteData._fromState,
                   routes: [
                     GoRouteData.$route(
                       path: 'edit',
-
-                      factory: _$ItemEditRouteData._fromState,
+                      factory: $ItemEditRouteData._fromState,
                     ),
                     GoRouteData.$route(
                       path: 'purchase',
-
-                      factory: _$PurchaseRouteData._fromState,
+                      factory: $PurchaseRouteData._fromState,
                     ),
                   ],
                 ),
                 GoRouteData.$route(
                   path: 'edit',
-
-                  factory: _$ItemCreateRouteData._fromState,
+                  factory: $ItemCreateRouteData._fromState,
                 ),
               ],
             ),
@@ -81,13 +71,11 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/analyze',
-
-              factory: _$AnalyzeRouteData._fromState,
+              factory: $AnalyzeRouteData._fromState,
               routes: [
                 GoRouteData.$route(
                   path: 'analyze_detail',
-
-                  factory: _$AnalyzeDetailRouteData._fromState,
+                  factory: $AnalyzeDetailRouteData._fromState,
                 ),
               ],
             ),
@@ -97,50 +85,41 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/settings',
-
-              factory: _$SettingsRouteData._fromState,
+              factory: $SettingsRouteData._fromState,
               routes: [
                 GoRouteData.$route(
                   path: 'groups',
-
-                  factory: _$GroupsRouteData._fromState,
+                  factory: $GroupsRouteData._fromState,
                   routes: [
                     GoRouteData.$route(
                       path: 'group/:groupId',
-
-                      factory: _$GroupRouteData._fromState,
+                      factory: $GroupRouteData._fromState,
                     ),
                   ],
                 ),
                 GoRouteData.$route(
                   path: 'profile',
-
-                  factory: _$ProfileRouteData._fromState,
+                  factory: $ProfileRouteData._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'account',
-
-                  factory: _$AccountRouteData._fromState,
+                  factory: $AccountRouteData._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'license',
-
-                  factory: _$LicenseRouteData._fromState,
+                  factory: $LicenseRouteData._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'ui_style',
-
-                  factory: _$SettingsUiStylePageRoute._fromState,
+                  factory: $SettingsUiStylePageRoute._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'color_style',
-
-                  factory: _$SettingsThemeColorPageRoute._fromState,
+                  factory: $SettingsThemeColorPageRoute._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'theme_mode',
-
-                  factory: _$SettingsThemeModePageRoute._fromState,
+                  factory: $SettingsThemeModePageRoute._fromState,
                 ),
               ],
             ),
@@ -156,7 +135,7 @@ extension $BaseShellSrouteDataExtension on BaseShellSrouteData {
       BaseShellSrouteData();
 }
 
-mixin _$RootRouteData on GoRouteData {
+mixin $RootRouteData on GoRouteData {
   static RootRouteData _fromState(GoRouterState state) => const RootRouteData();
 
   @override
@@ -176,7 +155,7 @@ mixin _$RootRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$OnboardStartRouteData on GoRouteData {
+mixin $OnboardStartRouteData on GoRouteData {
   static OnboardStartRouteData _fromState(GoRouterState state) =>
       const OnboardStartRouteData();
 
@@ -197,7 +176,7 @@ mixin _$OnboardStartRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$AccountLinkRouteData on GoRouteData {
+mixin $AccountLinkRouteData on GoRouteData {
   static AccountLinkRouteData _fromState(GoRouterState state) =>
       const AccountLinkRouteData();
 
@@ -218,7 +197,7 @@ mixin _$AccountLinkRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$ShareLinkRouteData on GoRouteData {
+mixin $ShareLinkRouteData on GoRouteData {
   static ShareLinkRouteData _fromState(GoRouterState state) =>
       ShareLinkRouteData(state.pathParameters['shareLinkId']!);
 
@@ -243,7 +222,7 @@ mixin _$ShareLinkRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$PhotoPreviewRouteData on GoRouteData {
+mixin $PhotoPreviewRouteData on GoRouteData {
   static PhotoPreviewRouteData _fromState(GoRouterState state) =>
       PhotoPreviewRouteData(
         index: _$convertMapValue(
@@ -278,7 +257,7 @@ mixin _$PhotoPreviewRouteData on GoRouteData {
       context.replace(location, extra: _self.$extra);
 }
 
-mixin _$OnboardFormRouteData on GoRouteData {
+mixin $OnboardFormRouteData on GoRouteData {
   static OnboardFormRouteData _fromState(GoRouterState state) =>
       const OnboardFormRouteData();
 
@@ -304,7 +283,7 @@ extension $BottomNavitorShellRouteDataExtension on BottomNavitorShellRouteData {
       const BottomNavitorShellRouteData();
 }
 
-mixin _$ItemsRouteData on GoRouteData {
+mixin $ItemsRouteData on GoRouteData {
   static ItemsRouteData _fromState(GoRouterState state) =>
       const ItemsRouteData();
 
@@ -325,7 +304,7 @@ mixin _$ItemsRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$ItemRouteData on GoRouteData {
+mixin $ItemRouteData on GoRouteData {
   static ItemRouteData _fromState(GoRouterState state) =>
       ItemRouteData(state.pathParameters['itemId']!);
 
@@ -349,7 +328,7 @@ mixin _$ItemRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$ItemEditRouteData on GoRouteData {
+mixin $ItemEditRouteData on GoRouteData {
   static ItemEditRouteData _fromState(GoRouterState state) =>
       ItemEditRouteData(state.pathParameters['itemId']!);
 
@@ -374,7 +353,7 @@ mixin _$ItemEditRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$PurchaseRouteData on GoRouteData {
+mixin $PurchaseRouteData on GoRouteData {
   static PurchaseRouteData _fromState(GoRouterState state) =>
       PurchaseRouteData(state.pathParameters['itemId']!);
 
@@ -399,7 +378,7 @@ mixin _$PurchaseRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$ItemCreateRouteData on GoRouteData {
+mixin $ItemCreateRouteData on GoRouteData {
   static ItemCreateRouteData _fromState(GoRouterState state) =>
       const ItemCreateRouteData();
 
@@ -420,7 +399,7 @@ mixin _$ItemCreateRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$AnalyzeRouteData on GoRouteData {
+mixin $AnalyzeRouteData on GoRouteData {
   static AnalyzeRouteData _fromState(GoRouterState state) =>
       const AnalyzeRouteData();
 
@@ -441,7 +420,7 @@ mixin _$AnalyzeRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$AnalyzeDetailRouteData on GoRouteData {
+mixin $AnalyzeDetailRouteData on GoRouteData {
   static AnalyzeDetailRouteData _fromState(GoRouterState state) =>
       AnalyzeDetailRouteData(
         index: _$convertMapValue(
@@ -473,7 +452,7 @@ mixin _$AnalyzeDetailRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SettingsRouteData on GoRouteData {
+mixin $SettingsRouteData on GoRouteData {
   static SettingsRouteData _fromState(GoRouterState state) =>
       const SettingsRouteData();
 
@@ -494,7 +473,7 @@ mixin _$SettingsRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$GroupsRouteData on GoRouteData {
+mixin $GroupsRouteData on GoRouteData {
   static GroupsRouteData _fromState(GoRouterState state) =>
       const GroupsRouteData();
 
@@ -515,7 +494,7 @@ mixin _$GroupsRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$GroupRouteData on GoRouteData {
+mixin $GroupRouteData on GoRouteData {
   static GroupRouteData _fromState(GoRouterState state) =>
       GroupRouteData(state.pathParameters['groupId']!);
 
@@ -540,7 +519,7 @@ mixin _$GroupRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$ProfileRouteData on GoRouteData {
+mixin $ProfileRouteData on GoRouteData {
   static ProfileRouteData _fromState(GoRouterState state) =>
       const ProfileRouteData();
 
@@ -561,7 +540,7 @@ mixin _$ProfileRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$AccountRouteData on GoRouteData {
+mixin $AccountRouteData on GoRouteData {
   static AccountRouteData _fromState(GoRouterState state) =>
       const AccountRouteData();
 
@@ -582,7 +561,7 @@ mixin _$AccountRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$LicenseRouteData on GoRouteData {
+mixin $LicenseRouteData on GoRouteData {
   static LicenseRouteData _fromState(GoRouterState state) =>
       const LicenseRouteData();
 
@@ -603,7 +582,7 @@ mixin _$LicenseRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SettingsUiStylePageRoute on GoRouteData {
+mixin $SettingsUiStylePageRoute on GoRouteData {
   static SettingsUiStylePageRoute _fromState(GoRouterState state) =>
       const SettingsUiStylePageRoute();
 
@@ -624,7 +603,7 @@ mixin _$SettingsUiStylePageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SettingsThemeColorPageRoute on GoRouteData {
+mixin $SettingsThemeColorPageRoute on GoRouteData {
   static SettingsThemeColorPageRoute _fromState(GoRouterState state) =>
       const SettingsThemeColorPageRoute();
 
@@ -645,7 +624,7 @@ mixin _$SettingsThemeColorPageRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SettingsThemeModePageRoute on GoRouteData {
+mixin $SettingsThemeModePageRoute on GoRouteData {
   static SettingsThemeModePageRoute _fromState(GoRouterState state) =>
       const SettingsThemeModePageRoute();
 

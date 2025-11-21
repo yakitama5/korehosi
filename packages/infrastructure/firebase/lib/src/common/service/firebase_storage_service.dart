@@ -1,8 +1,8 @@
 import 'package:cross_file/cross_file.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_storage_provider.dart';
 import 'package:packages_domain/common.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したサービスの実装
 class FirebaseStorageService implements StorageService {

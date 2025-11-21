@@ -8,352 +8,219 @@ part of 'firestore_notification_token_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$notificationTokenCollectionRefHash() =>
-    r'81fd226347bc7e957498d58c707b38d244eaa5f9';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// 通知FCMトークンコレクションの参照
-///
-/// Copied from [notificationTokenCollectionRef].
+
 @ProviderFor(notificationTokenCollectionRef)
 const notificationTokenCollectionRefProvider =
-    NotificationTokenCollectionRefFamily();
+    NotificationTokenCollectionRefFamily._();
 
 /// 通知FCMトークンコレクションの参照
-///
-/// Copied from [notificationTokenCollectionRef].
-class NotificationTokenCollectionRefFamily
-    extends Family<CollectionReference<FirestoreNotificationTokenModel>> {
-  /// 通知FCMトークンコレクションの参照
-  ///
-  /// Copied from [notificationTokenCollectionRef].
-  const NotificationTokenCollectionRefFamily();
 
-  /// 通知FCMトークンコレクションの参照
-  ///
-  /// Copied from [notificationTokenCollectionRef].
-  NotificationTokenCollectionRefProvider call({required UserId userId}) {
-    return NotificationTokenCollectionRefProvider(userId: userId);
-  }
-
-  @override
-  NotificationTokenCollectionRefProvider getProviderOverride(
-    covariant NotificationTokenCollectionRefProvider provider,
-  ) {
-    return call(userId: provider.userId);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'notificationTokenCollectionRefProvider';
-}
-
-/// 通知FCMトークンコレクションの参照
-///
-/// Copied from [notificationTokenCollectionRef].
-class NotificationTokenCollectionRefProvider
+final class NotificationTokenCollectionRefProvider
     extends
-        AutoDisposeProvider<
+        $FunctionalProvider<
+          CollectionReference<FirestoreNotificationTokenModel>,
+          CollectionReference<FirestoreNotificationTokenModel>,
           CollectionReference<FirestoreNotificationTokenModel>
-        > {
+        >
+    with $Provider<CollectionReference<FirestoreNotificationTokenModel>> {
   /// 通知FCMトークンコレクションの参照
-  ///
-  /// Copied from [notificationTokenCollectionRef].
-  NotificationTokenCollectionRefProvider({required UserId userId})
-    : this._internal(
-        (ref) => notificationTokenCollectionRef(
-          ref as NotificationTokenCollectionRefRef,
-          userId: userId,
-        ),
-        from: notificationTokenCollectionRefProvider,
-        name: r'notificationTokenCollectionRefProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$notificationTokenCollectionRefHash,
-        dependencies: NotificationTokenCollectionRefFamily._dependencies,
-        allTransitiveDependencies:
-            NotificationTokenCollectionRefFamily._allTransitiveDependencies,
-        userId: userId,
-      );
-
-  NotificationTokenCollectionRefProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.userId,
-  }) : super.internal();
-
-  final UserId userId;
+  const NotificationTokenCollectionRefProvider._({
+    required NotificationTokenCollectionRefFamily super.from,
+    required UserId super.argument,
+  }) : super(
+         retry: null,
+         name: r'notificationTokenCollectionRefProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
-  Override overrideWith(
-    CollectionReference<FirestoreNotificationTokenModel> Function(
-      NotificationTokenCollectionRefRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: NotificationTokenCollectionRefProvider._internal(
-        (ref) => create(ref as NotificationTokenCollectionRefRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        userId: userId,
-      ),
-    );
+  String debugGetCreateSourceHash() => _$notificationTokenCollectionRefHash();
+
+  @override
+  String toString() {
+    return r'notificationTokenCollectionRefProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AutoDisposeProviderElement<
-    CollectionReference<FirestoreNotificationTokenModel>
-  >
-  createElement() {
-    return _NotificationTokenCollectionRefProviderElement(this);
+  $ProviderElement<CollectionReference<FirestoreNotificationTokenModel>>
+  $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+
+  @override
+  CollectionReference<FirestoreNotificationTokenModel> create(Ref ref) {
+    final argument = this.argument as UserId;
+    return notificationTokenCollectionRef(ref, userId: argument);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(
+    CollectionReference<FirestoreNotificationTokenModel> value,
+  ) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<
+            CollectionReference<FirestoreNotificationTokenModel>
+          >(value),
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return other is NotificationTokenCollectionRefProvider &&
-        other.userId == userId;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, userId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin NotificationTokenCollectionRefRef
-    on
-        AutoDisposeProviderRef<
-          CollectionReference<FirestoreNotificationTokenModel>
-        > {
-  /// The parameter `userId` of this provider.
-  UserId get userId;
-}
+String _$notificationTokenCollectionRefHash() =>
+    r'81fd226347bc7e957498d58c707b38d244eaa5f9';
 
-class _NotificationTokenCollectionRefProviderElement
-    extends
-        AutoDisposeProviderElement<
-          CollectionReference<FirestoreNotificationTokenModel>
-        >
-    with NotificationTokenCollectionRefRef {
-  _NotificationTokenCollectionRefProviderElement(super.provider);
+/// 通知FCMトークンコレクションの参照
+
+final class NotificationTokenCollectionRefFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          CollectionReference<FirestoreNotificationTokenModel>,
+          UserId
+        > {
+  const NotificationTokenCollectionRefFamily._()
+    : super(
+        retry: null,
+        name: r'notificationTokenCollectionRefProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// 通知FCMトークンコレクションの参照
+
+  NotificationTokenCollectionRefProvider call({required UserId userId}) =>
+      NotificationTokenCollectionRefProvider._(argument: userId, from: this);
 
   @override
-  UserId get userId =>
-      (origin as NotificationTokenCollectionRefProvider).userId;
+  String toString() => r'notificationTokenCollectionRefProvider';
+}
+
+/// 通知FCMトークンドキュメントの参照
+
+@ProviderFor(notificationTokenDocumentRef)
+const notificationTokenDocumentRefProvider =
+    NotificationTokenDocumentRefFamily._();
+
+/// 通知FCMトークンドキュメントの参照
+
+final class NotificationTokenDocumentRefProvider
+    extends
+        $FunctionalProvider<
+          DocumentReference<FirestoreNotificationTokenModel>,
+          DocumentReference<FirestoreNotificationTokenModel>,
+          DocumentReference<FirestoreNotificationTokenModel>
+        >
+    with $Provider<DocumentReference<FirestoreNotificationTokenModel>> {
+  /// 通知FCMトークンドキュメントの参照
+  const NotificationTokenDocumentRefProvider._({
+    required NotificationTokenDocumentRefFamily super.from,
+    required ({UserId userId, String? token}) super.argument,
+  }) : super(
+         retry: null,
+         name: r'notificationTokenDocumentRefProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$notificationTokenDocumentRefHash();
+
+  @override
+  String toString() {
+    return r'notificationTokenDocumentRefProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $ProviderElement<DocumentReference<FirestoreNotificationTokenModel>>
+  $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+
+  @override
+  DocumentReference<FirestoreNotificationTokenModel> create(Ref ref) {
+    final argument = this.argument as ({UserId userId, String? token});
+    return notificationTokenDocumentRef(
+      ref,
+      userId: argument.userId,
+      token: argument.token,
+    );
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(
+    DocumentReference<FirestoreNotificationTokenModel> value,
+  ) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<
+            DocumentReference<FirestoreNotificationTokenModel>
+          >(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is NotificationTokenDocumentRefProvider &&
+        other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$notificationTokenDocumentRefHash() =>
     r'c8eb6eb1bc70391accafdc15ceabb075df5d7408';
 
 /// 通知FCMトークンドキュメントの参照
-///
-/// Copied from [notificationTokenDocumentRef].
-@ProviderFor(notificationTokenDocumentRef)
-const notificationTokenDocumentRefProvider =
-    NotificationTokenDocumentRefFamily();
 
-/// 通知FCMトークンドキュメントの参照
-///
-/// Copied from [notificationTokenDocumentRef].
-class NotificationTokenDocumentRefFamily
-    extends Family<DocumentReference<FirestoreNotificationTokenModel>> {
-  /// 通知FCMトークンドキュメントの参照
-  ///
-  /// Copied from [notificationTokenDocumentRef].
-  const NotificationTokenDocumentRefFamily();
+final class NotificationTokenDocumentRefFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          DocumentReference<FirestoreNotificationTokenModel>,
+          ({UserId userId, String? token})
+        > {
+  const NotificationTokenDocumentRefFamily._()
+    : super(
+        retry: null,
+        name: r'notificationTokenDocumentRefProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
   /// 通知FCMトークンドキュメントの参照
-  ///
-  /// Copied from [notificationTokenDocumentRef].
+
   NotificationTokenDocumentRefProvider call({
     required UserId userId,
     String? token,
-  }) {
-    return NotificationTokenDocumentRefProvider(userId: userId, token: token);
-  }
+  }) => NotificationTokenDocumentRefProvider._(
+    argument: (userId: userId, token: token),
+    from: this,
+  );
 
   @override
-  NotificationTokenDocumentRefProvider getProviderOverride(
-    covariant NotificationTokenDocumentRefProvider provider,
-  ) {
-    return call(userId: provider.userId, token: provider.token);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'notificationTokenDocumentRefProvider';
+  String toString() => r'notificationTokenDocumentRefProvider';
 }
-
-/// 通知FCMトークンドキュメントの参照
-///
-/// Copied from [notificationTokenDocumentRef].
-class NotificationTokenDocumentRefProvider
-    extends
-        AutoDisposeProvider<
-          DocumentReference<FirestoreNotificationTokenModel>
-        > {
-  /// 通知FCMトークンドキュメントの参照
-  ///
-  /// Copied from [notificationTokenDocumentRef].
-  NotificationTokenDocumentRefProvider({required UserId userId, String? token})
-    : this._internal(
-        (ref) => notificationTokenDocumentRef(
-          ref as NotificationTokenDocumentRefRef,
-          userId: userId,
-          token: token,
-        ),
-        from: notificationTokenDocumentRefProvider,
-        name: r'notificationTokenDocumentRefProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$notificationTokenDocumentRefHash,
-        dependencies: NotificationTokenDocumentRefFamily._dependencies,
-        allTransitiveDependencies:
-            NotificationTokenDocumentRefFamily._allTransitiveDependencies,
-        userId: userId,
-        token: token,
-      );
-
-  NotificationTokenDocumentRefProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.userId,
-    required this.token,
-  }) : super.internal();
-
-  final UserId userId;
-  final String? token;
-
-  @override
-  Override overrideWith(
-    DocumentReference<FirestoreNotificationTokenModel> Function(
-      NotificationTokenDocumentRefRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: NotificationTokenDocumentRefProvider._internal(
-        (ref) => create(ref as NotificationTokenDocumentRefRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        userId: userId,
-        token: token,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeProviderElement<DocumentReference<FirestoreNotificationTokenModel>>
-  createElement() {
-    return _NotificationTokenDocumentRefProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is NotificationTokenDocumentRefProvider &&
-        other.userId == userId &&
-        other.token == token;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, userId.hashCode);
-    hash = _SystemHash.combine(hash, token.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin NotificationTokenDocumentRefRef
-    on
-        AutoDisposeProviderRef<
-          DocumentReference<FirestoreNotificationTokenModel>
-        > {
-  /// The parameter `userId` of this provider.
-  UserId get userId;
-
-  /// The parameter `token` of this provider.
-  String? get token;
-}
-
-class _NotificationTokenDocumentRefProviderElement
-    extends
-        AutoDisposeProviderElement<
-          DocumentReference<FirestoreNotificationTokenModel>
-        >
-    with NotificationTokenDocumentRefRef {
-  _NotificationTokenDocumentRefProviderElement(super.provider);
-
-  @override
-  UserId get userId => (origin as NotificationTokenDocumentRefProvider).userId;
-  @override
-  String? get token => (origin as NotificationTokenDocumentRefProvider).token;
-}
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

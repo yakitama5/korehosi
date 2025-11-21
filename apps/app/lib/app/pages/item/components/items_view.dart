@@ -21,7 +21,7 @@ class ItemsView extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // 先頭ページを固定で取得
     // エラーハンドリングはコンテンツ取得部分で行うため`valueOrNull`で無視する
-    final result = ref.watch(searchItemsProvider(page: 1)).valueOrNull;
+    final result = ref.watch(searchItemsProvider(page: 1)).value;
 
     return Nested(
       children: const [
@@ -58,7 +58,7 @@ class ItemsView extends HookConsumerWidget {
               };
             },
             loading: () => _ShimmerTile(viewLayout: viewLayout),
-            error: (error, __) => _ErrorView(
+            error: (error, _) => _ErrorView(
               viewLayout: viewLayout,
               error: error,
               isLoading: response.isLoading,

@@ -19,7 +19,7 @@ class ItemsGroupSelectionWarningListner extends SingleChildStatelessWidget {
         final asyncValue = ref.watch(currentGroupProvider);
 
         // 読み込み済 かつ グループが未選択の場合は警告表示
-        if (asyncValue is AsyncData && asyncValue.valueOrNull == null) {
+        if (asyncValue is AsyncData && asyncValue.value == null) {
           return const SliverFillRemaining(
             hasScrollBody: false,
             child: NotGroupView(),

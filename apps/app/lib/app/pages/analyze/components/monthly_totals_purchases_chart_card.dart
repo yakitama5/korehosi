@@ -57,7 +57,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 期間を取得
-    final range = ref.watch(monthlyTotalsYearMonthRangeNotifierProvider);
+    final range = ref.watch(monthlyTotalsYearMonthRangeProvider);
 
     final colorScheme = useColorScheme();
     final textTheme = useTextTheme();
@@ -71,7 +71,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
         GestureDetector(
           onHorizontalDragEnd: (details) {
             final notifier = ref.read(
-              monthlyTotalsYearMonthRangeNotifierProvider.notifier,
+              monthlyTotalsYearMonthRangeProvider.notifier,
             );
             if (details.primaryVelocity == null) {
               return;
@@ -154,9 +154,8 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
           child: IconButton(
             icon: const Icon(Icons.keyboard_arrow_left_rounded),
             tooltip: commonI18n.common.prev,
-            onPressed: () => ref
-                .read(monthlyTotalsYearMonthRangeNotifierProvider.notifier)
-                .prev(),
+            onPressed: () =>
+                ref.read(monthlyTotalsYearMonthRangeProvider.notifier).prev(),
           ),
         ),
         Align(
@@ -166,9 +165,8 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
             child: IconButton(
               icon: const Icon(Icons.keyboard_arrow_right_rounded),
               tooltip: commonI18n.common.next,
-              onPressed: () => ref
-                  .read(monthlyTotalsYearMonthRangeNotifierProvider.notifier)
-                  .next(),
+              onPressed: () =>
+                  ref.read(monthlyTotalsYearMonthRangeProvider.notifier).next(),
             ),
           ),
         ),

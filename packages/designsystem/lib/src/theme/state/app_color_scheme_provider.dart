@@ -1,6 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 import 'package:packages_designsystem/src/extension/theme_color_extension.dart';
 import 'package:packages_designsystem/src/theme/utils/core_pallete_extension.dart';
@@ -13,7 +12,7 @@ part 'app_color_scheme_provider.g.dart';
 /// アプリ内のカラースキーマを管理
 @riverpod
 ColorScheme appColorScheme(Ref ref, {required Brightness brightness}) {
-  final themeColor = ref.watch(themeColorNotifierProvider);
+  final themeColor = ref.watch(themeColorProvider);
   final dynamicCorePalette = ref.watch(corePaletteProvider).value;
 
   // テーマカラーに応じたカラースキーマを取得
