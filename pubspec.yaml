@@ -1,7 +1,7 @@
 name: family_wish_list
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.10.0
 
 workspace:
   - apps/app
@@ -33,8 +33,8 @@ melos:
   command:
     bootstrap:
       environment:
-        sdk: ^3.9.0
-        flutter: ^3.35.1
+        sdk: ^3.10.1
+        flutter: ^3.38.3
       dependencies:
         collection: ^1.19.1
         cross_file: ^0.3.4+2

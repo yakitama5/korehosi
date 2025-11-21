@@ -1,4 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fcm_config/fcm_config.dart';
 import 'package:packages_domain/notification.dart';
 
 extension RemoteMessageX on RemoteMessage {
@@ -6,7 +6,7 @@ extension RemoteMessageX on RemoteMessage {
   NotificationMessage toDomainModel() => NotificationMessage(
     senderId: senderId == null ? null : NotificationMessageSenderId(senderId!),
     category: category,
-    path: data['path'],
+    path: data['path'] as String?,
     from: from,
     messageId: messageId == null ? null : NotificationMessageId(messageId!),
     messageType: messageType,

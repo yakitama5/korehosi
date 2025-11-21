@@ -4,7 +4,7 @@ publish_to: "none"
 version: 0.0.1
 
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.10.1
 
 dependencies:
   cross_file: ^0.3.4+2
