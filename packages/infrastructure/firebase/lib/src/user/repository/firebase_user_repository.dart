@@ -225,23 +225,23 @@ class FirebaseUserRepository implements UserRepository {
 
   /// Mobile用のGoogleサインイン
   Future<auth.UserCredential> _signInWithGoogleByMobile() async {
-    final googleUser = await ref.read(googleSignInProvider).signIn();
-    if (googleUser == null) {
+    try {
+      final googleUser = await ref.read(googleSignInProvider).authenticate();
+      final googleAuth = googleUser.authentication;
+      final credential = auth.GoogleAuthProvider.credential(
+        accessToken: googleAuth.idToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // 現在のユーザー情報があれば連携する
+      final current = _currentUser;
+      if (current != null) {
+        return current.linkWithCredential(credential);
+      } else {
+        return ref.read(firebaseAuthProvider).signInWithCredential(credential);
+      }
+    } on Exception catch (_) {
       throw const BusinessException(BusinessExceptionType.googleSignInUnknown);
-    }
-
-    final googleAuth = await googleUser.authentication;
-    final credential = auth.GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    // 現在のユーザー情報があれば連携する
-    final current = _currentUser;
-    if (current != null) {
-      return current.linkWithCredential(credential);
-    } else {
-      return ref.read(firebaseAuthProvider).signInWithCredential(credential);
     }
   }
 

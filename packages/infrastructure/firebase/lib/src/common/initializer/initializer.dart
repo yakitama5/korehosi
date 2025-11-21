@@ -35,15 +35,15 @@ final class FirebaseInitializer {
       Flavor.dev => DevEnv.recpthaSiteKey,
     };
     await FirebaseAppCheck.instance.activate(
-      androidProvider: switch (flavor) {
-        Flavor.prod => AndroidProvider.playIntegrity,
-        Flavor.dev => AndroidProvider.debug,
+      providerAndroid: switch (flavor) {
+        Flavor.prod => const AndroidPlayIntegrityProvider(),
+        Flavor.dev => const AndroidDebugProvider(),
       },
-      appleProvider: switch (flavor) {
-        Flavor.prod => AppleProvider.deviceCheck,
-        Flavor.dev => AppleProvider.debug,
+      providerApple: switch (flavor) {
+        Flavor.prod => const AppleDeviceCheckProvider(),
+        Flavor.dev => const AppleDebugProvider(),
       },
-      webProvider: ReCaptchaV3Provider(recpthaSiteKey),
+      providerWeb: ReCaptchaV3Provider(recpthaSiteKey),
     );
 
     // FCM Config

@@ -14,7 +14,7 @@ dependencies:
     path: ../../core
   packages_domain:
     path: ../../domain
-  purchases_flutter: ^9.6.2
+  purchases_flutter: ^9.9.8
   riverpod: ^3.0.3
   riverpod_annotation: ^3.0.3
 
