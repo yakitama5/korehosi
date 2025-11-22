@@ -5,9 +5,9 @@ import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'router.dart';
+import 'go_router_provider.dart';
 
-part 'router_observer.g.dart';
+part 'current_route_provider.g.dart';
 
 @riverpod
 class CurrentRoute extends _$CurrentRoute {

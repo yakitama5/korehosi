@@ -1,10 +1,10 @@
 import 'package:flutter_app/app/pages/error/error_page.dart';
-import 'package:flutter_app/app/routes/src/router_notifier.dart';
+import 'package:flutter_app/app/routes/src/providers/router_notifier_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:packages_application/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'router.g.dart';
+part 'go_router_provider.g.dart';
 
 @riverpod
 GoRouter goRouter(Ref ref) {

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/routes/src/router.dart';
+import 'package:flutter_app/app/routes/src/providers/go_router_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/common.dart';

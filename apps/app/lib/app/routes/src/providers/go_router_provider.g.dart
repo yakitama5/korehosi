@@ -1,6 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'router.dart';
+// ignore_for_file: type=lint, duplicate_ignore
+
+part of 'go_router_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator

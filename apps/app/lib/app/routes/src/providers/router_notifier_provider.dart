@@ -10,7 +10,7 @@ import 'package:packages_core/util.dart';
 import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'router_notifier.g.dart';
+part 'router_notifier_provider.g.dart';
 
 @riverpod
 class RouterNotifier extends _$RouterNotifier implements Listenable {
