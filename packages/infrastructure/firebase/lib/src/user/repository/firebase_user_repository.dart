@@ -10,6 +10,7 @@ import 'package:infrastructure_firebase/src/user/model/firestore_user_model.dart
 import 'package:infrastructure_firebase/src/user/state/firestore_deleted_user_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_participant_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_user_provider.dart';
+import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
@@ -226,11 +227,11 @@ class FirebaseUserRepository implements UserRepository {
   /// Mobile用のGoogleサインイン
   Future<auth.UserCredential> _signInWithGoogleByMobile() async {
     try {
-      final googleUser = await ref.read(googleSignInProvider).authenticate();
-      final googleAuth = googleUser.authentication;
+      final googleSignIn = ref.read(googleSignInProvider);
+      final account = await googleSignIn.authenticate();
+
       final credential = auth.GoogleAuthProvider.credential(
-        accessToken: googleAuth.idToken,
-        idToken: googleAuth.idToken,
+        idToken: account.authentication.idToken,
       );
 
       // 現在のユーザー情報があれば連携する
@@ -240,7 +241,8 @@ class FirebaseUserRepository implements UserRepository {
       } else {
         return ref.read(firebaseAuthProvider).signInWithCredential(credential);
       }
-    } on Exception catch (_) {
+    } on Exception catch (error) {
+      logger.e(error.toString());
       throw const BusinessException(BusinessExceptionType.googleSignInUnknown);
     }
   }

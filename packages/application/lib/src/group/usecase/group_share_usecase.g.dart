@@ -28,7 +28,7 @@ final class GroupShareUsecaseProvider
         argument: null,
         retry: null,
         name: r'groupShareUsecaseProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -56,4 +56,4 @@ final class GroupShareUsecaseProvider
   }
 }
 
-String _$groupShareUsecaseHash() => r'6dceeca26d8d37421a23b7879728b49c7d63f379';
+String _$groupShareUsecaseHash() => r'790c34ed1fa288446f845f580f52abbb7e0b5f7d';

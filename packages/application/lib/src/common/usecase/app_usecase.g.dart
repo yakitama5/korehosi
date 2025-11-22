@@ -23,7 +23,7 @@ final class AppUsecaseProvider
         argument: null,
         retry: null,
         name: r'appUsecaseProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -50,4 +50,4 @@ final class AppUsecaseProvider
   }
 }
 
-String _$appUsecaseHash() => r'0cfa5fbee4d6a8a8ab5827576c1b55451a4a3888';
+String _$appUsecaseHash() => r'fd7b9aeca68b8b8674dedaca8e6cb51086e9b2bb';

@@ -11,7 +11,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'group_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 GroupUsecase groupUsecase(Ref ref) => GroupUsecase(ref);
 
 typedef LocationBuilder = String Function(String shareLinkId);

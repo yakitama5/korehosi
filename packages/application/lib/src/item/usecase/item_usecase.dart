@@ -16,7 +16,7 @@ part 'item_usecase.g.dart';
 /// 欲しいもの詳細ページのパスを生成するためのファンクション
 typedef GenerateItemDetailRoute = String Function(ItemId itemId);
 
-@riverpod
+@Riverpod(keepAlive: true)
 ItemUsecase itemUsecase(Ref ref) => ItemUsecase(ref);
 
 /// ほしい物に関するユースケース
@@ -230,7 +230,6 @@ class ItemUsecase with RunUsecaseMixin {
     // Providerへの反映
     ref
       ..invalidate(itemProvider)
-      ..invalidate(searchItemsProvider)
-      ..invalidate(ItemDetailProviders.itemProvider);
+      ..invalidate(searchItemsProvider);
   }
 }

@@ -22,7 +22,7 @@ class AnimatedSwitcherFab extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final expanded = useState(false);
+    final expanded = useState(true);
 
     // スクロール状況を監視
     controller.addListener(

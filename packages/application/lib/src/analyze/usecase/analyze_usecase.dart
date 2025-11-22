@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'analyze_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 AnalyzeUsecase analyzeUsecase(Ref ref) => AnalyzeUsecase(ref);
 
 /// ほしい物に関するユースケース

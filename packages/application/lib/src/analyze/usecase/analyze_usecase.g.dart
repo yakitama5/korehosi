@@ -23,7 +23,7 @@ final class AnalyzeUsecaseProvider
         argument: null,
         retry: null,
         name: r'analyzeUsecaseProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -50,4 +50,4 @@ final class AnalyzeUsecaseProvider
   }
 }
 
-String _$analyzeUsecaseHash() => r'bdffaa855bfd9d0dc3ca01056239fdf456931a73';
+String _$analyzeUsecaseHash() => r'5a12cd124e6c7b5d6438e323580419cee2f9d00b';

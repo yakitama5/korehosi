@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'purchase_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 PurchaseUsecase purchaseUsecase(Ref ref) => PurchaseUsecase(ref);
 
 /// ほしい物の購入情報に関するユースケース

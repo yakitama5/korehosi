@@ -20,7 +20,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 UserUsecase userUsecase(Ref ref) => UserUsecase(ref);
 
 /// ユーザーに関するユースケース
@@ -178,7 +178,7 @@ class UserUsecase with RunUsecaseMixin {
   /// サインアップの際も含める
   Future<void> _onSignedIn() async {
     // 分析ログの出力
-    unawaited(ref.read(analyticsServiceProvider).signedIn());
+    await ref.read(analyticsServiceProvider).signedIn();
 
     // グループ情報を初期化
     await _initCurrentGroup();

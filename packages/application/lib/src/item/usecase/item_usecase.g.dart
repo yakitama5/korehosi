@@ -23,7 +23,7 @@ final class ItemUsecaseProvider
         argument: null,
         retry: null,
         name: r'itemUsecaseProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -50,4 +50,4 @@ final class ItemUsecaseProvider
   }
 }
 
-String _$itemUsecaseHash() => r'9383f73136ec5015f5dcddf7d9a9441d20a064f8';
+String _$itemUsecaseHash() => r'24b8a6d6f864e9e7b87963d4909d433e710b5954';

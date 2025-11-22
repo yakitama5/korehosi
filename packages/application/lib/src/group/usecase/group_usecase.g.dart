@@ -23,7 +23,7 @@ final class GroupUsecaseProvider
         argument: null,
         retry: null,
         name: r'groupUsecaseProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -50,4 +50,4 @@ final class GroupUsecaseProvider
   }
 }
 
-String _$groupUsecaseHash() => r'7052184c4e41784c33d7f048a5b41b2fee5263c0';
+String _$groupUsecaseHash() => r'7688e5c5cf85896d794f904238cc81ac2c49e050';

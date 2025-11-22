@@ -9,7 +9,7 @@ import 'package:share_plus/share_plus.dart';
 
 part 'group_share_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 GroupShareUsecase groupShareUsecase(Ref ref) => GroupShareUsecase(ref);
 
 /// グループの共有に関するユースケース

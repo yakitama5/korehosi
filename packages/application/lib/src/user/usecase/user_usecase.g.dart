@@ -23,7 +23,7 @@ final class UserUsecaseProvider
         argument: null,
         retry: null,
         name: r'userUsecaseProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -50,4 +50,4 @@ final class UserUsecaseProvider
   }
 }
 
-String _$userUsecaseHash() => r'bfac8058a5261b29428848589f17e0900d6817b2';
+String _$userUsecaseHash() => r'd3a82142385cdf14e1227b7fb885412b46dc833a';

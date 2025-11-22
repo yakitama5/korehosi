@@ -24,7 +24,7 @@ final class PurchaseUsecaseProvider
         argument: null,
         retry: null,
         name: r'purchaseUsecaseProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -51,4 +51,4 @@ final class PurchaseUsecaseProvider
   }
 }
 
-String _$purchaseUsecaseHash() => r'f756fbc139e3547deacd9d8a64304226a64eed23';
+String _$purchaseUsecaseHash() => r'de5deb44672aebb37ba1f09234951d41bd20b558';

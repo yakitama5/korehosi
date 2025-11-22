@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 AppUsecase appUsecase(Ref ref) => AppUsecase(ref);
 
 /// アプリ共通のユースケース

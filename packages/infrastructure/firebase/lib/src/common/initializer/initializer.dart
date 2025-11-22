@@ -3,6 +3,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:infrastructure_firebase/common.dart';
 import 'package:infrastructure_firebase/env/env.dart';
 import 'package:infrastructure_firebase/env/env.dev.dart';
@@ -66,6 +67,9 @@ final class FirebaseInitializer {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
     };
+
+    // GoogleSignIn
+    await GoogleSignIn.instance.initialize();
 
     // InitialMessage
     final remoteMessage = await FCMConfig.instance.getInitialMessage();
