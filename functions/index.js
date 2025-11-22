@@ -361,6 +361,8 @@ exports.scheduledBatchUpdatePurchaseStatus =
         const groupId = itemRef.parent.parent.id;
         const itemId = itemRef.id;
 
+        log(`"groups/${groupId}/purchases/${itemId}"のドキュメントを処理します。`);
+
         // 3. 対応する purchases ドキュメントを取得
         // コレクションパス: groups/{groupId}/purchases/{itemsId}
         const purchaseRef = db.doc(`groups/${groupId}/purchases/${itemId}`);
@@ -368,10 +370,16 @@ exports.scheduledBatchUpdatePurchaseStatus =
 
         // 購入状況を取得
         const purchaseStatus = getPurchaseStatus(purchaseDoc);
+        const childViewPurchaseStatus =
+          getChildPurchaseStatus(purchaseDoc, purchaseStatus);
+
+        log(`purchaseStatus is ${purchaseStatus}`);
+        log(`childViewPurchaseStatus is ${childViewPurchaseStatus}`);
 
         // 4. バッチに更新操作を追加
         currentBatch.update(itemRef, {
           'purchaseStatus': purchaseStatus,
+          'childViewPurchaseStatus': childViewPurchaseStatus,
         });
         batchCount++;
 
@@ -423,13 +431,43 @@ function pushToDevice(token, payload) {
  * @return {String} 購入状況
  */
 function getPurchaseStatus(purchaseDoc) {
-  if (purchaseDoc.exists) {
+  log(`is Exists ${purchaseDoc.exists}`);
+  if (!purchaseDoc.exists) {
     return NOT_PURCHASED;
-  } else if (purchaseDoc.data.sentAt != null) {
+  } else if (purchaseDoc.data().sentAt != null) {
+    log(`sentAt is ${purchaseDoc.data().sentAt}`);
     return PURCHASED;
-  } else if (purchaseDoc.data.planDate != null) {
+  } else if (purchaseDoc.data().planDate != null) {
+    log(`planDate is ${purchaseDoc.data().planDate}`);
     return PURCHASE_PLAN;
   } else {
+    return NOT_PURCHASED;
+  }
+}
+
+
+/**
+ * 子供用の購入ステータスを取得する.
+ * @param {DocumentSnapshot} purchaseDoc 購入状況のドキュメントスナップショット
+ * @param {PurchaseStatus} purchaseStatus 購入ステータス
+ * @return {PurchaseStatus} 子供用の購入ステータス
+ */
+function getChildPurchaseStatus(purchaseDoc, purchaseStatus) {
+  if (!purchaseDoc.exists) {
+    return NOT_PURCHASED;
+  }
+
+  // サプライズでなければそのまま設定
+  if (!purchaseDoc.data().surprise) {
+    return purchaseStatus;
+  }
+
+  switch (purchaseStatus) {
+  case PURCHASED:
+    return PURCHASED;
+  case NOT_PURCHASED:
+  case PURCHASE_PLAN:
+  default:
     return NOT_PURCHASED;
   }
 }

@@ -18,7 +18,7 @@ class WanterNameFilterChip extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final defaultTitle = i18n.item.common.wanterName;
 
-    final query = ref.watch(itemAnalyzeQueryNotifierProvider);
+    final query = ref.watch(itemAnalyzeQueryProvider);
     final selected = query.wanterName != null;
 
     return LeadingIconInputChip(
@@ -52,7 +52,7 @@ class WanterNameFilterChip extends HookConsumerWidget {
         );
 
         // 入力内容に応じて状態を更新
-        final notifier = ref.read(itemAnalyzeQueryNotifierProvider.notifier);
+        final notifier = ref.read(itemAnalyzeQueryProvider.notifier);
         switch (wanterName) {
           case null:
             return;

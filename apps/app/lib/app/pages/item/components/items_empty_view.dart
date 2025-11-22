@@ -17,7 +17,7 @@ class ItemsEmptyListner extends SingleChildStatelessWidget {
         final result = ref.watch(searchItemsProvider(page: 1));
 
         // 読み込み中でない かつ 0件の場合は空表示
-        if (result is AsyncData && result.valueOrNull?.totalCount == 0) {
+        if (result is AsyncData && result.value?.totalCount == 0) {
           return const SliverFillRemaining(child: ItemsEmptyView());
         }
 

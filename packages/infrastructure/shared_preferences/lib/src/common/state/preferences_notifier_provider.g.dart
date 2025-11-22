@@ -8,703 +8,511 @@ part of 'preferences_notifier_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$stringPreferenceHash() => r'17dab086a4e493d1f077f87e6c77d14d7ad9e948';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-abstract class _$StringPreference extends BuildlessAutoDisposeNotifier<String> {
-  late final Preferences<String> pref;
-
-  String build(Preferences<String> pref);
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
 /// `Preference<String>`のenum値を設定して利用する.
 ///
-///
-/// Copied from [StringPreference].
+
 @ProviderFor(StringPreference)
-const stringPreferenceProvider = StringPreferenceFamily();
+const stringPreferenceProvider = StringPreferenceFamily._();
 
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
 /// `Preference<String>`のenum値を設定して利用する.
 ///
-///
-/// Copied from [StringPreference].
-class StringPreferenceFamily extends Family<String> {
+final class StringPreferenceProvider
+    extends $NotifierProvider<StringPreference, String> {
   ///
   /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
   /// `Preference<String>`のenum値を設定して利用する.
   ///
-  ///
-  /// Copied from [StringPreference].
-  const StringPreferenceFamily();
+  const StringPreferenceProvider._({
+    required StringPreferenceFamily super.from,
+    required Preferences<String> super.argument,
+  }) : super(
+         retry: null,
+         name: r'stringPreferenceProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<String>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [StringPreference].
-  StringPreferenceProvider call(Preferences<String> pref) {
-    return StringPreferenceProvider(pref);
+  @override
+  String debugGetCreateSourceHash() => _$stringPreferenceHash();
+
+  @override
+  String toString() {
+    return r'stringPreferenceProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  StringPreferenceProvider getProviderOverride(
-    covariant StringPreferenceProvider provider,
-  ) {
-    return call(provider.pref);
-  }
+  StringPreference create() => StringPreference();
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'stringPreferenceProvider';
-}
-
-///
-/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-/// `Preference<String>`のenum値を設定して利用する.
-///
-///
-/// Copied from [StringPreference].
-class StringPreferenceProvider
-    extends AutoDisposeNotifierProviderImpl<StringPreference, String> {
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<String>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [StringPreference].
-  StringPreferenceProvider(Preferences<String> pref)
-    : this._internal(
-        () => StringPreference()..pref = pref,
-        from: stringPreferenceProvider,
-        name: r'stringPreferenceProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$stringPreferenceHash,
-        dependencies: StringPreferenceFamily._dependencies,
-        allTransitiveDependencies:
-            StringPreferenceFamily._allTransitiveDependencies,
-        pref: pref,
-      );
-
-  StringPreferenceProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.pref,
-  }) : super.internal();
-
-  final Preferences<String> pref;
-
-  @override
-  String runNotifierBuild(covariant StringPreference notifier) {
-    return notifier.build(pref);
-  }
-
-  @override
-  Override overrideWith(StringPreference Function() create) {
-    return ProviderOverride(
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
       origin: this,
-      override: StringPreferenceProvider._internal(
-        () => create()..pref = pref,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        pref: pref,
-      ),
+      providerOverride: $SyncValueProvider<String>(value),
     );
-  }
-
-  @override
-  AutoDisposeNotifierProviderElement<StringPreference, String> createElement() {
-    return _StringPreferenceProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is StringPreferenceProvider && other.pref == pref;
+    return other is StringPreferenceProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, pref.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin StringPreferenceRef on AutoDisposeNotifierProviderRef<String> {
-  /// The parameter `pref` of this provider.
-  Preferences<String> get pref;
-}
-
-class _StringPreferenceProviderElement
-    extends AutoDisposeNotifierProviderElement<StringPreference, String>
-    with StringPreferenceRef {
-  _StringPreferenceProviderElement(super.provider);
-
-  @override
-  Preferences<String> get pref => (origin as StringPreferenceProvider).pref;
-}
-
-String _$stringWithStringFamilyPreferenceHash() =>
-    r'e541a67bef349dd06f9f497db0841197cd5f0472';
-
-abstract class _$StringWithStringFamilyPreference
-    extends BuildlessAutoDisposeNotifier<String> {
-  late final Preferences<String> pref;
-  late final String family;
-
-  String build(Preferences<String> pref, String family);
-}
+String _$stringPreferenceHash() => r'17dab086a4e493d1f077f87e6c77d14d7ad9e948';
 
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
 /// `Preference<String>`のenum値を設定して利用する.
 ///
-///
-/// Copied from [StringWithStringFamilyPreference].
-@ProviderFor(StringWithStringFamilyPreference)
-const stringWithStringFamilyPreferenceProvider =
-    StringWithStringFamilyPreferenceFamily();
 
-///
-/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-/// `Preference<String>`のenum値を設定して利用する.
-///
-///
-/// Copied from [StringWithStringFamilyPreference].
-class StringWithStringFamilyPreferenceFamily extends Family<String> {
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<String>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [StringWithStringFamilyPreference].
-  const StringWithStringFamilyPreferenceFamily();
-
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<String>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [StringWithStringFamilyPreference].
-  StringWithStringFamilyPreferenceProvider call(
-    Preferences<String> pref,
-    String family,
-  ) {
-    return StringWithStringFamilyPreferenceProvider(pref, family);
-  }
-
-  @override
-  StringWithStringFamilyPreferenceProvider getProviderOverride(
-    covariant StringWithStringFamilyPreferenceProvider provider,
-  ) {
-    return call(provider.pref, provider.family);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'stringWithStringFamilyPreferenceProvider';
-}
-
-///
-/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-/// `Preference<String>`のenum値を設定して利用する.
-///
-///
-/// Copied from [StringWithStringFamilyPreference].
-class StringWithStringFamilyPreferenceProvider
-    extends
-        AutoDisposeNotifierProviderImpl<
-          StringWithStringFamilyPreference,
-          String
+final class StringPreferenceFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          StringPreference,
+          String,
+          String,
+          String,
+          Preferences<String>
         > {
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<String>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [StringWithStringFamilyPreference].
-  StringWithStringFamilyPreferenceProvider(
-    Preferences<String> pref,
-    String family,
-  ) : this._internal(
-        () => StringWithStringFamilyPreference()
-          ..pref = pref
-          ..family = family,
-        from: stringWithStringFamilyPreferenceProvider,
-        name: r'stringWithStringFamilyPreferenceProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$stringWithStringFamilyPreferenceHash,
-        dependencies: StringWithStringFamilyPreferenceFamily._dependencies,
-        allTransitiveDependencies:
-            StringWithStringFamilyPreferenceFamily._allTransitiveDependencies,
-        pref: pref,
-        family: family,
+  const StringPreferenceFamily._()
+    : super(
+        retry: null,
+        name: r'stringPreferenceProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
       );
 
-  StringWithStringFamilyPreferenceProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.pref,
-    required this.family,
-  }) : super.internal();
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<String>`のenum値を設定して利用する.
+  ///
 
-  final Preferences<String> pref;
-  final String family;
+  StringPreferenceProvider call(Preferences<String> pref) =>
+      StringPreferenceProvider._(argument: pref, from: this);
 
   @override
-  String runNotifierBuild(covariant StringWithStringFamilyPreference notifier) {
-    return notifier.build(pref, family);
+  String toString() => r'stringPreferenceProvider';
+}
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+
+abstract class _$StringPreference extends $Notifier<String> {
+  late final _$args = ref.$arg as Preferences<String>;
+  Preferences<String> get pref => _$args;
+
+  String build(Preferences<String> pref);
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build(_$args);
+    final ref = this.ref as $Ref<String, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String, String>,
+              String,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+
+@ProviderFor(StringWithStringFamilyPreference)
+const stringWithStringFamilyPreferenceProvider =
+    StringWithStringFamilyPreferenceFamily._();
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+final class StringWithStringFamilyPreferenceProvider
+    extends $NotifierProvider<StringWithStringFamilyPreference, String> {
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<String>`のenum値を設定して利用する.
+  ///
+  const StringWithStringFamilyPreferenceProvider._({
+    required StringWithStringFamilyPreferenceFamily super.from,
+    required (Preferences<String>, String) super.argument,
+  }) : super(
+         retry: null,
+         name: r'stringWithStringFamilyPreferenceProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$stringWithStringFamilyPreferenceHash();
+
+  @override
+  String toString() {
+    return r'stringWithStringFamilyPreferenceProvider'
+        ''
+        '$argument';
   }
 
+  @$internal
   @override
-  Override overrideWith(StringWithStringFamilyPreference Function() create) {
-    return ProviderOverride(
+  StringWithStringFamilyPreference create() =>
+      StringWithStringFamilyPreference();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
       origin: this,
-      override: StringWithStringFamilyPreferenceProvider._internal(
-        () => create()
-          ..pref = pref
-          ..family = family,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        pref: pref,
-        family: family,
-      ),
+      providerOverride: $SyncValueProvider<String>(value),
     );
-  }
-
-  @override
-  AutoDisposeNotifierProviderElement<StringWithStringFamilyPreference, String>
-  createElement() {
-    return _StringWithStringFamilyPreferenceProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
     return other is StringWithStringFamilyPreferenceProvider &&
-        other.pref == pref &&
-        other.family == family;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, pref.hashCode);
-    hash = _SystemHash.combine(hash, family.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin StringWithStringFamilyPreferenceRef
-    on AutoDisposeNotifierProviderRef<String> {
-  /// The parameter `pref` of this provider.
-  Preferences<String> get pref;
+String _$stringWithStringFamilyPreferenceHash() =>
+    r'e541a67bef349dd06f9f497db0841197cd5f0472';
 
-  /// The parameter `family` of this provider.
-  String get family;
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+
+final class StringWithStringFamilyPreferenceFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          StringWithStringFamilyPreference,
+          String,
+          String,
+          String,
+          (Preferences<String>, String)
+        > {
+  const StringWithStringFamilyPreferenceFamily._()
+    : super(
+        retry: null,
+        name: r'stringWithStringFamilyPreferenceProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<String>`のenum値を設定して利用する.
+  ///
+
+  StringWithStringFamilyPreferenceProvider call(
+    Preferences<String> pref,
+    String family,
+  ) => StringWithStringFamilyPreferenceProvider._(
+    argument: (pref, family),
+    from: this,
+  );
+
+  @override
+  String toString() => r'stringWithStringFamilyPreferenceProvider';
 }
 
-class _StringWithStringFamilyPreferenceProviderElement
-    extends
-        AutoDisposeNotifierProviderElement<
-          StringWithStringFamilyPreference,
-          String
-        >
-    with StringWithStringFamilyPreferenceRef {
-  _StringWithStringFamilyPreferenceProviderElement(super.provider);
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<String>`のenum値を設定して利用する.
+///
+
+abstract class _$StringWithStringFamilyPreference extends $Notifier<String> {
+  late final _$args = ref.$arg as (Preferences<String>, String);
+  Preferences<String> get pref => _$args.$1;
+  String get family => _$args.$2;
+
+  String build(Preferences<String> pref, String family);
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build(_$args.$1, _$args.$2);
+    final ref = this.ref as $Ref<String, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String, String>,
+              String,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<bool>`のenum値を設定して利用する.
+///
+
+@ProviderFor(BoolPreference)
+const boolPreferenceProvider = BoolPreferenceFamily._();
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<bool>`のenum値を設定して利用する.
+///
+final class BoolPreferenceProvider
+    extends $NotifierProvider<BoolPreference, bool> {
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<bool>`のenum値を設定して利用する.
+  ///
+  const BoolPreferenceProvider._({
+    required BoolPreferenceFamily super.from,
+    required Preferences<bool> super.argument,
+  }) : super(
+         retry: null,
+         name: r'boolPreferenceProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
-  Preferences<String> get pref =>
-      (origin as StringWithStringFamilyPreferenceProvider).pref;
+  String debugGetCreateSourceHash() => _$boolPreferenceHash();
+
   @override
-  String get family =>
-      (origin as StringWithStringFamilyPreferenceProvider).family;
+  String toString() {
+    return r'boolPreferenceProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  BoolPreference create() => BoolPreference();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is BoolPreferenceProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$boolPreferenceHash() => r'1645984b3471a9801c471b1803d35d078c38b074';
 
-abstract class _$BoolPreference extends BuildlessAutoDisposeNotifier<bool> {
-  late final Preferences<bool> pref;
-
-  bool build(Preferences<bool> pref);
-}
-
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
 /// `Preference<bool>`のenum値を設定して利用する.
 ///
-///
-/// Copied from [BoolPreference].
-@ProviderFor(BoolPreference)
-const boolPreferenceProvider = BoolPreferenceFamily();
 
-///
-/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-/// `Preference<bool>`のenum値を設定して利用する.
-///
-///
-/// Copied from [BoolPreference].
-class BoolPreferenceFamily extends Family<bool> {
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<bool>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [BoolPreference].
-  const BoolPreferenceFamily();
-
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<bool>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [BoolPreference].
-  BoolPreferenceProvider call(Preferences<bool> pref) {
-    return BoolPreferenceProvider(pref);
-  }
-
-  @override
-  BoolPreferenceProvider getProviderOverride(
-    covariant BoolPreferenceProvider provider,
-  ) {
-    return call(provider.pref);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'boolPreferenceProvider';
-}
-
-///
-/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-/// `Preference<bool>`のenum値を設定して利用する.
-///
-///
-/// Copied from [BoolPreference].
-class BoolPreferenceProvider
-    extends AutoDisposeNotifierProviderImpl<BoolPreference, bool> {
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<bool>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [BoolPreference].
-  BoolPreferenceProvider(Preferences<bool> pref)
-    : this._internal(
-        () => BoolPreference()..pref = pref,
-        from: boolPreferenceProvider,
+final class BoolPreferenceFamily extends $Family
+    with
+        $ClassFamilyOverride<
+          BoolPreference,
+          bool,
+          bool,
+          bool,
+          Preferences<bool>
+        > {
+  const BoolPreferenceFamily._()
+    : super(
+        retry: null,
         name: r'boolPreferenceProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$boolPreferenceHash,
-        dependencies: BoolPreferenceFamily._dependencies,
-        allTransitiveDependencies:
-            BoolPreferenceFamily._allTransitiveDependencies,
-        pref: pref,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
       );
 
-  BoolPreferenceProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.pref,
-  }) : super.internal();
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<bool>`のenum値を設定して利用する.
+  ///
 
-  final Preferences<bool> pref;
+  BoolPreferenceProvider call(Preferences<bool> pref) =>
+      BoolPreferenceProvider._(argument: pref, from: this);
 
   @override
-  bool runNotifierBuild(covariant BoolPreference notifier) {
-    return notifier.build(pref);
+  String toString() => r'boolPreferenceProvider';
+}
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<bool>`のenum値を設定して利用する.
+///
+
+abstract class _$BoolPreference extends $Notifier<bool> {
+  late final _$args = ref.$arg as Preferences<bool>;
+  Preferences<bool> get pref => _$args;
+
+  bool build(Preferences<bool> pref);
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build(_$args);
+    final ref = this.ref as $Ref<bool, bool>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<bool, bool>,
+              bool,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<int>`のenum値を設定して利用する.
+///
+
+@ProviderFor(IntPreference)
+const intPreferenceProvider = IntPreferenceFamily._();
+
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<int>`のenum値を設定して利用する.
+///
+final class IntPreferenceProvider
+    extends $NotifierProvider<IntPreference, int> {
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<int>`のenum値を設定して利用する.
+  ///
+  const IntPreferenceProvider._({
+    required IntPreferenceFamily super.from,
+    required Preferences<int> super.argument,
+  }) : super(
+         retry: null,
+         name: r'intPreferenceProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$intPreferenceHash();
+
+  @override
+  String toString() {
+    return r'intPreferenceProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  Override overrideWith(BoolPreference Function() create) {
-    return ProviderOverride(
+  IntPreference create() => IntPreference();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int value) {
+    return $ProviderOverride(
       origin: this,
-      override: BoolPreferenceProvider._internal(
-        () => create()..pref = pref,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        pref: pref,
-      ),
+      providerOverride: $SyncValueProvider<int>(value),
     );
   }
 
   @override
-  AutoDisposeNotifierProviderElement<BoolPreference, bool> createElement() {
-    return _BoolPreferenceProviderElement(this);
-  }
-
-  @override
   bool operator ==(Object other) {
-    return other is BoolPreferenceProvider && other.pref == pref;
+    return other is IntPreferenceProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, pref.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin BoolPreferenceRef on AutoDisposeNotifierProviderRef<bool> {
-  /// The parameter `pref` of this provider.
-  Preferences<bool> get pref;
-}
-
-class _BoolPreferenceProviderElement
-    extends AutoDisposeNotifierProviderElement<BoolPreference, bool>
-    with BoolPreferenceRef {
-  _BoolPreferenceProviderElement(super.provider);
-
-  @override
-  Preferences<bool> get pref => (origin as BoolPreferenceProvider).pref;
 }
 
 String _$intPreferenceHash() => r'ff1eb7bca50d959f32b13d584a657b5facf24585';
 
-abstract class _$IntPreference extends BuildlessAutoDisposeNotifier<int> {
-  late final Preferences<int> pref;
-
-  int build(Preferences<int> pref);
-}
-
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
 /// `Preference<int>`のenum値を設定して利用する.
 ///
-///
-/// Copied from [IntPreference].
-@ProviderFor(IntPreference)
-const intPreferenceProvider = IntPreferenceFamily();
 
-///
-/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-/// `Preference<int>`のenum値を設定して利用する.
-///
-///
-/// Copied from [IntPreference].
-class IntPreferenceFamily extends Family<int> {
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<int>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [IntPreference].
-  const IntPreferenceFamily();
-
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<int>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [IntPreference].
-  IntPreferenceProvider call(Preferences<int> pref) {
-    return IntPreferenceProvider(pref);
-  }
-
-  @override
-  IntPreferenceProvider getProviderOverride(
-    covariant IntPreferenceProvider provider,
-  ) {
-    return call(provider.pref);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'intPreferenceProvider';
-}
-
-///
-/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-/// `Preference<int>`のenum値を設定して利用する.
-///
-///
-/// Copied from [IntPreference].
-class IntPreferenceProvider
-    extends AutoDisposeNotifierProviderImpl<IntPreference, int> {
-  ///
-  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
-  /// `Preference<int>`のenum値を設定して利用する.
-  ///
-  ///
-  /// Copied from [IntPreference].
-  IntPreferenceProvider(Preferences<int> pref)
-    : this._internal(
-        () => IntPreference()..pref = pref,
-        from: intPreferenceProvider,
+final class IntPreferenceFamily extends $Family
+    with $ClassFamilyOverride<IntPreference, int, int, int, Preferences<int>> {
+  const IntPreferenceFamily._()
+    : super(
+        retry: null,
         name: r'intPreferenceProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$intPreferenceHash,
-        dependencies: IntPreferenceFamily._dependencies,
-        allTransitiveDependencies:
-            IntPreferenceFamily._allTransitiveDependencies,
-        pref: pref,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
       );
 
-  IntPreferenceProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.pref,
-  }) : super.internal();
+  ///
+  /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+  /// `Preference<int>`のenum値を設定して利用する.
+  ///
 
-  final Preferences<int> pref;
+  IntPreferenceProvider call(Preferences<int> pref) =>
+      IntPreferenceProvider._(argument: pref, from: this);
 
   @override
-  int runNotifierBuild(covariant IntPreference notifier) {
-    return notifier.build(pref);
-  }
-
-  @override
-  Override overrideWith(IntPreference Function() create) {
-    return ProviderOverride(
-      origin: this,
-      override: IntPreferenceProvider._internal(
-        () => create()..pref = pref,
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        pref: pref,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeNotifierProviderElement<IntPreference, int> createElement() {
-    return _IntPreferenceProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is IntPreferenceProvider && other.pref == pref;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, pref.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
+  String toString() => r'intPreferenceProvider';
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin IntPreferenceRef on AutoDisposeNotifierProviderRef<int> {
-  /// The parameter `pref` of this provider.
-  Preferences<int> get pref;
-}
+///
+/// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
+/// `Preference<int>`のenum値を設定して利用する.
+///
 
-class _IntPreferenceProviderElement
-    extends AutoDisposeNotifierProviderElement<IntPreference, int>
-    with IntPreferenceRef {
-  _IntPreferenceProviderElement(super.provider);
+abstract class _$IntPreference extends $Notifier<int> {
+  late final _$args = ref.$arg as Preferences<int>;
+  Preferences<int> get pref => _$args;
 
+  int build(Preferences<int> pref);
+  @$mustCallSuper
   @override
-  Preferences<int> get pref => (origin as IntPreferenceProvider).pref;
+  void runBuild() {
+    final created = build(_$args);
+    final ref = this.ref as $Ref<int, int>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<int, int>,
+              int,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

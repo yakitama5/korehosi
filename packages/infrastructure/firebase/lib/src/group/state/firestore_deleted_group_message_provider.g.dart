@@ -8,345 +8,226 @@ part of 'firestore_deleted_group_message_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dgroupMessageCollectionRefHash() =>
-    r'b5225ee299ecd2a8a6e38ffb3ece25fb6077ad5b';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// 削除済通知メッセージコレクションの参照
-///
-/// Copied from [dgroupMessageCollectionRef].
+
 @ProviderFor(dgroupMessageCollectionRef)
-const dgroupMessageCollectionRefProvider = DgroupMessageCollectionRefFamily();
+const dgroupMessageCollectionRefProvider = DgroupMessageCollectionRefFamily._();
 
 /// 削除済通知メッセージコレクションの参照
-///
-/// Copied from [dgroupMessageCollectionRef].
-class DgroupMessageCollectionRefFamily
-    extends Family<CollectionReference<FirestoreGroupMessageModel>> {
-  /// 削除済通知メッセージコレクションの参照
-  ///
-  /// Copied from [dgroupMessageCollectionRef].
-  const DgroupMessageCollectionRefFamily();
 
-  /// 削除済通知メッセージコレクションの参照
-  ///
-  /// Copied from [dgroupMessageCollectionRef].
-  DgroupMessageCollectionRefProvider call({required GroupId groupId}) {
-    return DgroupMessageCollectionRefProvider(groupId: groupId);
-  }
-
-  @override
-  DgroupMessageCollectionRefProvider getProviderOverride(
-    covariant DgroupMessageCollectionRefProvider provider,
-  ) {
-    return call(groupId: provider.groupId);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'dgroupMessageCollectionRefProvider';
-}
-
-/// 削除済通知メッセージコレクションの参照
-///
-/// Copied from [dgroupMessageCollectionRef].
-class DgroupMessageCollectionRefProvider
+final class DgroupMessageCollectionRefProvider
     extends
-        AutoDisposeProvider<CollectionReference<FirestoreGroupMessageModel>> {
+        $FunctionalProvider<
+          CollectionReference<FirestoreGroupMessageModel>,
+          CollectionReference<FirestoreGroupMessageModel>,
+          CollectionReference<FirestoreGroupMessageModel>
+        >
+    with $Provider<CollectionReference<FirestoreGroupMessageModel>> {
   /// 削除済通知メッセージコレクションの参照
-  ///
-  /// Copied from [dgroupMessageCollectionRef].
-  DgroupMessageCollectionRefProvider({required GroupId groupId})
-    : this._internal(
-        (ref) => dgroupMessageCollectionRef(
-          ref as DgroupMessageCollectionRefRef,
-          groupId: groupId,
-        ),
-        from: dgroupMessageCollectionRefProvider,
-        name: r'dgroupMessageCollectionRefProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$dgroupMessageCollectionRefHash,
-        dependencies: DgroupMessageCollectionRefFamily._dependencies,
-        allTransitiveDependencies:
-            DgroupMessageCollectionRefFamily._allTransitiveDependencies,
-        groupId: groupId,
-      );
-
-  DgroupMessageCollectionRefProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.groupId,
-  }) : super.internal();
-
-  final GroupId groupId;
+  const DgroupMessageCollectionRefProvider._({
+    required DgroupMessageCollectionRefFamily super.from,
+    required GroupId super.argument,
+  }) : super(
+         retry: null,
+         name: r'dgroupMessageCollectionRefProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
 
   @override
-  Override overrideWith(
-    CollectionReference<FirestoreGroupMessageModel> Function(
-      DgroupMessageCollectionRefRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: DgroupMessageCollectionRefProvider._internal(
-        (ref) => create(ref as DgroupMessageCollectionRefRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        groupId: groupId,
-      ),
-    );
+  String debugGetCreateSourceHash() => _$dgroupMessageCollectionRefHash();
+
+  @override
+  String toString() {
+    return r'dgroupMessageCollectionRefProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AutoDisposeProviderElement<CollectionReference<FirestoreGroupMessageModel>>
-  createElement() {
-    return _DgroupMessageCollectionRefProviderElement(this);
+  $ProviderElement<CollectionReference<FirestoreGroupMessageModel>>
+  $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+
+  @override
+  CollectionReference<FirestoreGroupMessageModel> create(Ref ref) {
+    final argument = this.argument as GroupId;
+    return dgroupMessageCollectionRef(ref, groupId: argument);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(
+    CollectionReference<FirestoreGroupMessageModel> value,
+  ) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<CollectionReference<FirestoreGroupMessageModel>>(
+            value,
+          ),
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return other is DgroupMessageCollectionRefProvider &&
-        other.groupId == groupId;
+        other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, groupId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin DgroupMessageCollectionRefRef
-    on AutoDisposeProviderRef<CollectionReference<FirestoreGroupMessageModel>> {
-  /// The parameter `groupId` of this provider.
-  GroupId get groupId;
-}
+String _$dgroupMessageCollectionRefHash() =>
+    r'b5225ee299ecd2a8a6e38ffb3ece25fb6077ad5b';
 
-class _DgroupMessageCollectionRefProviderElement
-    extends
-        AutoDisposeProviderElement<
-          CollectionReference<FirestoreGroupMessageModel>
-        >
-    with DgroupMessageCollectionRefRef {
-  _DgroupMessageCollectionRefProviderElement(super.provider);
+/// 削除済通知メッセージコレクションの参照
+
+final class DgroupMessageCollectionRefFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          CollectionReference<FirestoreGroupMessageModel>,
+          GroupId
+        > {
+  const DgroupMessageCollectionRefFamily._()
+    : super(
+        retry: null,
+        name: r'dgroupMessageCollectionRefProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// 削除済通知メッセージコレクションの参照
+
+  DgroupMessageCollectionRefProvider call({required GroupId groupId}) =>
+      DgroupMessageCollectionRefProvider._(argument: groupId, from: this);
 
   @override
-  GroupId get groupId => (origin as DgroupMessageCollectionRefProvider).groupId;
+  String toString() => r'dgroupMessageCollectionRefProvider';
+}
+
+/// 削除済通知メッセージドキュメントの参照
+
+@ProviderFor(dgroupMessageDocumentRef)
+const dgroupMessageDocumentRefProvider = DgroupMessageDocumentRefFamily._();
+
+/// 削除済通知メッセージドキュメントの参照
+
+final class DgroupMessageDocumentRefProvider
+    extends
+        $FunctionalProvider<
+          DocumentReference<FirestoreGroupMessageModel>,
+          DocumentReference<FirestoreGroupMessageModel>,
+          DocumentReference<FirestoreGroupMessageModel>
+        >
+    with $Provider<DocumentReference<FirestoreGroupMessageModel>> {
+  /// 削除済通知メッセージドキュメントの参照
+  const DgroupMessageDocumentRefProvider._({
+    required DgroupMessageDocumentRefFamily super.from,
+    required ({GroupId groupId, NotificationMessageId? dnotificationMessageId})
+    super.argument,
+  }) : super(
+         retry: null,
+         name: r'dgroupMessageDocumentRefProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$dgroupMessageDocumentRefHash();
+
+  @override
+  String toString() {
+    return r'dgroupMessageDocumentRefProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $ProviderElement<DocumentReference<FirestoreGroupMessageModel>>
+  $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+
+  @override
+  DocumentReference<FirestoreGroupMessageModel> create(Ref ref) {
+    final argument =
+        this.argument
+            as ({
+              GroupId groupId,
+              NotificationMessageId? dnotificationMessageId,
+            });
+    return dgroupMessageDocumentRef(
+      ref,
+      groupId: argument.groupId,
+      dnotificationMessageId: argument.dnotificationMessageId,
+    );
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(
+    DocumentReference<FirestoreGroupMessageModel> value,
+  ) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<DocumentReference<FirestoreGroupMessageModel>>(
+            value,
+          ),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is DgroupMessageDocumentRefProvider &&
+        other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$dgroupMessageDocumentRefHash() =>
     r'0fa6d8ac40505b10c6758a0b1ea2ec14517e433c';
 
 /// 削除済通知メッセージドキュメントの参照
-///
-/// Copied from [dgroupMessageDocumentRef].
-@ProviderFor(dgroupMessageDocumentRef)
-const dgroupMessageDocumentRefProvider = DgroupMessageDocumentRefFamily();
 
-/// 削除済通知メッセージドキュメントの参照
-///
-/// Copied from [dgroupMessageDocumentRef].
-class DgroupMessageDocumentRefFamily
-    extends Family<DocumentReference<FirestoreGroupMessageModel>> {
-  /// 削除済通知メッセージドキュメントの参照
-  ///
-  /// Copied from [dgroupMessageDocumentRef].
-  const DgroupMessageDocumentRefFamily();
+final class DgroupMessageDocumentRefFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          DocumentReference<FirestoreGroupMessageModel>,
+          ({GroupId groupId, NotificationMessageId? dnotificationMessageId})
+        > {
+  const DgroupMessageDocumentRefFamily._()
+    : super(
+        retry: null,
+        name: r'dgroupMessageDocumentRefProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
   /// 削除済通知メッセージドキュメントの参照
-  ///
-  /// Copied from [dgroupMessageDocumentRef].
+
   DgroupMessageDocumentRefProvider call({
     required GroupId groupId,
     NotificationMessageId? dnotificationMessageId,
-  }) {
-    return DgroupMessageDocumentRefProvider(
+  }) => DgroupMessageDocumentRefProvider._(
+    argument: (
       groupId: groupId,
       dnotificationMessageId: dnotificationMessageId,
-    );
-  }
+    ),
+    from: this,
+  );
 
   @override
-  DgroupMessageDocumentRefProvider getProviderOverride(
-    covariant DgroupMessageDocumentRefProvider provider,
-  ) {
-    return call(
-      groupId: provider.groupId,
-      dnotificationMessageId: provider.dnotificationMessageId,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'dgroupMessageDocumentRefProvider';
+  String toString() => r'dgroupMessageDocumentRefProvider';
 }
-
-/// 削除済通知メッセージドキュメントの参照
-///
-/// Copied from [dgroupMessageDocumentRef].
-class DgroupMessageDocumentRefProvider
-    extends AutoDisposeProvider<DocumentReference<FirestoreGroupMessageModel>> {
-  /// 削除済通知メッセージドキュメントの参照
-  ///
-  /// Copied from [dgroupMessageDocumentRef].
-  DgroupMessageDocumentRefProvider({
-    required GroupId groupId,
-    NotificationMessageId? dnotificationMessageId,
-  }) : this._internal(
-         (ref) => dgroupMessageDocumentRef(
-           ref as DgroupMessageDocumentRefRef,
-           groupId: groupId,
-           dnotificationMessageId: dnotificationMessageId,
-         ),
-         from: dgroupMessageDocumentRefProvider,
-         name: r'dgroupMessageDocumentRefProvider',
-         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-             ? null
-             : _$dgroupMessageDocumentRefHash,
-         dependencies: DgroupMessageDocumentRefFamily._dependencies,
-         allTransitiveDependencies:
-             DgroupMessageDocumentRefFamily._allTransitiveDependencies,
-         groupId: groupId,
-         dnotificationMessageId: dnotificationMessageId,
-       );
-
-  DgroupMessageDocumentRefProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.groupId,
-    required this.dnotificationMessageId,
-  }) : super.internal();
-
-  final GroupId groupId;
-  final NotificationMessageId? dnotificationMessageId;
-
-  @override
-  Override overrideWith(
-    DocumentReference<FirestoreGroupMessageModel> Function(
-      DgroupMessageDocumentRefRef provider,
-    )
-    create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: DgroupMessageDocumentRefProvider._internal(
-        (ref) => create(ref as DgroupMessageDocumentRefRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        groupId: groupId,
-        dnotificationMessageId: dnotificationMessageId,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeProviderElement<DocumentReference<FirestoreGroupMessageModel>>
-  createElement() {
-    return _DgroupMessageDocumentRefProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is DgroupMessageDocumentRefProvider &&
-        other.groupId == groupId &&
-        other.dnotificationMessageId == dnotificationMessageId;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, groupId.hashCode);
-    hash = _SystemHash.combine(hash, dnotificationMessageId.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin DgroupMessageDocumentRefRef
-    on AutoDisposeProviderRef<DocumentReference<FirestoreGroupMessageModel>> {
-  /// The parameter `groupId` of this provider.
-  GroupId get groupId;
-
-  /// The parameter `dnotificationMessageId` of this provider.
-  NotificationMessageId? get dnotificationMessageId;
-}
-
-class _DgroupMessageDocumentRefProviderElement
-    extends
-        AutoDisposeProviderElement<
-          DocumentReference<FirestoreGroupMessageModel>
-        >
-    with DgroupMessageDocumentRefRef {
-  _DgroupMessageDocumentRefProviderElement(super.provider);
-
-  @override
-  GroupId get groupId => (origin as DgroupMessageDocumentRefProvider).groupId;
-  @override
-  NotificationMessageId? get dnotificationMessageId =>
-      (origin as DgroupMessageDocumentRefProvider).dnotificationMessageId;
-}
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

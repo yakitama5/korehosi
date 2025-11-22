@@ -8,25 +8,59 @@ part of 'item_analyze_query_notifier_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemAnalyzeQueryNotifierHash() =>
-    r'f6326e80e83cdd9269d185c4384d8c49a160adac';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [ItemAnalyzeQueryNotifier].
 @ProviderFor(ItemAnalyzeQueryNotifier)
-final itemAnalyzeQueryNotifierProvider =
-    AutoDisposeNotifierProvider<
-      ItemAnalyzeQueryNotifier,
-      ItemAnalyzeQuery
-    >.internal(
-      ItemAnalyzeQueryNotifier.new,
-      name: r'itemAnalyzeQueryNotifierProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$itemAnalyzeQueryNotifierHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+const itemAnalyzeQueryProvider = ItemAnalyzeQueryNotifierProvider._();
 
-typedef _$ItemAnalyzeQueryNotifier = AutoDisposeNotifier<ItemAnalyzeQuery>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class ItemAnalyzeQueryNotifierProvider
+    extends $NotifierProvider<ItemAnalyzeQueryNotifier, ItemAnalyzeQuery> {
+  const ItemAnalyzeQueryNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'itemAnalyzeQueryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$itemAnalyzeQueryNotifierHash();
+
+  @$internal
+  @override
+  ItemAnalyzeQueryNotifier create() => ItemAnalyzeQueryNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ItemAnalyzeQuery value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ItemAnalyzeQuery>(value),
+    );
+  }
+}
+
+String _$itemAnalyzeQueryNotifierHash() =>
+    r'd424ea29429cdb52befdc08c8f56a7a035ac459d';
+
+abstract class _$ItemAnalyzeQueryNotifier extends $Notifier<ItemAnalyzeQuery> {
+  ItemAnalyzeQuery build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<ItemAnalyzeQuery, ItemAnalyzeQuery>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<ItemAnalyzeQuery, ItemAnalyzeQuery>,
+              ItemAnalyzeQuery,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

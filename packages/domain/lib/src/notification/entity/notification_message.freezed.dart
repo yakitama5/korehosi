@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NotificationMessage {
 
- NotificationMessageSenderId? get senderId; String? get category; Map<String, dynamic> get data; String? get from; NotificationMessageId? get messageId; String? get messageType;
+ NotificationMessageSenderId? get senderId; String? get category; String? get path; String? get from; NotificationMessageId? get messageId; String? get messageType;
 /// Create a copy of NotificationMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $NotificationMessageCopyWith<NotificationMessage> get copyWith => _$Notification
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&(identical(other.path, path) || other.path == path)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,senderId,category,const DeepCollectionEquality().hash(data),from,messageId,messageType);
+int get hashCode => Object.hash(runtimeType,senderId,category,path,from,messageId,messageType);
 
 @override
 String toString() {
-  return 'NotificationMessage(senderId: $senderId, category: $category, data: $data, from: $from, messageId: $messageId, messageType: $messageType)';
+  return 'NotificationMessage(senderId: $senderId, category: $category, path: $path, from: $from, messageId: $messageId, messageType: $messageType)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $NotificationMessageCopyWith<$Res>  {
   factory $NotificationMessageCopyWith(NotificationMessage value, $Res Function(NotificationMessage) _then) = _$NotificationMessageCopyWithImpl;
 @useResult
 $Res call({
- NotificationMessageSenderId? senderId, String? category, Map<String, dynamic> data, String? from, NotificationMessageId? messageId, String? messageType
+ NotificationMessageSenderId? senderId, String? category, String? path, String? from, NotificationMessageId? messageId, String? messageType
 });
 
 
@@ -62,12 +62,12 @@ class _$NotificationMessageCopyWithImpl<$Res>
 
 /// Create a copy of NotificationMessage
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? senderId = freezed,Object? category = freezed,Object? data = null,Object? from = freezed,Object? messageId = freezed,Object? messageType = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? senderId = freezed,Object? category = freezed,Object? path = freezed,Object? from = freezed,Object? messageId = freezed,Object? messageType = freezed,}) {
   return _then(_self.copyWith(
 senderId: freezed == senderId ? _self.senderId : senderId // ignore: cast_nullable_to_non_nullable
 as NotificationMessageSenderId?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String?,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,from: freezed == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
+as String?,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
+as String?,from: freezed == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
 as String?,messageId: freezed == messageId ? _self.messageId : messageId // ignore: cast_nullable_to_non_nullable
 as NotificationMessageId?,messageType: freezed == messageType ? _self.messageType : messageType // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -155,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( NotificationMessageSenderId? senderId,  String? category,  Map<String, dynamic> data,  String? from,  NotificationMessageId? messageId,  String? messageType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( NotificationMessageSenderId? senderId,  String? category,  String? path,  String? from,  NotificationMessageId? messageId,  String? messageType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NotificationMessage() when $default != null:
-return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messageId,_that.messageType);case _:
+return $default(_that.senderId,_that.category,_that.path,_that.from,_that.messageId,_that.messageType);case _:
   return orElse();
 
 }
@@ -176,10 +176,10 @@ return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messag
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( NotificationMessageSenderId? senderId,  String? category,  Map<String, dynamic> data,  String? from,  NotificationMessageId? messageId,  String? messageType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( NotificationMessageSenderId? senderId,  String? category,  String? path,  String? from,  NotificationMessageId? messageId,  String? messageType)  $default,) {final _that = this;
 switch (_that) {
 case _NotificationMessage():
-return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messageId,_that.messageType);case _:
+return $default(_that.senderId,_that.category,_that.path,_that.from,_that.messageId,_that.messageType);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +196,10 @@ return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messag
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( NotificationMessageSenderId? senderId,  String? category,  Map<String, dynamic> data,  String? from,  NotificationMessageId? messageId,  String? messageType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( NotificationMessageSenderId? senderId,  String? category,  String? path,  String? from,  NotificationMessageId? messageId,  String? messageType)?  $default,) {final _that = this;
 switch (_that) {
 case _NotificationMessage() when $default != null:
-return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messageId,_that.messageType);case _:
+return $default(_that.senderId,_that.category,_that.path,_that.from,_that.messageId,_that.messageType);case _:
   return null;
 
 }
@@ -211,18 +211,12 @@ return $default(_that.senderId,_that.category,_that.data,_that.from,_that.messag
 
 
 class _NotificationMessage implements NotificationMessage {
-  const _NotificationMessage({this.senderId, this.category, required final  Map<String, dynamic> data, this.from, this.messageId, this.messageType}): _data = data;
+  const _NotificationMessage({this.senderId, this.category, required this.path, this.from, this.messageId, this.messageType});
   
 
 @override final  NotificationMessageSenderId? senderId;
 @override final  String? category;
- final  Map<String, dynamic> _data;
-@override Map<String, dynamic> get data {
-  if (_data is EqualUnmodifiableMapView) return _data;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_data);
-}
-
+@override final  String? path;
 @override final  String? from;
 @override final  NotificationMessageId? messageId;
 @override final  String? messageType;
@@ -237,16 +231,16 @@ _$NotificationMessageCopyWith<_NotificationMessage> get copyWith => __$Notificat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&(identical(other.path, path) || other.path == path)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,senderId,category,const DeepCollectionEquality().hash(_data),from,messageId,messageType);
+int get hashCode => Object.hash(runtimeType,senderId,category,path,from,messageId,messageType);
 
 @override
 String toString() {
-  return 'NotificationMessage(senderId: $senderId, category: $category, data: $data, from: $from, messageId: $messageId, messageType: $messageType)';
+  return 'NotificationMessage(senderId: $senderId, category: $category, path: $path, from: $from, messageId: $messageId, messageType: $messageType)';
 }
 
 
@@ -257,7 +251,7 @@ abstract mixin class _$NotificationMessageCopyWith<$Res> implements $Notificatio
   factory _$NotificationMessageCopyWith(_NotificationMessage value, $Res Function(_NotificationMessage) _then) = __$NotificationMessageCopyWithImpl;
 @override @useResult
 $Res call({
- NotificationMessageSenderId? senderId, String? category, Map<String, dynamic> data, String? from, NotificationMessageId? messageId, String? messageType
+ NotificationMessageSenderId? senderId, String? category, String? path, String? from, NotificationMessageId? messageId, String? messageType
 });
 
 
@@ -274,12 +268,12 @@ class __$NotificationMessageCopyWithImpl<$Res>
 
 /// Create a copy of NotificationMessage
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? senderId = freezed,Object? category = freezed,Object? data = null,Object? from = freezed,Object? messageId = freezed,Object? messageType = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? senderId = freezed,Object? category = freezed,Object? path = freezed,Object? from = freezed,Object? messageId = freezed,Object? messageType = freezed,}) {
   return _then(_NotificationMessage(
 senderId: freezed == senderId ? _self.senderId : senderId // ignore: cast_nullable_to_non_nullable
 as NotificationMessageSenderId?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String?,data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,from: freezed == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
+as String?,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
+as String?,from: freezed == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
 as String?,messageId: freezed == messageId ? _self.messageId : messageId // ignore: cast_nullable_to_non_nullable
 as NotificationMessageId?,messageType: freezed == messageType ? _self.messageType : messageType // ignore: cast_nullable_to_non_nullable
 as String?,

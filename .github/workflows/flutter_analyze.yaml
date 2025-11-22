@@ -19,7 +19,7 @@ on:
 jobs:
   flutter_analyze:
     # ジョブの表示名
-    name: Analyze
+    name: 🔬Analyze
 
     # 一時的な無効化
     # if: ${{ false }}
@@ -33,11 +33,11 @@ jobs:
     # ジョブの手順
     steps:
       # チェックアウト
-      - name: Checkout
+      - name: 💾Checkout
         uses: actions/checkout@v4
 
       # セットアップ
-      - name: Setup Config Files
+      - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
         env: # Set the secret as an input
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
@@ -47,9 +47,9 @@ jobs:
           GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
           DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
-      - name: Setup Application Runtime
+      - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
       # 静的解析を実行
-      - run: melos run regenerate_code
-      - run: flutter analyze
+      - name: 🔬Analyze
+        run: flutter analyze

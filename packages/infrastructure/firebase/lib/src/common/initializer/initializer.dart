@@ -3,6 +3,8 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:infrastructure_firebase/common.dart';
 import 'package:infrastructure_firebase/env/env.dart';
 import 'package:infrastructure_firebase/env/env.dev.dart';
 import 'package:infrastructure_firebase/src/common/config/firebase_options.dart';
@@ -10,15 +12,18 @@ import 'package:infrastructure_firebase/src/common/config/firebase_options_dev.d
     as dev;
 import 'package:infrastructure_firebase/src/common/state/background_handler.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/notification.dart';
+
+typedef FirebaseInitializedValues = ({NotificationMessage? initialMessage});
 
 final class FirebaseInitializer {
   FirebaseInitializer._();
 
-  static Future<void> initialize(Flavor flavor) async {
+  static Future<FirebaseInitializedValues> initialize(Flavor flavor) async {
     // Flavor に応じた FirebaseOptions を準備する
     final firebaseOptions = switch (flavor) {
       Flavor.dev => dev.DefaultFirebaseOptions.currentPlatform,
-      Flavor.prd => DefaultFirebaseOptions.currentPlatform,
+      Flavor.prod => DefaultFirebaseOptions.currentPlatform,
     };
 
     // Firebase core
@@ -27,25 +32,24 @@ final class FirebaseInitializer {
     // App Check
     // 公開しているWebサイトのサイトキー
     final recpthaSiteKey = switch (flavor) {
-      Flavor.prd => ProductionEnv.recpthaSiteKey,
+      Flavor.prod => ProductionEnv.recpthaSiteKey,
       Flavor.dev => DevEnv.recpthaSiteKey,
     };
     await FirebaseAppCheck.instance.activate(
-      androidProvider: switch (flavor) {
-        Flavor.prd => AndroidProvider.playIntegrity,
-        Flavor.dev => AndroidProvider.debug,
+      providerAndroid: switch (flavor) {
+        Flavor.prod => const AndroidPlayIntegrityProvider(),
+        Flavor.dev => const AndroidDebugProvider(),
       },
-      appleProvider: switch (flavor) {
-        Flavor.prd => AppleProvider.deviceCheck,
-        Flavor.dev => AppleProvider.debug,
+      providerApple: switch (flavor) {
+        Flavor.prod => const AppleDeviceCheckProvider(),
+        Flavor.dev => const AppleDebugProvider(),
       },
-      webProvider: ReCaptchaV3Provider(recpthaSiteKey),
+      providerWeb: ReCaptchaV3Provider(recpthaSiteKey),
     );
 
     // FCM Config
     await FCMConfig.instance.init(
       options: firebaseOptions,
-      defaultAndroidForegroundIcon: '@mipmap/ic_launcher',
       onBackgroundMessage: firebaseMessagingBackgroundHandler,
       defaultAndroidChannel: const AndroidNotificationChannel(
         'high_importance_channel',
@@ -63,5 +67,12 @@ final class FirebaseInitializer {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       return true;
     };
+
+    // GoogleSignIn
+    await GoogleSignIn.instance.initialize();
+
+    // InitialMessage
+    final remoteMessage = await FCMConfig.instance.getInitialMessage();
+    return (initialMessage: remoteMessage?.toDomainModel());
   }
 }

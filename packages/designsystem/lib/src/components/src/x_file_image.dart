@@ -1,9 +1,9 @@
 import 'dart:io' as io;
 
+import 'package:cross_file/cross_file.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 
 class XFileImage extends HookConsumerWidget {
   const XFileImage({super.key, required this.xFile});

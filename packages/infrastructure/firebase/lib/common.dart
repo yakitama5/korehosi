@@ -1,3 +1,4 @@
+export 'src/common/extension/remote_message_extension.dart';
 export 'src/common/initializer/initializer.dart';
 export 'src/common/repository/firebase_app_maintenance_repository.dart';
 export 'src/common/repository/firebase_app_version_repository.dart';

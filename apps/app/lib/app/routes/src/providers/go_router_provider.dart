@@ -1,15 +1,14 @@
 import 'package:flutter_app/app/pages/error/error_page.dart';
-import 'package:flutter_app/app/routes/src/router_notifier.dart';
+import 'package:flutter_app/app/routes/src/providers/router_notifier_provider.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'router.g.dart';
+part 'go_router_provider.g.dart';
 
 @riverpod
-GoRouter router(Ref ref) {
-  final router = ref.watch(routerNotifierProvider.notifier);
+GoRouter goRouter(Ref ref) {
+  final router = ref.watch(routerProvider.notifier);
   final initialLocation = ref.watch(initialLocationProvider);
 
   return GoRouter(

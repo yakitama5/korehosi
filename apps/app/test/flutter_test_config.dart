@@ -7,8 +7,7 @@ import 'package:packages_designsystem/theme.dart';
 import 'test_utils/src/prepare_golden_file_comparator_with_threshold.dart';
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
-  // ignore: do_not_use_environment
-  const isRunningInCi = bool.fromEnvironment('CI', defaultValue: false);
+  const isRunningInCi = bool.fromEnvironment('CI');
 
   // CIの場合だけ誤差をある程度許容する
   if (isRunningInCi) {
@@ -17,14 +16,17 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 
   return AlchemistConfig.runWithConfig(
     config: AlchemistConfig(
+      ciGoldensConfig: const CiGoldensConfig(
+        enabled: isRunningInCi,
+      ),
       theme: ThemeData(
         brightness: Brightness.light,
-        colorScheme: lightColorScheme,
+        colorScheme: MaterialTheme.lightScheme(),
         fontFamily: 'Murecho',
       ),
       platformGoldensConfig: const PlatformGoldensConfig(
+        // ignore: avoid_redundant_argument_values
         enabled: !isRunningInCi,
-        renderShadows: !isRunningInCi,
       ),
     ),
     run: testMain,

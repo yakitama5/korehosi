@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
 import 'package:packages_application/user.dart';
@@ -16,7 +15,7 @@ const _cacheDuration = Duration(minutes: 3);
 @riverpod
 Future<PageInfo<Item>> searchItems(Ref ref, {required int page}) async {
   // 検索に必要な情報を取得
-  final query = ref.watch(itemsSearchQueryNotifierProvider);
+  final query = ref.watch(itemsSearchQueryProvider);
   final groupId = await ref.watch(currentGroupIdProvider.future);
   final user = await ref.watch(authUserProvider.future);
 

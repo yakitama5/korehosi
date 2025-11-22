@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_purchase_model.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
@@ -7,6 +6,7 @@ import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebasePurchaseRepository implements PurchaseRepository {

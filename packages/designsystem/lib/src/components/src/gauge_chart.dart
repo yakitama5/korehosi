@@ -34,6 +34,7 @@ class GaugeChart extends HookWidget {
     final tt = Theme.of(context).textTheme;
 
     return Stack(
+      alignment: AlignmentDirectional.center,
       children: [
         RotatedBox(
           quarterTurns: 2,

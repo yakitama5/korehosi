@@ -9,11 +9,11 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:packages_application/group.dart';
+import 'package:packages_core/util.dart';
 import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:uuid/uuid.dart';
 
 class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
   ShareGroupBottomSheet({
@@ -159,8 +159,8 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
   Future<io.File> _getTemporaryFile(List<int> imageData) async {
     final directory = await getTemporaryDirectory();
 
-    final uuid = const Uuid().v4();
-    final exportFile = io.File('${directory.path}/$uuid.png');
+    final fileName = uuid.v4();
+    final exportFile = io.File('${directory.path}/$fileName.png');
     if (!exportFile.existsSync()) {
       await exportFile.create(recursive: true);
     }

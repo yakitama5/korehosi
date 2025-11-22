@@ -1,6 +1,6 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/state/analytics_provider.dart';
 import 'package:packages_domain/common.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したサービスの実装
 class FirebaseAnalyticsService implements AnalyticsService {

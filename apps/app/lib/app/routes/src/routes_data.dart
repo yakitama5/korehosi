@@ -61,7 +61,7 @@ class BaseShellSrouteData extends ShellRouteData {
       navigator;
 }
 
-class RootRouteData extends GoRouteData with _$RootRouteData {
+class RootRouteData extends GoRouteData with $RootRouteData {
   const RootRouteData();
 
   static const path = '/';
@@ -92,7 +92,7 @@ class BottomNavitorShellRouteData extends StatefulShellRouteData {
   static const String $restorationScopeId = 'app_router';
 }
 
-class OnboardStartRouteData extends GoRouteData with _$OnboardStartRouteData {
+class OnboardStartRouteData extends GoRouteData with $OnboardStartRouteData {
   const OnboardStartRouteData();
 
   static const path = '/start';
@@ -102,7 +102,7 @@ class OnboardStartRouteData extends GoRouteData with _$OnboardStartRouteData {
       const WelcomePage();
 }
 
-class AccountLinkRouteData extends GoRouteData with _$AccountLinkRouteData {
+class AccountLinkRouteData extends GoRouteData with $AccountLinkRouteData {
   const AccountLinkRouteData();
 
   static const path = 'account_link';
@@ -112,7 +112,7 @@ class AccountLinkRouteData extends GoRouteData with _$AccountLinkRouteData {
       const AccountLinkPage();
 }
 
-class OnboardFormRouteData extends GoRouteData with _$OnboardFormRouteData {
+class OnboardFormRouteData extends GoRouteData with $OnboardFormRouteData {
   const OnboardFormRouteData();
 
   static const path = '/onboard_form';
@@ -121,7 +121,7 @@ class OnboardFormRouteData extends GoRouteData with _$OnboardFormRouteData {
   Widget build(BuildContext context, GoRouterState state) => OnboardPage();
 }
 
-class ShareLinkRouteData extends GoRouteData with _$ShareLinkRouteData {
+class ShareLinkRouteData extends GoRouteData with $ShareLinkRouteData {
   const ShareLinkRouteData(this.shareLinkId);
 
   static const path = '/share_link/:shareLinkId';
@@ -139,7 +139,7 @@ class ShareLinkRouteData extends GoRouteData with _$ShareLinkRouteData {
   );
 }
 
-class PhotoPreviewRouteData extends GoRouteData with _$PhotoPreviewRouteData {
+class PhotoPreviewRouteData extends GoRouteData with $PhotoPreviewRouteData {
   const PhotoPreviewRouteData({this.index, this.$extra});
 
   static const path = '/preview';

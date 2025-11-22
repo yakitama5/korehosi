@@ -8,27 +8,52 @@ part of 'initial_notification_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$initialNotificationMessageHash() =>
-    r'6ffaf54a22aea31a1770af7e4a9c76755804e086';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// プッシュ通知でアプリを表示した際の初期メッセージ
+
+@ProviderFor(initialNotificationMessage)
+const initialNotificationMessageProvider =
+    InitialNotificationMessageProvider._();
 
 /// プッシュ通知でアプリを表示した際の初期メッセージ
-///
-/// Copied from [initialNotificationMessage].
-@ProviderFor(initialNotificationMessage)
-final initialNotificationMessageProvider =
-    AutoDisposeFutureProvider<NotificationMessage?>.internal(
-      initialNotificationMessage,
-      name: r'initialNotificationMessageProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$initialNotificationMessageHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef InitialNotificationMessageRef =
-    AutoDisposeFutureProviderRef<NotificationMessage?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class InitialNotificationMessageProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<NotificationMessage?>,
+          NotificationMessage?,
+          FutureOr<NotificationMessage?>
+        >
+    with
+        $FutureModifier<NotificationMessage?>,
+        $FutureProvider<NotificationMessage?> {
+  /// プッシュ通知でアプリを表示した際の初期メッセージ
+  const InitialNotificationMessageProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'initialNotificationMessageProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$initialNotificationMessageHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<NotificationMessage?> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<NotificationMessage?> create(Ref ref) {
+    return initialNotificationMessage(ref);
+  }
+}
+
+String _$initialNotificationMessageHash() =>
+    r'6ffaf54a22aea31a1770af7e4a9c76755804e086';

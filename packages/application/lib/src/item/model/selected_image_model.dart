@@ -1,5 +1,5 @@
+import 'package:cross_file/cross_file.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:packages_domain/item.dart';
 
 part 'selected_image_model.freezed.dart';

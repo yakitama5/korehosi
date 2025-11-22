@@ -8,152 +8,90 @@ part of 'app_theme_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appThemeHash() => r'a027b8e826d0c1306853db34344070bccb18b326';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// アプリ内のテーマを管理
-///
-/// Copied from [appTheme].
+
 @ProviderFor(appTheme)
-const appThemeProvider = AppThemeFamily();
+const appThemeProvider = AppThemeFamily._();
 
 /// アプリ内のテーマを管理
-///
-/// Copied from [appTheme].
-class AppThemeFamily extends Family<ThemeData> {
-  /// アプリ内のテーマを管理
-  ///
-  /// Copied from [appTheme].
-  const AppThemeFamily();
 
+final class AppThemeProvider
+    extends $FunctionalProvider<ThemeData, ThemeData, ThemeData>
+    with $Provider<ThemeData> {
   /// アプリ内のテーマを管理
-  ///
-  /// Copied from [appTheme].
-  AppThemeProvider call({required Brightness brightness}) {
-    return AppThemeProvider(brightness: brightness);
+  const AppThemeProvider._({
+    required AppThemeFamily super.from,
+    required Brightness super.argument,
+  }) : super(
+         retry: null,
+         name: r'appThemeProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$appThemeHash();
+
+  @override
+  String toString() {
+    return r'appThemeProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AppThemeProvider getProviderOverride(covariant AppThemeProvider provider) {
-    return call(brightness: provider.brightness);
+  $ProviderElement<ThemeData> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  ThemeData create(Ref ref) {
+    final argument = this.argument as Brightness;
+    return appTheme(ref, brightness: argument);
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'appThemeProvider';
-}
-
-/// アプリ内のテーマを管理
-///
-/// Copied from [appTheme].
-class AppThemeProvider extends AutoDisposeProvider<ThemeData> {
-  /// アプリ内のテーマを管理
-  ///
-  /// Copied from [appTheme].
-  AppThemeProvider({required Brightness brightness})
-    : this._internal(
-        (ref) => appTheme(ref as AppThemeRef, brightness: brightness),
-        from: appThemeProvider,
-        name: r'appThemeProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$appThemeHash,
-        dependencies: AppThemeFamily._dependencies,
-        allTransitiveDependencies: AppThemeFamily._allTransitiveDependencies,
-        brightness: brightness,
-      );
-
-  AppThemeProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.brightness,
-  }) : super.internal();
-
-  final Brightness brightness;
-
-  @override
-  Override overrideWith(ThemeData Function(AppThemeRef provider) create) {
-    return ProviderOverride(
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ThemeData value) {
+    return $ProviderOverride(
       origin: this,
-      override: AppThemeProvider._internal(
-        (ref) => create(ref as AppThemeRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        brightness: brightness,
-      ),
+      providerOverride: $SyncValueProvider<ThemeData>(value),
     );
   }
 
   @override
-  AutoDisposeProviderElement<ThemeData> createElement() {
-    return _AppThemeProviderElement(this);
-  }
-
-  @override
   bool operator ==(Object other) {
-    return other is AppThemeProvider && other.brightness == brightness;
+    return other is AppThemeProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, brightness.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin AppThemeRef on AutoDisposeProviderRef<ThemeData> {
-  /// The parameter `brightness` of this provider.
-  Brightness get brightness;
-}
+String _$appThemeHash() => r'a027b8e826d0c1306853db34344070bccb18b326';
 
-class _AppThemeProviderElement extends AutoDisposeProviderElement<ThemeData>
-    with AppThemeRef {
-  _AppThemeProviderElement(super.provider);
+/// アプリ内のテーマを管理
+
+final class AppThemeFamily extends $Family
+    with $FunctionalFamilyOverride<ThemeData, Brightness> {
+  const AppThemeFamily._()
+    : super(
+        retry: null,
+        name: r'appThemeProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// アプリ内のテーマを管理
+
+  AppThemeProvider call({required Brightness brightness}) =>
+      AppThemeProvider._(argument: brightness, from: this);
 
   @override
-  Brightness get brightness => (origin as AppThemeProvider).brightness;
+  String toString() => r'appThemeProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

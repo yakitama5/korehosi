@@ -1,22 +1,22 @@
 name: flutter_app
 description: 子供と大人で利用する、家族のための欲しい物リストアプリ
 publish_to: "none"
-version: 1.0.8+20
+version: 1.0.10+29
 
 environment:
-  sdk: ^3.9.0
-  flutter: ^3.35.1
+  sdk: ^3.10.1
+  flutter: ^3.38.3
 
 resolution: workspace
 
 dependencies:
-  adaptive_dialog: ^2.4.2
+  adaptive_dialog: ^2.5.0
   cached_network_image: ^3.4.1
   carousel_slider: ^5.1.1
   collection: ^1.19.1
   cupertino_icons: ^1.0.8
   device_preview: ^1.3.1
-  fl_chart: ^1.0.0
+  fl_chart: ^1.1.1
   flutter:
     sdk: flutter
   flutter_hooks: ^0.21.3+1
@@ -25,18 +25,18 @@ dependencies:
     sdk: flutter
   flutter_rating_bar: ^4.0.1
   flutter_settings_ui: ^3.0.1
-  flutter_slidable: ^4.0.1
-  flutter_svg: ^2.0.13
+  flutter_slidable: ^4.0.3
+  flutter_svg: ^2.2.3
   flutter_web_plugins:
     sdk: flutter
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
   gauge_indicator: ^0.4.3
-  go_router: ^16.2.0
-  hooks_riverpod: ^2.6.1
-  image_picker: ^1.2.0
+  go_router: ^17.0.0
+  hooks_riverpod: ^3.0.3
+  image_picker: ^1.2.1
   intl: ^0.20.2
-  introduction_screen: ^3.1.17
+  introduction_screen: ^4.0.0
   lottie: ^3.3.2
   material_design_icons_flutter: ^7.0.7296
   nested: ^1.0.0
@@ -51,6 +51,8 @@ dependencies:
     path: ../../packages/designsystem
   packages_domain:
     path: ../../packages/domain
+  packages_infra_ui:
+    path: ../../packages/infra_ui
   path_provider: ^2.1.5
   pattern_formatter: ^4.0.1
   permission_handler: ^12.0.1
@@ -59,35 +61,34 @@ dependencies:
   reactive_cupertino_text_field: ^2.1.2
   reactive_date_time_picker: ^5.0.1
   reactive_flutter_rating_bar: ^2.0.2
-  reactive_forms: ^18.1.1
+  reactive_forms: ^18.2.0
   reactive_image_picker: ^8.0.1
   responsive_framework: ^1.5.1
-  riverpod_annotation: ^2.6.1
+  riverpod_annotation: ^3.0.3
   shimmer: ^3.0.0
-  slang: ^4.8.1
-  slang_flutter: ^4.8.0
+  slang: ^4.10.1
+  slang_flutter: ^4.10.0
   url_launcher: ^6.3.2
-  uuid: ^4.5.1
   version: ^3.0.2
 
 dev_dependencies:
-  alchemist: ^0.12.1
-  build_runner: ^2.5.4
-  custom_lint: ^0.7.6
-  flutter_gen_runner: ^5.11.0
+  alchemist: ^0.13.0
+  build_runner: ^2.10.4
+  custom_lint: ^0.8.1
+  flutter_gen_runner: ^5.12.0
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^3.1.0
-  go_router_builder: ^3.0.0
-  json_serializable: ^6.9.5
-  nilts: ^0.23.1
-  pedantic_mono: ^1.12.3
-  reactive_forms_generator: ^8.0.3
-  riverpod_generator: ^2.6.5
-  riverpod_lint: ^2.6.5
-  slang_build_runner: ^4.8.1
+  freezed: ^3.2.3
+  go_router_builder: ^4.1.1
+  json_serializable: ^6.11.2
+  nilts: ^0.25.1
+  pedantic_mono: ^1.35.0
+  # reactive_forms_generator: ^8.1.0-beta0
+  riverpod_generator: ^3.0.3
+  riverpod_lint: ^3.0.3
+  slang_build_runner: ^4.10.0
 
 flutter:
   uses-material-design: true

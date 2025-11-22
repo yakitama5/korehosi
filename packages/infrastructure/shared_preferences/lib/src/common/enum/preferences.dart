@@ -3,8 +3,8 @@ enum Preferences<T> {
   fcmTokenTimestamp('fcm_token_timestamp', ''),
   themeColor('COLOR_STYLE', 'appColor'),
   uiStyle('UI_STYLE', 'system'),
-  themeMode('THEME_MODE', 'dark'),
-  itemsViewLayout('ITEMS_VIEW_LAYOUT', 'list');
+  themeMode('THEME_MODE', 'system'),
+  itemsViewLayout('ITEMS_VIEW_LAYOUT', 'grid');
 
   const Preferences(this.key, this.defaultValue);
 

@@ -8,23 +8,55 @@ part of 'user_form_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// ユーザーの入力フォーム
+
+@ProviderFor(UserForm)
+const userFormProvider = UserFormProvider._();
+
+/// ユーザーの入力フォーム
+final class UserFormProvider
+    extends $AsyncNotifierProvider<UserForm, FormGroup> {
+  /// ユーザーの入力フォーム
+  const UserFormProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'userFormProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$userFormHash();
+
+  @$internal
+  @override
+  UserForm create() => UserForm();
+}
+
 String _$userFormHash() => r'9bd5e90eac312130c768c4e1a97d462c77a03b3a';
 
 /// ユーザーの入力フォーム
-///
-/// Copied from [UserForm].
-@ProviderFor(UserForm)
-final userFormProvider =
-    AutoDisposeAsyncNotifierProvider<UserForm, FormGroup>.internal(
-      UserForm.new,
-      name: r'userFormProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$userFormHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
 
-typedef _$UserForm = AutoDisposeAsyncNotifier<FormGroup>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$UserForm extends $AsyncNotifier<FormGroup> {
+  FutureOr<FormGroup> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<FormGroup>, FormGroup>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<FormGroup>, FormGroup>,
+              AsyncValue<FormGroup>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

@@ -8,152 +8,82 @@ part of 'item_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemHash() => r'c6f6939f0dc3a0a7d4e6cd6f5734c42e43950bde';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// 現在のグループ内の欲しい物
-///
-/// Copied from [item].
+
 @ProviderFor(item)
-const itemProvider = ItemFamily();
+const itemProvider = ItemFamily._();
 
 /// 現在のグループ内の欲しい物
-///
-/// Copied from [item].
-class ItemFamily extends Family<AsyncValue<Item?>> {
-  /// 現在のグループ内の欲しい物
-  ///
-  /// Copied from [item].
-  const ItemFamily();
 
+final class ItemProvider
+    extends $FunctionalProvider<AsyncValue<Item?>, Item?, FutureOr<Item?>>
+    with $FutureModifier<Item?>, $FutureProvider<Item?> {
   /// 現在のグループ内の欲しい物
-  ///
-  /// Copied from [item].
-  ItemProvider call({required ItemId itemId}) {
-    return ItemProvider(itemId: itemId);
+  const ItemProvider._({
+    required ItemFamily super.from,
+    required ItemId super.argument,
+  }) : super(
+         retry: null,
+         name: r'itemProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$itemHash();
+
+  @override
+  String toString() {
+    return r'itemProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  ItemProvider getProviderOverride(covariant ItemProvider provider) {
-    return call(itemId: provider.itemId);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  $FutureProviderElement<Item?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
 
   @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'itemProvider';
-}
-
-/// 現在のグループ内の欲しい物
-///
-/// Copied from [item].
-class ItemProvider extends AutoDisposeFutureProvider<Item?> {
-  /// 現在のグループ内の欲しい物
-  ///
-  /// Copied from [item].
-  ItemProvider({required ItemId itemId})
-    : this._internal(
-        (ref) => item(ref as ItemRef, itemId: itemId),
-        from: itemProvider,
-        name: r'itemProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$itemHash,
-        dependencies: ItemFamily._dependencies,
-        allTransitiveDependencies: ItemFamily._allTransitiveDependencies,
-        itemId: itemId,
-      );
-
-  ItemProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.itemId,
-  }) : super.internal();
-
-  final ItemId itemId;
-
-  @override
-  Override overrideWith(FutureOr<Item?> Function(ItemRef provider) create) {
-    return ProviderOverride(
-      origin: this,
-      override: ItemProvider._internal(
-        (ref) => create(ref as ItemRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        itemId: itemId,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<Item?> createElement() {
-    return _ItemProviderElement(this);
+  FutureOr<Item?> create(Ref ref) {
+    final argument = this.argument as ItemId;
+    return item(ref, itemId: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ItemProvider && other.itemId == itemId;
+    return other is ItemProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, itemId.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin ItemRef on AutoDisposeFutureProviderRef<Item?> {
-  /// The parameter `itemId` of this provider.
-  ItemId get itemId;
-}
+String _$itemHash() => r'c6f6939f0dc3a0a7d4e6cd6f5734c42e43950bde';
 
-class _ItemProviderElement extends AutoDisposeFutureProviderElement<Item?>
-    with ItemRef {
-  _ItemProviderElement(super.provider);
+/// 現在のグループ内の欲しい物
+
+final class ItemFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<Item?>, ItemId> {
+  const ItemFamily._()
+    : super(
+        retry: null,
+        name: r'itemProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// 現在のグループ内の欲しい物
+
+  ItemProvider call({required ItemId itemId}) =>
+      ItemProvider._(argument: itemId, from: this);
 
   @override
-  ItemId get itemId => (origin as ItemProvider).itemId;
+  String toString() => r'itemProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

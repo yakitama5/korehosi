@@ -8,25 +8,45 @@ part of 'auth_user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authUserHash() => r'd41eb032c3a6756672432c840fa5fd09c4ac4999';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 認証済のユーザー
+/// データの参照頻度を減らすため、`keepAlive`を指定
+
+@ProviderFor(authUser)
+const authUserProvider = AuthUserProvider._();
 
 /// 認証済のユーザー
 /// データの参照頻度を減らすため、`keepAlive`を指定
-///
-/// Copied from [authUser].
-@ProviderFor(authUser)
-final authUserProvider = FutureProvider<User?>.internal(
-  authUser,
-  name: r'authUserProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$authUserHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AuthUserRef = FutureProviderRef<User?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AuthUserProvider
+    extends $FunctionalProvider<AsyncValue<User?>, User?, FutureOr<User?>>
+    with $FutureModifier<User?>, $FutureProvider<User?> {
+  /// 認証済のユーザー
+  /// データの参照頻度を減らすため、`keepAlive`を指定
+  const AuthUserProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'authUserProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$authUserHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<User?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<User?> create(Ref ref) {
+    return authUser(ref);
+  }
+}
+
+String _$authUserHash() => r'd41eb032c3a6756672432c840fa5fd09c4ac4999';

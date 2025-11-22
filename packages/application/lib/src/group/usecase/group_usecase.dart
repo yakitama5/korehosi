@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/src/common/config/web_app_config.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/config/group_config.dart';
@@ -12,7 +11,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'group_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 GroupUsecase groupUsecase(Ref ref) => GroupUsecase(ref);
 
 typedef LocationBuilder = String Function(String shareLinkId);
@@ -178,4 +177,9 @@ class GroupUsecase with RunUsecaseMixin {
       return ref.read(deepLinkServiceProvider).buildLink(uri: uri);
     },
   );
+
+  /// 「欲しい物の登録数上限解除」の商品情報を取得
+  Future<AppInPurchaseProduct?> fetchLimitedReleasePlan() {
+    return ref.read(appInPurchaseServiceProvider).fetchLimitedReleasePlan();
+  }
 }

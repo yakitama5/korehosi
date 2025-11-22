@@ -8,7 +8,7 @@ part 'ui_style_notifier_provider.g.dart';
 /// UIスタイルを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
 @riverpod
-class UiStyle extends _$UiStyle {
+class UiStyleNotifier extends _$UiStyleNotifier {
   ThemeRepository get _repository => ref.watch(themeRepositoryProvider);
 
   @override

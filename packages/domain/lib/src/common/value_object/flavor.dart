@@ -1,5 +1,2 @@
 /// Product Flavor
-enum Flavor {
-  dev,
-  prd,
-}
+enum Flavor { dev, prod }

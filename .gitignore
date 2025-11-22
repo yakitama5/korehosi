@@ -24,7 +24,6 @@
 /firebase-debug.log
 firebase_options*.dart
 
-# FVM Version Cache
 /.fvm
 kotlin-compiler*.salive
 
@@ -40,3 +39,6 @@ env.*.dart
 firebase_options*.dart
 firebase_app_id_file.json
 *.rules
+
+# FVM Version Cache
+.fvm/

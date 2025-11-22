@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/extension/firebase_auth_user_extension.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_auth_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
@@ -11,9 +10,11 @@ import 'package:infrastructure_firebase/src/user/model/firestore_user_model.dart
 import 'package:infrastructure_firebase/src/user/state/firestore_deleted_user_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_participant_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_user_provider.dart';
+import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebaseUserRepository implements UserRepository {
@@ -225,23 +226,24 @@ class FirebaseUserRepository implements UserRepository {
 
   /// Mobile用のGoogleサインイン
   Future<auth.UserCredential> _signInWithGoogleByMobile() async {
-    final googleUser = await ref.read(googleSignInProvider).signIn();
-    if (googleUser == null) {
+    try {
+      final googleSignIn = ref.read(googleSignInProvider);
+      final account = await googleSignIn.authenticate();
+
+      final credential = auth.GoogleAuthProvider.credential(
+        idToken: account.authentication.idToken,
+      );
+
+      // 現在のユーザー情報があれば連携する
+      final current = _currentUser;
+      if (current != null) {
+        return current.linkWithCredential(credential);
+      } else {
+        return ref.read(firebaseAuthProvider).signInWithCredential(credential);
+      }
+    } on Exception catch (error) {
+      logger.e(error.toString());
       throw const BusinessException(BusinessExceptionType.googleSignInUnknown);
-    }
-
-    final googleAuth = await googleUser.authentication;
-    final credential = auth.GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    // 現在のユーザー情報があれば連携する
-    final current = _currentUser;
-    if (current != null) {
-      return current.linkWithCredential(credential);
-    } else {
-      return ref.read(firebaseAuthProvider).signInWithCredential(credential);
     }
   }
 

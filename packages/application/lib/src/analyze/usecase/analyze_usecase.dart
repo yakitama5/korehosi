@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_domain/analyze.dart';
 import 'package:packages_domain/common.dart';
@@ -8,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'analyze_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 AnalyzeUsecase analyzeUsecase(Ref ref) => AnalyzeUsecase(ref);
 
 /// ほしい物に関するユースケース

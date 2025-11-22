@@ -1,5 +1,5 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/common.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// ユースケース実行のためのメソッドを備えた Mixin
 mixin RunUsecaseMixin {
@@ -9,13 +9,13 @@ mixin RunUsecaseMixin {
     Ref ref, {
     required Future<T> Function() action,
     bool disableLoading = false,
-  }) async {
+  }) {
     // ローディング表示を行わない
     if (disableLoading) {
       return action.call();
     }
 
-    final loading = ref.read(loadingNotifierProvider.notifier);
+    final loading = ref.read(loadingProvider.notifier);
     return loading.wrap<T>(action.call());
   }
 }

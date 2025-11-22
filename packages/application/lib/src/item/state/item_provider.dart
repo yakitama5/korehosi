@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
 import 'package:packages_application/src/item/usecase/item_usecase.dart';
 import 'package:packages_application/src/user/state/auth_user_provider.dart';

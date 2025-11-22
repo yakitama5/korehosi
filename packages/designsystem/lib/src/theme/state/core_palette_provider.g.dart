@@ -8,22 +8,44 @@ part of 'core_palette_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$corePaletteHash() => r'be47ff890a167762c13f171d1af68f5b23817ef8';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [corePalette].
 @ProviderFor(corePalette)
-final corePaletteProvider = AutoDisposeFutureProvider<CorePalette?>.internal(
-  corePalette,
-  name: r'corePaletteProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$corePaletteHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const corePaletteProvider = CorePaletteProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef CorePaletteRef = AutoDisposeFutureProviderRef<CorePalette?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class CorePaletteProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<CorePalette?>,
+          CorePalette?,
+          FutureOr<CorePalette?>
+        >
+    with $FutureModifier<CorePalette?>, $FutureProvider<CorePalette?> {
+  const CorePaletteProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'corePaletteProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$corePaletteHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<CorePalette?> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<CorePalette?> create(Ref ref) {
+    return corePalette(ref);
+  }
+}
+
+String _$corePaletteHash() => r'be47ff890a167762c13f171d1af68f5b23817ef8';

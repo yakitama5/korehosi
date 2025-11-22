@@ -16,7 +16,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // Flavor に応じた FirebaseOptions を準備する
   final flavor = Flavor.values.byName(const String.fromEnvironment('flavor'));
   final firebaseOptions = switch (flavor) {
-    Flavor.prd => DefaultFirebaseOptions.currentPlatform,
+    Flavor.prod => DefaultFirebaseOptions.currentPlatform,
     Flavor.dev => dev.DefaultFirebaseOptions.currentPlatform,
   };
 

@@ -53,7 +53,7 @@ class AppUpdateListner extends SingleChildStatelessWidget {
   );
 
   /// ストアページへ遷移する.
-  Future<void> navigateToStore(WidgetRef ref) async {
+  Future<void> navigateToStore(WidgetRef ref) {
     final appBuildConfig = ref.read(appBuildConfigProvider);
 
     return StoreRedirect.redirect(

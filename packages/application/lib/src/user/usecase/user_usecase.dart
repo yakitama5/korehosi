@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/common/state/app_build_config_provider.dart';
@@ -21,7 +20,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 UserUsecase userUsecase(Ref ref) => UserUsecase(ref);
 
 /// ユーザーに関するユースケース
@@ -35,7 +34,7 @@ class UserUsecase with RunUsecaseMixin {
 
   /// アプリ内購入対応プラットフォームか否か
   bool get _appInPurchasePlatform =>
-      !kIsWeb && _appBuildConfig.flavor == Flavor.prd;
+      !kIsWeb && _appBuildConfig.flavor == Flavor.prod;
 
   /// 認証状態の取得
   Stream<AuthStatus?> fetchAuthStatus() =>
@@ -179,7 +178,7 @@ class UserUsecase with RunUsecaseMixin {
   /// サインアップの際も含める
   Future<void> _onSignedIn() async {
     // 分析ログの出力
-    unawaited(ref.read(analyticsServiceProvider).signedIn());
+    await ref.read(analyticsServiceProvider).signedIn();
 
     // グループ情報を初期化
     await _initCurrentGroup();

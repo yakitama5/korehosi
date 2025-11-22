@@ -1,0 +1,23 @@
+name: infrastructure_mock
+description: "This package provides core features of app."
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  packages_core:
+    path: ../../core
+  packages_domain:
+    path: ../../domain
+
+dev_dependencies:
+  build_runner: ^2.10.4
+  custom_lint: ^0.8.1
+  flutter_lints: ^6.0.0
+  nilts: ^0.25.1
+  pedantic_mono: ^1.35.0
+  riverpod_lint: ^3.0.3
+
+resolution: workspace

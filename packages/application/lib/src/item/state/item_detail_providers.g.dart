@@ -8,48 +8,98 @@ part of 'item_detail_providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$itemIdHash() => r'19e83d47e77503ef00c8f11eaa7639f61c41962b';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 明細表示対象となる欲しい物のIDを管理するProvider
+/// `override`前提の利用を強制する
+
+@ProviderFor(detailPageItemId)
+const _itemIdProvider = DetailPageItemIdProvider._();
 
 /// 明細表示対象となる欲しい物のIDを管理するProvider
 /// `override`前提の利用を強制する
-///
-/// Copied from [_itemId].
-@ProviderFor(_itemId)
-final _itemIdProvider = AutoDisposeProvider<ItemId?>.internal(
-  _itemId,
-  name: r'_itemIdProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$itemIdHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef _ItemIdRef = AutoDisposeProviderRef<ItemId?>;
-String _$itemHash() => r'e111dd95b1e7280f6c9b87b3948437c0c2754779';
+final class DetailPageItemIdProvider
+    extends $FunctionalProvider<ItemId?, ItemId?, ItemId?>
+    with $Provider<ItemId?> {
+  /// 明細表示対象となる欲しい物のIDを管理するProvider
+  /// `override`前提の利用を強制する
+  const DetailPageItemIdProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'_itemIdProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$detailPageItemIdHash();
+
+  @$internal
+  @override
+  $ProviderElement<ItemId?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  ItemId? create(Ref ref) {
+    return detailPageItemId(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ItemId? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ItemId?>(value),
+    );
+  }
+}
+
+String _$detailPageItemIdHash() => r'f3babfb340dac0b943dacff94238f08811617c01';
 
 /// 明細表示対象となる欲しい物のEntityを管理するProvider
 /// `_itemIdProvider`に依存する
-///
-/// Copied from [_item].
-@ProviderFor(_item)
-final _itemProvider = AutoDisposeFutureProvider<Item?>.internal(
-  _item,
-  name: r'_itemProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$itemHash,
-  dependencies: <ProviderOrFamily>[_itemIdProvider],
-  allTransitiveDependencies: <ProviderOrFamily>{
-    _itemIdProvider,
-    ...?_itemIdProvider.allTransitiveDependencies,
-  },
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef _ItemRef = AutoDisposeFutureProviderRef<Item?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+@ProviderFor(detailPageItem)
+const _itemProvider = DetailPageItemProvider._();
+
+/// 明細表示対象となる欲しい物のEntityを管理するProvider
+/// `_itemIdProvider`に依存する
+
+final class DetailPageItemProvider
+    extends $FunctionalProvider<AsyncValue<Item?>, Item?, FutureOr<Item?>>
+    with $FutureModifier<Item?>, $FutureProvider<Item?> {
+  /// 明細表示対象となる欲しい物のEntityを管理するProvider
+  /// `_itemIdProvider`に依存する
+  const DetailPageItemProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'_itemProvider',
+        isAutoDispose: true,
+        dependencies: const <ProviderOrFamily>[_itemIdProvider],
+        $allTransitiveDependencies: const <ProviderOrFamily>[
+          DetailPageItemProvider.$allTransitiveDependencies0,
+        ],
+      );
+
+  static const $allTransitiveDependencies0 = _itemIdProvider;
+
+  @override
+  String debugGetCreateSourceHash() => _$detailPageItemHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Item?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Item?> create(Ref ref) {
+    return detailPageItem(ref);
+  }
+}
+
+String _$detailPageItemHash() => r'53ecc4282fea20a4691805b4afce717fd031d100';

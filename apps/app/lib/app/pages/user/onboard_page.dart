@@ -150,7 +150,7 @@ class OnboardPage extends HookConsumerWidget with PresentationMixin {
     );
   }
 
-  Future<void> _onDone(BuildContext context, WidgetRef ref) async {
+  Future<void> _onDone(BuildContext context, WidgetRef ref) {
     return execute(
       // 画面遷移はリダイレクト処理で行う
       action: () async {

@@ -1,5 +1,4 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/analyze.dart';
 import 'package:packages_application/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,7 +11,7 @@ Future<MonthlyTotalsPurchasesChartData> monthlyTotalsPurchasesChartData(
   Ref ref,
 ) async {
   // 集計する期間のデータを取得
-  final range = ref.watch(monthlyTotalsYearMonthRangeNotifierProvider);
+  final range = ref.watch(monthlyTotalsYearMonthRangeProvider);
   final monthlyTotals = await ref.watch(
     monthlyTotalsPurchasesProvider(range: range).future,
   );

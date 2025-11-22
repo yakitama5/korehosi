@@ -1,8 +1,7 @@
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
-import 'package:uuid/uuid.dart';
+import 'package:riverpod/riverpod.dart';
 
 class BranchDeepLinkService implements DeepLinkService {
   const BranchDeepLinkService(this.ref);
@@ -11,7 +10,7 @@ class BranchDeepLinkService implements DeepLinkService {
 
   @override
   Future<String> buildLink({required Uri uri}) async {
-    final canonicalIdentifier = const Uuid().v4();
+    final canonicalIdentifier = uuid.v4();
 
     final buo = BranchUniversalObject(
       canonicalIdentifier: canonicalIdentifier,
@@ -32,7 +31,7 @@ class BranchDeepLinkService implements DeepLinkService {
           BusinessExceptionType.createDynamicLinkUnknown,
         );
       }
-      logger.d('short url: ${response.result.toString()}');
+      logger.d('short url: ${response.result}');
 
       return response.result.toString();
     } on Exception catch (_) {

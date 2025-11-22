@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/routes/src/router.dart';
+import 'package:flutter_app/app/routes/src/providers/go_router_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/common.dart';
@@ -14,7 +14,7 @@ class DynamicLinkListner extends SingleChildStatelessWidget {
     return Consumer(
       builder: (_, ref, _) {
         // DynamicLinksのイベント判定
-        ref.listen(reactiveDeepLinkProvider, (previous, next) async {
+        ref.listen(reactiveDeepLinkProvider, (previous, next) {
           // Web版は対応していない
           // URLがなければスルー
           if (kIsWeb || !next.hasValue) {
@@ -27,7 +27,7 @@ class DynamicLinkListner extends SingleChildStatelessWidget {
           }
 
           // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
-          ref.read(routerProvider).go(uri.path);
+          ref.read(goRouterProvider).go(uri.path);
         });
 
         return child ?? const SizedBox.shrink();

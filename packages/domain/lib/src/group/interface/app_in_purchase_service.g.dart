@@ -8,25 +8,57 @@ part of 'app_in_purchase_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appInPurchaseServiceHash() =>
-    r'6ab0e30dc6cee3e4c399e18262ff4137d748fd81';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// DI用 (依存性逆転のためドメイン層に定義)
+
+@ProviderFor(appInPurchaseService)
+const appInPurchaseServiceProvider = AppInPurchaseServiceProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
-///
-/// Copied from [appInPurchaseService].
-@ProviderFor(appInPurchaseService)
-final appInPurchaseServiceProvider = Provider<AppInPurchaseService>.internal(
-  appInPurchaseService,
-  name: r'appInPurchaseServiceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appInPurchaseServiceHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AppInPurchaseServiceRef = ProviderRef<AppInPurchaseService>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AppInPurchaseServiceProvider
+    extends
+        $FunctionalProvider<
+          AppInPurchaseService,
+          AppInPurchaseService,
+          AppInPurchaseService
+        >
+    with $Provider<AppInPurchaseService> {
+  /// DI用 (依存性逆転のためドメイン層に定義)
+  const AppInPurchaseServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appInPurchaseServiceProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appInPurchaseServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<AppInPurchaseService> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  AppInPurchaseService create(Ref ref) {
+    return appInPurchaseService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AppInPurchaseService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AppInPurchaseService>(value),
+    );
+  }
+}
+
+String _$appInPurchaseServiceHash() =>
+    r'6ab0e30dc6cee3e4c399e18262ff4137d748fd81';

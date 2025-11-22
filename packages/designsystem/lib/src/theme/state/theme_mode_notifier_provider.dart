@@ -7,15 +7,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'theme_mode_notifier_provider.g.dart';
 
-// 名称重複を避けるために別名指定で外部に公開する
-// ignore: invalid_use_of_internal_member, library_private_types_in_public_api
-AutoDisposeNotifierProviderImpl<_ThemeMode, ThemeMode> get themeModeProvider =>
-    _themeModeProvider;
-
 /// テーマを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
 @riverpod
-class _ThemeMode extends _$ThemeMode {
+class ThemeModeNotifier extends _$ThemeModeNotifier {
   ThemeRepository get _repository => ref.watch(themeRepositoryProvider);
 
   /// 初期状態はシステム

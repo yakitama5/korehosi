@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +10,7 @@ import 'package:packages_core/util.dart';
 import 'package:packages_domain/item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'router_notifier.g.dart';
+part 'router_notifier_provider.g.dart';
 
 @riverpod
 class RouterNotifier extends _$RouterNotifier implements Listenable {
@@ -63,8 +65,8 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
     final initialMessage = await ref.read(
       initialNotificationMessageProvider.future,
     );
-    if (initialMessage != null && initialMessage.data['path'] != null) {
-      return initialMessage.data['path'] as String;
+    if (initialMessage != null && initialMessage.path != null) {
+      return initialMessage.path;
     }
 
     // ほしいもの画面場合、パス指定されている項目IDが現在のグループ情報に存在するかを判定

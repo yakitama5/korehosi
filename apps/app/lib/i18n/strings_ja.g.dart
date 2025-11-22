@@ -3,6 +3,7 @@
 ///
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
+// dart format off
 
 part of 'strings.g.dart';
 
@@ -820,126 +821,133 @@ class TranslationsSettingsSettingsPageAccountPushNotificationJa {
 	String get caption => 'グループないでほしいものが追加された場合に通知が受け取れます';
 }
 
-/// Flat map(s) containing all translations.
+/// The flat map containing all translations for locale <ja>.
 /// Only for edge cases! For simple maps, use the map function of this library.
+///
+/// The Dart AOT compiler has issues with very large switch statements,
+/// so the map is split into smaller functions (512 entries each).
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
-		switch (path) {
-			case 'analyze.analyzePage.title': return 'ふりかえり';
-			case 'analyze.analyzePage.purchaseRate': return '購入率';
-			case 'analyze.analyzePage.purchased': return '購入済';
-			case 'analyze.analyzePage.format.fraction': return ({required int molecule, required int denominator}) => '${molecule}/${denominator}';
-			case 'analyze.analyzePage.format.month': return ({required int month}) => '${month}月';
-			case 'analyze.analyzePage.totalPrice': return '合計金額';
-			case 'group.common.groupName': return 'グループ名';
-			case 'group.common.leaveGroup': return 'グループから脱退';
-			case 'group.common.leaveConfirmDialog.title': return '離脱の確認';
-			case 'group.common.leaveConfirmDialog.message': return ({required String groupName}) => '「${groupName}」から離脱しますか？';
-			case 'group.shareLinkPage.joinedGroupDialog.title': return 'グループへ参加';
-			case 'group.shareLinkPage.joinedGroupDialog.message': return 'グループに参加しました。';
-			case 'group.groupsPage.title': return '参加中のグループ';
-			case 'group.groupsPage.help': return 'ヘルプ';
-			case 'group.groupsPage.shareGroupHelpDialog.title': return 'グループの共有/参加';
-			case 'group.groupsPage.shareGroupHelpDialog.message': return '【グループの共有】 グループから「共有」を行って下さい\n\n【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます';
-			case 'group.groupsPage.createGroup': return 'グループを作成';
-			case 'group.groupsPage.notJoinGroup': return 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。';
-			case 'group.groupPage.limitBreak': return 'ほしい物の登録数制限を解放する';
-			case 'group.groupPage.appInPurchaseConfirmDialog.title': return '購入の確認';
-			case 'group.groupPage.appInPurchaseConfirmDialog.message': return ({required String price}) => '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで)\n価格：¥${price}(無期限)';
-			case 'group.groupPage.appInPurchaseConfirmDialog.okLabel': return ({required String price}) => '購入(¥${price})';
-			case 'group.groupPage.limitBreakPurchased': return '欲しい物の登録数制限が解放されました。(無制限)';
-			case 'group.groupPage.shareGroup': return '共有';
-			case 'group.groupPage.shareGroupCaption': return '共有してメンバーを招待しましょう';
-			case 'group.groupPage.copyLink': return 'コピー';
-			case 'group.groupPage.copiedLink': return 'コピーしました';
-			case 'group.groupPage.select': return '選択';
-			case 'group.groupPage.savedImage': return '画像を保存しました。';
-			case 'item.common.wishList': return 'ほしいもの';
-			case 'item.common.status': return 'ステータス';
-			case 'item.common.wishRank': return 'ほしい度';
-			case 'item.common.itemName': return 'ほしいものの名前';
-			case 'item.common.wanterName': return 'ほしい人';
-			case 'item.common.wanterNameLabel': return 'だれがほしい？';
-			case 'item.common.memo': return 'メモ';
-			case 'item.common.wishSeason': return 'いつほしい？';
-			case 'item.common.url': return 'URL';
-			case 'item.common.price': return '価格';
-			case 'item.common.purchasePlanDate': return 'かう予定の日';
-			case 'item.common.sentDate': return 'わたした日';
-			case 'item.common.buyerName': return 'かった人';
-			case 'item.common.currencyFormat': return ({required int price}) => '¥${price}';
-			case 'item.common.currencySymbol': return '¥';
-			case 'item.itemsPage.title': return 'ほしいもの';
-			case 'item.itemsPage.add': return 'ほしいものを追加';
-			case 'item.itemsPage.notSelectedGroupDialog.title': return 'グループが選択されていません';
-			case 'item.itemsPage.notSelectedGroupDialog.message': return 'グループを選択してからほしいものを追加して下さい';
-			case 'item.itemsPage.account': return 'アカウント';
-			case 'item.itemsPage.completeChangeGroup': return 'グループを切り替えました。';
-			case 'item.itemsPage.itemEmpty': return 'ほしいものが見つかりませんでした。';
-			case 'item.itemsPage.selectNumberText': return ({required int length}) => '${length}件選択';
-			case 'item.itemsPage.wishRankFormat': return ({required String value}) => '星${value}';
-			case 'item.itemsPage.sortOrder': return '並び替え';
-			case 'item.itemPage.deletedItem': return 'ほしいものが見つかりませんでした。 削除された可能性があります。\n再度操作して下さい。';
-			case 'item.itemPage.wishSeason.hint': return '例：クリスマス、誕生日';
-			case 'item.itemPage.purchaseSection.title': return '購入/購入予定情報';
-			case 'item.itemPage.purchaseSection.message': return '以降の内容はグループ内の大人にだけ表示されます';
-			case 'item.itemPage.purchase': return '購入/購入予定';
-			case 'item.itemEditPage.editTitle': return 'ほしいものを編集';
-			case 'item.itemEditPage.createTitle': return 'ほしいものを作成';
-			case 'item.itemEditPage.wishSeason.hint': return '例：クリスマス、誕生日';
-			case 'item.itemEditPage.addUrl': return 'URLを追加';
-			case 'item.purchasePage.purchase': return '購入/購入予定情報';
-			case 'item.purchasePage.surprise.label': return 'サプライズ';
-			case 'item.purchasePage.surprise.caption': return '状況を子供に知られたくない';
-			case 'item.purchasePage.purchasePlanDate.hint': return '入力すると「購入予定」になります';
-			case 'item.purchasePage.sentDate.hint': return '入力すると「購入済」になります';
-			case 'settings.settingsPage.title': return '設定';
-			case 'settings.settingsPage.account.head': return 'アカウント';
-			case 'settings.settingsPage.account.profile': return 'プロフィール';
-			case 'settings.settingsPage.account.group': return 'グループ';
-			case 'settings.settingsPage.account.account': return 'アカウント';
-			case 'settings.settingsPage.account.pushNotification.title': return 'プッシュ通知';
-			case 'settings.settingsPage.account.pushNotification.caption': return 'グループないでほしいものが追加された場合に通知が受け取れます';
-			case 'settings.settingsPage.layout.haed': return 'レイアウト';
-			case 'settings.settingsPage.layout.uiStyle': return 'UIスタイル';
-			case 'settings.settingsPage.layout.themeMode': return 'テーマモード';
-			case 'settings.settingsPage.layout.colorTheme': return 'カラー';
-			case 'settings.settingsPage.help.head': return 'ヘルプ';
-			case 'settings.settingsPage.help.howToUse': return 'つかい方';
-			case 'settings.settingsPage.help.contactUs': return 'お問い合わせ';
-			case 'settings.settingsPage.help.developperTwitter': return '開発者X (旧Twitter)';
-			case 'settings.settingsPage.help.privacyPolicy': return 'プライバシーポリシー';
-			case 'settings.settingsPage.help.license': return 'ライセンス';
-			case 'settings.accountPage.title': return 'アカウント';
-			case 'settings.accountPage.link.head': return 'アカウント連携';
-			case 'settings.accountPage.link.google': return 'Google';
-			case 'settings.accountPage.link.apple': return 'Apple';
-			case 'settings.accountPage.other.head': return 'その他';
-			case 'settings.accountPage.other.logout': return 'ログアウト';
-			case 'settings.accountPage.other.leave': return '退会';
-			case 'settings.accountPage.leaveConfirmDialog.title': return '退会しますか？';
-			case 'settings.accountPage.leaveConfirmDialog.message': return '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
-			case 'settings.accountLinkPage.title': return 'アカウント連携';
-			case 'settings.accountLinkPage.meritDescription.title': return 'アカウント連携を行うことで、\n下記の機能をご利用いただけます。';
-			case 'settings.accountLinkPage.meritDescription.itemizedMessages.0': return 'クラウドへのデータバックアップ';
-			case 'settings.accountLinkPage.meritDescription.itemizedMessages.1': return '複数端末での同時利用';
-			case 'settings.accountLinkPage.meritDescription.itemizedMessages.2': return '端末変更に伴うデータ移行';
-			case 'settings.accountLinkPage.signInWithGoogle': return 'Googleアカウントでサインイン';
-			case 'settings.accountLinkPage.signInWithApple': return 'Appleアカウントでサインイン';
-			case 'user.welcomePage.start': return 'はじめる';
-			case 'user.welcomePage.forFirstTimers': return 'はじめての方はこちら';
-			case 'user.welcomePage.accountLink': return 'アカウント連携';
-			case 'user.profilePage.profile': return 'プロフィール';
-			case 'user.onboardPage.start': return 'はじめる';
-			case 'user.onboardPage.introduction.title': return 'はじめに';
-			case 'user.onboardPage.introduction.message': return 'まずはプロフィールを登録しましょう';
-			case 'user.onboardPage.profile': return 'あなたは？';
-			case 'user.onboardPage.confirm': return 'あっていますか？';
-			case 'user.common.name': return '名前';
-			case 'user.common.nameLabelText': return '名前 または ニックネーム';
-			case 'user.common.ageGroup': return '年齢層';
-			default: return null;
-		}
+		return _flatMapFunction$0(path);
+	}
+
+	dynamic _flatMapFunction$0(String path) {
+		return switch (path) {
+			'analyze.analyzePage.title' => 'ふりかえり',
+			'analyze.analyzePage.purchaseRate' => '購入率',
+			'analyze.analyzePage.purchased' => '購入済',
+			'analyze.analyzePage.format.fraction' => ({required int molecule, required int denominator}) => '${molecule}/${denominator}',
+			'analyze.analyzePage.format.month' => ({required int month}) => '${month}月',
+			'analyze.analyzePage.totalPrice' => '合計金額',
+			'group.common.groupName' => 'グループ名',
+			'group.common.leaveGroup' => 'グループから脱退',
+			'group.common.leaveConfirmDialog.title' => '離脱の確認',
+			'group.common.leaveConfirmDialog.message' => ({required String groupName}) => '「${groupName}」から離脱しますか？',
+			'group.shareLinkPage.joinedGroupDialog.title' => 'グループへ参加',
+			'group.shareLinkPage.joinedGroupDialog.message' => 'グループに参加しました。',
+			'group.groupsPage.title' => '参加中のグループ',
+			'group.groupsPage.help' => 'ヘルプ',
+			'group.groupsPage.shareGroupHelpDialog.title' => 'グループの共有/参加',
+			'group.groupsPage.shareGroupHelpDialog.message' => '【グループの共有】 グループから「共有」を行って下さい\n\n【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます',
+			'group.groupsPage.createGroup' => 'グループを作成',
+			'group.groupsPage.notJoinGroup' => 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。',
+			'group.groupPage.limitBreak' => 'ほしい物の登録数制限を解放する',
+			'group.groupPage.appInPurchaseConfirmDialog.title' => '購入の確認',
+			'group.groupPage.appInPurchaseConfirmDialog.message' => ({required String price}) => '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで)\n価格：¥${price}(無期限)',
+			'group.groupPage.appInPurchaseConfirmDialog.okLabel' => ({required String price}) => '購入(¥${price})',
+			'group.groupPage.limitBreakPurchased' => '欲しい物の登録数制限が解放されました。(無制限)',
+			'group.groupPage.shareGroup' => '共有',
+			'group.groupPage.shareGroupCaption' => '共有してメンバーを招待しましょう',
+			'group.groupPage.copyLink' => 'コピー',
+			'group.groupPage.copiedLink' => 'コピーしました',
+			'group.groupPage.select' => '選択',
+			'group.groupPage.savedImage' => '画像を保存しました。',
+			'item.common.wishList' => 'ほしいもの',
+			'item.common.status' => 'ステータス',
+			'item.common.wishRank' => 'ほしい度',
+			'item.common.itemName' => 'ほしいものの名前',
+			'item.common.wanterName' => 'ほしい人',
+			'item.common.wanterNameLabel' => 'だれがほしい？',
+			'item.common.memo' => 'メモ',
+			'item.common.wishSeason' => 'いつほしい？',
+			'item.common.url' => 'URL',
+			'item.common.price' => '価格',
+			'item.common.purchasePlanDate' => 'かう予定の日',
+			'item.common.sentDate' => 'わたした日',
+			'item.common.buyerName' => 'かった人',
+			'item.common.currencyFormat' => ({required int price}) => '¥${price}',
+			'item.common.currencySymbol' => '¥',
+			'item.itemsPage.title' => 'ほしいもの',
+			'item.itemsPage.add' => 'ほしいものを追加',
+			'item.itemsPage.notSelectedGroupDialog.title' => 'グループが選択されていません',
+			'item.itemsPage.notSelectedGroupDialog.message' => 'グループを選択してからほしいものを追加して下さい',
+			'item.itemsPage.account' => 'アカウント',
+			'item.itemsPage.completeChangeGroup' => 'グループを切り替えました。',
+			'item.itemsPage.itemEmpty' => 'ほしいものが見つかりませんでした。',
+			'item.itemsPage.selectNumberText' => ({required int length}) => '${length}件選択',
+			'item.itemsPage.wishRankFormat' => ({required String value}) => '星${value}',
+			'item.itemsPage.sortOrder' => '並び替え',
+			'item.itemPage.deletedItem' => 'ほしいものが見つかりませんでした。 削除された可能性があります。\n再度操作して下さい。',
+			'item.itemPage.wishSeason.hint' => '例：クリスマス、誕生日',
+			'item.itemPage.purchaseSection.title' => '購入/購入予定情報',
+			'item.itemPage.purchaseSection.message' => '以降の内容はグループ内の大人にだけ表示されます',
+			'item.itemPage.purchase' => '購入/購入予定',
+			'item.itemEditPage.editTitle' => 'ほしいものを編集',
+			'item.itemEditPage.createTitle' => 'ほしいものを作成',
+			'item.itemEditPage.wishSeason.hint' => '例：クリスマス、誕生日',
+			'item.itemEditPage.addUrl' => 'URLを追加',
+			'item.purchasePage.purchase' => '購入/購入予定情報',
+			'item.purchasePage.surprise.label' => 'サプライズ',
+			'item.purchasePage.surprise.caption' => '状況を子供に知られたくない',
+			'item.purchasePage.purchasePlanDate.hint' => '入力すると「購入予定」になります',
+			'item.purchasePage.sentDate.hint' => '入力すると「購入済」になります',
+			'settings.settingsPage.title' => '設定',
+			'settings.settingsPage.account.head' => 'アカウント',
+			'settings.settingsPage.account.profile' => 'プロフィール',
+			'settings.settingsPage.account.group' => 'グループ',
+			'settings.settingsPage.account.account' => 'アカウント',
+			'settings.settingsPage.account.pushNotification.title' => 'プッシュ通知',
+			'settings.settingsPage.account.pushNotification.caption' => 'グループないでほしいものが追加された場合に通知が受け取れます',
+			'settings.settingsPage.layout.haed' => 'レイアウト',
+			'settings.settingsPage.layout.uiStyle' => 'UIスタイル',
+			'settings.settingsPage.layout.themeMode' => 'テーマモード',
+			'settings.settingsPage.layout.colorTheme' => 'カラー',
+			'settings.settingsPage.help.head' => 'ヘルプ',
+			'settings.settingsPage.help.howToUse' => 'つかい方',
+			'settings.settingsPage.help.contactUs' => 'お問い合わせ',
+			'settings.settingsPage.help.developperTwitter' => '開発者X (旧Twitter)',
+			'settings.settingsPage.help.privacyPolicy' => 'プライバシーポリシー',
+			'settings.settingsPage.help.license' => 'ライセンス',
+			'settings.accountPage.title' => 'アカウント',
+			'settings.accountPage.link.head' => 'アカウント連携',
+			'settings.accountPage.link.google' => 'Google',
+			'settings.accountPage.link.apple' => 'Apple',
+			'settings.accountPage.other.head' => 'その他',
+			'settings.accountPage.other.logout' => 'ログアウト',
+			'settings.accountPage.other.leave' => '退会',
+			'settings.accountPage.leaveConfirmDialog.title' => '退会しますか？',
+			'settings.accountPage.leaveConfirmDialog.message' => '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。',
+			'settings.accountLinkPage.title' => 'アカウント連携',
+			'settings.accountLinkPage.meritDescription.title' => 'アカウント連携を行うことで、\n下記の機能をご利用いただけます。',
+			'settings.accountLinkPage.meritDescription.itemizedMessages.0' => 'クラウドへのデータバックアップ',
+			'settings.accountLinkPage.meritDescription.itemizedMessages.1' => '複数端末での同時利用',
+			'settings.accountLinkPage.meritDescription.itemizedMessages.2' => '端末変更に伴うデータ移行',
+			'settings.accountLinkPage.signInWithGoogle' => 'Googleアカウントでサインイン',
+			'settings.accountLinkPage.signInWithApple' => 'Appleアカウントでサインイン',
+			'user.welcomePage.start' => 'はじめる',
+			'user.welcomePage.forFirstTimers' => 'はじめての方はこちら',
+			'user.welcomePage.accountLink' => 'アカウント連携',
+			'user.profilePage.profile' => 'プロフィール',
+			'user.onboardPage.start' => 'はじめる',
+			'user.onboardPage.introduction.title' => 'はじめに',
+			'user.onboardPage.introduction.message' => 'まずはプロフィールを登録しましょう',
+			'user.onboardPage.profile' => 'あなたは？',
+			'user.onboardPage.confirm' => 'あっていますか？',
+			'user.common.name' => '名前',
+			'user.common.nameLabelText' => '名前 または ニックネーム',
+			'user.common.ageGroup' => '年齢層',
+			_ => null,
+		};
 	}
 }
 

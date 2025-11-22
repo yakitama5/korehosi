@@ -16,7 +16,7 @@ import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/notification.dart';
 import 'package:packages_domain/user.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:riverpod/misc.dart';
 
 Future<List<Override>> initializeInfrastructureProviders() async {
   return <Override>[
@@ -55,6 +55,6 @@ Future<List<Override>> initializeInfrastructureProviders() async {
     ),
 
     // Mock
-    // goodsRepositoryProvider.overrideWith(MockGoodsRepository.new),
+    // messagingServiceProvider.overrideWith((ref) => MockMessagingService()),
   ];
 }

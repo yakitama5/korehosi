@@ -1,0 +1,26 @@
+name: packages_infra_ui
+description: "This package provides core features of app."
+publish_to: "none"
+version: 0.0.1
+environment:
+  sdk: ^3.10.1
+
+dependencies:
+  fcm_config: ^3.6.5
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.0.3
+  infrastructure_firebase:
+    path: ../infrastructure/firebase
+  nested: ^1.0.0
+  packages_domain:
+    path: ../domain
+  riverpod: ^3.0.3
+
+dev_dependencies:
+  custom_lint: ^0.8.1
+  nilts: ^0.25.1
+  pedantic_mono: ^1.35.0
+  riverpod_lint: ^3.0.3
+
+resolution: workspace

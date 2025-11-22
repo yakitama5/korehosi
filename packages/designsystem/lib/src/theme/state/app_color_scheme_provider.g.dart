@@ -8,159 +8,90 @@ part of 'app_color_scheme_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appColorSchemeHash() => r'7472b42d429bd7df3f05b0e044b3c5ba23e5da16';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 /// アプリ内のカラースキーマを管理
-///
-/// Copied from [appColorScheme].
+
 @ProviderFor(appColorScheme)
-const appColorSchemeProvider = AppColorSchemeFamily();
+const appColorSchemeProvider = AppColorSchemeFamily._();
 
 /// アプリ内のカラースキーマを管理
-///
-/// Copied from [appColorScheme].
-class AppColorSchemeFamily extends Family<ColorScheme> {
-  /// アプリ内のカラースキーマを管理
-  ///
-  /// Copied from [appColorScheme].
-  const AppColorSchemeFamily();
 
+final class AppColorSchemeProvider
+    extends $FunctionalProvider<ColorScheme, ColorScheme, ColorScheme>
+    with $Provider<ColorScheme> {
   /// アプリ内のカラースキーマを管理
-  ///
-  /// Copied from [appColorScheme].
-  AppColorSchemeProvider call({required Brightness brightness}) {
-    return AppColorSchemeProvider(brightness: brightness);
+  const AppColorSchemeProvider._({
+    required AppColorSchemeFamily super.from,
+    required Brightness super.argument,
+  }) : super(
+         retry: null,
+         name: r'appColorSchemeProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$appColorSchemeHash();
+
+  @override
+  String toString() {
+    return r'appColorSchemeProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AppColorSchemeProvider getProviderOverride(
-    covariant AppColorSchemeProvider provider,
-  ) {
-    return call(brightness: provider.brightness);
+  $ProviderElement<ColorScheme> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  ColorScheme create(Ref ref) {
+    final argument = this.argument as Brightness;
+    return appColorScheme(ref, brightness: argument);
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'appColorSchemeProvider';
-}
-
-/// アプリ内のカラースキーマを管理
-///
-/// Copied from [appColorScheme].
-class AppColorSchemeProvider extends AutoDisposeProvider<ColorScheme> {
-  /// アプリ内のカラースキーマを管理
-  ///
-  /// Copied from [appColorScheme].
-  AppColorSchemeProvider({required Brightness brightness})
-    : this._internal(
-        (ref) =>
-            appColorScheme(ref as AppColorSchemeRef, brightness: brightness),
-        from: appColorSchemeProvider,
-        name: r'appColorSchemeProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$appColorSchemeHash,
-        dependencies: AppColorSchemeFamily._dependencies,
-        allTransitiveDependencies:
-            AppColorSchemeFamily._allTransitiveDependencies,
-        brightness: brightness,
-      );
-
-  AppColorSchemeProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.brightness,
-  }) : super.internal();
-
-  final Brightness brightness;
-
-  @override
-  Override overrideWith(
-    ColorScheme Function(AppColorSchemeRef provider) create,
-  ) {
-    return ProviderOverride(
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ColorScheme value) {
+    return $ProviderOverride(
       origin: this,
-      override: AppColorSchemeProvider._internal(
-        (ref) => create(ref as AppColorSchemeRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        brightness: brightness,
-      ),
+      providerOverride: $SyncValueProvider<ColorScheme>(value),
     );
   }
 
   @override
-  AutoDisposeProviderElement<ColorScheme> createElement() {
-    return _AppColorSchemeProviderElement(this);
-  }
-
-  @override
   bool operator ==(Object other) {
-    return other is AppColorSchemeProvider && other.brightness == brightness;
+    return other is AppColorSchemeProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, brightness.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin AppColorSchemeRef on AutoDisposeProviderRef<ColorScheme> {
-  /// The parameter `brightness` of this provider.
-  Brightness get brightness;
-}
+String _$appColorSchemeHash() => r'cc5f10491a5599f30df78289be489b39157bd072';
 
-class _AppColorSchemeProviderElement
-    extends AutoDisposeProviderElement<ColorScheme>
-    with AppColorSchemeRef {
-  _AppColorSchemeProviderElement(super.provider);
+/// アプリ内のカラースキーマを管理
+
+final class AppColorSchemeFamily extends $Family
+    with $FunctionalFamilyOverride<ColorScheme, Brightness> {
+  const AppColorSchemeFamily._()
+    : super(
+        retry: null,
+        name: r'appColorSchemeProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// アプリ内のカラースキーマを管理
+
+  AppColorSchemeProvider call({required Brightness brightness}) =>
+      AppColorSchemeProvider._(argument: brightness, from: this);
 
   @override
-  Brightness get brightness => (origin as AppColorSchemeProvider).brightness;
+  String toString() => r'appColorSchemeProvider';
 }
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

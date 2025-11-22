@@ -17,7 +17,7 @@ class ItemsPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 初期状態はドメイン層に定義
-    final viewLayout = ref.watch(itemsViewLayoutNotifierProvider);
+    final viewLayout = ref.watch(itemsViewLayoutProvider);
     final scrollController = useScrollController();
 
     return Scaffold(

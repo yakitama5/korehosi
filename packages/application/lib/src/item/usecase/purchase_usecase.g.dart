@@ -8,22 +8,47 @@ part of 'purchase_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchaseUsecaseHash() => r'f756fbc139e3547deacd9d8a64304226a64eed23';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [purchaseUsecase].
 @ProviderFor(purchaseUsecase)
-final purchaseUsecaseProvider = AutoDisposeProvider<PurchaseUsecase>.internal(
-  purchaseUsecase,
-  name: r'purchaseUsecaseProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$purchaseUsecaseHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const purchaseUsecaseProvider = PurchaseUsecaseProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef PurchaseUsecaseRef = AutoDisposeProviderRef<PurchaseUsecase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class PurchaseUsecaseProvider
+    extends
+        $FunctionalProvider<PurchaseUsecase, PurchaseUsecase, PurchaseUsecase>
+    with $Provider<PurchaseUsecase> {
+  const PurchaseUsecaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'purchaseUsecaseProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$purchaseUsecaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<PurchaseUsecase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  PurchaseUsecase create(Ref ref) {
+    return purchaseUsecase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PurchaseUsecase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PurchaseUsecase>(value),
+    );
+  }
+}
+
+String _$purchaseUsecaseHash() => r'de5deb44672aebb37ba1f09234951d41bd20b558';

@@ -24,7 +24,7 @@ class BranchItemsData extends StatefulShellBranchData {
   const BranchItemsData();
 }
 
-class ItemsRouteData extends GoRouteData with _$ItemsRouteData {
+class ItemsRouteData extends GoRouteData with $ItemsRouteData {
   const ItemsRouteData();
 
   static final GlobalKey<NavigatorState> $navigatorKey = _itemNavigatorKey;
@@ -34,7 +34,7 @@ class ItemsRouteData extends GoRouteData with _$ItemsRouteData {
   Widget build(BuildContext context, GoRouterState state) => const ItemsPage();
 }
 
-class ItemRouteData extends GoRouteData with _$ItemRouteData {
+class ItemRouteData extends GoRouteData with $ItemRouteData {
   const ItemRouteData(this.itemId);
 
   static const path = 'item/:itemId';
@@ -52,7 +52,7 @@ class ItemRouteData extends GoRouteData with _$ItemRouteData {
   );
 }
 
-class PurchaseRouteData extends GoRouteData with _$PurchaseRouteData {
+class PurchaseRouteData extends GoRouteData with $PurchaseRouteData {
   const PurchaseRouteData(this.itemId);
 
   static const path = 'purchase';
@@ -70,7 +70,7 @@ class PurchaseRouteData extends GoRouteData with _$PurchaseRouteData {
   );
 }
 
-class ItemCreateRouteData extends GoRouteData with _$ItemCreateRouteData {
+class ItemCreateRouteData extends GoRouteData with $ItemCreateRouteData {
   const ItemCreateRouteData();
 
   static const path = 'edit';
@@ -90,7 +90,7 @@ class ItemCreateRouteData extends GoRouteData with _$ItemCreateRouteData {
       );
 }
 
-class ItemEditRouteData extends GoRouteData with _$ItemEditRouteData {
+class ItemEditRouteData extends GoRouteData with $ItemEditRouteData {
   const ItemEditRouteData(this.itemId);
 
   static const path = 'edit';

@@ -1,6 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_color_utilities/palettes/core_palette.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

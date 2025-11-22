@@ -45,15 +45,23 @@ if (localPropertiesFile.exists()) {
     localProperties.load(FileInputStream(localPropertiesFile))
 }
 
-// Add: `google-services.json`の環境毎の読み替え
+// Add: アイコンや`google-services.json`の環境毎の読み替え
 // Firebase Crashlyticsも対応されたら削除すること
 val copySources by tasks.registering(Copy::class) {
-    from("src/${dartDefines["flavor"]}/res")
-    into("src/main/res")
+    copy {
+        from("src/${dartDefines["flavor"]}/res")
+        into("src/main/res")
+    }
+    copy {
+        from("src/main/res/google-services.json")
+        into("./.")
+    }
 }
+
 tasks.named("preBuild") {
     dependsOn(copySources)
 }
+
 
 android {
     namespace = "com.yakuran.family_wish_list"
@@ -76,8 +84,8 @@ android {
         applicationId = dartDefines["androidPackageName"]
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 35
+        targetSdk = 36
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         resValue("string", "app_name", dartDefines["appName"] ?: "")

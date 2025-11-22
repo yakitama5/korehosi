@@ -8,22 +8,46 @@ part of 'app_build_config_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appBuildConfigHash() => r'd4de2441f05786a30e954ce90fc0970a35426ab6';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [appBuildConfig].
 @ProviderFor(appBuildConfig)
-final appBuildConfigProvider = Provider<AppBuildConfig>.internal(
-  appBuildConfig,
-  name: r'appBuildConfigProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appBuildConfigHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const appBuildConfigProvider = AppBuildConfigProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AppBuildConfigRef = ProviderRef<AppBuildConfig>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class AppBuildConfigProvider
+    extends $FunctionalProvider<AppBuildConfig, AppBuildConfig, AppBuildConfig>
+    with $Provider<AppBuildConfig> {
+  const AppBuildConfigProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appBuildConfigProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appBuildConfigHash();
+
+  @$internal
+  @override
+  $ProviderElement<AppBuildConfig> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AppBuildConfig create(Ref ref) {
+    return appBuildConfig(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AppBuildConfig value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AppBuildConfig>(value),
+    );
+  }
+}
+
+String _$appBuildConfigHash() => r'd4de2441f05786a30e954ce90fc0970a35426ab6';

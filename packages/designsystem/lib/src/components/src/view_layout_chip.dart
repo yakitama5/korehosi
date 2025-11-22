@@ -24,7 +24,6 @@ class ViewLayoutChip extends StatelessWidget {
         onChanged(value);
       },
       showCheckmark: false,
-      selected: false,
     );
   }
 }

@@ -9,9 +9,13 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_dependency_override/dependency_override.dart';
 import 'package:packages_domain/common.dart';
+import 'package:packages_domain/notification.dart';
 import 'package:version/version.dart';
 
-typedef InitializedValues = ({AppBuildConfig buildConfig});
+typedef InitializedValues = ({
+  AppBuildConfig buildConfig,
+  NotificationMessage? initialMessage,
+});
 
 final class AppInitializer {
   AppInitializer._();
@@ -34,12 +38,15 @@ final class AppInitializer {
     usePathUrlStrategy();
 
     // インフラ層の初期化
-    await InfrastructureInitializer.initialize(
+    final infraResult = await InfrastructureInitializer.initialize(
       flavor: buildConfig.flavor,
       isWeb: kIsWeb,
     );
 
-    return (buildConfig: buildConfig);
+    return (
+      buildConfig: buildConfig,
+      initialMessage: infraResult.initialMessage,
+    );
   }
 
   static Future<AppBuildConfig> _initializeBuildConfig() async {

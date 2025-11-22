@@ -8,25 +8,47 @@ part of 'notification_message_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(notificationMessage)
+const notificationMessageProvider = NotificationMessageProvider._();
+
+final class NotificationMessageProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<NotificationMessage>,
+          NotificationMessage,
+          Stream<NotificationMessage>
+        >
+    with
+        $FutureModifier<NotificationMessage>,
+        $StreamProvider<NotificationMessage> {
+  const NotificationMessageProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'notificationMessageProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$notificationMessageHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<NotificationMessage> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<NotificationMessage> create(Ref ref) {
+    return notificationMessage(ref);
+  }
+}
+
 String _$notificationMessageHash() =>
     r'10836dd85fb80c340a2ad65b53f869fa7fb4bba7';
-
-/// See also [notificationMessage].
-@ProviderFor(notificationMessage)
-final notificationMessageProvider =
-    AutoDisposeStreamProvider<NotificationMessage>.internal(
-      notificationMessage,
-      name: r'notificationMessageProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$notificationMessageHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef NotificationMessageRef =
-    AutoDisposeStreamProviderRef<NotificationMessage>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

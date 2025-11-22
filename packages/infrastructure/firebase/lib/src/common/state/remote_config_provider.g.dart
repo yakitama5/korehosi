@@ -8,527 +8,330 @@ part of 'remote_config_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$remoteConfigHash() => r'36d7b397a177e8516a81814c1f515ebf6415c1a6';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// Firebase Remote Config
+/// テスト時にDIすることを考慮して、Providerとして定義
+
+@ProviderFor(remoteConfig)
+const remoteConfigProvider = RemoteConfigProvider._();
 
 /// Firebase Remote Config
 /// テスト時にDIすることを考慮して、Providerとして定義
-///
-/// Copied from [remoteConfig].
-@ProviderFor(remoteConfig)
-final remoteConfigProvider = FutureProvider<FirebaseRemoteConfig>.internal(
-  remoteConfig,
-  name: r'remoteConfigProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$remoteConfigHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef RemoteConfigRef = FutureProviderRef<FirebaseRemoteConfig>;
-String _$stringConfigHash() => r'a54d53ff39eb08f065ecfc5f289e17cac834de85';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// See also [stringConfig].
-@ProviderFor(stringConfig)
-const stringConfigProvider = StringConfigFamily();
-
-/// See also [stringConfig].
-class StringConfigFamily extends Family<AsyncValue<String>> {
-  /// See also [stringConfig].
-  const StringConfigFamily();
-
-  /// See also [stringConfig].
-  StringConfigProvider call({required RemoteConfigs<String> config}) {
-    return StringConfigProvider(config: config);
-  }
-
-  @override
-  StringConfigProvider getProviderOverride(
-    covariant StringConfigProvider provider,
-  ) {
-    return call(config: provider.config);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'stringConfigProvider';
-}
-
-/// See also [stringConfig].
-class StringConfigProvider extends AutoDisposeFutureProvider<String> {
-  /// See also [stringConfig].
-  StringConfigProvider({required RemoteConfigs<String> config})
-    : this._internal(
-        (ref) => stringConfig(ref as StringConfigRef, config: config),
-        from: stringConfigProvider,
-        name: r'stringConfigProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$stringConfigHash,
-        dependencies: StringConfigFamily._dependencies,
-        allTransitiveDependencies:
-            StringConfigFamily._allTransitiveDependencies,
-        config: config,
+final class RemoteConfigProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<FirebaseRemoteConfig>,
+          FirebaseRemoteConfig,
+          FutureOr<FirebaseRemoteConfig>
+        >
+    with
+        $FutureModifier<FirebaseRemoteConfig>,
+        $FutureProvider<FirebaseRemoteConfig> {
+  /// Firebase Remote Config
+  /// テスト時にDIすることを考慮して、Providerとして定義
+  const RemoteConfigProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'remoteConfigProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
       );
 
-  StringConfigProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.config,
-  }) : super.internal();
+  @override
+  String debugGetCreateSourceHash() => _$remoteConfigHash();
 
-  final RemoteConfigs<String> config;
+  @$internal
+  @override
+  $FutureProviderElement<FirebaseRemoteConfig> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
-  Override overrideWith(
-    FutureOr<String> Function(StringConfigRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: StringConfigProvider._internal(
-        (ref) => create(ref as StringConfigRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        config: config,
-      ),
-    );
+  FutureOr<FirebaseRemoteConfig> create(Ref ref) {
+    return remoteConfig(ref);
+  }
+}
+
+String _$remoteConfigHash() => r'36d7b397a177e8516a81814c1f515ebf6415c1a6';
+
+@ProviderFor(stringConfig)
+const stringConfigProvider = StringConfigFamily._();
+
+final class StringConfigProvider
+    extends $FunctionalProvider<AsyncValue<String>, String, FutureOr<String>>
+    with $FutureModifier<String>, $FutureProvider<String> {
+  const StringConfigProvider._({
+    required StringConfigFamily super.from,
+    required RemoteConfigs<String> super.argument,
+  }) : super(
+         retry: null,
+         name: r'stringConfigProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$stringConfigHash();
+
+  @override
+  String toString() {
+    return r'stringConfigProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AutoDisposeFutureProviderElement<String> createElement() {
-    return _StringConfigProviderElement(this);
+  $FutureProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<String> create(Ref ref) {
+    final argument = this.argument as RemoteConfigs<String>;
+    return stringConfig(ref, config: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is StringConfigProvider && other.config == config;
+    return other is StringConfigProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, config.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin StringConfigRef on AutoDisposeFutureProviderRef<String> {
-  /// The parameter `config` of this provider.
-  RemoteConfigs<String> get config;
-}
+String _$stringConfigHash() => r'a54d53ff39eb08f065ecfc5f289e17cac834de85';
 
-class _StringConfigProviderElement
-    extends AutoDisposeFutureProviderElement<String>
-    with StringConfigRef {
-  _StringConfigProviderElement(super.provider);
+final class StringConfigFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<String>, RemoteConfigs<String>> {
+  const StringConfigFamily._()
+    : super(
+        retry: null,
+        name: r'stringConfigProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  StringConfigProvider call({required RemoteConfigs<String> config}) =>
+      StringConfigProvider._(argument: config, from: this);
 
   @override
-  RemoteConfigs<String> get config => (origin as StringConfigProvider).config;
+  String toString() => r'stringConfigProvider';
+}
+
+@ProviderFor(boolConfig)
+const boolConfigProvider = BoolConfigFamily._();
+
+final class BoolConfigProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  const BoolConfigProvider._({
+    required BoolConfigFamily super.from,
+    required RemoteConfigs<bool> super.argument,
+  }) : super(
+         retry: null,
+         name: r'boolConfigProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$boolConfigHash();
+
+  @override
+  String toString() {
+    return r'boolConfigProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool> create(Ref ref) {
+    final argument = this.argument as RemoteConfigs<bool>;
+    return boolConfig(ref, config: argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is BoolConfigProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
 }
 
 String _$boolConfigHash() => r'3750bdf5cffc2bb87fbc946aef5adbd11fcc9438';
 
-/// See also [boolConfig].
-@ProviderFor(boolConfig)
-const boolConfigProvider = BoolConfigFamily();
-
-/// See also [boolConfig].
-class BoolConfigFamily extends Family<AsyncValue<bool>> {
-  /// See also [boolConfig].
-  const BoolConfigFamily();
-
-  /// See also [boolConfig].
-  BoolConfigProvider call({required RemoteConfigs<bool> config}) {
-    return BoolConfigProvider(config: config);
-  }
-
-  @override
-  BoolConfigProvider getProviderOverride(
-    covariant BoolConfigProvider provider,
-  ) {
-    return call(config: provider.config);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'boolConfigProvider';
-}
-
-/// See also [boolConfig].
-class BoolConfigProvider extends AutoDisposeFutureProvider<bool> {
-  /// See also [boolConfig].
-  BoolConfigProvider({required RemoteConfigs<bool> config})
-    : this._internal(
-        (ref) => boolConfig(ref as BoolConfigRef, config: config),
-        from: boolConfigProvider,
+final class BoolConfigFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<bool>, RemoteConfigs<bool>> {
+  const BoolConfigFamily._()
+    : super(
+        retry: null,
         name: r'boolConfigProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$boolConfigHash,
-        dependencies: BoolConfigFamily._dependencies,
-        allTransitiveDependencies: BoolConfigFamily._allTransitiveDependencies,
-        config: config,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
       );
 
-  BoolConfigProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.config,
-  }) : super.internal();
-
-  final RemoteConfigs<bool> config;
+  BoolConfigProvider call({required RemoteConfigs<bool> config}) =>
+      BoolConfigProvider._(argument: config, from: this);
 
   @override
-  Override overrideWith(
-    FutureOr<bool> Function(BoolConfigRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: BoolConfigProvider._internal(
-        (ref) => create(ref as BoolConfigRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        config: config,
-      ),
-    );
+  String toString() => r'boolConfigProvider';
+}
+
+@ProviderFor(stringStreamConfig)
+const stringStreamConfigProvider = StringStreamConfigFamily._();
+
+final class StringStreamConfigProvider
+    extends $FunctionalProvider<AsyncValue<String>, String, Stream<String>>
+    with $FutureModifier<String>, $StreamProvider<String> {
+  const StringStreamConfigProvider._({
+    required StringStreamConfigFamily super.from,
+    required RemoteConfigs<String> super.argument,
+  }) : super(
+         retry: null,
+         name: r'stringStreamConfigProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$stringStreamConfigHash();
+
+  @override
+  String toString() {
+    return r'stringStreamConfigProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AutoDisposeFutureProviderElement<bool> createElement() {
-    return _BoolConfigProviderElement(this);
+  $StreamProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
+
+  @override
+  Stream<String> create(Ref ref) {
+    final argument = this.argument as RemoteConfigs<String>;
+    return stringStreamConfig(ref, config: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is BoolConfigProvider && other.config == config;
+    return other is StringStreamConfigProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, config.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin BoolConfigRef on AutoDisposeFutureProviderRef<bool> {
-  /// The parameter `config` of this provider.
-  RemoteConfigs<bool> get config;
-}
-
-class _BoolConfigProviderElement extends AutoDisposeFutureProviderElement<bool>
-    with BoolConfigRef {
-  _BoolConfigProviderElement(super.provider);
-
-  @override
-  RemoteConfigs<bool> get config => (origin as BoolConfigProvider).config;
 }
 
 String _$stringStreamConfigHash() =>
     r'5d70c2bf5c5d5b92002e803fff4651df273f0b98';
 
-/// See also [stringStreamConfig].
-@ProviderFor(stringStreamConfig)
-const stringStreamConfigProvider = StringStreamConfigFamily();
-
-/// See also [stringStreamConfig].
-class StringStreamConfigFamily extends Family<AsyncValue<String>> {
-  /// See also [stringStreamConfig].
-  const StringStreamConfigFamily();
-
-  /// See also [stringStreamConfig].
-  StringStreamConfigProvider call({required RemoteConfigs<String> config}) {
-    return StringStreamConfigProvider(config: config);
-  }
-
-  @override
-  StringStreamConfigProvider getProviderOverride(
-    covariant StringStreamConfigProvider provider,
-  ) {
-    return call(config: provider.config);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'stringStreamConfigProvider';
-}
-
-/// See also [stringStreamConfig].
-class StringStreamConfigProvider extends AutoDisposeStreamProvider<String> {
-  /// See also [stringStreamConfig].
-  StringStreamConfigProvider({required RemoteConfigs<String> config})
-    : this._internal(
-        (ref) =>
-            stringStreamConfig(ref as StringStreamConfigRef, config: config),
-        from: stringStreamConfigProvider,
+final class StringStreamConfigFamily extends $Family
+    with $FunctionalFamilyOverride<Stream<String>, RemoteConfigs<String>> {
+  const StringStreamConfigFamily._()
+    : super(
+        retry: null,
         name: r'stringStreamConfigProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$stringStreamConfigHash,
-        dependencies: StringStreamConfigFamily._dependencies,
-        allTransitiveDependencies:
-            StringStreamConfigFamily._allTransitiveDependencies,
-        config: config,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
       );
 
-  StringStreamConfigProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.config,
-  }) : super.internal();
-
-  final RemoteConfigs<String> config;
+  StringStreamConfigProvider call({required RemoteConfigs<String> config}) =>
+      StringStreamConfigProvider._(argument: config, from: this);
 
   @override
-  Override overrideWith(
-    Stream<String> Function(StringStreamConfigRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: StringStreamConfigProvider._internal(
-        (ref) => create(ref as StringStreamConfigRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        config: config,
-      ),
-    );
+  String toString() => r'stringStreamConfigProvider';
+}
+
+@ProviderFor(boolStreamConfig)
+const boolStreamConfigProvider = BoolStreamConfigFamily._();
+
+final class BoolStreamConfigProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, Stream<bool>>
+    with $FutureModifier<bool>, $StreamProvider<bool> {
+  const BoolStreamConfigProvider._({
+    required BoolStreamConfigFamily super.from,
+    required RemoteConfigs<bool> super.argument,
+  }) : super(
+         retry: null,
+         name: r'boolStreamConfigProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$boolStreamConfigHash();
+
+  @override
+  String toString() {
+    return r'boolStreamConfigProvider'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  AutoDisposeStreamProviderElement<String> createElement() {
-    return _StringStreamConfigProviderElement(this);
+  $StreamProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
+
+  @override
+  Stream<bool> create(Ref ref) {
+    final argument = this.argument as RemoteConfigs<bool>;
+    return boolStreamConfig(ref, config: argument);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is StringStreamConfigProvider && other.config == config;
+    return other is BoolStreamConfigProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, config.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
-}
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin StringStreamConfigRef on AutoDisposeStreamProviderRef<String> {
-  /// The parameter `config` of this provider.
-  RemoteConfigs<String> get config;
-}
-
-class _StringStreamConfigProviderElement
-    extends AutoDisposeStreamProviderElement<String>
-    with StringStreamConfigRef {
-  _StringStreamConfigProviderElement(super.provider);
-
-  @override
-  RemoteConfigs<String> get config =>
-      (origin as StringStreamConfigProvider).config;
 }
 
 String _$boolStreamConfigHash() => r'd5360082d0a6b46d1fe91de93198a70960a02d47';
 
-/// See also [boolStreamConfig].
-@ProviderFor(boolStreamConfig)
-const boolStreamConfigProvider = BoolStreamConfigFamily();
-
-/// See also [boolStreamConfig].
-class BoolStreamConfigFamily extends Family<AsyncValue<bool>> {
-  /// See also [boolStreamConfig].
-  const BoolStreamConfigFamily();
-
-  /// See also [boolStreamConfig].
-  BoolStreamConfigProvider call({required RemoteConfigs<bool> config}) {
-    return BoolStreamConfigProvider(config: config);
-  }
-
-  @override
-  BoolStreamConfigProvider getProviderOverride(
-    covariant BoolStreamConfigProvider provider,
-  ) {
-    return call(config: provider.config);
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'boolStreamConfigProvider';
-}
-
-/// See also [boolStreamConfig].
-class BoolStreamConfigProvider extends AutoDisposeStreamProvider<bool> {
-  /// See also [boolStreamConfig].
-  BoolStreamConfigProvider({required RemoteConfigs<bool> config})
-    : this._internal(
-        (ref) => boolStreamConfig(ref as BoolStreamConfigRef, config: config),
-        from: boolStreamConfigProvider,
+final class BoolStreamConfigFamily extends $Family
+    with $FunctionalFamilyOverride<Stream<bool>, RemoteConfigs<bool>> {
+  const BoolStreamConfigFamily._()
+    : super(
+        retry: null,
         name: r'boolStreamConfigProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$boolStreamConfigHash,
-        dependencies: BoolStreamConfigFamily._dependencies,
-        allTransitiveDependencies:
-            BoolStreamConfigFamily._allTransitiveDependencies,
-        config: config,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
       );
 
-  BoolStreamConfigProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.config,
-  }) : super.internal();
-
-  final RemoteConfigs<bool> config;
+  BoolStreamConfigProvider call({required RemoteConfigs<bool> config}) =>
+      BoolStreamConfigProvider._(argument: config, from: this);
 
   @override
-  Override overrideWith(
-    Stream<bool> Function(BoolStreamConfigRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: BoolStreamConfigProvider._internal(
-        (ref) => create(ref as BoolStreamConfigRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        config: config,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeStreamProviderElement<bool> createElement() {
-    return _BoolStreamConfigProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is BoolStreamConfigProvider && other.config == config;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, config.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
+  String toString() => r'boolStreamConfigProvider';
 }
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin BoolStreamConfigRef on AutoDisposeStreamProviderRef<bool> {
-  /// The parameter `config` of this provider.
-  RemoteConfigs<bool> get config;
-}
-
-class _BoolStreamConfigProviderElement
-    extends AutoDisposeStreamProviderElement<bool>
-    with BoolStreamConfigRef {
-  _BoolStreamConfigProviderElement(super.provider);
-
-  @override
-  RemoteConfigs<bool> get config => (origin as BoolStreamConfigProvider).config;
-}
-
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

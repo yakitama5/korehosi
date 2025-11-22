@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_functions_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_group_model.dart';
@@ -13,6 +12,7 @@ import 'package:infrastructure_firebase/src/user/state/firestore_user_provider.d
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebaseGroupRepository implements GroupRepository {

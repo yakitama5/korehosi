@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-final _expandedProvider = StateProvider<bool>((ref) => true);
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 /// スクロールに応じたアニメーション表示を行うFAB
-class AnimatedSwitcherFab extends HookConsumerWidget {
+class AnimatedSwitcherFab extends HookWidget {
   const AnimatedSwitcherFab({
     super.key,
     required this.controller,
@@ -23,24 +21,23 @@ class AnimatedSwitcherFab extends HookConsumerWidget {
   final double expandWidth;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    final expanded = useState(true);
+
     // スクロール状況を監視
     controller.addListener(
       () {
-        final expanded = ref.read(_expandedProvider.notifier);
         if (controller.offset > kToolbarHeight) {
-          expanded.update((state) => false);
+          expanded.value = false;
         } else {
-          expanded.update((state) => true);
+          expanded.value = true;
         }
       },
     );
 
-    final expanded = ref.watch(_expandedProvider);
-
     // HACK(yakitama5): Flutter公式でサポートされたらそちらに変更すること
     // https://github.com/flutter/flutter/issues/104393
-    return expanded
+    return expanded.value
         ? AnimatedContainer(
             duration: duration,
             width: expandWidth,

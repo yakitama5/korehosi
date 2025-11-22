@@ -8,24 +8,48 @@ part of 'join_groups_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$joinGroupsHash() => r'5af4e8c7fed5250aa60734dec23ed314e858e3d8';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// 認証ユーザーの参加グループの一覧
+
+@ProviderFor(joinGroups)
+const joinGroupsProvider = JoinGroupsProvider._();
 
 /// 認証ユーザーの参加グループの一覧
-///
-/// Copied from [joinGroups].
-@ProviderFor(joinGroups)
-final joinGroupsProvider = AutoDisposeFutureProvider<List<Group>?>.internal(
-  joinGroups,
-  name: r'joinGroupsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$joinGroupsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef JoinGroupsRef = AutoDisposeFutureProviderRef<List<Group>?>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class JoinGroupsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Group>?>,
+          List<Group>?,
+          FutureOr<List<Group>?>
+        >
+    with $FutureModifier<List<Group>?>, $FutureProvider<List<Group>?> {
+  /// 認証ユーザーの参加グループの一覧
+  const JoinGroupsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'joinGroupsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$joinGroupsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<Group>?> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<Group>?> create(Ref ref) {
+    return joinGroups(ref);
+  }
+}
+
+String _$joinGroupsHash() => r'46cc416bdf238bf31c7ed3fd2a471d43cf09ac6c';

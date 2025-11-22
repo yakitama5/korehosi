@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app/app/pages/group/components/premium_icon_container.dart';
 import 'package:flutter_app/app/pages/group/components/share_group_bottom_sheet.dart';
 import 'package:flutter_app/app/pages/item/components/list_loader_view.dart';
@@ -19,7 +18,6 @@ import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/user.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 
 class GroupPage extends HookConsumerWidget {
   const GroupPage({super.key});
@@ -135,55 +133,38 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
       );
       return;
     }
-    try {
-      // 商品情報の取得
-      final offerings = await Purchases.getOfferings();
-      final package = offerings.all['familyWishList_once_premiumGroup_100']
-          ?.getPackage('premiumGroups');
-      final price = NumberFormat.decimalPattern().format(
-        package?.storeProduct.price,
+
+    // 商品情報の取得
+    final usecase = ref.read(groupUsecaseProvider);
+    final product = await usecase.fetchLimitedReleasePlan();
+
+    final price = NumberFormat.decimalPattern().format(
+      product?.price,
+    );
+
+    if (!context.mounted) {
+      return;
+    }
+    final messages = i18n.group.groupPage.appInPurchaseConfirmDialog;
+    final result = await showOkCancelAlertDialog(
+      context: context,
+      title: messages.title,
+      okLabel: messages.okLabel(price: price),
+      message: messages.message(price: price),
+    );
+
+    if (result != OkCancelResult.ok) {
+      return;
+    }
+
+    // SnackBarの表示は`listen`を用いて行うため、ここでは不要
+    if (context.mounted) {
+      await execute(
+        action: () => ref
+            .read(groupUsecaseProvider)
+            .upgradeLimitedReleasePlan(groupId: group!.id),
+        successMessage: i18n.group.groupPage.limitBreakPurchased,
       );
-
-      if (!context.mounted) {
-        return;
-      }
-      final messages = i18n.group.groupPage.appInPurchaseConfirmDialog;
-      final result = await showOkCancelAlertDialog(
-        context: context,
-        title: messages.title,
-        okLabel: messages.okLabel(price: price),
-        message: messages.message(price: price),
-      );
-
-      if (result != OkCancelResult.ok) {
-        return;
-      }
-
-      // SnackBarの表示は`listen`を用いて行うため、ここでは不要
-      if (context.mounted) {
-        await execute(
-          action: () => ref
-              .read(groupUsecaseProvider)
-              .upgradeLimitedReleasePlan(groupId: group!.id),
-          successMessage: i18n.group.groupPage.limitBreakPurchased,
-        );
-      }
-    } on PlatformException catch (e) {
-      // キャンセルした場合に限り、何もしない
-      final errorCode = PurchasesErrorHelper.getErrorCode(e);
-      if (errorCode != PurchasesErrorCode.purchaseCancelledError) {
-        if (context.mounted) {
-          SnackBarManager.showErrorSnackBar(
-            commonI18n.exceptions.errorMessage.unexpected,
-          );
-        }
-      }
-    } on Exception {
-      if (context.mounted) {
-        SnackBarManager.showErrorSnackBar(
-          commonI18n.exceptions.errorMessage.unexpected,
-        );
-      }
     }
   }
 }

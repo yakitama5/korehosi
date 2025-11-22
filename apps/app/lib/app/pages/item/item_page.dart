@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/pages/item/components/item_images.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
+import 'package:flutter_app/app/pages/item/extension/purchase_status_icon_extension.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

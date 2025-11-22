@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/state/current_group_provider.dart';
@@ -10,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'purchase_usecase.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 PurchaseUsecase purchaseUsecase(Ref ref) => PurchaseUsecase(ref);
 
 /// ほしい物の購入情報に関するユースケース

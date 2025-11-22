@@ -3,6 +3,7 @@
 ///
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
+// dart format off
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -202,39 +203,46 @@ class _TranslationsSettingsAccountPageLeaveConfirmDialogEn extends TranslationsS
 	@override String get body => 'Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.';
 }
 
-/// Flat map(s) containing all translations.
+/// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
+///
+/// The Dart AOT compiler has issues with very large switch statements,
+/// so the map is split into smaller functions (512 entries each).
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
-		switch (path) {
-			case 'analyze.hoge': return 'hoge';
-			case 'group.hoge': return 'hoge';
-			case 'item.hoge': return 'hoge';
-			case 'settings.settingsPage.title': return 'Settings';
-			case 'settings.settingsPage.account.head': return 'Account';
-			case 'settings.settingsPage.account.account': return 'Account';
-			case 'settings.settingsPage.layout.haed': return 'Layout';
-			case 'settings.settingsPage.layout.uiStyle': return 'UI Style';
-			case 'settings.settingsPage.layout.themeMode': return 'ThemeMode';
-			case 'settings.settingsPage.layout.colorTheme': return 'Colors';
-			case 'settings.settingsPage.help.head': return 'Help';
-			case 'settings.settingsPage.help.howToUse': return 'HowToUse';
-			case 'settings.settingsPage.help.contactUs': return 'Contact us';
-			case 'settings.settingsPage.help.developperTwitter': return 'Developper';
-			case 'settings.settingsPage.help.privacyPolicy': return 'PrivacyPolicy';
-			case 'settings.settingsPage.help.licencse': return 'License';
-			case 'settings.accountPage.title': return 'Account';
-			case 'settings.accountPage.link.head': return 'Account link';
-			case 'settings.accountPage.link.google': return 'Google';
-			case 'settings.accountPage.link.apple': return 'Apple';
-			case 'settings.accountPage.other.head': return 'Other';
-			case 'settings.accountPage.other.logout': return 'Logout';
-			case 'settings.accountPage.other.leave': return 'Leave';
-			case 'settings.accountPage.leaveConfirmDialog.title': return 'Leave?';
-			case 'settings.accountPage.leaveConfirmDialog.body': return 'Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.';
-			case 'user.hoge': return 'hoge';
-			default: return null;
-		}
+		return _flatMapFunction$0(path);
+	}
+
+	dynamic _flatMapFunction$0(String path) {
+		return switch (path) {
+			'analyze.hoge' => 'hoge',
+			'group.hoge' => 'hoge',
+			'item.hoge' => 'hoge',
+			'settings.settingsPage.title' => 'Settings',
+			'settings.settingsPage.account.head' => 'Account',
+			'settings.settingsPage.account.account' => 'Account',
+			'settings.settingsPage.layout.haed' => 'Layout',
+			'settings.settingsPage.layout.uiStyle' => 'UI Style',
+			'settings.settingsPage.layout.themeMode' => 'ThemeMode',
+			'settings.settingsPage.layout.colorTheme' => 'Colors',
+			'settings.settingsPage.help.head' => 'Help',
+			'settings.settingsPage.help.howToUse' => 'HowToUse',
+			'settings.settingsPage.help.contactUs' => 'Contact us',
+			'settings.settingsPage.help.developperTwitter' => 'Developper',
+			'settings.settingsPage.help.privacyPolicy' => 'PrivacyPolicy',
+			'settings.settingsPage.help.licencse' => 'License',
+			'settings.accountPage.title' => 'Account',
+			'settings.accountPage.link.head' => 'Account link',
+			'settings.accountPage.link.google' => 'Google',
+			'settings.accountPage.link.apple' => 'Apple',
+			'settings.accountPage.other.head' => 'Other',
+			'settings.accountPage.other.logout' => 'Logout',
+			'settings.accountPage.other.leave' => 'Leave',
+			'settings.accountPage.leaveConfirmDialog.title' => 'Leave?',
+			'settings.accountPage.leaveConfirmDialog.body' => 'Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.',
+			'user.hoge' => 'hoge',
+			_ => null,
+		};
 	}
 }
 

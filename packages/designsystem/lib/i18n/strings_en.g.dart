@@ -3,6 +3,7 @@
 ///
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
+// dart format off
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -369,176 +370,72 @@ class _TranslationsDesignsystemAppUpdateForceUpdateEn extends TranslationsDesign
 	@override String get message => 'ご利用のバージョンは現在ご利用出来ません。 ストアから新しいバージョンをご利用下さい。';
 }
 
-/// Flat map(s) containing all translations.
+/// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
+///
+/// The Dart AOT compiler has issues with very large switch statements,
+/// so the map is split into smaller functions (512 entries each).
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
-		switch (path) {
-			case 'common.yes': return 'Yes';
-			case 'common.no': return 'No';
-			case 'common.itmizedTextPrefix': return '・';
-			case 'common.save': return '保存';
-			case 'common.delete': return '削除';
-			case 'common.edit': return '編集';
-			case 'common.unset': return '<未設定>';
-			case 'common.requiredMark': return '*';
-			case 'common.requiredHelper': return '*必須項目';
-			case 'common.next': return '次へ';
-			case 'common.back': return '戻る';
-			case 'common.prev': return '前へ';
-			case 'common.skip': return 'スキップ';
-			case 'common.ok': return 'OK';
-			case 'common.cancel': return 'キャンセル';
-			case 'common.reset': return 'リセット';
-			case 'common.apply': return '適用';
-			case 'common.all': return 'すべて';
-			case 'common.noName': return '名無し';
-			case 'designsystem.imageSourceSelect.shoot': return '写真を撮る';
-			case 'designsystem.imageSourceSelect.chooseFromLibrary': return 'ライブラリから画像を選択';
-			case 'designsystem.confirmDiscardChanges.title': return '変更を破棄しますか？';
-			case 'designsystem.confirmDiscardChanges.message': return 'すべての変更は失われます';
-			case 'designsystem.confirmDiscardChanges.discard': return '破棄';
-			case 'designsystem.confirmDiscardChanges.notDiscard': return '破棄しない';
-			case 'designsystem.permissionMessages.photos': return 'ギャラリーへのアクセス';
-			case 'designsystem.permissionMessages.camera': return 'カメラへのアクセス';
-			case 'designsystem.permissionMessages.pushNotification': return 'プッシュ通知';
-			case 'designsystem.permissionMessages.permissionLackDialog.title': return ({required String permission}) => '${permission}が許可されていません';
-			case 'designsystem.permissionMessages.permissionLackDialog.message': return ({required String permission}) => '設定アプリを開いて${permission}を許可してください';
-			case 'designsystem.permissionMessages.permissionLackDialog.openSettings': return '設定アプリを開く';
-			case 'designsystem.permissionMessages.permissionOffDialog.title': return ({required String permission}) => '${permission}をオフにしますか？';
-			case 'designsystem.permissionMessages.permissionOffDialog.message': return ({required String permission}) => '設定アプリを開いて${permission}をオフにしてください';
-			case 'designsystem.permissionMessages.permissionOffDialog.openSettings': return '設定アプリを開く';
-			case 'designsystem.sendUrlErrorDialog.title': return 'エラー';
-			case 'designsystem.sendUrlErrorDialog.message': return 'URLを開けませんでした。\n頻発する場合はお問い合わせ下さい。';
-			case 'designsystem.appUpdate.updatePossible.message': return '新しいバージョンが公開されています。 アップデートを行うと、新しい機能をご利用いただけます。 アップデートを行いますか？';
-			case 'designsystem.appUpdate.forceUpdate.message': return 'ご利用のバージョンは現在ご利用出来ません。 ストアから新しいバージョンをご利用下さい。';
-			case 'designsystem.appUpdate.navigateStore': return 'ストアを開く';
-			case 'designsystem.validationError.required': return '必須項目を入力して下さい';
-			case 'designsystem.validationError.url': return '正しいURL形式で入力して下さい';
-			case 'designsystem.format.percent': return ({required String percent}) => '${percent}%';
-			case 'kEnum.uiStyle': return ({required UIStyle context}) {
-				switch (context) {
-					case UIStyle.system:
-						return 'System';
-					case UIStyle.android:
-						return 'Android';
-					case UIStyle.ios:
-						return 'iOS';
-				}
-			};
-			case 'kEnum.themeColor': return ({required ThemeColor context}) {
-				switch (context) {
-					case ThemeColor.appColor:
-						return 'AppColor';
-					case ThemeColor.dynamicColor:
-						return 'DynamicColor';
-					case ThemeColor.blue:
-						return 'Blue';
-					case ThemeColor.purple:
-						return 'Purple';
-					case ThemeColor.green:
-						return 'Green';
-					case ThemeColor.red:
-						return 'Red';
-					case ThemeColor.pink:
-						return 'Pink';
-					case ThemeColor.yellow:
-						return 'Yellow';
-					case ThemeColor.orange:
-						return 'Orange';
-				}
-			};
-			case 'kEnum.themeMode': return ({required ThemeMode context}) {
-				switch (context) {
-					case ThemeMode.system:
-						return 'System';
-					case ThemeMode.light:
-						return 'Light';
-					case ThemeMode.dark:
-						return 'Dark';
-				}
-			};
-			case 'kEnum.viewLayout.name': return 'Layout';
-			case 'kEnum.viewLayout.typeName': return ({required ViewLayout context}) {
-				switch (context) {
-					case ViewLayout.grid:
-						return 'Grid';
-					case ViewLayout.list:
-						return 'List';
-				}
-			};
-			case 'kEnum.sortOrder': return ({required SortOrder context}) {
-				switch (context) {
-					case SortOrder.asc:
-						return 'ASC';
-					case SortOrder.desc:
-						return 'DESC';
-				}
-			};
-			case 'kEnum.itemOrderKey': return ({required ItemOrderKey context}) {
-				switch (context) {
-					case ItemOrderKey.createdAt:
-						return 'Created at';
-					case ItemOrderKey.name:
-						return 'Name';
-					case ItemOrderKey.wishRank:
-						return 'Degree of desirability';
-				}
-			};
-			case 'kEnum.ageGroup': return ({required AgeGroup context}) {
-				switch (context) {
-					case AgeGroup.child:
-						return 'child';
-					case AgeGroup.adult:
-						return 'adult';
-				}
-			};
-			case 'kEnum.purchaseStatus': return ({required PurchaseStatus context}) {
-				switch (context) {
-					case PurchaseStatus.notPurchased:
-						return 'unpurchased';
-					case PurchaseStatus.purchasePlan:
-						return 'Planned purchases';
-					case PurchaseStatus.purchased:
-						return 'already bought';
-				}
-			};
-			case 'exceptions.businessException': return ({required BusinessExceptionType context}) {
-				switch (context) {
-					case BusinessExceptionType.deleted:
-						return '削除済です。';
-					case BusinessExceptionType.updateTargetNotFound:
-						return '保存に失敗しました、あらためて操作を行ってください。';
-					case BusinessExceptionType.notSelectedGroup:
-						return 'グループが選択されていません。 グループを選択してください。';
-					case BusinessExceptionType.notAuth:
-						return 'ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。';
-					case BusinessExceptionType.createDynamicLinkUnknown:
-						return '招待リンクの作成に失敗しました。';
-					case BusinessExceptionType.joinGroupPolicyJoinedGroup:
-						return 'すでに参加しています。';
-					case BusinessExceptionType.joinGroupPolicyExpired:
-						return '招待リンクの有効期限が切れています。';
-					case BusinessExceptionType.joinGroupPolicyNotAuth:
-						return '認証エラーが発生しました。';
-					case BusinessExceptionType.joinGroupPolicyLimitOver:
-						return 'グループの参加上限(5件)に達しました。';
-					case BusinessExceptionType.joinGroupPolicyInvalidShareLink:
-						return '招待リンクが正しくありません。';
-					case BusinessExceptionType.registrationItemPolicyLimitOver:
-						return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。';
-					case BusinessExceptionType.signInPolicyLinkedAccount:
-						return 'すでに連携済のアカウントです。';
-					case BusinessExceptionType.googleSignInUnknown:
-						return 'Google認証に失敗しました。';
-					case BusinessExceptionType.appInPurchasePolicyPackageNotExist:
-						return '購入処理に失敗しました。';
-					case BusinessExceptionType.appInPurchasePolicyPackageNotActive:
-						return '購入処理に失敗しました。';
-				}
-			};
-			default: return null;
-		}
+		return _flatMapFunction$0(path);
+	}
+
+	dynamic _flatMapFunction$0(String path) {
+		return switch (path) {
+			'common.yes' => 'Yes',
+			'common.no' => 'No',
+			'common.itmizedTextPrefix' => '・',
+			'common.save' => '保存',
+			'common.delete' => '削除',
+			'common.edit' => '編集',
+			'common.unset' => '<未設定>',
+			'common.requiredMark' => '*',
+			'common.requiredHelper' => '*必須項目',
+			'common.next' => '次へ',
+			'common.back' => '戻る',
+			'common.prev' => '前へ',
+			'common.skip' => 'スキップ',
+			'common.ok' => 'OK',
+			'common.cancel' => 'キャンセル',
+			'common.reset' => 'リセット',
+			'common.apply' => '適用',
+			'common.all' => 'すべて',
+			'common.noName' => '名無し',
+			'designsystem.imageSourceSelect.shoot' => '写真を撮る',
+			'designsystem.imageSourceSelect.chooseFromLibrary' => 'ライブラリから画像を選択',
+			'designsystem.confirmDiscardChanges.title' => '変更を破棄しますか？',
+			'designsystem.confirmDiscardChanges.message' => 'すべての変更は失われます',
+			'designsystem.confirmDiscardChanges.discard' => '破棄',
+			'designsystem.confirmDiscardChanges.notDiscard' => '破棄しない',
+			'designsystem.permissionMessages.photos' => 'ギャラリーへのアクセス',
+			'designsystem.permissionMessages.camera' => 'カメラへのアクセス',
+			'designsystem.permissionMessages.pushNotification' => 'プッシュ通知',
+			'designsystem.permissionMessages.permissionLackDialog.title' => ({required String permission}) => '${permission}が許可されていません',
+			'designsystem.permissionMessages.permissionLackDialog.message' => ({required String permission}) => '設定アプリを開いて${permission}を許可してください',
+			'designsystem.permissionMessages.permissionLackDialog.openSettings' => '設定アプリを開く',
+			'designsystem.permissionMessages.permissionOffDialog.title' => ({required String permission}) => '${permission}をオフにしますか？',
+			'designsystem.permissionMessages.permissionOffDialog.message' => ({required String permission}) => '設定アプリを開いて${permission}をオフにしてください',
+			'designsystem.permissionMessages.permissionOffDialog.openSettings' => '設定アプリを開く',
+			'designsystem.sendUrlErrorDialog.title' => 'エラー',
+			'designsystem.sendUrlErrorDialog.message' => 'URLを開けませんでした。\n頻発する場合はお問い合わせ下さい。',
+			'designsystem.appUpdate.updatePossible.message' => '新しいバージョンが公開されています。 アップデートを行うと、新しい機能をご利用いただけます。 アップデートを行いますか？',
+			'designsystem.appUpdate.forceUpdate.message' => 'ご利用のバージョンは現在ご利用出来ません。 ストアから新しいバージョンをご利用下さい。',
+			'designsystem.appUpdate.navigateStore' => 'ストアを開く',
+			'designsystem.validationError.required' => '必須項目を入力して下さい',
+			'designsystem.validationError.url' => '正しいURL形式で入力して下さい',
+			'designsystem.format.percent' => ({required String percent}) => '${percent}%',
+			'kEnum.uiStyle' => ({required UIStyle context}) { switch (context) { case UIStyle.system: return 'System'; case UIStyle.android: return 'Android'; case UIStyle.ios: return 'iOS'; } }, 
+			'kEnum.themeColor' => ({required ThemeColor context}) { switch (context) { case ThemeColor.appColor: return 'AppColor'; case ThemeColor.dynamicColor: return 'DynamicColor'; case ThemeColor.blue: return 'Blue'; case ThemeColor.purple: return 'Purple'; case ThemeColor.green: return 'Green'; case ThemeColor.red: return 'Red'; case ThemeColor.pink: return 'Pink'; case ThemeColor.yellow: return 'Yellow'; case ThemeColor.orange: return 'Orange'; } }, 
+			'kEnum.themeMode' => ({required ThemeMode context}) { switch (context) { case ThemeMode.system: return 'System'; case ThemeMode.light: return 'Light'; case ThemeMode.dark: return 'Dark'; } }, 
+			'kEnum.viewLayout.name' => 'Layout',
+			'kEnum.viewLayout.typeName' => ({required ViewLayout context}) { switch (context) { case ViewLayout.grid: return 'Grid'; case ViewLayout.list: return 'List'; } }, 
+			'kEnum.sortOrder' => ({required SortOrder context}) { switch (context) { case SortOrder.asc: return 'ASC'; case SortOrder.desc: return 'DESC'; } }, 
+			'kEnum.itemOrderKey' => ({required ItemOrderKey context}) { switch (context) { case ItemOrderKey.createdAt: return 'Created at'; case ItemOrderKey.name: return 'Name'; case ItemOrderKey.wishRank: return 'Degree of desirability'; } }, 
+			'kEnum.ageGroup' => ({required AgeGroup context}) { switch (context) { case AgeGroup.child: return 'child'; case AgeGroup.adult: return 'adult'; } }, 
+			'kEnum.purchaseStatus' => ({required PurchaseStatus context}) { switch (context) { case PurchaseStatus.notPurchased: return 'unpurchased'; case PurchaseStatus.purchasePlan: return 'Planned purchases'; case PurchaseStatus.purchased: return 'already bought'; } }, 
+			'exceptions.businessException' => ({required BusinessExceptionType context}) { switch (context) { case BusinessExceptionType.deleted: return '削除済です。'; case BusinessExceptionType.updateTargetNotFound: return '保存に失敗しました、あらためて操作を行ってください。'; case BusinessExceptionType.notSelectedGroup: return 'グループが選択されていません。 グループを選択してください。'; case BusinessExceptionType.notAuth: return 'ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。'; case BusinessExceptionType.createDynamicLinkUnknown: return '招待リンクの作成に失敗しました。'; case BusinessExceptionType.joinGroupPolicyJoinedGroup: return 'すでに参加しています。'; case BusinessExceptionType.joinGroupPolicyExpired: return '招待リンクの有効期限が切れています。'; case BusinessExceptionType.joinGroupPolicyNotAuth: return '認証エラーが発生しました。'; case BusinessExceptionType.joinGroupPolicyLimitOver: return 'グループの参加上限(5件)に達しました。'; case BusinessExceptionType.joinGroupPolicyInvalidShareLink: return '招待リンクが正しくありません。'; case BusinessExceptionType.registrationItemPolicyLimitOver: return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。'; case BusinessExceptionType.signInPolicyLinkedAccount: return 'すでに連携済のアカウントです。'; case BusinessExceptionType.googleSignInUnknown: return 'Google認証に失敗しました。'; case BusinessExceptionType.appInPurchasePolicyPackageNotExist: return '購入処理に失敗しました。'; case BusinessExceptionType.appInPurchasePolicyPackageNotActive: return '購入処理に失敗しました。'; } }, 
+			_ => null,
+		};
 	}
 }
 

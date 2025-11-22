@@ -1,4 +1,4 @@
-// ignore_for_file: inference_failure_on_function_return_type, use_is_even_rather_than_modulo, lines_longer_than_80_chars
+// ignore_for_file: use_is_even_rather_than_modulo
 
 import 'dart:math';
 

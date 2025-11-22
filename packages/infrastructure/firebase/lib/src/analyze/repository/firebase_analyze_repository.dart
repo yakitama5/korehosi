@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_purchase_model.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
@@ -7,6 +6,7 @@ import 'package:packages_domain/analyze.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/user.dart';
+import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したリポジトリの実装
 class FirebaseAnalyzeRepository implements AnalyzeRepository {
@@ -25,7 +25,8 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
     final purchaseQuery = createAnalyzeQuery(groupId: groupId, query: query);
 
     // 各件数の取得
-    final itemCount = await itemCol.count().get().then((doc) => doc.count);
+    final itemCount =
+        (await itemCol.count().get().then((doc) => doc.count)) ?? 0;
     final buyedItemCount =
         await purchaseQuery
             .where('sentAt', isNull: false)
@@ -35,11 +36,11 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
         0;
 
     // 購入率を計算
-    final buyedRate = itemCount == null ? 0.0 : buyedItemCount / itemCount;
+    final buyedRate = itemCount == 0 ? 0.0 : buyedItemCount / itemCount;
 
     return ItemBuyedRate(
       buyedItemCount: buyedItemCount,
-      itemCount: itemCount ?? 0,
+      itemCount: itemCount,
       buyedRate: buyedRate,
     );
   }
