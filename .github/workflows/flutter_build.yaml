@@ -69,10 +69,8 @@ jobs:
           EOF
 
       # ビルド
-      - name: ♻️Regenerate Code
-        run: melos run regenerate_code
       - name: 🛠️Build for Android
-        run: melos run build_app_android
+        run: melos run build:app:android
 
       # ビルドしたaabをGithub Actionsにアップロード
       - name: "🚀Deploy Bundle"
@@ -147,11 +145,9 @@ jobs:
         run: |
           echo -n $EXPORT_OPTIONS | base64 -d > apps/app/ExportOptions.plist
 
-      - name: ♻️Regenerate Code
-        run: melos run regenerate_code
       - name: 🛠️Build for iOS
         run: |
-          melos run build_app_ios
+          melos run build:app:ios
 
       - name: 🚀Publish the app to App Store Connect
         run: |

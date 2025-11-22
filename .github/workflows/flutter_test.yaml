@@ -10,17 +10,17 @@ on:
 jobs:
   flutter_test:
     # if: ${{ false }}
-    name: Test
+    name: 🧪Test
     runs-on: ubuntu-latest
     # runs-on: windows-latest
     timeout-minutes: 30
     steps:
       # チェックアウト
-      - name: Checkout
+      - name: 💾Checkout
         uses: actions/checkout@v4
 
       # セットアップ
-      - name: Setup Config Files
+      - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
         env: # Set the secret as an input
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
@@ -30,9 +30,9 @@ jobs:
           GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
           DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
-      - name: Setup Application Runtime
+      - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
       # 実行
-      - run: melos run regenerate_code
-      - run: melos run test_ci
+      - name: 🧪Test
+        run: melos run test:ci

@@ -1,4 +1,4 @@
-name: Create Release Branch and PR
+name: Create Version Up Branch and PR
 
 on:
   workflow_dispatch:
@@ -15,8 +15,8 @@ on:
         default: "build"
 
 jobs:
-  create_release_branch:
-    name: Create Release Branch
+  version_up_pr:
+    name: ⬆️Version Up Pull Request
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -24,49 +24,47 @@ jobs:
       pull-requests: write
       packages: read
     steps:
-      - name: Checkout repository
+      - name: 💾Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Application Runtime
+      - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
 
-      # Ciderセットアップ
-      - name: Activate cider
+      - name: 🥤Activate cider
         run: dart pub global activate cider
 
-      # バージョンアップ
-      - name: Bump version
+      - name: ⬆️Bump version
         run: |
           cd apps/app
           cider bump ${{ github.event.inputs.release_type }} --bump-build
 
       # バージョンを取得
-      - name: Get new version
+      - name: 🆕Get new version
         run: |
           cd apps/app
           echo "new_version=$(cider version)" >> $GITHUB_ENV
 
       # Git設定
-      - name: Configure git user
+      - name: 🐈‍⬛Configure git user
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       # バージョンアップの変更をコミット
-      - name: Commit version bump
+      - name: 🆕Commit version bump
         run: |
           git add .
           git commit -m "chore: bump version to ${{ env.new_version }}"
 
       # releasブランチを作成
-      - name: Create and push release branch
+      - name: 🆕Create and push release branch
         env: 
           NEW_BRANCH: 'release/v${{ env.new_version }}'
         run: |
           git checkout -b "release/v$NEW_BRANCH"
           git push origin "release/v$NEW_BRANCH"
       # PRを作成
-      - name: Create PR for release
+      - name: 🚀Create PR for release
         env: 
           NEW_BRANCH: 'release/v${{ env.new_version }}'
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
