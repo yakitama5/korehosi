@@ -24,7 +24,10 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
         colorScheme: MaterialTheme.lightScheme(),
         fontFamily: 'Murecho',
       ),
-      platformGoldensConfig: const PlatformGoldensConfig(),
+      platformGoldensConfig: const PlatformGoldensConfig(
+        // ignore: avoid_redundant_argument_values
+        enabled: !isRunningInCi,
+      ),
     ),
     run: testMain,
   );
