@@ -16,14 +16,15 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 
   return AlchemistConfig.runWithConfig(
     config: AlchemistConfig(
+      ciGoldensConfig: const CiGoldensConfig(
+        enabled: isRunningInCi,
+      ),
       theme: ThemeData(
         brightness: Brightness.light,
         colorScheme: MaterialTheme.lightScheme(),
         fontFamily: 'Murecho',
       ),
-      platformGoldensConfig: const PlatformGoldensConfig(
-        
-      ),
+      platformGoldensConfig: const PlatformGoldensConfig(),
     ),
     run: testMain,
   );
