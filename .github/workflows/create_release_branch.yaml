@@ -23,8 +23,6 @@ jobs:
       contents: write
       pull-requests: write
       packages: read
-    env:
-      BASE_BRANCH: ${{ github.head_ref }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,6 +33,10 @@ jobs:
       # Ciderセットアップ
       - name: Activate cider
         run: dart pub global activate cider
+
+      # 元ブランチ名の取得
+      - name: save Branch Name
+        run: echo "old_branch=${{github.head_ref}}" >> $GITHUB_ENV
 
       # バージョンアップ
       - name: Bump version
@@ -67,6 +69,6 @@ jobs:
           git push origin "release/v${{ env.new_version }}"
       # PRを作成
       - name: Create PR for release
-        run: gh pr create --base $BASE_BRANCH --head release/v${{ env.new_version }} --title "Release v${{ env.new_version }}" --body ""
+        run: gh pr create --base ${{ env.old_branch }} --head release/v${{ env.new_version }} --title "Release v${{ env.new_version }}" --body ""
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
