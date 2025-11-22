@@ -33,7 +33,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -70,13 +70,6 @@
 				<!-- REPLACE `android:host` with your `app.link` domain -->
 				<data android:scheme="https" android:host="kvh26.app.link" />
 				<data android:scheme="https" android:host="kvh26-alternate.app.link" />
-			</intent-filter>
-
-			<!-- Branch App Links - Test App -->
-			<intent-filter android:autoVerify="true">
-				<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="android.intent.category.BROWSABLE" />
 				<data android:scheme="https" android:host="kvh26.test-app.link" />
 				<data android:scheme="https" android:host="kvh26-alternate.test-app.link" />
 			</intent-filter>
