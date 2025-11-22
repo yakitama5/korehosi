@@ -17,6 +17,7 @@ const {
 const {
   onSchedule,
 } = require('firebase-functions/scheduler');
+const _ = require('lodash');
 
 admin.initializeApp();
 const tokyoTimeZone = 'Asia/Tokyo';
@@ -323,6 +324,54 @@ exports.v2OnCreateMessage = onDocumentCreated(
 );
 
 /**
+ * 【監視処理】
+ * 購入情報が変更された場合にグループ内情報のサジェストへ反映させる.
+ */
+exports.onWritePurchase = onDocumentWritten(
+  'groups/{groupId}/purchases/{purchaseId}',
+  async (event) => {
+    if (!event.data.after.exists) {
+      // 削除の場合は処理しない
+      return;
+    }
+
+    log('--- 購入状況が登録 または 更新されたので、処理を開始します。 ---');
+
+    // `groups`のドキュメント定義
+    const purchase = event.data.after.data();
+    const groupDoc = db.collection(GROUPS_PATH).doc(event.params.groupId);
+
+    // 「ほしい人」の一覧へ反映
+    if (purchase.wanterName != null) {
+      const wanterCol = groupDoc.collection('wanterNames');
+      const wanterSnap = await wanterCol
+        .where('name', '==', purchase.wanterName).get();
+      if (!wanterSnap.exists) {
+        log('🆕欲しい人のサジェストを追加します');
+        await wanterCol.doc().set({
+          'name': purchase.wanterName,
+        });
+      }
+    }
+
+    // 「かった人」の一覧へ反映
+    if (purchase.buyerName != null) {
+      const buyerCol = groupDoc.collection('buyerNames');
+      const buyerSnap = await buyerCol
+        .where('name', '==', purchase.buyerName).get();
+      if (buyerSnap.exists) {
+        log('🆕かった人のサジェストを追加します');
+        await buyerCol.doc().set({
+          'name': purchase.buyerName,
+        });
+      }
+    }
+
+    log('--- 処理を終了します ---');
+  },
+);
+
+/**
  * FirestoreのitemsコレクションのpurchaseStatusフィールドを一括更新するスケジュール関数
  * 毎日0時0分に実行されます。
  * * ⚠️ Cron式のタイムゾーンに注意してください。
@@ -408,6 +457,76 @@ exports.scheduledBatchUpdatePurchaseStatus =
   });
 
 /**
+* FirestoreのpurchasesコレクションのwanterName, buyerNameフィールドを取得して、サジェストコレクションを一括更新する関数
+* 1月1日のみの実行に設定して、手動実行で管理する
+*/
+exports.scheduledBatchUpdateSuggestion =
+  onSchedule('0 0 1 1 *', async (event) => {
+    try {
+      log('--- スケジュールされた一括更新を開始します ---');
+
+      // 全グループを取得する
+      const groupsSnapshot = db.collection(GROUPS_PATH).get();
+      const groupDocs = groupsSnapshot.docs;
+
+      if (groupDocs.length === 0) {
+        log('更新対象のgroupsドキュメントが見つかりませんでした。');
+        return null;
+      }
+
+      log(`合計 ${groupDocs.length} 件のgroupsドキュメントを処理します。`);
+
+      // 2. ドキュメントをチャンクに分けて処理
+      for (let i = 0; i < groupDocs.length; i++) {
+        // 購入状況の取得
+        const groupId = groupDocs[i].ref.id;
+        const purchasesSnapshot = db.collection(GROUPS_PATH).doc(groupId)
+          .collection('purchases').get();
+        const purchaseDocs = purchasesSnapshot.docs;
+
+        if (purchaseDocs.length === 0) {
+          log(`purchasesドキュメントが見つかりませんでした。`);
+          continue;
+        }
+
+        // 購入状況から「ほしい人」「かった人」の一覧を取得
+        const buyerNames = _.uniq(purchaseDocs.map((doc) => {
+          return doc.data().buyerName;
+        }).filter((name) => name != null));
+        const wanterNames = _.uniq(purchaseDocs.map((doc) => {
+          return doc.data().wanterName;
+        }).filter((name) => name != null));
+
+        for (let j = 0; i < wanterNames.length; j++) {
+          const wanterName = wanterNames[j];
+          const wanterDoc = db.collection(GROUPS_PATH).doc(groupId)
+            .collection('wanterNames').doc;
+          await wanterDoc.doc().set({
+            'name': wanterName,
+          });
+        }
+
+        for (let j = 0; i < buyerNames.length; j++) {
+          const buyerName = buyerNames[j];
+          const buyerDoc = db.collection(GROUPS_PATH).doc(groupId)
+            .collection('buyerNames').doc;
+          await buyerDoc.doc().set({
+            'name': buyerName,
+          });
+        }
+      }
+
+      // スケジュール関数は Promise を解決して終了
+      log(`--- すべての更新が完了しました。 ---`);
+      return null;
+    } catch (err) {
+      error('致命的なエラーが発生しました:', err);
+      // エラーが発生した場合も、処理を終了するためにnullを返す
+      return null;
+    }
+  });
+
+/**
  * 通知処理
  * @param {String} token FCMトークン
  * @param {Object} payload 通知ペイロード
@@ -444,7 +563,6 @@ function getPurchaseStatus(purchaseDoc) {
     return NOT_PURCHASED;
   }
 }
-
 
 /**
  * 子供用の購入ステータスを取得する.
