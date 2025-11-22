@@ -94,7 +94,7 @@
 		<!-- REPLACE `BranchKey.test` with the value from your Branch Dashboard -->
 		<meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_iEEbSPKbYDWYcMn5nWhosmlbDtlkHbqv" />
 		<!-- Set to `true` to use `BranchKey.test` -->
-		<meta-data android:name="io.branch.sdk.TestMode" android:value="true" />
+		<meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
