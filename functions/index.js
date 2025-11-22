@@ -504,8 +504,8 @@ exports.scheduledBatchUpdateSuggestion =
         log(`"groups/${groupId}"のドキュメントを処理します。`);
 
         // メンテンナンス
-        maintenanceWanterNameSuggestion(groupId);
-        maintenanceBuyerNameSuggestion(groupId);
+        await maintenanceWanterNameSuggestion(groupId);
+        await maintenanceBuyerNameSuggestion(groupId);
       }
 
       // スケジュール関数は Promise を解決して終了
