@@ -341,28 +341,50 @@ exports.onWritePurchase = onDocumentWritten(
     const purchase = event.data.after.data();
     const groupDoc = db.collection(GROUPS_PATH).doc(event.params.groupId);
 
-    // 「ほしい人」の一覧へ反映
-    if (purchase.wanterName != null) {
-      const wanterCol = groupDoc.collection('wanterNames');
-      const wanterSnap = await wanterCol
-        .where('name', '==', purchase.wanterName).get();
-      if (!wanterSnap.exists) {
-        log('🆕欲しい人のサジェストを追加します');
-        await wanterCol.doc().set({
-          'name': purchase.wanterName,
+    // 「かった人」の一覧へ反映
+    if (!_.isEmpty(purchase.buyerName)) {
+      const buyerCol = groupDoc.collection('buyerNames');
+      const buyerSnap = await buyerCol
+        .where('name', '==', purchase.buyerName).get();
+      if (!buyerSnap.exists) {
+        log('🆕かった人のサジェストを追加します');
+        await buyerCol.doc().set({
+          'name': purchase.buyerName,
         });
       }
     }
 
-    // 「かった人」の一覧へ反映
-    if (purchase.buyerName != null) {
-      const buyerCol = groupDoc.collection('buyerNames');
-      const buyerSnap = await buyerCol
-        .where('name', '==', purchase.buyerName).get();
-      if (buyerSnap.exists) {
-        log('🆕かった人のサジェストを追加します');
-        await buyerCol.doc().set({
-          'name': purchase.buyerName,
+    log('--- 処理を終了します ---');
+  },
+);
+
+/**
+ * 【監視処理】
+ * ほしいものが変更された場合にグループ内情報のサジェストへ反映させる.
+ */
+exports.onWriteItem = onDocumentWritten(
+  'groups/{groupId}/items/{itemId}',
+  async (event) => {
+    if (!event.data.after.exists) {
+      // 削除の場合は処理しない
+      return;
+    }
+
+    log('--- ほしいものが登録 または 更新されたので、処理を開始します。 ---');
+
+    // `groups`のドキュメント定義
+    const item = event.data.after.data();
+    const groupDoc = db.collection(GROUPS_PATH).doc(event.params.groupId);
+
+    // 「ほしい人」の一覧へ反映
+    if (!_.isEmpty(item.wanterName)) {
+      const wanterCol = groupDoc.collection('wanterNames');
+      const wanterSnap = await wanterCol
+        .where('name', '==', item.wanterName).get();
+      if (!wanterSnap.exists) {
+        log('🆕欲しい人のサジェストを追加します');
+        await wanterCol.doc().set({
+          'name': item.wanterName,
         });
       }
     }
@@ -466,7 +488,7 @@ exports.scheduledBatchUpdateSuggestion =
       log('--- スケジュールされた一括更新を開始します ---');
 
       // 全グループを取得する
-      const groupsSnapshot = db.collection(GROUPS_PATH).get();
+      const groupsSnapshot = await db.collection(GROUPS_PATH).get();
       const groupDocs = groupsSnapshot.docs;
 
       if (groupDocs.length === 0) {
@@ -478,42 +500,12 @@ exports.scheduledBatchUpdateSuggestion =
 
       // 2. ドキュメントをチャンクに分けて処理
       for (let i = 0; i < groupDocs.length; i++) {
-        // 購入状況の取得
         const groupId = groupDocs[i].ref.id;
-        const purchasesSnapshot = db.collection(GROUPS_PATH).doc(groupId)
-          .collection('purchases').get();
-        const purchaseDocs = purchasesSnapshot.docs;
+        log(`"groups/${groupId}"のドキュメントを処理します。`);
 
-        if (purchaseDocs.length === 0) {
-          log(`purchasesドキュメントが見つかりませんでした。`);
-          continue;
-        }
-
-        // 購入状況から「ほしい人」「かった人」の一覧を取得
-        const buyerNames = _.uniq(purchaseDocs.map((doc) => {
-          return doc.data().buyerName;
-        }).filter((name) => name != null));
-        const wanterNames = _.uniq(purchaseDocs.map((doc) => {
-          return doc.data().wanterName;
-        }).filter((name) => name != null));
-
-        for (let j = 0; i < wanterNames.length; j++) {
-          const wanterName = wanterNames[j];
-          const wanterDoc = db.collection(GROUPS_PATH).doc(groupId)
-            .collection('wanterNames').doc;
-          await wanterDoc.doc().set({
-            'name': wanterName,
-          });
-        }
-
-        for (let j = 0; i < buyerNames.length; j++) {
-          const buyerName = buyerNames[j];
-          const buyerDoc = db.collection(GROUPS_PATH).doc(groupId)
-            .collection('buyerNames').doc;
-          await buyerDoc.doc().set({
-            'name': buyerName,
-          });
-        }
+        // メンテンナンス
+        maintenanceWanterNameSuggestion(groupId);
+        maintenanceBuyerNameSuggestion(groupId);
       }
 
       // スケジュール関数は Promise を解決して終了
@@ -525,6 +517,77 @@ exports.scheduledBatchUpdateSuggestion =
       return null;
     }
   });
+
+/**
+ * ほしい人のメンテナンス処理
+ * @param {String} groupId グループID
+ */
+async function maintenanceWanterNameSuggestion(groupId) {
+  const itemsSnapshot = await db.collection(GROUPS_PATH).doc(groupId)
+    .collection('items').get();
+  const itemsDocs = itemsSnapshot.docs;
+
+  if (itemsDocs.length === 0) {
+    log(`itemsドキュメントが見つかりませんでした。`);
+    return;
+  }
+
+  log(`合計 ${itemsDocs.length} 件のitemsドキュメントを処理します。`);
+
+  // ほしいものから「ほしい人」の一覧を取得
+  const wanterNames = _.uniq(itemsDocs.map((doc) => {
+    return doc.data().wanterName;
+  }).filter((name) => !_.isEmpty(name)));
+
+  log(`${wanterNames.length} 件のwanterNamesドキュメントを登録します。`);
+
+  for (let i = 0; i < wanterNames.length; i++) {
+    const wanterName = wanterNames[i];
+    const wanterDoc = db.collection(GROUPS_PATH).doc(groupId)
+      .collection('wanterNames').doc();
+
+    await wanterDoc.set(
+      {
+        'name': wanterName,
+      });
+  }
+}
+
+
+/**
+ * 買った人のメンテナンス処理
+ * @param {String} groupId グループID
+ */
+async function maintenanceBuyerNameSuggestion(groupId) {
+  const purchasesSnapshot = await db.collection(GROUPS_PATH).doc(groupId)
+    .collection('purchases').get();
+  const purchaseDocs = purchasesSnapshot.docs;
+
+  if (purchaseDocs.length === 0) {
+    log(`purchasesドキュメントが見つかりませんでした。`);
+    return;
+  }
+
+  log(`合計 ${purchaseDocs.length} 件のpurchasesドキュメントを処理します。`);
+
+  // 購入状況から「かった人」の一覧を取得
+  const buyerNames = _.uniq(purchaseDocs.map((doc) => {
+    return doc.data().buyerName;
+  }).filter((name) => !_.isEmpty(name)));
+
+  log(`${buyerNames.length} 件のbuyerNamesドキュメントを登録します。`);
+
+  for (let i = 0; i < buyerNames.length; i++) {
+    const buyerName = buyerNames[i];
+    const buyerDoc = db.collection(GROUPS_PATH).doc(groupId)
+      .collection('buyerNames').doc();
+
+    await buyerDoc.set(
+      {
+        'name': buyerName,
+      });
+  }
+}
 
 /**
  * 通知処理
