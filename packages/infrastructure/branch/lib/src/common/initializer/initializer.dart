@@ -8,8 +8,6 @@ final class BranchInitializer {
       enableLogging: true,
       branchAttributionLevel: BranchAttributionLevel.FULL,
     );
-    // TODO
-    FlutterBranchSdk.validateSDKIntegration();
     FlutterBranchSdk.setConsumerProtectionAttributionLevel(
       BranchAttributionLevel.FULL,
     );
