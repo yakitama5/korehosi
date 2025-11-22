@@ -20,31 +20,40 @@ class MonthlyTotalsPurchasesChartCard extends HookConsumerWidget {
     final textTheme = useTextTheme();
 
     // チャートデータを取得
-    final data = ref.watch(monthlyTotalsPurchasesChartDataProvider).value;
-    // 一瞬なのでローディング表示は行わない
-    if (data == null) {
-      return const SizedBox.shrink();
-    }
+    return ref
+        .watch(monthlyTotalsPurchasesChartDataProvider)
+        .when(
+          data: (data) {
+            final currencyPrice = data.monthlyTotalsPurchases.allTimeTotalPrice
+                .formatCurrency(
+                  locale: AppLocaleUtils.findDeviceLocale().languageCode,
+                );
 
-    final currencyPrice = data.monthlyTotalsPurchases.allTimeTotalPrice
-        .formatCurrency(locale: AppLocaleUtils.findDeviceLocale().languageCode);
-
-    return ChartCard(
-      onTap: onTap,
-      title: i18n.analyze.analyzePage.totalPrice,
-      iconData: Icons.show_chart,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(currencyPrice, style: textTheme.headlineLarge),
+            return ChartCard(
+              onTap: onTap,
+              title: i18n.analyze.analyzePage.totalPrice,
+              iconData: Icons.show_chart,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(currencyPrice, style: textTheme.headlineLarge),
+                  ),
+                  const Gap(16),
+                  SizedBox(
+                    height: 240,
+                    child: _TotalPriceLinerChart(chartData: data),
+                  ),
+                ],
+              ),
+            );
+          },
+          error: ErrorView.new,
+          loading: () => const ShimmerWidget.rectangular(
+            height: 320,
           ),
-          const Gap(16),
-          SizedBox(height: 240, child: _TotalPriceLinerChart(chartData: data)),
-        ],
-      ),
-    );
+        );
   }
 }
 

@@ -14,26 +14,30 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final itemBuyedRate = ref.watch(buyedRateProvider).value;
-    // 一瞬なのでローディング表示は行わない
-    if (itemBuyedRate == null) {
-      return const SizedBox.shrink();
-    }
+    return ref
+        .watch(buyedRateProvider)
+        .when(
+          data: (itemBuyedRate) {
+            final percent = itemBuyedRate.buyedRate * 100.0;
 
-    final percent = itemBuyedRate.buyedRate * 100.0;
-
-    return ChartCard(
-      title: i18n.analyze.analyzePage.purchaseRate,
-      iconData: Icons.pie_chart,
-      onTap: onTap,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GaugeChart(value: percent, radius: 80),
-          _BuyedItemCount(itemBuyedRate),
-        ],
-      ),
-    );
+            return ChartCard(
+              title: i18n.analyze.analyzePage.purchaseRate,
+              iconData: Icons.pie_chart,
+              onTap: onTap,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GaugeChart(value: percent, radius: 80),
+                  _BuyedItemCount(itemBuyedRate),
+                ],
+              ),
+            );
+          },
+          error: ErrorView.new,
+          loading: () => const ShimmerWidget.rectangular(
+            height: 280,
+          ),
+        );
   }
 }
 
