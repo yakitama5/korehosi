@@ -177,4 +177,9 @@ class GroupUsecase with RunUsecaseMixin {
       return ref.read(deepLinkServiceProvider).buildLink(uri: uri);
     },
   );
+
+  /// 「欲しい物の登録数上限解除」の商品情報を取得
+  Future<AppInPurchaseProduct?> fetchLimitedReleasePlan() {
+    return ref.read(appInPurchaseServiceProvider).fetchLimitedReleasePlan();
+  }
 }
