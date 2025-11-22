@@ -1,7 +1,7 @@
 name: flutter_app
 description: 子供と大人で利用する、家族のための欲しい物リストアプリ
 publish_to: "none"
-version: 1.0.10+25
+version: 1.0.10+26
 
 environment:
   sdk: ^3.10.1
