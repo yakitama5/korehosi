@@ -48,4 +48,8 @@ abstract class PurchaseRepository {
 
   /// 購入情報を削除
   Future<void> delete({required GroupId groupId, required ItemId itemId});
+
+  /// かった人の履歴を取得する
+  /// 対象は「かった人」に入力したことのある人
+  Stream<List<String>> fetchBuyerNameHistories({required GroupId groupId});
 }

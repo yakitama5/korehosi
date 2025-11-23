@@ -28,4 +28,8 @@ extension FirebaseFirestoreX on FirebaseFirestore {
       groupsRef().doc(groupId.value).collection('_dmessages');
   CollectionReference fcmTokensRef(UserId userId) =>
       usersRef().doc(userId.value).collection('fcmTokens');
+  CollectionReference wanterNamesRef(GroupId groupId) =>
+      groupsRef().doc(groupId.value).collection('wanterNames');
+  CollectionReference buyerNamesRef(GroupId groupId) =>
+      groupsRef().doc(groupId.value).collection('buyerNames');
 }

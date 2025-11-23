@@ -56,4 +56,4 @@ final class WanterNameSuggestionProvider
 }
 
 String _$wanterNameSuggestionHash() =>
-    r'26912fd97a5029dca7778e4d14cc9132ca0ef861';
+    r'732252ee40538285f70f97909cad2a1465b4dbd1';

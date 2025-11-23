@@ -6,6 +6,7 @@ import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart
 import 'package:infrastructure_firebase/src/item/model/firestore_item_model.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
+import 'package:infrastructure_firebase/src/item/state/firestore_wanter_names_provider.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/group.dart';
@@ -267,6 +268,13 @@ class FirebaseItemRepository implements ItemRepository {
           .delete(purchaseDocRef);
     });
   }
+
+  @override
+  Stream<List<String>> fetchWanterNameHistories({required GroupId groupId}) =>
+      ref
+          .watch(wanterNameCollectionRefProvider(groupId: groupId))
+          .snapshots()
+          .map((snap) => snap.docs.map((doc) => doc.data().name).toList());
 
   Future<List<ImageId>> _uploadItemImage(
     List<XFile>? uploadImages,

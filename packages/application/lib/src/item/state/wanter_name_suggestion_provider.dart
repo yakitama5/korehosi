@@ -1,3 +1,5 @@
+import 'package:packages_application/src/group/state/current_group_id_provider.dart';
+import 'package:packages_application/src/item/state/wanter_name_histories_provider.dart';
 import 'package:packages_application/user.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,7 +10,17 @@ part 'wanter_name_suggestion_provider.g.dart';
 /// 対象は「だれがほしい？」に入力したことのある人 + 現在のグループ内のユーザー
 @riverpod
 Future<List<String>> wanterNameSuggestion(Ref ref) async {
-  // TODO(yakitama5): 負荷軽減のため一時的にユーザー一覧だけ表示
+  final groupId = await ref.watch(currentGroupIdProvider.future);
+  if (groupId == null) {
+    return List.empty();
+  }
+
+  // 履歴を取得
+  final histories = await ref.watch(
+    wanterNameHistoriesProvider(groupId: groupId).future,
+  );
+
+  // 現在のグループ内のユーザーを取得
   final currentGroupUserNames = await ref.watch(
     currentGroupJoinUsersProvider.future.select(
       (users) async =>
@@ -16,6 +28,7 @@ Future<List<String>> wanterNameSuggestion(Ref ref) async {
     ),
   );
 
-  // ほしい人の履歴を優先して結合
-  return currentGroupUserNames.toList();
+  // 現在のグループ内のユーザーを優先して表示
+  // 重複を削除するために`Set`を経由
+  return (currentGroupUserNames.toList() + histories).toSet().toList();
 }
