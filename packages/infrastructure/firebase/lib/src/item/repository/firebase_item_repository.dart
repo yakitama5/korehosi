@@ -270,11 +270,11 @@ class FirebaseItemRepository implements ItemRepository {
   }
 
   @override
-  Stream<List<String>> fetchWanterNameHistories({required GroupId groupId}) =>
+  Future<List<String>> fetchWanterNameHistories({required GroupId groupId}) =>
       ref
           .watch(wanterNameCollectionRefProvider(groupId: groupId))
-          .snapshots()
-          .map((snap) => snap.docs.map((doc) => doc.data().name).toList());
+          .get()
+          .then((snap) => snap.docs.map((doc) => doc.data().name).toList());
 
   Future<List<ImageId>> _uploadItemImage(
     List<XFile>? uploadImages,

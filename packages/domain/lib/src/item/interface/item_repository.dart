@@ -64,5 +64,5 @@ abstract class ItemRepository {
 
   /// ほしい人のサジェストリスト
   /// 対象は「だれがほしい？」に入力したことのある人
-  Stream<List<String>> fetchWanterNameHistories({required GroupId groupId});
+  Future<List<String>> fetchWanterNameHistories({required GroupId groupId});
 }

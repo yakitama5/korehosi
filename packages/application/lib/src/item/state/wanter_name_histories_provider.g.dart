@@ -22,9 +22,9 @@ final class WanterNameHistoriesProvider
         $FunctionalProvider<
           AsyncValue<List<String>>,
           List<String>,
-          Stream<List<String>>
+          FutureOr<List<String>>
         >
-    with $FutureModifier<List<String>>, $StreamProvider<List<String>> {
+    with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
   /// ほしい人の履歴を取得する
   const WanterNameHistoriesProvider._({
     required WanterNameHistoriesFamily super.from,
@@ -49,12 +49,12 @@ final class WanterNameHistoriesProvider
 
   @$internal
   @override
-  $StreamProviderElement<List<String>> $createElement(
+  $FutureProviderElement<List<String>> $createElement(
     $ProviderPointer pointer,
-  ) => $StreamProviderElement(pointer);
+  ) => $FutureProviderElement(pointer);
 
   @override
-  Stream<List<String>> create(Ref ref) {
+  FutureOr<List<String>> create(Ref ref) {
     final argument = this.argument as GroupId;
     return wanterNameHistories(ref, groupId: argument);
   }
@@ -71,12 +71,12 @@ final class WanterNameHistoriesProvider
 }
 
 String _$wanterNameHistoriesHash() =>
-    r'46f1198ad07c303bc88ecfb35edf96716ae47986';
+    r'9cbe7ff62d2ea1157f97767c8803fd5124c0b422';
 
 /// ほしい人の履歴を取得する
 
 final class WanterNameHistoriesFamily extends $Family
-    with $FunctionalFamilyOverride<Stream<List<String>>, GroupId> {
+    with $FunctionalFamilyOverride<FutureOr<List<String>>, GroupId> {
   const WanterNameHistoriesFamily._()
     : super(
         retry: null,

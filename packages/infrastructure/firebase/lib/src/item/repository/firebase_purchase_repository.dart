@@ -178,9 +178,9 @@ class FirebasePurchaseRepository implements PurchaseRepository {
   }
 
   @override
-  Stream<List<String>> fetchBuyerNameHistories({required GroupId groupId}) =>
+  Future<List<String>> fetchBuyerNameHistories({required GroupId groupId}) =>
       ref
           .watch(buyerNameCollectionRefProvider(groupId: groupId))
-          .snapshots()
-          .map((snap) => snap.docs.map((doc) => doc.data().name).toList());
+          .get()
+          .then((snap) => snap.docs.map((doc) => doc.data().name).toList());
 }

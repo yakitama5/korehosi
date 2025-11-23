@@ -19,9 +19,9 @@ final class BuyerNameHistoriesProvider
         $FunctionalProvider<
           AsyncValue<List<String>>,
           List<String>,
-          Stream<List<String>>
+          FutureOr<List<String>>
         >
-    with $FutureModifier<List<String>>, $StreamProvider<List<String>> {
+    with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
   const BuyerNameHistoriesProvider._({
     required BuyerNameHistoriesFamily super.from,
     required GroupId super.argument,
@@ -45,12 +45,12 @@ final class BuyerNameHistoriesProvider
 
   @$internal
   @override
-  $StreamProviderElement<List<String>> $createElement(
+  $FutureProviderElement<List<String>> $createElement(
     $ProviderPointer pointer,
-  ) => $StreamProviderElement(pointer);
+  ) => $FutureProviderElement(pointer);
 
   @override
-  Stream<List<String>> create(Ref ref) {
+  FutureOr<List<String>> create(Ref ref) {
     final argument = this.argument as GroupId;
     return buyerNameHistories(ref, groupId: argument);
   }
@@ -67,10 +67,10 @@ final class BuyerNameHistoriesProvider
 }
 
 String _$buyerNameHistoriesHash() =>
-    r'3397d84ae55f1cfe42d473b1881a1a4f975f2441';
+    r'ce9923d0c698b54ce721e2c6b46899fdb391741b';
 
 final class BuyerNameHistoriesFamily extends $Family
-    with $FunctionalFamilyOverride<Stream<List<String>>, GroupId> {
+    with $FunctionalFamilyOverride<FutureOr<List<String>>, GroupId> {
   const BuyerNameHistoriesFamily._()
     : super(
         retry: null,

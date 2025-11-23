@@ -140,7 +140,7 @@ class PurchaseUsecase with RunUsecaseMixin {
   );
 
   /// かった人の履歴を取得する
-  Stream<List<String>> fetchBuyerNameHistories({required GroupId groupId}) {
+  Future<List<String>> fetchBuyerNameHistories({required GroupId groupId}) {
     return ref
         .read(purchaseRepositoryProvider)
         .fetchBuyerNameHistories(groupId: groupId);

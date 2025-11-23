@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'buyer_name_histories_provider.g.dart';
 
 @riverpod
-Stream<List<String>> buyerNameHistories(Ref ref, {required GroupId groupId}) =>
+Future<List<String>> buyerNameHistories(Ref ref, {required GroupId groupId}) =>
     ref
         .watch(purchaseUsecaseProvider)
         .fetchBuyerNameHistories(groupId: groupId);

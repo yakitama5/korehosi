@@ -210,7 +210,7 @@ class ItemUsecase with RunUsecaseMixin {
   );
 
   /// ほしい人のサジェストを取得する
-  Stream<List<String>> fetchWanterNameHistories({required GroupId groupId}) {
+  Future<List<String>> fetchWanterNameHistories({required GroupId groupId}) {
     return ref
         .read(itemRepositoryProvider)
         .fetchWanterNameHistories(groupId: groupId);

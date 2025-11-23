@@ -1,7 +1,6 @@
 import 'package:packages_application/src/group/state/current_group_id_provider.dart';
 import 'package:packages_application/src/item/state/buyer_name_histories_provider.dart';
-import 'package:packages_application/src/user/state/current_group_join_users_provider.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:packages_application/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'buyer_name_suggestion_provider.g.dart';
@@ -21,12 +20,13 @@ Future<List<String>> buyerNameSuggestion(Ref ref) async {
   );
 
   // 現在のグループ内のユーザーを取得
-  final currentGroupUserNames = await ref.watch(
-    currentGroupJoinUsersProvider.future.select(
-      (users) async =>
-          (await users).map((e) => e.name).nonNulls.where((e) => e.isNotEmpty),
-    ),
+  final currentGroupUser = await ref.watch(
+    groupJoinUsersProvider(groupId: groupId).future,
   );
+  final currentGroupUserNames = currentGroupUser
+      .map((e) => e.name)
+      .nonNulls
+      .toList();
 
   // 現在のグループ参加者を優先して結合
   return (currentGroupUserNames.toList() + histories).toSet().toList();
