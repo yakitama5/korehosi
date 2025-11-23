@@ -23,7 +23,6 @@ class ItemsPage extends HookConsumerWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () => ref.read(itemUsecaseProvider).refreshSearchItems(),
-        // HACK(yakitama5): SliverAppBar付きのこの構成を共通定義化する
         child: CustomScrollView(
           slivers: [
             const PinnedHeaderSliver(

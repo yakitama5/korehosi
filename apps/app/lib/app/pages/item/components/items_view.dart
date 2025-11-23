@@ -94,7 +94,6 @@ class _ErrorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (viewLayout) {
-      // TODO(yakitama5): エラー表示を分けて記載
       ViewLayout.grid => ItemsErrorCard(
         indexInPage: indexInPage,
         isLoading: isLoading,
