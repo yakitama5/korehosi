@@ -7,6 +7,8 @@ extension ErrorMeessageInObjectX on Object {
       return i18n.exceptions.businessException(
         context: (this as BusinessException).exceptionType,
       );
+    } else if (this is UnknownException) {
+      return i18n.exceptions.errorMessage.unexpected;
     }
 
     return toString();

@@ -11,6 +11,8 @@ dependencies:
   freezed_annotation: ^3.1.0
   intl: ^0.20.2
   json_annotation: ^4.9.0
+  packages_core:
+    path: ../core
   riverpod: ^3.0.3
   riverpod_annotation: ^3.0.3
   version: ^3.0.2
