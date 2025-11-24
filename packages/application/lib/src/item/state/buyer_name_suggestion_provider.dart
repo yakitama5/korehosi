@@ -29,5 +29,5 @@ Future<List<String>> buyerNameSuggestion(Ref ref) async {
       .toList();
 
   // 現在のグループ参加者を優先して結合
-  return (currentGroupUserNames.toList() + histories).toSet().toList();
+  return (currentGroupUserNames + histories).toSet().toList();
 }
