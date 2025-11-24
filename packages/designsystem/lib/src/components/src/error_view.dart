@@ -13,8 +13,7 @@ class ErrorView extends HookWidget {
   final StackTrace? stackTrace;
 
   @override
-  Widget build(BuildContext context) {
-    logger.e('ErrorView\n$error\n$stackTrace');
+  Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
