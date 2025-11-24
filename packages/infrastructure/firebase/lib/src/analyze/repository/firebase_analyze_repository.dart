@@ -9,7 +9,9 @@ import 'package:packages_domain/user.dart';
 import 'package:riverpod/riverpod.dart';
 
 /// Firebaseを利用したリポジトリの実装
-class FirebaseAnalyzeRepository implements AnalyzeRepository {
+class FirebaseAnalyzeRepository
+    with RepositoryMixin
+    implements AnalyzeRepository {
   const FirebaseAnalyzeRepository(this.ref);
 
   final Ref ref;
@@ -19,31 +21,36 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
     required GroupId groupId,
     required AgeGroup ageGroup,
     required ItemAnalyzeQuery query,
-  }) async {
-    // コレクション定義
-    final itemCol = ref.read(itemCollectionRefProvider(groupId: groupId));
-    final purchaseQuery = createAnalyzeQuery(groupId: groupId, query: query);
+  }) => ensureDomainException(
+    action: () async {
+      // コレクション定義
+      final itemCol = ref.read(itemCollectionRefProvider(groupId: groupId));
+      final purchaseQuery = createAnalyzeQuery(
+        groupId: groupId,
+        query: query,
+      );
 
-    // 各件数の取得
-    final itemCount =
-        (await itemCol.count().get().then((doc) => doc.count)) ?? 0;
-    final buyedItemCount =
-        await purchaseQuery
-            .where('sentAt', isNull: false)
-            .count()
-            .get()
-            .then((doc) => doc.count) ??
-        0;
+      // 各件数の取得
+      final itemCount =
+          (await itemCol.count().get().then((doc) => doc.count)) ?? 0;
+      final buyedItemCount =
+          await purchaseQuery
+              .where('sentAt', isNull: false)
+              .count()
+              .get()
+              .then((doc) => doc.count) ??
+          0;
 
-    // 購入率を計算
-    final buyedRate = itemCount == 0 ? 0.0 : buyedItemCount / itemCount;
+      // 購入率を計算
+      final buyedRate = itemCount == 0 ? 0.0 : buyedItemCount / itemCount;
 
-    return ItemBuyedRate(
-      buyedItemCount: buyedItemCount,
-      itemCount: itemCount,
-      buyedRate: buyedRate,
-    );
-  }
+      return ItemBuyedRate(
+        buyedItemCount: buyedItemCount,
+        itemCount: itemCount,
+        buyedRate: buyedRate,
+      );
+    },
+  );
 
   @override
   Future<MonthlyTotalsPurchases> exploreMonthlyTotals({
@@ -51,62 +58,64 @@ class FirebaseAnalyzeRepository implements AnalyzeRepository {
     required AgeGroup ageGroup,
     required YearMonthRange range,
     required ItemAnalyzeQuery query,
-  }) async {
-    // クエリー定義
-    final allTimeTotalQuery = createAnalyzeQuery(
-      groupId: groupId,
-      query: query,
-    );
-
-    // 全期間の購入金額の合計を先に取得
-    final allTimeTotalPrice = await allTimeTotalQuery
-        .aggregate(sum('price'))
-        .get()
-        .then((res) => res.getSum('price'));
-
-    // 月初めに正規化
-    var currentDate = DateTime(range.from.year, range.from.month);
-    final lastDate = DateTime(range.to.year, range.to.month);
-
-    // 月別の合計金額の取得
-    final totals = <MonthlyTotals>[];
-    while (currentDate.isBefore(lastDate) ||
-        currentDate.isAtSameMomentAs(lastDate)) {
-      // 単月の結果を取得
-      final from = Timestamp.fromDate(currentDate);
-      final to = Timestamp.fromDate(
-        DateTime(
-          currentDate.year,
-          currentDate.month + 1,
-        ).add(const Duration(microseconds: -1)),
+  }) => ensureDomainException(
+    action: () async {
+      // クエリー定義
+      final allTimeTotalQuery = createAnalyzeQuery(
+        groupId: groupId,
+        query: query,
       );
-      final price = await allTimeTotalQuery
-          .where('sentAt', isGreaterThanOrEqualTo: from)
-          .where('sentAt', isLessThanOrEqualTo: to)
+
+      // 全期間の購入金額の合計を先に取得
+      final allTimeTotalPrice = await allTimeTotalQuery
           .aggregate(sum('price'))
           .get()
           .then((res) => res.getSum('price'));
 
-      // 結果を格納
-      totals.add(
-        MonthlyTotals(
-          yearMonth: YearMonth(
-            year: currentDate.year,
-            month: currentDate.month,
+      // 月初めに正規化
+      var currentDate = DateTime(range.from.year, range.from.month);
+      final lastDate = DateTime(range.to.year, range.to.month);
+
+      // 月別の合計金額の取得
+      final totals = <MonthlyTotals>[];
+      while (currentDate.isBefore(lastDate) ||
+          currentDate.isAtSameMomentAs(lastDate)) {
+        // 単月の結果を取得
+        final from = Timestamp.fromDate(currentDate);
+        final to = Timestamp.fromDate(
+          DateTime(
+            currentDate.year,
+            currentDate.month + 1,
+          ).add(const Duration(microseconds: -1)),
+        );
+        final price = await allTimeTotalQuery
+            .where('sentAt', isGreaterThanOrEqualTo: from)
+            .where('sentAt', isLessThanOrEqualTo: to)
+            .aggregate(sum('price'))
+            .get()
+            .then((res) => res.getSum('price'));
+
+        // 結果を格納
+        totals.add(
+          MonthlyTotals(
+            yearMonth: YearMonth(
+              year: currentDate.year,
+              month: currentDate.month,
+            ),
+            totalPrice: (price ?? 0.0).toInt(),
           ),
-          totalPrice: (price ?? 0.0).toInt(),
-        ),
+        );
+
+        // 次の月へ進める
+        currentDate = DateTime(currentDate.year, currentDate.month + 1);
+      }
+
+      return MonthlyTotalsPurchases(
+        monthlyTotals: totals,
+        allTimeTotalPrice: (allTimeTotalPrice ?? 0.0).toInt(),
       );
-
-      // 次の月へ進める
-      currentDate = DateTime(currentDate.year, currentDate.month + 1);
-    }
-
-    return MonthlyTotalsPurchases(
-      monthlyTotals: totals,
-      allTimeTotalPrice: (allTimeTotalPrice ?? 0.0).toInt(),
-    );
-  }
+    },
+  );
 
   Query<FirestorePurchaseModel> createAnalyzeQuery({
     required GroupId groupId,

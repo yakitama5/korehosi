@@ -16,6 +16,8 @@ void main() async {
 
   runApp(
     ProviderScope(
+      // 自動リトライは無効化
+      retry: (_, _) => null,
       overrides: [
         // 初期ロケーションの設定
         initialLocationProvider.overrideWithValue(
