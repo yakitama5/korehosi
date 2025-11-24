@@ -12,7 +12,7 @@ mixin RepositoryMixin {
       return await action();
     } on AppException catch (e) {
       // ドメインの例外としてハンドリングされていれば、そのままスロー
-      logger.e('Repository rethrown AppException\n$e');
+      logger.w('Repository rethrown AppException\n$e');
       rethrow;
     } on Exception catch (e) {
       // ドメインの例外としてハンドリングされていなければ、原因不明なエラーとして返却
