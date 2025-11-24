@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:lottie/lottie.dart';
-import 'package:packages_core/util.dart';
 import 'package:packages_designsystem/src/extension/exception_extension.dart';
 import 'package:packages_designsystem/src/gen/assets/assets.gen.dart';
 
@@ -13,7 +12,7 @@ class ErrorView extends HookWidget {
   final StackTrace? stackTrace;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
