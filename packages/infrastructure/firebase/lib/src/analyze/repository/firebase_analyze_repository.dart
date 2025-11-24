@@ -33,13 +33,12 @@ class FirebaseAnalyzeRepository
       // 各件数の取得
       final itemCount =
           (await itemCol.count().get().then((doc) => doc.count)) ?? 0;
-      final buyedItemCount =
-          await purchaseQuery
-              .where('sentAt', isNull: false)
-              .count()
-              .get()
-              .then((doc) => doc.count) ??
-          0;
+      final rawBuyedItemCount = await purchaseQuery
+          .where('sentAt', isNull: false)
+          .count()
+          .get()
+          .then((doc) => doc.count);
+      final buyedItemCount = rawBuyedItemCount ?? 0;
 
       // 購入率を計算
       final buyedRate = itemCount == 0 ? 0.0 : buyedItemCount / itemCount;
