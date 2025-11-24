@@ -70,7 +70,7 @@ final class MonthlyTotalsPurchasesProvider
 }
 
 String _$monthlyTotalsPurchasesHash() =>
-    r'c58dadd3d0eb9e92356bdf93ffbec746c7d28202';
+    r'304b83f0a173c33740b83cdc457db586257f47c3';
 
 final class MonthlyTotalsPurchasesFamily extends $Family
     with
