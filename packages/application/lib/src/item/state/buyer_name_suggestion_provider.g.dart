@@ -56,4 +56,4 @@ final class BuyerNameSuggestionProvider
 }
 
 String _$buyerNameSuggestionHash() =>
-    r'7006d3487e56b18f386192765997be5c7565fe9f';
+    r'e7179e26904a58f5c8fc971c3b5ae254f3ce65e4';

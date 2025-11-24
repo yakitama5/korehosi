@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
+import 'package:packages_application/common.dart';
 import 'package:packages_designsystem/widgets.dart';
-
-// TODO(yakitama5): URLはアプリに応じて定義すること
-const _dummyUrl = 'https://flutter.dev';
 
 class HowToUseLink extends StatelessWidget {
   const HowToUseLink({super.key});
@@ -11,7 +9,7 @@ class HowToUseLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UrlLink(
-      url: _dummyUrl,
+      url: urlConfig.howToUse,
       label: i18n.settings.settingsPage.help.howToUse,
     );
   }
@@ -23,7 +21,7 @@ class ContactUsLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UrlLink(
-      url: _dummyUrl,
+      url: urlConfig.contactUs,
       label: i18n.settings.settingsPage.help.contactUs,
     );
   }
@@ -35,7 +33,7 @@ class PrivacyPolicyLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UrlLink(
-      url: _dummyUrl,
+      url: urlConfig.privacyPolicyJa,
       label: i18n.settings.settingsPage.help.privacyPolicy,
     );
   }

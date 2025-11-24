@@ -1,5 +1,6 @@
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_purchase_model.dart';
+import 'package:infrastructure_firebase/src/item/state/firestore_buyer_names_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
 import 'package:packages_domain/common.dart';
@@ -175,4 +176,11 @@ class FirebasePurchaseRepository implements PurchaseRepository {
           });
     });
   }
+
+  @override
+  Future<List<String>> fetchBuyerNameHistories({required GroupId groupId}) =>
+      ref
+          .watch(buyerNameCollectionRefProvider(groupId: groupId))
+          .get()
+          .then((snap) => snap.docs.map((doc) => doc.data().name).toList());
 }

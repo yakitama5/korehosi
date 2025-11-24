@@ -30,7 +30,7 @@ class BuyerNameFilterChip extends HookConsumerWidget {
       selected: selected,
       showCheckmark: selected,
       onPressed: () async {
-        final buyerNames = await ref.read(buyerNameSuggestionProvider.future);
+        final buyerNames = await ref.watch(buyerNameSuggestionProvider.future);
         if (!context.mounted) {
           return;
         }

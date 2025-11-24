@@ -121,7 +121,7 @@ class FirebaseGroupRepository implements GroupRepository {
     final functions = ref.read(firebaseFunctionsProvider);
     final param = JoinGroupRequest(shareLinkId: shareLinkId.value);
     final result = await functions
-        .httpsCallable('joinGroup')
+        .httpsCallable('v2JoinGroup')
         .call<Map<String, dynamic>>(param.toJson());
 
     // エラーハンドリング

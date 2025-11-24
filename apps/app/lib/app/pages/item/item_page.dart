@@ -102,7 +102,6 @@ class _ItemDetailView extends HookWidget {
   /// 編集押下
   ///
   /// 編集画面に遷移する
-  // TODO(yakitama5): ItemIDに切り替える
   void _onEdit(BuildContext context) =>
       ItemEditRouteData(item.id.value).go(context);
 }

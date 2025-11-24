@@ -17,6 +17,7 @@ const {
 const {
   onSchedule,
 } = require('firebase-functions/scheduler');
+const _ = require('lodash');
 
 admin.initializeApp();
 const tokyoTimeZone = 'Asia/Tokyo';
@@ -323,6 +324,76 @@ exports.v2OnCreateMessage = onDocumentCreated(
 );
 
 /**
+ * 【監視処理】
+ * 購入情報が変更された場合にグループ内情報のサジェストへ反映させる.
+ */
+exports.onWritePurchase = onDocumentWritten(
+  'groups/{groupId}/purchases/{purchaseId}',
+  async (event) => {
+    if (!event.data.after.exists) {
+      // 削除の場合は処理しない
+      return;
+    }
+
+    log('--- 購入状況が登録 または 更新されたので、処理を開始します。 ---');
+
+    // `groups`のドキュメント定義
+    const purchase = event.data.after.data();
+    const groupDoc = db.collection(GROUPS_PATH).doc(event.params.groupId);
+
+    // 「かった人」の一覧へ反映
+    if (!_.isEmpty(purchase.buyerName)) {
+      const buyerCol = groupDoc.collection('buyerNames');
+      const buyerSnap = await buyerCol
+        .where('name', '==', purchase.buyerName).get();
+      if (!buyerSnap.exists) {
+        log('🆕かった人のサジェストを追加します');
+        await buyerCol.doc().set({
+          'name': purchase.buyerName,
+        });
+      }
+    }
+
+    log('--- 処理を終了します ---');
+  },
+);
+
+/**
+ * 【監視処理】
+ * ほしいものが変更された場合にグループ内情報のサジェストへ反映させる.
+ */
+exports.onWriteItem = onDocumentWritten(
+  'groups/{groupId}/items/{itemId}',
+  async (event) => {
+    if (!event.data.after.exists) {
+      // 削除の場合は処理しない
+      return;
+    }
+
+    log('--- ほしいものが登録 または 更新されたので、処理を開始します。 ---');
+
+    // `groups`のドキュメント定義
+    const item = event.data.after.data();
+    const groupDoc = db.collection(GROUPS_PATH).doc(event.params.groupId);
+
+    // 「ほしい人」の一覧へ反映
+    if (!_.isEmpty(item.wanterName)) {
+      const wanterCol = groupDoc.collection('wanterNames');
+      const wanterSnap = await wanterCol
+        .where('name', '==', item.wanterName).get();
+      if (!wanterSnap.exists) {
+        log('🆕欲しい人のサジェストを追加します');
+        await wanterCol.doc().set({
+          'name': item.wanterName,
+        });
+      }
+    }
+
+    log('--- 処理を終了します ---');
+  },
+);
+
+/**
  * FirestoreのitemsコレクションのpurchaseStatusフィールドを一括更新するスケジュール関数
  * 毎日0時0分に実行されます。
  * * ⚠️ Cron式のタイムゾーンに注意してください。
@@ -444,7 +515,6 @@ function getPurchaseStatus(purchaseDoc) {
     return NOT_PURCHASED;
   }
 }
-
 
 /**
  * 子供用の購入ステータスを取得する.

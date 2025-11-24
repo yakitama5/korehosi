@@ -61,4 +61,8 @@ abstract class ItemRepository {
 
   /// ほしい物を削除
   Future<void> delete({required GroupId groupId, required ItemId itemId});
+
+  /// ほしい人のサジェストリスト
+  /// 対象は「だれがほしい？」に入力したことのある人
+  Future<List<String>> fetchWanterNameHistories({required GroupId groupId});
 }

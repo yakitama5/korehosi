@@ -209,6 +209,13 @@ class ItemUsecase with RunUsecaseMixin {
     },
   );
 
+  /// ほしい人のサジェストを取得する
+  Future<List<String>> fetchWanterNameHistories({required GroupId groupId}) {
+    return ref
+        .read(itemRepositoryProvider)
+        .fetchWanterNameHistories(groupId: groupId);
+  }
+
   /// 欲しい物の登録数上限を検証
   Future<void> _validateItemCount() async {
     final group = await ref.read(currentGroupProvider.future);
