@@ -101,6 +101,7 @@ jobs:
       DIST_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
       APP_STORE_APPLE_ID: ${{ vars.APP_STORE_APPLE_ID }}
       EXPORT_OPTIONS: ${{ secrets.EXPORT_OPTIONS }}
+      CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
     steps:
       # チェックアウト
       - name: 💾Checkout
@@ -126,17 +127,14 @@ jobs:
       - name: ⚙️Set up keychain
         run: keychain initialize
 
-      - name: ⚙️Set up Provisioning profiles
+      - name: ⚙️Fetch signing files
         run: |
-          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
-          mkdir -p "$PROFILES_HOME"
-          PROFILE_PATH="$(mktemp "$PROFILES_HOME"/$(uuidgen).mobileprovision)"
-          echo ${DIST_PROFILE} | base64 --decode > "$PROFILE_PATH"
-          echo "Saved provisioning profile $PROFILE_PATH"
+          app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
+          --type IOS_APP_STORE \
+          --create       
+
       - name: ⚙️Set up signing certificate
-        run: |
-          echo $DIST_CERTIFICATE | base64 --decode > /tmp/certificate.p12
-          keychain add-certificates --certificate /tmp/certificate.p12 --certificate-password $DIST_CERTIFICATE_PASSWORD
+        run: keychain add-certificates
 
       - name: ⚙️Set up code signing settings on Xcode project
         run: xcode-project use-profiles
