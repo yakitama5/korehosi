@@ -32,6 +32,11 @@ runs:
         dart pub global activate melos $MELOS_VERSION
         dart run melos bootstrap
       shell: bash
+
+    - name: 🔥Setup FlutterFire
+      run: |
+        dart pub global activate flutterfire_cli
+      shell: bash
     
     - name: ♻️Regenerate Code
       run: melos run gen
