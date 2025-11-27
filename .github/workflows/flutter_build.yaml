@@ -151,6 +151,16 @@ jobs:
 
       - name: 🚀Publish the app to App Store Connect
         run: |
-          APP_FILE=$(find $(pwd) -name "*.ipa")
-          app-store-connect publish \
-          --path "$APP_FILE"
+          # ipaファイルを検索して変数に格納
+          # 複数見つかった場合は head -n 1 で最初の1つだけを取得
+          APP_FILE=$(find apps/app/build/ios/ipa -name "*.ipa" | head -n 1)
+
+          echo "Found IPA file: $APP_FILE"
+
+          if [ -z "$APP_FILE" ]; then
+            echo "Error: .ipa file not found!"
+            exit 1
+          fi
+
+          # パブリッシュ実行
+          app-store-connect publish --path "$APP_FILE"
