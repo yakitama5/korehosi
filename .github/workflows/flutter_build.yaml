@@ -47,6 +47,7 @@ jobs:
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
           FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
@@ -101,6 +102,7 @@ jobs:
       DIST_PROFILE: ${{ secrets.PROVISIONING_PROFILE }}
       APP_STORE_APPLE_ID: ${{ vars.APP_STORE_APPLE_ID }}
       EXPORT_OPTIONS: ${{ secrets.EXPORT_OPTIONS }}
+      CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
     steps:
       # チェックアウト
       - name: 💾Checkout
@@ -116,6 +118,7 @@ jobs:
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
           FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
+          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
@@ -126,17 +129,14 @@ jobs:
       - name: ⚙️Set up keychain
         run: keychain initialize
 
-      - name: ⚙️Set up Provisioning profiles
+      - name: ⚙️Fetch signing files
         run: |
-          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
-          mkdir -p "$PROFILES_HOME"
-          PROFILE_PATH="$(mktemp "$PROFILES_HOME"/$(uuidgen).mobileprovision)"
-          echo ${DIST_PROFILE} | base64 --decode > "$PROFILE_PATH"
-          echo "Saved provisioning profile $PROFILE_PATH"
+          app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
+          --type IOS_APP_STORE \
+          --create       
+
       - name: ⚙️Set up signing certificate
-        run: |
-          echo $DIST_CERTIFICATE | base64 --decode > /tmp/certificate.p12
-          keychain add-certificates --certificate /tmp/certificate.p12 --certificate-password $DIST_CERTIFICATE_PASSWORD
+        run: keychain add-certificates
 
       - name: ⚙️Set up code signing settings on Xcode project
         run: xcode-project use-profiles
@@ -146,11 +146,23 @@ jobs:
           echo -n $EXPORT_OPTIONS | base64 -d > apps/app/ExportOptions.plist
 
       - name: 🛠️Build for iOS
+        working-directory: apps/app
         run: |
-          melos run build:app:ios
+          # Runner上で生成されたexport-optionsを指定
+          flutter build ipa --export-options-plist=$HOME/export_options.plist --dart-define-from-file=dart_defines/prod.json
 
       - name: 🚀Publish the app to App Store Connect
         run: |
-          APP_FILE=$(find $(pwd) -name "*.ipa")
-          app-store-connect publish \
-          --path "$APP_FILE"
+          # ipaファイルを検索して変数に格納
+          # 複数見つかった場合は head -n 1 で最初の1つだけを取得
+          APP_FILE=$(find apps/app/build/ios/ipa -name "*.ipa" | head -n 1)
+
+          echo "Found IPA file: $APP_FILE"
+
+          if [ -z "$APP_FILE" ]; then
+            echo "Error: .ipa file not found!"
+            exit 1
+          fi
+
+          # パブリッシュ実行
+          app-store-connect publish --path "$APP_FILE"
