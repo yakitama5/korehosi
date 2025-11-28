@@ -146,7 +146,7 @@ jobs:
           echo -n $EXPORT_OPTIONS | base64 -d > apps/app/ExportOptions.plist
 
       - name: 🛠️Build for iOS
-        working-directory: subdir
+        working-directory: apps/app
         run: |
           # Runner上で生成されたexport-optionsを指定
           flutter build ipa --export-options-plist=$HOME/export_options.plist --dart-define-from-file=dart_defines/prod.json
