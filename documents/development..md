@@ -18,13 +18,13 @@
 - 開発
 
   ```sh
-  flutterfire configure --out=packages/infrastructure/firebase/lib/src/common/config/firebase_options_dev.dart -p [Develop Project ID] --platforms=android,ios,web -i [iOS Bundle ID] -a [Android Package Name]
+  flutterfire configure --out=../../packages/infrastructure/firebase/lib/src/common/config/firebase_options_dev.dart -p [Production Project ID] --platforms=android,ios,web -i [iOS Bundle ID] -a [Android Package Name]
   ```
 
 - 本番
 
   ```sh
-  flutterfire configure --out=packages/infrastructure/firebase/lib/src/common/config/firebase_options.dart -p [Production Project ID] --platforms=android,ios,web -i [iOS Bundle ID] -a [Android Package Name]
+  flutterfire configure --out=../../packages/infrastructure/firebase/lib/src/common/config/firebase_options.dart -p [Production Project ID] --platforms=android,ios,web -i [iOS Bundle ID] -a [Android Package Name]
   ```
 
 生成されるファイルの内、`GoogleService-Info.plist`, `google-services.json`は出力先を変更出来ないため、
