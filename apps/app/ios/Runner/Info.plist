@@ -55,6 +55,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>$(deeplinkScheme)</string>
+				<string>$(reversedClientId)</string>
 			</array>
 		</dict>
 	</array>
