@@ -43,6 +43,8 @@
 		<key>test</key>
 		<string>key_test_iEEbSPKbYDWYcMn5nWhosmlbDtlkHbqv</string>
 	</dict>
+	<key>branch_disable_nativelink</key>
+	<true/>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -51,7 +53,7 @@
 			<key>CFBundleURLIconFile</key>
 			<string></string>
 			<key>CFBundleURLName</key>
-			<string>BranchLinks</string>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>$(deeplinkScheme)</string>
