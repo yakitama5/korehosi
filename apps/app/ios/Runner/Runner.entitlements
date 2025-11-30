@@ -10,10 +10,10 @@
 	</array>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>kvh26.app.link</string>
-		<string>kvh26-alternate.app.link</string>
-		<string>kvh26.test-app.link</string>
-		<string>kvh26-alternate.test-app.link</string>
+		<string>applinks:kvh26.app.link</string>
+		<string>applinks:kvh26-alternate.app.link</string>
+		<string>applinks:kvh26.test-app.link</string>
+		<string>applinks:kvh26-alternate.test-app.link</string>
 	</array>
 </dict>
 </plist>
