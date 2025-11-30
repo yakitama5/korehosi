@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:go_router/go_router.dart';
-import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_core/util.dart';
@@ -60,7 +59,7 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
         return const ItemsRouteData().location;
       }
     }
-
+
     // ほしいもの画面場合、パス指定されている項目IDが現在のグループ情報に存在するかを判定
     if (routeState.pathParameters.containsKey('itemId')) {
       final itemId = routeState.pathParameters['itemId']!;
