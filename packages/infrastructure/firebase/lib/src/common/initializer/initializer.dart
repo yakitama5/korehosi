@@ -56,10 +56,15 @@ final class FirebaseInitializer {
         'これほしい！からのお知らせ',
         importance: Importance.high,
       ),
-      displayInForeground: (notification) {
-        return true;
-      },
+      displayInForeground: (_) => true,
     );
+    // フォアグラウンド通知の表示オプション設定（iOS / macOS）
+    await FCMConfig.instance.messaging
+        .setForegroundNotificationPresentationOptions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
 
     // Firebase Crashlytics
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

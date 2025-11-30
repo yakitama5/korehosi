@@ -72,12 +72,12 @@ jobs:
         env: 
           NEW_BRANCH: 'release/v${{ env.new_version }}'
         run: |
-          git checkout -b "release/v$NEW_BRANCH"
-          git push origin "release/v$NEW_BRANCH"
+          git checkout -b "$NEW_BRANCH"
+          git push origin "$NEW_BRANCH"
       # PRを作成
       - name: 🚀Create PR for release
         env: 
           NEW_BRANCH: 'release/v${{ env.new_version }}'
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr create --base ${{ github.ref_name }} --head release/v$NEW_BRANCH --title "Release $NEW_BRANCH" --body ""
+        run: gh pr create --base ${{ github.ref_name }} --head $NEW_BRANCH --title "Release $NEW_BRANCH" --body ""
           

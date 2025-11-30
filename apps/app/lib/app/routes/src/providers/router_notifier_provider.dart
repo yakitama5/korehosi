@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:go_router/go_router.dart';
-import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_core/util.dart';
@@ -59,14 +58,6 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
       } else if (isSplash || isNotAuthLocations) {
         return const ItemsRouteData().location;
       }
-    }
-
-    // プッシュ通知からのアプリ表示を判定
-    final initialMessage = await ref.read(
-      initialNotificationMessageProvider.future,
-    );
-    if (initialMessage != null && initialMessage.path != null) {
-      return initialMessage.path;
     }
 
     // ほしいもの画面場合、パス指定されている項目IDが現在のグループ情報に存在するかを判定
