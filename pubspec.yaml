@@ -18,21 +18,16 @@ workspace:
   - packages/infrastructure/shared_preferences
 
 dev_dependencies:
-  custom_lint: ^0.8.1
+  altive_lints: ^2.0.0
   flutter_lints: ^6.0.0
   grinder: ^0.9.5
   melos: ^7.3.0
-  nilts: ^0.25.1
   path: ^1.9.0
-  pedantic_mono: ^1.12.3
-  riverpod_lint: ^3.0.3
   yaml: ^3.1.2
   yaml_edit: ^2.2.1
 
-# dependency_overrides:
-#   _fe_analyzer_shared: ^89.0.0
-#   analyzer: ^8.4.0
-#   build: ^4.0.0
+dependency_overrides:
+  analyzer: ^9.0.0
 
 melos:
   command:
@@ -63,51 +58,45 @@ melos:
         url_launcher: ^6.3.2
         version: ^3.0.2
       dev_dependencies:
+        altive_lints: ^2.0.0
         build_runner: ^2.10.4
-        custom_lint: ^0.8.1
         envied_generator: ^1.3.1
         flutter_gen_runner: ^5.12.0
         flutter_lints: ^6.0.0
         freezed: ^3.2.3
         json_serializable: ^6.11.2
-        nilts: ^0.25.1
-        pedantic_mono: ^1.35.0
         # reactive_forms_generator: ^8.1.0-beta0
         riverpod_generator: ^3.0.3
-        riverpod_lint: ^3.0.3
         slang_build_runner: ^4.10.0
     clean:
       hooks:
         post: melos exec --flutter --concurrency=3 -- "flutter clean"
 
   scripts:
-
     # ビルド関連
-    build:app: 
+    build:app:
       description: 各プラットフォーム毎にモバイルアプリをビルドする
-      stpes: 
+      stpes:
         - build:app:android
         - build:app:ios
-    build:app:ios: 
+    build:app:ios:
       description: Android向けにモバイルアプリをビルドする
-      run: 
-        melos exec --scope="flutter_app" -- flutter build ipa
+      run: melos exec --scope="flutter_app" -- flutter build ipa
         --export-options-plist=ExportOptions.plist
         --dart-define-from-file=dart_defines/prod.json
-    build:app:android: 
+    build:app:android:
       description: iOS向けにモバイルアプリをビルドする
-      run: 
-        melos exec --scope="flutter_app" -- flutter build
+      run: melos exec --scope="flutter_app" -- flutter build
         appbundle --dart-define-from-file=dart_defines/prod.json
 
     # コード生成関連
-    gen: 
+    gen:
       description: build_runner, slangの生成コマンドを実行する
       steps:
         - gen:build
         - gen:slang
-    
-    gen:build:  
+
+    gen:build:
       description: build_runner を使用してコードを生成する
       run: dart run build_runner build -d
       exec:
@@ -185,7 +174,7 @@ melos:
       packageFilters:
         dependsOn: alchemist
         dirExists:
-        - test
+          - test
     test:golden:update:
       run: flutter test --update-goldens
       exec:
@@ -193,14 +182,14 @@ melos:
       packageFilters:
         dependsOn: alchemist
         dirExists:
-        - test
-    test:ci: 
+          - test
+    test:ci:
       run: flutter test --dart-define=CI=true
       exec:
         failFast: true
       packageFilters:
         dirExists:
-        - test
+          - test
 
   ide:
     intellij:

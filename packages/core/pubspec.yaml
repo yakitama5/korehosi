@@ -12,9 +12,6 @@ dependencies:
   uuid: ^4.5.2
 
 dev_dependencies:
-  custom_lint: ^0.8.1
   nilts: ^0.25.1
-  pedantic_mono: ^1.35.0
-  riverpod_lint: ^3.0.3
 
 resolution: workspace

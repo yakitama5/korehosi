@@ -1,23 +1,22 @@
-include: package:pedantic_mono/analysis_options.yaml
+include: package:altive_lints/altive_lints.yaml
+linter:
+  rules:
+    - public_member_api_docs: false
+
+plugins:
+  altive_lints:
+    version: ^2.0.0
+    diagnostics:
+      avoid_hardcoded_color: false
+      avoid_hardcoded_japanese: false
 
 analyzer:
-  plugins:
-    - custom_lint
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - "**/*.gform.dart"
     - "**/firebase_options*.dart"
-    - "*/.github/workflows/flutter_*.yaml"
-    - "*/functions/*.js"
-    - "analysis_options.yaml"
   errors:
     invalid_annotation_target: ignore
     todo: ignore
     hack: ignore
-    
-custom_lint:
-  enable_all_lint_rules: false
-  rules:
-    - unsafe_null_assertion: false
-    - unstable_enum_values: false
