@@ -1,3 +1,4 @@
+import 'package:clock/clock.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:packages_application/analyze.dart';
 import 'package:packages_application/common.dart';
@@ -17,7 +18,7 @@ Future<MonthlyTotalsPurchasesChartData> monthlyTotalsPurchasesChartData(
   );
 
   // 各軸用のデータに変換
-  final now = DateTime.now();
+  final now = clock.now();
   final spots = monthlyTotals.monthlyTotals.map((e) {
     // X軸は現在日時との差月
     final dt = e.yearMonth.toDateTime();

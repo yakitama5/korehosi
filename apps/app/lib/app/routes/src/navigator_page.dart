@@ -82,30 +82,24 @@ class _NavigationRail extends HookWidget {
     return Scaffold(
       body: Row(
         children: [
-          Column(
-            children: [
-              Expanded(
-                child: NavigationRail(
-                  destinations: navigationItems
-                      .map(
-                        (e) => NavigationRailDestination(
-                          label: Text(e.label),
-                          // HACK(yakitama5): `Navigation rail`がTooltip非対応
-                          /// 対応されたら書き換える
-                          /// https://github.com/flutter/flutter/issues/113103
-                          icon: Tooltip(message: e.label, child: e.icon),
-                          selectedIcon: Tooltip(
-                            message: e.label,
-                            child: e.selectedIcon,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  selectedIndex: navigationShell.currentIndex,
-                  onDestinationSelected: _onDestinationSelected,
-                ),
-              ),
-            ],
+          NavigationRail(
+            destinations: navigationItems
+                .map(
+                  (e) => NavigationRailDestination(
+                    label: Text(e.label),
+                    // HACK(yakitama5): `Navigation rail`がTooltip非対応
+                    /// 対応されたら書き換える
+                    /// https://github.com/flutter/flutter/issues/113103
+                    icon: Tooltip(message: e.label, child: e.icon),
+                    selectedIcon: Tooltip(
+                      message: e.label,
+                      child: e.selectedIcon,
+                    ),
+                  ),
+                )
+                .toList(),
+            selectedIndex: navigationShell.currentIndex,
+            onDestinationSelected: _onDestinationSelected,
           ),
           VerticalDivider(
             thickness: 1,

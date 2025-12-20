@@ -58,7 +58,7 @@ class GroupPage extends HookConsumerWidget {
                     _LeaveButton(),
                   ],
                 ),
-                const _PremiumPlanButton(),
+                const _SliverPremiumPlanButton(),
                 const _SliverBody(),
               ],
             ),
@@ -98,8 +98,9 @@ class _SliverBody extends HookConsumerWidget {
   }
 }
 
-class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
-  const _PremiumPlanButton();
+class _SliverPremiumPlanButton extends HookConsumerWidget
+    with PresentationMixin {
+  const _SliverPremiumPlanButton();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

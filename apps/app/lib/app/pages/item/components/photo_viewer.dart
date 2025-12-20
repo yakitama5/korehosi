@@ -28,12 +28,13 @@ class PhotoViewer extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentIndex = useState(initialIndex);
+    final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
       body: Container(
         decoration: backgroundDecoration,
         constraints: BoxConstraints.expand(
-          height: MediaQuery.of(context).size.height,
+          height: size.height,
         ),
         child: Stack(
           alignment: Alignment.bottomRight,

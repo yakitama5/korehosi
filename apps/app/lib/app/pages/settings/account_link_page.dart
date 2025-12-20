@@ -86,6 +86,7 @@ class _Caption extends HookWidget {
 
 class _GoogleSignInButton extends HookConsumerWidget with PresentationMixin {
   const _GoogleSignInButton();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ConstrainedTabletBox(
@@ -106,6 +107,7 @@ class _GoogleSignInButton extends HookConsumerWidget with PresentationMixin {
 
 class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
   const _AppleSignInButton();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;

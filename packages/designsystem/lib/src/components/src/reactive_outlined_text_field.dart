@@ -37,6 +37,7 @@ class _ReactiveOutlinedRawAutocomplete extends StatelessWidget {
     this.labelText,
     this.maxLength,
   });
+
   final String? labelText;
   final String formControlName;
   final int? maxLength;

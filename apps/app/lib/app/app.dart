@@ -15,6 +15,7 @@ import 'package:packages_designsystem/widgets.dart';
 
 class App extends HookConsumerWidget {
   const App({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // アプリの共通情報

@@ -84,6 +84,7 @@ class _SliverBody extends HookConsumerWidget {
 
 class _Fab extends HookConsumerWidget with PresentationMixin {
   const _Fab();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return FloatingActionButton.extended(

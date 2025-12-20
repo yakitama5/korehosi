@@ -10,6 +10,7 @@ environment:
 resolution: workspace
 
 dependencies:
+  clock: ^1.1.2
   collection: ^1.19.1
   cross_file: ^0.3.5+1
   fl_chart: ^1.1.1

@@ -21,9 +21,9 @@ class ItemImageCarouselSlider extends StatelessWidget {
         const Condition.largerThan(name: DESKTOP, value: 0.2),
       ],
     ).value;
+    final size = MediaQuery.sizeOf(context);
     final viewWidth =
-        (MediaQuery.sizeOf(context).width -
-            (PagePadding.padding.left + PagePadding.padding.right)) *
+        (size.width - (PagePadding.padding.left + PagePadding.padding.right)) *
         viewportFraction;
     final carouselHeight = (viewWidth / 16) * 9;
 

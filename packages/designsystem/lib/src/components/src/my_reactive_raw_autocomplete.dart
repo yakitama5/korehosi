@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-typedef ControllerInitCallback = void Function(
-  TextEditingController controller,
-);
+typedef ControllerInitCallback =
+    void Function(
+      TextEditingController controller,
+    );
 
 // HACK: プルリクが取り込まれるまでの一時的な対応
 class MyReactiveRawAutocomplete<T, V extends Object>
@@ -79,107 +80,112 @@ class MyReactiveRawAutocomplete<T, V extends Object>
     bool stylusHandwritingEnabled = true,
     bool enableIMEPersonalizedLearning = true,
   }) : super(
-          builder: (field) {
-            final state = field as _ReactiveRawAutocompleteState<T, V>;
-            final effectiveDecoration = decoration
-                .applyDefaults(Theme.of(state.context).inputDecorationTheme);
+         builder: (field) {
+           final state = field as _ReactiveRawAutocompleteState<T, V>;
+           final effectiveDecoration = decoration.applyDefaults(
+             Theme.of(state.context).inputDecorationTheme,
+           );
 
-            state._setFocusNode(focusNode);
+           state._setFocusNode(focusNode);
 
-            return RawAutocomplete<V>(
-              optionsViewBuilder: optionsViewBuilder,
-              optionsBuilder: optionsBuilder,
-              displayStringForOption: displayStringForOption,
-              focusNode: state.focusNode,
-              onSelected: field.didChange,
-              textEditingController: state._textController,
-              fieldViewBuilder: fieldViewBuilder ??
-                  (
-                    context,
-                    textEditingController,
-                    focusNode,
-                    onFieldSubmitted,
-                  ) {
-                    return TextField(
-                      controller: textEditingController,
-                      focusNode: focusNode,
-                      decoration: effectiveDecoration.copyWith(
-                        errorText: state.errorText,
-                      ),
-                      onChanged: (value) {
-                        if (viewDataTypeFromTextEditingValue != null) {
-                          field.didChange(
-                            viewDataTypeFromTextEditingValue.call(value),
-                          );
-                        }
-                      },
-                      keyboardType: keyboardType,
-                      textInputAction: textInputAction,
-                      style: style,
-                      strutStyle: strutStyle,
-                      textAlign: textAlign,
-                      textAlignVertical: textAlignVertical,
-                      textDirection: textDirection,
-                      textCapitalization: textCapitalization,
-                      autofocus: autofocus,
-                      readOnly: readOnly,
-                      showCursor: showCursor,
-                      obscureText: obscureText,
-                      autocorrect: autocorrect,
-                      smartDashesType: smartDashesType ??
-                          (obscureText
-                              ? SmartDashesType.disabled
-                              : SmartDashesType.enabled),
-                      smartQuotesType: smartQuotesType ??
-                          (obscureText
-                              ? SmartQuotesType.disabled
-                              : SmartQuotesType.enabled),
-                      enableSuggestions: enableSuggestions,
-                      maxLengthEnforcement: maxLengthEnforcement,
-                      maxLines: maxLines,
-                      minLines: minLines,
-                      expands: expands,
-                      maxLength: maxLength,
-                      onTap: onTap,
-                      onSubmitted: (_) {
-                        if (autocompleteOnSubmit) {
-                          onFieldSubmitted();
-                        }
+           return RawAutocomplete<V>(
+             optionsViewBuilder: optionsViewBuilder,
+             optionsBuilder: optionsBuilder,
+             displayStringForOption: displayStringForOption,
+             focusNode: state.focusNode,
+             onSelected: field.didChange,
+             textEditingController: state._textController,
+             fieldViewBuilder:
+                 fieldViewBuilder ??
+                 (
+                   context,
+                   textEditingController,
+                   focusNode,
+                   onFieldSubmitted,
+                 ) {
+                   return TextField(
+                     controller: textEditingController,
+                     focusNode: focusNode,
+                     decoration: effectiveDecoration.copyWith(
+                       errorText: state.errorText,
+                     ),
+                     onChanged: (value) {
+                       if (viewDataTypeFromTextEditingValue != null) {
+                         field.didChange(
+                           viewDataTypeFromTextEditingValue.call(value),
+                         );
+                       }
+                     },
+                     keyboardType: keyboardType,
+                     textInputAction: textInputAction,
+                     style: style,
+                     strutStyle: strutStyle,
+                     textAlign: textAlign,
+                     textAlignVertical: textAlignVertical,
+                     textDirection: textDirection,
+                     textCapitalization: textCapitalization,
+                     autofocus: autofocus,
+                     readOnly: readOnly,
+                     showCursor: showCursor,
+                     obscureText: obscureText,
+                     autocorrect: autocorrect,
+                     smartDashesType:
+                         smartDashesType ??
+                         (obscureText
+                             ? SmartDashesType.disabled
+                             : SmartDashesType.enabled),
+                     smartQuotesType:
+                         smartQuotesType ??
+                         (obscureText
+                             ? SmartQuotesType.disabled
+                             : SmartQuotesType.enabled),
+                     enableSuggestions: enableSuggestions,
+                     maxLengthEnforcement: maxLengthEnforcement,
+                     maxLines: maxLines,
+                     minLines: minLines,
+                     expands: expands,
+                     maxLength: maxLength,
+                     onTap: onTap,
+                     onSubmitted: (_) {
+                       if (autocompleteOnSubmit) {
+                         onFieldSubmitted();
+                       }
 
-                        if (onSubmitted != null) {
-                          onSubmitted();
-                        }
-                      },
-                      onEditingComplete: onEditingComplete,
-                      inputFormatters: inputFormatters,
-                      enabled: field.control.enabled,
-                      cursorWidth: cursorWidth,
-                      cursorHeight: cursorHeight,
-                      cursorRadius: cursorRadius,
-                      cursorColor: cursorColor,
-                      scrollPadding: scrollPadding,
-                      scrollPhysics: scrollPhysics,
-                      keyboardAppearance: keyboardAppearance,
-                      enableInteractiveSelection: enableInteractiveSelection,
-                      buildCounter: buildCounter,
-                      autofillHints: autofillHints,
-                      mouseCursor: mouseCursor,
-                      obscuringCharacter: obscuringCharacter,
-                      dragStartBehavior: dragStartBehavior,
-                      onAppPrivateCommand: onAppPrivateCommand,
-                      restorationId: restorationId,
-                      scrollController: scrollController,
-                      selectionControls: selectionControls,
-                      selectionHeightStyle: selectionHeightStyle,
-                      selectionWidthStyle: selectionWidthStyle,
-                      stylusHandwritingEnabled: stylusHandwritingEnabled,
-                      enableIMEPersonalizedLearning:
-                          enableIMEPersonalizedLearning,
-                    );
-                  },
-            );
-          },
-        );
+                       if (onSubmitted != null) {
+                         onSubmitted();
+                       }
+                     },
+                     onEditingComplete: onEditingComplete,
+                     inputFormatters: inputFormatters,
+                     enabled: field.control.enabled,
+                     cursorWidth: cursorWidth,
+                     cursorHeight: cursorHeight,
+                     cursorRadius: cursorRadius,
+                     cursorColor: cursorColor,
+                     scrollPadding: scrollPadding,
+                     scrollPhysics: scrollPhysics,
+                     keyboardAppearance: keyboardAppearance,
+                     enableInteractiveSelection: enableInteractiveSelection,
+                     buildCounter: buildCounter,
+                     autofillHints: autofillHints,
+                     mouseCursor: mouseCursor,
+                     obscuringCharacter: obscuringCharacter,
+                     dragStartBehavior: dragStartBehavior,
+                     onAppPrivateCommand: onAppPrivateCommand,
+                     restorationId: restorationId,
+                     scrollController: scrollController,
+                     selectionControls: selectionControls,
+                     selectionHeightStyle: selectionHeightStyle,
+                     selectionWidthStyle: selectionWidthStyle,
+                     stylusHandwritingEnabled: stylusHandwritingEnabled,
+                     enableIMEPersonalizedLearning:
+                         enableIMEPersonalizedLearning,
+                   );
+                 },
+           );
+         },
+       );
+
   final ControllerInitCallback? onControllerInit;
 
   final AutocompleteOptionToString<V> displayStringForOption;

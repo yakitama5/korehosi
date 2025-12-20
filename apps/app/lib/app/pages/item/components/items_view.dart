@@ -112,6 +112,7 @@ class _ErrorView extends StatelessWidget {
 
 class _ShimmerTile extends StatelessWidget {
   const _ShimmerTile({required this.viewLayout});
+
   final ViewLayout viewLayout;
 
   @override

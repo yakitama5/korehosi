@@ -1,3 +1,4 @@
+import 'package:clock/clock.dart';
 import 'package:packages_domain/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,7 +11,7 @@ class MonthlyTotalsYearMonthRangeNotifier
   /// 初期状態は現在日時から過去6ヶ月
   @override
   YearMonthRange build() {
-    final now = DateTime.now();
+    final now = clock.now();
 
     final from = YearMonth.fromDateTime(DateTime(now.year, now.month - 5));
     final to = YearMonth.fromDateTime(now);

@@ -1,3 +1,4 @@
+import 'package:clock/clock.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/pages/analyze/components/chart_card.dart';
@@ -71,7 +72,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
     final colorScheme = useColorScheme();
     final textTheme = useTextTheme();
 
-    final now = DateTime.now();
+    final now = clock.now();
     final minX = now.diffMonth(range.from.toDateTime()).toDouble();
     final maxX = now.diffMonth(range.to.toDateTime()).toDouble();
 
@@ -208,7 +209,7 @@ class _TotalPriceLinerChart extends HookConsumerWidget {
   /// グラフ下側のラベル郡を生成する.
   AxisTitles buildBottomTitles(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
-    final now = DateTime.now();
+    final now = clock.now();
 
     return AxisTitles(
       sideTitles: SideTitles(

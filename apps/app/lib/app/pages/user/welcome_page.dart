@@ -93,6 +93,7 @@ class _StartButton extends HookWidget {
 
 class _AccountLinkButton extends HookWidget {
   const _AccountLinkButton();
+
   @override
   Widget build(BuildContext context) {
     return ConstrainedTabletBox(

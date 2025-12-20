@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:clock/clock.dart';
 import 'package:flutter/foundation.dart';
 import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
@@ -266,7 +267,7 @@ class UserUsecase with RunUsecaseMixin {
     final tokenTimestamp = await ref.read(
       tokenTimestampProvider(token: token).future,
     );
-    final now = DateTime.now();
+    final now = clock.now();
     if (tokenTimestamp != null &&
         now.add(const Duration(days: -30)).isBefore(tokenTimestamp)) {
       return;

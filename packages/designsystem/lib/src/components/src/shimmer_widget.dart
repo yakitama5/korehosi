@@ -7,8 +7,8 @@ class ShimmerWidget extends StatelessWidget {
     this.width = double.infinity,
     required this.height,
   }) : shapeBorder = const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-        );
+         borderRadius: BorderRadius.all(Radius.circular(8)),
+       );
 
   const ShimmerWidget.circular({
     super.key,
@@ -16,19 +16,19 @@ class ShimmerWidget extends StatelessWidget {
     required this.height,
     this.shapeBorder = const CircleBorder(),
   });
+
   final double width;
   final double height;
   final ShapeBorder shapeBorder;
 
   @override
   Widget build(BuildContext context) => Shimmer.fromColors(
-        baseColor: Colors.grey[400]!,
-        highlightColor: Colors.grey[300]!,
-        child: Container(
-          height: height,
-          width: width,
-          decoration:
-              ShapeDecoration(color: Colors.grey[400], shape: shapeBorder),
-        ),
-      );
+    baseColor: Colors.grey[400]!,
+    highlightColor: Colors.grey[300]!,
+    child: Container(
+      height: height,
+      width: width,
+      decoration: ShapeDecoration(color: Colors.grey[400], shape: shapeBorder),
+    ),
+  );
 }
