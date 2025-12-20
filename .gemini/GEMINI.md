@@ -20,7 +20,10 @@
 
 ## 🏗️ Project Structure (プロジェクト構造)
 
-* **標準構造:** 標準的な Flutter プロジェクト構造を採用し、`lib/main.dart` を主要なアプリケーションエントリーポイントとします。
+* **標準構造:** `melos` を使用したモノレポ構成を採用しています。
+  * **apps/**: アプリケーションのエントリーポイントやプラットフォーム固有の設定が含まれます。
+  * **packages/**: 共有ロジック、機能モジュール、UIコンポーネントなどが含まれます。
+* **Melos:** ワークスペース全体の管理には `melos` を使用します。`pubspec.yaml` の `workspace` 定義に従ってください。
 
 ## 🎨 Flutter Style Guide (Flutter スタイルガイド)
 
@@ -31,11 +34,16 @@
   * **イミュータビリティ:** 変更不可能なデータ構造を優先してください。ウィジェット（特に `StatelessWidget`）はイミュータブルであるべきです。
   * **状態管理:** エフェメラルな状態とアプリの状態を分離してください。関心の分離を扱うために、アプリの状態には状態管理ソリューションを使用してください。
   * **ウィジェットはUI用:** Flutter UI のすべてはウィジェットです。より小さく再利用可能なウィジェットから複雑な UI を構成してください。
-* **ナビゲーション:** `auto_route` や `go_router` のようなモダンなルーティングパッケージを使用してください。
+* **ナビゲーション:** `go_router` を使用し、`go_router_builder` による Typed Routes を採用してください。画面遷移は型安全に行われるべきです。
 
 ## 📦 Package Management (パッケージ管理)
 
-パッケージ管理には、可能な場合は `pub` ツールを使用します。
+パッケージ管理には、ワークスペース管理ツールの `melos` と、標準の `flutter pub` コマンドを適切に使い分けます。
+
+* **Melosコマンド:**
+  * `melos bootstrap`: 依存関係のインストールとリンクを行います。
+  * `melos run gen`: コード生成を実行します。
+  * `melos run test:ci`: すべてのテストを実行します。
 
 * **外部パッケージの選定:** 新しい機能に外部パッケージが必要な場合、可能な場合は `pub_dev_search` ツールを使用します。それ以外の場合は、`pub.dev` から最も適切で安定したパッケージを特定してください。
 * **依存関係の追加/削除:**
@@ -96,7 +104,10 @@
 
 ## ⚙️ State Management (状態管理)
 
-* **組み込みソリューションの優先:** Flutter の組み込み状態管理ソリューションを優先してください。サードパーティパッケージは、明示的に要求された場合にのみ使用してください。
+* **Riverpod:** 状態管理には `flutter_riverpod` (hooks_riverpod) を使用します。
+* **Riverpod Generator:** `@riverpod` アノテーションと `riverpod_generator` を使用して Provider を定義することを推奨します。
+* **Hooks:** `HookConsumerWidget` を積極的に使用し、`flutter_hooks` と組み合わせた簡潔な記述を心がけてください。
+* **組み込みソリューション:** シンプルなケースでは `useState` (flutter_hooks) や `ValueNotifier` も検討してください。
 * **Streams:** 非同期イベントのシーケンスの処理には `Streams` と `StreamBuilder` を使用してください。
 * **Futures:** 単一の非同期操作の処理には `Futures` と `FutureBuilder` を使用してください。
 * **ValueNotifier:** シンプルな、単一の値に関わるローカル状態には、`ValueNotifier` と `ValueListenableBuilder` を使用してください。
@@ -123,11 +134,12 @@
 ## 🔗 Routing (ルーティング)
 
 * **GoRouter:** 宣言的なナビゲーション、ディープリンク、Web サポートのために `go_router` パッケージを使用してください。
-* **GoRouter セットアップ:**
+* **GoRouter Builder:** `go_router_builder` を使用して、型安全なルーティング（Typed Routes）を実装してください。
 
     ```dart
     // 1. Add the dependency
     // flutter pub add go_router
+    // flutter pub add dev:go_router_builder build_runner
 
     // 2. Configure the router
     final GoRouter _router = GoRouter(
@@ -155,6 +167,11 @@
     ```
 
 * **Navigator:** ダイアログや一時的なビューなど、ディープリンク可能である必要のない短命の画面には、組み込みの `Navigator` を使用してください。
+
+## 📝 Form Handling (フォーム処理)
+
+* **Reactive Forms:** フォームの構築とバリデーションには `reactive_forms` パッケージを使用してください。
+* **バリデーション:** UI コードから分離された再利用可能なカスタムバリデーターを作成してください。
 
 ## 🔒 Data Handling & Serialization (データ処理とシリアライズ)
 
@@ -197,12 +214,20 @@
   * **ウィジェットテスト:** UI コンポーネントには `package:flutter_test` を使用してください。
   * **インテグレーションテスト:** エンドツーエンドのユーザーフロー検証には `package:integration_test` を使用してください。
 * **アサーション:** デフォルトの `matchers` よりも、より表現力豊かで読みやすいアサーションのために `package:checks` を優先してください。
+* **Golden Tests:** ゴールデンテスト（スナップショットテスト）には `alchemist` パッケージを使用してください。
+* **Melos Scripts:** テスト実行には `melos run test:ci` や `melos run test:golden` などの定義済みスクリプトを使用してください。
 
 ### Testing Best practices (テスティングのベストプラクティス)
 
 * **パターン:** Arrange-Act-Assert (または Given-When-Then) パターンに従ってください。
 * **モック:** モックよりもフェイク（Fakes）やスタブ（Stubs）を優先してください。モックが必要な場合は、`mockito` または `mocktail` を使用してください。
 * **カバレッジ:** 高いテストカバレッジを目指してください。
+
+## 🌍 Internationalization (国際化)
+
+* **Slang:** 国際化（i18n）には `slang` と `slang_flutter` を使用してください。
+* **Type-safe:** `slang` によって生成された型安全な翻訳アクセサを使用してください。
+* **JSON/YAML:** 翻訳ファイルは JSON または YAML 形式で管理し、`slang` で Dart コードを生成します。
 
 ## 💅 Visual Design & Theming (ビジュアルデザインとテーマ)
 
