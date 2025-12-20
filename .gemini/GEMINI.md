@@ -17,6 +17,9 @@
   * 実装計画 (Implementation Plan)
   * 修正内容の確認 (Walkthrough)
   * タスクリスト (Task List)
+  * リリースノート (Release Notes)
+  * バージョンアップデートガイド (Version Update Guide)
+  * 考察中のログ (Research Log)
 
 ## 🏗️ Project Structure (プロジェクト構造)
 
