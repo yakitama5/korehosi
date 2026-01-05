@@ -1,1 +1,8 @@
-hoge: hoge
+analyzePage:
+  title: Review
+  purchaseRate: Purchase Rate
+  purchased: Purchased
+  format:
+    fraction: "${molecule:int}/${denominator:int}"
+    month: "Month ${month:int}"
+  totalPrice: Total Price

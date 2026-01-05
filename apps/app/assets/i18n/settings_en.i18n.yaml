@@ -2,29 +2,49 @@ settingsPage:
   title: Settings
   account:
     head: Account
+    profile: Profile
+    group: Group
     account: Account
+    pushNotification:
+      title: Push Notification
+      caption: Receive notifications when wishes are added in the group
   layout:
     haed: Layout
     uiStyle: UI Style
-    themeMode: ThemeMode
-    colorTheme: Colors
+    themeMode: Theme Mode
+    colorTheme: Theme Color
   help:
     head: Help
-    howToUse: HowToUse
-    contactUs: Contact us
-    developperTwitter: Developper
-    privacyPolicy: PrivacyPolicy
-    licencse: License
+    howToUse: How to Use
+    contactUs: Contact Us
+    developperTwitter: Developer X (Twitter)
+    privacyPolicy: Privacy Policy
+    license: License
 accountPage:
   title: Account
   link:
-    head: Account link
+    head: Account Link
     google: Google
     apple: Apple
-  other: 
+  other:
     head: Other
     logout: Logout
-    leave: Leave
+    leave: Delete Account
   leaveConfirmDialog:
-    title: Leave?
-    body: Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.
+    title: Delete Account?
+    message: "Are you sure you want to delete your account?\nThis operation cannot be undone."
+accountLinkPage:
+  title: Account Link
+  meritDescription:
+    title: >-
+      By linking your account,
+
+      you can use the following features:
+    itemizedMessages:
+      [
+        "Data backup to cloud",
+        "Simultaneous use on multiple devices",
+        "Data transfer when changing devices",
+      ]
+  signInWithGoogle: Sign in with Google
+  signInWithApple: Sign in with Apple

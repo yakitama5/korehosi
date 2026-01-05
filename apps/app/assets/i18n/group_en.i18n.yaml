@@ -1,1 +1,47 @@
-hoge: hoge
+common:
+  groupName: Group Name
+  leaveGroup: Leave Group
+  leaveConfirmDialog:
+    title: Confirm Leave
+    message: Are you sure you want to leave "${groupName:String}"?
+shareLinkPage:
+  joinedGroupDialog:
+    title: Join Group
+    message: Joined the group.
+groupsPage:
+  title: Joined Groups
+  help: Help
+  shareGroupHelpDialog:
+    title: Share/Join Group
+    message: >-
+      [Share Group]
+      Please perform "Share" from the group page.
+
+
+      [Join Group]
+      You can join by clicking the shared URL or
+      scanning the QR code.
+  createGroup: Create Group
+  notJoinGroup: >-
+    You do not belong to any group.
+    Please create a group or
+    join a group you were invited to.
+groupPage:
+  limitBreak: Unlock Wishlist Limit
+  appInPurchaseConfirmDialog:
+    title: Confirm Purchase
+    message: >-
+      Purchasing this item will unlock
+      the limit of wishes you can register
+      in the displayed group.
+      (Free version is up to 30 items)
+
+      Price: ¥${price:String} (Indefinite)
+    okLabel: Purchase (¥${price:String})
+  limitBreakPurchased: Wishlist limit has been unlocked. (Unlimited)
+  shareGroup: Share
+  shareGroupCaption: Share to invite members
+  copyLink: Copy
+  copiedLink: Copied
+  select: Select
+  savedImage: Image saved.

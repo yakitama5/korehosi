@@ -1,1 +1,17 @@
-hoge: hoge
+welcomePage:
+  start: Start
+  forFirstTimers: First time users here
+  accountLink: Account Link
+profilePage:
+  profile: Profile
+onboardPage:
+  start: Start
+  introduction:
+    title: Introduction
+    message: First, let's register your profile.
+  profile: Who are you?
+  confirm: Is this correct?
+common:
+  name: Name
+  nameLabelText: Name or Nickname
+  ageGroup: Age Group

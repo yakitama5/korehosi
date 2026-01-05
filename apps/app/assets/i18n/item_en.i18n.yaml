@@ -1,1 +1,55 @@
-hoge: hoge
+common:
+  wishList: Wishlist
+  status: Status
+  wishRank: Priority
+  itemName: Item Name
+  wanterName: Wanter
+  wanterNameLabel: Who wants it?
+  memo: Memo
+  wishSeason: When do you want it?
+  url: URL
+  price: Price
+  purchasePlanDate: Planned Date
+  sentDate: Given Date
+  buyerName: Buyer
+  currencyFormat: "¥${price:int}"
+  currencySymbol: "¥"
+itemsPage:
+  title: Wishlist
+  add: Add Wish
+  notSelectedGroupDialog:
+    title: Group not selected
+    message: Please select a group before adding a wish.
+  account: Account
+  completeChangeGroup: Switched group.
+  itemEmpty: No wishes found.
+  selectNumberText: "${length:int} selected"
+  wishRankFormat: "${value:String} Stars"
+  sortOrder: Sort Order
+itemPage:
+  deletedItem: >-
+    Wish not found.
+    It may have been deleted.
+
+    Please try again.
+  wishSeason:
+    hint: e.g. Christmas, Birthday
+  purchaseSection:
+    title: Purchase/Plan Info
+    message: The following content is only visible to adults in the group.
+  purchase: Purchase/Plan
+itemEditPage:
+  editTitle: Edit Wish
+  createTitle: Create Wish
+  wishSeason:
+    hint: e.g. Christmas, Birthday
+  addUrl: Add URL
+purchasePage:
+  purchase: Purchase/Plan Info
+  surprise:
+    label: Surprise
+    caption: Do not let the child know the status
+  purchasePlanDate:
+    hint: Inputting this sets status to "Planned"
+  sentDate:
+    hint: Inputting this sets status to "Purchased"
