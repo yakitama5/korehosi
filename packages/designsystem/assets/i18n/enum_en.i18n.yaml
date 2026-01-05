@@ -1,10 +1,10 @@
 uiStyle(context=UIStyle):
-  system: System
+  system: System Setting
   android: Android
   ios: iOS
 themeColor(context=ThemeColor):
-  appColor: AppColor
-  dynamicColor: DynamicColor
+  appColor: App Color
+  dynamicColor: Dynamic Color
   blue: Blue
   purple: Purple
   green: Green
@@ -13,25 +13,25 @@ themeColor(context=ThemeColor):
   yellow: Yellow
   orange: Orange
 themeMode(context=ThemeMode):
-  system: System
+  system: System Theme
   light: Light
   dark: Dark
 viewLayout:
-  name: Layout
+  name: View Type
   typeName(context=ViewLayout):
     grid: Grid
     list: List
 sortOrder(context=SortOrder):
-  asc: ASC
-  desc: DESC
+  asc: Ascending
+  desc: Descending
 itemOrderKey(context=ItemOrderKey):
-  createdAt: Created at
+  createdAt: Date Created
   name: Name
-  wishRank: Degree of desirability
+  wishRank: Priority
 ageGroup(context=AgeGroup):
-  child: child
-  adult: adult
+  child: Child
+  adult: Adult
 purchaseStatus(context=PurchaseStatus):
-  notPurchased: unpurchased
-  purchasePlan: Planned purchases
-  purchased: already bought
+  notPurchased: Not Purchased
+  purchasePlan: Planned
+  purchased: Purchased

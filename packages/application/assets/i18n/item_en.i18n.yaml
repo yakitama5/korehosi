@@ -1,1 +1,2 @@
-hoge: hoge
+notificationAddItemTitle: "${name:String} added a wish!"
+notificationAddItemBody: "${name:String} added a wish!"

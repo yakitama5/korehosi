@@ -1,1 +1,7 @@
-hoge: hoge
+groupShareText: >-
+  ${user:String} invited you to ${group:String}.
+
+  Click the URL below or scan the QR code to join the wishlist group
+
+  ${url:String}
+initialGroupName: "${userName: String}'s Group"

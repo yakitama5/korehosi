@@ -1,1 +1,4 @@
-hoge: hoge
+deletedUser: <Deleted User>
+unset: <Unset>
+user:
+  noname: No Name

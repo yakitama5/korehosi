@@ -1,42 +1,42 @@
 imageSourceSelect:
-  shoot: '写真を撮る'
-  chooseFromLibrary: 'ライブラリから画像を選択'
+  shoot: "Take Photo"
+  chooseFromLibrary: "Choose from Library"
 confirmDiscardChanges:
-  title: '変更を破棄しますか？'
-  message: 'すべての変更は失われます'
-  discard: '破棄'
-  notDiscard: '破棄しない'
+  title: "Discard changes?"
+  message: "All changes will be lost"
+  discard: "Discard"
+  notDiscard: "Keep"
 permissionMessages:
-  photos: 'ギャラリーへのアクセス'
-  camera: 'カメラへのアクセス'
-  pushNotification: 'プッシュ通知'
+  photos: "Access to Gallery"
+  camera: "Access to Camera"
+  pushNotification: "Push Notification"
   permissionLackDialog:
-    title: '${permission:String}が許可されていません'
-    message: '設定アプリを開いて${permission:String}を許可してください'
-    openSettings: '設定アプリを開く'
+    title: "${permission:String} is not allowed"
+    message: "Please open settings and allow ${permission:String}"
+    openSettings: "Open Settings"
   permissionOffDialog:
-    title: '${permission:String}をオフにしますか？'
-    message: '設定アプリを開いて${permission:String}をオフにしてください'
-    openSettings: '設定アプリを開く'
+    title: "Turn off ${permission:String}?"
+    message: "Please open settings and turn off ${permission:String}"
+    openSettings: "Open Settings"
 sendUrlErrorDialog:
-  title: 'エラー'
+  title: "Error"
   message: >-
-    URLを開けませんでした。
+    Could not open URL.
 
-    頻発する場合はお問い合わせ下さい。
+    Please contact us if this happens frequently.
 appUpdate:
   updatePossible:
     message: >-
-      新しいバージョンが公開されています。
-      アップデートを行うと、新しい機能をご利用いただけます。
-      アップデートを行いますか？
+      A new version is available.
+      Update to access new features.
+      Do you want to update?
   forceUpdate:
     message: >-
-      ご利用のバージョンは現在ご利用出来ません。
-      ストアから新しいバージョンをご利用下さい。
-  navigateStore: 'ストアを開く'
+      Your current version is no longer supported.
+      Please update from the store.
+  navigateStore: "Open Store"
 validationError:
-  required: '必須項目を入力して下さい'
-  url: '正しいURL形式で入力して下さい'
+  required: "Please enter required items"
+  url: "Please enter a valid URL"
 format:
-  percent: '${percent:String}%'
+  percent: "${percent:String}%"
