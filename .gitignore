@@ -24,6 +24,7 @@
 # firebase
 /.firebase
 /firebase-debug.log
+/*-debug.log
 
 /.fvm
 kotlin-compiler*.salive

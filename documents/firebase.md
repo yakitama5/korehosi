@@ -62,6 +62,24 @@ newer.
 firebase emulators:start --only auth,firestore,storage,functions
 ```
 
+Connect the app to the suite with a compile-time flag. Android emulators use
+`10.0.2.2`; iOS simulators and Web use `localhost`.
+
+```sh
+flutter run \
+  --dart-define-from-file=dart_defines/dev.json \
+  --dart-define=useFirebaseEmulators=true
+```
+
+For a physical device or a nonstandard network, override the host explicitly:
+
+```sh
+flutter run \
+  --dart-define-from-file=dart_defines/dev.json \
+  --dart-define=useFirebaseEmulators=true \
+  --dart-define=firebaseEmulatorHost=192.168.1.10
+```
+
 Install rule-test dependencies and run the isolated security suite with a demo
 project (it cannot contact production services):
 
