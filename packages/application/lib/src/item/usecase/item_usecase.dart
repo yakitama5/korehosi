@@ -1,3 +1,4 @@
+import 'package:cross_file/cross_file.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/i18n/strings.g.dart';
 import 'package:packages_application/item.dart';
@@ -194,6 +195,84 @@ class ItemUsecase with RunUsecaseMixin {
     },
   );
 
+  /// 欲しい物を別のグループへコピー
+  Future<void> copyToGroup({
+    required Item item,
+    required Group targetGroup,
+  }) => _transferToGroup(
+    item: item,
+    targetGroup: targetGroup,
+    deleteSource: false,
+  );
+
+  /// 欲しい物を別のグループへ移動
+  Future<void> moveToGroup({
+    required Item item,
+    required Group targetGroup,
+  }) => _transferToGroup(
+    item: item,
+    targetGroup: targetGroup,
+    deleteSource: true,
+  );
+
+  Future<void> _transferToGroup({
+    required Item item,
+    required Group targetGroup,
+    required bool deleteSource,
+  }) => execute(
+    ref,
+    action: () async {
+      final sourceGroup = await ref.read(currentGroupProvider.future);
+      if (sourceGroup == null) {
+        throw const BusinessException(BusinessExceptionType.notSelectedGroup);
+      }
+      if (sourceGroup.id == targetGroup.id) {
+        throw ArgumentError.value(
+          targetGroup.id,
+          'targetGroup',
+          'The source and target groups must be different.',
+        );
+      }
+
+      await _validateItemCount(group: targetGroup);
+
+      final storageService = ref.read(storageServiceProvider);
+      final uploadImages = await Future.wait<XFile>(
+        item.images
+                ?.map((image) => storageService.downloadImage(image.id))
+                .toList() ??
+            <Future<XFile>>[],
+      );
+
+      await ref
+          .read(itemRepositoryProvider)
+          .add(
+            groupId: targetGroup.id,
+            uploadImages: uploadImages,
+            name: item.name,
+            wanterName: item.wanterName,
+            wishRank: item.wishRank,
+            wishSeason: item.wishSeason,
+            wishDate: item.wishDate,
+            urls: item.urls,
+            urlThumbnails: item.urlThumbnails,
+            memo: item.memo,
+          );
+
+      // コピーが完了した場合のみ移動元を削除する
+      if (deleteSource) {
+        await ref
+            .read(itemRepositoryProvider)
+            .delete(groupId: sourceGroup.id, itemId: item.id);
+      }
+
+      ref
+        ..invalidate(groupProvider)
+        ..invalidate(joinGroupsProvider);
+      refreshItemProviders();
+    },
+  );
+
   /// 欲しい物の削除
   Future<void> delete({required ItemId itemId}) => execute(
     ref,
@@ -225,13 +304,13 @@ class ItemUsecase with RunUsecaseMixin {
   }
 
   /// 欲しい物の登録数上限を検証
-  Future<void> _validateItemCount() async {
-    final group = await ref.read(currentGroupProvider.future);
+  Future<void> _validateItemCount({Group? group}) async {
+    final validateGroup = group ?? await ref.read(currentGroupProvider.future);
 
-    final isPremium = group?.premium == true;
+    final isPremium = validateGroup?.premium == true;
     final overItemCount =
-        group?.itemCount != null &&
-        group!.itemCount! >= itemConfig.limitItemCount;
+        validateGroup?.itemCount != null &&
+        validateGroup!.itemCount! >= itemConfig.limitItemCount;
 
     if (!isPremium && overItemCount) {
       throw const BusinessException(
