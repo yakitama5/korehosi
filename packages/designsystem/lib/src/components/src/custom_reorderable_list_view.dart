@@ -24,7 +24,7 @@ class CustomReorderableListView extends ReorderableListView {
     super.physics,
     super.shrinkWrap,
     super.anchor,
-    super.cacheExtent,
+    super.scrollCacheExtent,
     super.dragStartBehavior,
     super.keyboardDismissBehavior,
     super.restorationId,
@@ -47,11 +47,7 @@ class CustomReorderableListView extends ReorderableListView {
 
            return itemBuilder.call(context, index ~/ 2);
          },
-         onReorder: (int oldIndex, int newIndex) {
-           if (oldIndex < newIndex) {
-             newIndex -= 1;
-           }
-
+         onReorderItem: (int oldIndex, int newIndex) {
            if (oldIndex % 2 == 1) {
              //separator - should never happen
              return;
@@ -62,12 +58,11 @@ class CustomReorderableListView extends ReorderableListView {
              return;
            }
 
-           newIndex =
-               oldIndex > newIndex && newIndex % 2 == 1
-                   ? (newIndex + 1) ~/ 2
-                   : newIndex ~/ 2;
-           oldIndex = oldIndex ~/ 2;
-           onReorder.call(oldIndex, newIndex);
+           final itemNewIndex = oldIndex > newIndex && newIndex % 2 == 1
+               ? (newIndex + 1) ~/ 2
+               : newIndex ~/ 2;
+           final itemOldIndex = oldIndex ~/ 2;
+           onReorder.call(itemOldIndex, itemNewIndex);
          },
        );
 }

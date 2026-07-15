@@ -11,7 +11,6 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/i18n.dart';
@@ -118,7 +117,7 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
           child: FilledButton.icon(
             onPressed: () => onPremium(context, ref),
             label: Text(i18n.group.groupPage.limitBreak),
-            icon: Icon(MdiIcons.crown),
+            icon: const Icon(Icons.workspace_premium),
           ),
         ),
       ),

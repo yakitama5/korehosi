@@ -3,7 +3,7 @@ description: "This package provides core features of app."
 publish_to: "none"
 version: 0.0.1
 environment:
-  sdk: ^3.10.1
+  sdk: ^3.12.2
 
 dependencies:
   fcm_config: ^3.6.5

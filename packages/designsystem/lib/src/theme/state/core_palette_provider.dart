@@ -1,3 +1,6 @@
+// The dynamic_color API still exposes the deprecated CorePalette type.
+// ignore_for_file: deprecated_member_use
+
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_color_utilities/palettes/core_palette.dart';

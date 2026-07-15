@@ -1,7 +1,7 @@
 name: family_wish_list
 
 environment:
-  sdk: ^3.10.0
+  sdk: ^3.12.2
 
 workspace:
   - apps/app
@@ -38,8 +38,8 @@ melos:
   command:
     bootstrap:
       environment:
-        sdk: ^3.10.1
-        flutter: ^3.38.3
+        sdk: ^3.12.2
+        flutter: ^3.44.6
       dependencies:
         collection: ^1.19.1
         cross_file: ^0.3.5+1
@@ -51,7 +51,6 @@ melos:
         hooks_riverpod: ^3.0.3
         intl: ^0.20.2
         json_annotation: ^4.9.0
-        material_design_icons_flutter: ^7.0.7296
         nested: ^1.0.0
         reactive_forms: ^18.2.0
         responsive_framework: ^1.5.1

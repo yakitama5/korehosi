@@ -4,8 +4,8 @@ publish_to: "none"
 version: 1.0.10+35
 
 environment:
-  sdk: ^3.10.1
-  flutter: ^3.38.3
+  sdk: ^3.12.2
+  flutter: ^3.44.6
 
 resolution: workspace
 
@@ -38,7 +38,6 @@ dependencies:
   intl: ^0.20.2
   introduction_screen: ^4.0.0
   lottie: ^3.3.2
-  material_design_icons_flutter: ^7.0.7296
   nested: ^1.0.0
   package_info_plus: ^9.0.0
   packages_application:

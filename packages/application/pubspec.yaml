@@ -4,8 +4,8 @@ publish_to: "none"
 version: 0.0.1
 
 environment:
-  sdk: ^3.10.1
-  flutter: ^3.38.3
+  sdk: ^3.12.2
+  flutter: ^3.44.6
 
 resolution: workspace
 
@@ -19,7 +19,6 @@ dependencies:
   image_gallery_saver_plus: ^4.0.1
   intl: ^0.20.2
   introduction_screen: ^4.0.0
-  material_design_icons_flutter: ^7.0.7296
   nested: ^1.0.0
   packages_core:
     path: ../../packages/core

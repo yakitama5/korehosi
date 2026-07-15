@@ -3,6 +3,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:material_color_utilities/dynamiccolor/dynamic_scheme.dart';
 import 'package:material_color_utilities/dynamiccolor/variant.dart';
+import 'package:material_color_utilities/hct/hct.dart';
 import 'package:material_color_utilities/palettes/core_palette.dart';
 
 /// [暫定的な対応]
@@ -15,7 +16,9 @@ extension CorePaletteX on CorePalette {
     Brightness brightness = Brightness.light,
   }) {
     final scheme = DynamicScheme(
-      sourceColorArgb: toColorScheme(brightness: brightness).primary.value,
+      sourceColorHct: Hct.fromInt(
+        toColorScheme(brightness: brightness).primary.toARGB32(),
+      ),
       // Variantを取得する手段がないため、`fruitSalad`を暫定的に固定設定
       variant: Variant.fruitSalad,
       isDark: brightness == Brightness.dark,

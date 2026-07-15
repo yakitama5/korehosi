@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ItemsEmptyImage extends StatelessWidget {
   const ItemsEmptyImage({
@@ -20,7 +19,7 @@ class ItemsEmptyImage extends StatelessWidget {
     final icon = showAddIcon
         ? Center(
             child: Icon(
-              MdiIcons.imagePlus,
+              Icons.add_photo_alternate_outlined,
               color: cs.onSurfaceVariant,
               size: 48,
             ),
