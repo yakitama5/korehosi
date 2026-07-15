@@ -7,6 +7,7 @@ common:
   wanterNameLabel: だれがほしい？
   memo: メモ
   wishSeason: いつほしい？
+  wishDate: ほしい日
   url: URL
   price: 価格
   purchasePlanDate: かう予定の日
@@ -43,6 +44,8 @@ itemEditPage:
   createTitle: ほしいものを作成
   wishSeason:
     hint: 例：クリスマス、誕生日
+  wishDate:
+    hint: 具体的な日付が決まっている場合に入力して下さい
   addUrl: URLを追加
 purchasePage:
   purchase: 購入/購入予定情報

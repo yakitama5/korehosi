@@ -28,6 +28,7 @@ itemOrderKey(context=ItemOrderKey):
   createdAt: Created at
   name: Name
   wishRank: Degree of desirability
+  wishDate: Desired date
 ageGroup(context=AgeGroup):
   child: child
   adult: adult

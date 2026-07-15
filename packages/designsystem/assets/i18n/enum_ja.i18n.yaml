@@ -28,6 +28,7 @@ itemOrderKey(context=ItemOrderKey):
   createdAt: 作成日時
   name: 名前
   wishRank: 欲しい度
+  wishDate: ほしい日
 ageGroup(context=AgeGroup):
   child: こども
   adult: おとな

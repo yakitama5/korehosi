@@ -249,6 +249,9 @@ class TranslationsItemCommonJa {
 	/// ja: 'いつほしい？'
 	String get wishSeason => 'いつほしい？';
 
+	/// ja: 'ほしい日'
+	String get wishDate => 'ほしい日';
+
 	/// ja: 'URL'
 	String get url => 'URL';
 
@@ -339,6 +342,7 @@ class TranslationsItemItemEditPageJa {
 	String get createTitle => 'ほしいものを作成';
 
 	late final TranslationsItemItemEditPageWishSeasonJa wishSeason = TranslationsItemItemEditPageWishSeasonJa.internal(_root);
+	late final TranslationsItemItemEditPageWishDateJa wishDate = TranslationsItemItemEditPageWishDateJa.internal(_root);
 
 	/// ja: 'URLを追加'
 	String get addUrl => 'URLを追加';
@@ -612,6 +616,18 @@ class TranslationsItemItemEditPageWishSeasonJa {
 	String get hint => '例：クリスマス、誕生日';
 }
 
+// Path: item.itemEditPage.wishDate
+class TranslationsItemItemEditPageWishDateJa {
+	TranslationsItemItemEditPageWishDateJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '具体的な日付が決まっている場合に入力して下さい'
+	String get hint => '具体的な日付が決まっている場合に入力して下さい';
+}
+
 // Path: item.purchasePage.surprise
 class TranslationsItemPurchasePageSurpriseJa {
 	TranslationsItemPurchasePageSurpriseJa.internal(this._root);
@@ -870,6 +886,7 @@ extension on Translations {
 			'item.common.wanterNameLabel' => 'だれがほしい？',
 			'item.common.memo' => 'メモ',
 			'item.common.wishSeason' => 'いつほしい？',
+			'item.common.wishDate' => 'ほしい日',
 			'item.common.url' => 'URL',
 			'item.common.price' => '価格',
 			'item.common.purchasePlanDate' => 'かう予定の日',
@@ -895,6 +912,7 @@ extension on Translations {
 			'item.itemEditPage.editTitle' => 'ほしいものを編集',
 			'item.itemEditPage.createTitle' => 'ほしいものを作成',
 			'item.itemEditPage.wishSeason.hint' => '例：クリスマス、誕生日',
+			'item.itemEditPage.wishDate.hint' => '具体的な日付が決まっている場合に入力して下さい',
 			'item.itemEditPage.addUrl' => 'URLを追加',
 			'item.purchasePage.purchase' => '購入/購入予定情報',
 			'item.purchasePage.surprise.label' => 'サプライズ',
