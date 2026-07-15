@@ -39,6 +39,14 @@ itemPage:
     title: 購入/購入予定情報
     message: 以降の内容はグループ内の大人にだけ表示されます
   purchase: 購入/購入予定
+  transfer:
+    menu: 別のグループへ
+    copy: 別のグループにコピー
+    move: 別のグループに移動
+    selectGroup: 送り先のグループを選択
+    noDestination: コピー・移動できる他のグループがありません。
+    copied: コピーしました。
+    moved: 移動しました。
 itemEditPage:
   editTitle: ほしいものを編集
   createTitle: ほしいものを作成

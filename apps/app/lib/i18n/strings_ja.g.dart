@@ -325,6 +325,8 @@ class TranslationsItemItemPageJa {
 
 	/// ja: '購入/購入予定'
 	String get purchase => '購入/購入予定';
+
+	late final TranslationsItemItemPageTransferJa transfer = TranslationsItemItemPageTransferJa.internal(_root);
 }
 
 // Path: item.itemEditPage
@@ -602,6 +604,36 @@ class TranslationsItemItemPagePurchaseSectionJa {
 
 	/// ja: '以降の内容はグループ内の大人にだけ表示されます'
 	String get message => '以降の内容はグループ内の大人にだけ表示されます';
+}
+
+// Path: item.itemPage.transfer
+class TranslationsItemItemPageTransferJa {
+	TranslationsItemItemPageTransferJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '別のグループへ'
+	String get menu => '別のグループへ';
+
+	/// ja: '別のグループにコピー'
+	String get copy => '別のグループにコピー';
+
+	/// ja: '別のグループに移動'
+	String get move => '別のグループに移動';
+
+	/// ja: '送り先のグループを選択'
+	String get selectGroup => '送り先のグループを選択';
+
+	/// ja: 'コピー・移動できる他のグループがありません。'
+	String get noDestination => 'コピー・移動できる他のグループがありません。';
+
+	/// ja: 'コピーしました。'
+	String get copied => 'コピーしました。';
+
+	/// ja: '移動しました。'
+	String get moved => '移動しました。';
 }
 
 // Path: item.itemEditPage.wishSeason
@@ -909,6 +941,13 @@ extension on Translations {
 			'item.itemPage.purchaseSection.title' => '購入/購入予定情報',
 			'item.itemPage.purchaseSection.message' => '以降の内容はグループ内の大人にだけ表示されます',
 			'item.itemPage.purchase' => '購入/購入予定',
+			'item.itemPage.transfer.menu' => '別のグループへ',
+			'item.itemPage.transfer.copy' => '別のグループにコピー',
+			'item.itemPage.transfer.move' => '別のグループに移動',
+			'item.itemPage.transfer.selectGroup' => '送り先のグループを選択',
+			'item.itemPage.transfer.noDestination' => 'コピー・移動できる他のグループがありません。',
+			'item.itemPage.transfer.copied' => 'コピーしました。',
+			'item.itemPage.transfer.moved' => '移動しました。',
 			'item.itemEditPage.editTitle' => 'ほしいものを編集',
 			'item.itemEditPage.createTitle' => 'ほしいものを作成',
 			'item.itemEditPage.wishSeason.hint' => '例：クリスマス、誕生日',

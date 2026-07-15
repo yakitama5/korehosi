@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/pages/item/components/item_images.dart';
+import 'package:flutter_app/app/pages/item/components/item_transfer_group_bottom_sheet.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
 import 'package:flutter_app/app/pages/item/extension/purchase_status_icon_extension.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
@@ -9,10 +10,12 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:packages_application/common.dart';
+import 'package:packages_application/group.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
+import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 import 'package:packages_domain/user.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
@@ -53,18 +56,50 @@ class ItemPage extends HookConsumerWidget {
   }
 }
 
-class _ItemDetailView extends HookWidget {
+class _ItemDetailView extends HookConsumerWidget with PresentationMixin {
   const _ItemDetailView({required this.item, required this.user});
 
   final Item item;
   final User user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentGroupId = ref.watch(currentGroupProvider).value?.id;
+    final joinedGroups = ref.watch(joinGroupsProvider);
+    final targetGroups =
+        joinedGroups.value
+            ?.where((group) => group.id != currentGroupId)
+            .toList() ??
+        const <Group>[];
+
     return Scaffold(
       appBar: AppBar(
         title: Text(item.name),
-        actions: [EditIconButton(onPressed: () => _onEdit(context))],
+        actions: [
+          EditIconButton(onPressed: () => _onEdit(context)),
+          PopupMenuButton<_ItemTransferAction>(
+            enabled: joinedGroups.hasValue && currentGroupId != null,
+            tooltip: i18n.item.itemPage.transfer.menu,
+            onSelected: (action) =>
+                _onTransfer(context, ref, action, targetGroups),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: _ItemTransferAction.copy,
+                child: _TransferMenuItem(
+                  icon: Icons.copy,
+                  label: i18n.item.itemPage.transfer.copy,
+                ),
+              ),
+              PopupMenuItem(
+                value: _ItemTransferAction.move,
+                child: _TransferMenuItem(
+                  icon: Icons.drive_file_move,
+                  label: i18n.item.itemPage.transfer.move,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: PagePadding(
@@ -114,6 +149,59 @@ class _ItemDetailView extends HookWidget {
   /// 編集画面に遷移する
   void _onEdit(BuildContext context) =>
       ItemEditRouteData(item.id.value).go(context);
+
+  Future<void> _onTransfer(
+    BuildContext context,
+    WidgetRef ref,
+    _ItemTransferAction action,
+    List<Group> targetGroups,
+  ) async {
+    final targetGroup = await ItemTransferGroupBottomSheet.show(
+      context: context,
+      groups: targetGroups,
+    );
+    if (targetGroup == null || !context.mounted) {
+      return;
+    }
+
+    final messages = i18n.item.itemPage.transfer;
+    await execute(
+      action: () async {
+        final usecase = ref.read(itemUsecaseProvider);
+        switch (action) {
+          case _ItemTransferAction.copy:
+            await usecase.copyToGroup(item: item, targetGroup: targetGroup);
+          case _ItemTransferAction.move:
+            await usecase.moveToGroup(item: item, targetGroup: targetGroup);
+            if (context.mounted) {
+              const ItemsRouteData().go(context);
+            }
+        }
+      },
+      successMessage: switch (action) {
+        _ItemTransferAction.copy => messages.copied,
+        _ItemTransferAction.move => messages.moved,
+      },
+    );
+  }
+}
+
+enum _ItemTransferAction { copy, move }
+
+class _TransferMenuItem extends StatelessWidget {
+  const _TransferMenuItem({required this.icon, required this.label});
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      Icon(icon),
+      const Gap(12),
+      Text(label),
+    ],
+  );
 }
 
 /// 購入状況
