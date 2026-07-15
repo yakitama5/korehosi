@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_designsystem/i18n.dart';
+import 'package:packages_designsystem/src/components/src/image_crop_page.dart';
 import 'package:packages_designsystem/src/helper/permission_helper.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -126,9 +127,27 @@ class _Form extends HookConsumerWidget {
       return;
     }
 
+    // 選択した画像をアップロード前に編集
+    final image = await file.readAsBytes();
+    if (!context.mounted) {
+      return;
+    }
+    final croppedImage = await ImageCropPage.show(
+      context: context,
+      image: image,
+    );
+    if (croppedImage == null) {
+      return;
+    }
+
     // Formへの反映
     final hasValue = field.value != null;
-    final model = SelectedImageModel(uploadFile: file);
+    final croppedFile = XFile.fromData(
+      croppedImage,
+      name: file.name,
+      mimeType: file.mimeType,
+    );
+    final model = SelectedImageModel(uploadFile: croppedFile);
     field.didChange(model);
     if (hasValue) {
       onEdited?.call();
