@@ -1,6 +1,8 @@
 # https://dart.dev/guides/libraries/private-files
 # Flutter/Dart/Pub related
 /.dart_tool/*
+**/build/
+**/failures/
 .flutter-plugins
 .flutter-plugins-dependencies
 
