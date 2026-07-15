@@ -21,5 +21,6 @@
         "pflannery.vscode-versionlens",
         "rioukkevin.vscode-git-commit",
         "redhat.vscode-yaml",
+        "streetsidesoftware.code-spell-checker",
     ]
 }

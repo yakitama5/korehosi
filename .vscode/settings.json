@@ -78,6 +78,9 @@
   "files.associations": {
     "*.json": "json"
   },
+  "cSpell.import": [
+    "${workspaceFolder}/cspell.json"
+  ],
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -127,7 +130,7 @@
         "detail": "コメント整理、TODOコメント(Comment)"
       },
       {
-        "label": "♻️generete",
+        "label": "♻️generate",
         "detail": "コード(再)生成、Bootstrap(Generate)"
       },
       {
@@ -143,7 +146,7 @@
         "detail": "WIP(Work In Progress)"
       },
       {
-        "label": "💩depre",
+        "label": "💩deprecate",
         "detail": "非推奨追加（Deprecation）"
       }
     ]
