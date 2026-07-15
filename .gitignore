@@ -2,6 +2,7 @@
 # Flutter/Dart/Pub related
 /.dart_tool/*
 **/build/
+**/test_bundle.dart
 **/failures/
 .flutter-plugins
 .flutter-plugins-dependencies

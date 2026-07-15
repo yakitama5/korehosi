@@ -82,6 +82,8 @@ android {
 
     defaultConfig {
         applicationId = dartDefines["androidPackageName"]
+        testInstrumentationRunner = "pl.leancode.patrol.PatrolJUnitRunner"
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 35
@@ -110,9 +112,14 @@ android {
             signingConfig = signingConfigs.getByName("release")
         }
     }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
 }
 
 dependencies {
+    androidTestUtil("androidx.test:orchestrator:1.5.1")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 
