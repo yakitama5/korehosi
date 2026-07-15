@@ -10,19 +10,6 @@ runs:
         echo -n $DART_DEFINE_JSON | base64 -d > apps/app/dart_defines/prod.json
       shell: bash
 
-    - name: 🔥Create Firebase Conf
-      run: |
-        echo -n $FIREBASE_OPTIONS | base64 -d > ${CONF_PATH}/firebase_options.dart
-        echo -n $FIREBASE_OPTIONS_DEV | base64 -d > ${CONF_PATH}/firebase_options_dev.dart
-        mkdir -p apps/app/android/app/src/prod/
-        echo -n $GOOGLE_SERVICES_JSON | base64 -d > apps/app/android/app/src/prod/res/google-services.json
-        mkdir -p apps/app/ios/prod/
-        echo -n $GOOGLE_INFO_PLIST | base64 -d > apps/app/ios/prod/GoogleService-Info.plist
-        echo -n $FIREBASE_JSON | base64 -d > apps/app/ios/prod/firebase.json
-      shell: bash
-      env: 
-        CONF_PATH: packages/infrastructure/firebase/lib/src/common/config
-
     - name: 🔥Create Firebase env
       run: |
         mkdir -p packages/infrastructure/firebase/scripts

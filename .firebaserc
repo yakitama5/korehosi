@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "family-wish-list-ad3c7-dev"
+    "default": "family-wish-list-ad3c7-dev",
+    "dev": "family-wish-list-ad3c7-dev",
+    "prod": "family-wish-list-ad3c7"
   }
 }
