@@ -76,9 +76,9 @@ Future<bool> _request(
 ) async {
   final status = await permission.request();
 
-  if (status.isGranted) {
+  if (isPermissionGranted(status)) {
     return true;
-  } else if (status.isLimited || status.isPermanentlyDenied) {
+  } else if (status.isPermanentlyDenied) {
     if (context.mounted) {
       await showPermissionDeniedDialog(
         context: context,
@@ -92,6 +92,9 @@ Future<bool> _request(
     return false;
   }
 }
+
+bool isPermissionGranted(PermissionStatus status) =>
+    status.isGranted || status.isLimited;
 
 Future<void> showPermissionDeniedDialog({
   required BuildContext context,
