@@ -15,10 +15,10 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref
-        .watch(buyedRateProvider)
+        .watch(purchaseRateProvider)
         .when(
-          data: (itemBuyedRate) {
-            final percent = itemBuyedRate.buyedRate * 100.0;
+          data: (itemPurchaseRate) {
+            final percent = itemPurchaseRate.purchaseRate * 100.0;
 
             return ChartCard(
               title: i18n.analyze.analyzePage.purchaseRate,
@@ -28,7 +28,7 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GaugeChart(value: percent, radius: 80),
-                  _BuyedItemCount(itemBuyedRate),
+                  _PurchasedItemCount(itemPurchaseRate),
                 ],
               ),
             );
@@ -41,10 +41,10 @@ class PurchaseGaugeChartCard extends HookConsumerWidget {
   }
 }
 
-class _BuyedItemCount extends HookConsumerWidget {
-  const _BuyedItemCount(this.itemBuyedRate);
+class _PurchasedItemCount extends HookConsumerWidget {
+  const _PurchasedItemCount(this.itemPurchaseRate);
 
-  final ItemBuyedRate itemBuyedRate;
+  final ItemPurchaseRate itemPurchaseRate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -57,8 +57,8 @@ class _BuyedItemCount extends HookConsumerWidget {
         ),
         Text(
           i18n.analyze.analyzePage.format.fraction(
-            molecule: itemBuyedRate.buyedItemCount,
-            denominator: itemBuyedRate.itemCount,
+            molecule: itemPurchaseRate.purchasedItemCount,
+            denominator: itemPurchaseRate.itemCount,
           ),
           style: Theme.of(context).textTheme.titleLarge,
         ),

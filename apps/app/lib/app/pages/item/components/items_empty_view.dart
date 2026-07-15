@@ -7,8 +7,8 @@ import 'package:lottie/lottie.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/item.dart';
 
-class ItemsEmptyListner extends SingleChildStatelessWidget {
-  const ItemsEmptyListner({super.key, super.child});
+class ItemsEmptyListener extends SingleChildStatelessWidget {
+  const ItemsEmptyListener({super.key, super.child});
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {

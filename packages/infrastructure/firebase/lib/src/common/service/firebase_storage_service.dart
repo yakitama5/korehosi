@@ -26,11 +26,11 @@ class FirebaseStorageService implements StorageService {
     // メタデータの定義
     // TODO(yakitama5): `contentType`を修正しないといけない
     final imageData = await xfile.readAsBytes();
-    final metadeta = SettableMetadata(contentType: 'image/png');
+    final metadata = SettableMetadata(contentType: 'image/png');
 
     // Webを考慮し `putData`を利用
     // Note: https://stackoverflow.com/questions/58459483/unsupported-operation-platform-operatingsystem
-    await imageRef.putData(imageData, metadeta);
+    await imageRef.putData(imageData, metadata);
 
     // パスを返却して処理終了
     return ImageId(imageRef.fullPath);

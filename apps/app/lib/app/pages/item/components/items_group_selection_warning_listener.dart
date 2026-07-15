@@ -5,8 +5,8 @@ import 'package:nested/nested.dart';
 import 'package:packages_application/group.dart';
 
 /// ほしいもの一覧において、グループの選択状態に応じて警告を表示する
-class ItemsGroupSelectionWarningListner extends SingleChildStatelessWidget {
-  const ItemsGroupSelectionWarningListner({super.key, super.child});
+class ItemsGroupSelectionWarningListener extends SingleChildStatelessWidget {
+  const ItemsGroupSelectionWarningListener({super.key, super.child});
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {

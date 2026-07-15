@@ -45,9 +45,9 @@ final class FirebaseInitializer {
 
     // App Check
     // 公開しているWebサイトのサイトキー
-    final recpthaSiteKey = switch (flavor) {
-      Flavor.prod => ProductionEnv.recpthaSiteKey,
-      Flavor.dev => DevEnv.recpthaSiteKey,
+    final recaptchaSiteKey = switch (flavor) {
+      Flavor.prod => ProductionEnv.recaptchaSiteKey,
+      Flavor.dev => DevEnv.recaptchaSiteKey,
     };
     await FirebaseAppCheck.instance.activate(
       providerAndroid: switch (flavor) {
@@ -58,7 +58,7 @@ final class FirebaseInitializer {
         Flavor.prod => const AppleDeviceCheckProvider(),
         Flavor.dev => const AppleDebugProvider(),
       },
-      providerWeb: ReCaptchaV3Provider(recpthaSiteKey),
+      providerWeb: ReCaptchaV3Provider(recaptchaSiteKey),
     );
 
     // FCM Config

@@ -62,7 +62,7 @@ jobs:
           git add .
           git commit -m "chore: bump version to ${{ env.new_version }}"
 
-      # releasブランチを作成
+      # releaseブランチを作成
       - name: 🆕Create and push release branch
         env: 
           NEW_BRANCH: 'release/v${{ env.new_version }}'

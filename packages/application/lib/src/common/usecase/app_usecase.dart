@@ -16,6 +16,6 @@ class AppUsecase with RunUsecaseMixin {
   final Ref ref;
 
   /// アプリ起動時
-  Future<void> onLanched() =>
+  Future<void> onLaunched() =>
       ref.read(userUsecaseProvider).refreshFCMTokenAndCheckPushPermission();
 }

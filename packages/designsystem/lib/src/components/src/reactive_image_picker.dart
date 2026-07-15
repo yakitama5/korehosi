@@ -20,7 +20,7 @@ class ReactiveImagePicker
     InputButtonBuilder? inputBuilder,
     SelectedBuilder? selectedBuilder,
     VoidCallback? onSelected,
-    VoidCallback? onEditted,
+    VoidCallback? onEdited,
     VoidCallback? onDeleted,
   }) : super(
          formControlName: formControlName,
@@ -33,7 +33,7 @@ class ReactiveImagePicker
                inputBuilder,
                selectedBuilder,
                onSelected,
-               onEditted,
+               onEdited,
                onDeleted,
              ),
        );
@@ -50,7 +50,7 @@ class _Form extends HookConsumerWidget {
     this.inputBuilder,
     this.selectedBuilder,
     this.onSelected,
-    this.onEditted,
+    this.onEdited,
     this.onDeleted,
   );
 
@@ -58,7 +58,7 @@ class _Form extends HookConsumerWidget {
   final InputButtonBuilder? inputBuilder;
   final SelectedBuilder? selectedBuilder;
   final VoidCallback? onSelected;
-  final VoidCallback? onEditted;
+  final VoidCallback? onEdited;
   final VoidCallback? onDeleted;
 
   @override
@@ -131,7 +131,7 @@ class _Form extends HookConsumerWidget {
     final model = SelectedImageModel(uploadFile: file);
     field.didChange(model);
     if (hasValue) {
-      onEditted?.call();
+      onEdited?.call();
     } else {
       onSelected?.call();
     }

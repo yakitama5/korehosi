@@ -80,7 +80,7 @@ Future<bool> _request(
     return true;
   } else if (status.isLimited || status.isPermanentlyDenied) {
     if (context.mounted) {
-      await showPermissionDeinedDialog(
+      await showPermissionDeniedDialog(
         context: context,
         ref: ref,
         permission: permission,
@@ -93,7 +93,7 @@ Future<bool> _request(
   }
 }
 
-Future<void> showPermissionDeinedDialog({
+Future<void> showPermissionDeniedDialog({
   required BuildContext context,
   required WidgetRef ref,
   required Permission permission,

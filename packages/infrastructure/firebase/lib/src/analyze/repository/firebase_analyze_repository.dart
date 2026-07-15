@@ -17,7 +17,7 @@ class FirebaseAnalyzeRepository
   final Ref ref;
 
   @override
-  Future<ItemBuyedRate> exploreBuyedRate({
+  Future<ItemPurchaseRate> explorePurchaseRate({
     required GroupId groupId,
     required AgeGroup ageGroup,
     required ItemAnalyzeQuery query,
@@ -33,20 +33,22 @@ class FirebaseAnalyzeRepository
       // 各件数の取得
       final itemCount =
           (await itemCol.count().get().then((doc) => doc.count)) ?? 0;
-      final rawBuyedItemCount = await purchaseQuery
+      final rawPurchasedItemCount = await purchaseQuery
           .where('sentAt', isNull: false)
           .count()
           .get()
           .then((doc) => doc.count);
-      final buyedItemCount = rawBuyedItemCount ?? 0;
+      final purchasedItemCount = rawPurchasedItemCount ?? 0;
 
       // 購入率を計算
-      final buyedRate = itemCount == 0 ? 0.0 : buyedItemCount / itemCount;
+      final purchaseRate = itemCount == 0
+          ? 0.0
+          : purchasedItemCount / itemCount;
 
-      return ItemBuyedRate(
-        buyedItemCount: buyedItemCount,
+      return ItemPurchaseRate(
+        purchasedItemCount: purchasedItemCount,
         itemCount: itemCount,
-        buyedRate: buyedRate,
+        purchaseRate: purchaseRate,
       );
     },
   );

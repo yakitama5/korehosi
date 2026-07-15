@@ -7,8 +7,8 @@ import 'package:packages_core/util.dart';
 import 'package:packages_domain/notification.dart';
 
 /// PUSH通知を押下した時のリスナー
-class BackgroundNotificationClickListner extends SingleChildStatelessWidget {
-  const BackgroundNotificationClickListner({super.key, super.child});
+class BackgroundNotificationClickListener extends SingleChildStatelessWidget {
+  const BackgroundNotificationClickListener({super.key, super.child});
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {

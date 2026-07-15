@@ -65,7 +65,7 @@
     ├── core (レイヤーに囚われず利用するUtilityなど)
     ├── domain (ドメイン層/核となるドメインやインタフェース)
     │── application (アプリケーション層/業務ロジックや状態管理)
-    │── dependenciy_override (依存性注入)
+    │── dependency_override (依存性注入)
     │── designsystem (アプリ全体のテーマや共通Widgetなどのデザインシステム)
     │
     └── infrastructure (インフラ層/アプリ外への依存処理)

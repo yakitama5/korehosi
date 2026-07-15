@@ -85,31 +85,31 @@ melos:
   scripts:
 
     # ビルド関連
-    build:app: 
+    build:app:
       description: 各プラットフォーム毎にモバイルアプリをビルドする
-      stpes: 
+      steps:
         - build:app:android
         - build:app:ios
-    build:app:ios: 
+    build:app:ios:
       description: Android向けにモバイルアプリをビルドする
-      run: 
+      run:
         melos exec --scope="flutter_app" -- flutter build ipa
         --export-options-plist=ExportOptions.plist
         --dart-define-from-file=dart_defines/prod.json
-    build:app:android: 
+    build:app:android:
       description: iOS向けにモバイルアプリをビルドする
-      run: 
+      run:
         melos exec --scope="flutter_app" -- flutter build
         appbundle --dart-define-from-file=dart_defines/prod.json
 
     # コード生成関連
-    gen: 
+    gen:
       description: build_runner, slangの生成コマンドを実行する
       steps:
         - gen:build
         - gen:slang
-    
-    gen:build:  
+
+    gen:build:
       description: build_runner を使用してコードを生成する
       run: dart run build_runner build -d
       exec:
@@ -196,7 +196,7 @@ melos:
         dependsOn: alchemist
         dirExists:
         - test
-    test:ci: 
+    test:ci:
       run: flutter test --dart-define=CI=true
       exec:
         failFast: true

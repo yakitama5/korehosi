@@ -1,6 +1,6 @@
 yes: 'Yes'
 no: 'No'
-itmizedTextPrefix: '・'
+itemizedTextPrefix: '・'
 save: '保存'
 delete: '削除'
 edit: '編集'

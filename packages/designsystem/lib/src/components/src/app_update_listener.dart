@@ -9,8 +9,8 @@ import 'package:packages_designsystem/src/keys/root_navigator_key.dart';
 import 'package:packages_domain/common.dart';
 import 'package:store_redirect/store_redirect.dart';
 
-class AppUpdateListner extends SingleChildStatelessWidget {
-  const AppUpdateListner({super.key, super.child});
+class AppUpdateListener extends SingleChildStatelessWidget {
+  const AppUpdateListener({super.key, super.child});
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) => Consumer(

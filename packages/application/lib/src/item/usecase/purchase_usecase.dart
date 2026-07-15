@@ -69,7 +69,7 @@ class PurchaseUsecase with RunUsecaseMixin {
           );
 
       // Providerへの反映
-      _itemUsecase.refreshItemProvideres();
+      _itemUsecase.refreshItemProviders();
     },
   );
 
@@ -112,7 +112,7 @@ class PurchaseUsecase with RunUsecaseMixin {
           );
 
       // Providerへの反映
-      _itemUsecase.refreshItemProvideres();
+      _itemUsecase.refreshItemProviders();
     },
   );
 
@@ -135,7 +135,7 @@ class PurchaseUsecase with RunUsecaseMixin {
           .delete(groupId: groupId, itemId: itemId);
 
       // Providerへの反映
-      _itemUsecase.refreshItemProvideres();
+      _itemUsecase.refreshItemProviders();
     },
   );
 

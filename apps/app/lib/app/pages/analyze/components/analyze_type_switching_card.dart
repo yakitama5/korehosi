@@ -20,7 +20,7 @@ class AnalyzeTypeSwitchingCard extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return switch (analyzeType) {
-      AnalyzeType.buyedRate => PurchaseGaugeChartCard(
+      AnalyzeType.purchasedRate => PurchaseGaugeChartCard(
         onTap: enabled
             ? () => AnalyzeDetailRouteData(index: analyzeType.index).go(context)
             : null,

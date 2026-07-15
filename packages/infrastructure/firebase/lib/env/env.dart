@@ -9,5 +9,5 @@ part 'env.g.dart';
 @Envied(path: 'scripts/env/.env')
 final class ProductionEnv {
   @EnviedField(varName: 'RECPTCHA_SITE_KEY', obfuscate: true)
-  static final String recpthaSiteKey = _ProductionEnv.recpthaSiteKey;
+  static final String recaptchaSiteKey = _ProductionEnv.recaptchaSiteKey;
 }

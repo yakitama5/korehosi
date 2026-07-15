@@ -63,7 +63,7 @@ class SettingsPage extends HookConsumerWidget {
                             permission: Permission.notification,
                           );
                         } else {
-                          await showPermissionDeinedDialog(
+                          await showPermissionDeniedDialog(
                             context: context,
                             ref: ref,
                             permission: Permission.notification,
@@ -78,7 +78,7 @@ class SettingsPage extends HookConsumerWidget {
                   ],
                 ),
                 SettingsSection(
-                  title: Text(messages.layout.haed),
+                  title: Text(messages.layout.title),
                   tiles: [
                     SettingsTile.navigation(
                       leading: const Icon(Icons.style),
@@ -123,9 +123,8 @@ class SettingsPage extends HookConsumerWidget {
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(CustomIcons.x_twitter),
-                      title: Text(messages.help.developperTwitter),
-                      onPressed: (context) =>
-                          _onDevelopperTwitter(context, ref),
+                      title: Text(messages.help.developerX),
+                      onPressed: (context) => _onDeveloperX(context, ref),
                     ),
                     SettingsTile.navigation(
                       leading: const Icon(Icons.lock),
@@ -163,24 +162,24 @@ class SettingsPage extends HookConsumerWidget {
   }
 
   Future<bool> _onHowToUse(BuildContext context, WidgetRef ref) {
-    return lanchUrlStringSafety(context, urlConfig.howToUse);
+    return launchUrlStringSafely(context, urlConfig.howToUse);
   }
 
   Future<bool> _onContactUs(BuildContext context, WidgetRef ref) {
-    return lanchUrlStringSafety(context, urlConfig.contactUs);
+    return launchUrlStringSafely(context, urlConfig.contactUs);
   }
 
-  Future<bool> _onDevelopperTwitter(BuildContext context, WidgetRef ref) {
+  Future<bool> _onDeveloperX(BuildContext context, WidgetRef ref) {
     // Notes: https://pub.dev/packages/url_launcher#configuration
-    return lanchUrlStringSafety(
+    return launchUrlStringSafely(
       context,
-      urlConfig.developperXApp,
-      secondUrl: urlConfig.developperXWeb,
+      urlConfig.developerXApp,
+      secondUrl: urlConfig.developerXWeb,
     );
   }
 
   Future<bool> _onPrivacyPolicy(BuildContext context, WidgetRef ref) {
-    return lanchUrlStringSafety(context, urlConfig.privacyPolicyJa);
+    return launchUrlStringSafely(context, urlConfig.privacyPolicyJa);
   }
 
   void _onLicense(BuildContext context, WidgetRef ref) {

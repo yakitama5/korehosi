@@ -1,7 +1,7 @@
 export 'src/animated_switcher_fab.dart';
 export 'src/app_lifecycle_builder.dart';
 export 'src/app_reactive_form_config.dart';
-export 'src/app_update_listner.dart';
+export 'src/app_update_listener.dart';
 export 'src/bottom_sheet_column.dart';
 export 'src/bottom_sheet_multi_select_action_chip.dart';
 export 'src/bottom_sheet_select_action_chip.dart';

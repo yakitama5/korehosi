@@ -2,7 +2,7 @@
 
 // ignore_for_file: type=lint, duplicate_ignore
 
-part of 'buyed_rate_provider.dart';
+part of 'purchase_rate_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -12,44 +12,44 @@ part of 'buyed_rate_provider.dart';
 // ignore_for_file: type=lint, type=warning
 /// 購入率を管理するProvider
 
-@ProviderFor(buyedRate)
-const buyedRateProvider = BuyedRateProvider._();
+@ProviderFor(purchaseRate)
+const purchaseRateProvider = PurchaseRateProvider._();
 
 /// 購入率を管理するProvider
 
-final class BuyedRateProvider
+final class PurchaseRateProvider
     extends
         $FunctionalProvider<
-          AsyncValue<ItemBuyedRate>,
-          ItemBuyedRate,
-          FutureOr<ItemBuyedRate>
+          AsyncValue<ItemPurchaseRate>,
+          ItemPurchaseRate,
+          FutureOr<ItemPurchaseRate>
         >
-    with $FutureModifier<ItemBuyedRate>, $FutureProvider<ItemBuyedRate> {
+    with $FutureModifier<ItemPurchaseRate>, $FutureProvider<ItemPurchaseRate> {
   /// 購入率を管理するProvider
-  const BuyedRateProvider._()
+  const PurchaseRateProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'buyedRateProvider',
+        name: r'purchaseRateProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$buyedRateHash();
+  String debugGetCreateSourceHash() => _$purchaseRateHash();
 
   @$internal
   @override
-  $FutureProviderElement<ItemBuyedRate> $createElement(
+  $FutureProviderElement<ItemPurchaseRate> $createElement(
     $ProviderPointer pointer,
   ) => $FutureProviderElement(pointer);
 
   @override
-  FutureOr<ItemBuyedRate> create(Ref ref) {
-    return buyedRate(ref);
+  FutureOr<ItemPurchaseRate> create(Ref ref) {
+    return purchaseRate(ref);
   }
 }
 
-String _$buyedRateHash() => r'9887ffbdf6f42a083f82049d111a53bc7d7b9847';
+String _$purchaseRateHash() => r'457493fd133520466515115186e5faabc521e6fd';

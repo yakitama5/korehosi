@@ -683,7 +683,7 @@ class TranslationsSettingsSettingsPageLayoutJa {
 	// Translations
 
 	/// ja: 'レイアウト'
-	String get haed => 'レイアウト';
+	String get title => 'レイアウト';
 
 	/// ja: 'UIスタイル'
 	String get uiStyle => 'UIスタイル';
@@ -713,7 +713,7 @@ class TranslationsSettingsSettingsPageHelpJa {
 	String get contactUs => 'お問い合わせ';
 
 	/// ja: '開発者X (旧Twitter)'
-	String get developperTwitter => '開発者X (旧Twitter)';
+	String get developerX => '開発者X (旧Twitter)';
 
 	/// ja: 'プライバシーポリシー'
 	String get privacyPolicy => 'プライバシーポリシー';
@@ -908,14 +908,14 @@ extension on Translations {
 			'settings.settingsPage.account.account' => 'アカウント',
 			'settings.settingsPage.account.pushNotification.title' => 'プッシュ通知',
 			'settings.settingsPage.account.pushNotification.caption' => 'グループないでほしいものが追加された場合に通知が受け取れます',
-			'settings.settingsPage.layout.haed' => 'レイアウト',
+			'settings.settingsPage.layout.title' => 'レイアウト',
 			'settings.settingsPage.layout.uiStyle' => 'UIスタイル',
 			'settings.settingsPage.layout.themeMode' => 'テーマモード',
 			'settings.settingsPage.layout.colorTheme' => 'カラー',
 			'settings.settingsPage.help.head' => 'ヘルプ',
 			'settings.settingsPage.help.howToUse' => 'つかい方',
 			'settings.settingsPage.help.contactUs' => 'お問い合わせ',
-			'settings.settingsPage.help.developperTwitter' => '開発者X (旧Twitter)',
+			'settings.settingsPage.help.developerX' => '開発者X (旧Twitter)',
 			'settings.settingsPage.help.privacyPolicy' => 'プライバシーポリシー',
 			'settings.settingsPage.help.license' => 'ライセンス',
 			'settings.accountPage.title' => 'アカウント',

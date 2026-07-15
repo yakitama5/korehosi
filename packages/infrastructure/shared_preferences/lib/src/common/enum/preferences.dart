@@ -1,5 +1,5 @@
 enum Preferences<T> {
-  curentGroup('current_group_id', ''),
+  currentGroup('current_group_id', ''),
   fcmTokenTimestamp('fcm_token_timestamp', ''),
   themeColor('COLOR_STYLE', 'appColor'),
   uiStyle('UI_STYLE', 'system'),

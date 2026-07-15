@@ -182,7 +182,7 @@ class ItemUsecase with RunUsecaseMixin {
           );
 
       // Providerへの反映
-      refreshItemProvideres();
+      refreshItemProviders();
     },
   );
 
@@ -205,7 +205,7 @@ class ItemUsecase with RunUsecaseMixin {
           .delete(groupId: groupId, itemId: itemId);
 
       // Providerへの反映
-      refreshItemProvideres();
+      refreshItemProviders();
     },
   );
 
@@ -233,7 +233,7 @@ class ItemUsecase with RunUsecaseMixin {
   }
 
   /// 各種欲しいものを管理しているProviderのリフレッシュ
-  void refreshItemProvideres() {
+  void refreshItemProviders() {
     // Providerへの反映
     ref
       ..invalidate(itemProvider)

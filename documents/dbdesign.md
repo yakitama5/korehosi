@@ -21,8 +21,8 @@ Firestoreのドキュメント構造は下記の通り
 | name         | string?       | 名前                 | サンプル 太郎       |
 | ageGroup     | string        | こども or おとな     | child               |
 | joinGroupIds | array<string> | 参加グループのID配列 | XXXX, YYYY          |
-| createdAt    | Timestmap     | 作成日時             | 1987-12-01 00:00:00 |
-| updatedAt    | Timestmap     | 更新日時             | 1987-12-01 00:00:00 |
+| createdAt    | Timestamp     | 作成日時             | 1987-12-01 00:00:00 |
+| updatedAt    | Timestamp     | 更新日時             | 1987-12-01 00:00:00 |
 
 ### _dusers/{userId}
 
@@ -42,8 +42,8 @@ Firestoreのドキュメント構造は下記の通り
 | joinUids  | array<string> | 参加中のユーザーID配列       | XXXX, YYYY          |
 | itemCount | number        | 登録された欲しい物の数       | 10                  |
 | premium   | boolean       | プレミアムグループフラグ     | true                |
-| createdAt | Timestmap     | 作成日時                     | 1987-12-01 00:00:00 |
-| updatedAt | Timestmap     | 更新日時                     | 1987-12-01 00:00:00 |
+| createdAt | Timestamp     | 作成日時                     | 1987-12-01 00:00:00 |
+| updatedAt | Timestamp     | 更新日時                     | 1987-12-01 00:00:00 |
 
 ### _dgroups/{groupId}
 
@@ -65,8 +65,8 @@ Firestoreのドキュメント構造は下記の通り
 | wanterName | string?        | 欲しい人の名前       | 子供                       |
 | urls       | array<string>? | URL配列              | http://***                 |
 | memo       | string?        | メモ                 | おばあちゃんに買ってほしい |
-| createdAt  | Timestmap      | 作成日時             | 1987-12-01 00:00:00        |
-| updatedAt  | Timestmap      | 更新日時             | 1987-12-01 00:00:00        |
+| createdAt  | Timestamp      | 作成日時             | 1987-12-01 00:00:00        |
+| updatedAt  | Timestamp      | 更新日時             | 1987-12-01 00:00:00        |
 
 ### groups/{groupId}/_ditems/{itemId}
 
@@ -90,8 +90,8 @@ Firestoreのドキュメント構造は下記の通り
 | sentAt    | Timestamp? | 欲しい物を渡した日                         | 1987-12-01 00:00:0  |
 | buyerName | string     | 購入した人の名前                           | サンプル 太郎       |
 | memo      | string     | メモ                                       | メモ                |
-| createdAt | Timestmap  | 作成日時                                   | 1987-12-01 00:00:00 |
-| updatedAt | Timestmap  | 更新日時                                   | 1987-12-01 00:00:00 |
+| createdAt | Timestamp  | 作成日時                                   | 1987-12-01 00:00:00 |
+| updatedAt | Timestamp  | 更新日時                                   | 1987-12-01 00:00:00 |
 
 ### groups/{groupId}/_dpurchases/{purchaseId}
 
@@ -116,8 +116,8 @@ Firestoreのドキュメント構造は下記の通り
 | id        | string    | サロゲートキー(UUID)   | XXXX (UUID)         |
 | groupId   | string    | グループID             | XXXX (UUID)         |
 | validDays | number    | リンクの有効期間(日数) | 3                   |
-| createdAt | Timestmap | 作成日時               | 1987-12-01 00:00:00 |
-| updatedAt | Timestmap | 更新日時               | 1987-12-01 00:00:00 |
+| createdAt | Timestamp | 作成日時               | 1987-12-01 00:00:00 |
+| updatedAt | Timestamp | 更新日時               | 1987-12-01 00:00:00 |
 
 ### users/{userId}/fcmTokens/{token}
 
@@ -126,8 +126,8 @@ Firestoreのドキュメント構造は下記の通り
 | Field     | Type      | Description | Sample              |
 | --------- | --------- | ----------- | ------------------- |
 | token     | string    | FCMトークン | XXXX                |
-| createdAt | Timestmap | 作成日時    | 1987-12-01 00:00:00 |
-| updatedAt | Timestmap | 更新日時    | 1987-12-01 00:00:00 |
+| createdAt | Timestamp | 作成日時    | 1987-12-01 00:00:00 |
+| updatedAt | Timestamp | 更新日時    | 1987-12-01 00:00:00 |
 
 ### groups/{groupId}/messages/{messageId}
 
@@ -140,5 +140,5 @@ Firestoreのドキュメント構造は下記の通り
 | body      | string    |                      |                     |
 | event     | string    |                      |                     |
 | target    | string    |                      |                     |
-| createdAt | Timestmap | 作成日時             | 1987-12-01 00:00:00 |
-| updatedAt | Timestmap | 更新日時             | 1987-12-01 00:00:00 |
+| createdAt | Timestamp | 作成日時             | 1987-12-01 00:00:00 |
+| updatedAt | Timestamp | 更新日時             | 1987-12-01 00:00:00 |

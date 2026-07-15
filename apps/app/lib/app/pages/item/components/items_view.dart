@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app/pages/item/components/items_card.dart';
 import 'package:flutter_app/app/pages/item/components/items_empty_view.dart';
 import 'package:flutter_app/app/pages/item/components/items_error_list_tile.dart';
-import 'package:flutter_app/app/pages/item/components/items_group_selection_warning_listner.dart';
+import 'package:flutter_app/app/pages/item/components/items_group_selection_warning_listener.dart';
 import 'package:flutter_app/app/pages/item/components/items_list_tile.dart';
 import 'package:flutter_app/app/routes/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,8 +25,8 @@ class ItemsView extends HookConsumerWidget {
 
     return Nested(
       children: const [
-        ItemsGroupSelectionWarningListner(),
-        ItemsEmptyListner(),
+        ItemsGroupSelectionWarningListener(),
+        ItemsEmptyListener(),
       ],
       child: SliverSwitchLayoutViewBuilder(
         viewLayout: viewLayout,

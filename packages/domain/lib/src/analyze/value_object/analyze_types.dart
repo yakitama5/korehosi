@@ -1,5 +1,5 @@
 /// 分析種別
 enum AnalyzeType {
-  buyedRate,
+  purchasedRate,
   monthlySumPrice,
 }

@@ -5,10 +5,11 @@ import 'package:infrastructure_firebase/common.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_domain/notification.dart';
 
-/// アプリ起動中のPUSH通知押下Listner
+/// アプリ起動中のPUSH通知押下Listener
 /// 本来はInfra層ではあるが、利便性のため、該当Widgetのみ許容
-class FCMForegroundNotificationClickListner extends SingleChildStatelessWidget {
-  const FCMForegroundNotificationClickListner({
+class FCMForegroundNotificationClickListener
+    extends SingleChildStatelessWidget {
+  const FCMForegroundNotificationClickListener({
     super.key,
     super.child,
     this.onNotificationClick,

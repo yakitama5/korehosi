@@ -8,7 +8,7 @@ import 'package:material_color_utilities/palettes/core_palette.dart';
 
 /// [暫定的な対応]
 /// `dynamic_color`パッケージで生成された`ColorScheme`を基に
-/// Flutter3.22.0で変更されたColorSchemeを生成する
+/// Flutter 3.22.0で変更されたColorSchemeを生成する
 /// https://github.com/material-foundation/flutter-packages/issues/582#issuecomment-2081174158
 extension CorePaletteX on CorePalette {
   /// Create a [ColorScheme] from the given `palette` obtained from the Android OS.

@@ -58,7 +58,7 @@ class UserUsecase with RunUsecaseMixin {
       action: () async {
         // 内容を元に編集
         final groupName = i18n.group.initialGroupName(
-          userName: name ?? i18n.user.user.noname,
+          userName: name ?? i18n.user.user.noName,
         );
 
         // 登録

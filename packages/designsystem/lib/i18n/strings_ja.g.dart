@@ -61,7 +61,7 @@ class TranslationsCommonJa {
 	String get no => 'No';
 
 	/// ja: '・'
-	String get itmizedTextPrefix => '・';
+	String get itemizedTextPrefix => '・';
 
 	/// ja: '保存'
 	String get save => '保存';
@@ -519,7 +519,7 @@ extension on Translations {
 		return switch (path) {
 			'common.yes' => 'Yes',
 			'common.no' => 'No',
-			'common.itmizedTextPrefix' => '・',
+			'common.itemizedTextPrefix' => '・',
 			'common.save' => '保存',
 			'common.delete' => '削除',
 			'common.deletionComplete' => '削除しました。',

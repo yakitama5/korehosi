@@ -60,7 +60,7 @@ class _TranslationsCommonEn extends TranslationsCommonJa {
 	// Translations
 	@override String get yes => 'Yes';
 	@override String get no => 'No';
-	@override String get itmizedTextPrefix => '・';
+	@override String get itemizedTextPrefix => '・';
 	@override String get save => '保存';
 	@override String get delete => '削除';
 	@override String get edit => '編集';
@@ -384,7 +384,7 @@ extension on TranslationsEn {
 		return switch (path) {
 			'common.yes' => 'Yes',
 			'common.no' => 'No',
-			'common.itmizedTextPrefix' => '・',
+			'common.itemizedTextPrefix' => '・',
 			'common.save' => '保存',
 			'common.delete' => '削除',
 			'common.edit' => '編集',

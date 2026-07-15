@@ -103,14 +103,14 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Web以外のプラットフォームで参加済でないユーザーに表示
-    final premiumed = ref.watch(
+    final hasPremiumAccess = ref.watch(
       GroupDetailProviders.groupProvider.select(
         (value) => value.value?.premium == true,
       ),
     );
 
     return SliverVisibility(
-      visible: !premiumed && !kIsWeb,
+      visible: !hasPremiumAccess && !kIsWeb,
       sliver: SliverPadding(
         padding: const EdgeInsets.all(8),
         sliver: SliverToBoxAdapter(

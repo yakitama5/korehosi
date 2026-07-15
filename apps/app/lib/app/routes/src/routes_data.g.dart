@@ -8,11 +8,11 @@ part of 'routes_data.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$baseShellSrouteData];
+List<RouteBase> get $appRoutes => [$baseShellRouteData];
 
-RouteBase get $baseShellSrouteData => ShellRouteData.$route(
-  navigatorKey: BaseShellSrouteData.$navigatorKey,
-  factory: $BaseShellSrouteDataExtension._fromState,
+RouteBase get $baseShellRouteData => ShellRouteData.$route(
+  navigatorKey: BaseShellRouteData.$navigatorKey,
+  factory: $BaseShellRouteDataExtension._fromState,
   routes: [
     GoRouteData.$route(path: '/', factory: $RootRouteData._fromState),
     GoRouteData.$route(
@@ -38,8 +38,8 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
       factory: $OnboardFormRouteData._fromState,
     ),
     StatefulShellRouteData.$route(
-      restorationScopeId: BottomNavitorShellRouteData.$restorationScopeId,
-      factory: $BottomNavitorShellRouteDataExtension._fromState,
+      restorationScopeId: BottomNavigatorShellRouteData.$restorationScopeId,
+      factory: $BottomNavigatorShellRouteDataExtension._fromState,
       branches: [
         StatefulShellBranchData.$branch(
           routes: [
@@ -132,9 +132,9 @@ RouteBase get $baseShellSrouteData => ShellRouteData.$route(
   ],
 );
 
-extension $BaseShellSrouteDataExtension on BaseShellSrouteData {
-  static BaseShellSrouteData _fromState(GoRouterState state) =>
-      BaseShellSrouteData();
+extension $BaseShellRouteDataExtension on BaseShellRouteData {
+  static BaseShellRouteData _fromState(GoRouterState state) =>
+      BaseShellRouteData();
 }
 
 mixin $RootRouteData on GoRouteData {
@@ -280,9 +280,10 @@ mixin $OnboardFormRouteData on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $BottomNavitorShellRouteDataExtension on BottomNavitorShellRouteData {
-  static BottomNavitorShellRouteData _fromState(GoRouterState state) =>
-      const BottomNavitorShellRouteData();
+extension $BottomNavigatorShellRouteDataExtension
+    on BottomNavigatorShellRouteData {
+  static BottomNavigatorShellRouteData _fromState(GoRouterState state) =>
+      const BottomNavigatorShellRouteData();
 }
 
 mixin $ItemsRouteData on GoRouteData {

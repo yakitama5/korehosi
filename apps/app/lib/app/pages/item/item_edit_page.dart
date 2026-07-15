@@ -126,7 +126,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) =>
-      SaveButton(onPressesd: () => onSave(context, ref));
+      SaveButton(onPressed: () => onSave(context, ref));
 
   Future<void> onSave(BuildContext context, WidgetRef ref) async {
     await execute(

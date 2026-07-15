@@ -6,8 +6,8 @@ import 'package:nested/nested.dart';
 import 'package:packages_application/common.dart';
 
 /// DynamicLinkによる遷移を検知(起動中の押下を検知)
-class DynamicLinkListner extends SingleChildStatelessWidget {
-  const DynamicLinkListner({super.key, super.child});
+class DynamicLinkListener extends SingleChildStatelessWidget {
+  const DynamicLinkListener({super.key, super.child});
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
