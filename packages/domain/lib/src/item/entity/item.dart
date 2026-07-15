@@ -16,10 +16,23 @@ abstract class Item with _$Item {
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
     Purchase? purchase,
     required PurchaseStatus purchaseStatus,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _Item;
+}
+
+extension ItemImageUrls on Item {
+  List<String> get imageUrls => [
+    ...?images?.map((image) => image.url),
+    ...?urlThumbnails?.values.whereType<String>(),
+  ];
+
+  String? get primaryImageUrl {
+    final urls = imageUrls;
+    return urls.isEmpty ? null : urls.first;
+  }
 }

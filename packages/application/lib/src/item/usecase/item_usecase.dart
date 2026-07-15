@@ -79,6 +79,7 @@ class ItemUsecase with RunUsecaseMixin {
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
     required GenerateItemDetailRoute generateItemDetailRoute,
   }) => execute(
@@ -112,6 +113,7 @@ class ItemUsecase with RunUsecaseMixin {
             wishRank: wishRank,
             wishSeason: wishSeason,
             urls: urls,
+            urlThumbnails: urlThumbnails,
             memo: memo,
           );
 
@@ -146,6 +148,7 @@ class ItemUsecase with RunUsecaseMixin {
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
   }) => execute(
     ref,
@@ -178,6 +181,7 @@ class ItemUsecase with RunUsecaseMixin {
             wishRank: wishRank,
             wishSeason: wishSeason,
             urls: urls,
+            urlThumbnails: urlThumbnails,
             memo: memo,
           );
 

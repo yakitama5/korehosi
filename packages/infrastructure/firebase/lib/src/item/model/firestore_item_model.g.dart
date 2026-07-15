@@ -25,6 +25,12 @@ _FirestoreItemModel _$FirestoreItemModelFromJson(
       'urls',
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
     ),
+    urlThumbnails: $checkedConvert(
+      'urlThumbnails',
+      (v) => (v as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String?),
+      ),
+    ),
     memo: $checkedConvert('memo', (v) => v as String?),
     purchaseStatus: $checkedConvert(
       'purchaseStatus',
@@ -49,6 +55,7 @@ Map<String, dynamic> _$FirestoreItemModelToJson(_FirestoreItemModel instance) =>
       'wishRank': instance.wishRank,
       'wishSeason': instance.wishSeason,
       'urls': instance.urls,
+      'urlThumbnails': instance.urlThumbnails,
       'memo': instance.memo,
       'purchaseStatus': _$PurchaseStatusEnumMap[instance.purchaseStatus]!,
       'childViewPurchaseStatus':

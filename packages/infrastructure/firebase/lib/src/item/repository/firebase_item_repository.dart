@@ -154,6 +154,7 @@ class FirebaseItemRepository implements ItemRepository {
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
   }) async {
     // 新しいドキュメントを取得
@@ -171,6 +172,7 @@ class FirebaseItemRepository implements ItemRepository {
       imagesPath: imageIds.map((e) => e.value).toList(),
       memo: memo,
       urls: urls,
+      urlThumbnails: urlThumbnails,
       wanterName: wanterName,
       wishSeason: wishSeason,
       purchaseStatus: PurchaseStatus.notPurchased,
@@ -202,6 +204,7 @@ class FirebaseItemRepository implements ItemRepository {
     required double wishRank,
     String? wishSeason,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
   }) async {
     // 更新前の内容を取得
@@ -232,6 +235,7 @@ class FirebaseItemRepository implements ItemRepository {
       imagesPath: joinImageIds.map((e) => e.value).toList(),
       memo: memo,
       urls: urls,
+      urlThumbnails: urlThumbnails,
       wanterName: wanterName,
       purchaseStatus: prevItem.data()!.purchaseStatus,
       childViewPurchaseStatus: prevItem.data()!.childViewPurchaseStatus,
