@@ -38,6 +38,7 @@ dependencies:
   intl: ^0.20.2
   introduction_screen: ^4.0.0
   lottie: ^3.3.2
+  metadata_fetch: ^0.4.2
   nested: ^1.0.0
   package_info_plus: ^9.0.0
   packages_application:
