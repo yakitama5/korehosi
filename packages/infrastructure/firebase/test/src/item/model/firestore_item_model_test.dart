@@ -18,4 +18,20 @@ void main() {
 
     expect(model.toJson()['urlThumbnails'], model.urlThumbnails);
   });
+
+  test('round-trips the desired date as a Firestore timestamp', () {
+    final wishDate = DateTime(2026, 7, 15);
+    final model = FirestoreItemModel(
+      id: 'item',
+      name: 'item',
+      wishRank: 3,
+      wishDate: wishDate,
+      purchaseStatus: PurchaseStatus.notPurchased,
+      childViewPurchaseStatus: PurchaseStatus.notPurchased,
+    );
+
+    final restored = FirestoreItemModel.fromJson(model.toJson());
+
+    expect(restored.wishDate, wishDate);
+  });
 }

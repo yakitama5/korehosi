@@ -21,6 +21,7 @@ _FirestoreItemModel _$FirestoreItemModelFromJson(
     wanterName: $checkedConvert('wanterName', (v) => v as String?),
     wishRank: $checkedConvert('wishRank', (v) => (v as num).toDouble()),
     wishSeason: $checkedConvert('wishSeason', (v) => v as String?),
+    wishDate: $checkedConvert('wishDate', (v) => dateFromTimestampValue(v)),
     urls: $checkedConvert(
       'urls',
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -54,6 +55,7 @@ Map<String, dynamic> _$FirestoreItemModelToJson(_FirestoreItemModel instance) =>
       'wanterName': instance.wanterName,
       'wishRank': instance.wishRank,
       'wishSeason': instance.wishSeason,
+      'wishDate': timestampFromDateValue(instance.wishDate),
       'urls': instance.urls,
       'urlThumbnails': instance.urlThumbnails,
       'memo': instance.memo,

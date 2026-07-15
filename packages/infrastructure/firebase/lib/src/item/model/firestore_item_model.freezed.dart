@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FirestoreItemModel {
 
- String get id; List<String>? get imagesPath; String get name; String? get wanterName; double get wishRank; String? get wishSeason; List<String>? get urls; Map<String, String?>? get urlThumbnails; String? get memo; PurchaseStatus get purchaseStatus; PurchaseStatus get childViewPurchaseStatus;@timestampKey DateTime? get createdAt;@timestampKey DateTime? get updatedAt;
+ String get id; List<String>? get imagesPath; String get name; String? get wanterName; double get wishRank; String? get wishSeason;@timestampKey DateTime? get wishDate; List<String>? get urls; Map<String, String?>? get urlThumbnails; String? get memo; PurchaseStatus get purchaseStatus; PurchaseStatus get childViewPurchaseStatus;@timestampKey DateTime? get createdAt;@timestampKey DateTime? get updatedAt;
 /// Create a copy of FirestoreItemModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $FirestoreItemModelCopyWith<FirestoreItemModel> get copyWith => _$FirestoreItemM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirestoreItemModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.imagesPath, imagesPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&const DeepCollectionEquality().equals(other.urls, urls)&&const DeepCollectionEquality().equals(other.urlThumbnails, urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.childViewPurchaseStatus, childViewPurchaseStatus) || other.childViewPurchaseStatus == childViewPurchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirestoreItemModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.imagesPath, imagesPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&(identical(other.wishDate, wishDate) || other.wishDate == wishDate)&&const DeepCollectionEquality().equals(other.urls, urls)&&const DeepCollectionEquality().equals(other.urlThumbnails, urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.childViewPurchaseStatus, childViewPurchaseStatus) || other.childViewPurchaseStatus == childViewPurchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(imagesPath),name,wanterName,wishRank,wishSeason,const DeepCollectionEquality().hash(urls),const DeepCollectionEquality().hash(urlThumbnails),memo,purchaseStatus,childViewPurchaseStatus,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(imagesPath),name,wanterName,wishRank,wishSeason,wishDate,const DeepCollectionEquality().hash(urls),const DeepCollectionEquality().hash(urlThumbnails),memo,purchaseStatus,childViewPurchaseStatus,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'FirestoreItemModel(id: $id, imagesPath: $imagesPath, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchaseStatus: $purchaseStatus, childViewPurchaseStatus: $childViewPurchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'FirestoreItemModel(id: $id, imagesPath: $imagesPath, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, wishDate: $wishDate, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchaseStatus: $purchaseStatus, childViewPurchaseStatus: $childViewPurchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $FirestoreItemModelCopyWith<$Res>  {
   factory $FirestoreItemModelCopyWith(FirestoreItemModel value, $Res Function(FirestoreItemModel) _then) = _$FirestoreItemModelCopyWithImpl;
 @useResult
 $Res call({
- String id, List<String>? imagesPath, String name, String? wanterName, double wishRank, String? wishSeason, List<String>? urls, Map<String, String?>? urlThumbnails, String? memo, PurchaseStatus purchaseStatus, PurchaseStatus childViewPurchaseStatus,@timestampKey DateTime? createdAt,@timestampKey DateTime? updatedAt
+ String id, List<String>? imagesPath, String name, String? wanterName, double wishRank, String? wishSeason,@timestampKey DateTime? wishDate, List<String>? urls, Map<String, String?>? urlThumbnails, String? memo, PurchaseStatus purchaseStatus, PurchaseStatus childViewPurchaseStatus,@timestampKey DateTime? createdAt,@timestampKey DateTime? updatedAt
 });
 
 
@@ -65,7 +65,7 @@ class _$FirestoreItemModelCopyWithImpl<$Res>
 
 /// Create a copy of FirestoreItemModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? imagesPath = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? urls = freezed,Object? urlThumbnails = freezed,Object? memo = freezed,Object? purchaseStatus = null,Object? childViewPurchaseStatus = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? imagesPath = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? wishDate = freezed,Object? urls = freezed,Object? urlThumbnails = freezed,Object? memo = freezed,Object? purchaseStatus = null,Object? childViewPurchaseStatus = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,imagesPath: freezed == imagesPath ? _self.imagesPath : imagesPath // ignore: cast_nullable_to_non_nullable
@@ -73,7 +73,8 @@ as List<String>?,name: null == name ? _self.name : name // ignore: cast_nullable
 as String,wanterName: freezed == wanterName ? _self.wanterName : wanterName // ignore: cast_nullable_to_non_nullable
 as String?,wishRank: null == wishRank ? _self.wishRank : wishRank // ignore: cast_nullable_to_non_nullable
 as double,wishSeason: freezed == wishSeason ? _self.wishSeason : wishSeason // ignore: cast_nullable_to_non_nullable
-as String?,urls: freezed == urls ? _self.urls : urls // ignore: cast_nullable_to_non_nullable
+as String?,wishDate: freezed == wishDate ? _self.wishDate : wishDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,urls: freezed == urls ? _self.urls : urls // ignore: cast_nullable_to_non_nullable
 as List<String>?,urlThumbnails: freezed == urlThumbnails ? _self.urlThumbnails : urlThumbnails // ignore: cast_nullable_to_non_nullable
 as Map<String, String?>?,memo: freezed == memo ? _self.memo : memo // ignore: cast_nullable_to_non_nullable
 as String?,purchaseStatus: null == purchaseStatus ? _self.purchaseStatus : purchaseStatus // ignore: cast_nullable_to_non_nullable
@@ -165,10 +166,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  List<String>? imagesPath,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  Map<String, String?>? urlThumbnails,  String? memo,  PurchaseStatus purchaseStatus,  PurchaseStatus childViewPurchaseStatus, @timestampKey  DateTime? createdAt, @timestampKey  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  List<String>? imagesPath,  String name,  String? wanterName,  double wishRank,  String? wishSeason, @timestampKey  DateTime? wishDate,  List<String>? urls,  Map<String, String?>? urlThumbnails,  String? memo,  PurchaseStatus purchaseStatus,  PurchaseStatus childViewPurchaseStatus, @timestampKey  DateTime? createdAt, @timestampKey  DateTime? updatedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FirestoreItemModel() when $default != null:
-return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.urlThumbnails,_that.memo,_that.purchaseStatus,_that.childViewPurchaseStatus,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.wishDate,_that.urls,_that.urlThumbnails,_that.memo,_that.purchaseStatus,_that.childViewPurchaseStatus,_that.createdAt,_that.updatedAt);case _:
   return orElse();
 
 }
@@ -186,10 +187,10 @@ return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wish
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  List<String>? imagesPath,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  Map<String, String?>? urlThumbnails,  String? memo,  PurchaseStatus purchaseStatus,  PurchaseStatus childViewPurchaseStatus, @timestampKey  DateTime? createdAt, @timestampKey  DateTime? updatedAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  List<String>? imagesPath,  String name,  String? wanterName,  double wishRank,  String? wishSeason, @timestampKey  DateTime? wishDate,  List<String>? urls,  Map<String, String?>? urlThumbnails,  String? memo,  PurchaseStatus purchaseStatus,  PurchaseStatus childViewPurchaseStatus, @timestampKey  DateTime? createdAt, @timestampKey  DateTime? updatedAt)  $default,) {final _that = this;
 switch (_that) {
 case _FirestoreItemModel():
-return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.urlThumbnails,_that.memo,_that.purchaseStatus,_that.childViewPurchaseStatus,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.wishDate,_that.urls,_that.urlThumbnails,_that.memo,_that.purchaseStatus,_that.childViewPurchaseStatus,_that.createdAt,_that.updatedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -206,10 +207,10 @@ return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wish
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  List<String>? imagesPath,  String name,  String? wanterName,  double wishRank,  String? wishSeason,  List<String>? urls,  Map<String, String?>? urlThumbnails,  String? memo,  PurchaseStatus purchaseStatus,  PurchaseStatus childViewPurchaseStatus, @timestampKey  DateTime? createdAt, @timestampKey  DateTime? updatedAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  List<String>? imagesPath,  String name,  String? wanterName,  double wishRank,  String? wishSeason, @timestampKey  DateTime? wishDate,  List<String>? urls,  Map<String, String?>? urlThumbnails,  String? memo,  PurchaseStatus purchaseStatus,  PurchaseStatus childViewPurchaseStatus, @timestampKey  DateTime? createdAt, @timestampKey  DateTime? updatedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _FirestoreItemModel() when $default != null:
-return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.urls,_that.urlThumbnails,_that.memo,_that.purchaseStatus,_that.childViewPurchaseStatus,_that.createdAt,_that.updatedAt);case _:
+return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wishRank,_that.wishSeason,_that.wishDate,_that.urls,_that.urlThumbnails,_that.memo,_that.purchaseStatus,_that.childViewPurchaseStatus,_that.createdAt,_that.updatedAt);case _:
   return null;
 
 }
@@ -221,7 +222,7 @@ return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wish
 @JsonSerializable()
 
 class _FirestoreItemModel implements FirestoreItemModel {
-  const _FirestoreItemModel({required this.id, final  List<String>? imagesPath, required this.name, this.wanterName, required this.wishRank, this.wishSeason, final  List<String>? urls, final  Map<String, String?>? urlThumbnails, this.memo, required this.purchaseStatus, required this.childViewPurchaseStatus, @timestampKey this.createdAt, @timestampKey this.updatedAt}): _imagesPath = imagesPath,_urls = urls,_urlThumbnails = urlThumbnails;
+  const _FirestoreItemModel({required this.id, final  List<String>? imagesPath, required this.name, this.wanterName, required this.wishRank, this.wishSeason, @timestampKey this.wishDate, final  List<String>? urls, final  Map<String, String?>? urlThumbnails, this.memo, required this.purchaseStatus, required this.childViewPurchaseStatus, @timestampKey this.createdAt, @timestampKey this.updatedAt}): _imagesPath = imagesPath,_urls = urls,_urlThumbnails = urlThumbnails;
   factory _FirestoreItemModel.fromJson(Map<String, dynamic> json) => _$FirestoreItemModelFromJson(json);
 
 @override final  String id;
@@ -238,6 +239,7 @@ class _FirestoreItemModel implements FirestoreItemModel {
 @override final  String? wanterName;
 @override final  double wishRank;
 @override final  String? wishSeason;
+@override@timestampKey final  DateTime? wishDate;
  final  List<String>? _urls;
 @override List<String>? get urls {
   final value = _urls;
@@ -275,16 +277,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirestoreItemModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._imagesPath, _imagesPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&const DeepCollectionEquality().equals(other._urls, _urls)&&const DeepCollectionEquality().equals(other._urlThumbnails, _urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.childViewPurchaseStatus, childViewPurchaseStatus) || other.childViewPurchaseStatus == childViewPurchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirestoreItemModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._imagesPath, _imagesPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&(identical(other.wishDate, wishDate) || other.wishDate == wishDate)&&const DeepCollectionEquality().equals(other._urls, _urls)&&const DeepCollectionEquality().equals(other._urlThumbnails, _urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.childViewPurchaseStatus, childViewPurchaseStatus) || other.childViewPurchaseStatus == childViewPurchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_imagesPath),name,wanterName,wishRank,wishSeason,const DeepCollectionEquality().hash(_urls),const DeepCollectionEquality().hash(_urlThumbnails),memo,purchaseStatus,childViewPurchaseStatus,createdAt,updatedAt);
+int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_imagesPath),name,wanterName,wishRank,wishSeason,wishDate,const DeepCollectionEquality().hash(_urls),const DeepCollectionEquality().hash(_urlThumbnails),memo,purchaseStatus,childViewPurchaseStatus,createdAt,updatedAt);
 
 @override
 String toString() {
-  return 'FirestoreItemModel(id: $id, imagesPath: $imagesPath, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchaseStatus: $purchaseStatus, childViewPurchaseStatus: $childViewPurchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
+  return 'FirestoreItemModel(id: $id, imagesPath: $imagesPath, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, wishDate: $wishDate, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchaseStatus: $purchaseStatus, childViewPurchaseStatus: $childViewPurchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 
@@ -295,7 +297,7 @@ abstract mixin class _$FirestoreItemModelCopyWith<$Res> implements $FirestoreIte
   factory _$FirestoreItemModelCopyWith(_FirestoreItemModel value, $Res Function(_FirestoreItemModel) _then) = __$FirestoreItemModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, List<String>? imagesPath, String name, String? wanterName, double wishRank, String? wishSeason, List<String>? urls, Map<String, String?>? urlThumbnails, String? memo, PurchaseStatus purchaseStatus, PurchaseStatus childViewPurchaseStatus,@timestampKey DateTime? createdAt,@timestampKey DateTime? updatedAt
+ String id, List<String>? imagesPath, String name, String? wanterName, double wishRank, String? wishSeason,@timestampKey DateTime? wishDate, List<String>? urls, Map<String, String?>? urlThumbnails, String? memo, PurchaseStatus purchaseStatus, PurchaseStatus childViewPurchaseStatus,@timestampKey DateTime? createdAt,@timestampKey DateTime? updatedAt
 });
 
 
@@ -312,7 +314,7 @@ class __$FirestoreItemModelCopyWithImpl<$Res>
 
 /// Create a copy of FirestoreItemModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? imagesPath = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? urls = freezed,Object? urlThumbnails = freezed,Object? memo = freezed,Object? purchaseStatus = null,Object? childViewPurchaseStatus = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? imagesPath = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? wishDate = freezed,Object? urls = freezed,Object? urlThumbnails = freezed,Object? memo = freezed,Object? purchaseStatus = null,Object? childViewPurchaseStatus = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
   return _then(_FirestoreItemModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,imagesPath: freezed == imagesPath ? _self._imagesPath : imagesPath // ignore: cast_nullable_to_non_nullable
@@ -320,7 +322,8 @@ as List<String>?,name: null == name ? _self.name : name // ignore: cast_nullable
 as String,wanterName: freezed == wanterName ? _self.wanterName : wanterName // ignore: cast_nullable_to_non_nullable
 as String?,wishRank: null == wishRank ? _self.wishRank : wishRank // ignore: cast_nullable_to_non_nullable
 as double,wishSeason: freezed == wishSeason ? _self.wishSeason : wishSeason // ignore: cast_nullable_to_non_nullable
-as String?,urls: freezed == urls ? _self._urls : urls // ignore: cast_nullable_to_non_nullable
+as String?,wishDate: freezed == wishDate ? _self.wishDate : wishDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,urls: freezed == urls ? _self._urls : urls // ignore: cast_nullable_to_non_nullable
 as List<String>?,urlThumbnails: freezed == urlThumbnails ? _self._urlThumbnails : urlThumbnails // ignore: cast_nullable_to_non_nullable
 as Map<String, String?>?,memo: freezed == memo ? _self.memo : memo // ignore: cast_nullable_to_non_nullable
 as String?,purchaseStatus: null == purchaseStatus ? _self.purchaseStatus : purchaseStatus // ignore: cast_nullable_to_non_nullable

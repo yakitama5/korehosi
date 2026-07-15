@@ -15,6 +15,7 @@ abstract class Item with _$Item {
     String? wanterName,
     required double wishRank,
     String? wishSeason,
+    DateTime? wishDate,
     List<String>? urls,
     Map<String, String?>? urlThumbnails,
     String? memo,
