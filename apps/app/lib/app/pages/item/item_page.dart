@@ -70,7 +70,7 @@ class _ItemDetailView extends HookWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ItemImages(images: item.images),
+              ItemImages(imageUrls: item.imageUrls),
               const Gap(8),
               _PurchaseStatus(purchaseStatus: item.purchaseStatus),
               const Gap(32),

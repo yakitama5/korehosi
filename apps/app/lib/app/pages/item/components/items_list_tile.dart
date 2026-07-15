@@ -13,17 +13,17 @@ class ItemsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 画像は先頭1件を利用する
-    final image = item.images?.firstOrNull;
+    final imageUrl = item.primaryImageUrl;
 
     return ListTile(
       onTap: onTap,
       title: Text(item.name),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-        child: (image == null)
+        child: (imageUrl == null)
             ? const ItemsEmptyImage(width: 96, height: double.infinity)
             : NetworkImageWithPlaceholder(
-                imageUrl: image.url,
+                imageUrl: imageUrl,
                 width: 96,
                 fit: BoxFit.cover,
               ),

@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/pages/item/components/item_image_carousel_slider.dart';
 import 'package:flutter_app/app/pages/item/components/items_empty_image.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
+import 'package:flutter_app/app/pages/item/services/url_thumbnail_fetcher.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
@@ -47,6 +51,10 @@ class _ItemForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final urlThumbnails = useState<Map<String, String?>>({
+      ...?item?.urlThumbnails,
+    });
+
     return ItemFormModelFormBuilder(
       model: _createModel(),
       builder: (context, formModel, child) => Nested(
@@ -60,7 +68,7 @@ class _ItemForm extends HookConsumerWidget {
           appBar: AppBar(
             title: Text(titleData ?? ''),
             actions: [
-              const _Submit(),
+              _Submit(urlThumbnails: urlThumbnails),
               const Gap(8),
               if (item != null) const _DeleteButton(),
             ],
@@ -70,7 +78,7 @@ class _ItemForm extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const _ImageFields(),
+                  _ImageFields(urlThumbnails: urlThumbnails),
                   const Gap(16),
                   const _NameField(),
                   const Gap(16),
@@ -79,7 +87,7 @@ class _ItemForm extends HookConsumerWidget {
                   const Gap(64),
                   const _WishSeasonField(),
                   const Gap(16),
-                  const _UrlFields(),
+                  _UrlFields(urlThumbnails: urlThumbnails),
                   _UrlAddButton(
                     onAdd: () {
                       formModel.addUrlsItem('');
@@ -122,7 +130,9 @@ class _ItemForm extends HookConsumerWidget {
 
 /// 保存ボタン
 class _Submit extends HookConsumerWidget with PresentationMixin {
-  const _Submit();
+  const _Submit({required this.urlThumbnails});
+
+  final ValueNotifier<Map<String, String?>> urlThumbnails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) =>
@@ -149,6 +159,11 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
             .map((e) => e.value)
             .nonNulls
             .toList();
+        final thumbnails = Map<String, String?>.fromEntries(
+          urlThumbnails.value.entries.where(
+            (entry) => urls.contains(entry.key),
+          ),
+        );
         final memo = formModel.memoControl.value;
         final selectedImages = formModel.imagesControl.controls
             .map((e) => e.value)
@@ -167,6 +182,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
             wishRank: wishRank!,
             wishSeason: wishSeason,
             urls: urls,
+            urlThumbnails: thumbnails,
             memo: memo,
             generateItemDetailRoute: (itemId) =>
                 ItemRouteData(itemId.value).location,
@@ -180,6 +196,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
             wishRank: wishRank!,
             wishSeason: wishSeason,
             urls: urls,
+            urlThumbnails: thumbnails,
             memo: memo,
           );
         }
@@ -238,11 +255,14 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
 
 /// 欲しい物の画像一覧
 class _ImageFields extends HookConsumerWidget {
-  const _ImageFields();
+  const _ImageFields({required this.urlThumbnails});
+
+  final ValueNotifier<Map<String, String?>> urlThumbnails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formModel = ReactiveItemFormModelForm.of(context)!;
+    final thumbnails = useValueListenable(urlThumbnails);
 
     return ReactiveFormArray<SelectedImageModel>(
       formArray: formModel.imagesControl,
@@ -250,41 +270,74 @@ class _ImageFields extends HookConsumerWidget {
         final radius = BorderRadius.circular(16);
 
         return ItemImageCarouselSlider(
-          items: formArray.controls
-              .mapIndexed(
-                (i, key) => ClipRRect(
-                  borderRadius: radius,
-                  child: ReactiveImagePicker(
-                    key: ObjectKey(formArray.control('$i')),
-                    formControlName: '$i',
-                    inputBuilder: (onPressed) => InkWell(
+          items: [
+            ...formArray.controls.mapIndexed(
+              (i, key) => ClipRRect(
+                borderRadius: radius,
+                child: ReactiveImagePicker(
+                  key: ObjectKey(formArray.control('$i')),
+                  formControlName: '$i',
+                  inputBuilder: (onPressed) => InkWell(
+                    borderRadius: radius,
+                    onTap: onPressed,
+                    child: const ItemsEmptyImage(
+                      width: double.infinity,
+                      height: double.infinity,
+                      showAddIcon: true,
+                    ),
+                  ),
+                  onSelected: () => formModel.addImagesItem(null),
+                  onDeleted: () => formModel.imagesControl.removeAt(i),
+                  selectedBuilder: (onPressed, selectedFile) {
+                    final uploaded = selectedFile.savedImage != null;
+                    return InkWell(
                       borderRadius: radius,
                       onTap: onPressed,
-                      child: const ItemsEmptyImage(
-                        width: double.infinity,
-                        height: double.infinity,
-                        showAddIcon: true,
-                      ),
-                    ),
-                    onSelected: () => formModel.addImagesItem(null),
-                    onDeleted: () => formModel.imagesControl.removeAt(i),
-                    selectedBuilder: (onPressed, selectedFile) {
-                      final uploaded = selectedFile.savedImage != null;
-                      return InkWell(
-                        borderRadius: radius,
-                        onTap: onPressed,
-                        // ファイル種別に応じてWidgetを切り替える
-                        child: uploaded
-                            ? NetworkImageWithPlaceholder(
-                                imageUrl: selectedFile.savedImage!.url,
-                              )
-                            : XFileImage(xFile: selectedFile.uploadFile!),
-                      );
-                    },
-                  ),
+                      // ファイル種別に応じてWidgetを切り替える
+                      child: uploaded
+                          ? NetworkImageWithPlaceholder(
+                              imageUrl: selectedFile.savedImage!.url,
+                            )
+                          : XFileImage(xFile: selectedFile.uploadFile!),
+                    );
+                  },
                 ),
-              )
-              .toList(),
+              ),
+            ),
+            ...thumbnails.entries.expand(
+              (entry) {
+                final imageUrl = entry.value;
+                return imageUrl == null
+                    ? const <Widget>[]
+                    : [
+                        ClipRRect(
+                          borderRadius: radius,
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              NetworkImageWithPlaceholder(
+                                imageUrl: imageUrl,
+                              ),
+                              PositionedDirectional(
+                                top: 8,
+                                end: 8,
+                                child: IconButton.filled(
+                                  onPressed: () {
+                                    urlThumbnails.value = {
+                                      ...urlThumbnails.value,
+                                      entry.key: null,
+                                    };
+                                  },
+                                  icon: const Icon(Icons.delete),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ];
+              },
+            ),
+          ],
         );
       },
     );
@@ -363,7 +416,9 @@ class _WishSeasonField extends HookConsumerWidget {
 }
 
 class _UrlFields extends HookConsumerWidget {
-  const _UrlFields();
+  const _UrlFields({required this.urlThumbnails});
+
+  final ValueNotifier<Map<String, String?>> urlThumbnails;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -371,14 +426,84 @@ class _UrlFields extends HookConsumerWidget {
 
     return ReactiveItemFormModelFormArrayBuilder(
       formControl: formModel.urlsControl,
-      itemBuilder: (_, i, _, _, formModel) => ReactiveOutlinedTextField<String>(
+      itemBuilder: (_, i, _, _, formModel) => _UrlField(
         key: ObjectKey(formModel.urlsControl.control('$i')),
-        formControlName: '$i',
-        labelText: i18n.item.common.url,
-        maxLength: itemConfig.maxUrlLength,
-        textInputType: TextInputType.url,
-        counterText: '',
+        index: i,
+        urlThumbnails: urlThumbnails,
       ),
+    );
+  }
+}
+
+class _UrlField extends HookWidget {
+  const _UrlField({
+    super.key,
+    required this.index,
+    required this.urlThumbnails,
+  });
+
+  final int index;
+  final ValueNotifier<Map<String, String?>> urlThumbnails;
+
+  @override
+  Widget build(BuildContext context) {
+    final formModel = ReactiveItemFormModelForm.of(context)!;
+    final control =
+        formModel.urlsControl.control('$index') as FormControl<String>;
+    final previousUrl = useRef(control.value);
+    final debounce = useRef<Timer?>(null);
+    final attemptedUrls = useRef(<String>{});
+
+    Future<void> fetchThumbnail(String? value) async {
+      final url = value?.trim();
+      final uri = Uri.tryParse(url ?? '');
+      if (url == null ||
+          url.isEmpty ||
+          uri == null ||
+          !{'http', 'https'}.contains(uri.scheme) ||
+          urlThumbnails.value.containsKey(url) ||
+          !attemptedUrls.value.add(url)) {
+        return;
+      }
+
+      final imageUrl = await fetchUrlThumbnail(url);
+      if (imageUrl != null && !urlThumbnails.value.containsKey(url)) {
+        urlThumbnails.value = {
+          ...urlThumbnails.value,
+          url: imageUrl,
+        };
+      }
+    }
+
+    void scheduleFetch(FormControl<String> changedControl) {
+      final url = changedControl.value;
+      final previous = previousUrl.value;
+      if (previous != null && previous != url) {
+        final updated = Map<String, String?>.from(urlThumbnails.value)
+          ..remove(previous);
+        urlThumbnails.value = updated;
+      }
+      previousUrl.value = url;
+
+      debounce.value?.cancel();
+      debounce.value = Timer(
+        const Duration(milliseconds: 700),
+        () => fetchThumbnail(url),
+      );
+    }
+
+    useEffect(() {
+      scheduleFetch(control);
+      return () => debounce.value?.cancel();
+    }, [control]);
+
+    return ReactiveOutlinedTextField<String>(
+      formControlName: '$index',
+      labelText: i18n.item.common.url,
+      maxLength: itemConfig.maxUrlLength,
+      textInputType: TextInputType.url,
+      counterText: '',
+      onChanged: scheduleFetch,
     );
   }
 }

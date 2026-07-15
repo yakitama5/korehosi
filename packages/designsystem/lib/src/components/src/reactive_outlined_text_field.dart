@@ -125,6 +125,7 @@ class ReactiveOutlinedTextField<T> extends ReactiveFormField<T, T> {
     TextInputType? textInputType,
     bool autofocus = false,
     List<TextInputFormatter>? inputFormatters,
+    void Function(FormControl<T>)? onChanged,
   }) : super(
          formControlName: formControlName,
          builder: (ReactiveFormFieldState<T, T> field) =>
@@ -143,6 +144,7 @@ class ReactiveOutlinedTextField<T> extends ReactiveFormField<T, T> {
                prefixText: prefixText,
                inputFormatters: inputFormatters,
                autofocus: autofocus,
+               onChanged: onChanged,
              ),
        );
 }
@@ -164,6 +166,7 @@ class _ReactiveOutlinedTextField<T> extends HookWidget {
     this.prefixText,
     this.inputFormatters,
     this.autofocus = false,
+    this.onChanged,
   });
 
   final ReactiveFormFieldState<T, T> field;
@@ -180,6 +183,7 @@ class _ReactiveOutlinedTextField<T> extends HookWidget {
   final TextInputType? textInputType;
   final bool autofocus;
   final List<TextInputFormatter>? inputFormatters;
+  final void Function(FormControl<T>)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +196,7 @@ class _ReactiveOutlinedTextField<T> extends HookWidget {
       maxLength: maxLength,
       keyboardType: textInputType,
       inputFormatters: inputFormatters,
+      onChanged: onChanged,
       decoration: InputDecoration(
         labelText:
             '''

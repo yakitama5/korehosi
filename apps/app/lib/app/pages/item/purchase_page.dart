@@ -53,7 +53,7 @@ class _PurchaseForm extends HookConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ItemImages(images: value.images),
+                      ItemImages(imageUrls: value.imageUrls),
                       const Gap(16),
                       TextWithLabel(
                         value.name,
