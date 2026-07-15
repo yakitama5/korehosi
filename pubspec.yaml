@@ -29,7 +29,10 @@ dev_dependencies:
   yaml: ^3.1.2
   yaml_edit: ^2.2.1
 
-# dependency_overrides:
+dependency_overrides:
+  # reactive_image_picker 8.0.1 allows only 6.x, but 7.0.0 contains the
+  # Swift 6 concurrency fix required by Flutter's Swift Package Manager build.
+  app_settings: ^7.0.0
 #   _fe_analyzer_shared: ^89.0.0
 #   analyzer: ^8.4.0
 #   build: ^4.0.0
