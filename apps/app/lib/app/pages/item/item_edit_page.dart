@@ -17,6 +17,7 @@ import 'package:packages_application/item.dart';
 import 'package:packages_designsystem/i18n.dart';
 import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/item.dart';
+import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -54,13 +55,21 @@ class _ItemForm extends HookConsumerWidget {
     final urlThumbnails = useState<Map<String, String?>>({
       ...?item?.urlThumbnails,
     });
+    final wishDateControl = useMemoized(
+      () => FormControl<DateTime>(value: item?.wishDate),
+      [item?.id],
+    );
+    useStream(wishDateControl.valueChanges);
+    useEffect(() => wishDateControl.dispose, [wishDateControl]);
 
     return ItemFormModelFormBuilder(
       model: _createModel(),
       builder: (context, formModel, child) => Nested(
         children: [
           PopScopeDirtyConfirm(
-            dirty: ReactiveItemFormModelForm.of(context)?.form.dirty,
+            dirty:
+                (ReactiveItemFormModelForm.of(context)?.form.dirty ?? false) ||
+                wishDateControl.dirty,
           ),
           const UnfocusOnTap(),
         ],
@@ -68,7 +77,10 @@ class _ItemForm extends HookConsumerWidget {
           appBar: AppBar(
             title: Text(titleData ?? ''),
             actions: [
-              _Submit(urlThumbnails: urlThumbnails),
+              _Submit(
+                urlThumbnails: urlThumbnails,
+                wishDateControl: wishDateControl,
+              ),
               const Gap(8),
               if (item != null) const _DeleteButton(),
             ],
@@ -86,6 +98,8 @@ class _ItemForm extends HookConsumerWidget {
                   const _WishRankField(),
                   const Gap(64),
                   const _WishSeasonField(),
+                  const Gap(16),
+                  _WishDateField(control: wishDateControl),
                   const Gap(16),
                   _UrlFields(urlThumbnails: urlThumbnails),
                   _UrlAddButton(
@@ -130,9 +144,13 @@ class _ItemForm extends HookConsumerWidget {
 
 /// 保存ボタン
 class _Submit extends HookConsumerWidget with PresentationMixin {
-  const _Submit({required this.urlThumbnails});
+  const _Submit({
+    required this.urlThumbnails,
+    required this.wishDateControl,
+  });
 
   final ValueNotifier<Map<String, String?>> urlThumbnails;
+  final FormControl<DateTime> wishDateControl;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) =>
@@ -155,6 +173,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
         final wanterName = formModel.wanterNameControl.value;
         final wishRank = formModel.wishRankControl.value;
         final wishSeason = formModel.wishSeasonControl.value;
+        final wishDate = wishDateControl.value;
         final urls = formModel.urlsControl.controls
             .map((e) => e.value)
             .nonNulls
@@ -181,6 +200,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
             wanterName: wanterName,
             wishRank: wishRank!,
             wishSeason: wishSeason,
+            wishDate: wishDate,
             urls: urls,
             urlThumbnails: thumbnails,
             memo: memo,
@@ -195,6 +215,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
             wanterName: wanterName,
             wishRank: wishRank!,
             wishSeason: wishSeason,
+            wishDate: wishDate,
             urls: urls,
             urlThumbnails: thumbnails,
             memo: memo,
@@ -413,6 +434,25 @@ class _WishSeasonField extends HookConsumerWidget {
       maxLength: itemConfig.maxWishSeasonLength,
     );
   }
+}
+
+class _WishDateField extends StatelessWidget {
+  const _WishDateField({required this.control});
+
+  final FormControl<DateTime> control;
+
+  @override
+  Widget build(BuildContext context) => ReactiveDateTimePicker(
+    formControl: control,
+    fieldLabelText: i18n.item.common.wishDate,
+    keyboardType: TextInputType.datetime,
+    decoration: InputDecoration(
+      labelText: i18n.item.common.wishDate,
+      border: const OutlineInputBorder(),
+      suffixIcon: const Icon(Icons.calendar_today),
+      helperText: i18n.item.itemEditPage.wishDate.hint,
+    ),
+  );
 }
 
 class _UrlFields extends HookConsumerWidget {

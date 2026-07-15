@@ -7,6 +7,7 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:packages_application/common.dart';
 import 'package:packages_application/item.dart';
 import 'package:packages_application/user.dart';
@@ -83,6 +84,15 @@ class _ItemDetailView extends HookWidget {
               TextWithLabel(
                 item.wishSeason,
                 label: i18n.item.itemPage.wishSeason.hint,
+              ),
+              const Gap(16),
+              TextWithLabel(
+                item.wishDate == null
+                    ? null
+                    : DateFormat.yMMMd(
+                        Localizations.localeOf(context).toLanguageTag(),
+                      ).format(item.wishDate!),
+                label: i18n.item.common.wishDate,
               ),
               const Gap(16),
               _Urls(urls: item.urls),
