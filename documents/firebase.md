@@ -55,10 +55,22 @@ flutterfire configure \
 ## Local emulators
 
 The default Firebase project alias is the development project. Start the local
-services from the repository root:
+services from the repository root. The Firestore emulator requires JDK 21 or
+newer.
 
 ```sh
 firebase emulators:start --only auth,firestore,storage,functions
+```
+
+Install rule-test dependencies and run the isolated security suite with a demo
+project (it cannot contact production services):
+
+```sh
+npm --prefix functions ci
+firebase emulators:exec \
+  --project demo-korehosi \
+  --only firestore,storage \
+  "npm --prefix functions run test:rules"
 ```
 
 Use the explicit alias for any deploy operation:
