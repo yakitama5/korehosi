@@ -44,10 +44,47 @@ class ItemUsecase with RunUsecaseMixin {
         );
   }
 
+  /// 現在の検索条件に一致する、すべての欲しいものをページ順に取得する。
+  Future<List<Item>> searchAllItems({
+    required GroupId groupId,
+    required AgeGroup ageGroup,
+    required ItemsSearchQuery query,
+  }) async {
+    final firstPage = await searchItems(
+      page: 1,
+      groupId: groupId,
+      ageGroup: ageGroup,
+      query: query,
+    );
+    final pageCount = (firstPage.totalCount / itemsPageConfig.pageSize).ceil();
+    if (pageCount <= 1) {
+      return firstPage.items;
+    }
+
+    final remainingPages = await Future.wait(
+      [
+        for (var page = 2; page <= pageCount; page++)
+          searchItems(
+            page: page,
+            groupId: groupId,
+            ageGroup: ageGroup,
+            query: query,
+          ),
+      ],
+    );
+
+    return [
+      ...firstPage.items,
+      ...remainingPages.expand((page) => page.items),
+    ];
+  }
+
   /// ほしいもの一覧を再読み込みする.
   Future<void> refreshSearchItems() async {
     // すべての要素を再読み込み
-    ref.invalidate(searchItemsProvider);
+    ref
+      ..invalidate(searchItemsProvider)
+      ..invalidate(searchAllItemsProvider);
 
     // 最初のページ文のデータが取得できるまでは待機
     return ref.read(searchItemsProvider(page: 1).future);
@@ -123,7 +160,8 @@ class ItemUsecase with RunUsecaseMixin {
       // Providerへの反映
       ref
         ..invalidate(itemProvider)
-        ..invalidate(searchItemsProvider);
+        ..invalidate(searchItemsProvider)
+        ..invalidate(searchAllItemsProvider);
 
       // 通知処理
       final itemDetailPath = generateItemDetailRoute(item.id);
@@ -324,6 +362,7 @@ class ItemUsecase with RunUsecaseMixin {
     // Providerへの反映
     ref
       ..invalidate(itemProvider)
-      ..invalidate(searchItemsProvider);
+      ..invalidate(searchItemsProvider)
+      ..invalidate(searchAllItemsProvider);
   }
 }

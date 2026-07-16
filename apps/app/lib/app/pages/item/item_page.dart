@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/pages/item/components/item_detail_pager.dart';
 import 'package:flutter_app/app/pages/item/components/item_images.dart';
 import 'package:flutter_app/app/pages/item/components/item_transfer_group_bottom_sheet.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
@@ -27,6 +28,7 @@ class ItemPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(authUserProvider);
     final item = ref.watch(ItemDetailProviders.itemProvider);
+    final searchItems = ref.watch(searchAllItemsProvider);
 
     // 欲しい物と購入情報に応じて判定を行う
     return switch ((item, user)) {
@@ -41,7 +43,11 @@ class ItemPage extends HookConsumerWidget {
         AsyncData(value: final Item itemData),
         AsyncData(value: final User userData),
       ) =>
-        _ItemDetailView(item: itemData, user: userData),
+        _SwipeableItemDetailView(
+          initialItem: itemData,
+          user: userData,
+          searchItems: searchItems.value,
+        ),
 
       // どちらかがエラーの場合はエラー
       (AsyncError(error: final error, stackTrace: final stackTrace), _) ||
@@ -53,6 +59,32 @@ class ItemPage extends HookConsumerWidget {
       // 一瞬なのでローディング中は何も表示しない
       _ => const SizedBox.shrink(),
     };
+  }
+}
+
+class _SwipeableItemDetailView extends StatelessWidget {
+  const _SwipeableItemDetailView({
+    required this.initialItem,
+    required this.user,
+    required this.searchItems,
+  });
+
+  final Item initialItem;
+  final User user;
+  final List<Item>? searchItems;
+
+  @override
+  Widget build(BuildContext context) {
+    final items = searchItems;
+    if (items == null || !items.any((item) => item.id == initialItem.id)) {
+      return _ItemDetailView(item: initialItem, user: user);
+    }
+
+    return ItemDetailPager(
+      items: items,
+      initialItemId: initialItem.id,
+      itemBuilder: (_, item) => _ItemDetailView(item: item, user: user),
+    );
   }
 }
 
