@@ -27,17 +27,13 @@ jobs:
       - name: 💾Checkout
         uses: actions/checkout@v4
 
-      - name: ⚙️Setup Config Files
-        uses: ./.github/actions/setup-config-files
-        env: # Set the secret as an input
-          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
-      - name: ⚙️Setup Application Runtime
-        uses: ./.github/actions/setup-application-runtime
+      - name: 🎯Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 3.12.2
 
       - name: 🥤Activate cider
-        run: dart pub global activate cider
+        run: dart pub global activate cider 0.2.10
 
       - name: ⬆️Bump version
         run: |
