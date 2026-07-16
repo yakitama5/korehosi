@@ -105,8 +105,11 @@ jobs:
           cache: pip
           cache-dependency-path: .github/requirements-cd.txt
 
-      - name: 🪄Install Codemagic CLI tools
-        run: pip install --disable-pip-version-check -r .github/requirements-cd.txt
+      - name: 🪄Install FlutterFire and Codemagic CLI tools
+        run: |
+          dart pub global activate flutterfire_cli
+          echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+          pip install --disable-pip-version-check -r .github/requirements-cd.txt
 
       - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
