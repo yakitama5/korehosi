@@ -35,4 +35,6 @@ jobs:
 
       # 実行
       - name: 🧪Test
-        run: dart run melos run test:ci --no-select
+        run: >-
+          dart run melos exec --fail-fast --dir-exists=test --
+          flutter test --no-pub --dart-define=CI=true

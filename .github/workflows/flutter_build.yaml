@@ -85,7 +85,10 @@ jobs:
 
       # ビルド
       - name: 🛠️Build for Android
-        run: dart run melos run build:app:android --no-select
+        working-directory: apps/app
+        run: >-
+          flutter build appbundle --no-pub
+          --dart-define-from-file=dart_defines/prod.json
 
       # ビルドしたaabをGithub Actionsにアップロード
       - name: "🚀Deploy Bundle"
