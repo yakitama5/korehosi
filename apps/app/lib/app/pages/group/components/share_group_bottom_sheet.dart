@@ -114,7 +114,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
     await execute(
       action: () async {
         // Widgetを画像形式に変換
-        final xFile = await repaintBoundartKeyToXFile(_qrImageKey);
+        final xFile = await repaintBoundaryKeyToXFile(_qrImageKey);
 
         // 共有
         await ref
@@ -129,7 +129,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
     await execute(
       action: () async {
         // Widgetを画像形式に変換
-        final xFile = await repaintBoundartKeyToXFile(_qrImageKey);
+        final xFile = await repaintBoundaryKeyToXFile(_qrImageKey);
 
         // 保存
         await ref.read(groupShareUsecaseProvider).saveQrCode(xFile: xFile!);
@@ -139,7 +139,7 @@ class ShareGroupBottomSheet extends HookConsumerWidget with PresentationMixin {
   }
 
   /// Widgetのキーを元にXFileを生成する
-  Future<XFile?> repaintBoundartKeyToXFile(GlobalKey key) async {
+  Future<XFile?> repaintBoundaryKeyToXFile(GlobalKey key) async {
     // RenderObjectを取得
     final boundary = key.currentContext?.findRenderObject();
     if (boundary == null || boundary is! RenderRepaintBoundary) {

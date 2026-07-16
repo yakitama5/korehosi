@@ -1,0 +1,31 @@
+name: Spell Check
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  spell_check:
+    name: 📝Spell Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 💾Checkout
+        uses: actions/checkout@v4
+
+      - name: 📝Check spelling
+        uses: streetsidesoftware/cspell-action@v8
+        with:
+          config: cspell.json
+          files: |
+            **/*.{dart,js,json,md,ts,yaml,yml}
+          incremental_files_only: false

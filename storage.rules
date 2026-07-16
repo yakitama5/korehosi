@@ -1,0 +1,26 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isGroupMember(groupId) {
+      return isSignedIn()
+        && request.auth.uid in firestore.get(
+          /databases/(default)/documents/groups/$(groupId)
+        ).data.joinUids;
+    }
+
+    function isValidImage() {
+      return request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    match /group/{groupId}/item/{itemId}/{imageId} {
+      allow read, delete: if isGroupMember(groupId);
+      allow create, update: if isGroupMember(groupId) && isValidImage();
+    }
+  }
+}

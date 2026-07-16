@@ -23,7 +23,7 @@ class _ItemizedTextRow extends HookWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(commonI18n.common.itmizedTextPrefix, style: text.style),
+        Text(commonI18n.common.itemizedTextPrefix, style: text.style),
         Expanded(child: text),
       ],
     );

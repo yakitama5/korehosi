@@ -11,7 +11,6 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/i18n.dart';
@@ -104,21 +103,21 @@ class _PremiumPlanButton extends HookConsumerWidget with PresentationMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Web以外のプラットフォームで参加済でないユーザーに表示
-    final premiumed = ref.watch(
+    final hasPremiumAccess = ref.watch(
       GroupDetailProviders.groupProvider.select(
         (value) => value.value?.premium == true,
       ),
     );
 
     return SliverVisibility(
-      visible: !premiumed && !kIsWeb,
+      visible: !hasPremiumAccess && !kIsWeb,
       sliver: SliverPadding(
         padding: const EdgeInsets.all(8),
         sliver: SliverToBoxAdapter(
           child: FilledButton.icon(
             onPressed: () => onPremium(context, ref),
             label: Text(i18n.group.groupPage.limitBreak),
-            icon: Icon(MdiIcons.crown),
+            icon: const Icon(Icons.workspace_premium),
           ),
         ),
       ),

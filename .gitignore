@@ -1,6 +1,9 @@
 # https://dart.dev/guides/libraries/private-files
 # Flutter/Dart/Pub related
 /.dart_tool/*
+**/build/
+**/test_bundle.dart
+**/failures/
 .flutter-plugins
 .flutter-plugins-dependencies
 
@@ -22,7 +25,7 @@
 # firebase
 /.firebase
 /firebase-debug.log
-firebase_options*.dart
+/*-debug.log
 
 /.fvm
 kotlin-compiler*.salive
@@ -36,9 +39,7 @@ scripts/**
 GoogleService-Info.plist
 google-services.json
 env.*.dart
-firebase_options*.dart
 firebase_app_id_file.json
-*.rules
 
 # FVM Version Cache
 .fvm/

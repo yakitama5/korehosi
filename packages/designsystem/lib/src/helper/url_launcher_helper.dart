@@ -4,7 +4,7 @@ import 'package:packages_designsystem/i18n.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 /// URL文字列に遷移する
-Future<bool> lanchUrlStringSafety(
+Future<bool> launchUrlStringSafely(
   BuildContext context,
   String url, {
   String? secondUrl,

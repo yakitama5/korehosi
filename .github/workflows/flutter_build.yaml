@@ -37,23 +37,37 @@ jobs:
       - name: 💾Checkout
         uses: actions/checkout@v4
 
+      - name: ☕Setup Java and Gradle cache
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+          cache-dependency-path: |
+            apps/app/android/**/*.gradle*
+            apps/app/android/**/gradle-wrapper.properties
+
+      - name: 🐍Setup Python and pip cache
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: .github/requirements-cd.txt
+
       - name: 🪄Install Codemagic CLI tools
-        run: pip install codemagic-cli-tools
+        run: pip install --disable-pip-version-check -r .github/requirements-cd.txt
 
       # セットアップ
       - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
         env: # Set the secret as an input
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
-          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
-          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
           DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
       - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
+        with:
+          code-generation: all
 
       # Android用の設定ファイルを設定
       - name: ⚙️Setup Android keystore
@@ -71,7 +85,10 @@ jobs:
 
       # ビルド
       - name: 🛠️Build for Android
-        run: melos run build:app:android
+        working-directory: apps/app
+        run: >-
+          flutter build appbundle --no-pub
+          --dart-define-from-file=dart_defines/prod.json
 
       # ビルドしたaabをGithub Actionsにアップロード
       - name: "🚀Deploy Bundle"
@@ -108,23 +125,35 @@ jobs:
       - name: 💾Checkout
         uses: actions/checkout@v4
 
+      - name: 🐍Setup Python and pip cache
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: .github/requirements-cd.txt
+
       - name: 🪄Install Codemagic CLI tools
-        run: pip install codemagic-cli-tools
+        run: pip install --disable-pip-version-check -r .github/requirements-cd.txt
 
       # セットアップ
       - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
         env: # Set the secret as an input
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
-          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
-          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
           DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
       - name: ⚙️Setup Application Runtime
         uses: ./.github/actions/setup-application-runtime
+        with:
+          code-generation: all
+
+      - name: 📦Restore CocoaPods download cache
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Caches/CocoaPods
+          key: ${{ runner.os }}-cocoapods-${{ hashFiles('apps/app/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cocoapods-
 
       - name: ⚙️Set up keychain
         run: keychain initialize
@@ -149,7 +178,7 @@ jobs:
         working-directory: apps/app
         run: |
           # Runner上で生成されたexport-optionsを指定
-          flutter build ipa --export-options-plist=$HOME/export_options.plist --dart-define-from-file=dart_defines/prod.json
+          flutter build ipa --no-pub --export-options-plist=$HOME/export_options.plist --dart-define-from-file=dart_defines/prod.json
 
       - name: 🚀Publish the app to App Store Connect
         run: |

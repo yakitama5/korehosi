@@ -19,7 +19,7 @@ class BottomSheetColumn extends StatelessWidget {
         children: [
           const Gap(8),
           title ?? const SizedBox.shrink(),
-          ...[const Gap(8), if (children != null) ...children!],
+          ...[const Gap(8), ...?children],
         ],
       ),
     );

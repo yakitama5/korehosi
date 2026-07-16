@@ -34,6 +34,7 @@ class FirebaseItemRepository implements ItemRepository {
     final sortFieldName = switch (query.itemsOrder.key) {
       ItemOrderKey.name => 'name',
       ItemOrderKey.wishRank => 'wishRank',
+      ItemOrderKey.wishDate => null,
       ItemOrderKey.createdAt => FirestoreColumns.createdAt.fieldName,
     };
     final descending = query.itemsOrder.sortOrder == SortOrder.desc;
@@ -48,7 +49,6 @@ class FirebaseItemRepository implements ItemRepository {
     };
     var itemsQuery = ref
         .read(itemCollectionRefProvider(groupId: groupId))
-        .orderBy(sortFieldName, descending: descending)
         .where(
           purchaseStatusField,
           whereIn: query.purchaseStatuses.map((e) => e.name),
@@ -66,13 +66,27 @@ class FirebaseItemRepository implements ItemRepository {
     final totalCount = await itemsQuery.count().get();
 
     // データの取得
-    final docs =
-        (await itemsQuery
-                // ページング (読み取りコストはかかるが、オフセット方を採用する)
-                .limit(limit)
-                .get())
-            .docs
-            .skip(offset);
+    late final Iterable<QueryDocumentSnapshot<FirestoreItemModel>> docs;
+    if (query.itemsOrder.key == ItemOrderKey.wishDate) {
+      final sortedDocs = (await itemsQuery.get()).docs
+        ..sort(
+          (left, right) => compareWishDates(
+            left.data().wishDate,
+            right.data().wishDate,
+            descending: descending,
+          ),
+        );
+      docs = sortedDocs.skip(offset).take(pageSize);
+    } else {
+      docs =
+          (await itemsQuery
+                  .orderBy(sortFieldName!, descending: descending)
+                  // ページング (読み取りコストはかかるが、オフセット方を採用する)
+                  .limit(limit)
+                  .get())
+              .docs
+              .skip(offset);
+    }
 
     final items = await Future.wait(
       docs.map((e) async {
@@ -153,7 +167,9 @@ class FirebaseItemRepository implements ItemRepository {
     String? wanterName,
     required double wishRank,
     String? wishSeason,
+    DateTime? wishDate,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
   }) async {
     // 新しいドキュメントを取得
@@ -171,8 +187,10 @@ class FirebaseItemRepository implements ItemRepository {
       imagesPath: imageIds.map((e) => e.value).toList(),
       memo: memo,
       urls: urls,
+      urlThumbnails: urlThumbnails,
       wanterName: wanterName,
       wishSeason: wishSeason,
+      wishDate: wishDate,
       purchaseStatus: PurchaseStatus.notPurchased,
       childViewPurchaseStatus: PurchaseStatus.notPurchased,
     );
@@ -201,7 +219,9 @@ class FirebaseItemRepository implements ItemRepository {
     String? wanterName,
     required double wishRank,
     String? wishSeason,
+    DateTime? wishDate,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
   }) async {
     // 更新前の内容を取得
@@ -232,10 +252,12 @@ class FirebaseItemRepository implements ItemRepository {
       imagesPath: joinImageIds.map((e) => e.value).toList(),
       memo: memo,
       urls: urls,
+      urlThumbnails: urlThumbnails,
       wanterName: wanterName,
       purchaseStatus: prevItem.data()!.purchaseStatus,
       childViewPurchaseStatus: prevItem.data()!.childViewPurchaseStatus,
       wishSeason: wishSeason,
+      wishDate: wishDate,
     );
 
     // 更新
@@ -291,4 +313,19 @@ class FirebaseItemRepository implements ItemRepository {
           [],
     );
   }
+}
+
+int compareWishDates(
+  DateTime? left,
+  DateTime? right, {
+  required bool descending,
+}) {
+  if (left == null) {
+    return right == null ? 0 : 1;
+  }
+  if (right == null) {
+    return -1;
+  }
+
+  return descending ? right.compareTo(left) : left.compareTo(right);
 }

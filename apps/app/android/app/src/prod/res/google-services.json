@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "911045633649",
+    "project_id": "family-wish-list-ad3c7",
+    "storage_bucket": "family-wish-list-ad3c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911045633649:android:6766170ce81e45c4b61dd0",
+        "android_client_info": {
+          "package_name": "com.yakuran.family_wish_list"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911045633649-9dv6inmmpqroc2nt9rjghre7mrpm6bsl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yakuran.family_wish_list",
+            "certificate_hash": "0b0dc203f56415672bd45df9cdb455ad54080254"
+          }
+        },
+        {
+          "client_id": "911045633649-9jk7qtrg15knfmftq5lb0jepcftfrpji.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yakuran.family_wish_list",
+            "certificate_hash": "0b599ef04c28baaefc59d41feee68dfab9768dc6"
+          }
+        },
+        {
+          "client_id": "911045633649-orjegpino1pgqr6d0hh98tedfovt856k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yakuran.family_wish_list",
+            "certificate_hash": "329e0150cee60824584c86d64d53652008f19be4"
+          }
+        },
+        {
+          "client_id": "911045633649-h3sr544jcmint3ok34t5diqs39n28fh5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm8rC322A4tECRB3WSlMaUyO6wWMPmE0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911045633649-h3sr544jcmint3ok34t5diqs39n28fh5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "911045633649-a5v9r51vpj3p13h1iifb99j6fu52k1ga.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yakuran.familyWishList.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

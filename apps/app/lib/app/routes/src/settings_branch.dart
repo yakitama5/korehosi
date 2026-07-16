@@ -85,7 +85,7 @@ class LicenseRouteData extends GoRouteData with $LicenseRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      const MyLincensePage();
+      const MyLicensePage();
 }
 
 class AccountRouteData extends GoRouteData with $AccountRouteData {

@@ -34,7 +34,7 @@ part 'settings_branch.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-@TypedShellRoute<BaseShellSrouteData>(
+@TypedShellRoute<BaseShellRouteData>(
   routes: [
     TypedGoRoute<RootRouteData>(path: RootRouteData.path),
     TypedGoRoute<OnboardStartRouteData>(
@@ -46,12 +46,12 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
     TypedGoRoute<ShareLinkRouteData>(path: ShareLinkRouteData.path),
     TypedGoRoute<PhotoPreviewRouteData>(path: PhotoPreviewRouteData.path),
     TypedGoRoute<OnboardFormRouteData>(path: OnboardFormRouteData.path),
-    TypedStatefulShellRoute<BottomNavitorShellRouteData>(
+    TypedStatefulShellRoute<BottomNavigatorShellRouteData>(
       branches: [itemBranch, analyzeBranch, settingsBranch],
     ),
   ],
 )
-class BaseShellSrouteData extends ShellRouteData {
+class BaseShellRouteData extends ShellRouteData {
   static final GlobalKey<NavigatorState> $navigatorKey = _rootNavigatorKey;
 
   // ルート設定のために定義だけ
@@ -75,8 +75,8 @@ class RootRouteData extends GoRouteData with $RootRouteData {
 final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 
-class BottomNavitorShellRouteData extends StatefulShellRouteData {
-  const BottomNavitorShellRouteData();
+class BottomNavigatorShellRouteData extends StatefulShellRouteData {
+  const BottomNavigatorShellRouteData();
 
   static final GlobalKey<NavigatorState> $navigatorKey = _shellNavigatorKey;
 

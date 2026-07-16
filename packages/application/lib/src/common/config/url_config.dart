@@ -15,9 +15,9 @@ const urlConfig = UrlConfig(
 
   /// 開発者のX(Twitter)
   /// WebページのURL
-  developperXWeb: 'https://twitter.com/yakuran1',
+  developerXWeb: 'https://twitter.com/yakuran1',
 
   /// 開発者のX(Twitter)
   /// アプリのスキーマ
-  developperXApp: 'twitter://user?screen_name=yakuran1',
+  developerXApp: 'twitter://user?screen_name=yakuran1',
 );

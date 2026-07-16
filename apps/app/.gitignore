@@ -67,10 +67,17 @@ env.dev.g.dart
 firebase_options.dart
 firebase_options_dev.dart
 firebase_app_id_file.json
-*.rules
 
 # FVM Version Cache
 .fvm/
 
 # Add: Firebase
 firebase.json
+
+# Firebase app configuration is public and reproducible. Generated build
+# copies remain ignored by the broad rules above.
+!firebase.json
+!android/app/src/dev/res/google-services.json
+!android/app/src/prod/res/google-services.json
+!ios/dev/GoogleService-Info.plist
+!ios/prod/GoogleService-Info.plist

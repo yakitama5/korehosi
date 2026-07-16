@@ -41,7 +41,9 @@ abstract class ItemRepository {
     String? wanterName,
     required double wishRank,
     String? wishSeason,
+    DateTime? wishDate,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
   });
 
@@ -55,7 +57,9 @@ abstract class ItemRepository {
     String? wanterName,
     required double wishRank,
     String? wishSeason,
+    DateTime? wishDate,
     List<String>? urls,
+    Map<String, String?>? urlThumbnails,
     String? memo,
   });
 

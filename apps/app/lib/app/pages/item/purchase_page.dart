@@ -53,7 +53,7 @@ class _PurchaseForm extends HookConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ItemImages(images: value.images),
+                      ItemImages(imageUrls: value.imageUrls),
                       const Gap(16),
                       TextWithLabel(
                         value.name,
@@ -99,7 +99,7 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) =>
-      SaveButton(onPressesd: () => onSave(context, ref));
+      SaveButton(onPressed: () => onSave(context, ref));
 
   Future<void> onSave(BuildContext context, WidgetRef ref) async {
     // 入力チェック判定

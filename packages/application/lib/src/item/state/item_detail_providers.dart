@@ -4,10 +4,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'item_detail_providers.g.dart';
 
-// ignore: avoid_classes_with_only_static_members
 /// 欲しい物の明細を管理するProvider
 /// 明細を表示する画面郡で横断して利用する状態を管理する
 /// IDを管理するProviderを `override`することを前提に処理を組む
+// ignore: avoid_classes_with_only_static_members
 class ItemDetailProviders {
   static DetailPageItemIdProvider get itemIdProvider => _itemIdProvider;
   static DetailPageItemProvider get itemProvider => _itemProvider;

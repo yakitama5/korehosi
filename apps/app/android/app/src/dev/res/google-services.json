@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "303104073024",
+    "project_id": "family-wish-list-ad3c7-dev",
+    "storage_bucket": "family-wish-list-ad3c7-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303104073024:android:33f49455ac0aa7f3ce2ea5",
+        "android_client_info": {
+          "package_name": "com.yakuran.family_wish_list.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303104073024-88jjdv9p5tlccd9a841kdc8ifttuuob2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yakuran.family_wish_list.dev",
+            "certificate_hash": "0b1964dfe105405d9d790553458d527cd297b392"
+          }
+        },
+        {
+          "client_id": "303104073024-mani1q8pg2nc3nb7ltg1j3akiise1ng1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yakuran.family_wish_list.dev",
+            "certificate_hash": "0b0dc203f56415672bd45df9cdb455ad54080254"
+          }
+        },
+        {
+          "client_id": "303104073024-b94avfo0a1rsmmecul7jr3lrsek437dv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBySo3QeZGEMkUwoV1uodyJf56i-JS5VhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303104073024-b94avfo0a1rsmmecul7jr3lrsek437dv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "303104073024-28061i41k90ceh6735n4iba8k1qcrlin.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yakuran.familyWishList.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

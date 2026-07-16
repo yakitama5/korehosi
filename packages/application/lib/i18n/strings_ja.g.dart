@@ -101,7 +101,7 @@ class TranslationsUserUserJa {
 	// Translations
 
 	/// ja: '名無し'
-	String get noname => '名無し';
+	String get noName => '名無し';
 }
 
 /// The flat map containing all translations for locale <ja>.
@@ -122,7 +122,7 @@ extension on Translations {
 			'item.notificationAddItemBody' => ({required String name}) => '${name}さんがほしいものを追加しました！',
 			'user.deletedUser' => '<削除済ユーザー>',
 			'user.unset' => '<未設定>',
-			'user.user.noname' => '名無し',
+			'user.user.noName' => '名無し',
 			_ => null,
 		};
 	}

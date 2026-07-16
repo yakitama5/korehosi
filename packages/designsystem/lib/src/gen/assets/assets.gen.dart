@@ -48,9 +48,7 @@ class $AssetsLottieGen {
   List<String> get values => [error];
 }
 
-class Assets {
-  const Assets._();
-
+abstract final class Assets {
   static const String package = 'packages_designsystem';
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();

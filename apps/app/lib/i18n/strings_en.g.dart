@@ -147,7 +147,7 @@ class _TranslationsSettingsSettingsPageLayoutEn extends TranslationsSettingsSett
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get haed => 'Layout';
+	@override String get title => 'Layout';
 	@override String get uiStyle => 'UI Style';
 	@override String get themeMode => 'ThemeMode';
 	@override String get colorTheme => 'Colors';
@@ -163,9 +163,9 @@ class _TranslationsSettingsSettingsPageHelpEn extends TranslationsSettingsSettin
 	@override String get head => 'Help';
 	@override String get howToUse => 'HowToUse';
 	@override String get contactUs => 'Contact us';
-	@override String get developperTwitter => 'Developper';
+	@override String get developerX => 'Developer';
 	@override String get privacyPolicy => 'PrivacyPolicy';
-	@override String get licencse => 'License';
+	@override String get license => 'License';
 }
 
 // Path: settings.accountPage.link
@@ -221,16 +221,16 @@ extension on TranslationsEn {
 			'settings.settingsPage.title' => 'Settings',
 			'settings.settingsPage.account.head' => 'Account',
 			'settings.settingsPage.account.account' => 'Account',
-			'settings.settingsPage.layout.haed' => 'Layout',
+			'settings.settingsPage.layout.title' => 'Layout',
 			'settings.settingsPage.layout.uiStyle' => 'UI Style',
 			'settings.settingsPage.layout.themeMode' => 'ThemeMode',
 			'settings.settingsPage.layout.colorTheme' => 'Colors',
 			'settings.settingsPage.help.head' => 'Help',
 			'settings.settingsPage.help.howToUse' => 'HowToUse',
 			'settings.settingsPage.help.contactUs' => 'Contact us',
-			'settings.settingsPage.help.developperTwitter' => 'Developper',
+			'settings.settingsPage.help.developerX' => 'Developer',
 			'settings.settingsPage.help.privacyPolicy' => 'PrivacyPolicy',
-			'settings.settingsPage.help.licencse' => 'License',
+			'settings.settingsPage.help.license' => 'License',
 			'settings.accountPage.title' => 'Account',
 			'settings.accountPage.link.head' => 'Account link',
 			'settings.accountPage.link.google' => 'Google',

@@ -77,7 +77,7 @@ exports.v2JoinGroup = onCall(
     }
 
     // リンクの有効期限チェック
-    // HACK(yakitama5): FiedlValueを利用した書き方に変更すること
+    // HACK(yakitama5): FieldValueを利用した書き方に変更すること
     const now = new Date();
     const linkSnap = await db.collection('shareLinks').doc(shareLinkId).get();
     const linkData = linkSnap.data();

@@ -9,13 +9,14 @@ class LinkedScrollBuilder extends StatefulWidget {
     BuildContext context,
     LinkedScrollControllerGroup controllerGroup,
     ({ScrollController one, ScrollController two}) controllers,
-  ) builder;
+  )
+  builder;
 
   @override
-  State<StatefulWidget> createState() => _LinkedScrollControllBuilderState();
+  State<StatefulWidget> createState() => _LinkedScrollControlBuilderState();
 }
 
-class _LinkedScrollControllBuilderState extends State<LinkedScrollBuilder> {
+class _LinkedScrollControlBuilderState extends State<LinkedScrollBuilder> {
   final LinkedScrollControllerGroup _controllerGroup =
       LinkedScrollControllerGroup();
 

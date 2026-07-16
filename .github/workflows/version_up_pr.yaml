@@ -27,22 +27,13 @@ jobs:
       - name: 💾Checkout
         uses: actions/checkout@v4
 
-      - name: ⚙️Setup Config Files
-        uses: ./.github/actions/setup-config-files
-        env: # Set the secret as an input
-          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
-          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
-          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
-      - name: ⚙️Setup Application Runtime
-        uses: ./.github/actions/setup-application-runtime
+      - name: 🎯Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 3.12.2
 
       - name: 🥤Activate cider
-        run: dart pub global activate cider
+        run: dart pub global activate cider 0.2.10
 
       - name: ⬆️Bump version
         run: |
@@ -67,7 +58,7 @@ jobs:
           git add .
           git commit -m "chore: bump version to ${{ env.new_version }}"
 
-      # releasブランチを作成
+      # releaseブランチを作成
       - name: 🆕Create and push release branch
         env: 
           NEW_BRANCH: 'release/v${{ env.new_version }}'

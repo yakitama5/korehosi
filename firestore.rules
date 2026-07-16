@@ -1,0 +1,116 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isGroupMember(groupId) {
+      return isSignedIn()
+        && request.auth.uid in get(
+          /databases/$(database)/documents/groups/$(groupId)
+        ).data.joinUids;
+    }
+
+    function isGroupOwner(groupId) {
+      return isSignedIn()
+        && get(
+          /databases/$(database)/documents/groups/$(groupId)
+        ).data.ownerUid == request.auth.uid;
+    }
+
+    match /users/{userId} {
+      allow create: if isSelf(userId)
+        && request.resource.data.id == userId;
+      allow read, update, delete: if isSelf(userId);
+
+      match /fcmTokens/{token} {
+        allow read, write: if isSelf(userId);
+      }
+    }
+
+    match /_dusers/{userId} {
+      allow create, read: if isSelf(userId);
+      allow update, delete: if false;
+    }
+
+    match /groups/{groupId} {
+      allow create: if isSignedIn()
+        && request.resource.data.id == groupId
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.auth.uid in request.resource.data.joinUids;
+      allow read: if isGroupMember(groupId);
+      allow update: if isGroupMember(groupId);
+      allow delete: if isGroupOwner(groupId);
+
+      match /participants/{participantId} {
+        allow read: if isGroupMember(groupId);
+        allow write: if false;
+      }
+
+      match /items/{itemId} {
+        allow read, write: if isGroupMember(groupId);
+      }
+
+      match /purchases/{purchaseId} {
+        allow read, write: if isGroupMember(groupId);
+      }
+
+      match /messages/{messageId} {
+        allow read, write: if isGroupMember(groupId);
+      }
+
+      match /wanterNames/{nameId} {
+        allow read: if isGroupMember(groupId);
+        allow write: if false;
+      }
+
+      match /buyerNames/{nameId} {
+        allow read: if isGroupMember(groupId);
+        allow write: if false;
+      }
+
+      match /_ditems/{itemId} {
+        allow read: if isGroupMember(groupId);
+        allow write: if false;
+      }
+
+      match /_cpurchases/{purchaseId} {
+        allow read: if isGroupMember(groupId);
+        allow write: if false;
+      }
+
+      match /_dpurchases/{purchaseId} {
+        allow read: if isGroupMember(groupId);
+        allow write: if false;
+      }
+
+      match /_dmessages/{messageId} {
+        allow read: if isGroupMember(groupId);
+        allow write: if false;
+      }
+    }
+
+    match /_dgroups/{groupId} {
+      allow create: if isSignedIn()
+        && request.auth.uid in request.resource.data.joinUids;
+      allow read: if isSignedIn()
+        && request.auth.uid in resource.data.joinUids;
+      allow update, delete: if false;
+    }
+
+    match /shareLinks/{shareLinkId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn()
+        && request.resource.data.id == shareLinkId
+        && isGroupMember(request.resource.data.groupId);
+      allow update, delete: if isSignedIn()
+        && isGroupMember(resource.data.groupId);
+    }
+  }
+}

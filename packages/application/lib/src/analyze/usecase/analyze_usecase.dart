@@ -19,7 +19,7 @@ class AnalyzeUsecase with RunUsecaseMixin {
   AnalyzeRepository get _repository => ref.read(analyzeRepositoryProvider);
 
   // グループ内のほしいものの購入率を導き出す
-  Future<ItemBuyedRate> exploreBuyedRate({
+  Future<ItemPurchaseRate> explorePurchaseRate({
     required GroupId? groupId,
     required AgeGroup? ageGroup,
     required ItemAnalyzeQuery query,
@@ -31,7 +31,7 @@ class AnalyzeUsecase with RunUsecaseMixin {
       throw const BusinessException(BusinessExceptionType.notAuth);
     }
 
-    return _repository.exploreBuyedRate(
+    return _repository.explorePurchaseRate(
       groupId: groupId,
       ageGroup: ageGroup,
       query: query,

@@ -7,6 +7,11 @@ on:
   push:
     branches:
       - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   flutter_test:
     # if: ${{ false }}
@@ -19,16 +24,10 @@ jobs:
       - name: 💾Checkout
         uses: actions/checkout@v4
 
-      # セットアップ
       - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
-        env: # Set the secret as an input
+        env:
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
-          FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
-          FIREBASE_OPTIONS_DEV: ${{ secrets.FIREBASE_OPTIONS_DEV }}
-          FIREBASE_JSON: ${{ secrets.FIREBASE_JSON }}
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          GOOGLE_INFO_PLIST: ${{ secrets.GOOGLE_INFO_PLIST }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
           DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
       - name: ⚙️Setup Application Runtime
@@ -36,4 +35,6 @@ jobs:
 
       # 実行
       - name: 🧪Test
-        run: melos run test:ci
+        run: >-
+          dart run melos exec --fail-fast --dir-exists=test --
+          flutter test --no-pub --dart-define=CI=true

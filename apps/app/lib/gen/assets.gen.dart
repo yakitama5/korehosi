@@ -15,12 +15,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/account_link.svg
   String get accountLink => 'assets/images/account_link.svg';
 
-  /// File path: assets/images/apple.svg
-  String get apple => 'assets/images/apple.svg';
-
-  /// File path: assets/images/google.svg
-  String get google => 'assets/images/google.svg';
-
   /// File path: assets/images/onboard_done.svg
   String get onboardDone => 'assets/images/onboard_done.svg';
 
@@ -38,15 +32,13 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<String> get values => [
-        accountLink,
-        apple,
-        google,
-        onboardDone,
-        onboardGift,
-        onboardProfile,
-        onboardSex,
-        onboardStart
-      ];
+    accountLink,
+    onboardDone,
+    onboardGift,
+    onboardProfile,
+    onboardSex,
+    onboardStart,
+  ];
 }
 
 class $AssetsLottieGen {
@@ -54,9 +46,6 @@ class $AssetsLottieGen {
 
   /// File path: assets/lottie/empty.json
   String get empty => 'assets/lottie/empty.json';
-
-  /// File path: assets/lottie/error.json
-  String get error => 'assets/lottie/error.json';
 
   /// File path: assets/lottie/group.json
   String get group => 'assets/lottie/group.json';
@@ -68,13 +57,10 @@ class $AssetsLottieGen {
   String get womanEmptyBox => 'assets/lottie/woman_empty_box.json';
 
   /// List of all assets
-  List<String> get values =>
-      [empty, error, group, simpleAnalytics, womanEmptyBox];
+  List<String> get values => [empty, group, simpleAnalytics, womanEmptyBox];
 }
 
-class Assets {
-  const Assets._();
-
+abstract final class Assets {
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }

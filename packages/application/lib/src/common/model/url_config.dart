@@ -9,7 +9,7 @@ abstract class UrlConfig with _$UrlConfig {
     required String contactUs,
     required String privacyPolicyJa,
     required String howToUse,
-    required String developperXWeb,
-    required String developperXApp,
+    required String developerXWeb,
+    required String developerXApp,
   }) = _UrlConfig;
 }

@@ -249,6 +249,9 @@ class TranslationsItemCommonJa {
 	/// ja: 'いつほしい？'
 	String get wishSeason => 'いつほしい？';
 
+	/// ja: 'ほしい日'
+	String get wishDate => 'ほしい日';
+
 	/// ja: 'URL'
 	String get url => 'URL';
 
@@ -322,6 +325,8 @@ class TranslationsItemItemPageJa {
 
 	/// ja: '購入/購入予定'
 	String get purchase => '購入/購入予定';
+
+	late final TranslationsItemItemPageTransferJa transfer = TranslationsItemItemPageTransferJa.internal(_root);
 }
 
 // Path: item.itemEditPage
@@ -339,6 +344,7 @@ class TranslationsItemItemEditPageJa {
 	String get createTitle => 'ほしいものを作成';
 
 	late final TranslationsItemItemEditPageWishSeasonJa wishSeason = TranslationsItemItemEditPageWishSeasonJa.internal(_root);
+	late final TranslationsItemItemEditPageWishDateJa wishDate = TranslationsItemItemEditPageWishDateJa.internal(_root);
 
 	/// ja: 'URLを追加'
 	String get addUrl => 'URLを追加';
@@ -600,6 +606,36 @@ class TranslationsItemItemPagePurchaseSectionJa {
 	String get message => '以降の内容はグループ内の大人にだけ表示されます';
 }
 
+// Path: item.itemPage.transfer
+class TranslationsItemItemPageTransferJa {
+	TranslationsItemItemPageTransferJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '別のグループへ'
+	String get menu => '別のグループへ';
+
+	/// ja: '別のグループにコピー'
+	String get copy => '別のグループにコピー';
+
+	/// ja: '別のグループに移動'
+	String get move => '別のグループに移動';
+
+	/// ja: '送り先のグループを選択'
+	String get selectGroup => '送り先のグループを選択';
+
+	/// ja: 'コピー・移動できる他のグループがありません。'
+	String get noDestination => 'コピー・移動できる他のグループがありません。';
+
+	/// ja: 'コピーしました。'
+	String get copied => 'コピーしました。';
+
+	/// ja: '移動しました。'
+	String get moved => '移動しました。';
+}
+
 // Path: item.itemEditPage.wishSeason
 class TranslationsItemItemEditPageWishSeasonJa {
 	TranslationsItemItemEditPageWishSeasonJa.internal(this._root);
@@ -610,6 +646,18 @@ class TranslationsItemItemEditPageWishSeasonJa {
 
 	/// ja: '例：クリスマス、誕生日'
 	String get hint => '例：クリスマス、誕生日';
+}
+
+// Path: item.itemEditPage.wishDate
+class TranslationsItemItemEditPageWishDateJa {
+	TranslationsItemItemEditPageWishDateJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '具体的な日付が決まっている場合に入力して下さい'
+	String get hint => '具体的な日付が決まっている場合に入力して下さい';
 }
 
 // Path: item.purchasePage.surprise
@@ -683,7 +731,7 @@ class TranslationsSettingsSettingsPageLayoutJa {
 	// Translations
 
 	/// ja: 'レイアウト'
-	String get haed => 'レイアウト';
+	String get title => 'レイアウト';
 
 	/// ja: 'UIスタイル'
 	String get uiStyle => 'UIスタイル';
@@ -713,7 +761,7 @@ class TranslationsSettingsSettingsPageHelpJa {
 	String get contactUs => 'お問い合わせ';
 
 	/// ja: '開発者X (旧Twitter)'
-	String get developperTwitter => '開発者X (旧Twitter)';
+	String get developerX => '開発者X (旧Twitter)';
 
 	/// ja: 'プライバシーポリシー'
 	String get privacyPolicy => 'プライバシーポリシー';
@@ -870,6 +918,7 @@ extension on Translations {
 			'item.common.wanterNameLabel' => 'だれがほしい？',
 			'item.common.memo' => 'メモ',
 			'item.common.wishSeason' => 'いつほしい？',
+			'item.common.wishDate' => 'ほしい日',
 			'item.common.url' => 'URL',
 			'item.common.price' => '価格',
 			'item.common.purchasePlanDate' => 'かう予定の日',
@@ -892,9 +941,17 @@ extension on Translations {
 			'item.itemPage.purchaseSection.title' => '購入/購入予定情報',
 			'item.itemPage.purchaseSection.message' => '以降の内容はグループ内の大人にだけ表示されます',
 			'item.itemPage.purchase' => '購入/購入予定',
+			'item.itemPage.transfer.menu' => '別のグループへ',
+			'item.itemPage.transfer.copy' => '別のグループにコピー',
+			'item.itemPage.transfer.move' => '別のグループに移動',
+			'item.itemPage.transfer.selectGroup' => '送り先のグループを選択',
+			'item.itemPage.transfer.noDestination' => 'コピー・移動できる他のグループがありません。',
+			'item.itemPage.transfer.copied' => 'コピーしました。',
+			'item.itemPage.transfer.moved' => '移動しました。',
 			'item.itemEditPage.editTitle' => 'ほしいものを編集',
 			'item.itemEditPage.createTitle' => 'ほしいものを作成',
 			'item.itemEditPage.wishSeason.hint' => '例：クリスマス、誕生日',
+			'item.itemEditPage.wishDate.hint' => '具体的な日付が決まっている場合に入力して下さい',
 			'item.itemEditPage.addUrl' => 'URLを追加',
 			'item.purchasePage.purchase' => '購入/購入予定情報',
 			'item.purchasePage.surprise.label' => 'サプライズ',
@@ -908,14 +965,14 @@ extension on Translations {
 			'settings.settingsPage.account.account' => 'アカウント',
 			'settings.settingsPage.account.pushNotification.title' => 'プッシュ通知',
 			'settings.settingsPage.account.pushNotification.caption' => 'グループないでほしいものが追加された場合に通知が受け取れます',
-			'settings.settingsPage.layout.haed' => 'レイアウト',
+			'settings.settingsPage.layout.title' => 'レイアウト',
 			'settings.settingsPage.layout.uiStyle' => 'UIスタイル',
 			'settings.settingsPage.layout.themeMode' => 'テーマモード',
 			'settings.settingsPage.layout.colorTheme' => 'カラー',
 			'settings.settingsPage.help.head' => 'ヘルプ',
 			'settings.settingsPage.help.howToUse' => 'つかい方',
 			'settings.settingsPage.help.contactUs' => 'お問い合わせ',
-			'settings.settingsPage.help.developperTwitter' => '開発者X (旧Twitter)',
+			'settings.settingsPage.help.developerX' => '開発者X (旧Twitter)',
 			'settings.settingsPage.help.privacyPolicy' => 'プライバシーポリシー',
 			'settings.settingsPage.help.license' => 'ライセンス',
 			'settings.accountPage.title' => 'アカウント',

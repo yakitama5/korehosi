@@ -19,19 +19,19 @@ class ItemsCard extends StatelessWidget {
     final tt = Theme.of(context).textTheme;
 
     // 画像は先頭1件を利用する
-    final image = item.images?.firstOrNull;
+    final imageUrl = item.primaryImageUrl;
 
     return _ItemsCommonStyleCard(
       onTap: onTap,
       head: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-        child: (image == null)
+        child: (imageUrl == null)
             ? const ItemsEmptyImage(
                 width: double.infinity,
                 height: double.infinity,
               )
             : NetworkImageWithPlaceholder(
-                imageUrl: image.url,
+                imageUrl: imageUrl,
                 fit: BoxFit.cover,
               ),
       ),

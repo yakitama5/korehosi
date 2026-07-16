@@ -4,7 +4,6 @@ import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/theme.dart';
 import 'package:packages_designsystem/widgets.dart';
@@ -114,7 +113,7 @@ class _AppleSignInButton extends HookConsumerWidget with PresentationMixin {
       child: ExpandWidthContainer(
         child: OutlinedButton.icon(
           onPressed: () => _onSignInWithApple(context, ref),
-          icon: Icon(MdiIcons.apple, color: colorScheme.onSurface),
+          icon: Icon(Icons.apple, color: colorScheme.onSurface),
           label: Text(i18n.settings.accountLinkPage.signInWithApple),
         ),
       ),

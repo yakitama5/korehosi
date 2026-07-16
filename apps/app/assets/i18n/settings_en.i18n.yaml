@@ -4,7 +4,7 @@ settingsPage:
     head: Account
     account: Account
   layout:
-    haed: Layout
+    title: Layout
     uiStyle: UI Style
     themeMode: ThemeMode
     colorTheme: Colors
@@ -12,9 +12,9 @@ settingsPage:
     head: Help
     howToUse: HowToUse
     contactUs: Contact us
-    developperTwitter: Developper
+    developerX: Developer
     privacyPolicy: PrivacyPolicy
-    licencse: License
+    license: License
 accountPage:
   title: Account
   link:

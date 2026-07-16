@@ -18,10 +18,10 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
 
   @override
   GroupId? fetchCurrentGroupId() {
-    final value = ref.watch(stringPreferenceProvider(Preferences.curentGroup));
+    final value = ref.watch(stringPreferenceProvider(Preferences.currentGroup));
 
     // 未設定の場合はNULLを返却
-    if (value == Preferences.curentGroup.defaultValue) {
+    if (value == Preferences.currentGroup.defaultValue) {
       return null;
     }
 
@@ -30,12 +30,12 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
 
   @override
   Future<void> setCurrentGroupId({required GroupId groupId}) => ref
-      .watch(stringPreferenceProvider(Preferences.curentGroup).notifier)
+      .watch(stringPreferenceProvider(Preferences.currentGroup).notifier)
       .update(groupId.value);
 
   @override
   Future<void> removeCurrentGroupId() => ref
-      .watch(stringPreferenceProvider(Preferences.curentGroup).notifier)
+      .watch(stringPreferenceProvider(Preferences.currentGroup).notifier)
       .remove();
 
   @override
@@ -64,7 +64,7 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
     return ref
         .watch(
           stringWithStringFamilyPreferenceProvider(
-            Preferences.curentGroup,
+            Preferences.currentGroup,
             userId.value,
           ).notifier,
         )
@@ -79,7 +79,7 @@ class SharedPreferenceUserSessionRepository implements UserSessionRepository {
     return ref
         .watch(
           stringWithStringFamilyPreferenceProvider(
-            Preferences.curentGroup,
+            Preferences.currentGroup,
             userId.value,
           ).notifier,
         )

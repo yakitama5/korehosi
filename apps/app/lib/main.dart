@@ -10,7 +10,7 @@ import 'package:packages_application/i18n.dart';
 import 'package:packages_dependency_override/dependency_override.dart';
 import 'package:packages_designsystem/i18n.dart';
 
-void main() async {
+Future<void> main() async {
   // アプリの初期処理
   final initializedResult = await AppInitializer.initialize();
 

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UrlConfig {
 
- String get contactUs; String get privacyPolicyJa; String get howToUse; String get developperXWeb; String get developperXApp;
+ String get contactUs; String get privacyPolicyJa; String get howToUse; String get developerXWeb; String get developerXApp;
 /// Create a copy of UrlConfig
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $UrlConfigCopyWith<UrlConfig> get copyWith => _$UrlConfigCopyWithImpl<UrlConfig>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UrlConfig&&(identical(other.contactUs, contactUs) || other.contactUs == contactUs)&&(identical(other.privacyPolicyJa, privacyPolicyJa) || other.privacyPolicyJa == privacyPolicyJa)&&(identical(other.howToUse, howToUse) || other.howToUse == howToUse)&&(identical(other.developperXWeb, developperXWeb) || other.developperXWeb == developperXWeb)&&(identical(other.developperXApp, developperXApp) || other.developperXApp == developperXApp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UrlConfig&&(identical(other.contactUs, contactUs) || other.contactUs == contactUs)&&(identical(other.privacyPolicyJa, privacyPolicyJa) || other.privacyPolicyJa == privacyPolicyJa)&&(identical(other.howToUse, howToUse) || other.howToUse == howToUse)&&(identical(other.developerXWeb, developerXWeb) || other.developerXWeb == developerXWeb)&&(identical(other.developerXApp, developerXApp) || other.developerXApp == developerXApp));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,contactUs,privacyPolicyJa,howToUse,developperXWeb,developperXApp);
+int get hashCode => Object.hash(runtimeType,contactUs,privacyPolicyJa,howToUse,developerXWeb,developerXApp);
 
 @override
 String toString() {
-  return 'UrlConfig(contactUs: $contactUs, privacyPolicyJa: $privacyPolicyJa, howToUse: $howToUse, developperXWeb: $developperXWeb, developperXApp: $developperXApp)';
+  return 'UrlConfig(contactUs: $contactUs, privacyPolicyJa: $privacyPolicyJa, howToUse: $howToUse, developerXWeb: $developerXWeb, developerXApp: $developerXApp)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $UrlConfigCopyWith<$Res>  {
   factory $UrlConfigCopyWith(UrlConfig value, $Res Function(UrlConfig) _then) = _$UrlConfigCopyWithImpl;
 @useResult
 $Res call({
- String contactUs, String privacyPolicyJa, String howToUse, String developperXWeb, String developperXApp
+ String contactUs, String privacyPolicyJa, String howToUse, String developerXWeb, String developerXApp
 });
 
 
@@ -62,13 +62,13 @@ class _$UrlConfigCopyWithImpl<$Res>
 
 /// Create a copy of UrlConfig
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? contactUs = null,Object? privacyPolicyJa = null,Object? howToUse = null,Object? developperXWeb = null,Object? developperXApp = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? contactUs = null,Object? privacyPolicyJa = null,Object? howToUse = null,Object? developerXWeb = null,Object? developerXApp = null,}) {
   return _then(_self.copyWith(
 contactUs: null == contactUs ? _self.contactUs : contactUs // ignore: cast_nullable_to_non_nullable
 as String,privacyPolicyJa: null == privacyPolicyJa ? _self.privacyPolicyJa : privacyPolicyJa // ignore: cast_nullable_to_non_nullable
 as String,howToUse: null == howToUse ? _self.howToUse : howToUse // ignore: cast_nullable_to_non_nullable
-as String,developperXWeb: null == developperXWeb ? _self.developperXWeb : developperXWeb // ignore: cast_nullable_to_non_nullable
-as String,developperXApp: null == developperXApp ? _self.developperXApp : developperXApp // ignore: cast_nullable_to_non_nullable
+as String,developerXWeb: null == developerXWeb ? _self.developerXWeb : developerXWeb // ignore: cast_nullable_to_non_nullable
+as String,developerXApp: null == developerXApp ? _self.developerXApp : developerXApp // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -154,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String contactUs,  String privacyPolicyJa,  String howToUse,  String developperXWeb,  String developperXApp)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String contactUs,  String privacyPolicyJa,  String howToUse,  String developerXWeb,  String developerXApp)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UrlConfig() when $default != null:
-return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.developperXWeb,_that.developperXApp);case _:
+return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.developerXWeb,_that.developerXApp);case _:
   return orElse();
 
 }
@@ -175,10 +175,10 @@ return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.devel
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String contactUs,  String privacyPolicyJa,  String howToUse,  String developperXWeb,  String developperXApp)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String contactUs,  String privacyPolicyJa,  String howToUse,  String developerXWeb,  String developerXApp)  $default,) {final _that = this;
 switch (_that) {
 case _UrlConfig():
-return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.developperXWeb,_that.developperXApp);case _:
+return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.developerXWeb,_that.developerXApp);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +195,10 @@ return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.devel
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String contactUs,  String privacyPolicyJa,  String howToUse,  String developperXWeb,  String developperXApp)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String contactUs,  String privacyPolicyJa,  String howToUse,  String developerXWeb,  String developerXApp)?  $default,) {final _that = this;
 switch (_that) {
 case _UrlConfig() when $default != null:
-return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.developperXWeb,_that.developperXApp);case _:
+return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.developerXWeb,_that.developerXApp);case _:
   return null;
 
 }
@@ -210,14 +210,14 @@ return $default(_that.contactUs,_that.privacyPolicyJa,_that.howToUse,_that.devel
 
 
 class _UrlConfig implements UrlConfig {
-  const _UrlConfig({required this.contactUs, required this.privacyPolicyJa, required this.howToUse, required this.developperXWeb, required this.developperXApp});
+  const _UrlConfig({required this.contactUs, required this.privacyPolicyJa, required this.howToUse, required this.developerXWeb, required this.developerXApp});
   
 
 @override final  String contactUs;
 @override final  String privacyPolicyJa;
 @override final  String howToUse;
-@override final  String developperXWeb;
-@override final  String developperXApp;
+@override final  String developerXWeb;
+@override final  String developerXApp;
 
 /// Create a copy of UrlConfig
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +229,16 @@ _$UrlConfigCopyWith<_UrlConfig> get copyWith => __$UrlConfigCopyWithImpl<_UrlCon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UrlConfig&&(identical(other.contactUs, contactUs) || other.contactUs == contactUs)&&(identical(other.privacyPolicyJa, privacyPolicyJa) || other.privacyPolicyJa == privacyPolicyJa)&&(identical(other.howToUse, howToUse) || other.howToUse == howToUse)&&(identical(other.developperXWeb, developperXWeb) || other.developperXWeb == developperXWeb)&&(identical(other.developperXApp, developperXApp) || other.developperXApp == developperXApp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UrlConfig&&(identical(other.contactUs, contactUs) || other.contactUs == contactUs)&&(identical(other.privacyPolicyJa, privacyPolicyJa) || other.privacyPolicyJa == privacyPolicyJa)&&(identical(other.howToUse, howToUse) || other.howToUse == howToUse)&&(identical(other.developerXWeb, developerXWeb) || other.developerXWeb == developerXWeb)&&(identical(other.developerXApp, developerXApp) || other.developerXApp == developerXApp));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,contactUs,privacyPolicyJa,howToUse,developperXWeb,developperXApp);
+int get hashCode => Object.hash(runtimeType,contactUs,privacyPolicyJa,howToUse,developerXWeb,developerXApp);
 
 @override
 String toString() {
-  return 'UrlConfig(contactUs: $contactUs, privacyPolicyJa: $privacyPolicyJa, howToUse: $howToUse, developperXWeb: $developperXWeb, developperXApp: $developperXApp)';
+  return 'UrlConfig(contactUs: $contactUs, privacyPolicyJa: $privacyPolicyJa, howToUse: $howToUse, developerXWeb: $developerXWeb, developerXApp: $developerXApp)';
 }
 
 
@@ -249,7 +249,7 @@ abstract mixin class _$UrlConfigCopyWith<$Res> implements $UrlConfigCopyWith<$Re
   factory _$UrlConfigCopyWith(_UrlConfig value, $Res Function(_UrlConfig) _then) = __$UrlConfigCopyWithImpl;
 @override @useResult
 $Res call({
- String contactUs, String privacyPolicyJa, String howToUse, String developperXWeb, String developperXApp
+ String contactUs, String privacyPolicyJa, String howToUse, String developerXWeb, String developerXApp
 });
 
 
@@ -266,13 +266,13 @@ class __$UrlConfigCopyWithImpl<$Res>
 
 /// Create a copy of UrlConfig
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? contactUs = null,Object? privacyPolicyJa = null,Object? howToUse = null,Object? developperXWeb = null,Object? developperXApp = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? contactUs = null,Object? privacyPolicyJa = null,Object? howToUse = null,Object? developerXWeb = null,Object? developerXApp = null,}) {
   return _then(_UrlConfig(
 contactUs: null == contactUs ? _self.contactUs : contactUs // ignore: cast_nullable_to_non_nullable
 as String,privacyPolicyJa: null == privacyPolicyJa ? _self.privacyPolicyJa : privacyPolicyJa // ignore: cast_nullable_to_non_nullable
 as String,howToUse: null == howToUse ? _self.howToUse : howToUse // ignore: cast_nullable_to_non_nullable
-as String,developperXWeb: null == developperXWeb ? _self.developperXWeb : developperXWeb // ignore: cast_nullable_to_non_nullable
-as String,developperXApp: null == developperXApp ? _self.developperXApp : developperXApp // ignore: cast_nullable_to_non_nullable
+as String,developerXWeb: null == developerXWeb ? _self.developerXWeb : developerXWeb // ignore: cast_nullable_to_non_nullable
+as String,developerXApp: null == developerXApp ? _self.developerXApp : developerXApp // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

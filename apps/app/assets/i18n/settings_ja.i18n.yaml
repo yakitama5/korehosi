@@ -9,7 +9,7 @@ settingsPage:
       title: プッシュ通知
       caption: グループないでほしいものが追加された場合に通知が受け取れます
   layout:
-    haed: レイアウト
+    title: レイアウト
     uiStyle: UIスタイル
     themeMode: テーマモード
     colorTheme: カラー
@@ -17,7 +17,7 @@ settingsPage:
     head: ヘルプ
     howToUse: つかい方
     contactUs: お問い合わせ
-    developperTwitter: 開発者X (旧Twitter)
+    developerX: 開発者X (旧Twitter)
     privacyPolicy: プライバシーポリシー
     license: ライセンス
 accountPage:

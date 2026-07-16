@@ -4,7 +4,6 @@ import 'package:flutter_app/app/pages/settings/components/themed_settings_list.d
 import 'package:flutter_app/i18n/strings.g.dart';
 import 'package:flutter_settings_ui/flutter_settings_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:packages_application/user.dart';
 import 'package:packages_designsystem/widgets.dart';
 
@@ -33,7 +32,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
                   onToggle: (value) => _onToggleGoogle(context, ref, value),
                 ),
                 SettingsTile.switchTile(
-                  leading: Icon(MdiIcons.apple, color: colorScheme.onSurface),
+                  leading: Icon(Icons.apple, color: colorScheme.onSurface),
                   title: Text(messages.link.apple),
                   initialValue: data?.linkedApple,
                   onToggle: (value) => _onToggleApple(context, ref, value),
