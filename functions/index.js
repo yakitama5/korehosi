@@ -297,6 +297,7 @@ exports.v2OnCreateMessage = onDocumentCreated(
               body: messageData.body,
             },
             data: {
+              groupId: event.params.groupId,
               path: messageData.path,
             },
             android: {

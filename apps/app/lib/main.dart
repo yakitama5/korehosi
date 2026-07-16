@@ -19,9 +19,10 @@ Future<void> main() async {
       // 自動リトライは無効化
       retry: (_, _) => null,
       overrides: [
-        // 初期ロケーションの設定
-        initialLocationProvider.overrideWithValue(
-          initializedResult.initialMessage?.path,
+        // 通知から起動した場合も、認証とグループ選択後に遷移する
+        initialLocationProvider.overrideWithValue(null),
+        initialNotificationMessageProvider.overrideWith(
+          (ref) => initializedResult.initialMessage,
         ),
 
         // 起動時に取得したアプリの基本情報を設定
