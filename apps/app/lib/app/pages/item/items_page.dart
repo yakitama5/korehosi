@@ -21,7 +21,7 @@ class ItemsPage extends HookConsumerWidget {
     final scrollController = useScrollController();
 
     return Scaffold(
-      body: RefreshIndicator(
+      body: ExpressiveRefreshIndicator(
         onRefresh: () => ref.read(itemUsecaseProvider).refreshSearchItems(),
         child: CustomScrollView(
           slivers: [
