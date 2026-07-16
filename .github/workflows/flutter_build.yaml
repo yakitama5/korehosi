@@ -107,6 +107,13 @@ jobs:
           key: pub-${{ runner.os }}-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: pub-${{ runner.os }}-
 
+      - name: Python のセットアップ
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: .github/requirements-cd.txt
+
       - name: Melos & FlutterFire & CodeMagic CLI のインストール
         run: |
           dart pub global activate melos
@@ -198,6 +205,13 @@ jobs:
           path: ~/.pub-cache
           key: pub-${{ runner.os }}-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: pub-${{ runner.os }}-
+
+      - name: Python のセットアップ
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: .github/requirements-cd.txt
 
       - name: Melos & CodeMagic CLI のインストール
         run: |
