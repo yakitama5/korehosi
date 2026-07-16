@@ -7,6 +7,11 @@ on:
   push:
     branches:
       - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   flutter_test:
     # if: ${{ false }}
@@ -19,10 +24,9 @@ jobs:
       - name: 💾Checkout
         uses: actions/checkout@v4
 
-      # セットアップ
       - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
-        env: # Set the secret as an input
+        env:
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
           ENV_FILE: ${{ secrets.ENV_FILE }}
           DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
@@ -31,4 +35,4 @@ jobs:
 
       # 実行
       - name: 🧪Test
-        run: melos run test:ci
+        run: dart run melos run test:ci --no-select

@@ -184,7 +184,7 @@ melos:
         dirExists:
         - test
     test:ci:
-      run: flutter test --dart-define=CI=true
+      run: flutter test --no-pub --dart-define=CI=true
       exec:
         failFast: true
       packageFilters:

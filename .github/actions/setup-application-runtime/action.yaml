@@ -1,43 +1,34 @@
 name: "Setup Application Runtime"
 description: "Setup application runtime for Flutter"
 
+inputs:
+  code-generation:
+    description: "Code generation mode: env, all, or none"
+    required: false
+    default: "env"
+
 runs:
   using: "composite"
   steps:
-  
-    # https://github.com/kuhnroyal/flutter-fvm-config-action
-    - name: ⚙️Fetch flutter config
+
+    # This action parses .fvmrc and installs Flutter via subosito/flutter-action.
+    - name: ⚙️Setup Flutter
       uses: kuhnroyal/flutter-fvm-config-action/setup@v3
-      id: fvm-config-action
 
-    # https://github.com/subosito/flutter-action
-    - name: ⚙️Setup flutter
-      uses: subosito/flutter-action@1c5eb12d812966ca84680edc38353a0851c8fd56 # v2.14.0
-      with:
-        flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
-        channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
-        cache: true
-
-    # NOTE: 後述の melosコマンドが実行できないためPATHを通します。
-    # PUB_CACHE: $HOME/.pub-cache に設定
-    - name: ⚙️Export PUB_CACHE
-      run: |
-        echo "PUB_CACHE=$HOME/.pub-cache" >> "$GITHUB_ENV"
-        echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+    - name: 📦Resolve dependencies
+      run: flutter pub get
       shell: bash
 
-    - name: 🏃‍➡️Setup melos
-      run: |
-        MELOS_VERSION=$(cat pubspec.lock | yq ".packages.melos.version" -r)
-        dart pub global activate melos $MELOS_VERSION
-        dart run melos bootstrap
+    - name: 🔐Generate environment code
+      if: inputs.code-generation == 'env'
+      run: >-
+        dart run build_runner build --workspace --force-jit
+        --build-filter=package:infrastructure_firebase/env/env.g.dart
+        --build-filter=package:infrastructure_firebase/env/env.dev.g.dart
+        --build-filter=package:infrastructure_revenue_cat/env/env.g.dart
       shell: bash
 
-    - name: 🔥Setup FlutterFire
-      run: |
-        dart pub global activate flutterfire_cli
-      shell: bash
-    
-    - name: ♻️Regenerate Code
-      run: melos run gen
+    - name: ♻️Regenerate all code
+      if: inputs.code-generation == 'all'
+      run: dart run build_runner build --workspace --force-jit
       shell: bash
