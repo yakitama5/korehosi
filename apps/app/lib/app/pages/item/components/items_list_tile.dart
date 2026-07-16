@@ -72,7 +72,7 @@ class ItemsListTile extends StatelessWidget with PresentationMixin {
       title: messages.title,
       message: messages.message(name: item.name),
     );
-    if (result != OkCancelResult.ok) {
+    if (result != OkCancelResult.ok || !context.mounted) {
       return;
     }
 
