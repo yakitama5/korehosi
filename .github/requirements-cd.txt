@@ -1,0 +1,1 @@
+codemagic-cli-tools==0.69.0

@@ -100,7 +100,7 @@ melos:
       description: iOS向けにモバイルアプリをビルドする
       run:
         melos exec --scope="flutter_app" -- flutter build
-        appbundle --dart-define-from-file=dart_defines/prod.json
+        appbundle --no-pub --dart-define-from-file=dart_defines/prod.json
 
     # コード生成関連
     gen:
