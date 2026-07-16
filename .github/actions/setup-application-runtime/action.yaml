@@ -3,9 +3,9 @@ description: "Setup application runtime for Flutter"
 
 inputs:
   code-generation:
-    description: "Code generation mode: env, all, or none"
+    description: "Code generation mode: all or none"
     required: false
-    default: "env"
+    default: "all"
 
 runs:
   using: "composite"
@@ -17,15 +17,6 @@ runs:
 
     - name: 📦Resolve dependencies
       run: flutter pub get
-      shell: bash
-
-    - name: 🔐Generate environment code
-      if: inputs.code-generation == 'env'
-      run: >-
-        dart run build_runner build --workspace --force-jit
-        --build-filter=package:infrastructure_firebase/env/env.g.dart
-        --build-filter=package:infrastructure_firebase/env/env.dev.g.dart
-        --build-filter=package:infrastructure_revenue_cat/env/env.g.dart
       shell: bash
 
     - name: ♻️Regenerate all code
