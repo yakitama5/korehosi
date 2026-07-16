@@ -30,6 +30,7 @@ dependencies:
   intl: ^0.20.2
   linked_scroll_controller: ^0.2.0
   lottie: ^3.3.2
+  material3_indicators: ^2026.7.12+2
   material_color_utilities: ^0.13.0
   nested: ^1.0.0
   packages_application:

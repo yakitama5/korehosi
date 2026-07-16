@@ -54,6 +54,7 @@ melos:
         hooks_riverpod: ^3.0.3
         intl: ^0.20.2
         json_annotation: ^4.9.0
+        material3_indicators: ^2026.7.12+2
         nested: ^1.0.0
         reactive_forms: ^18.2.0
         responsive_framework: ^1.5.1

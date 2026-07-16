@@ -5,7 +5,10 @@ import 'package:packages_domain/user.dart';
 class MockMessagingService extends MessagingService {
   @override
   Future<NotificationMessage?> getInitialMessage() async {
-    return const NotificationMessage(path: '/items/item/PFe1fICV0PgqlbTWNrMo');
+    return NotificationMessage(
+      groupId: GroupId('mock-group'),
+      path: '/items/item/PFe1fICV0PgqlbTWNrMo',
+    );
   }
 
   @override

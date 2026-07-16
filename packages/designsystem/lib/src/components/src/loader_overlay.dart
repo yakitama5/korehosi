@@ -3,6 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/common.dart';
 
+import 'expressive_loading_indicator.dart';
+
 class LoaderOverlay extends SingleChildStatelessWidget {
   const LoaderOverlay({super.key, super.child});
 
@@ -20,7 +22,7 @@ class LoaderOverlay extends SingleChildStatelessWidget {
 
             return const ColoredBox(
               color: Colors.black54,
-              child: Center(child: CircularProgressIndicator.adaptive()),
+              child: Center(child: ExpressiveLoadingIndicator()),
             );
           },
         ),

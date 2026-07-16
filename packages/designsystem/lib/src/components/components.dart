@@ -19,6 +19,8 @@ export 'src/edit_icon_button.dart';
 export 'src/edit_icon_container.dart';
 export 'src/error_view.dart';
 export 'src/expand_width_container.dart';
+export 'src/expressive_loading_indicator.dart';
+export 'src/expressive_refresh_indicator.dart';
 export 'src/gauge_chart.dart';
 export 'src/google_icon.dart';
 export 'src/image_aspect_ratio.dart';

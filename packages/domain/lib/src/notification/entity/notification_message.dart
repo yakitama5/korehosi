@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:packages_domain/group.dart';
 
 part 'notification_message.freezed.dart';
 
@@ -11,6 +12,7 @@ abstract class NotificationMessage with _$NotificationMessage {
   const factory NotificationMessage({
     NotificationMessageSenderId? senderId,
     String? category,
+    GroupId? groupId,
     required String? path,
     String? from,
     NotificationMessageId? messageId,

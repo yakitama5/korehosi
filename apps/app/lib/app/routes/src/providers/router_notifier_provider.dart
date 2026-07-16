@@ -19,13 +19,12 @@ class RouterNotifier extends _$RouterNotifier implements Listenable {
 
   @override
   Future<void> build() async {
-    listenSelf((previous, next) {
-      if (state.isLoading) {
-        return;
-      }
-
-      routerListener?.call();
-    });
+    // GoRouter に認証状態の変化を通知し、redirect を再評価する。
+    // RouterNotifier 自身の state は認証状態に依存しないため、listenSelf では
+    // サインイン/サインアウトを検知できない。
+    ref
+      ..listen(authStatusProvider, (_, _) => routerListener?.call())
+      ..listen(authUserProvider, (_, _) => routerListener?.call());
   }
 
   Future<String?> redirect(

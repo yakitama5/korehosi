@@ -54,6 +54,8 @@ class ItemsView extends HookConsumerWidget {
                   key: ValueKey(item),
                   item: item,
                   onTap: () => onSelect(context, ref, item.id),
+                  onDelete: () =>
+                      ref.read(itemUsecaseProvider).delete(itemId: item.id),
                 ),
               };
             },

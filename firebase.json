@@ -59,6 +59,15 @@
   "storage": {
     "rules": "storage.rules"
   },
+  "auth": {
+    "providers": {
+      "anonymous": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "これほしい！",
+        "supportEmail": "yakitamagmo@gmail.com"
+      }
+    }
+  },
   "remoteconfig": {
     "template": "remoteconfig.template.json"
   }

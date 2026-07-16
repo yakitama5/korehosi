@@ -4,6 +4,8 @@ import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/material.dart';
 import 'package:packages_designsystem/i18n.dart';
 
+import 'expressive_loading_indicator.dart';
+
 class ImageCropPage extends StatefulWidget {
   const ImageCropPage({super.key, required this.image});
 
@@ -50,7 +52,7 @@ class _ImageCropPageState extends State<ImageCropPage> {
             const Positioned.fill(
               child: ColoredBox(
                 color: Color(0x66000000),
-                child: Center(child: CircularProgressIndicator()),
+                child: Center(child: ExpressiveLoadingIndicator()),
               ),
             ),
         ],

@@ -22,7 +22,7 @@ class ShareLinkPage extends HookConsumerWidget with PresentationMixin {
 
     // 画面としてはずっとぐるぐる回るだけ
     return const Scaffold(
-      body: Center(child: CircularProgressIndicator.adaptive()),
+      body: Center(child: ExpressiveLoadingIndicator()),
     );
   }
 

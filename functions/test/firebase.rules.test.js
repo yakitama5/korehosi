@@ -18,7 +18,7 @@ const {
   uploadString,
 } = require('firebase/storage');
 
-const projectId = 'demo-korehosi';
+const projectId = process.env.GCLOUD_PROJECT || 'demo-korehosi';
 const groupId = 'family';
 const memberId = 'member';
 const outsiderId = 'outsider';

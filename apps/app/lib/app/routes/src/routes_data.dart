@@ -24,6 +24,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:packages_application/group.dart';
 import 'package:packages_application/item.dart';
+import 'package:packages_designsystem/widgets.dart';
 import 'package:packages_domain/group.dart';
 import 'package:packages_domain/item.dart';
 
@@ -69,7 +70,7 @@ class RootRouteData extends GoRouteData with $RootRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       // ぐるぐる回すだけ
-      const Scaffold(body: Center(child: CircularProgressIndicator.adaptive()));
+      const Scaffold(body: Center(child: ExpressiveLoadingIndicator()));
 }
 
 final GlobalKey<NavigatorState> _shellNavigatorKey =

@@ -191,7 +191,7 @@ class _ListTile extends HookConsumerWidget with PresentationMixin {
       ) => ErrorView(error, stackTrace),
 
       // TODO(yakitama5): 読み込み中表示を後から作ること
-      _ => const CircularProgressIndicator(),
+      _ => const ExpressiveLoadingIndicator(),
     };
   }
 

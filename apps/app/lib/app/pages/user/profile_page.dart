@@ -21,13 +21,13 @@ class ProfilePage extends HookConsumerWidget {
       skipLoadingOnRefresh: true,
       skipLoadingOnReload: true,
       data: (data) => data == null
-          ? const CircularProgressIndicator()
+          ? const ExpressiveLoadingIndicator()
           : UserFormModelFormBuilder(
               model: UserFormModel(name: data.name, ageGroup: data.ageGroup),
               builder: (context, formModel, child) => const _Form(),
             ),
       error: ErrorView.new,
-      loading: CircularProgressIndicator.new,
+      loading: ExpressiveLoadingIndicator.new,
     );
   }
 }

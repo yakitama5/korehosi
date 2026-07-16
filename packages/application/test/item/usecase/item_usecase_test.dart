@@ -96,6 +96,45 @@ void main() {
 
     expect(repository.deletedItemId, isNull);
   });
+
+  test('searchAllItems combines every page in order', () async {
+    final repository = _FakeItemRepository(
+      searchResults: {
+        1: PageInfo(
+          items: List.generate(10, _searchItem),
+          totalCount: 12,
+        ),
+        2: PageInfo(
+          items: List.generate(2, (index) => _searchItem(index + 10)),
+          totalCount: 12,
+        ),
+      },
+    );
+    final container = _container(
+      sourceGroup: sourceGroup,
+      repository: repository,
+    );
+    addTearDown(container.dispose);
+
+    final result = await container
+        .read(itemUsecaseProvider)
+        .searchAllItems(
+          groupId: sourceGroup.id,
+          ageGroup: AgeGroup.adult,
+          query: const ItemsSearchQuery(
+            purchaseStatuses: [],
+            itemsOrder: ItemsOrder(
+              key: ItemOrderKey.createdAt,
+              sortOrder: SortOrder.desc,
+            ),
+          ),
+        );
+
+    expect(repository.searchedPages, [1, 2]);
+    expect(result.map((item) => item.id.value), [
+      for (var index = 0; index < 12; index++) 'item-$index',
+    ]);
+  });
 }
 
 ProviderContainer _container({
@@ -135,10 +174,15 @@ class _FakeStorageService implements StorageService {
 }
 
 class _FakeItemRepository implements ItemRepository {
-  _FakeItemRepository({this.events, this.failToAdd = false});
+  _FakeItemRepository({
+    this.events,
+    this.failToAdd = false,
+    this.searchResults = const {},
+  });
 
   final List<String>? events;
   final bool failToAdd;
+  final Map<int, PageInfo<Item>> searchResults;
 
   GroupId? addedGroupId;
   List<XFile>? uploadImages;
@@ -152,6 +196,7 @@ class _FakeItemRepository implements ItemRepository {
   String? memo;
   GroupId? deletedGroupId;
   ItemId? deletedItemId;
+  final searchedPages = <int>[];
 
   @override
   Future<Item> add({
@@ -212,7 +257,10 @@ class _FakeItemRepository implements ItemRepository {
     required GroupId groupId,
     required AgeGroup ageGroup,
     required ItemsSearchQuery query,
-  }) async => const PageInfo(items: [], totalCount: 0);
+  }) async {
+    searchedPages.add(page);
+    return searchResults[page] ?? const PageInfo(items: [], totalCount: 0);
+  }
 
   @override
   Future<void> update({
@@ -234,6 +282,15 @@ class _FakeItemRepository implements ItemRepository {
 final _item = Item(
   id: ItemId('copied'),
   name: 'copied',
+  wishRank: 1,
+  purchaseStatus: PurchaseStatus.notPurchased,
+  createdAt: DateTime(2026),
+  updatedAt: DateTime(2026),
+);
+
+Item _searchItem(int index) => Item(
+  id: ItemId('item-$index'),
+  name: 'item-$index',
   wishRank: 1,
   purchaseStatus: PurchaseStatus.notPurchased,
   createdAt: DateTime(2026),

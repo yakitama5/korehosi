@@ -60,7 +60,7 @@ class AccountPage extends HookConsumerWidget with PresentationMixin {
         ),
       ),
       error: ErrorView.new,
-      loading: CircularProgressIndicator.new,
+      loading: ExpressiveLoadingIndicator.new,
     );
   }
 

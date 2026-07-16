@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/routes/src/providers/go_router_provider.dart';
+import 'package:flutter_app/app/routes/src/notification_navigation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nested/nested.dart';
 import 'package:packages_application/common.dart';
@@ -33,13 +33,11 @@ class BackgroundNotificationClickListener extends SingleChildStatelessWidget {
     WidgetRef ref,
     NotificationMessage? message,
   ) async {
-    final path = message?.path;
     logger.d('Background Click');
-    if (path == null) {
+    if (message == null) {
       return;
     }
 
-    // GoRouterの定義よりも上位階層のため、Providerから遷移先を指定する
-    ref.read(goRouterProvider).go(path);
+    await navigateFromNotification(ref, message);
   }
 }
