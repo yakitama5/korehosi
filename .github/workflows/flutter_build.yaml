@@ -129,8 +129,7 @@ jobs:
         run: |
           mkdir -p apps/app/dart_defines
           echo -n "$DART_DEFINE_JSON" | base64 -d > apps/app/dart_defines/prod.json
-          for ENV_PATH in +            packages/infrastructure/firebase/scripts/env +            packages/infrastructure/revenue_cat/scripts/env
-          do
+          for ENV_PATH in packages/infrastructure/firebase/scripts/env packages/infrastructure/revenue_cat/scripts/env; do
             mkdir -p "$ENV_PATH"
             echo -n "$ENV_FILE" | base64 -d > "$ENV_PATH/.env"
             echo -n "$DEV_ENV_FILE" | base64 -d > "$ENV_PATH/.env.dev"
@@ -228,8 +227,7 @@ jobs:
         run: |
           mkdir -p apps/app/dart_defines
           echo -n "$DART_DEFINE_JSON" | base64 -d > apps/app/dart_defines/prod.json
-          for ENV_PATH in +            packages/infrastructure/firebase/scripts/env +            packages/infrastructure/revenue_cat/scripts/env
-          do
+          for ENV_PATH in packages/infrastructure/firebase/scripts/env packages/infrastructure/revenue_cat/scripts/env; do
             mkdir -p "$ENV_PATH"
             echo -n "$ENV_FILE" | base64 -d > "$ENV_PATH/.env"
             echo -n "$DEV_ENV_FILE" | base64 -d > "$ENV_PATH/.env.dev"
@@ -271,5 +269,4 @@ jobs:
       - name: Google Play へパブリッシュ（内部テストトラック）
         env:
           GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
-        run: |
-          google-play bundles publish +            --bundle apps/app/build/app/outputs/bundle/release/app-release.aab +            --track internal
+        run: google-play bundles publish --bundle apps/app/build/app/outputs/bundle/release/app-release.aab --track internal
