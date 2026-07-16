@@ -7,10 +7,10 @@ import 'group_provider.dart';
 
 part 'group_detail_providers.g.dart';
 
-// ignore: avoid_classes_with_only_static_members
 /// グループの明細を管理するProvider
 /// 明細を表示する画面郡で横断して利用する状態を管理する
 /// IDを管理するProviderを `override`することを前提に処理を組む
+// ignore: avoid_classes_with_only_static_members
 class GroupDetailProviders {
   static DetailPageGroupIdProvider get groupIdProvider => _groupIdProvider;
   static DetailPageGroupProvider get groupProvider => _groupProvider;

@@ -15,8 +15,8 @@ class PremiumPrefixContainer extends SingleChildStatelessWidget {
     return Row(
       children: [
         if (premium)
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
+          const Padding(
+            padding: EdgeInsets.only(right: 8),
             child: Icon(Icons.workspace_premium),
           ),
         Expanded(child: child ?? const SizedBox.shrink()),
