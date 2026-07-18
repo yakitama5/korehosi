@@ -13,25 +13,27 @@ const {
 const {
   log,
   error,
+  warn,
 } = require('firebase-functions/logger');
 const {
   onSchedule,
 } = require('firebase-functions/scheduler');
-const _ = require('lodash');
+const {
+  getChildPurchaseStatus,
+  getPurchaseStatus,
+} = require('./src/purchase-status');
+const {createJoinGroupHandler} = require('./src/join-group');
+const {createUserSyncHandler} = require('./src/user-sync');
+const {createMessageHandler} = require('./src/notifications');
+const {createSuggestionHandler} = require('./src/name-suggestions');
+const {createWishReminderHandler} = require('./src/wish-reminder');
+const {createDeleteUserHandler} = require('./src/delete-user');
 
 admin.initializeApp();
 const tokyoTimeZone = 'Asia/Tokyo';
 
 // コレクションパス
 const GROUPS_PATH = 'groups';
-const PARTICIPANTS_PATH = 'participants';
-const USERS_PATH = 'users';
-const TOKENS_PATH = 'fcmTokens';
-
-// 購入状況
-const NOT_PURCHASED = 'notPurchased';
-const PURCHASE_PLAN = 'purchasePlan;';
-const PURCHASED = 'purchased';
 
 // Firestoreのバッチ書き込みの最大操作数 (上限は500)
 const BATCH_SIZE = 499;
@@ -46,6 +48,35 @@ setGlobalOptions({
 
 const db = admin.firestore();
 const remoteConfig = admin.remoteConfig();
+const logger = {log, error, warn};
+
+const joinGroup = createJoinGroupHandler({
+  db,
+  remoteConfig,
+  fieldValue: admin.firestore.FieldValue,
+});
+const syncUser = createUserSyncHandler({db, logger});
+const sendMessageNotifications = createMessageHandler({
+  db,
+  messaging: admin.messaging(),
+  logger,
+});
+const updateBuyerSuggestion = createSuggestionHandler({
+  db,
+  collectionName: 'buyerNames',
+  fieldName: 'buyerName',
+});
+const updateWanterSuggestion = createSuggestionHandler({
+  db,
+  collectionName: 'wanterNames',
+  fieldName: 'wanterName',
+});
+const sendWishDateReminders = createWishReminderHandler({
+  db,
+  messaging: admin.messaging(),
+  logger,
+});
+const deleteUser = createDeleteUserHandler({db, auth: admin.auth()});
 
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -58,74 +89,18 @@ exports.v2JoinGroup = onCall(
   {
     enforceAppCheck: true,
   },
-  async (request) => {
-    // 認証済か否か
-    const uid = request.auth.uid;
-    const user = await admin.auth().getUser(uid);
-    if (!user) {
-      return {
-        'errorCode': 'not-auth',
-      };
-    }
+  joinGroup,
+);
 
-    // パラメタが設定されているか
-    const shareLinkId = request.data.shareLinkId;
-    if (!shareLinkId) {
-      return {
-        'errorCode': 'invalid-param',
-      };
-    }
-
-    // リンクの有効期限チェック
-    // HACK(yakitama5): FieldValueを利用した書き方に変更すること
-    const now = new Date();
-    const linkSnap = await db.collection('shareLinks').doc(shareLinkId).get();
-    const linkData = linkSnap.data();
-    const createdAt = linkData.createdAt.toDate();
-    const validDate = createdAt
-      .setDate(createdAt.getDate() + linkData.validDays);
-    if (validDate <= now) {
-      return {
-        'errorCode': 'invalid-date',
-      };
-    }
-
-    // 参加済チェック
-    const groupSnap = await db.collection(GROUPS_PATH)
-      .doc(linkData.groupId).get();
-    const groupData = groupSnap.data();
-    if (groupData.joinUids.includes(user.uid)) {
-      return {
-        'errorCode': 'joined-group',
-      };
-    }
-
-    // グループの上限数確認
-    const rcTemplate = await remoteConfig.getTemplate();
-    const parameters = rcTemplate.parameters;
-    const maxGroup = parameters.max_group_count_by_free_plan.defaultValue.value;
-
-    const userRef = db.collection(USERS_PATH).doc(user.uid);
-    const userDoc = await userRef.get();
-    const joinGroupIds = userDoc.data().joinGroupIds;
-    if (joinGroupIds.length >= maxGroup) {
-      return {
-        'errorCode': 'over-count',
-      };
-    }
-
-    // グループ および ユーザー情報の取得
-    const groupRef = db.collection(GROUPS_PATH).doc(linkData.groupId);
-    db.runTransaction(async (t) => {
-      t.update(groupRef, {
-        'joinUids': admin.firestore.FieldValue.arrayUnion(user.uid),
-      }).update(userRef, {
-        'joinGroupIds': admin.firestore.FieldValue.arrayUnion(linkData.groupId),
-      });
-    });
-
-    return {};
+/**
+ * 【呼び出し】
+ * 認証済みユーザー本人のデータと認証情報を削除する.
+ */
+exports.v2DeleteUser = onCall(
+  {
+    enforceAppCheck: true,
   },
+  deleteUser,
 );
 
 
@@ -135,100 +110,7 @@ exports.v2JoinGroup = onCall(
  */
 exports.v2OnWriteUser = onDocumentWritten(
   'users/{userId}',
-  async (event) => {
-    const getUniqueElementsInSource = (source, target) => {
-      const set2 = new Set(target);
-      return source.filter((element) => !set2.has(element));
-    };
-
-    const onGroupSet = async (before, after) => {
-      // グループから脱退している場合は、脱退したグループの情報を削除する
-      removeBeforeGroup(before, after);
-
-      // 登録 or 更新時は変更後の内容を所属しているグループへ反映する
-      const user = after.data();
-      if (user.joinGroupIds == null) {
-        log('Empty joinGroupIds');
-        return;
-      }
-
-      for (const groupId of user.joinGroupIds) {
-        log(`Update from GroupId: ${groupId}`);
-        const groupRef = db.collection(GROUPS_PATH).doc(groupId);
-        const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(user.id);
-        await userRef.set(user);
-      }
-    };
-
-    const onGroupDelete = async (before) => {
-      // 削除されたユーザーが参加していたグループ内の情報を削除する
-      const user = before.data();
-      if (user.joinGroupIds == null || user.joinGroupIds.length === 0) {
-        return;
-      }
-
-      for (const groupId of user.joinGroupIds) {
-        const groupRef = db.collection(GROUPS_PATH).doc(groupId);
-        const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(user.id);
-        await userRef.delete();
-      }
-    };
-
-    const removeBeforeGroup = async (before, after) => {
-      // 前回の情報が存在しない、またはjoinGroupIdsに変更がない場合はスキップ
-      if (!before.exists ||
-        before.data().joinGroupIds == after.data().joinGroupIds) {
-        return;
-      }
-
-      // 脱退したグループのグループIDを取得する
-      const b4JoinGroupIds = before.data().joinGroupIds;
-      const afJoinGroupIds = after.data().joinGroupIds;
-      const leavedJoinGroupIds =
-        getUniqueElementsInSource(b4JoinGroupIds, afJoinGroupIds);
-      log(`LeavedJoinGroupIds is ${leavedJoinGroupIds}`);
-
-      // 脱退したグループが存在しない場合はスキップ
-      if (leavedJoinGroupIds == null || leavedJoinGroupIds.length === 0) {
-        return;
-      }
-
-      // 脱退したグループの参加者情報を削除する
-      const userId = after.data().id;
-      for (const groupId of leavedJoinGroupIds) {
-        log(`Leave from GroupId: ${groupId}`);
-        const groupRef = db.collection(GROUPS_PATH).doc(groupId);
-        const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
-        await userRef.delete();
-      }
-    };
-
-    const toEventType = (event) => {
-      if (!event.data.before.exists) {
-        return 'create';
-      } else if (event.data.after.exists) {
-        return 'update';
-      } else {
-        return 'delete';
-      }
-    };
-
-    // 判定
-    const eventType = toEventType(event);
-    log(eventType);
-
-    switch (eventType) {
-    case 'create':
-    case 'update':
-      onGroupSet(event.data.before, event.data.after);
-      break;
-    case 'delete':
-      onGroupDelete(event.data.before);
-      break;
-    default:
-    // do nothing
-    }
-  },
+  syncUser,
 );
 
 /**
@@ -258,70 +140,7 @@ exports.v2OnDeleteGroup = onDocumentDeleted(
  */
 exports.v2OnCreateMessage = onDocumentCreated(
   'groups/{groupId}/messages/{messageId}',
-  async (event) => {
-    // グループ内のユーザー一覧を取得する
-    const groupRef = db.collection(GROUPS_PATH).doc(event.params.groupId);
-    const groupSnap = await groupRef.get();
-    const groupData = groupSnap.data();
-    const joinUids = groupData.joinUids;
-    for (const userId of joinUids) {
-      // ユーザーが通知対象でなければリトライ
-      const userRef = groupRef.collection(PARTICIPANTS_PATH).doc(userId);
-      const userSnap = await userRef.get();
-      const user = userSnap.data();
-      const target = event.data.data().target;
-
-      const messageData = event.data.data();
-      const isMyOperation = user.id == messageData.uid;
-      const isTargetGroup = target == 'all' || target == user.ageGroup;
-      if (isMyOperation || !isTargetGroup) {
-        continue;
-      }
-
-      // トークンを取得して通知を投げる
-      const tokensRef = db.collection(USERS_PATH).doc(user.id)
-        .collection(TOKENS_PATH);
-      const tokensSnap = await tokensRef.get();
-      if (tokensSnap.empty) {
-        continue;
-      }
-
-      tokensSnap.docs.forEach((doc) => {
-        const token = doc.data().token;
-
-        // 通知の内容を作る処理
-        if (token != null) {
-          const message = {
-            notification: {
-              title: messageData.title,
-              body: messageData.body,
-            },
-            data: {
-              groupId: event.params.groupId,
-              path: messageData.path,
-            },
-            android: {
-              notification: {
-                sound: 'default',
-                click_action: messageData.event,
-              },
-            },
-            apns: {
-              payload: {
-                aps: {
-                  badge: 0,
-                  sound: 'default',
-                },
-              },
-            },
-            token: token,
-          };
-
-          pushToDevice(token, message);
-        }
-      });
-    }
-  },
+  sendMessageNotifications,
 );
 
 /**
@@ -330,33 +149,7 @@ exports.v2OnCreateMessage = onDocumentCreated(
  */
 exports.onWritePurchase = onDocumentWritten(
   'groups/{groupId}/purchases/{purchaseId}',
-  async (event) => {
-    if (!event.data.after.exists) {
-      // 削除の場合は処理しない
-      return;
-    }
-
-    log('--- 購入状況が登録 または 更新されたので、処理を開始します。 ---');
-
-    // `groups`のドキュメント定義
-    const purchase = event.data.after.data();
-    const groupDoc = db.collection(GROUPS_PATH).doc(event.params.groupId);
-
-    // 「かった人」の一覧へ反映
-    if (!_.isEmpty(purchase.buyerName)) {
-      const buyerCol = groupDoc.collection('buyerNames');
-      const buyerSnap = await buyerCol
-        .where('name', '==', purchase.buyerName).get();
-      if (!buyerSnap.exists) {
-        log('🆕かった人のサジェストを追加します');
-        await buyerCol.doc().set({
-          'name': purchase.buyerName,
-        });
-      }
-    }
-
-    log('--- 処理を終了します ---');
-  },
+  updateBuyerSuggestion,
 );
 
 /**
@@ -365,33 +158,7 @@ exports.onWritePurchase = onDocumentWritten(
  */
 exports.onWriteItem = onDocumentWritten(
   'groups/{groupId}/items/{itemId}',
-  async (event) => {
-    if (!event.data.after.exists) {
-      // 削除の場合は処理しない
-      return;
-    }
-
-    log('--- ほしいものが登録 または 更新されたので、処理を開始します。 ---');
-
-    // `groups`のドキュメント定義
-    const item = event.data.after.data();
-    const groupDoc = db.collection(GROUPS_PATH).doc(event.params.groupId);
-
-    // 「ほしい人」の一覧へ反映
-    if (!_.isEmpty(item.wanterName)) {
-      const wanterCol = groupDoc.collection('wanterNames');
-      const wanterSnap = await wanterCol
-        .where('name', '==', item.wanterName).get();
-      if (!wanterSnap.exists) {
-        log('🆕欲しい人のサジェストを追加します');
-        await wanterCol.doc().set({
-          'name': item.wanterName,
-        });
-      }
-    }
-
-    log('--- 処理を終了します ---');
-  },
+  updateWanterSuggestion,
 );
 
 /**
@@ -480,65 +247,12 @@ exports.scheduledBatchUpdatePurchaseStatus =
   });
 
 /**
- * 通知処理
- * @param {String} token FCMトークン
- * @param {Object} payload 通知ペイロード
+ * Opt-inしたユーザーへ、ほしい日のリマインダーを重複なく配信する。
  */
-function pushToDevice(token, payload) {
-  admin.messaging().send(payload)
-    .then((pushResponse) => {
-      return {
-        text: token,
-      };
-    })
-    .catch((err) => {
-      // HttpsErrorはv1の遺物なので、一般的なErrorをthrowするか、ロギングに留めます。
-      error('Failed to send push notification:', err);
-    });
-}
-
-/**
- * 購入状況を取得する.
- * @param {DocumentSnapshot} purchaseDoc 購入状況のドキュメントスナップショット
- * @return {String} 購入状況
- */
-function getPurchaseStatus(purchaseDoc) {
-  log(`is Exists ${purchaseDoc.exists}`);
-  if (!purchaseDoc.exists) {
-    return NOT_PURCHASED;
-  } else if (purchaseDoc.data().sentAt != null) {
-    log(`sentAt is ${purchaseDoc.data().sentAt}`);
-    return PURCHASED;
-  } else if (purchaseDoc.data().planDate != null) {
-    log(`planDate is ${purchaseDoc.data().planDate}`);
-    return PURCHASE_PLAN;
-  } else {
-    return NOT_PURCHASED;
-  }
-}
-
-/**
- * 子供用の購入ステータスを取得する.
- * @param {DocumentSnapshot} purchaseDoc 購入状況のドキュメントスナップショット
- * @param {PurchaseStatus} purchaseStatus 購入ステータス
- * @return {PurchaseStatus} 子供用の購入ステータス
- */
-function getChildPurchaseStatus(purchaseDoc, purchaseStatus) {
-  if (!purchaseDoc.exists) {
-    return NOT_PURCHASED;
-  }
-
-  // サプライズでなければそのまま設定
-  if (!purchaseDoc.data().surprise) {
-    return purchaseStatus;
-  }
-
-  switch (purchaseStatus) {
-  case PURCHASED:
-    return PURCHASED;
-  case NOT_PURCHASED:
-  case PURCHASE_PLAN:
-  default:
-    return NOT_PURCHASED;
-  }
-}
+exports.scheduledWishDateReminders = onSchedule(
+  {
+    schedule: 'every 1 hours',
+    timeZone: tokyoTimeZone,
+  },
+  sendWishDateReminders,
+);
