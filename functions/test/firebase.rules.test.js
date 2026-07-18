@@ -199,12 +199,21 @@ describe('Firebase security rules', () => {
     const memberGroup = doc(memberFirestore(), 'groups', groupId);
     const outsiderGroup = doc(outsiderFirestore(), 'groups', groupId);
     const memberItem = doc(memberGroup, 'items', 'item');
+    const childItem = doc(
+      childFirestore(),
+      'groups',
+      groupId,
+      'items',
+      'child-item',
+    );
     const outsiderItem = doc(outsiderGroup, 'items', 'item');
 
     await assertSucceeds(getDoc(memberGroup));
     await assertSucceeds(setDoc(memberItem, {id: 'item', name: 'Gift'}));
     await assertSucceeds(updateDoc(memberItem, {name: 'New gift'}));
     await assertSucceeds(deleteDoc(memberItem));
+    await assertSucceeds(setDoc(childItem, {id: 'child-item', name: 'Gift'}));
+    await assertSucceeds(deleteDoc(childItem));
     await assertFails(getDoc(outsiderGroup));
     await assertFails(setDoc(outsiderItem, {id: 'item'}));
   });
