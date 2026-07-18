@@ -1,0 +1,12 @@
+{
+  "flavor": "dev",
+  "appName": "(dev)これほしい！",
+  "appIdSuffix": ".dev",
+  "appWebUrl": "https://family-wish-list-ad3c7-dev.firebaseapp.com",
+  "androidPackageName": "com.yakuran.family_wish_list.dev",
+  "deeplinkScheme": "korehosi.dev",
+  "iosBundleId": "com.yakuran.familyWishList.dev",
+  "reversedClientId": "com.googleusercontent.apps.303104073024-28061i41k90ceh6735n4iba8k1qcrlin",
+  "appStoreId": "6464590360",
+  "branchTestMode": "true"
+}
