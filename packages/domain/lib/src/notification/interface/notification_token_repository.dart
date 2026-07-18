@@ -1,5 +1,3 @@
-// ignore_for_file: one_member_abstracts
-
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
