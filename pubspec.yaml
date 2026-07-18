@@ -92,16 +92,16 @@ melos:
         - build:app:android
         - build:app:ios
     build:app:ios:
-      description: Android向けにモバイルアプリをビルドする
-      run:
-        melos exec --scope="flutter_app" -- flutter build ipa
-        --export-options-plist=ExportOptions.plist
-        --dart-define-from-file=dart_defines/prod.json
-    build:app:android:
       description: iOS向けにモバイルアプリをビルドする
       run:
+        melos exec --scope="flutter_app" -- flutter build ipa
+        --export-options-plist=$HOME/export_options.plist
+        --dart-define-from-file=dart_defines/prod.json
+    build:app:android:
+      description: Android向けにモバイルアプリをビルドする
+      run:
         melos exec --scope="flutter_app" -- flutter build
-        appbundle --no-pub --dart-define-from-file=dart_defines/prod.json
+        appbundle --dart-define-from-file=dart_defines/prod.json
 
     # コード生成関連
     gen:

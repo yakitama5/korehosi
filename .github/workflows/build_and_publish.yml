@@ -1,0 +1,282 @@
+name: Build and Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: "Version bump (none = バージョンアップせずビルドのみ)"
+        required: true
+        default: "none"
+        type: choice
+        options: [none, patch, minor, major, build]
+      platform:
+        description: "Platform to build"
+        required: true
+        default: "all"
+        type: choice
+        options: [all, ios, android]
+
+permissions:
+  contents: read
+
+jobs:
+  # ──────────────────────────────────────────────
+  # Job 0: バージョンアップ（bump_type が none 以外のときのみ実行）
+  # ──────────────────────────────────────────────
+  version_up:
+    name: バージョンアップ (${{ github.event.inputs.bump_type }})
+    if: ${{ github.event.inputs.bump_type != 'none' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      release_sha: ${{ steps.publish.outputs.release_sha }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Flutter バージョンの取得 (.fvmrc)
+        id: fvm
+        run: echo "version=$(jq -r '.flutter' .fvmrc)" >> "$GITHUB_OUTPUT"
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.fvm.outputs.version }}
+          cache: true
+
+      - name: Cider のインストール
+        run: dart pub global activate cider
+
+      - name: バージョンのバンプ
+        id: bump
+        run: |
+          cd apps/app
+          if [ "${{ github.event.inputs.bump_type }}" != "build" ]; then
+            dart pub global run cider bump ${{ github.event.inputs.bump_type }} --bump-build
+          else
+            dart pub global run cider bump build
+          fi
+          NEW_VERSION=$(dart pub global run cider version)
+          echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: 変更のコミットとタグの作成
+        id: publish
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apps/app/pubspec.yaml
+          git commit -m "🔖tag: v${{ steps.bump.outputs.new_version }} へバージョンアップ"
+          git tag "v${{ steps.bump.outputs.new_version }}"
+          git push --atomic origin \
+            "HEAD:refs/heads/${{ github.ref_name }}" \
+            "refs/tags/v${{ steps.bump.outputs.new_version }}"
+          echo "release_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  # ──────────────────────────────────────────────
+  # Job 1: iOS ビルド＆App Store Connect へ配布（macOS ランナー）
+  # ──────────────────────────────────────────────
+  build-ios:
+    name: iOS ビルド＆配布
+    needs: version_up
+    # version_up をスキップ（bump_type=none）しても実行する。
+    # version_up が失敗した場合のみビルドを行わない。
+    if: |
+      always() &&
+      (needs.version_up.result == 'success' || needs.version_up.result == 'skipped') &&
+      (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios')
+    runs-on: macos-latest
+
+    steps:
+      # version_up がバージョンアップコミットを push している可能性があるため、
+      # バージョン更新時はそのコミット、更新なしならディスパッチ時点のコミットを取得する。
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.version_up.outputs.release_sha || github.sha }}
+          persist-credentials: false
+
+      - name: FVM 設定の取得
+        uses: kuhnroyal/flutter-fvm-config-action/setup@v3
+        id: fvm-config-action
+
+      - name: Flutter のセットアップ
+        uses: subosito/flutter-action@1c5eb12d812966ca84680edc38353a0851c8fd56 # v2.14.0
+        with:
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: .fvm/flutter_sdk シンボリックリンクの作成
+        run: |
+          mkdir -p .fvm
+          ln -sf "$(dirname "$(dirname "$(which flutter)")")" .fvm/flutter_sdk
+
+      - name: Pub キャッシュの復元
+        uses: actions/cache@v6
+        with:
+          path: ~/.pub-cache
+          key: pub-${{ runner.os }}-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: pub-${{ runner.os }}-
+
+      - name: Python のセットアップ
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: .github/requirements-cd.txt
+
+      - name: Melos & FlutterFire & CodeMagic CLI のインストール
+        run: |
+          dart pub global activate melos
+          dart pub global activate flutterfire_cli
+          echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+          pip3 install --disable-pip-version-check -r .github/requirements-cd.txt
+
+      - name: 設定ファイルの復元
+        env:
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+        run: |
+          mkdir -p apps/app/dart_defines
+          echo -n "$DART_DEFINE_JSON" | base64 -d > apps/app/dart_defines/prod.json
+          for ENV_PATH in packages/infrastructure/firebase/scripts/env packages/infrastructure/revenue_cat/scripts/env; do
+            mkdir -p "$ENV_PATH"
+            echo -n "$ENV_FILE" | base64 -d > "$ENV_PATH/.env"
+            echo -n "$DEV_ENV_FILE" | base64 -d > "$ENV_PATH/.env.dev"
+          done
+
+      - name: 依存関係の解決 (melos bootstrap)
+        run: melos bootstrap
+
+      - name: コード生成 (build_runner)
+        run: melos run gen:build
+
+      - name: 最新の安定版Xcodeをセットアップ
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "latest-stable"
+
+      - name: iOS ビルド＆配布
+        env:
+          APP_STORE_CONNECT_ISSUER_ID: ${{ vars.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ vars.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
+        run: |
+          # 1. キーチェーンの初期化
+          keychain initialize
+          # 2. 証明書とプロビジョニングプロファイルの取得（CodeMagic CLI）
+          app-store-connect fetch-signing-files "com.yakuran.familyWishList" --type IOS_APP_STORE --create
+          # 3. キーチェーンへの追加とXcodeプロジェクトへの適用
+          keychain add-certificates
+          xcode-project use-profiles --project apps/app/ios/Runner.xcodeproj
+          # 4. Melos経由でビルド
+          melos run build:app:ios
+          # 5. App Store Connectへアップロード
+          app-store-connect publish --path apps/app/build/ios/ipa/*.ipa
+
+  # ──────────────────────────────────────────────
+  # Job 2: Android ビルド＆Google Play へ配布（Ubuntu ランナー）
+  # ──────────────────────────────────────────────
+  build-android:
+    name: Android ビルド＆配布
+    needs: version_up
+    if: |
+      always() &&
+      (needs.version_up.result == 'success' || needs.version_up.result == 'skipped') &&
+      (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android')
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.version_up.outputs.release_sha || github.sha }}
+          persist-credentials: false
+
+      - name: FVM 設定の取得
+        uses: kuhnroyal/flutter-fvm-config-action/setup@v3
+        id: fvm-config-action
+
+      - name: Flutter のセットアップ
+        uses: subosito/flutter-action@1c5eb12d812966ca84680edc38353a0851c8fd56 # v2.14.0
+        with:
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: .fvm/flutter_sdk シンボリックリンクの作成
+        run: |
+          mkdir -p .fvm
+          ln -sf "$(dirname "$(dirname "$(which flutter)")")" .fvm/flutter_sdk
+
+      - name: Pub キャッシュの復元
+        uses: actions/cache@v6
+        with:
+          path: ~/.pub-cache
+          key: pub-${{ runner.os }}-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: pub-${{ runner.os }}-
+
+      - name: Python のセットアップ
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+          cache: pip
+          cache-dependency-path: .github/requirements-cd.txt
+
+      - name: Melos & CodeMagic CLI のインストール
+        run: |
+          dart pub global activate melos
+          echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
+          pip3 install --disable-pip-version-check -r .github/requirements-cd.txt
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: 設定ファイルの復元
+        env:
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+        run: |
+          mkdir -p apps/app/dart_defines
+          echo -n "$DART_DEFINE_JSON" | base64 -d > apps/app/dart_defines/prod.json
+          for ENV_PATH in packages/infrastructure/firebase/scripts/env packages/infrastructure/revenue_cat/scripts/env; do
+            mkdir -p "$ENV_PATH"
+            echo -n "$ENV_FILE" | base64 -d > "$ENV_PATH/.env"
+            echo -n "$DEV_ENV_FILE" | base64 -d > "$ENV_PATH/.env.dev"
+          done
+
+      - name: 依存関係の解決 (melos bootstrap)
+        run: melos bootstrap
+
+      - name: コード生成 (build_runner)
+        run: melos run gen:build
+
+      - name: Android ビルド
+        env:
+          ANDROID_KEYSTORE_FILENAME: ${{ vars.ANDROID_KEYSTORE_FILENAME }}
+          ANDROID_KEY_ALIAS: ${{ vars.ANDROID_KEY_ALIAS }}
+          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          # 1. Base64化されたKeystoreを復元
+          echo "$ANDROID_KEYSTORE" | base64 --decode > "apps/app/android/app/$ANDROID_KEYSTORE_FILENAME"
+          # 2. key.propertiesファイルの生成
+          cat <<EOF > apps/app/android/key.properties
+          storePassword=$ANDROID_KEYSTORE_PASSWORD
+          keyPassword=$ANDROID_KEY_PASSWORD
+          keyAlias=$ANDROID_KEY_ALIAS
+          storeFile=$ANDROID_KEYSTORE_FILENAME
+          EOF
+          # 3. Melos経由でビルド
+          melos run build:app:android
+
+      - name: AAB を GitHub Actions にアップロード
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-aab
+          path: apps/app/build/app/outputs/bundle/release/app-release.aab
+          retention-days: 7
+
+      - name: Google Play へパブリッシュ（内部テストトラック）
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
+        run: google-play bundles publish --bundle apps/app/build/app/outputs/bundle/release/app-release.aab --track internal
