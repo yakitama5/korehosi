@@ -92,6 +92,7 @@ class TranslationsSettingsJa {
 
 	// Translations
 	late final TranslationsSettingsSettingsPageJa settingsPage = TranslationsSettingsSettingsPageJa.internal(_root);
+	late final TranslationsSettingsWishReminderSettingsPageJa wishReminderSettingsPage = TranslationsSettingsWishReminderSettingsPageJa.internal(_root);
 	late final TranslationsSettingsAccountPageJa accountPage = TranslationsSettingsAccountPageJa.internal(_root);
 	late final TranslationsSettingsAccountLinkPageJa accountLinkPage = TranslationsSettingsAccountLinkPageJa.internal(_root);
 }
@@ -380,6 +381,27 @@ class TranslationsSettingsSettingsPageJa {
 	late final TranslationsSettingsSettingsPageAccountJa account = TranslationsSettingsSettingsPageAccountJa.internal(_root);
 	late final TranslationsSettingsSettingsPageLayoutJa layout = TranslationsSettingsSettingsPageLayoutJa.internal(_root);
 	late final TranslationsSettingsSettingsPageHelpJa help = TranslationsSettingsSettingsPageHelpJa.internal(_root);
+}
+
+// Path: settings.wishReminderSettingsPage
+class TranslationsSettingsWishReminderSettingsPageJa {
+	TranslationsSettingsWishReminderSettingsPageJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ほしい日のリマインダー'
+	String get title => 'ほしい日のリマインダー';
+
+	/// ja: 'リマインダーを受け取る'
+	String get enabled => 'リマインダーを受け取る';
+
+	/// ja: '通知を希望する場合だけオンにしてください'
+	String get description => '通知を希望する場合だけオンにしてください';
+
+	late final TranslationsSettingsWishReminderSettingsPageTimingJa timing = TranslationsSettingsWishReminderSettingsPageTimingJa.internal(_root);
+	late final TranslationsSettingsWishReminderSettingsPageAudienceJa audience = TranslationsSettingsWishReminderSettingsPageAudienceJa.internal(_root);
 }
 
 // Path: settings.accountPage
@@ -720,6 +742,7 @@ class TranslationsSettingsSettingsPageAccountJa {
 	String get account => 'アカウント';
 
 	late final TranslationsSettingsSettingsPageAccountPushNotificationJa pushNotification = TranslationsSettingsSettingsPageAccountPushNotificationJa.internal(_root);
+	late final TranslationsSettingsSettingsPageAccountWishReminderJa wishReminder = TranslationsSettingsSettingsPageAccountWishReminderJa.internal(_root);
 }
 
 // Path: settings.settingsPage.layout
@@ -768,6 +791,45 @@ class TranslationsSettingsSettingsPageHelpJa {
 
 	/// ja: 'ライセンス'
 	String get license => 'ライセンス';
+}
+
+// Path: settings.wishReminderSettingsPage.timing
+class TranslationsSettingsWishReminderSettingsPageTimingJa {
+	TranslationsSettingsWishReminderSettingsPageTimingJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '通知タイミング'
+	String get title => '通知タイミング';
+
+	/// ja: '当日'
+	String get sameDay => '当日';
+
+	/// ja: '1日前'
+	String get dayBefore => '1日前';
+
+	/// ja: '1週間前'
+	String get weekBefore => '1週間前';
+}
+
+// Path: settings.wishReminderSettingsPage.audience
+class TranslationsSettingsWishReminderSettingsPageAudienceJa {
+	TranslationsSettingsWishReminderSettingsPageAudienceJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: '通知対象'
+	String get title => '通知対象';
+
+	/// ja: '子どもを含む全員を対象にする'
+	String get everyone => '子どもを含む全員を対象にする';
+
+	/// ja: 'オフの場合は大人だけが通知を受け取ります'
+	String get description => 'オフの場合は大人だけが通知を受け取ります';
 }
 
 // Path: settings.accountPage.link
@@ -869,6 +931,21 @@ class TranslationsSettingsSettingsPageAccountPushNotificationJa {
 	String get caption => 'グループないでほしいものが追加された場合に通知が受け取れます';
 }
 
+// Path: settings.settingsPage.account.wishReminder
+class TranslationsSettingsSettingsPageAccountWishReminderJa {
+	TranslationsSettingsSettingsPageAccountWishReminderJa.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// ja: 'ほしい日のリマインダー'
+	String get title => 'ほしい日のリマインダー';
+
+	/// ja: 'ほしい日の前に通知を受け取ります'
+	String get caption => 'ほしい日の前に通知を受け取ります';
+}
+
 /// The flat map containing all translations for locale <ja>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -965,6 +1042,8 @@ extension on Translations {
 			'settings.settingsPage.account.account' => 'アカウント',
 			'settings.settingsPage.account.pushNotification.title' => 'プッシュ通知',
 			'settings.settingsPage.account.pushNotification.caption' => 'グループないでほしいものが追加された場合に通知が受け取れます',
+			'settings.settingsPage.account.wishReminder.title' => 'ほしい日のリマインダー',
+			'settings.settingsPage.account.wishReminder.caption' => 'ほしい日の前に通知を受け取ります',
 			'settings.settingsPage.layout.title' => 'レイアウト',
 			'settings.settingsPage.layout.uiStyle' => 'UIスタイル',
 			'settings.settingsPage.layout.themeMode' => 'テーマモード',
@@ -975,6 +1054,16 @@ extension on Translations {
 			'settings.settingsPage.help.developerX' => '開発者X (旧Twitter)',
 			'settings.settingsPage.help.privacyPolicy' => 'プライバシーポリシー',
 			'settings.settingsPage.help.license' => 'ライセンス',
+			'settings.wishReminderSettingsPage.title' => 'ほしい日のリマインダー',
+			'settings.wishReminderSettingsPage.enabled' => 'リマインダーを受け取る',
+			'settings.wishReminderSettingsPage.description' => '通知を希望する場合だけオンにしてください',
+			'settings.wishReminderSettingsPage.timing.title' => '通知タイミング',
+			'settings.wishReminderSettingsPage.timing.sameDay' => '当日',
+			'settings.wishReminderSettingsPage.timing.dayBefore' => '1日前',
+			'settings.wishReminderSettingsPage.timing.weekBefore' => '1週間前',
+			'settings.wishReminderSettingsPage.audience.title' => '通知対象',
+			'settings.wishReminderSettingsPage.audience.everyone' => '子どもを含む全員を対象にする',
+			'settings.wishReminderSettingsPage.audience.description' => 'オフの場合は大人だけが通知を受け取ります',
 			'settings.accountPage.title' => 'アカウント',
 			'settings.accountPage.link.head' => 'アカウント連携',
 			'settings.accountPage.link.google' => 'Google',

@@ -75,6 +75,12 @@ class SettingsPage extends HookConsumerWidget {
                         messages.account.pushNotification.caption,
                       ),
                     ),
+                    SettingsTile.navigation(
+                      leading: const Icon(Icons.event_available),
+                      title: Text(messages.account.wishReminder.title),
+                      description: Text(messages.account.wishReminder.caption),
+                      onPressed: const WishReminderSettingsRouteData().go,
+                    ),
                   ],
                 ),
                 SettingsSection(

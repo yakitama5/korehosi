@@ -8,6 +8,9 @@ settingsPage:
     pushNotification:
       title: プッシュ通知
       caption: グループないでほしいものが追加された場合に通知が受け取れます
+    wishReminder:
+      title: ほしい日のリマインダー
+      caption: ほしい日の前に通知を受け取ります
   layout:
     title: レイアウト
     uiStyle: UIスタイル
@@ -20,6 +23,19 @@ settingsPage:
     developerX: 開発者X (旧Twitter)
     privacyPolicy: プライバシーポリシー
     license: ライセンス
+wishReminderSettingsPage:
+  title: ほしい日のリマインダー
+  enabled: リマインダーを受け取る
+  description: 通知を希望する場合だけオンにしてください
+  timing:
+    title: 通知タイミング
+    sameDay: 当日
+    dayBefore: 1日前
+    weekBefore: 1週間前
+  audience:
+    title: 通知対象
+    everyone: 子どもを含む全員を対象にする
+    description: オフの場合は大人だけが通知を受け取ります
 accountPage:
   title: アカウント
   link:

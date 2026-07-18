@@ -90,6 +90,7 @@ class _TranslationsSettingsEn extends TranslationsSettingsJa {
 
 	// Translations
 	@override late final _TranslationsSettingsSettingsPageEn settingsPage = _TranslationsSettingsSettingsPageEn._(_root);
+	@override late final _TranslationsSettingsWishReminderSettingsPageEn wishReminderSettingsPage = _TranslationsSettingsWishReminderSettingsPageEn._(_root);
 	@override late final _TranslationsSettingsAccountPageEn accountPage = _TranslationsSettingsAccountPageEn._(_root);
 }
 
@@ -116,6 +117,20 @@ class _TranslationsSettingsSettingsPageEn extends TranslationsSettingsSettingsPa
 	@override late final _TranslationsSettingsSettingsPageHelpEn help = _TranslationsSettingsSettingsPageHelpEn._(_root);
 }
 
+// Path: settings.wishReminderSettingsPage
+class _TranslationsSettingsWishReminderSettingsPageEn extends TranslationsSettingsWishReminderSettingsPageJa {
+	_TranslationsSettingsWishReminderSettingsPageEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Wish-date reminders';
+	@override String get enabled => 'Receive reminders';
+	@override String get description => 'Turn this on only when you want reminder notifications';
+	@override late final _TranslationsSettingsWishReminderSettingsPageTimingEn timing = _TranslationsSettingsWishReminderSettingsPageTimingEn._(_root);
+	@override late final _TranslationsSettingsWishReminderSettingsPageAudienceEn audience = _TranslationsSettingsWishReminderSettingsPageAudienceEn._(_root);
+}
+
 // Path: settings.accountPage
 class _TranslationsSettingsAccountPageEn extends TranslationsSettingsAccountPageJa {
 	_TranslationsSettingsAccountPageEn._(TranslationsEn root) : this._root = root, super.internal(root);
@@ -137,7 +152,11 @@ class _TranslationsSettingsSettingsPageAccountEn extends TranslationsSettingsSet
 
 	// Translations
 	@override String get head => 'Account';
+	@override String get profile => 'Profile';
+	@override String get group => 'Groups';
 	@override String get account => 'Account';
+	@override late final _TranslationsSettingsSettingsPageAccountPushNotificationEn pushNotification = _TranslationsSettingsSettingsPageAccountPushNotificationEn._(_root);
+	@override late final _TranslationsSettingsSettingsPageAccountWishReminderEn wishReminder = _TranslationsSettingsSettingsPageAccountWishReminderEn._(_root);
 }
 
 // Path: settings.settingsPage.layout
@@ -166,6 +185,31 @@ class _TranslationsSettingsSettingsPageHelpEn extends TranslationsSettingsSettin
 	@override String get developerX => 'Developer';
 	@override String get privacyPolicy => 'PrivacyPolicy';
 	@override String get license => 'License';
+}
+
+// Path: settings.wishReminderSettingsPage.timing
+class _TranslationsSettingsWishReminderSettingsPageTimingEn extends TranslationsSettingsWishReminderSettingsPageTimingJa {
+	_TranslationsSettingsWishReminderSettingsPageTimingEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Timing';
+	@override String get sameDay => 'Same day';
+	@override String get dayBefore => 'One day before';
+	@override String get weekBefore => 'One week before';
+}
+
+// Path: settings.wishReminderSettingsPage.audience
+class _TranslationsSettingsWishReminderSettingsPageAudienceEn extends TranslationsSettingsWishReminderSettingsPageAudienceJa {
+	_TranslationsSettingsWishReminderSettingsPageAudienceEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Audience';
+	@override String get everyone => 'Include children';
+	@override String get description => 'When off, reminders are delivered to adults only';
 }
 
 // Path: settings.accountPage.link
@@ -203,6 +247,28 @@ class _TranslationsSettingsAccountPageLeaveConfirmDialogEn extends TranslationsS
 	@override String get body => 'Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.';
 }
 
+// Path: settings.settingsPage.account.pushNotification
+class _TranslationsSettingsSettingsPageAccountPushNotificationEn extends TranslationsSettingsSettingsPageAccountPushNotificationJa {
+	_TranslationsSettingsSettingsPageAccountPushNotificationEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Push notifications';
+	@override String get caption => 'Receive notifications when items are added in your groups';
+}
+
+// Path: settings.settingsPage.account.wishReminder
+class _TranslationsSettingsSettingsPageAccountWishReminderEn extends TranslationsSettingsSettingsPageAccountWishReminderJa {
+	_TranslationsSettingsSettingsPageAccountWishReminderEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Wish-date reminders';
+	@override String get caption => 'Receive a notification before a wish date';
+}
+
 /// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -220,7 +286,13 @@ extension on TranslationsEn {
 			'item.hoge' => 'hoge',
 			'settings.settingsPage.title' => 'Settings',
 			'settings.settingsPage.account.head' => 'Account',
+			'settings.settingsPage.account.profile' => 'Profile',
+			'settings.settingsPage.account.group' => 'Groups',
 			'settings.settingsPage.account.account' => 'Account',
+			'settings.settingsPage.account.pushNotification.title' => 'Push notifications',
+			'settings.settingsPage.account.pushNotification.caption' => 'Receive notifications when items are added in your groups',
+			'settings.settingsPage.account.wishReminder.title' => 'Wish-date reminders',
+			'settings.settingsPage.account.wishReminder.caption' => 'Receive a notification before a wish date',
 			'settings.settingsPage.layout.title' => 'Layout',
 			'settings.settingsPage.layout.uiStyle' => 'UI Style',
 			'settings.settingsPage.layout.themeMode' => 'ThemeMode',
@@ -231,6 +303,16 @@ extension on TranslationsEn {
 			'settings.settingsPage.help.developerX' => 'Developer',
 			'settings.settingsPage.help.privacyPolicy' => 'PrivacyPolicy',
 			'settings.settingsPage.help.license' => 'License',
+			'settings.wishReminderSettingsPage.title' => 'Wish-date reminders',
+			'settings.wishReminderSettingsPage.enabled' => 'Receive reminders',
+			'settings.wishReminderSettingsPage.description' => 'Turn this on only when you want reminder notifications',
+			'settings.wishReminderSettingsPage.timing.title' => 'Timing',
+			'settings.wishReminderSettingsPage.timing.sameDay' => 'Same day',
+			'settings.wishReminderSettingsPage.timing.dayBefore' => 'One day before',
+			'settings.wishReminderSettingsPage.timing.weekBefore' => 'One week before',
+			'settings.wishReminderSettingsPage.audience.title' => 'Audience',
+			'settings.wishReminderSettingsPage.audience.everyone' => 'Include children',
+			'settings.wishReminderSettingsPage.audience.description' => 'When off, reminders are delivered to adults only',
 			'settings.accountPage.title' => 'Account',
 			'settings.accountPage.link.head' => 'Account link',
 			'settings.accountPage.link.google' => 'Google',

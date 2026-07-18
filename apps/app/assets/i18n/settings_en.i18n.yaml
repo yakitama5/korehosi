@@ -2,7 +2,15 @@ settingsPage:
   title: Settings
   account:
     head: Account
+    profile: Profile
+    group: Groups
     account: Account
+    pushNotification:
+      title: Push notifications
+      caption: Receive notifications when items are added in your groups
+    wishReminder:
+      title: Wish-date reminders
+      caption: Receive a notification before a wish date
   layout:
     title: Layout
     uiStyle: UI Style
@@ -15,6 +23,19 @@ settingsPage:
     developerX: Developer
     privacyPolicy: PrivacyPolicy
     license: License
+wishReminderSettingsPage:
+  title: Wish-date reminders
+  enabled: Receive reminders
+  description: Turn this on only when you want reminder notifications
+  timing:
+    title: Timing
+    sameDay: Same day
+    dayBefore: One day before
+    weekBefore: One week before
+  audience:
+    title: Audience
+    everyone: Include children
+    description: When off, reminders are delivered to adults only
 accountPage:
   title: Account
   link:
