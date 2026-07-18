@@ -6,10 +6,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 
 const _projectId = 'family-wish-list-ad3c7-dev';
+const _skipFirebaseEmulatorReset = bool.fromEnvironment(
+  'skipFirebaseEmulatorReset',
+);
 
 void main() {
   patrolTest('初回登録からほしいものの作成・編集・削除まで完了できる', ($) async {
-    await _resetFirebaseEmulators();
+    if (!_skipFirebaseEmulatorReset) {
+      await _resetFirebaseEmulators();
+    }
     await app.main();
     await $.pumpAndSettle();
 
