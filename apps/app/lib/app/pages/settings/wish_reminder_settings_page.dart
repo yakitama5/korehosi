@@ -43,6 +43,9 @@ class WishReminderSettingsPage extends ConsumerWidget {
                       initialValue: value.timings.contains(timing),
                       onToggle: (selected) {
                         final timings = {...value.timings};
+                        if (!selected && timings.length == 1) {
+                          return Future<void>.value();
+                        }
                         selected ? timings.add(timing) : timings.remove(timing);
                         return _save(ref, value.copyWith(timings: timings));
                       },
