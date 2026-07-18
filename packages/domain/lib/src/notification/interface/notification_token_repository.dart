@@ -3,6 +3,8 @@
 import 'package:packages_domain/user.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../entity/wish_reminder_settings.dart';
+
 part 'notification_token_repository.g.dart';
 
 /// DI用 (依存性逆転のためドメイン層に定義)
@@ -15,4 +17,13 @@ NotificationTokenRepository notificationTokenRepository(Ref ref) =>
 abstract class NotificationTokenRepository {
   /// トークンを設定
   Future<void> set({required UserId userId, required String token});
+
+  Stream<WishReminderSettings> watchWishReminderSettings({
+    required UserId userId,
+  });
+
+  Future<void> setWishReminderSettings({
+    required UserId userId,
+    required WishReminderSettings settings,
+  });
 }

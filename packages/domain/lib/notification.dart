@@ -1,6 +1,7 @@
 export 'src/notification/entity/group_message.dart';
 export 'src/notification/entity/notification_message.dart';
 export 'src/notification/entity/notification_token.dart';
+export 'src/notification/entity/wish_reminder_settings.dart';
 export 'src/notification/interface/messaging_service.dart';
 export 'src/notification/interface/notification_token_repository.dart';
 export 'src/notification/value_object/notification_event.dart';
