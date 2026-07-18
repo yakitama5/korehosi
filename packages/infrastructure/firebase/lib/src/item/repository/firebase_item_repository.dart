@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cross_file/cross_file.dart';
 import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_storage_provider.dart';
-import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/item/model/firestore_item_model.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_item_provider.dart';
-import 'package:infrastructure_firebase/src/item/state/firestore_purchase_provider.dart';
 import 'package:infrastructure_firebase/src/item/state/firestore_wanter_names_provider.dart';
 import 'package:packages_core/util.dart';
 import 'package:packages_domain/common.dart';
@@ -90,12 +88,14 @@ class FirebaseItemRepository implements ItemRepository {
 
     final items = await Future.wait(
       docs.map((e) async {
-        // 購入情報の取得
+        // 購入詳細は大人だけが取得する。子どもは安全な投影値だけを使う。
         final itemId = ItemId(e.id);
-        final purchase = await _purchaseRepository.fetchByItemId(
-          groupId: groupId,
-          itemId: itemId,
-        );
+        final purchase = ageGroup == AgeGroup.adult
+            ? await _purchaseRepository.fetchByItemId(
+                groupId: groupId,
+                itemId: itemId,
+              )
+            : null;
 
         // 画像をURL化
         final storage = ref.read(firebaseStorageProvider);
@@ -112,7 +112,9 @@ class FirebaseItemRepository implements ItemRepository {
         return e.data().toDomainModel(
           purchase: purchase,
           images: images,
-          purchaseStatus: purchase.status(ageGroup),
+          purchaseStatus: ageGroup == AgeGroup.adult
+              ? purchase.status(ageGroup)
+              : e.data().childViewPurchaseStatus,
         );
       }).toList(),
     );
@@ -134,12 +136,14 @@ class FirebaseItemRepository implements ItemRepository {
       return null;
     }
 
-    // 購入情報の取得
+    // 購入詳細は大人だけが取得する。子どもは安全な投影値だけを使う。
     final item = snap.data()!;
-    final purchase = await _purchaseRepository.fetchByItemId(
-      groupId: groupId,
-      itemId: itemId,
-    );
+    final purchase = ageGroup == AgeGroup.adult
+        ? await _purchaseRepository.fetchByItemId(
+            groupId: groupId,
+            itemId: itemId,
+          )
+        : null;
 
     // 画像をURL化
     final storage = ref.read(firebaseStorageProvider);
@@ -153,7 +157,9 @@ class FirebaseItemRepository implements ItemRepository {
           List.empty(),
     );
     return item.toDomainModel(
-      purchaseStatus: purchase.status(ageGroup),
+      purchaseStatus: ageGroup == AgeGroup.adult
+          ? purchase.status(ageGroup)
+          : item.childViewPurchaseStatus,
       purchase: purchase,
       images: images,
     );
@@ -271,24 +277,11 @@ class FirebaseItemRepository implements ItemRepository {
     required GroupId groupId,
     required ItemId itemId,
   }) async {
-    final firestore = ref.read(firestoreProvider);
-    await firestore.runTransaction((transaction) async {
-      // 削除前の状態を保持
-      final itemDocRef = ref.read(
-        itemDocumentRefProvider(groupId: groupId, itemId: itemId),
-      );
-      // 購入状況が存在すれば同時に削除
-      final purchaseId = PurchaseId(itemId.value);
-      final purchaseDocRef = ref.read(
-        purchaseDocumentRefProvider(groupId: groupId, purchaseId: purchaseId),
-      );
-
-      transaction
-          // ドキュメントの削除
-          .delete(itemDocRef)
-          // 購入状況の削除
-          .delete(purchaseDocRef);
-    });
+    // 子どもは購入詳細へアクセスできないため、クライアントではItemだけを
+    // 削除する。対応する購入詳細はonWriteItemがAdmin SDKで削除する。
+    await ref
+        .read(itemDocumentRefProvider(groupId: groupId, itemId: itemId))
+        .delete();
   }
 
   @override

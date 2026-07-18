@@ -28,6 +28,7 @@ const {createMessageHandler} = require('./src/notifications');
 const {createSuggestionHandler} = require('./src/name-suggestions');
 const {createWishReminderHandler} = require('./src/wish-reminder');
 const {createDeleteUserHandler} = require('./src/delete-user');
+const {createItemWriteHandler} = require('./src/item-write');
 
 admin.initializeApp();
 const tokyoTimeZone = 'Asia/Tokyo';
@@ -70,6 +71,10 @@ const updateWanterSuggestion = createSuggestionHandler({
   db,
   collectionName: 'wanterNames',
   fieldName: 'wanterName',
+});
+const handleItemWrite = createItemWriteHandler({
+  db,
+  updateSuggestion: updateWanterSuggestion,
 });
 const sendWishDateReminders = createWishReminderHandler({
   db,
@@ -158,7 +163,7 @@ exports.onWritePurchase = onDocumentWritten(
  */
 exports.onWriteItem = onDocumentWritten(
   'groups/{groupId}/items/{itemId}',
-  updateWanterSuggestion,
+  handleItemWrite,
 );
 
 /**
