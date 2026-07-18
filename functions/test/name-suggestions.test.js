@@ -19,6 +19,7 @@ function fakeCollection() {
 
 describe('name suggestions', () => {
   it('normalizes Unicode, case, and whitespace for identity', () => {
+    // cspell:disable-next-line -- Full-width Unicode normalization fixture.
     assert.equal(normalizeSuggestionName('  Ａlice\t SMITH  '), 'alice smith');
   });
 
@@ -34,6 +35,7 @@ describe('name suggestions', () => {
     await Promise.all([
       upsertNameSuggestion(collection, 'Alice'),
       upsertNameSuggestion(collection, ' alice '),
+      // cspell:disable-next-line -- Full-width Unicode normalization fixture.
       upsertNameSuggestion(collection, 'ＡＬＩＣＥ'),
     ]);
 

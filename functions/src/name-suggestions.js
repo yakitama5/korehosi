@@ -23,7 +23,7 @@ function suggestionDocumentId(name) {
 }
 
 /**
- * Upserts a suggestion using a deterministic ID, making concurrent triggers
+ * Writes a suggestion using a deterministic ID, making concurrent triggers
  * idempotent.
  * @param {CollectionReference} collection suggestion collection
  * @param {string} name suggestion name
