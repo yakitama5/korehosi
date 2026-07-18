@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:packages_application/src/common/config/web_app_config.dart';
 import 'package:packages_application/src/common/mixin/run_usecase_mixin.dart';
 import 'package:packages_application/src/group/config/group_config.dart';
@@ -89,9 +90,46 @@ class GroupUsecase with RunUsecaseMixin {
   );
 
   /// グループから脱退
+  ///
+  /// 所有者はグループを脱退できない。所有者向けの操作はグループ削除とする。
   Future<void> leave({required GroupId groupId}) => execute(
     ref,
-    action: () => ref.read(groupUsecaseProvider).leave(groupId: groupId),
+    action: () async {
+      final user = await ref.read(authUserProvider.future);
+      if (user == null) {
+        throw const BusinessException(BusinessExceptionType.notAuth);
+      }
+
+      final group = await ref
+          .read(groupRepositoryProvider)
+          .fetch(groupId: groupId)
+          .first;
+      if (group?.ownerUid == user.id) {
+        throw const BusinessException(
+          BusinessExceptionType.leaveGroupPolicyOwner,
+        );
+      }
+
+      await ref
+          .read(groupRepositoryProvider)
+          .leave(groupId: groupId, userId: user.id);
+
+      final sessionRepository = ref.read(userSessionRepositoryProvider);
+      final currentGroupId = sessionRepository.fetchCurrentGroupId();
+      if (currentGroupId != groupId) {
+        return;
+      }
+
+      final nextGroupId = user.joinGroupIds
+          ?.where((joinedGroupId) => joinedGroupId != groupId)
+          .firstOrNull;
+      if (nextGroupId == null) {
+        await sessionRepository.removeCurrentGroupId();
+      } else {
+        await sessionRepository.setCurrentGroupId(groupId: nextGroupId);
+      }
+      ref.invalidate(currentGroupIdProvider);
+    },
   );
 
   /// グループの欲しい物上限を解放する
