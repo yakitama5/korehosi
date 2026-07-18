@@ -7,7 +7,9 @@ import 'package:infrastructure_firebase/src/common/state/remote_config_provider.
 import 'package:riverpod/riverpod.dart';
 import 'package:version/version.dart';
 
-final _repositoryProvider = Provider(FirebaseAppVersionRepository.new);
+final Provider<FirebaseAppVersionRepository> _repositoryProvider = Provider(
+  FirebaseAppVersionRepository.new,
+);
 
 void main() {
   test('watchRemoteConfigValue emits initial and activated updates', () async {
