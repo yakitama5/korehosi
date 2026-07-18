@@ -1,5 +1,7 @@
 /* eslint-disable valid-jsdoc */
 
+const {createHash} = require('node:crypto');
+
 const DEFAULT_TIME_ZONE = 'Asia/Tokyo';
 const VALID_OFFSETS = new Set([0, 1, 7]);
 const INVALID_TOKEN_CODES = new Set([
@@ -43,6 +45,13 @@ function deliveryId({userId, groupId, itemId, offset, wishDate, timeZone}) {
     itemId,
     userId,
   ].join('_');
+}
+
+/** Creates a privacy-safe per-device idempotency key. */
+function deviceDeliveryId(baseDeliveryId, token) {
+  const tokenHash = createHash('sha256')
+    .update(token).digest('hex').slice(0, 20);
+  return `${baseDeliveryId}_${tokenHash}`;
 }
 
 /** Builds a privacy-safe FCM payload. */
@@ -99,28 +108,14 @@ async function sendToUser({
   }
 
   const offset = calendarDayDistance(now, wishDate, timeZone);
-  const sentRef = db.collection('wishReminderDeliveries').doc(deliveryId({
+  const baseDeliveryId = deliveryId({
     userId,
     groupId,
     itemId,
     offset,
     wishDate,
     timeZone,
-  }));
-  const claimed = await db.runTransaction(async (transaction) => {
-    const sent = await transaction.get(sentRef);
-    if (sent.exists) return false;
-    transaction.create(sentRef, {
-      userId,
-      groupId,
-      itemId,
-      offset,
-      wishDate: item.wishDate,
-      createdAt: new Date(),
-    });
-    return true;
   });
-  if (!claimed) return 0;
 
   const tokens = await db.collection('users').doc(userId)
     .collection('fcmTokens').get();
@@ -128,6 +123,23 @@ async function sendToUser({
   for (const tokenDoc of tokens.docs) {
     const token = tokenDoc.data().token;
     if (!token) continue;
+    const sentRef = db.collection('wishReminderDeliveries').doc(
+      deviceDeliveryId(baseDeliveryId, token),
+    );
+    const claimed = await db.runTransaction(async (transaction) => {
+      const sent = await transaction.get(sentRef);
+      if (sent.exists) return false;
+      transaction.create(sentRef, {
+        userId,
+        groupId,
+        itemId,
+        offset,
+        wishDate: item.wishDate,
+        createdAt: new Date(),
+      });
+      return true;
+    });
+    if (!claimed) continue;
     try {
       await messaging.send(buildWishReminderMessage({
         token,
@@ -142,6 +154,8 @@ async function sendToUser({
         await tokenDoc.ref.delete();
       } else {
         logger.error('Failed to send wish reminder', err);
+        // Retry transient failures without duplicating successful devices.
+        await sentRef.delete();
       }
     }
   }
@@ -202,5 +216,6 @@ module.exports = {
   createWishReminderHandler,
   dateKey,
   deliveryId,
+  deviceDeliveryId,
   isReminderDue,
 };

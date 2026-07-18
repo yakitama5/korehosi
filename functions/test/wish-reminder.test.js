@@ -2,7 +2,9 @@ const assert = require('node:assert/strict');
 const {
   buildWishReminderMessage,
   calendarDayDistance,
+  createWishReminderHandler,
   deliveryId,
+  deviceDeliveryId,
   isReminderDue,
 } = require('../src/wish-reminder');
 
@@ -37,6 +39,44 @@ describe('wish reminder', () => {
     };
     assert.equal(deliveryId(input), deliveryId(input));
     assert.notEqual(deliveryId(input), deliveryId({...input, offset: 7}));
+    assert.equal(
+      deviceDeliveryId(deliveryId(input), 'token'),
+      deviceDeliveryId(deliveryId(input), 'token'),
+    );
+    assert.notEqual(
+      deviceDeliveryId(deliveryId(input), 'first-token'),
+      deviceDeliveryId(deliveryId(input), 'second-token'),
+    );
+  });
+
+  it('reschedules with a new id when the wish date changes', () => {
+    const input = {
+      userId: 'user',
+      groupId: 'group',
+      itemId: 'item',
+      offset: 1,
+      wishDate: new Date('2026-07-20T00:00:00Z'),
+      timeZone: 'UTC',
+    };
+
+    assert.notEqual(
+      deliveryId(input),
+      deliveryId({...input, wishDate: new Date('2026-08-20T00:00:00Z')}),
+    );
+  });
+
+  it('does not send after an item has been deleted', async () => {
+    const messages = [];
+    const handler = createWishReminderHandler({
+      db: {
+        collectionGroup: () => ({get: async () => ({docs: []})}),
+      },
+      messaging: {send: async (message) => messages.push(message)},
+      logger: {log: () => {}, error: () => {}},
+    });
+
+    assert.equal(await handler(), 0);
+    assert.deepEqual(messages, []);
   });
 
   it('does not expose purchase or surprise information in the message', () => {
