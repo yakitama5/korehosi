@@ -66,7 +66,6 @@ jobs:
             --verbose \
             --dart-define-from-file ../../.github/e2e_dart_defines.json \
             --dart-define useFirebaseEmulators=true \
-            --dart-define skipFirebaseEmulatorReset=true \
             2>&1 | tee ../../patrol-ios.log
       - name: Capture simulator on failure
         if: failure()
@@ -119,7 +118,7 @@ jobs:
             curl --silent --fail http://127.0.0.1:4000 >/dev/null
             cd apps/app
             set -o pipefail
-            patrol test --target patrol_test/critical_flow_test.dart --uninstall --verbose --dart-define-from-file ../../.github/e2e_dart_defines.json --dart-define useFirebaseEmulators=true --dart-define skipFirebaseEmulatorReset=true --dart-define firebaseEmulatorHost=10.0.2.2 2>&1 | tee ../../patrol-android.log
+            patrol test --target patrol_test/critical_flow_test.dart --uninstall --verbose --dart-define-from-file ../../.github/e2e_dart_defines.json --dart-define useFirebaseEmulators=true --dart-define firebaseEmulatorHost=10.0.2.2 2>&1 | tee ../../patrol-android.log
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
