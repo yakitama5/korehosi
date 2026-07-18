@@ -6,19 +6,19 @@ import 'package:patrol/patrol.dart';
 void main() {
   patrolTest('初回登録からほしいものの作成・編集・削除まで完了できる', ($) async {
     await app.main();
-    await $.pumpAndSettle();
+    await $.pump(const Duration(seconds: 2));
 
     // A clean auth emulator can route either through Welcome or directly to
     // onboarding, depending on when anonymous sign-in completes.
     if ($('はじめる').evaluate().isNotEmpty) {
       await $('はじめる').tap();
-      await $.pumpAndSettle();
+      await $.pump(const Duration(milliseconds: 500));
     }
     await $(FilledButton).first.tap();
-    await $.pumpAndSettle();
+    await $.pump(const Duration(milliseconds: 500));
     await $(TextField).first.enterText('E2Eユーザー');
     await $(FilledButton).first.tap();
-    await $.pumpAndSettle();
+    await $.pump(const Duration(milliseconds: 500));
     await $('はじめる').last.tap();
     await $('ほしいものを追加').waitUntilVisible(
       timeout: const Duration(seconds: 20),
@@ -26,7 +26,7 @@ void main() {
 
     expect($('ほしいもの'), findsWidgets);
     await $('ほしいものを追加').tap();
-    await $.pumpAndSettle();
+    await $.pump(const Duration(milliseconds: 500));
     await $(TextField).first.enterText('E2Eテスト商品');
     await $('保存').tap();
     await $('E2Eテスト商品').waitUntilVisible(
