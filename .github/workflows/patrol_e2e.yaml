@@ -4,15 +4,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 18 * * 1-5'
-  pull_request:
-    types: [opened, synchronize]
-    paths:
-      - 'apps/app/**'
-      - 'packages/**'
-      - 'firestore.rules'
-      - 'storage.rules'
-      - 'functions/**'
-      - '.github/workflows/patrol_e2e.yaml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -85,7 +76,6 @@ jobs:
 
   android-critical-path:
     name: Android critical path (scheduled)
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
