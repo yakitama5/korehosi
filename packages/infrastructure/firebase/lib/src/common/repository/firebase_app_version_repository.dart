@@ -30,7 +30,11 @@ class FirebaseAppVersionRepository extends AppVersionRepository {
       try {
         yield Version.parse(value);
       } on FormatException catch (error, stackTrace) {
-        await ref.read(remoteConfigErrorReporterProvider)(error, stackTrace);
+        await reportRemoteConfigError(
+          ref.read(remoteConfigErrorReporterProvider),
+          error,
+          stackTrace,
+        );
         yield Version.parse(config.defaultValue);
       }
     }

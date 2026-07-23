@@ -15,13 +15,30 @@ typedef RemoteConfigErrorReporter =
     );
 
 final remoteConfigErrorReporterProvider = Provider<RemoteConfigErrorReporter>(
-  (ref) =>
-      (error, stackTrace) => FirebaseCrashlytics.instance.recordError(
+  (ref) => (error, stackTrace) async {
+    try {
+      await FirebaseCrashlytics.instance.recordError(
         error,
         stackTrace,
         reason: 'Firebase Remote Config',
-      ),
+      );
+    } on Object {
+      // Reporting is best-effort and must not break Remote Config fallback.
+    }
+  },
 );
+
+Future<void> reportRemoteConfigError(
+  RemoteConfigErrorReporter reportError,
+  Object error,
+  StackTrace stackTrace,
+) async {
+  try {
+    await reportError(error, stackTrace);
+  } on Object {
+    // A custom reporter must also remain best-effort.
+  }
+}
 
 /// Firebase Remote Configをテスト可能にするための最小インターフェース。
 abstract interface class RemoteConfigClient {
@@ -75,7 +92,11 @@ Future<RemoteConfigClient> remoteConfig(Ref ref) async {
   try {
     await remoteConfig.fetchAndActivate();
   } on Object catch (error, stackTrace) {
-    await ref.read(remoteConfigErrorReporterProvider)(error, stackTrace);
+    await reportRemoteConfigError(
+      ref.read(remoteConfigErrorReporterProvider),
+      error,
+      stackTrace,
+    );
   }
 
   return FirebaseRemoteConfigClient(remoteConfig);
@@ -153,13 +174,13 @@ Stream<T> watchRemoteConfigValue<T>({
               controller.add(read());
             }
           } on Object catch (error, stackTrace) {
-            await reportError(error, stackTrace);
+            await reportRemoteConfigError(reportError, error, stackTrace);
           } finally {
             subscription?.resume();
           }
         },
         onError: (Object error, StackTrace stackTrace) async {
-          await reportError(error, stackTrace);
+          await reportRemoteConfigError(reportError, error, stackTrace);
         },
         onDone: controller.close,
       );

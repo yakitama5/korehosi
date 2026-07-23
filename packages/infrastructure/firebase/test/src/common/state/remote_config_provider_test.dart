@@ -67,6 +67,32 @@ void main() {
     expect(values, ['1.0.0', '1.2.0']);
   });
 
+  test('reporter failures do not terminate realtime updates', () async {
+    final client = _FakeRemoteConfigClient(
+      strings: {RemoteConfigs.latestAppVersion.key: '1.0.0'},
+    );
+    addTearDown(client.dispose);
+    final stream = watchRemoteConfigValue(
+      client: client,
+      key: RemoteConfigs.latestAppVersion.key,
+      read: () => client.getString(RemoteConfigs.latestAppVersion.key),
+      reportError: (error, stackTrace) async => throw StateError('reporting'),
+    );
+
+    final values = <String>[];
+    final subscription = stream.listen(values.add);
+    addTearDown(subscription.cancel);
+    await _eventLoop();
+
+    client.addError(StateError('offline'));
+    await _eventLoop();
+    client.strings[RemoteConfigs.latestAppVersion.key] = '1.2.0';
+    client.addUpdate(RemoteConfigs.latestAppVersion.key);
+    await _eventLoop();
+
+    expect(values, ['1.0.0', '1.2.0']);
+  });
+
   test('cancelling the value stream cancels the update subscription', () async {
     final client = _FakeRemoteConfigClient(
       strings: {RemoteConfigs.latestAppVersion.key: '1.0.0'},
@@ -116,6 +142,29 @@ void main() {
       expect(errors.single, isA<FormatException>());
     },
   );
+
+  test('invalid versions fall back when the reporter also fails', () async {
+    final client = _FakeRemoteConfigClient(
+      strings: {RemoteConfigs.latestAppVersion.key: 'invalid'},
+    );
+    addTearDown(client.dispose);
+    final container = ProviderContainer(
+      overrides: [
+        remoteConfigProvider.overrideWith((ref) => client),
+        remoteConfigErrorReporterProvider.overrideWithValue(
+          (error, stackTrace) async => throw StateError('reporting'),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final version = await container
+        .read(_repositoryProvider)
+        .listenLatestAppVersion()
+        .first;
+
+    expect(version, Version(0, 0, 0));
+  });
 }
 
 Future<void> _eventLoop() => Future<void>.delayed(Duration.zero);
