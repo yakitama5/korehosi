@@ -210,4 +210,61 @@ describe('delete user', () => {
     assert.equal(updates[0][0].lastErrorCode, 'unknown');
     assert.deepEqual(updates[0][1], {merge: true});
   });
+
+  it('aggregates failures without blocking successful deletions', async () => {
+    const authError = new Error('temporary auth outage');
+    authError.code = 'auth/internal-error';
+    const operations = [];
+    const errors = [];
+    const successfulJob = {
+      id: 'successful-user',
+      data: () => ({attempts: 0}),
+      ref: {
+        delete: async () =>
+          operations.push(['job-delete', 'successful-user']),
+      },
+    };
+    const failedJob = {
+      id: 'failed-user',
+      data: () => ({attempts: 0}),
+      ref: {
+        delete: async () => operations.push(['job-delete', 'failed-user']),
+        set: async (data) =>
+          operations.push(['job-update', 'failed-user', data]),
+      },
+    };
+    const query = {
+      where: () => query,
+      limit: () => query,
+      get: async () => ({docs: [successfulJob, failedJob]}),
+    };
+    const retry = createRetryUserDeletionsHandler({
+      db: {collection: () => query},
+      auth: {deleteUser: async (uid) => {
+        operations.push(['auth-delete', uid]);
+        if (uid === 'failed-user') throw authError;
+      }},
+      logger: {error: (...args) => errors.push(args)},
+      clock: () => new Date('2026-07-23T00:00:00Z'),
+    });
+
+    await assert.rejects(retry(), (retryError) => {
+      assert.equal(retryError.message, '1 user deletions failed');
+      assert.deepEqual(retryError.errors, [authError]);
+      return true;
+    });
+    assert.equal(errors.length, 1);
+    assert.equal(errors[0][0], 'Failed to retry user deletion');
+    assert.equal(errors[0][1], authError);
+    assert.equal(
+      operations.some(([operation, uid]) =>
+        operation === 'job-delete' && uid === 'successful-user'),
+      true,
+    );
+    assert.equal(
+      operations.some(([operation, uid]) =>
+        operation === 'job-delete' && uid === 'failed-user'),
+      false,
+    );
+  });
 });
