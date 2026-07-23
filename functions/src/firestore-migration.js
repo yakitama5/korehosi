@@ -68,34 +68,49 @@ function suggestionMigrationOperations(collection, documents) {
 }
 
 /**
+ * Streams migration writes through one BulkWriter with bounded in-flight work.
  * @param {Firestore} db Firestore instance
- * @param {Object[]} operations migration operations
- * @return {Promise<void>}
+ * @param {boolean} dryRun whether writes should be skipped
+ * @param {number} maxInFlight maximum queued writes
+ * @return {Object} operation sink
  */
-async function applyOperations(db, operations) {
-  const writer = db.bulkWriter();
-  writer.onWriteError((writeError) => writeError.failedAttempts < 3);
-  const writes = [];
-  for (const operation of operations) {
-    if (operation.type === 'set') {
-      writes.push(writer.set(operation.ref, operation.data, {merge: true}));
-    } else if (operation.type === 'update') {
-      writes.push(writer.update(operation.ref, operation.data));
-    } else {
-      writes.push(writer.delete(operation.ref));
+function createOperationSink(db, dryRun, maxInFlight = 100) {
+  const summary = {set: 0, update: 0, delete: 0};
+  const writer = dryRun ? null : db.bulkWriter();
+  const pending = new Set();
+  const failures = [];
+  if (writer) {
+    writer.onWriteError((writeError) => writeError.failedAttempts < 3);
+  }
+
+  const add = async (operation) => {
+    summary[operation.type]++;
+    if (!writer) return;
+    const write = operation.type === 'set' ?
+      writer.set(operation.ref, operation.data, {merge: true}) :
+      operation.type === 'update' ?
+        writer.update(operation.ref, operation.data) :
+        writer.delete(operation.ref);
+    const tracked = write.catch((error) => failures.push(error));
+    pending.add(tracked);
+    tracked.finally(() => pending.delete(tracked));
+    if (pending.size >= maxInFlight) {
+      await Promise.race(pending);
     }
-  }
-  const writesCompleted = Promise.allSettled(writes);
-  await writer.close();
-  const results = await writesCompleted;
-  const failures = results.filter(({status}) => status === 'rejected');
-  if (failures.length > 0) {
-    const migrationError = new Error(
-      `${failures.length} migration writes failed`,
-    );
-    migrationError.errors = failures.map(({reason}) => reason);
-    throw migrationError;
-  }
+  };
+
+  const close = async () => {
+    await Promise.all(pending);
+    if (writer) await writer.close();
+    if (failures.length > 0) {
+      const migrationError = new Error(
+        `${failures.length} migration writes failed`,
+      );
+      migrationError.errors = failures;
+      throw migrationError;
+    }
+  };
+  return {add, close, summary};
 }
 
 /**
@@ -109,41 +124,38 @@ async function migrateFirestoreData(
   db,
   {dryRun = true, logger = console} = {},
 ) {
-  const operations = [];
-  const items = await db.collectionGroup('items').get();
-  for (const item of items.docs) {
+  const sink = createOperationSink(db, dryRun);
+  for await (const item of db.collectionGroup('items').stream()) {
     const patch = purchaseStatusPatch(item.data());
     if (Object.keys(patch).length > 0) {
-      operations.push({type: 'update', ref: item.ref, data: patch});
+      await sink.add({type: 'update', ref: item.ref, data: patch});
     }
   }
 
-  const groups = await db.collection('groups').get();
-  for (const group of groups.docs) {
+  for await (const group of db.collection('groups').stream()) {
     for (const collectionName of ['buyerNames', 'wanterNames']) {
       const collection = group.ref.collection(collectionName);
       const suggestions = await collection.get();
-      operations.push(...suggestionMigrationOperations(
-        collection,
-        suggestions.docs,
-      ));
+      const operations = suggestionMigrationOperations(
+        collection, suggestions.docs,
+      );
+      for (const operation of operations) {
+        await sink.add(operation);
+      }
     }
   }
 
-  const summary = operations.reduce((result, operation) => {
-    result[operation.type]++;
-    return result;
-  }, {set: 0, update: 0, delete: 0});
-  logger.log(`${dryRun ? 'DRY RUN' : 'APPLY'}: ${JSON.stringify(summary)}`);
-  if (!dryRun) {
-    await applyOperations(db, operations);
-  }
-  return summary;
+  await sink.close();
+  logger.log(
+    `${dryRun ? 'DRY RUN' : 'APPLY'}: ${JSON.stringify(sink.summary)}`,
+  );
+  return sink.summary;
 }
 
 module.exports = {
   INVALID_PURCHASE_PLAN,
   VALID_PURCHASE_PLAN,
+  createOperationSink,
   migrateFirestoreData,
   purchaseStatusPatch,
   suggestionMigrationOperations,

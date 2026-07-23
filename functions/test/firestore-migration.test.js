@@ -1,5 +1,6 @@
 const assert = require('node:assert/strict');
 const {
+  migrateFirestoreData,
   purchaseStatusPatch,
   suggestionMigrationOperations,
 } = require('../src/firestore-migration');
@@ -47,5 +48,32 @@ describe('Firestore data migration', () => {
     assert.deepEqual(suggestionMigrationOperations(collection, [
       document(targetId, 'Alice', {normalizedName}),
     ]), []);
+  });
+
+  it('streams items and groups without accumulating migration writes', async () => {
+    const item = {
+      ref: {path: 'groups/group/items/item'},
+      data: () => ({purchaseStatus: 'purchasePlan;'}),
+    };
+    const names = {
+      doc: (id) => ({path: `names/${id}`}),
+      get: async () => ({docs: [document('legacy', 'Alice')]}),
+    };
+    const group = {
+      ref: {collection: () => names},
+    };
+    const stream = (values) => async function* () {
+      yield* values;
+    };
+    const db = {
+      collectionGroup: () => ({stream: stream([item])}),
+      collection: () => ({stream: stream([group])}),
+    };
+
+    const summary = await migrateFirestoreData(db, {
+      logger: {log: () => {}},
+    });
+
+    assert.deepEqual(summary, {set: 2, update: 1, delete: 2});
   });
 });
