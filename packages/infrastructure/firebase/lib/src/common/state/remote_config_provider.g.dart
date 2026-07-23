@@ -10,27 +10,33 @@ part of 'remote_config_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Firebase Remote Config
-/// テスト時にDIすることを考慮して、Providerとして定義
+/// Firebase Remote Config。
+///
+/// fetchに失敗しても、SDKが保持するactivated/cached/default値を利用できるよう
+/// 初期化自体は成功させる。
 
 @ProviderFor(remoteConfig)
 const remoteConfigProvider = RemoteConfigProvider._();
 
-/// Firebase Remote Config
-/// テスト時にDIすることを考慮して、Providerとして定義
+/// Firebase Remote Config。
+///
+/// fetchに失敗しても、SDKが保持するactivated/cached/default値を利用できるよう
+/// 初期化自体は成功させる。
 
 final class RemoteConfigProvider
     extends
         $FunctionalProvider<
-          AsyncValue<FirebaseRemoteConfig>,
-          FirebaseRemoteConfig,
-          FutureOr<FirebaseRemoteConfig>
+          AsyncValue<RemoteConfigClient>,
+          RemoteConfigClient,
+          FutureOr<RemoteConfigClient>
         >
     with
-        $FutureModifier<FirebaseRemoteConfig>,
-        $FutureProvider<FirebaseRemoteConfig> {
-  /// Firebase Remote Config
-  /// テスト時にDIすることを考慮して、Providerとして定義
+        $FutureModifier<RemoteConfigClient>,
+        $FutureProvider<RemoteConfigClient> {
+  /// Firebase Remote Config。
+  ///
+  /// fetchに失敗しても、SDKが保持するactivated/cached/default値を利用できるよう
+  /// 初期化自体は成功させる。
   const RemoteConfigProvider._()
     : super(
         from: null,
@@ -47,17 +53,17 @@ final class RemoteConfigProvider
 
   @$internal
   @override
-  $FutureProviderElement<FirebaseRemoteConfig> $createElement(
+  $FutureProviderElement<RemoteConfigClient> $createElement(
     $ProviderPointer pointer,
   ) => $FutureProviderElement(pointer);
 
   @override
-  FutureOr<FirebaseRemoteConfig> create(Ref ref) {
+  FutureOr<RemoteConfigClient> create(Ref ref) {
     return remoteConfig(ref);
   }
 }
 
-String _$remoteConfigHash() => r'36d7b397a177e8516a81814c1f515ebf6415c1a6';
+String _$remoteConfigHash() => r'81bb48b01e8e14e8ef39d0a394175a7d45f2ecc2';
 
 @ProviderFor(stringConfig)
 const stringConfigProvider = StringConfigFamily._();
@@ -108,7 +114,7 @@ final class StringConfigProvider
   }
 }
 
-String _$stringConfigHash() => r'a54d53ff39eb08f065ecfc5f289e17cac834de85';
+String _$stringConfigHash() => r'9629e726337755b97478026bc3bcc0b70d517ec1';
 
 final class StringConfigFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<String>, RemoteConfigs<String>> {
@@ -177,7 +183,7 @@ final class BoolConfigProvider
   }
 }
 
-String _$boolConfigHash() => r'3750bdf5cffc2bb87fbc946aef5adbd11fcc9438';
+String _$boolConfigHash() => r'a8cc7ffd994eb559dce9dc12b1879770883ea63a';
 
 final class BoolConfigFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, RemoteConfigs<bool>> {
@@ -247,7 +253,7 @@ final class StringStreamConfigProvider
 }
 
 String _$stringStreamConfigHash() =>
-    r'5d70c2bf5c5d5b92002e803fff4651df273f0b98';
+    r'154a6b929a9383efbf6b4285cbbc28b13d8ce7b6';
 
 final class StringStreamConfigFamily extends $Family
     with $FunctionalFamilyOverride<Stream<String>, RemoteConfigs<String>> {
@@ -316,7 +322,7 @@ final class BoolStreamConfigProvider
   }
 }
 
-String _$boolStreamConfigHash() => r'd5360082d0a6b46d1fe91de93198a70960a02d47';
+String _$boolStreamConfigHash() => r'0cd53acec79ecdb47a766d0396d27a0bcf4209dd';
 
 final class BoolStreamConfigFamily extends $Family
     with $FunctionalFamilyOverride<Stream<bool>, RemoteConfigs<bool>> {

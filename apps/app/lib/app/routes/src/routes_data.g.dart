@@ -123,6 +123,10 @@ RouteBase get $baseShellRouteData => ShellRouteData.$route(
                   path: 'theme_mode',
                   factory: $SettingsThemeModePageRoute._fromState,
                 ),
+                GoRouteData.$route(
+                  path: 'wish_reminder',
+                  factory: $WishReminderSettingsRouteData._fromState,
+                ),
               ],
             ),
           ],
@@ -633,6 +637,27 @@ mixin $SettingsThemeModePageRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/settings/theme_mode');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin $WishReminderSettingsRouteData on GoRouteData {
+  static WishReminderSettingsRouteData _fromState(GoRouterState state) =>
+      const WishReminderSettingsRouteData();
+
+  @override
+  String get location => GoRouteData.$location('/settings/wish_reminder');
 
   @override
   void go(BuildContext context) => context.go(location);

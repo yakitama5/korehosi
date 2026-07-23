@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 import 'package:infrastructure_firebase/src/common/extension/firebase_auth_user_extension.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_auth_provider.dart';
+import 'package:infrastructure_firebase/src/common/state/firebase_functions_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firestore_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/google_sign_in_provider.dart';
 import 'package:infrastructure_firebase/src/group/model/firestore_group_model.dart';
 import 'package:infrastructure_firebase/src/group/state/firestore_group_provider.dart';
 import 'package:infrastructure_firebase/src/user/model/firestore_user_model.dart';
-import 'package:infrastructure_firebase/src/user/state/firestore_deleted_user_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_participant_provider.dart';
 import 'package:infrastructure_firebase/src/user/state/firestore_user_provider.dart';
 import 'package:packages_core/util.dart';
@@ -112,23 +112,9 @@ class FirebaseUserRepository implements UserRepository {
 
   @override
   Future<void> delete({required UserId userId}) async {
-    // ユーザーモデルの削除
-    final firestore = ref.read(firestoreProvider);
-    await firestore.runTransaction((transaction) async {
-      // 削除前の状態を保持
-      final docRef = ref.read(userDocumentRefProvider(userId: userId));
-      final delDocRef = ref.read(duserDocumentRefProvider(userId: userId));
-      final doc = await transaction.get(docRef);
-
-      transaction
-          // ドキュメントの削除
-          .delete(docRef)
-          // 削除用ドキュメントの追加
-          .set<FirestoreUserModel>(delDocRef, doc.data()!);
-    });
-
-    // 認証情報の削除
-    await ref.read(firebaseAuthProvider).currentUser?.delete();
+    final functions = ref.read(firebaseFunctionsProvider);
+    await functions.httpsCallable('v2DeleteUser').call<Map<String, dynamic>>();
+    await ref.read(firebaseAuthProvider).signOut();
   }
 
   @override

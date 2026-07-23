@@ -1,0 +1,70 @@
+name: Firebase Test
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - ".github/workflows/firebase_test.yaml"
+      - "firebase.json"
+      - "firestore.rules"
+      - "storage.rules"
+      - "functions/**"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/firebase_test.yaml"
+      - "firebase.json"
+      - "firestore.rules"
+      - "storage.rules"
+      - "functions/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  firebase_test:
+    name: Firebase lint and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Install dependencies
+        run: npm ci --prefix functions
+
+      - name: Lint Functions
+        run: npm run lint --prefix functions
+
+      - name: Test Functions
+        run: npm run test:functions --prefix functions
+
+      - name: Test Firestore and Storage rules
+        run: >-
+          npx --yes firebase-tools@15.20.0 emulators:exec
+          --project demo-korehosi
+          --only firestore,storage
+          "npm run test:rules --prefix functions"

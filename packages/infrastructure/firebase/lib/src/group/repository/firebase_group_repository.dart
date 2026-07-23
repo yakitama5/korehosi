@@ -149,11 +149,15 @@ class FirebaseGroupRepository implements GroupRepository {
       transaction
           // グループから除外
           .update(groupDocRef, {
-            'joinUids': FieldValue.arrayRemove([userId]),
+            'joinUids': FieldValue.arrayRemove(
+              firestoreLeaveUserValues(userId),
+            ),
           })
           // ユーザーの参加グループから削除
           .update(userDocRef, {
-            'joinGroupIds': FieldValue.arrayRemove([groupId]),
+            'joinGroupIds': FieldValue.arrayRemove(
+              firestoreLeaveGroupValues(groupId),
+            ),
           });
     });
   }
@@ -176,3 +180,9 @@ class FirebaseGroupRepository implements GroupRepository {
     return docRef.id;
   }
 }
+
+/// Firestoreにはextension typeではなく、その基底値を保存する。
+List<String> firestoreLeaveUserValues(UserId userId) => [userId.value];
+
+/// Firestoreにはextension typeではなく、その基底値を保存する。
+List<String> firestoreLeaveGroupValues(GroupId groupId) => [groupId.value];

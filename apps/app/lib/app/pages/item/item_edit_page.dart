@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/app/pages/item/components/item_image_carousel_slider.dart';
 import 'package:flutter_app/app/pages/item/components/items_empty_image.dart';
 import 'package:flutter_app/app/pages/item/components/rating_icon.dart';
+import 'package:flutter_app/app/pages/item/controllers/item_edit_form_controller.dart';
 import 'package:flutter_app/app/pages/item/services/url_thumbnail_fetcher.dart';
 import 'package:flutter_app/app/routes/src/routes_data.dart';
 import 'package:flutter_app/i18n/strings.g.dart';
@@ -20,6 +21,9 @@ import 'package:packages_domain/item.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 import 'package:reactive_flutter_rating_bar/reactive_flutter_rating_bar.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+part 'components/item_edit_image_section.dart';
+part 'components/item_edit_url_date_section.dart';
 
 class ItemEditPage extends HookConsumerWidget with RouteAware {
   const ItemEditPage({super.key});
@@ -52,18 +56,22 @@ class _ItemForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final urlThumbnails = useState<Map<String, String?>>({
-      ...?item?.urlThumbnails,
-    });
+    final draft = useMemoized(
+      () => ItemEditFormDraft.fromItem(item),
+      [item?.id],
+    );
+    final urlThumbnails = useState<Map<String, String?>>(
+      draft.urlThumbnails,
+    );
     final wishDateControl = useMemoized(
-      () => FormControl<DateTime>(value: item?.wishDate),
+      () => FormControl<DateTime>(value: draft.wishDate),
       [item?.id],
     );
     useStream(wishDateControl.valueChanges);
     useEffect(() => wishDateControl.dispose, [wishDateControl]);
 
     return ItemFormModelFormBuilder(
-      model: _createModel(),
+      model: draft.model,
       builder: (context, formModel, child) => Nested(
         children: [
           PopScopeDirtyConfirm(
@@ -117,29 +125,6 @@ class _ItemForm extends HookConsumerWidget {
       ),
     );
   }
-
-  /// FormGroupを生成する
-  ItemFormModel _createModel() {
-    return ItemFormModel(
-      name: item?.name,
-      // HACK(yakitama5): 初期値設定をモデル定義側に統一したい
-      wishRank: item?.wishRank ?? 0.0,
-      wanterName: item?.wanterName,
-      wishSeason: item?.wishSeason,
-      memo: item?.memo,
-      // 最低1つの要素を表示
-      urls: (item?.urls?.isEmpty ?? true) ? [''] : item?.urls,
-      images: [
-        // 新規アップロード用に項目を+1定義
-        ...item?.images
-                // 画像はアップロード済のものと分けて管理するためモデルに変換
-                ?.map((image) => SelectedImageModel(savedImage: image))
-                .toList() ??
-            [],
-        null,
-      ],
-    );
-  }
 }
 
 /// 保存ボタン
@@ -168,59 +153,45 @@ class _Submit extends HookConsumerWidget with PresentationMixin {
 
         final navigator = Navigator.of(context);
 
-        // 入力値を取得
-        final name = formModel.nameControl.value;
-        final wanterName = formModel.wanterNameControl.value;
-        final wishRank = formModel.wishRankControl.value;
-        final wishSeason = formModel.wishSeasonControl.value;
-        final wishDate = wishDateControl.value;
-        final urls = formModel.urlsControl.controls
-            .map((e) => e.value)
-            .nonNulls
-            .toList();
-        final thumbnails = Map<String, String?>.fromEntries(
-          urlThumbnails.value.entries.where(
-            (entry) => urls.contains(entry.key),
-          ),
+        final submission = ItemEditSubmission.fromForm(
+          form: formModel,
+          wishDate: wishDateControl.value,
+          urlThumbnails: urlThumbnails.value,
         );
-        final memo = formModel.memoControl.value;
-        final selectedImages = formModel.imagesControl.controls
-            .map((e) => e.value)
-            .nonNulls
-            .toList();
 
         // 登録 or 更新
         final itemId = ref.read(ItemDetailProviders.itemIdProvider);
-        final isAdd = itemId == null;
         final usecase = ref.read(itemUsecaseProvider);
-        if (isAdd) {
-          await usecase.add(
-            selectedImages: selectedImages,
-            name: name!,
-            wanterName: wanterName,
-            wishRank: wishRank!,
-            wishSeason: wishSeason,
-            wishDate: wishDate,
-            urls: urls,
-            urlThumbnails: thumbnails,
-            memo: memo,
-            generateItemDetailRoute: (itemId) =>
-                ItemRouteData(itemId.value).location,
-          );
-        } else {
-          await usecase.update(
-            itemId: itemId,
-            selectedImages: selectedImages,
-            name: name!,
-            wanterName: wanterName,
-            wishRank: wishRank!,
-            wishSeason: wishSeason,
-            wishDate: wishDate,
-            urls: urls,
-            urlThumbnails: thumbnails,
-            memo: memo,
-          );
-        }
+        final controller = ItemEditFormController(
+          add: (value) => usecase.add(
+            selectedImages: value.selectedImages,
+            name: value.name,
+            wanterName: value.wanterName,
+            wishRank: value.wishRank,
+            wishSeason: value.wishSeason,
+            wishDate: value.wishDate,
+            urls: value.urls,
+            urlThumbnails: value.urlThumbnails,
+            memo: value.memo,
+            generateItemDetailRoute: (id) => ItemRouteData(id.value).location,
+          ),
+          update: (id, value) => usecase.update(
+            itemId: id,
+            selectedImages: value.selectedImages,
+            name: value.name,
+            wanterName: value.wanterName,
+            wishRank: value.wishRank,
+            wishSeason: value.wishSeason,
+            wishDate: value.wishDate,
+            urls: value.urls,
+            urlThumbnails: value.urlThumbnails,
+            memo: value.memo,
+          ),
+        );
+        await controller.save(
+          itemId: itemId,
+          submission: submission,
+        );
 
         // 遷移元にポップ
         navigator.pop();
@@ -270,97 +241,6 @@ class _DeleteButton extends HookConsumerWidget with PresentationMixin {
         }
       },
       successMessage: commonI18n.common.deletionComplete,
-    );
-  }
-}
-
-/// 欲しい物の画像一覧
-class _ImageFields extends HookConsumerWidget {
-  const _ImageFields({required this.urlThumbnails});
-
-  final ValueNotifier<Map<String, String?>> urlThumbnails;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final formModel = ReactiveItemFormModelForm.of(context)!;
-    final thumbnails = useValueListenable(urlThumbnails);
-
-    return ReactiveFormArray<SelectedImageModel>(
-      formArray: formModel.imagesControl,
-      builder: (context, formArray, child) {
-        final radius = BorderRadius.circular(16);
-
-        return ItemImageCarouselSlider(
-          items: [
-            ...formArray.controls.mapIndexed(
-              (i, key) => ClipRRect(
-                borderRadius: radius,
-                child: ReactiveImagePicker(
-                  key: ObjectKey(formArray.control('$i')),
-                  formControlName: '$i',
-                  inputBuilder: (onPressed) => InkWell(
-                    borderRadius: radius,
-                    onTap: onPressed,
-                    child: const ItemsEmptyImage(
-                      width: double.infinity,
-                      height: double.infinity,
-                      showAddIcon: true,
-                    ),
-                  ),
-                  onSelected: () => formModel.addImagesItem(null),
-                  onDeleted: () => formModel.imagesControl.removeAt(i),
-                  selectedBuilder: (onPressed, selectedFile) {
-                    final uploaded = selectedFile.savedImage != null;
-                    return InkWell(
-                      borderRadius: radius,
-                      onTap: onPressed,
-                      // ファイル種別に応じてWidgetを切り替える
-                      child: uploaded
-                          ? NetworkImageWithPlaceholder(
-                              imageUrl: selectedFile.savedImage!.url,
-                            )
-                          : XFileImage(xFile: selectedFile.uploadFile!),
-                    );
-                  },
-                ),
-              ),
-            ),
-            ...thumbnails.entries.expand(
-              (entry) {
-                final imageUrl = entry.value;
-                return imageUrl == null
-                    ? const <Widget>[]
-                    : [
-                        ClipRRect(
-                          borderRadius: radius,
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              NetworkImageWithPlaceholder(
-                                imageUrl: imageUrl,
-                              ),
-                              PositionedDirectional(
-                                top: 8,
-                                end: 8,
-                                child: IconButton.filled(
-                                  onPressed: () {
-                                    urlThumbnails.value = {
-                                      ...urlThumbnails.value,
-                                      entry.key: null,
-                                    };
-                                  },
-                                  icon: const Icon(Icons.delete),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ];
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }
@@ -432,133 +312,6 @@ class _WishSeasonField extends HookConsumerWidget {
       labelText: i18n.item.common.wishSeason,
       hintText: i18n.item.itemEditPage.wishSeason.hint,
       maxLength: itemConfig.maxWishSeasonLength,
-    );
-  }
-}
-
-class _WishDateField extends StatelessWidget {
-  const _WishDateField({required this.control});
-
-  final FormControl<DateTime> control;
-
-  @override
-  Widget build(BuildContext context) => ReactiveDateTimePicker(
-    formControl: control,
-    fieldLabelText: i18n.item.common.wishDate,
-    keyboardType: TextInputType.datetime,
-    decoration: InputDecoration(
-      labelText: i18n.item.common.wishDate,
-      border: const OutlineInputBorder(),
-      suffixIcon: const Icon(Icons.calendar_today),
-      helperText: i18n.item.itemEditPage.wishDate.hint,
-    ),
-  );
-}
-
-class _UrlFields extends HookConsumerWidget {
-  const _UrlFields({required this.urlThumbnails});
-
-  final ValueNotifier<Map<String, String?>> urlThumbnails;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final formModel = ReactiveItemFormModelForm.of(context)!;
-
-    return ReactiveItemFormModelFormArrayBuilder(
-      formControl: formModel.urlsControl,
-      itemBuilder: (_, i, _, _, formModel) => _UrlField(
-        key: ObjectKey(formModel.urlsControl.control('$i')),
-        index: i,
-        urlThumbnails: urlThumbnails,
-      ),
-    );
-  }
-}
-
-class _UrlField extends HookWidget {
-  const _UrlField({
-    super.key,
-    required this.index,
-    required this.urlThumbnails,
-  });
-
-  final int index;
-  final ValueNotifier<Map<String, String?>> urlThumbnails;
-
-  @override
-  Widget build(BuildContext context) {
-    final formModel = ReactiveItemFormModelForm.of(context)!;
-    final control =
-        formModel.urlsControl.control('$index') as FormControl<String>;
-    final previousUrl = useRef(control.value);
-    final debounce = useRef<Timer?>(null);
-    final attemptedUrls = useRef(<String>{});
-
-    Future<void> fetchThumbnail(String? value) async {
-      final url = value?.trim();
-      final uri = Uri.tryParse(url ?? '');
-      if (url == null ||
-          url.isEmpty ||
-          uri == null ||
-          !{'http', 'https'}.contains(uri.scheme) ||
-          urlThumbnails.value.containsKey(url) ||
-          !attemptedUrls.value.add(url)) {
-        return;
-      }
-
-      final imageUrl = await fetchUrlThumbnail(url);
-      if (imageUrl != null && !urlThumbnails.value.containsKey(url)) {
-        urlThumbnails.value = {
-          ...urlThumbnails.value,
-          url: imageUrl,
-        };
-      }
-    }
-
-    void scheduleFetch(FormControl<String> changedControl) {
-      final url = changedControl.value;
-      final previous = previousUrl.value;
-      if (previous != null && previous != url) {
-        final updated = Map<String, String?>.from(urlThumbnails.value)
-          ..remove(previous);
-        urlThumbnails.value = updated;
-      }
-      previousUrl.value = url;
-
-      debounce.value?.cancel();
-      debounce.value = Timer(
-        const Duration(milliseconds: 700),
-        () => fetchThumbnail(url),
-      );
-    }
-
-    useEffect(() {
-      scheduleFetch(control);
-      return () => debounce.value?.cancel();
-    }, [control]);
-
-    return ReactiveOutlinedTextField<String>(
-      formControlName: '$index',
-      labelText: i18n.item.common.url,
-      maxLength: itemConfig.maxUrlLength,
-      textInputType: TextInputType.url,
-      counterText: '',
-      onChanged: scheduleFetch,
-    );
-  }
-}
-
-class _UrlAddButton extends HookConsumerWidget {
-  const _UrlAddButton({required this.onAdd});
-
-  final void Function() onAdd;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return TextButton.icon(
-      onPressed: onAdd,
-      icon: const Icon(Icons.add),
-      label: Text(i18n.item.itemEditPage.addUrl),
     );
   }
 }

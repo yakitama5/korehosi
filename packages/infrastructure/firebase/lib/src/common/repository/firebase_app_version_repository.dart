@@ -19,10 +19,24 @@ class FirebaseAppVersionRepository extends AppVersionRepository {
 
   /// バージョンを取得する
   Stream<Version> _listenVersion(RemoteConfigs<String> config) async* {
-    // HACK(yakitama5): RemoteConfigの値をStreamで取得する箇所でエラーが頻発する、原因調査
-    final value = await ref.watch(
-      stringStreamConfigProvider(config: config).future,
+    final client = await ref.watch(remoteConfigProvider.future);
+    final values = watchRemoteConfigValue(
+      client: client,
+      key: config.key,
+      read: () => client.getString(config.key),
+      reportError: ref.read(remoteConfigErrorReporterProvider),
     );
-    yield Version.parse(value);
+    await for (final value in values) {
+      try {
+        yield Version.parse(value);
+      } on FormatException catch (error, stackTrace) {
+        await reportRemoteConfigError(
+          ref.read(remoteConfigErrorReporterProvider),
+          error,
+          stackTrace,
+        );
+        yield Version.parse(config.defaultValue);
+      }
+    }
   }
 }

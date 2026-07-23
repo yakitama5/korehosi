@@ -11,12 +11,19 @@ typedef InfrastructureInitializedValues = ({
 final class InfrastructureInitializer {
   InfrastructureInitializer._();
 
+  static const _useFirebaseEmulators = bool.fromEnvironment(
+    'useFirebaseEmulators',
+  );
+
   static Future<InfrastructureInitializedValues> initialize({
     required Flavor flavor,
     required bool isWeb,
   }) async {
     // Firebase
     final firebaseResult = await FirebaseInitializer.initialize(flavor);
+    if (_useFirebaseEmulators) {
+      return (initialMessage: firebaseResult.initialMessage);
+    }
 
     // branch (deep link)
     await BranchInitializer.initialize();

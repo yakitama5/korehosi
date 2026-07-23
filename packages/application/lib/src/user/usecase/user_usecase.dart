@@ -283,6 +283,22 @@ class UserUsecase with RunUsecaseMixin {
         .updateTokenTimestamp(userId: userId, dateTime: now);
   }
 
+  Future<void> updateWishReminderSettings(
+    WishReminderSettings settings,
+  ) async {
+    final userId = await ref.read(
+      authUserProvider.selectAsync((user) => user?.id),
+    );
+    if (userId == null) {
+      throw const BusinessException(
+        BusinessExceptionType.updateTargetNotFound,
+      );
+    }
+    await ref
+        .read(notificationTokenRepositoryProvider)
+        .setWishReminderSettings(userId: userId, settings: settings);
+  }
+
   /// Permissionエラーを避けるために、キャッシュしていた取得データをリフレッシュする
   void _invalidateStates() {
     logger.d('Refresh Firestore instance');

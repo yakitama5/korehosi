@@ -66,6 +66,7 @@
     "fontello",
     "fvmrc",
     "gitmessage",
+    "googleusercontent",
     "goldens",
     "Gruntfuggly",
     "haxe",
@@ -74,6 +75,7 @@
     "kuhnroyal",
     "lobanov",
     "lancher",
+    "Millis",
     "mocktail",
     "Murecho",
     "MVVM",
@@ -87,6 +89,7 @@
     "phpactor",
     "Podfile",
     "xcconfig",
+    "xcresult",
     "predeploy",
     "pubspec",
     "recaptcha",
@@ -113,6 +116,14 @@
     "xcworkspace",
     "yakitama",
     "yakuran",
-    "Zain"
+    "Zain",
+    "bootstatus",
+    "NFKC",
+    "pipefail",
+    "reactivecircus",
+    "simctl",
+    "startswith",
+    "udid",
+    "xcrun"
   ]
 }

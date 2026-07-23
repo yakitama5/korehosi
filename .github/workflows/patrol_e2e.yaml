@@ -1,0 +1,128 @@
+name: Patrol E2E
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 18 * * 1-5'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ios-critical-path:
+    name: iOS critical path
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Setup config files
+        uses: ./.github/actions/setup-config-files
+        env:
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+      - name: Setup application runtime
+        uses: ./.github/actions/setup-application-runtime
+      - name: Install E2E tools
+        run: |
+          dart pub global activate patrol_cli 4.5.1
+          dart pub global activate flutterfire_cli 1.4.0
+          npm install --global firebase-tools@15.20.0
+          npm ci --prefix functions
+      - name: Boot iOS simulator
+        run: |
+          DEVICE_ID=$(xcrun simctl list devices available -j | jq -r '[.devices[][] | select(.name | startswith("iPhone"))][0].udid')
+          xcrun simctl boot "$DEVICE_ID" || true
+          xcrun simctl bootstatus "$DEVICE_ID" -b
+      - name: Start Firebase emulators
+        run: |
+          firebase emulators:start --project family-wish-list-ad3c7-dev \
+            --only auth,firestore,functions,storage > firebase-emulator.log 2>&1 &
+          for _ in {1..120}; do
+            curl --silent --fail http://127.0.0.1:4000 >/dev/null && exit 0
+            sleep 2
+          done
+          exit 1
+      - name: Run iOS critical path
+        timeout-minutes: 30
+        working-directory: apps/app
+        run: |
+          set -o pipefail
+          patrol test --target patrol_test/critical_flow_test.dart \
+            --uninstall --full-isolation \
+            --verbose \
+            --dart-define-from-file ../../.github/e2e_dart_defines.json \
+            --dart-define useFirebaseEmulators=true \
+            2>&1 | tee ../../patrol-ios.log
+      - name: Capture simulator on failure
+        if: failure()
+        run: xcrun simctl io booted screenshot ios-failure.png || true
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: patrol-ios-diagnostics
+          if-no-files-found: ignore
+          path: |
+            patrol-ios.log
+            firebase-emulator.log
+            ios-failure.png
+            apps/app/build/ios_results*.xcresult
+
+  android-critical-path:
+    name: Android critical path (scheduled)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Setup config files
+        uses: ./.github/actions/setup-config-files
+        env:
+          DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+          DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
+      - name: Setup application runtime
+        uses: ./.github/actions/setup-application-runtime
+      - name: Install E2E tools
+        run: |
+          dart pub global activate patrol_cli 4.5.1
+          dart pub global activate flutterfire_cli 1.4.0
+          npm install --global firebase-tools@15.20.0
+          npm ci --prefix functions
+      - name: Run Android critical path
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          script: |
+            firebase emulators:start --project family-wish-list-ad3c7-dev --only auth,firestore,functions,storage > firebase-emulator.log 2>&1 &
+            for _ in {1..120}; do curl --silent --fail http://127.0.0.1:4000 >/dev/null && break; sleep 2; done
+            curl --silent --fail http://127.0.0.1:4000 >/dev/null
+            cd apps/app
+            set -o pipefail
+            patrol test --target patrol_test/critical_flow_test.dart --uninstall --verbose --dart-define-from-file ../../.github/e2e_dart_defines.json --dart-define useFirebaseEmulators=true --dart-define firebaseEmulatorHost=10.0.2.2 2>&1 | tee ../../patrol-android.log
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: patrol-android-diagnostics
+          if-no-files-found: ignore
+          path: |
+            patrol-android.log
+            firebase-emulator.log

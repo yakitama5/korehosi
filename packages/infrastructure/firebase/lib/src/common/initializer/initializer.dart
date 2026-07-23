@@ -41,6 +41,9 @@ final class FirebaseInitializer {
     await Firebase.initializeApp(options: firebaseOptions);
     if (_useFirebaseEmulators) {
       await _connectToFirebaseEmulators();
+      // Emulator-backed E2E tests do not need services that contact Apple,
+      // Google, or production Firebase during application startup.
+      return (initialMessage: null);
     }
 
     // App Check

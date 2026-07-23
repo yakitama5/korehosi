@@ -3,7 +3,11 @@
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "lint": "eslint .",
+    "test": "npm run lint && npm run test:functions",
+    "test:functions": "mocha --timeout 20000 \"test/**/*.test.js\" --ignore \"test/**/*.rules.test.js\"",
     "test:rules": "mocha --timeout 20000 \"test/**/*.rules.test.js\"",
+    "migrate:data": "node scripts/migrate-firestore-data.js",
+    "migrate:data:apply": "node scripts/migrate-firestore-data.js --apply",
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
@@ -16,8 +20,7 @@
   "main": "index.js",
   "dependencies": {
     "firebase-admin": "^13.6.0",
-    "firebase-functions": "^6.6.0",
-    "lodash": "^4.17.21"
+    "firebase-functions": "^6.6.0"
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^5.0.1",

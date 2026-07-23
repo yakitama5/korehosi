@@ -23,6 +23,9 @@ const settingsBranch = TypedStatefulShellBranch<BranchSettingsData>(
         TypedGoRoute<SettingsThemeModePageRoute>(
           path: SettingsThemeModePageRoute.path,
         ),
+        TypedGoRoute<WishReminderSettingsRouteData>(
+          path: WishReminderSettingsRouteData.path,
+        ),
       ],
     ),
   ],
@@ -129,4 +132,15 @@ class SettingsThemeModePageRoute extends GoRouteData
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const SettingsThemeModePage();
+}
+
+class WishReminderSettingsRouteData extends GoRouteData
+    with $WishReminderSettingsRouteData {
+  const WishReminderSettingsRouteData();
+
+  static const path = 'wish_reminder';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const WishReminderSettingsPage();
 }

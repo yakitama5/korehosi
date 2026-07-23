@@ -19,6 +19,8 @@ enum BusinessExceptionType {
   joinGroupPolicyLimitOver,
   // グループ参加ポリシーエラー:無効な招待リンク
   joinGroupPolicyInvalidShareLink,
+  // グループ脱退ポリシーエラー:所有者
+  leaveGroupPolicyOwner,
   // グループ参加ポリシーエラー:登録数超過
   registrationItemPolicyLimitOver,
   // サインインポリシー:連携済アカウント

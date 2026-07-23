@@ -7,6 +7,7 @@ businessException(context=BusinessExceptionType):
   joinGroupPolicyNotAuth: 認証エラーが発生しました。
   joinGroupPolicyLimitOver: グループの参加上限(5件)に達しました。
   joinGroupPolicyInvalidShareLink: 招待リンクが正しくありません。
+  leaveGroupPolicyOwner: Group owners cannot leave. Delete the group instead.
   registrationItemPolicyLimitOver: >-
     登録数の上限に達しました。
 

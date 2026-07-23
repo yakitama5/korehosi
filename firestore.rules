@@ -24,19 +24,91 @@ service cloud.firestore {
         ).data.ownerUid == request.auth.uid;
     }
 
+    // ageGroup is maintained in the server-generated participant projection.
+    // Purchase documents contain surprise details and are adult-only.
+    function isAdultGroupMember(groupId) {
+      return isGroupMember(groupId)
+        && get(
+          /databases/$(database)/documents/groups/$(groupId)/participants/$(request.auth.uid)
+        ).data.ageGroup == 'adult';
+    }
+
+    function isAllowedSelfUserUpdate() {
+      let affectedKeys = request.resource.data.diff(resource.data).affectedKeys();
+      let joinGroupIdsChanged = affectedKeys.hasAny(['joinGroupIds']);
+      return affectedKeys.hasOnly(['name', 'joinGroupIds', 'updatedAt'])
+        // Joining is handled by the callable function. A client may only remove
+        // groups from its own membership list as part of the leave transaction.
+        && (!joinGroupIdsChanged
+          || (request.resource.data.joinGroupIds.hasOnly(resource.data.joinGroupIds)
+            && request.resource.data.joinGroupIds.size()
+              <= resource.data.joinGroupIds.size()));
+    }
+
+    function isAllowedGroupNameUpdate() {
+      return request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['name', 'updatedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 30;
+    }
+
+    function isAllowedSelfLeave() {
+      let beforeUids = resource.data.joinUids;
+      let afterUids = request.resource.data.joinUids;
+      return request.auth.uid != resource.data.ownerUid
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['joinUids'])
+        && request.auth.uid in beforeUids
+        && !(request.auth.uid in afterUids)
+        && afterUids.hasOnly(beforeUids)
+        && afterUids.size() == afterUids.toSet().size()
+        && afterUids.size() == beforeUids.size() - 1;
+    }
+
     match /users/{userId} {
       allow create: if isSelf(userId)
-        && request.resource.data.id == userId;
-      allow read, update, delete: if isSelf(userId);
+        && request.resource.data.id == userId
+        && request.resource.data.ageGroup in ['child', 'adult']
+        && !exists(
+          /databases/$(database)/documents/_dusers/$(userId)
+        );
+      allow read: if isSelf(userId);
+      allow delete: if false;
+      // ageGroup is immutable from clients so a child cannot grant themselves
+      // access to adult-only purchase documents.
+      allow update: if isSelf(userId) && isAllowedSelfUserUpdate();
 
       match /fcmTokens/{token} {
         allow read, write: if isSelf(userId);
       }
+
+      match /notificationSettings/wishReminder {
+        allow read, delete: if isSelf(userId);
+        allow create, update: if isSelf(userId)
+          && request.resource.data.keys().hasOnly([
+            'enabled',
+            'offsetDays',
+            'audience',
+            'timeZone',
+            'updatedAt',
+          ])
+          && request.resource.data.enabled is bool
+          && request.resource.data.offsetDays is list
+          && request.resource.data.offsetDays.hasOnly([0, 1, 7])
+          && request.resource.data.offsetDays.size() <= 3
+          && (!request.resource.data.enabled
+            || request.resource.data.offsetDays.size() > 0)
+          && request.resource.data.audience in ['adult', 'all']
+          && request.resource.data.timeZone is string
+          && request.resource.data.timeZone.size() > 0
+          && request.resource.data.updatedAt == request.time;
+      }
     }
 
     match /_dusers/{userId} {
-      allow create, read: if isSelf(userId);
-      allow update, delete: if false;
+      allow read: if isSelf(userId);
+      allow write: if false;
     }
 
     match /groups/{groupId} {
@@ -45,7 +117,10 @@ service cloud.firestore {
         && request.resource.data.ownerUid == request.auth.uid
         && request.auth.uid in request.resource.data.joinUids;
       allow read: if isGroupMember(groupId);
-      allow update: if isGroupMember(groupId);
+      // Client updates are limited to normal name edits and a non-owner leaving
+      // the group. Joining and protected fields are updated by Admin SDK code.
+      allow update: if isGroupMember(groupId)
+        && (isAllowedGroupNameUpdate() || isAllowedSelfLeave());
       allow delete: if isGroupOwner(groupId);
 
       match /participants/{participantId} {
@@ -58,7 +133,7 @@ service cloud.firestore {
       }
 
       match /purchases/{purchaseId} {
-        allow read, write: if isGroupMember(groupId);
+        allow read, write: if isAdultGroupMember(groupId);
       }
 
       match /messages/{messageId} {
@@ -81,12 +156,12 @@ service cloud.firestore {
       }
 
       match /_cpurchases/{purchaseId} {
-        allow read: if isGroupMember(groupId);
+        allow read: if isAdultGroupMember(groupId);
         allow write: if false;
       }
 
       match /_dpurchases/{purchaseId} {
-        allow read: if isGroupMember(groupId);
+        allow read: if isAdultGroupMember(groupId);
         allow write: if false;
       }
 
@@ -111,6 +186,11 @@ service cloud.firestore {
         && isGroupMember(request.resource.data.groupId);
       allow update, delete: if isSignedIn()
         && isGroupMember(resource.data.groupId);
+    }
+
+    // Idempotency records are created and read only by the Admin SDK.
+    match /wishReminderDeliveries/{deliveryId} {
+      allow read, write: if false;
     }
   }
 }

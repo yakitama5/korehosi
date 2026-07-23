@@ -15,6 +15,7 @@ import 'package:flutter_app/app/pages/settings/settings_page.dart';
 import 'package:flutter_app/app/pages/settings/settings_theme_color_page.dart';
 import 'package:flutter_app/app/pages/settings/settings_theme_mode_page.dart';
 import 'package:flutter_app/app/pages/settings/settings_ui_style_page.dart';
+import 'package:flutter_app/app/pages/settings/wish_reminder_settings_page.dart';
 import 'package:flutter_app/app/pages/user/license_page.dart';
 import 'package:flutter_app/app/pages/user/onboard_page.dart';
 import 'package:flutter_app/app/pages/user/profile_page.dart';

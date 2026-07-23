@@ -41,7 +41,7 @@ class TranslationsEn extends Translations {
 
 	late final TranslationsEn _root = this; // ignore: unused_field
 
-	@override 
+	@override
 	TranslationsEn $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsEn(meta: meta ?? this.$meta);
 
 	// Translations
@@ -214,6 +214,8 @@ class _TranslationsExceptionsEn extends TranslationsExceptionsJa {
 				return 'グループの参加上限(5件)に達しました。';
 			case BusinessExceptionType.joinGroupPolicyInvalidShareLink:
 				return '招待リンクが正しくありません。';
+			case BusinessExceptionType.leaveGroupPolicyOwner:
+				return 'Group owners cannot leave. Delete the group instead.';
 			case BusinessExceptionType.registrationItemPolicyLimitOver:
 				return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。';
 			case BusinessExceptionType.signInPolicyLinkedAccount:
@@ -426,16 +428,16 @@ extension on TranslationsEn {
 			'designsystem.validationError.required' => '必須項目を入力して下さい',
 			'designsystem.validationError.url' => '正しいURL形式で入力して下さい',
 			'designsystem.format.percent' => ({required String percent}) => '${percent}%',
-			'kEnum.uiStyle' => ({required UIStyle context}) { switch (context) { case UIStyle.system: return 'System'; case UIStyle.android: return 'Android'; case UIStyle.ios: return 'iOS'; } }, 
-			'kEnum.themeColor' => ({required ThemeColor context}) { switch (context) { case ThemeColor.appColor: return 'AppColor'; case ThemeColor.dynamicColor: return 'DynamicColor'; case ThemeColor.blue: return 'Blue'; case ThemeColor.purple: return 'Purple'; case ThemeColor.green: return 'Green'; case ThemeColor.red: return 'Red'; case ThemeColor.pink: return 'Pink'; case ThemeColor.yellow: return 'Yellow'; case ThemeColor.orange: return 'Orange'; } }, 
-			'kEnum.themeMode' => ({required ThemeMode context}) { switch (context) { case ThemeMode.system: return 'System'; case ThemeMode.light: return 'Light'; case ThemeMode.dark: return 'Dark'; } }, 
+			'kEnum.uiStyle' => ({required UIStyle context}) { switch (context) { case UIStyle.system: return 'System'; case UIStyle.android: return 'Android'; case UIStyle.ios: return 'iOS'; } },
+			'kEnum.themeColor' => ({required ThemeColor context}) { switch (context) { case ThemeColor.appColor: return 'AppColor'; case ThemeColor.dynamicColor: return 'DynamicColor'; case ThemeColor.blue: return 'Blue'; case ThemeColor.purple: return 'Purple'; case ThemeColor.green: return 'Green'; case ThemeColor.red: return 'Red'; case ThemeColor.pink: return 'Pink'; case ThemeColor.yellow: return 'Yellow'; case ThemeColor.orange: return 'Orange'; } },
+			'kEnum.themeMode' => ({required ThemeMode context}) { switch (context) { case ThemeMode.system: return 'System'; case ThemeMode.light: return 'Light'; case ThemeMode.dark: return 'Dark'; } },
 			'kEnum.viewLayout.name' => 'Layout',
-			'kEnum.viewLayout.typeName' => ({required ViewLayout context}) { switch (context) { case ViewLayout.grid: return 'Grid'; case ViewLayout.list: return 'List'; } }, 
-			'kEnum.sortOrder' => ({required SortOrder context}) { switch (context) { case SortOrder.asc: return 'ASC'; case SortOrder.desc: return 'DESC'; } }, 
-			'kEnum.itemOrderKey' => ({required ItemOrderKey context}) { switch (context) { case ItemOrderKey.createdAt: return 'Created at'; case ItemOrderKey.name: return 'Name'; case ItemOrderKey.wishRank: return 'Degree of desirability'; case ItemOrderKey.wishDate: return 'Desired date'; } }, 
-			'kEnum.ageGroup' => ({required AgeGroup context}) { switch (context) { case AgeGroup.child: return 'child'; case AgeGroup.adult: return 'adult'; } }, 
-			'kEnum.purchaseStatus' => ({required PurchaseStatus context}) { switch (context) { case PurchaseStatus.notPurchased: return 'unpurchased'; case PurchaseStatus.purchasePlan: return 'Planned purchases'; case PurchaseStatus.purchased: return 'already bought'; } }, 
-			'exceptions.businessException' => ({required BusinessExceptionType context}) { switch (context) { case BusinessExceptionType.deleted: return '削除済です。'; case BusinessExceptionType.updateTargetNotFound: return '保存に失敗しました、あらためて操作を行ってください。'; case BusinessExceptionType.notSelectedGroup: return 'グループが選択されていません。 グループを選択してください。'; case BusinessExceptionType.notAuth: return 'ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。'; case BusinessExceptionType.createDynamicLinkUnknown: return '招待リンクの作成に失敗しました。'; case BusinessExceptionType.joinGroupPolicyJoinedGroup: return 'すでに参加しています。'; case BusinessExceptionType.joinGroupPolicyExpired: return '招待リンクの有効期限が切れています。'; case BusinessExceptionType.joinGroupPolicyNotAuth: return '認証エラーが発生しました。'; case BusinessExceptionType.joinGroupPolicyLimitOver: return 'グループの参加上限(5件)に達しました。'; case BusinessExceptionType.joinGroupPolicyInvalidShareLink: return '招待リンクが正しくありません。'; case BusinessExceptionType.registrationItemPolicyLimitOver: return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。'; case BusinessExceptionType.signInPolicyLinkedAccount: return 'すでに連携済のアカウントです。'; case BusinessExceptionType.googleSignInUnknown: return 'Google認証に失敗しました。'; case BusinessExceptionType.appInPurchasePolicyPackageNotExist: return '購入処理に失敗しました。'; case BusinessExceptionType.appInPurchasePolicyPackageNotActive: return '購入処理に失敗しました。'; } }, 
+			'kEnum.viewLayout.typeName' => ({required ViewLayout context}) { switch (context) { case ViewLayout.grid: return 'Grid'; case ViewLayout.list: return 'List'; } },
+			'kEnum.sortOrder' => ({required SortOrder context}) { switch (context) { case SortOrder.asc: return 'ASC'; case SortOrder.desc: return 'DESC'; } },
+			'kEnum.itemOrderKey' => ({required ItemOrderKey context}) { switch (context) { case ItemOrderKey.createdAt: return 'Created at'; case ItemOrderKey.name: return 'Name'; case ItemOrderKey.wishRank: return 'Degree of desirability'; case ItemOrderKey.wishDate: return 'Desired date'; } },
+			'kEnum.ageGroup' => ({required AgeGroup context}) { switch (context) { case AgeGroup.child: return 'child'; case AgeGroup.adult: return 'adult'; } },
+			'kEnum.purchaseStatus' => ({required PurchaseStatus context}) { switch (context) { case PurchaseStatus.notPurchased: return 'unpurchased'; case PurchaseStatus.purchasePlan: return 'Planned purchases'; case PurchaseStatus.purchased: return 'already bought'; } },
+			'exceptions.businessException' => ({required BusinessExceptionType context}) { switch (context) { case BusinessExceptionType.deleted: return '削除済です。'; case BusinessExceptionType.updateTargetNotFound: return '保存に失敗しました、あらためて操作を行ってください。'; case BusinessExceptionType.notSelectedGroup: return 'グループが選択されていません。 グループを選択してください。'; case BusinessExceptionType.notAuth: return 'ログイン情報が取得できませんでした。 ログインし直して、再度実行して下さい。'; case BusinessExceptionType.createDynamicLinkUnknown: return '招待リンクの作成に失敗しました。'; case BusinessExceptionType.joinGroupPolicyJoinedGroup: return 'すでに参加しています。'; case BusinessExceptionType.joinGroupPolicyExpired: return '招待リンクの有効期限が切れています。'; case BusinessExceptionType.joinGroupPolicyNotAuth: return '認証エラーが発生しました。'; case BusinessExceptionType.joinGroupPolicyLimitOver: return 'グループの参加上限(5件)に達しました。'; case BusinessExceptionType.joinGroupPolicyInvalidShareLink: return '招待リンクが正しくありません。'; case BusinessExceptionType.leaveGroupPolicyOwner: return 'Group owners cannot leave. Delete the group instead.'; case BusinessExceptionType.registrationItemPolicyLimitOver: return '登録数の上限に達しました。\n購入済のものを削除するか、プレミアムプランに変更して下さい。'; case BusinessExceptionType.signInPolicyLinkedAccount: return 'すでに連携済のアカウントです。'; case BusinessExceptionType.googleSignInUnknown: return 'Google認証に失敗しました。'; case BusinessExceptionType.appInPurchasePolicyPackageNotExist: return '購入処理に失敗しました。'; case BusinessExceptionType.appInPurchasePolicyPackageNotActive: return '購入処理に失敗しました。'; } },
 			_ => null,
 		};
 	}
