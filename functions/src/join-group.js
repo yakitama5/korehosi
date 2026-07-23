@@ -56,34 +56,34 @@ function createJoinGroupHandler({
       return responseError(ERROR_CODE.INVALID_PARAM);
     }
 
-    const linkSnap = await db.collection('shareLinks').doc(shareLinkId).get();
-    if (!linkSnap.exists) {
-      return responseError(ERROR_CODE.INVALID_PARAM);
-    }
-
-    const link = linkSnap.data();
-    const createdAt = toDate(link.createdAt);
-    const validDays = Number(link.validDays);
-    if (!createdAt || !Number.isFinite(validDays) || validDays < 0 ||
-      typeof link.groupId !== 'string' || link.groupId.length === 0) {
-      return responseError(ERROR_CODE.INVALID_PARAM);
-    }
-
-    const expiresAt = new Date(createdAt.getTime());
-    expiresAt.setDate(expiresAt.getDate() + validDays);
-    if (expiresAt.getTime() <= now()) {
-      return responseError(ERROR_CODE.INVALID_DATE);
-    }
-
     const template = await remoteConfig.getTemplate();
     const maxGroupCount = getMaxGroupCount(template);
     if (maxGroupCount == null) {
       throw new Error('Remote Config max_group_count_by_free_plan is invalid');
     }
 
-    const groupRef = db.collection('groups').doc(link.groupId);
+    const shareLinkRef = db.collection('shareLinks').doc(shareLinkId);
     const userRef = db.collection('users').doc(uid);
     return db.runTransaction(async (transaction) => {
+      const linkSnap = await transaction.get(shareLinkRef);
+      if (!linkSnap.exists) {
+        return responseError(ERROR_CODE.INVALID_PARAM);
+      }
+
+      const link = linkSnap.data();
+      const createdAt = toDate(link.createdAt);
+      const validDays = Number(link.validDays);
+      if (!createdAt || !Number.isFinite(validDays) || validDays < 0 ||
+        typeof link.groupId !== 'string' || link.groupId.length === 0) {
+        return responseError(ERROR_CODE.INVALID_PARAM);
+      }
+      const expiresAt = new Date(createdAt.getTime());
+      expiresAt.setDate(expiresAt.getDate() + validDays);
+      if (expiresAt.getTime() <= now()) {
+        return responseError(ERROR_CODE.INVALID_DATE);
+      }
+
+      const groupRef = db.collection('groups').doc(link.groupId);
       const [groupSnap, userSnap] = await Promise.all([
         transaction.get(groupRef),
         transaction.get(userRef),

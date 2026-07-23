@@ -17,6 +17,7 @@ function setup(overrides = {}) {
     records.set(path, snap(value));
   }
   const updates = [];
+  const transactionReads = [];
   const ref = (path) => ({path});
   const db = {
     collection: (collectionName) => ({
@@ -26,7 +27,10 @@ function setup(overrides = {}) {
       }),
     }),
     runTransaction: async (callback) => callback({
-      get: async (document) => records.get(document.path) || snap(null),
+      get: async (document) => {
+        transactionReads.push(document.path);
+        return records.get(document.path) || snap(null);
+      },
       update: (document, data) => updates.push([document.path, data]),
     }),
   };
@@ -42,7 +46,7 @@ function setup(overrides = {}) {
     fieldValue: {arrayUnion: (value) => ({arrayUnion: value})},
     now: () => new Date('2026-01-02T00:00:00Z').getTime(),
   });
-  return {handler, updates};
+  return {handler, transactionReads, updates};
 }
 
 const request = (data = {shareLinkId: 'invite'}) => ({
@@ -102,8 +106,9 @@ describe('join group', () => {
   });
 
   it('returns success only after both transaction writes are queued', async () => {
-    const {handler, updates} = setup();
+    const {handler, transactionReads, updates} = setup();
     assert.deepEqual(await handler(request()), {});
+    assert.equal(transactionReads[0], 'shareLinks/invite');
     assert.deepEqual(updates, [
       ['groups/group', {joinUids: {arrayUnion: 'user'}}],
       ['users/user', {joinGroupIds: {arrayUnion: 'group'}}],
