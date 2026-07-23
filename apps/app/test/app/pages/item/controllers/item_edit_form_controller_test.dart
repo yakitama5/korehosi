@@ -74,6 +74,29 @@ void main() {
     });
   });
 
+  test('submission removes blank URLs and trims entered URLs', () {
+    final form = ItemFormModelForm(
+      ItemFormModelForm.formElements(
+        const ItemFormModel(
+          name: 'name',
+          wishRank: 1,
+          urls: ['', '  ', ' https://item.example '],
+          images: [],
+        ),
+      ),
+      null,
+    );
+    addTearDown(form.form.dispose);
+
+    final submission = ItemEditSubmission.fromForm(
+      form: form,
+      wishDate: null,
+      urlThumbnails: const {},
+    );
+
+    expect(submission.urls, ['https://item.example']);
+  });
+
   test('save uses add for a new item', () async {
     ItemEditSubmission? added;
     var updateCalled = false;

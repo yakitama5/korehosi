@@ -54,8 +54,9 @@ class ItemEditSubmission {
     required Map<String, String?> urlThumbnails,
   }) {
     final urls = form.urlsControl.controls
-        .map((control) => control.value)
-        .nonNulls
+        .map((control) => control.value?.trim())
+        .whereType<String>()
+        .where((url) => url.isNotEmpty)
         .toList();
     return ItemEditSubmission(
       name: form.nameControl.value!,

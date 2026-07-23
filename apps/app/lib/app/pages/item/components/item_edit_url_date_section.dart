@@ -72,6 +72,9 @@ class _UrlField extends HookWidget {
       }
 
       final imageUrl = await fetchUrlThumbnail(url);
+      if (!context.mounted || control.value?.trim() != url) {
+        return;
+      }
       if (imageUrl != null && !urlThumbnails.value.containsKey(url)) {
         urlThumbnails.value = {...urlThumbnails.value, url: imageUrl};
       }
