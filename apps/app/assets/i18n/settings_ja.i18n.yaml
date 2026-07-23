@@ -7,7 +7,7 @@ settingsPage:
     account: アカウント
     pushNotification:
       title: プッシュ通知
-      caption: グループないでほしいものが追加された場合に通知が受け取れます
+      caption: グループ内でほしいものが追加された場合に通知が受け取れます
     wishReminder:
       title: ほしい日のリマインダー
       caption: ほしい日の前に通知を受け取ります

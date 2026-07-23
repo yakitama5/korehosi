@@ -927,8 +927,8 @@ class TranslationsSettingsSettingsPageAccountPushNotificationJa {
 	/// ja: 'プッシュ通知'
 	String get title => 'プッシュ通知';
 
-	/// ja: 'グループないでほしいものが追加された場合に通知が受け取れます'
-	String get caption => 'グループないでほしいものが追加された場合に通知が受け取れます';
+	/// ja: 'グループ内でほしいものが追加された場合に通知が受け取れます'
+	String get caption => 'グループ内でほしいものが追加された場合に通知が受け取れます';
 }
 
 // Path: settings.settingsPage.account.wishReminder
@@ -1041,7 +1041,7 @@ extension on Translations {
 			'settings.settingsPage.account.group' => 'グループ',
 			'settings.settingsPage.account.account' => 'アカウント',
 			'settings.settingsPage.account.pushNotification.title' => 'プッシュ通知',
-			'settings.settingsPage.account.pushNotification.caption' => 'グループないでほしいものが追加された場合に通知が受け取れます',
+			'settings.settingsPage.account.pushNotification.caption' => 'グループ内でほしいものが追加された場合に通知が受け取れます',
 			'settings.settingsPage.account.wishReminder.title' => 'ほしい日のリマインダー',
 			'settings.settingsPage.account.wishReminder.caption' => 'ほしい日の前に通知を受け取ります',
 			'settings.settingsPage.layout.title' => 'レイアウト',
