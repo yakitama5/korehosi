@@ -47,7 +47,10 @@ service cloud.firestore {
 
     function isAllowedGroupNameUpdate() {
       return request.resource.data.diff(resource.data).affectedKeys()
-        .hasOnly(['name', 'updatedAt']);
+          .hasOnly(['name', 'updatedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 30;
     }
 
     function isAllowedSelfLeave() {
@@ -59,6 +62,7 @@ service cloud.firestore {
         && request.auth.uid in beforeUids
         && !(request.auth.uid in afterUids)
         && afterUids.hasOnly(beforeUids)
+        && afterUids.size() == afterUids.toSet().size()
         && afterUids.size() == beforeUids.size() - 1;
     }
 

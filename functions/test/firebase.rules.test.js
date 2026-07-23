@@ -292,6 +292,9 @@ describe('Firebase security rules', () => {
       const group = doc(adultFirestore(), 'groups', groupId);
 
       await assertSucceeds(updateDoc(group, {name: 'New family name'}));
+      await assertFails(updateDoc(group, {name: ''}));
+      await assertFails(updateDoc(group, {name: 123}));
+      await assertFails(updateDoc(group, {name: 'x'.repeat(31)}));
       await assertSucceeds(
         setDoc(group, {
           id: groupId,
@@ -321,6 +324,9 @@ describe('Firebase security rules', () => {
 
     await assertFails(
       updateDoc(ownerGroup, {joinUids: [adultId, childId]}),
+    );
+    await assertFails(
+      updateDoc(adultGroup, {joinUids: [memberId, memberId]}),
     );
     await assertSucceeds(
       updateDoc(adultGroup, {joinUids: [memberId, childId]}),
