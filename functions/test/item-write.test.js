@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const {describe, it} = require('node:test');
+const {describe, it} = require('mocha');
 const {createItemWriteHandler} = require('../src/item-write');
 
 describe('item write handler', () => {
