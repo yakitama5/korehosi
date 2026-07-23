@@ -18,7 +18,6 @@ void main() {
     // onboarding, depending on when anonymous sign-in completes.
     if ($('はじめる').evaluate().isNotEmpty) {
       await $('はじめる').tap();
-      await $.pump(const Duration(milliseconds: 500));
     }
     await $(FilledButton).first.waitUntilVisible(
       timeout: const Duration(seconds: 20),
@@ -39,7 +38,9 @@ void main() {
 
     expect($('ほしいもの'), findsWidgets);
     await $('ほしいものを追加').tap();
-    await $.pump(const Duration(milliseconds: 500));
+    await $(TextField).first.waitUntilVisible(
+      timeout: const Duration(seconds: 20),
+    );
     await $(TextField).first.enterText('E2Eテスト商品');
     await $('保存').tap();
     await $('E2Eテスト商品').waitUntilVisible(
