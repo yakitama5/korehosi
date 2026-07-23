@@ -1,6 +1,7 @@
 const ERROR_CODE = Object.freeze({
   NOT_AUTH: 'not-auth',
 });
+const MAX_RETRY_ATTEMPTS = 5;
 
 /**
  * Deletes an Auth account and then removes its durable retry job.
@@ -61,14 +62,32 @@ function createRetryUserDeletionsHandler({
   auth,
   logger = console,
   batchSize = 100,
+  clock = () => new Date(),
+  maxRetryAttempts = MAX_RETRY_ATTEMPTS,
 }) {
   return async () => {
     const jobs = await db.collection('_userDeletionJobs')
       .where('status', '==', 'pending')
       .limit(batchSize)
       .get();
-    const results = await Promise.allSettled(jobs.docs.map((job) =>
-      completeUserDeletion({auth, jobRef: job.ref, uid: job.id})));
+    const results = await Promise.allSettled(jobs.docs.map(async (job) => {
+      try {
+        await completeUserDeletion({auth, jobRef: job.ref, uid: job.id});
+      } catch (deletionError) {
+        const data = job.data();
+        const previousAttempts = Number.isInteger(data.attempts) &&
+          data.attempts >= 0 ? data.attempts : 0;
+        const attempts = previousAttempts + 1;
+        await job.ref.set({
+          attempts,
+          status: attempts >= maxRetryAttempts ? 'failed' : 'pending',
+          lastErrorCode: typeof deletionError.code === 'string' ?
+            deletionError.code : 'unknown',
+          updatedAt: clock(),
+        }, {merge: true});
+        throw deletionError;
+      }
+    }));
     const failures = results
       .filter(({status}) => status === 'rejected')
       .map(({reason}) => reason);

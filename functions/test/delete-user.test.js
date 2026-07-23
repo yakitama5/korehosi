@@ -122,6 +122,7 @@ describe('delete user', () => {
     const operations = [];
     const job = {
       id: 'user',
+      data: () => ({attempts: 0}),
       ref: {delete: async () => operations.push(['job-delete', 'user'])},
     };
     const query = {
@@ -140,5 +141,73 @@ describe('delete user', () => {
       ['auth-delete', 'user'],
       ['job-delete', 'user'],
     ]);
+  });
+
+  it('keeps transient failures pending and increments their attempts', async () => {
+    const authError = new Error('temporary auth outage');
+    authError.code = 'auth/internal-error';
+    const updates = [];
+    const job = {
+      id: 'user',
+      data: () => ({attempts: 1}),
+      ref: {
+        delete: async () => {},
+        set: async (...args) => updates.push(args),
+      },
+    };
+    const query = {
+      where: () => query,
+      limit: () => query,
+      get: async () => ({docs: [job]}),
+    };
+    const retry = createRetryUserDeletionsHandler({
+      db: {collection: () => query},
+      auth: {deleteUser: async () => {
+        throw authError;
+      }},
+      logger: {error: () => {}},
+      clock: () => new Date('2026-07-23T00:00:00Z'),
+      maxRetryAttempts: 3,
+    });
+
+    await assert.rejects(retry());
+    assert.deepEqual(updates, [[{
+      attempts: 2,
+      status: 'pending',
+      lastErrorCode: 'auth/internal-error',
+      updatedAt: new Date('2026-07-23T00:00:00Z'),
+    }, {merge: true}]]);
+  });
+
+  it('moves exhausted deletion jobs to failed for alerting', async () => {
+    const updates = [];
+    const job = {
+      id: 'user',
+      data: () => ({attempts: 2}),
+      ref: {
+        delete: async () => {},
+        set: async (...args) => updates.push(args),
+      },
+    };
+    const query = {
+      where: () => query,
+      limit: () => query,
+      get: async () => ({docs: [job]}),
+    };
+    const retry = createRetryUserDeletionsHandler({
+      db: {collection: () => query},
+      auth: {deleteUser: async () => {
+        throw new Error('permanent failure');
+      }},
+      logger: {error: () => {}},
+      clock: () => new Date('2026-07-23T00:00:00Z'),
+      maxRetryAttempts: 3,
+    });
+
+    await assert.rejects(retry());
+    assert.equal(updates[0][0].attempts, 3);
+    assert.equal(updates[0][0].status, 'failed');
+    assert.equal(updates[0][0].lastErrorCode, 'unknown');
+    assert.deepEqual(updates[0][1], {merge: true});
   });
 });
