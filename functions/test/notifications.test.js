@@ -8,12 +8,26 @@ const snapshot = (data) => ({exists: data != null, data: () => data});
 
 function setup(send) {
   let deleted = false;
+  const deliveryDocuments = new Map();
+  const sentMessages = [];
   const tokenDoc = {
     data: () => ({token: 'token'}),
     ref: {delete: async () => {
       deleted = true;
     }},
   };
+  const deliveryRef = (id) => ({
+    id,
+    get path() {
+      return `messageNotificationDeliveries/${id}`;
+    },
+    set: async (data, options) => {
+      const previous = deliveryDocuments.get(id) || {};
+      deliveryDocuments.set(id, options && options.merge ?
+        {...previous, ...data} : data);
+    },
+    delete: async () => deliveryDocuments.delete(id),
+  });
   const groupRef = {
     get: async () => snapshot({joinUids: ['sender', 'receiver']}),
     collection: () => ({
@@ -23,26 +37,42 @@ function setup(send) {
     }),
   };
   const db = {
-    collection: (name) => name === 'groups' ? {
-      doc: () => groupRef,
-    } : {
-      doc: () => ({
-        collection: () => ({get: async () => ({docs: [tokenDoc]})}),
-      }),
+    collection: (name) => {
+      if (name === 'groups') return {doc: () => groupRef};
+      if (name === 'messageNotificationDeliveries') {
+        return {doc: deliveryRef};
+      }
+      return {
+        doc: () => ({
+          collection: () => ({get: async () => ({docs: [tokenDoc]})}),
+        }),
+      };
     },
+    runTransaction: async (callback) => callback({
+      get: async (document) => snapshot(
+        deliveryDocuments.get(document.id),
+      ),
+      set: (document, data) => deliveryDocuments.set(document.id, data),
+    }),
   };
   return {
     deleted: () => deleted,
+    deliveryDocuments,
+    sentMessages,
     handler: createMessageHandler({
       db,
-      messaging: {send},
+      messaging: {send: async (message) => {
+        sentMessages.push(message);
+        return send(message);
+      }},
       logger: {warn: () => {}, error: () => {}},
+      clock: () => new Date('2026-07-23T00:00:00Z'),
     }),
   };
 }
 
 const event = {
-  params: {groupId: 'group'},
+  params: {groupId: 'group', messageId: 'message'},
   data: {data: () => ({
     uid: 'sender',
     target: 'all',
@@ -85,5 +115,27 @@ describe('message notifications', () => {
     });
     await handler(event);
     assert.equal(deleted(), true);
+  });
+
+  it('throws transient failures so Functions retries the event', async () => {
+    const sendError = new Error('temporary outage');
+    sendError.code = 'messaging/internal-error';
+    const {handler, deliveryDocuments} = setup(async () => {
+      throw sendError;
+    });
+
+    await assert.rejects(handler(event), {
+      message: 'Push notification delivery failed',
+    });
+    assert.equal(deliveryDocuments.size, 0);
+  });
+
+  it('does not send again after a completed delivery', async () => {
+    const {handler, sentMessages} = setup(async () => 'message-id');
+
+    await handler(event);
+    await handler(event);
+
+    assert.equal(sentMessages.length, 1);
   });
 });

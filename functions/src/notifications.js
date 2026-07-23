@@ -1,7 +1,10 @@
+const {createHash} = require('node:crypto');
+
 const INVALID_TOKEN_CODES = new Set([
   'messaging/invalid-registration-token',
   'messaging/registration-token-not-registered',
 ]);
+const CLAIM_TTL_MILLISECONDS = 10 * 60 * 1000;
 
 /**
  * @param {Error} reason messaging error
@@ -9,6 +12,18 @@ const INVALID_TOKEN_CODES = new Set([
  */
 function isInvalidTokenError(reason) {
   return reason && INVALID_TOKEN_CODES.has(reason.code);
+}
+
+/**
+ * @param {string} groupId group ID
+ * @param {string} messageId message ID
+ * @param {string} token FCM token
+ * @return {string} privacy-safe delivery document ID
+ */
+function messageDeliveryId(groupId, messageId, token) {
+  return createHash('sha256')
+    .update(`${groupId}\0${messageId}\0${token}`)
+    .digest('hex');
 }
 
 /**
@@ -49,9 +64,15 @@ function notificationPayload(messageData, groupId, token) {
  * @param {Object} dependencies handler dependencies
  * @return {Function} Firestore event handler
  */
-function createMessageHandler({db, messaging, logger}) {
+function createMessageHandler({
+  db,
+  messaging,
+  logger,
+  clock = () => new Date(),
+}) {
   return async (event) => {
     const groupId = event.params.groupId;
+    const messageId = event.params.messageId;
     const groupRef = db.collection('groups').doc(groupId);
     const groupSnap = await groupRef.get();
     if (!groupSnap.exists) {
@@ -87,32 +108,81 @@ function createMessageHandler({db, messaging, logger}) {
           continue;
         }
         sends.push({
-          promise: Promise.resolve().then(() => messaging.send(
-            notificationPayload(messageData, groupId, token),
-          )),
+          token,
           tokenRef: tokenDoc.ref,
         });
       }
     }
 
-    const results = await Promise.allSettled(sends.map(({promise}) => promise));
-    const cleanup = [];
-    results.forEach((result, index) => {
-      if (result.status === 'fulfilled') {
-        return;
+    const results = await Promise.allSettled(sends.map(async (send) => {
+      const deliveryRef = db.collection('messageNotificationDeliveries').doc(
+        messageDeliveryId(groupId, messageId, send.token),
+      );
+      const claimedAt = clock();
+      const claimed = await db.runTransaction(async (transaction) => {
+        const delivery = await transaction.get(deliveryRef);
+        if (delivery.exists) {
+          const data = delivery.data();
+          const activeUntil = data.claimExpiresAt &&
+            typeof data.claimExpiresAt.toDate === 'function' ?
+            data.claimExpiresAt.toDate() : data.claimExpiresAt;
+          if (data.status === 'sent' ||
+              (data.status === 'pending' && activeUntil instanceof Date &&
+                activeUntil > claimedAt)) {
+            return false;
+          }
+        }
+        transaction.set(deliveryRef, {
+          status: 'pending',
+          groupId,
+          messageId,
+          claimedAt,
+          claimExpiresAt: new Date(
+            claimedAt.getTime() + CLAIM_TTL_MILLISECONDS,
+          ),
+        });
+        return true;
+      });
+      if (!claimed) return;
+
+      try {
+        await messaging.send(notificationPayload(
+          messageData,
+          groupId,
+          send.token,
+        ));
+        await deliveryRef.set({status: 'sent', sentAt: clock()}, {merge: true});
+      } catch (sendError) {
+        if (isInvalidTokenError(sendError)) {
+          await Promise.all([
+            send.tokenRef.delete(),
+            deliveryRef.set(
+              {status: 'invalid-token', failedAt: clock()},
+              {merge: true},
+            ),
+          ]);
+          return;
+        }
+        await deliveryRef.delete();
+        throw sendError;
       }
-      if (isInvalidTokenError(result.reason)) {
-        cleanup.push(sends[index].tokenRef.delete());
-      } else {
-        logger.error('Failed to send push notification:', result.reason);
-      }
-    });
-    await Promise.all(cleanup);
+    }));
+    const failures = results
+      .filter(({status}) => status === 'rejected')
+      .map(({reason}) => reason);
+    if (failures.length > 0) {
+      failures.forEach((failure) =>
+        logger.error('Failed to send push notification:', failure));
+      const deliveryError = new Error('Push notification delivery failed');
+      deliveryError.errors = failures;
+      throw deliveryError;
+    }
   };
 }
 
 module.exports = {
   createMessageHandler,
   isInvalidTokenError,
+  messageDeliveryId,
   notificationPayload,
 };
