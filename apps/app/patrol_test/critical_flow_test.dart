@@ -48,9 +48,13 @@ void main() {
     expect($('E2Eテスト商品'), findsWidgets);
 
     await $('E2Eテスト商品').first.tap();
-    await $.pump(const Duration(milliseconds: 500));
+    await $(Icons.edit).waitUntilVisible(
+      timeout: const Duration(seconds: 20),
+    );
     await $(Icons.edit).tap();
-    await $.pump(const Duration(milliseconds: 500));
+    await $(TextField).first.waitUntilVisible(
+      timeout: const Duration(seconds: 20),
+    );
     await $(TextField).first.enterText('E2E編集済み商品');
     await $('保存').tap();
     await $('E2E編集済み商品').waitUntilVisible(
@@ -58,8 +62,13 @@ void main() {
     );
     expect($('E2E編集済み商品'), findsWidgets);
 
+    await $(Icons.edit).waitUntilVisible(
+      timeout: const Duration(seconds: 20),
+    );
     await $(Icons.edit).tap();
-    await $.pump(const Duration(milliseconds: 500));
+    await $(Icons.delete).waitUntilVisible(
+      timeout: const Duration(seconds: 20),
+    );
     await $(Icons.delete).tap();
     await $('OK').tap();
     await $('ほしいものを追加').waitUntilVisible(
