@@ -3,6 +3,9 @@
 const {createHash} = require('node:crypto');
 
 const DEFAULT_TIME_ZONE = 'Asia/Tokyo';
+const CLAIM_TTL_MILLISECONDS = 10 * 60 * 1000;
+const ITEM_PAGE_SIZE = 200;
+const MAX_ITEMS_PER_RUN = 5000;
 const VALID_OFFSETS = new Set([0, 1, 7]);
 const INVALID_TOKEN_CODES = new Set([
   'messaging/invalid-registration-token',
@@ -34,6 +37,19 @@ function calendarDayDistance(from, to, timeZone = DEFAULT_TIME_ZONE) {
 function isReminderDue({now, wishDate, offsets, timeZone}) {
   const days = calendarDayDistance(now, wishDate, timeZone);
   return offsets.some((offset) => VALID_OFFSETS.has(offset) && offset === days);
+}
+
+/** Returns a supported timezone, falling back for invalid persisted data. */
+function validatedTimeZone(value) {
+  if (typeof value !== 'string' || value.length === 0) {
+    return DEFAULT_TIME_ZONE;
+  }
+  try {
+    new Intl.DateTimeFormat('en', {timeZone: value}).format();
+    return value;
+  } catch (_) {
+    return DEFAULT_TIME_ZONE;
+  }
 }
 
 /** Creates the idempotency key for one reminder delivery. */
@@ -98,7 +114,7 @@ async function sendToUser({
   now,
   logger,
 }) {
-  const timeZone = settings.timeZone || DEFAULT_TIME_ZONE;
+  const timeZone = validatedTimeZone(settings.timeZone);
   const offsets = Array.isArray(settings.offsetDays) ?
     settings.offsetDays : [1];
   const wishDate = toDate(item.wishDate);
@@ -127,15 +143,24 @@ async function sendToUser({
       deviceDeliveryId(baseDeliveryId, token),
     );
     const claimed = await db.runTransaction(async (transaction) => {
-      const sent = await transaction.get(sentRef);
-      if (sent.exists) return false;
-      transaction.create(sentRef, {
+      const delivery = await transaction.get(sentRef);
+      if (delivery.exists) {
+        const data = delivery.data();
+        const activeUntil = toDate(data.claimExpiresAt);
+        if (data.status === 'sent' ||
+            (data.status === 'pending' && activeUntil && activeUntil > now)) {
+          return false;
+        }
+      }
+      transaction.set(sentRef, {
+        status: 'pending',
         userId,
         groupId,
         itemId,
         offset,
         wishDate: item.wishDate,
-        createdAt: new Date(),
+        claimedAt: now,
+        claimExpiresAt: new Date(now.getTime() + CLAIM_TTL_MILLISECONDS),
       });
       return true;
     });
@@ -148,10 +173,17 @@ async function sendToUser({
         itemName: item.name,
         offset,
       }));
+      await sentRef.set({status: 'sent', sentAt: now}, {merge: true});
       sentCount++;
     } catch (err) {
       if (INVALID_TOKEN_CODES.has(err.code)) {
-        await tokenDoc.ref.delete();
+        await Promise.all([
+          tokenDoc.ref.delete(),
+          sentRef.set(
+            {status: 'invalid-token', failedAt: now},
+            {merge: true},
+          ),
+        ]);
       } else {
         logger.error('Failed to send wish reminder', err);
         // Retry transient failures without duplicating successful devices.
@@ -171,41 +203,64 @@ function createWishReminderHandler({
 }) {
   return async () => {
     const now = clock();
-    const items = await db.collectionGroup('items').get();
     let sentCount = 0;
-    for (const itemDoc of items.docs) {
-      const item = itemDoc.data();
-      if (!item.wishDate) continue;
-      const groupRef = itemDoc.ref.parent.parent;
-      if (!groupRef) continue;
-      const group = await groupRef.get();
-      if (!group.exists) continue;
-      for (const userId of group.data().joinUids || []) {
-        const [settingsDoc, participantDoc] = await Promise.all([
-          db.collection('users').doc(userId)
-            .collection('notificationSettings').doc('wishReminder').get(),
-          groupRef.collection('participants').doc(userId).get(),
-        ]);
-        if (!settingsDoc.exists ||
+    let processedCount = 0;
+    let cursor = null;
+    // Include all supported offsets plus timezone extremes, then apply the
+    // recipient-specific calendar check in sendToUser.
+    const rangeStart = new Date(now.getTime() - 2 * 86400000);
+    const rangeEnd = new Date(now.getTime() + 9 * 86400000);
+    const baseQuery = db.collectionGroup('items')
+      .where('wishDate', '>=', rangeStart)
+      .where('wishDate', '<', rangeEnd)
+      .orderBy('wishDate')
+      .limit(ITEM_PAGE_SIZE);
+
+    while (processedCount < MAX_ITEMS_PER_RUN) {
+      const query = cursor ? baseQuery.startAfter(cursor) : baseQuery;
+      const items = await query.get();
+      if (items.docs.length === 0) break;
+      for (const itemDoc of items.docs) {
+        if (processedCount >= MAX_ITEMS_PER_RUN) break;
+        processedCount++;
+        const item = itemDoc.data();
+        if (!item.wishDate) continue;
+        const groupRef = itemDoc.ref.parent.parent;
+        if (!groupRef) continue;
+        const group = await groupRef.get();
+        if (!group.exists) continue;
+        for (const userId of group.data().joinUids || []) {
+          const [settingsDoc, participantDoc] = await Promise.all([
+            db.collection('users').doc(userId)
+              .collection('notificationSettings').doc('wishReminder').get(),
+            groupRef.collection('participants').doc(userId).get(),
+          ]);
+          if (!settingsDoc.exists ||
             !settingsDoc.data().enabled ||
             !participantDoc.exists) {
-          continue;
+            continue;
+          }
+          sentCount += await sendToUser({
+            db,
+            messaging,
+            userId,
+            groupId: groupRef.id,
+            itemId: itemDoc.id,
+            item,
+            settings: settingsDoc.data(),
+            participant: participantDoc.data(),
+            now,
+            logger,
+          });
         }
-        sentCount += await sendToUser({
-          db,
-          messaging,
-          userId,
-          groupId: groupRef.id,
-          itemId: itemDoc.id,
-          item,
-          settings: settingsDoc.data(),
-          participant: participantDoc.data(),
-          now,
-          logger,
-        });
       }
+      cursor = items.docs[items.docs.length - 1];
+      if (items.docs.length < ITEM_PAGE_SIZE) break;
     }
-    logger.log(`Wish reminder completed: ${sentCount} notifications sent`);
+    logger.log(
+      `Wish reminder completed: ${sentCount} notifications sent from ` +
+      `${processedCount} items`,
+    );
     return sentCount;
   };
 }
@@ -218,4 +273,6 @@ module.exports = {
   deliveryId,
   deviceDeliveryId,
   isReminderDue,
+  sendToUser,
+  validatedTimeZone,
 };
