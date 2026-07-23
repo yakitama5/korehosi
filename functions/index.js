@@ -27,7 +27,10 @@ const {createUserSyncHandler} = require('./src/user-sync');
 const {createMessageHandler} = require('./src/notifications');
 const {createSuggestionHandler} = require('./src/name-suggestions');
 const {createWishReminderHandler} = require('./src/wish-reminder');
-const {createDeleteUserHandler} = require('./src/delete-user');
+const {
+  createDeleteUserHandler,
+  createRetryUserDeletionsHandler,
+} = require('./src/delete-user');
 const {createItemWriteHandler} = require('./src/item-write');
 
 admin.initializeApp();
@@ -82,6 +85,11 @@ const sendWishDateReminders = createWishReminderHandler({
   logger,
 });
 const deleteUser = createDeleteUserHandler({db, auth: admin.auth()});
+const retryUserDeletions = createRetryUserDeletionsHandler({
+  db,
+  auth: admin.auth(),
+  logger,
+});
 
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -106,6 +114,12 @@ exports.v2DeleteUser = onCall(
     enforceAppCheck: true,
   },
   deleteUser,
+);
+
+/** Completes Authentication deletions left pending by transient failures. */
+exports.scheduledRetryUserDeletions = onSchedule(
+  'every 15 minutes',
+  retryUserDeletions,
 );
 
 
