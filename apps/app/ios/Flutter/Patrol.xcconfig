@@ -1,2 +1,3 @@
+#include? "Pods/Target Support Files/Pods-RunnerUITests/Pods-RunnerUITests.debug.xcconfig"
 #include "Generated.xcconfig"
 #include "Dart-Defines.xcconfig"
