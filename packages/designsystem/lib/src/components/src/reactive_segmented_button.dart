@@ -11,19 +11,32 @@ class ReactiveSegmentedButton extends ReactiveFormField<AgeGroup, AgeGroup> {
   ReactiveSegmentedButton({
     super.key,
     String? labelText,
+    String? helperText,
+    bool readOnly = false,
     required String formControlName,
   }) : super(
          formControlName: formControlName,
-         builder: (ReactiveFormFieldState<AgeGroup, AgeGroup> field) =>
-             _Form(field, labelText),
+         builder: (ReactiveFormFieldState<AgeGroup, AgeGroup> field) => _Form(
+           field,
+           labelText,
+           helperText: helperText,
+           readOnly: readOnly,
+         ),
        );
 }
 
 class _Form extends HookWidget {
-  const _Form(this.field, this.labelText);
+  const _Form(
+    this.field,
+    this.labelText, {
+    this.helperText,
+    required this.readOnly,
+  });
 
   final ReactiveFormFieldState<AgeGroup, AgeGroup> field;
   final String? labelText;
+  final String? helperText;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +59,20 @@ class _Form extends HookWidget {
                 )
                 .toList(),
             selected: field.value == null ? {} : {field.value!},
-            onSelectionChanged: (p0) => field.didChange(p0.first),
+            onSelectionChanged: readOnly
+                ? null
+                : (selection) => field.didChange(selection.first),
           ),
         ),
+        if (helperText != null) ...[
+          const Gap(4),
+          Text(
+            helperText!,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
       ],
     );
   }

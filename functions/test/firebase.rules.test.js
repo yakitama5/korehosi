@@ -1,3 +1,4 @@
+const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -124,6 +125,29 @@ describe('Firebase security rules', () => {
     await assertFails(
       updateDoc(ownProfile, {joinGroupIds: [groupId, outsiderId]}),
     );
+  });
+
+  it('allows the profile update payload without changing age group', async () => {
+    const profile = doc(adultFirestore(), 'users', adultId);
+
+    await assertSucceeds(
+      setDoc(profile, {
+        id: adultId,
+        ageGroup: 'adult',
+        name: 'Before',
+        joinGroupIds: [groupId],
+      }),
+    );
+    await assertSucceeds(
+      updateDoc(profile, {
+        name: 'After',
+        updatedAt: serverTimestamp(),
+      }),
+    );
+
+    const updatedProfile = await assertSucceeds(getDoc(profile));
+    assert.equal(updatedProfile.data().name, 'After');
+    assert.equal(updatedProfile.data().ageGroup, 'adult');
   });
 
   it('prevents a child from granting themselves adult access', async () => {

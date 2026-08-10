@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
+import 'package:infrastructure_firebase/src/common/enum/firestore_columns.dart';
 import 'package:infrastructure_firebase/src/common/extension/firebase_auth_user_extension.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_auth_provider.dart';
 import 'package:infrastructure_firebase/src/common/state/firebase_functions_provider.dart';
@@ -90,24 +92,23 @@ class FirebaseUserRepository implements UserRepository {
   @override
   Future<void> update({
     required UserId userId,
-    required AgeGroup ageGroup,
     String? name,
   }) async {
-    // Firestore用のモデルに変換
     final docRef = ref.read(userDocumentRefProvider(userId: userId));
-    final prev = await docRef.get();
-    if (!prev.exists) {
-      throw const BusinessException(BusinessExceptionType.updateTargetNotFound);
+    try {
+      await docRef.update(
+        userProfileUpdateData(
+          name: name,
+          updatedAt: FieldValue.serverTimestamp(),
+        ),
+      );
+    } on FirebaseException catch (error) {
+      final exceptionType = userProfileUpdateBusinessExceptionType(error.code);
+      if (exceptionType != null) {
+        throw BusinessException(exceptionType);
+      }
+      rethrow;
     }
-
-    final param = prev.data()!.copyWith(
-      id: userId.value,
-      ageGroup: ageGroup,
-      name: name,
-    );
-
-    // 更新
-    return ref.read(userDocumentRefProvider(userId: userId)).set(param);
   }
 
   @override
@@ -260,6 +261,23 @@ class FirebaseUserRepository implements UserRepository {
     return _currentUser?.unlink(providerId);
   }
 }
+
+@visibleForTesting
+Map<String, Object?> userProfileUpdateData({
+  required String? name,
+  required Object updatedAt,
+}) => {
+  'name': name,
+  FirestoreColumns.updatedAt.fieldName: updatedAt,
+};
+
+@visibleForTesting
+BusinessExceptionType? userProfileUpdateBusinessExceptionType(
+  String errorCode,
+) => switch (errorCode) {
+  'not-found' => BusinessExceptionType.updateTargetNotFound,
+  _ => null,
+};
 
 BusinessExceptionType? deleteUserBusinessExceptionType(String? errorCode) =>
     switch (errorCode) {

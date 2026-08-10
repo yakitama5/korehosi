@@ -3,6 +3,30 @@ import 'package:infrastructure_firebase/src/user/repository/firebase_user_reposi
 import 'package:packages_domain/common.dart';
 
 void main() {
+  test('profile updates contain only mutable user fields', () {
+    final updatedAt = Object();
+
+    expect(
+      userProfileUpdateData(name: 'New name', updatedAt: updatedAt),
+      {'name': 'New name', 'updatedAt': same(updatedAt)},
+    );
+    expect(
+      userProfileUpdateData(name: null, updatedAt: updatedAt),
+      {'name': null, 'updatedAt': same(updatedAt)},
+    );
+  });
+
+  test('maps a missing profile update to the existing business error', () {
+    expect(
+      userProfileUpdateBusinessExceptionType('not-found'),
+      BusinessExceptionType.updateTargetNotFound,
+    );
+    expect(
+      userProfileUpdateBusinessExceptionType('permission-denied'),
+      isNull,
+    );
+  });
+
   test('maps delete user errors to business exceptions', () {
     expect(
       deleteUserBusinessExceptionType('not-auth'),

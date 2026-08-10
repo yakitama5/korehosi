@@ -468,6 +468,9 @@ class TranslationsUserProfilePageJa {
 
 	/// ja: 'プロフィール'
 	String get profile => 'プロフィール';
+
+	/// ja: '年齢層は登録後に変更できません'
+	String get ageGroupCannotBeChanged => '年齢層は登録後に変更できません';
 }
 
 // Path: user.onboardPage
@@ -1084,6 +1087,7 @@ extension on Translations {
 			'user.welcomePage.forFirstTimers' => 'はじめての方はこちら',
 			'user.welcomePage.accountLink' => 'アカウント連携',
 			'user.profilePage.profile' => 'プロフィール',
+			'user.profilePage.ageGroupCannotBeChanged' => '年齢層は登録後に変更できません',
 			'user.onboardPage.start' => 'はじめる',
 			'user.onboardPage.introduction.title' => 'はじめに',
 			'user.onboardPage.introduction.message' => 'まずはプロフィールを登録しましょう',

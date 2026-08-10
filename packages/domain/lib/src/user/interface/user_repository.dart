@@ -25,7 +25,6 @@ abstract class UserRepository {
   /// ユーザーモデルの更新
   Future<void> update({
     required UserId userId,
-    required AgeGroup ageGroup,
     String? name,
   });
 

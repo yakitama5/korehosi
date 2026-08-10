@@ -101,6 +101,7 @@ class _TranslationsUserEn extends TranslationsUserJa {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override late final _TranslationsUserProfilePageEn profilePage = _TranslationsUserProfilePageEn._(_root);
 	@override String get hoge => 'hoge';
 }
 
@@ -142,6 +143,16 @@ class _TranslationsSettingsAccountPageEn extends TranslationsSettingsAccountPage
 	@override late final _TranslationsSettingsAccountPageLinkEn link = _TranslationsSettingsAccountPageLinkEn._(_root);
 	@override late final _TranslationsSettingsAccountPageOtherEn other = _TranslationsSettingsAccountPageOtherEn._(_root);
 	@override late final _TranslationsSettingsAccountPageLeaveConfirmDialogEn leaveConfirmDialog = _TranslationsSettingsAccountPageLeaveConfirmDialogEn._(_root);
+}
+
+// Path: user.profilePage
+class _TranslationsUserProfilePageEn extends TranslationsUserProfilePageJa {
+	_TranslationsUserProfilePageEn._(TranslationsEn root) : this._root = root, super.internal(root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get ageGroupCannotBeChanged => 'Age group can\'t be changed after registration.';
 }
 
 // Path: settings.settingsPage.account
@@ -322,6 +333,7 @@ extension on TranslationsEn {
 			'settings.accountPage.other.leave' => 'Leave',
 			'settings.accountPage.leaveConfirmDialog.title' => 'Leave?',
 			'settings.accountPage.leaveConfirmDialog.body' => 'Are you sure you want to cancel your membership? \\Ўn this operation cannot be undone.',
+			'user.profilePage.ageGroupCannotBeChanged' => 'Age group can\'t be changed after registration.',
 			'user.hoge' => 'hoge',
 			_ => null,
 		};

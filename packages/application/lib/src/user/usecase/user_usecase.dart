@@ -78,10 +78,7 @@ class UserUsecase with RunUsecaseMixin {
   }
 
   /// ユーザー情報の更新
-  Future<void> update({
-    required String? name,
-    required AgeGroup ageGroup,
-  }) async {
+  Future<void> update({required String? name}) async {
     await execute(
       ref,
       action: () async {
@@ -93,7 +90,7 @@ class UserUsecase with RunUsecaseMixin {
         // 更新
         await ref
             .read(userRepositoryProvider)
-            .update(userId: userId!, name: name, ageGroup: ageGroup);
+            .update(userId: userId!, name: name);
       },
     );
   }
