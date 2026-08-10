@@ -33,6 +33,8 @@ jobs:
       release_sha: ${{ steps.publish.outputs.release_sha }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Flutter バージョンの取得 (.fvmrc)
         id: fvm
@@ -60,13 +62,17 @@ jobs:
 
       - name: 変更のコミットとタグの作成
         id: publish
+        env:
+          # main は保護ブランチのため GITHUB_TOKEN では push できない。
+          # admin 権限を持つ PAT (RELEASE_PAT) を push 直前のみ使ってブランチ保護をバイパスする。
+          RELEASE_PAT: ${{ secrets.RELEASE_PAT }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add apps/app/pubspec.yaml
           git commit -m "🔖tag: v${{ steps.bump.outputs.new_version }} へバージョンアップ"
           git tag "v${{ steps.bump.outputs.new_version }}"
-          git push --atomic origin \
+          git push --atomic "https://x-access-token:${RELEASE_PAT}@github.com/${GITHUB_REPOSITORY}.git" \
             "HEAD:refs/heads/${{ github.ref_name }}" \
             "refs/tags/v${{ steps.bump.outputs.new_version }}"
           echo "release_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
