@@ -4,6 +4,7 @@ welcomePage:
   accountLink: アカウント連携
 profilePage:
   profile: プロフィール
+  ageGroupCannotBeChanged: 年齢層は登録後に変更できません
 onboardPage:
   start: はじめる
   introduction: 
