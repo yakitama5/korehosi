@@ -84,7 +84,11 @@ const sendWishDateReminders = createWishReminderHandler({
   messaging: admin.messaging(),
   logger,
 });
-const deleteUser = createDeleteUserHandler({db, auth: admin.auth()});
+const deleteUser = createDeleteUserHandler({
+  db,
+  auth: admin.auth(),
+  fieldValue: admin.firestore.FieldValue,
+});
 const retryUserDeletions = createRetryUserDeletionsHandler({
   db,
   auth: admin.auth(),

@@ -8,30 +8,67 @@ const snapshot = (data) => ({exists: data != null, data: () => data});
 
 function setup({
   user = {id: 'user', ageGroup: 'child'},
+  groups = {},
   authError,
   transactionError,
 } = {}) {
   const operations = [];
-  const refs = {
-    'users/user': {path: 'users/user'},
-    '_dusers/user': {path: '_dusers/user'},
-    '_userDeletionJobs/user': {
-      path: '_userDeletionJobs/user',
+  const documentRef = (path) => ({
+    path,
+    collection: (name) => ({
+      doc: (id) => documentRef(`${path}/${name}/${id}`),
+    }),
+    ...(path === '_userDeletionJobs/user' ? {
       delete: async () => operations.push(['job-delete', 'user']),
-    },
+    } : {}),
+  });
+  const collectionRef = (path) => ({
+    path,
+    doc: (id) => documentRef(`${path}/${id}`),
+    where: (field, operator, value) => ({
+      type: 'query',
+      path,
+      field,
+      operator,
+      value,
+    }),
+  });
+  const queryGroups = ({field, operator, value}) => {
+    const matches = Object.entries(groups).filter(([, data]) => {
+      if (field === 'ownerUid' && operator === '==') {
+        return data.ownerUid === value;
+      }
+      if (field === 'joinUids' && operator === 'array-contains') {
+        return Array.isArray(data.joinUids) && data.joinUids.includes(value);
+      }
+      throw new Error(`Unexpected query: ${field} ${operator}`);
+    });
+    return {
+      docs: matches.map(([id, data]) => ({
+        id,
+        ref: documentRef(`groups/${id}`),
+        ...snapshot(data),
+      })),
+    };
   };
   const handler = createDeleteUserHandler({
     db: {
-      collection: (name) => ({doc: (id) => refs[`${name}/${id}`]}),
+      collection: collectionRef,
       runTransaction: async (callback) => {
-        await callback({
-          get: async () => snapshot(user),
+        const result = await callback({
+          get: async (target) => {
+            if (target.type === 'query') return queryGroups(target);
+            if (target.path === 'users/user') return snapshot(user);
+            throw new Error(`Unexpected transaction read: ${target.path}`);
+          },
           set: (ref, data) => operations.push(['set', ref.path, data]),
+          update: (ref, data) => operations.push(['update', ref.path, data]),
           delete: (ref) => operations.push(['delete', ref.path]),
         });
         if (transactionError) {
           throw transactionError;
         }
+        return result;
       },
     },
     auth: {
@@ -41,6 +78,9 @@ function setup({
           throw authError;
         }
       },
+    },
+    fieldValue: {
+      serverTimestamp: () => ({serverTimestamp: true}),
     },
     clock: () => new Date('2026-07-23T00:00:00Z'),
   });
@@ -52,6 +92,112 @@ describe('delete user', () => {
     const {handler, operations} = setup();
     assert.deepEqual(await handler({}), {errorCode: 'not-auth'});
     assert.deepEqual(operations, []);
+  });
+
+  it('rejects owners without changing member groups or deleting Auth', async () => {
+    const {handler, operations} = setup({
+      user: {
+        id: 'user',
+        ageGroup: 'adult',
+        joinGroupIds: ['owned', 'member'],
+      },
+      groups: {
+        owned: {ownerUid: 'user', joinUids: ['other']},
+        member: {ownerUid: 'other', joinUids: ['user', 'other']},
+      },
+    });
+
+    assert.deepEqual(await handler({auth: {uid: 'user'}}), {
+      errorCode: 'owns-group',
+      groupIds: ['owned'],
+    });
+    assert.deepEqual(operations, []);
+  });
+
+  it('cleans memberships missing from the user document atomically', async () => {
+    const {handler, operations} = setup({
+      user: {
+        id: 'user',
+        ageGroup: 'adult',
+        joinGroupIds: [],
+      },
+      groups: {
+        first: {ownerUid: 'owner', joinUids: ['user', 'other', 'user']},
+        second: {ownerUid: 'owner', joinUids: ['user']},
+      },
+    });
+
+    assert.deepEqual(await handler({auth: {uid: 'user'}}), {});
+    assert.deepEqual(
+      operations.filter(([operation, path]) =>
+        operation === 'update' && path.startsWith('groups/')),
+      [
+        ['update', 'groups/first', {joinUids: ['other']}],
+        ['update', 'groups/second', {joinUids: []}],
+      ],
+    );
+    assert.deepEqual(
+      operations.filter(([operation, path]) =>
+        operation === 'delete' && path.includes('/participants/')),
+      [
+        ['delete', 'groups/first/participants/user'],
+        ['delete', 'groups/second/participants/user'],
+      ],
+    );
+    assert.deepEqual(
+      operations.filter(([, path]) => path.includes('/participantSyncStates/')),
+      [
+        ['set', 'groups/first/participantSyncStates/user', {
+          sourceUpdatedAt: {serverTimestamp: true},
+        }],
+        ['set', 'groups/second/participantSyncStates/user', {
+          sourceUpdatedAt: {serverTimestamp: true},
+        }],
+      ],
+    );
+    assert.equal(
+      operations.some(([operation, uid]) =>
+        operation === 'auth-delete' && uid === 'user'),
+      true,
+    );
+  });
+
+  it('cleans group membership even when the user document is missing', async () => {
+    const {handler, operations} = setup({
+      user: null,
+      groups: {
+        member: {ownerUid: 'owner', joinUids: ['user', 'other']},
+      },
+    });
+
+    assert.deepEqual(await handler({auth: {uid: 'user'}}), {});
+    assert.equal(
+      operations.some(([operation, path]) =>
+        operation === 'update' && path === 'groups/member'),
+      true,
+    );
+    assert.equal(
+      operations.some(([operation, path]) =>
+        operation === 'delete' &&
+        path === 'groups/member/participants/user'),
+      true,
+    );
+  });
+
+  it('ignores stale references to already missing groups', async () => {
+    const {handler, operations} = setup({
+      user: {
+        id: 'user',
+        ageGroup: 'adult',
+        joinGroupIds: ['missing'],
+      },
+    });
+
+    assert.deepEqual(await handler({auth: {uid: 'user'}}), {});
+    assert.equal(
+      operations.some(([, path]) => path.startsWith('groups/')),
+      false,
+    );
   });
 
   it('archives and deletes Firestore data before deleting Auth', async () => {
@@ -104,7 +250,12 @@ describe('delete user', () => {
   it('leaves a durable retry job when Auth deletion fails', async () => {
     const authError = new Error('temporary auth outage');
     authError.code = 'auth/internal-error';
-    const {handler, operations} = setup({authError});
+    const {handler, operations} = setup({
+      authError,
+      groups: {
+        member: {ownerUid: 'owner', joinUids: ['user', 'other']},
+      },
+    });
 
     await assert.rejects(handler({auth: {uid: 'user'}}), authError);
 
@@ -114,6 +265,17 @@ describe('delete user', () => {
     );
     assert.equal(
       operations.some(([, path]) => path === '_userDeletionJobs/user'),
+      true,
+    );
+    assert.equal(
+      operations.some(([operation, path]) =>
+        operation === 'update' && path === 'groups/member'),
+      true,
+    );
+    assert.equal(
+      operations.some(([operation, path]) =>
+        operation === 'delete' &&
+        path === 'groups/member/participants/user'),
       true,
     );
   });
@@ -133,6 +295,36 @@ describe('delete user', () => {
     const retry = createRetryUserDeletionsHandler({
       db: {collection: () => query},
       auth: {deleteUser: async (uid) => operations.push(['auth-delete', uid])},
+      logger: {error: () => {}},
+    });
+
+    assert.equal(await retry(), 1);
+    assert.deepEqual(operations, [
+      ['auth-delete', 'user'],
+      ['job-delete', 'user'],
+    ]);
+  });
+
+  it('completes a retry when Auth was already deleted', async () => {
+    const operations = [];
+    const authError = new Error('missing');
+    authError.code = 'auth/user-not-found';
+    const job = {
+      id: 'user',
+      data: () => ({attempts: 1}),
+      ref: {delete: async () => operations.push(['job-delete', 'user'])},
+    };
+    const query = {
+      where: () => query,
+      limit: () => query,
+      get: async () => ({docs: [job]}),
+    };
+    const retry = createRetryUserDeletionsHandler({
+      db: {collection: () => query},
+      auth: {deleteUser: async (uid) => {
+        operations.push(['auth-delete', uid]);
+        throw authError;
+      }},
       logger: {error: () => {}},
     });
 

@@ -21,6 +21,8 @@ enum BusinessExceptionType {
   joinGroupPolicyInvalidShareLink,
   // グループ脱退ポリシーエラー:所有者
   leaveGroupPolicyOwner,
+  // ユーザー削除ポリシーエラー:グループ所有者
+  deleteUserPolicyGroupOwner,
   // グループ参加ポリシーエラー:登録数超過
   registrationItemPolicyLimitOver,
   // サインインポリシー:連携済アカウント
