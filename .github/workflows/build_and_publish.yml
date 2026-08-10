@@ -32,7 +32,11 @@ jobs:
     outputs:
       release_sha: ${{ steps.publish.outputs.release_sha }}
     steps:
+      # main は保護ブランチのため GITHUB_TOKEN では push できない。
+      # admin 権限を持つ PAT (RELEASE_PAT) を使ってブランチ保護をバイパスする。
       - uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.RELEASE_PAT }}
 
       - name: Flutter バージョンの取得 (.fvmrc)
         id: fvm
