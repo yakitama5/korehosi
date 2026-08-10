@@ -1,5 +1,6 @@
 const ERROR_CODE = Object.freeze({
   NOT_AUTH: 'not-auth',
+  OWNS_GROUP: 'owns-group',
 });
 const MAX_RETRY_ATTEMPTS = 5;
 
@@ -20,11 +21,17 @@ async function completeUserDeletion({auth, jobRef, uid}) {
 }
 
 /**
- * Archives Firestore data and persists a retry job before deleting Auth.
+ * Cleans group membership, archives Firestore data, and persists a retry job
+ * before deleting Auth.
  * @param {Object} dependencies handler dependencies
  * @return {Function} callable request handler
  */
-function createDeleteUserHandler({db, auth, clock = () => new Date()}) {
+function createDeleteUserHandler({
+  db,
+  auth,
+  fieldValue,
+  clock = () => new Date(),
+}) {
   return async (request) => {
     const uid = request && request.auth && request.auth.uid;
     if (typeof uid !== 'string' || uid.length === 0) {
@@ -34,8 +41,43 @@ function createDeleteUserHandler({db, auth, clock = () => new Date()}) {
     const userRef = db.collection('users').doc(uid);
     const deletedUserRef = db.collection('_dusers').doc(uid);
     const jobRef = db.collection('_userDeletionJobs').doc(uid);
-    await db.runTransaction(async (transaction) => {
-      const user = await transaction.get(userRef);
+    const groupsRef = db.collection('groups');
+    const ownedGroupsQuery = groupsRef.where('ownerUid', '==', uid);
+    const membershipsQuery = groupsRef.where(
+      'joinUids',
+      'array-contains',
+      uid,
+    );
+    const updatedAt = clock();
+    const ownerGroupIds = await db.runTransaction(async (transaction) => {
+      const [user, ownedGroups, memberships] = await Promise.all([
+        transaction.get(userRef),
+        transaction.get(ownedGroupsQuery),
+        transaction.get(membershipsQuery),
+      ]);
+      const ownedGroupIds = ownedGroups.docs.map(({id}) => id).sort();
+      if (ownedGroupIds.length > 0) {
+        return ownedGroupIds;
+      }
+
+      for (const group of memberships.docs) {
+        const joinUids = Array.isArray(group.data().joinUids) ?
+          group.data().joinUids : [];
+        const participantRef = group.ref.collection('participants').doc(uid);
+        const syncStateRef = group.ref
+          .collection('participantSyncStates')
+          .doc(uid);
+        transaction.update(group.ref, {
+          joinUids: joinUids.filter((memberUid) => memberUid !== uid),
+        });
+        // Advance the same ordering tombstone used by user-sync so a delayed
+        // profile event cannot recreate the participant after this cleanup.
+        transaction.set(syncStateRef, {
+          sourceUpdatedAt: fieldValue.serverTimestamp(),
+        });
+        transaction.delete(participantRef);
+      }
+
       if (user.exists) {
         transaction.set(deletedUserRef, user.data());
         transaction.delete(userRef);
@@ -43,9 +85,17 @@ function createDeleteUserHandler({db, auth, clock = () => new Date()}) {
       transaction.set(jobRef, {
         uid,
         status: 'pending',
-        updatedAt: clock(),
+        updatedAt,
       }, {merge: true});
+      return [];
     });
+
+    if (ownerGroupIds.length > 0) {
+      return {
+        errorCode: ERROR_CODE.OWNS_GROUP,
+        groupIds: ownerGroupIds,
+      };
+    }
 
     await completeUserDeletion({auth, jobRef, uid});
     return {};

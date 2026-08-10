@@ -8,6 +8,9 @@ businessException(context=BusinessExceptionType):
   joinGroupPolicyLimitOver: グループの参加上限(5件)に達しました。
   joinGroupPolicyInvalidShareLink: 招待リンクが正しくありません。
   leaveGroupPolicyOwner: Group owners cannot leave. Delete the group instead.
+  deleteUserPolicyGroupOwner: >-
+    You can't delete your account while you own a group.
+    Delete the groups you own, then try again.
   registrationItemPolicyLimitOver: >-
     登録数の上限に達しました。
 

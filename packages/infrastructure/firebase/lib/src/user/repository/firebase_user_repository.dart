@@ -113,8 +113,13 @@ class FirebaseUserRepository implements UserRepository {
   @override
   Future<void> delete({required UserId userId}) async {
     final functions = ref.read(firebaseFunctionsProvider);
-    await functions.httpsCallable('v2DeleteUser').call<Map<String, dynamic>>();
-    await ref.read(firebaseAuthProvider).signOut();
+    final result = await functions
+        .httpsCallable('v2DeleteUser')
+        .call<Map<String, dynamic>>();
+    await handleDeleteUserResponse(
+      data: result.data,
+      signOut: ref.read(firebaseAuthProvider).signOut,
+    );
   }
 
   @override
@@ -254,4 +259,30 @@ class FirebaseUserRepository implements UserRepository {
 
     return _currentUser?.unlink(providerId);
   }
+}
+
+BusinessExceptionType? deleteUserBusinessExceptionType(String? errorCode) =>
+    switch (errorCode) {
+      'not-auth' => BusinessExceptionType.notAuth,
+      'owns-group' => BusinessExceptionType.deleteUserPolicyGroupOwner,
+      _ => null,
+    };
+
+Future<void> handleDeleteUserResponse({
+  required Map<String, dynamic> data,
+  required Future<void> Function() signOut,
+}) async {
+  final errorCodeValue = data['errorCode'];
+  if (errorCodeValue != null && errorCodeValue is! String) {
+    throw const UnknownException();
+  }
+  final errorCode = errorCodeValue as String?;
+  final exceptionType = deleteUserBusinessExceptionType(errorCode);
+  if (exceptionType != null) {
+    throw BusinessException(exceptionType);
+  }
+  if (errorCode != null) {
+    throw const UnknownException();
+  }
+  await signOut();
 }
