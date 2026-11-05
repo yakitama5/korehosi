@@ -31,12 +31,13 @@ class FakeAppleApi:
         self.build = build()
         self.build_params = None
         self.internal_state = "IN_BETA_TESTING"
+        self.app = {"id": "app", "attributes": {"bundleId": METADATA["bundle_id"]}}
 
     def resources(self, path, **params):
         if path == "/v1/apps":
             if params["filter[bundleId]"] != METADATA["bundle_id"]:
                 raise AssertionError("Unexpected bundle")
-            return [{"id": "app"}]
+            return [self.app]
         if path == "/v1/apps/app/betaGroups":
             return self.groups
         if path == "/v1/builds":
@@ -47,6 +48,8 @@ class FakeAppleApi:
         raise AssertionError(f"Unexpected resource path {path}")
 
     def request(self, method, path, **kwargs):
+        if method == "GET" and path == "/v1/apps/6464590632":
+            return {"data": self.app}
         if method == "POST":
             self.writes.append((path, kwargs["json"]))
             if path != "/v1/betaGroups/internal/relationships/builds":
@@ -88,6 +91,36 @@ class InternalReleaseTests(unittest.TestCase):
         api.internal_state = "READY_FOR_BETA_TESTING"
         release.verify_ios(api, METADATA, timeout=0)
         self.assertEqual(api.writes, [])
+
+    def test_explicit_apple_id_bypasses_app_list_and_validates_bundle(self):
+        api = FakeAppleApi()
+        api.app["id"] = "6464590632"
+        original_resources = api.resources
+
+        def resources(path, **params):
+            if path == "/v1/apps":
+                raise AssertionError("Explicit Apple ID must bypass app list/filter lookup")
+            return original_resources(path.replace("/apps/6464590632/", "/apps/app/"), **params)
+
+        with patch.object(api, "resources", side_effect=resources):
+            result = release.verify_ios(api, METADATA, timeout=0, app_id="6464590632")
+        self.assertEqual(result["app_id"], "6464590632")
+
+    def test_explicit_apple_id_rejects_wrong_application_before_assignment(self):
+        for app in (
+            {"id": "other", "attributes": {"bundleId": METADATA["bundle_id"]}},
+            {"id": "6464590632", "attributes": {"bundleId": "com.example.other"}},
+            {"id": "6464590632", "attributes": {"bundleId": "COM.example.app"}},
+        ):
+            api = FakeAppleApi()
+            api.app = app
+            with self.subTest(app=app), self.assertRaises(release.VerificationError):
+                release.verify_ios(api, METADATA, timeout=0, app_id="6464590632")
+            self.assertEqual(api.writes, [])
+
+    def test_apple_id_cannot_include_a_path(self):
+        with self.assertRaisesRegex(release.VerificationError, "must be numeric"):
+            release.verify_ios(FakeAppleApi(), METADATA, timeout=0, app_id="../other")
 
     def test_no_internal_group_fails_without_assignment(self):
         api = FakeAppleApi()

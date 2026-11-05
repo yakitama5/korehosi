@@ -167,6 +167,7 @@ jobs:
 
       - name: iOS ビルド＆配布
         env:
+          APP_STORE_APPLE_ID: ${{ vars.APP_STORE_APPLE_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ vars.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ vars.APP_STORE_CONNECT_KEY_IDENTIFIER }}
           APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
