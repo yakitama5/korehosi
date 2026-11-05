@@ -12,11 +12,11 @@ part of 'router_notifier_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(RouterNotifier)
-const routerProvider = RouterNotifierProvider._();
+final routerProvider = RouterNotifierProvider._();
 
 final class RouterNotifierProvider
     extends $AsyncNotifierProvider<RouterNotifier, void> {
-  const RouterNotifierProvider._()
+  RouterNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -41,8 +41,7 @@ abstract class _$RouterNotifier extends $AsyncNotifier<void> {
   FutureOr<void> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<void>, void>;
     final element =
         ref.element
@@ -52,6 +51,6 @@ abstract class _$RouterNotifier extends $AsyncNotifier<void> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, null);
+    return element.handleCreate(ref, build);
   }
 }

@@ -13,7 +13,7 @@ part of 'search_all_items_provider.dart';
 /// 詳細画面間の移動に利用する、現在の検索結果すべて。
 
 @ProviderFor(searchAllItems)
-const searchAllItemsProvider = SearchAllItemsProvider._();
+final searchAllItemsProvider = SearchAllItemsProvider._();
 
 /// 詳細画面間の移動に利用する、現在の検索結果すべて。
 
@@ -26,7 +26,7 @@ final class SearchAllItemsProvider
         >
     with $FutureModifier<List<Item>>, $FutureProvider<List<Item>> {
   /// 詳細画面間の移動に利用する、現在の検索結果すべて。
-  const SearchAllItemsProvider._()
+  SearchAllItemsProvider._()
     : super(
         from: null,
         argument: null,

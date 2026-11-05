@@ -12,7 +12,7 @@ part of 'buyer_name_histories_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(buyerNameHistories)
-const buyerNameHistoriesProvider = BuyerNameHistoriesFamily._();
+final buyerNameHistoriesProvider = BuyerNameHistoriesFamily._();
 
 final class BuyerNameHistoriesProvider
     extends
@@ -22,7 +22,7 @@ final class BuyerNameHistoriesProvider
           FutureOr<List<String>>
         >
     with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
-  const BuyerNameHistoriesProvider._({
+  BuyerNameHistoriesProvider._({
     required BuyerNameHistoriesFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -71,7 +71,7 @@ String _$buyerNameHistoriesHash() =>
 
 final class BuyerNameHistoriesFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<List<String>>, GroupId> {
-  const BuyerNameHistoriesFamily._()
+  BuyerNameHistoriesFamily._()
     : super(
         retry: null,
         name: r'buyerNameHistoriesProvider',

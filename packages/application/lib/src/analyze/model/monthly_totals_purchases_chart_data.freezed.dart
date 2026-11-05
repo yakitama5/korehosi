@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'monthly_totals_purchases_chart_data.dart';
@@ -9,6 +9,7 @@ part of 'monthly_totals_purchases_chart_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $MonthlyTotalsPurchasesChartDataCopyWith<MonthlyTotalsPurchasesChartData> get co
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthlyTotalsPurchasesChartData&&(identical(other.monthlyTotalsPurchases, monthlyTotalsPurchases) || other.monthlyTotalsPurchases == monthlyTotalsPurchases)&&const DeepCollectionEquality().equals(other.spots, spots));
+  final _this = this as MonthlyTotalsPurchasesChartData;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthlyTotalsPurchasesChartData&&(identical(other.monthlyTotalsPurchases, _this.monthlyTotalsPurchases) || other.monthlyTotalsPurchases == _this.monthlyTotalsPurchases)&&const DeepCollectionEquality().equals(other.spots, _this.spots));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,monthlyTotalsPurchases,const DeepCollectionEquality().hash(spots));
+int get hashCode {
+  final _this = this as MonthlyTotalsPurchasesChartData;
+  return Object.hash(runtimeType,_this.monthlyTotalsPurchases,const DeepCollectionEquality().hash(_this.spots));
+}
 
 @override
 String toString() {
-  return 'MonthlyTotalsPurchasesChartData(monthlyTotalsPurchases: $monthlyTotalsPurchases, spots: $spots)';
+  final _this = this as MonthlyTotalsPurchasesChartData;
+  return 'MonthlyTotalsPurchasesChartData(monthlyTotalsPurchases: ${_this.monthlyTotalsPurchases}, spots: ${_this.spots})';
 }
 
 
@@ -63,7 +69,7 @@ class _$MonthlyTotalsPurchasesChartDataCopyWithImpl<$Res>
 /// Create a copy of MonthlyTotalsPurchasesChartData
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? monthlyTotalsPurchases = null,Object? spots = null,}) {
-  return _then(_self.copyWith(
+  return _then(MonthlyTotalsPurchasesChartData(
 monthlyTotalsPurchases: null == monthlyTotalsPurchases ? _self.monthlyTotalsPurchases : monthlyTotalsPurchases // ignore: cast_nullable_to_non_nullable
 as MonthlyTotalsPurchases,spots: null == spots ? _self.spots : spots // ignore: cast_nullable_to_non_nullable
 as List<FlSpot>,
@@ -216,7 +222,7 @@ return $default(_that.monthlyTotalsPurchases,_that.spots);case _:
 
 
 class _MonthlyTotalsPurchasesChartData implements MonthlyTotalsPurchasesChartData {
-  const _MonthlyTotalsPurchasesChartData({required this.monthlyTotalsPurchases, required final  List<FlSpot> spots}): _spots = spots;
+  const _MonthlyTotalsPurchasesChartData({required this.monthlyTotalsPurchases, required  List<FlSpot> spots}): _spots = spots;
   
 
 @override final  MonthlyTotalsPurchases monthlyTotalsPurchases;
@@ -238,16 +244,18 @@ _$MonthlyTotalsPurchasesChartDataCopyWith<_MonthlyTotalsPurchasesChartData> get 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MonthlyTotalsPurchasesChartData&&(identical(other.monthlyTotalsPurchases, monthlyTotalsPurchases) || other.monthlyTotalsPurchases == monthlyTotalsPurchases)&&const DeepCollectionEquality().equals(other._spots, _spots));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MonthlyTotalsPurchasesChartData&&(identical(other.monthlyTotalsPurchases, monthlyTotalsPurchases) || other.monthlyTotalsPurchases == monthlyTotalsPurchases)&&const DeepCollectionEquality().equals(other.spots, _spots));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,monthlyTotalsPurchases,const DeepCollectionEquality().hash(_spots));
+int get hashCode {
+    return Object.hash(runtimeType,monthlyTotalsPurchases,const DeepCollectionEquality().hash(_spots));
+}
 
 @override
 String toString() {
-  return 'MonthlyTotalsPurchasesChartData(monthlyTotalsPurchases: $monthlyTotalsPurchases, spots: $spots)';
+    return 'MonthlyTotalsPurchasesChartData(monthlyTotalsPurchases: $monthlyTotalsPurchases, spots: $spots)';
 }
 
 

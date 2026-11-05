@@ -4,7 +4,7 @@ Patrol drives the Flutter UI and native platform UI. Install the CLI version
 compatible with the `patrol` package before running the suite:
 
 ```sh
-dart pub global activate patrol_cli 4.5.1
+dart pub global activate patrol_cli 4.9.0
 patrol doctor
 ```
 

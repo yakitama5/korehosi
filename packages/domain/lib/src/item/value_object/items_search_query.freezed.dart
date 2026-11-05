@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'items_search_query.dart';
@@ -9,6 +9,7 @@ part of 'items_search_query.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ItemsSearchQueryCopyWith<ItemsSearchQuery> get copyWith => _$ItemsSearchQueryCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemsSearchQuery&&(identical(other.minimumWishRank, minimumWishRank) || other.minimumWishRank == minimumWishRank)&&const DeepCollectionEquality().equals(other.purchaseStatuses, purchaseStatuses)&&(identical(other.itemsOrder, itemsOrder) || other.itemsOrder == itemsOrder));
+  final _this = this as ItemsSearchQuery;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemsSearchQuery&&(identical(other.minimumWishRank, _this.minimumWishRank) || other.minimumWishRank == _this.minimumWishRank)&&const DeepCollectionEquality().equals(other.purchaseStatuses, _this.purchaseStatuses)&&(identical(other.itemsOrder, _this.itemsOrder) || other.itemsOrder == _this.itemsOrder));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,minimumWishRank,const DeepCollectionEquality().hash(purchaseStatuses),itemsOrder);
+int get hashCode {
+  final _this = this as ItemsSearchQuery;
+  return Object.hash(runtimeType,_this.minimumWishRank,const DeepCollectionEquality().hash(_this.purchaseStatuses),_this.itemsOrder);
+}
 
 @override
 String toString() {
-  return 'ItemsSearchQuery(minimumWishRank: $minimumWishRank, purchaseStatuses: $purchaseStatuses, itemsOrder: $itemsOrder)';
+  final _this = this as ItemsSearchQuery;
+  return 'ItemsSearchQuery(minimumWishRank: ${_this.minimumWishRank}, purchaseStatuses: ${_this.purchaseStatuses}, itemsOrder: ${_this.itemsOrder})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ItemsSearchQueryCopyWithImpl<$Res>
 /// Create a copy of ItemsSearchQuery
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? minimumWishRank = freezed,Object? purchaseStatuses = null,Object? itemsOrder = null,}) {
-  return _then(_self.copyWith(
+  return _then(ItemsSearchQuery(
 minimumWishRank: freezed == minimumWishRank ? _self.minimumWishRank : minimumWishRank // ignore: cast_nullable_to_non_nullable
 as double?,purchaseStatuses: null == purchaseStatuses ? _self.purchaseStatuses : purchaseStatuses // ignore: cast_nullable_to_non_nullable
 as List<PurchaseStatus>,itemsOrder: null == itemsOrder ? _self.itemsOrder : itemsOrder // ignore: cast_nullable_to_non_nullable
@@ -217,7 +223,7 @@ return $default(_that.minimumWishRank,_that.purchaseStatuses,_that.itemsOrder);c
 
 
 class _ItemsSearchQuery implements ItemsSearchQuery {
-  const _ItemsSearchQuery({this.minimumWishRank, required final  List<PurchaseStatus> purchaseStatuses, required this.itemsOrder}): _purchaseStatuses = purchaseStatuses;
+  const _ItemsSearchQuery({this.minimumWishRank, required  List<PurchaseStatus> purchaseStatuses, required this.itemsOrder}): _purchaseStatuses = purchaseStatuses;
   
 
 @override final  double? minimumWishRank;
@@ -240,16 +246,18 @@ _$ItemsSearchQueryCopyWith<_ItemsSearchQuery> get copyWith => __$ItemsSearchQuer
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemsSearchQuery&&(identical(other.minimumWishRank, minimumWishRank) || other.minimumWishRank == minimumWishRank)&&const DeepCollectionEquality().equals(other._purchaseStatuses, _purchaseStatuses)&&(identical(other.itemsOrder, itemsOrder) || other.itemsOrder == itemsOrder));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemsSearchQuery&&(identical(other.minimumWishRank, minimumWishRank) || other.minimumWishRank == minimumWishRank)&&const DeepCollectionEquality().equals(other.purchaseStatuses, _purchaseStatuses)&&(identical(other.itemsOrder, itemsOrder) || other.itemsOrder == itemsOrder));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,minimumWishRank,const DeepCollectionEquality().hash(_purchaseStatuses),itemsOrder);
+int get hashCode {
+    return Object.hash(runtimeType,minimumWishRank,const DeepCollectionEquality().hash(_purchaseStatuses),itemsOrder);
+}
 
 @override
 String toString() {
-  return 'ItemsSearchQuery(minimumWishRank: $minimumWishRank, purchaseStatuses: $purchaseStatuses, itemsOrder: $itemsOrder)';
+    return 'ItemsSearchQuery(minimumWishRank: $minimumWishRank, purchaseStatuses: $purchaseStatuses, itemsOrder: $itemsOrder)';
 }
 
 

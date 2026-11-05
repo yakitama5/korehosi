@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'item_config.dart';
@@ -9,6 +9,7 @@ part of 'item_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ItemConfigCopyWith<ItemConfig> get copyWith => _$ItemConfigCopyWithImpl<ItemCon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemConfig&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength)&&(identical(other.maxWanterNameLength, maxWanterNameLength) || other.maxWanterNameLength == maxWanterNameLength)&&(identical(other.maxWishSeasonLength, maxWishSeasonLength) || other.maxWishSeasonLength == maxWishSeasonLength)&&(identical(other.maxUrlLength, maxUrlLength) || other.maxUrlLength == maxUrlLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength)&&(identical(other.limitItemCount, limitItemCount) || other.limitItemCount == limitItemCount));
+  final _this = this as ItemConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemConfig&&(identical(other.maxNameLength, _this.maxNameLength) || other.maxNameLength == _this.maxNameLength)&&(identical(other.maxWanterNameLength, _this.maxWanterNameLength) || other.maxWanterNameLength == _this.maxWanterNameLength)&&(identical(other.maxWishSeasonLength, _this.maxWishSeasonLength) || other.maxWishSeasonLength == _this.maxWishSeasonLength)&&(identical(other.maxUrlLength, _this.maxUrlLength) || other.maxUrlLength == _this.maxUrlLength)&&(identical(other.maxMemoLength, _this.maxMemoLength) || other.maxMemoLength == _this.maxMemoLength)&&(identical(other.limitItemCount, _this.limitItemCount) || other.limitItemCount == _this.limitItemCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,maxNameLength,maxWanterNameLength,maxWishSeasonLength,maxUrlLength,maxMemoLength,limitItemCount);
+int get hashCode {
+  final _this = this as ItemConfig;
+  return Object.hash(runtimeType,_this.maxNameLength,_this.maxWanterNameLength,_this.maxWishSeasonLength,_this.maxUrlLength,_this.maxMemoLength,_this.limitItemCount);
+}
 
 @override
 String toString() {
-  return 'ItemConfig(maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength, limitItemCount: $limitItemCount)';
+  final _this = this as ItemConfig;
+  return 'ItemConfig(maxNameLength: ${_this.maxNameLength}, maxWanterNameLength: ${_this.maxWanterNameLength}, maxWishSeasonLength: ${_this.maxWishSeasonLength}, maxUrlLength: ${_this.maxUrlLength}, maxMemoLength: ${_this.maxMemoLength}, limitItemCount: ${_this.limitItemCount})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ItemConfigCopyWithImpl<$Res>
 /// Create a copy of ItemConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? maxNameLength = null,Object? maxWanterNameLength = null,Object? maxWishSeasonLength = null,Object? maxUrlLength = null,Object? maxMemoLength = null,Object? limitItemCount = null,}) {
-  return _then(_self.copyWith(
+  return _then(ItemConfig(
 maxNameLength: null == maxNameLength ? _self.maxNameLength : maxNameLength // ignore: cast_nullable_to_non_nullable
 as int,maxWanterNameLength: null == maxWanterNameLength ? _self.maxWanterNameLength : maxWanterNameLength // ignore: cast_nullable_to_non_nullable
 as int,maxWishSeasonLength: null == maxWishSeasonLength ? _self.maxWishSeasonLength : maxWishSeasonLength // ignore: cast_nullable_to_non_nullable
@@ -231,16 +237,18 @@ _$ItemConfigCopyWith<_ItemConfig> get copyWith => __$ItemConfigCopyWithImpl<_Ite
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemConfig&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength)&&(identical(other.maxWanterNameLength, maxWanterNameLength) || other.maxWanterNameLength == maxWanterNameLength)&&(identical(other.maxWishSeasonLength, maxWishSeasonLength) || other.maxWishSeasonLength == maxWishSeasonLength)&&(identical(other.maxUrlLength, maxUrlLength) || other.maxUrlLength == maxUrlLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength)&&(identical(other.limitItemCount, limitItemCount) || other.limitItemCount == limitItemCount));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemConfig&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength)&&(identical(other.maxWanterNameLength, maxWanterNameLength) || other.maxWanterNameLength == maxWanterNameLength)&&(identical(other.maxWishSeasonLength, maxWishSeasonLength) || other.maxWishSeasonLength == maxWishSeasonLength)&&(identical(other.maxUrlLength, maxUrlLength) || other.maxUrlLength == maxUrlLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength)&&(identical(other.limitItemCount, limitItemCount) || other.limitItemCount == limitItemCount));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,maxNameLength,maxWanterNameLength,maxWishSeasonLength,maxUrlLength,maxMemoLength,limitItemCount);
+int get hashCode {
+    return Object.hash(runtimeType,maxNameLength,maxWanterNameLength,maxWishSeasonLength,maxUrlLength,maxMemoLength,limitItemCount);
+}
 
 @override
 String toString() {
-  return 'ItemConfig(maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength, limitItemCount: $limitItemCount)';
+    return 'ItemConfig(maxNameLength: $maxNameLength, maxWanterNameLength: $maxWanterNameLength, maxWishSeasonLength: $maxWishSeasonLength, maxUrlLength: $maxUrlLength, maxMemoLength: $maxMemoLength, limitItemCount: $limitItemCount)';
 }
 
 

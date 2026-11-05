@@ -12,12 +12,12 @@ part of 'analyze_usecase.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(analyzeUsecase)
-const analyzeUsecaseProvider = AnalyzeUsecaseProvider._();
+final analyzeUsecaseProvider = AnalyzeUsecaseProvider._();
 
 final class AnalyzeUsecaseProvider
     extends $FunctionalProvider<AnalyzeUsecase, AnalyzeUsecase, AnalyzeUsecase>
     with $Provider<AnalyzeUsecase> {
-  const AnalyzeUsecaseProvider._()
+  AnalyzeUsecaseProvider._()
     : super(
         from: null,
         argument: null,

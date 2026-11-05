@@ -14,7 +14,7 @@ part of 'analytics_provider.dart';
 /// テスト時にDIすることを考慮して、Providerとして定義
 
 @ProviderFor(analytics)
-const analyticsProvider = AnalyticsProvider._();
+final analyticsProvider = AnalyticsProvider._();
 
 /// Firebase Analytics
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -29,7 +29,7 @@ final class AnalyticsProvider
     with $Provider<FirebaseAnalytics> {
   /// Firebase Analytics
   /// テスト時にDIすることを考慮して、Providerとして定義
-  const AnalyticsProvider._()
+  AnalyticsProvider._()
     : super(
         from: null,
         argument: null,

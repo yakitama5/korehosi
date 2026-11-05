@@ -13,7 +13,7 @@ part of 'firestore_user_provider.dart';
 /// ユーザーコレクションの参照
 
 @ProviderFor(userCollectionRef)
-const userCollectionRefProvider = UserCollectionRefProvider._();
+final userCollectionRefProvider = UserCollectionRefProvider._();
 
 /// ユーザーコレクションの参照
 
@@ -26,7 +26,7 @@ final class UserCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreUserModel>> {
   /// ユーザーコレクションの参照
-  const UserCollectionRefProvider._()
+  UserCollectionRefProvider._()
     : super(
         from: null,
         argument: null,
@@ -66,7 +66,7 @@ String _$userCollectionRefHash() => r'1a0a25e375965d7d6d7afd4fe5d5e5207486865f';
 /// ユーザードキュメントの参照
 
 @ProviderFor(userDocumentRef)
-const userDocumentRefProvider = UserDocumentRefFamily._();
+final userDocumentRefProvider = UserDocumentRefFamily._();
 
 /// ユーザードキュメントの参照
 
@@ -79,7 +79,7 @@ final class UserDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreUserModel>> {
   /// ユーザードキュメントの参照
-  const UserDocumentRefProvider._({
+  UserDocumentRefProvider._({
     required UserDocumentRefFamily super.from,
     required UserId? super.argument,
   }) : super(
@@ -142,7 +142,7 @@ final class UserDocumentRefFamily extends $Family
           DocumentReference<FirestoreUserModel>,
           UserId?
         > {
-  const UserDocumentRefFamily._()
+  UserDocumentRefFamily._()
     : super(
         retry: null,
         name: r'userDocumentRefProvider',

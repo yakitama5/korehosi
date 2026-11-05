@@ -13,7 +13,7 @@ part of 'group_join_user_provider.dart';
 /// グループに参加中のユーザー情報
 
 @ProviderFor(groupJoinUser)
-const groupJoinUserProvider = GroupJoinUserFamily._();
+final groupJoinUserProvider = GroupJoinUserFamily._();
 
 /// グループに参加中のユーザー情報
 
@@ -21,7 +21,7 @@ final class GroupJoinUserProvider
     extends $FunctionalProvider<AsyncValue<User?>, User?, FutureOr<User?>>
     with $FutureModifier<User?>, $FutureProvider<User?> {
   /// グループに参加中のユーザー情報
-  const GroupJoinUserProvider._({
+  GroupJoinUserProvider._({
     required GroupJoinUserFamily super.from,
     required ({GroupId groupId, UserId userId}) super.argument,
   }) : super(
@@ -78,7 +78,7 @@ final class GroupJoinUserFamily extends $Family
           FutureOr<User?>,
           ({GroupId groupId, UserId userId})
         > {
-  const GroupJoinUserFamily._()
+  GroupJoinUserFamily._()
     : super(
         retry: null,
         name: r'groupJoinUserProvider',

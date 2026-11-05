@@ -14,7 +14,7 @@ part of 'user_provider.dart';
 /// データの参照頻度を減らすため、`keepAlive`を指定
 
 @ProviderFor(user)
-const userProvider = UserFamily._();
+final userProvider = UserFamily._();
 
 /// ユーザー
 /// データの参照頻度を減らすため、`keepAlive`を指定
@@ -24,7 +24,7 @@ final class UserProvider
     with $FutureModifier<User?>, $StreamProvider<User?> {
   /// ユーザー
   /// データの参照頻度を減らすため、`keepAlive`を指定
-  const UserProvider._({
+  UserProvider._({
     required UserFamily super.from,
     required UserId super.argument,
   }) : super(
@@ -74,7 +74,7 @@ String _$userHash() => r'956e4dec3579a70e5d76087201d3e742136f708f';
 
 final class UserFamily extends $Family
     with $FunctionalFamilyOverride<Stream<User?>, UserId> {
-  const UserFamily._()
+  UserFamily._()
     : super(
         retry: null,
         name: r'userProvider',

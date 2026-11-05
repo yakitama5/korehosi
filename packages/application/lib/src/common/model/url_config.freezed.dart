@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'url_config.dart';
@@ -9,6 +9,7 @@ part of 'url_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $UrlConfigCopyWith<UrlConfig> get copyWith => _$UrlConfigCopyWithImpl<UrlConfig>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UrlConfig&&(identical(other.contactUs, contactUs) || other.contactUs == contactUs)&&(identical(other.privacyPolicyJa, privacyPolicyJa) || other.privacyPolicyJa == privacyPolicyJa)&&(identical(other.howToUse, howToUse) || other.howToUse == howToUse)&&(identical(other.developerXWeb, developerXWeb) || other.developerXWeb == developerXWeb)&&(identical(other.developerXApp, developerXApp) || other.developerXApp == developerXApp));
+  final _this = this as UrlConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UrlConfig&&(identical(other.contactUs, _this.contactUs) || other.contactUs == _this.contactUs)&&(identical(other.privacyPolicyJa, _this.privacyPolicyJa) || other.privacyPolicyJa == _this.privacyPolicyJa)&&(identical(other.howToUse, _this.howToUse) || other.howToUse == _this.howToUse)&&(identical(other.developerXWeb, _this.developerXWeb) || other.developerXWeb == _this.developerXWeb)&&(identical(other.developerXApp, _this.developerXApp) || other.developerXApp == _this.developerXApp));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,contactUs,privacyPolicyJa,howToUse,developerXWeb,developerXApp);
+int get hashCode {
+  final _this = this as UrlConfig;
+  return Object.hash(runtimeType,_this.contactUs,_this.privacyPolicyJa,_this.howToUse,_this.developerXWeb,_this.developerXApp);
+}
 
 @override
 String toString() {
-  return 'UrlConfig(contactUs: $contactUs, privacyPolicyJa: $privacyPolicyJa, howToUse: $howToUse, developerXWeb: $developerXWeb, developerXApp: $developerXApp)';
+  final _this = this as UrlConfig;
+  return 'UrlConfig(contactUs: ${_this.contactUs}, privacyPolicyJa: ${_this.privacyPolicyJa}, howToUse: ${_this.howToUse}, developerXWeb: ${_this.developerXWeb}, developerXApp: ${_this.developerXApp})';
 }
 
 
@@ -63,7 +69,7 @@ class _$UrlConfigCopyWithImpl<$Res>
 /// Create a copy of UrlConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? contactUs = null,Object? privacyPolicyJa = null,Object? howToUse = null,Object? developerXWeb = null,Object? developerXApp = null,}) {
-  return _then(_self.copyWith(
+  return _then(UrlConfig(
 contactUs: null == contactUs ? _self.contactUs : contactUs // ignore: cast_nullable_to_non_nullable
 as String,privacyPolicyJa: null == privacyPolicyJa ? _self.privacyPolicyJa : privacyPolicyJa // ignore: cast_nullable_to_non_nullable
 as String,howToUse: null == howToUse ? _self.howToUse : howToUse // ignore: cast_nullable_to_non_nullable
@@ -229,16 +235,18 @@ _$UrlConfigCopyWith<_UrlConfig> get copyWith => __$UrlConfigCopyWithImpl<_UrlCon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UrlConfig&&(identical(other.contactUs, contactUs) || other.contactUs == contactUs)&&(identical(other.privacyPolicyJa, privacyPolicyJa) || other.privacyPolicyJa == privacyPolicyJa)&&(identical(other.howToUse, howToUse) || other.howToUse == howToUse)&&(identical(other.developerXWeb, developerXWeb) || other.developerXWeb == developerXWeb)&&(identical(other.developerXApp, developerXApp) || other.developerXApp == developerXApp));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UrlConfig&&(identical(other.contactUs, contactUs) || other.contactUs == contactUs)&&(identical(other.privacyPolicyJa, privacyPolicyJa) || other.privacyPolicyJa == privacyPolicyJa)&&(identical(other.howToUse, howToUse) || other.howToUse == howToUse)&&(identical(other.developerXWeb, developerXWeb) || other.developerXWeb == developerXWeb)&&(identical(other.developerXApp, developerXApp) || other.developerXApp == developerXApp));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,contactUs,privacyPolicyJa,howToUse,developerXWeb,developerXApp);
+int get hashCode {
+    return Object.hash(runtimeType,contactUs,privacyPolicyJa,howToUse,developerXWeb,developerXApp);
+}
 
 @override
 String toString() {
-  return 'UrlConfig(contactUs: $contactUs, privacyPolicyJa: $privacyPolicyJa, howToUse: $howToUse, developerXWeb: $developerXWeb, developerXApp: $developerXApp)';
+    return 'UrlConfig(contactUs: $contactUs, privacyPolicyJa: $privacyPolicyJa, howToUse: $howToUse, developerXWeb: $developerXWeb, developerXApp: $developerXApp)';
 }
 
 

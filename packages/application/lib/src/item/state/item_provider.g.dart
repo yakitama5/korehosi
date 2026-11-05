@@ -13,7 +13,7 @@ part of 'item_provider.dart';
 /// 現在のグループ内の欲しい物
 
 @ProviderFor(item)
-const itemProvider = ItemFamily._();
+final itemProvider = ItemFamily._();
 
 /// 現在のグループ内の欲しい物
 
@@ -21,7 +21,7 @@ final class ItemProvider
     extends $FunctionalProvider<AsyncValue<Item?>, Item?, FutureOr<Item?>>
     with $FutureModifier<Item?>, $FutureProvider<Item?> {
   /// 現在のグループ内の欲しい物
-  const ItemProvider._({
+  ItemProvider._({
     required ItemFamily super.from,
     required ItemId super.argument,
   }) : super(
@@ -70,7 +70,7 @@ String _$itemHash() => r'c6f6939f0dc3a0a7d4e6cd6f5734c42e43950bde';
 
 final class ItemFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<Item?>, ItemId> {
-  const ItemFamily._()
+  ItemFamily._()
     : super(
         retry: null,
         name: r'itemProvider',

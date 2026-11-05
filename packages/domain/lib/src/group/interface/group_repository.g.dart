@@ -13,7 +13,7 @@ part of 'group_repository.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(groupRepository)
-const groupRepositoryProvider = GroupRepositoryProvider._();
+final groupRepositoryProvider = GroupRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -22,7 +22,7 @@ final class GroupRepositoryProvider
         $FunctionalProvider<GroupRepository, GroupRepository, GroupRepository>
     with $Provider<GroupRepository> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const GroupRepositoryProvider._()
+  GroupRepositoryProvider._()
     : super(
         from: null,
         argument: null,

@@ -14,7 +14,7 @@ part of 'firebase_storage_provider.dart';
 /// テスト時にDIすることを考慮して、Providerとして定義
 
 @ProviderFor(firebaseStorage)
-const firebaseStorageProvider = FirebaseStorageProvider._();
+final firebaseStorageProvider = FirebaseStorageProvider._();
 
 /// Firebase Storage
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -25,7 +25,7 @@ final class FirebaseStorageProvider
     with $Provider<FirebaseStorage> {
   /// Firebase Storage
   /// テスト時にDIすることを考慮して、Providerとして定義
-  const FirebaseStorageProvider._()
+  FirebaseStorageProvider._()
     : super(
         from: null,
         argument: null,

@@ -64,7 +64,7 @@ jobs:
 
       - name: Test Firestore and Storage rules
         run: >-
-          npx --yes firebase-tools@15.20.0 emulators:exec
+          npx --yes firebase-tools@15.34.2 emulators:exec
           --project demo-korehosi
           --only firestore,storage
           "npm run test:rules --prefix functions"

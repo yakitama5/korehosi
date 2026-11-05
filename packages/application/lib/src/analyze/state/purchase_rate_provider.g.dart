@@ -13,7 +13,7 @@ part of 'purchase_rate_provider.dart';
 /// 購入率を管理するProvider
 
 @ProviderFor(purchaseRate)
-const purchaseRateProvider = PurchaseRateProvider._();
+final purchaseRateProvider = PurchaseRateProvider._();
 
 /// 購入率を管理するProvider
 
@@ -26,7 +26,7 @@ final class PurchaseRateProvider
         >
     with $FutureModifier<ItemPurchaseRate>, $FutureProvider<ItemPurchaseRate> {
   /// 購入率を管理するProvider
-  const PurchaseRateProvider._()
+  PurchaseRateProvider._()
     : super(
         from: null,
         argument: null,

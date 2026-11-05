@@ -13,7 +13,7 @@ part of 'firestore_wanter_names_provider.dart';
 /// ほしい人コレクションの参照
 
 @ProviderFor(wanterNameCollectionRef)
-const wanterNameCollectionRefProvider = WanterNameCollectionRefFamily._();
+final wanterNameCollectionRefProvider = WanterNameCollectionRefFamily._();
 
 /// ほしい人コレクションの参照
 
@@ -26,7 +26,7 @@ final class WanterNameCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreWanterNameModel>> {
   /// ほしい人コレクションの参照
-  const WanterNameCollectionRefProvider._({
+  WanterNameCollectionRefProvider._({
     required WanterNameCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -94,7 +94,7 @@ final class WanterNameCollectionRefFamily extends $Family
           CollectionReference<FirestoreWanterNameModel>,
           GroupId
         > {
-  const WanterNameCollectionRefFamily._()
+  WanterNameCollectionRefFamily._()
     : super(
         retry: null,
         name: r'wanterNameCollectionRefProvider',

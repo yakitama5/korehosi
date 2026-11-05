@@ -13,7 +13,7 @@ part of 'item_repository.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(itemRepository)
-const itemRepositoryProvider = ItemRepositoryProvider._();
+final itemRepositoryProvider = ItemRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -21,7 +21,7 @@ final class ItemRepositoryProvider
     extends $FunctionalProvider<ItemRepository, ItemRepository, ItemRepository>
     with $Provider<ItemRepository> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const ItemRepositoryProvider._()
+  ItemRepositoryProvider._()
     : super(
         from: null,
         argument: null,

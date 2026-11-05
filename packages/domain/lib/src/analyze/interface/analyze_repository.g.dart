@@ -13,7 +13,7 @@ part of 'analyze_repository.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(analyzeRepository)
-const analyzeRepositoryProvider = AnalyzeRepositoryProvider._();
+final analyzeRepositoryProvider = AnalyzeRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -26,7 +26,7 @@ final class AnalyzeRepositoryProvider
         >
     with $Provider<AnalyzeRepository> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const AnalyzeRepositoryProvider._()
+  AnalyzeRepositoryProvider._()
     : super(
         from: null,
         argument: null,

@@ -13,7 +13,7 @@ part of 'firestore_deleted_group_provider.dart';
 /// グループコレクションの参照
 
 @ProviderFor(dgroupCollectionRef)
-const dgroupCollectionRefProvider = DgroupCollectionRefProvider._();
+final dgroupCollectionRefProvider = DgroupCollectionRefProvider._();
 
 /// グループコレクションの参照
 
@@ -26,7 +26,7 @@ final class DgroupCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreGroupModel>> {
   /// グループコレクションの参照
-  const DgroupCollectionRefProvider._()
+  DgroupCollectionRefProvider._()
     : super(
         from: null,
         argument: null,
@@ -67,7 +67,7 @@ String _$dgroupCollectionRefHash() =>
 /// グループドキュメントの参照
 
 @ProviderFor(dgroupDocumentRef)
-const dgroupDocumentRefProvider = DgroupDocumentRefFamily._();
+final dgroupDocumentRefProvider = DgroupDocumentRefFamily._();
 
 /// グループドキュメントの参照
 
@@ -80,7 +80,7 @@ final class DgroupDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreGroupModel>> {
   /// グループドキュメントの参照
-  const DgroupDocumentRefProvider._({
+  DgroupDocumentRefProvider._({
     required DgroupDocumentRefFamily super.from,
     required GroupId? super.argument,
   }) : super(
@@ -143,7 +143,7 @@ final class DgroupDocumentRefFamily extends $Family
           DocumentReference<FirestoreGroupModel>,
           GroupId?
         > {
-  const DgroupDocumentRefFamily._()
+  DgroupDocumentRefFamily._()
     : super(
         retry: null,
         name: r'dgroupDocumentRefProvider',

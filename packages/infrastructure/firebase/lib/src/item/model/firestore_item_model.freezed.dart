@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'firestore_item_model.dart';
@@ -9,6 +9,7 @@ part of 'firestore_item_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $FirestoreItemModelCopyWith<FirestoreItemModel> get copyWith => _$FirestoreItemM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirestoreItemModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.imagesPath, imagesPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&(identical(other.wishDate, wishDate) || other.wishDate == wishDate)&&const DeepCollectionEquality().equals(other.urls, urls)&&const DeepCollectionEquality().equals(other.urlThumbnails, urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.childViewPurchaseStatus, childViewPurchaseStatus) || other.childViewPurchaseStatus == childViewPurchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  final _this = this as FirestoreItemModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirestoreItemModel&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.imagesPath, _this.imagesPath)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.wanterName, _this.wanterName) || other.wanterName == _this.wanterName)&&(identical(other.wishRank, _this.wishRank) || other.wishRank == _this.wishRank)&&(identical(other.wishSeason, _this.wishSeason) || other.wishSeason == _this.wishSeason)&&(identical(other.wishDate, _this.wishDate) || other.wishDate == _this.wishDate)&&const DeepCollectionEquality().equals(other.urls, _this.urls)&&const DeepCollectionEquality().equals(other.urlThumbnails, _this.urlThumbnails)&&(identical(other.memo, _this.memo) || other.memo == _this.memo)&&(identical(other.purchaseStatus, _this.purchaseStatus) || other.purchaseStatus == _this.purchaseStatus)&&(identical(other.childViewPurchaseStatus, _this.childViewPurchaseStatus) || other.childViewPurchaseStatus == _this.childViewPurchaseStatus)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(imagesPath),name,wanterName,wishRank,wishSeason,wishDate,const DeepCollectionEquality().hash(urls),const DeepCollectionEquality().hash(urlThumbnails),memo,purchaseStatus,childViewPurchaseStatus,createdAt,updatedAt);
+int get hashCode {
+  final _this = this as FirestoreItemModel;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.imagesPath),_this.name,_this.wanterName,_this.wishRank,_this.wishSeason,_this.wishDate,const DeepCollectionEquality().hash(_this.urls),const DeepCollectionEquality().hash(_this.urlThumbnails),_this.memo,_this.purchaseStatus,_this.childViewPurchaseStatus,_this.createdAt,_this.updatedAt);
+}
 
 @override
 String toString() {
-  return 'FirestoreItemModel(id: $id, imagesPath: $imagesPath, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, wishDate: $wishDate, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchaseStatus: $purchaseStatus, childViewPurchaseStatus: $childViewPurchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
+  final _this = this as FirestoreItemModel;
+  return 'FirestoreItemModel(id: ${_this.id}, imagesPath: ${_this.imagesPath}, name: ${_this.name}, wanterName: ${_this.wanterName}, wishRank: ${_this.wishRank}, wishSeason: ${_this.wishSeason}, wishDate: ${_this.wishDate}, urls: ${_this.urls}, urlThumbnails: ${_this.urlThumbnails}, memo: ${_this.memo}, purchaseStatus: ${_this.purchaseStatus}, childViewPurchaseStatus: ${_this.childViewPurchaseStatus}, createdAt: ${_this.createdAt}, updatedAt: ${_this.updatedAt})';
 }
 
 
@@ -66,7 +72,7 @@ class _$FirestoreItemModelCopyWithImpl<$Res>
 /// Create a copy of FirestoreItemModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? imagesPath = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? wishDate = freezed,Object? urls = freezed,Object? urlThumbnails = freezed,Object? memo = freezed,Object? purchaseStatus = null,Object? childViewPurchaseStatus = null,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(FirestoreItemModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,imagesPath: freezed == imagesPath ? _self.imagesPath : imagesPath // ignore: cast_nullable_to_non_nullable
 as List<String>?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -222,7 +228,7 @@ return $default(_that.id,_that.imagesPath,_that.name,_that.wanterName,_that.wish
 @JsonSerializable()
 
 class _FirestoreItemModel implements FirestoreItemModel {
-  const _FirestoreItemModel({required this.id, final  List<String>? imagesPath, required this.name, this.wanterName, required this.wishRank, this.wishSeason, @timestampKey this.wishDate, final  List<String>? urls, final  Map<String, String?>? urlThumbnails, this.memo, required this.purchaseStatus, required this.childViewPurchaseStatus, @timestampKey this.createdAt, @timestampKey this.updatedAt}): _imagesPath = imagesPath,_urls = urls,_urlThumbnails = urlThumbnails;
+  const _FirestoreItemModel({required this.id,  List<String>? imagesPath, required this.name, this.wanterName, required this.wishRank, this.wishSeason, @timestampKey this.wishDate,  List<String>? urls,  Map<String, String?>? urlThumbnails, this.memo, required this.purchaseStatus, required this.childViewPurchaseStatus, @timestampKey this.createdAt, @timestampKey this.updatedAt}): _imagesPath = imagesPath,_urls = urls,_urlThumbnails = urlThumbnails;
   factory _FirestoreItemModel.fromJson(Map<String, dynamic> json) => _$FirestoreItemModelFromJson(json);
 
 @override final  String id;
@@ -277,16 +283,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirestoreItemModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._imagesPath, _imagesPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&(identical(other.wishDate, wishDate) || other.wishDate == wishDate)&&const DeepCollectionEquality().equals(other._urls, _urls)&&const DeepCollectionEquality().equals(other._urlThumbnails, _urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.childViewPurchaseStatus, childViewPurchaseStatus) || other.childViewPurchaseStatus == childViewPurchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirestoreItemModel&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.imagesPath, _imagesPath)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&(identical(other.wishDate, wishDate) || other.wishDate == wishDate)&&const DeepCollectionEquality().equals(other.urls, _urls)&&const DeepCollectionEquality().equals(other.urlThumbnails, _urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.childViewPurchaseStatus, childViewPurchaseStatus) || other.childViewPurchaseStatus == childViewPurchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_imagesPath),name,wanterName,wishRank,wishSeason,wishDate,const DeepCollectionEquality().hash(_urls),const DeepCollectionEquality().hash(_urlThumbnails),memo,purchaseStatus,childViewPurchaseStatus,createdAt,updatedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_imagesPath),name,wanterName,wishRank,wishSeason,wishDate,const DeepCollectionEquality().hash(_urls),const DeepCollectionEquality().hash(_urlThumbnails),memo,purchaseStatus,childViewPurchaseStatus,createdAt,updatedAt);
+}
 
 @override
 String toString() {
-  return 'FirestoreItemModel(id: $id, imagesPath: $imagesPath, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, wishDate: $wishDate, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchaseStatus: $purchaseStatus, childViewPurchaseStatus: $childViewPurchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FirestoreItemModel(id: $id, imagesPath: $imagesPath, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, wishDate: $wishDate, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchaseStatus: $purchaseStatus, childViewPurchaseStatus: $childViewPurchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 

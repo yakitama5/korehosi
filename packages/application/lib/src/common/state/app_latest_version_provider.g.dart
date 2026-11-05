@@ -12,12 +12,12 @@ part of 'app_latest_version_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(appLatestVersion)
-const appLatestVersionProvider = AppLatestVersionProvider._();
+final appLatestVersionProvider = AppLatestVersionProvider._();
 
 final class AppLatestVersionProvider
     extends $FunctionalProvider<AsyncValue<Version>, Version, Stream<Version>>
     with $FutureModifier<Version>, $StreamProvider<Version> {
-  const AppLatestVersionProvider._()
+  AppLatestVersionProvider._()
     : super(
         from: null,
         argument: null,

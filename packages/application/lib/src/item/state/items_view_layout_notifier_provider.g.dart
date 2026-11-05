@@ -12,11 +12,11 @@ part of 'items_view_layout_notifier_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(ItemsViewLayoutNotifier)
-const itemsViewLayoutProvider = ItemsViewLayoutNotifierProvider._();
+final itemsViewLayoutProvider = ItemsViewLayoutNotifierProvider._();
 
 final class ItemsViewLayoutNotifierProvider
     extends $NotifierProvider<ItemsViewLayoutNotifier, ViewLayout> {
-  const ItemsViewLayoutNotifierProvider._()
+  ItemsViewLayoutNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -50,8 +50,7 @@ abstract class _$ItemsViewLayoutNotifier extends $Notifier<ViewLayout> {
   ViewLayout build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<ViewLayout, ViewLayout>;
     final element =
         ref.element
@@ -61,6 +60,6 @@ abstract class _$ItemsViewLayoutNotifier extends $Notifier<ViewLayout> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

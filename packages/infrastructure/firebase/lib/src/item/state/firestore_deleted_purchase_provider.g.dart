@@ -13,7 +13,7 @@ part of 'firestore_deleted_purchase_provider.dart';
 /// 削除済購入情報コレクションの参照
 
 @ProviderFor(dpurchaseCollectionRef)
-const dpurchaseCollectionRefProvider = DpurchaseCollectionRefFamily._();
+final dpurchaseCollectionRefProvider = DpurchaseCollectionRefFamily._();
 
 /// 削除済購入情報コレクションの参照
 
@@ -26,7 +26,7 @@ final class DpurchaseCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestorePurchaseModel>> {
   /// 削除済購入情報コレクションの参照
-  const DpurchaseCollectionRefProvider._({
+  DpurchaseCollectionRefProvider._({
     required DpurchaseCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -95,7 +95,7 @@ final class DpurchaseCollectionRefFamily extends $Family
           CollectionReference<FirestorePurchaseModel>,
           GroupId
         > {
-  const DpurchaseCollectionRefFamily._()
+  DpurchaseCollectionRefFamily._()
     : super(
         retry: null,
         name: r'dpurchaseCollectionRefProvider',
@@ -116,7 +116,7 @@ final class DpurchaseCollectionRefFamily extends $Family
 /// 購入情報ドキュメントの参照
 
 @ProviderFor(dpurchaseDocumentRef)
-const dpurchaseDocumentRefProvider = DpurchaseDocumentRefFamily._();
+final dpurchaseDocumentRefProvider = DpurchaseDocumentRefFamily._();
 
 /// 購入情報ドキュメントの参照
 
@@ -129,7 +129,7 @@ final class DpurchaseDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestorePurchaseModel>> {
   /// 購入情報ドキュメントの参照
-  const DpurchaseDocumentRefProvider._({
+  DpurchaseDocumentRefProvider._({
     required DpurchaseDocumentRefFamily super.from,
     required ({GroupId groupId, PurchaseId? purchaseId}) super.argument,
   }) : super(
@@ -198,7 +198,7 @@ final class DpurchaseDocumentRefFamily extends $Family
           DocumentReference<FirestorePurchaseModel>,
           ({GroupId groupId, PurchaseId? purchaseId})
         > {
-  const DpurchaseDocumentRefFamily._()
+  DpurchaseDocumentRefFamily._()
     : super(
         retry: null,
         name: r'dpurchaseDocumentRefProvider',

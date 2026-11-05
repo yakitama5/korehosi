@@ -17,7 +17,7 @@ part of 'current_group_id_provider.dart';
 /// 現在のグループID
 
 @ProviderFor(CurrentGroupId)
-const currentGroupIdProvider = CurrentGroupIdProvider._();
+final currentGroupIdProvider = CurrentGroupIdProvider._();
 
 /// 現在のグループID
 // @Riverpod(keepAlive: true)
@@ -31,7 +31,7 @@ final class CurrentGroupIdProvider
   // Future<String?> currentGroupId(CurrentGroupIdRef ref) =>
   //     ref.read(groupUsecaseProvider).fetchCurrentGroupId();
   /// 現在のグループID
-  const CurrentGroupIdProvider._()
+  CurrentGroupIdProvider._()
     : super(
         from: null,
         argument: null,
@@ -62,8 +62,7 @@ abstract class _$CurrentGroupId extends $AsyncNotifier<GroupId?> {
   FutureOr<GroupId?> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<GroupId?>, GroupId?>;
     final element =
         ref.element
@@ -73,6 +72,6 @@ abstract class _$CurrentGroupId extends $AsyncNotifier<GroupId?> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'notification_message.dart';
@@ -9,6 +9,7 @@ part of 'notification_message.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $NotificationMessageCopyWith<NotificationMessage> get copyWith => _$Notification
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.path, path) || other.path == path)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
+  final _this = this as NotificationMessage;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NotificationMessage&&(identical(other.senderId, _this.senderId) || other.senderId == _this.senderId)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.groupId, _this.groupId) || other.groupId == _this.groupId)&&(identical(other.path, _this.path) || other.path == _this.path)&&(identical(other.from, _this.from) || other.from == _this.from)&&(identical(other.messageId, _this.messageId) || other.messageId == _this.messageId)&&(identical(other.messageType, _this.messageType) || other.messageType == _this.messageType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,senderId,category,groupId,path,from,messageId,messageType);
+int get hashCode {
+  final _this = this as NotificationMessage;
+  return Object.hash(runtimeType,_this.senderId,_this.category,_this.groupId,_this.path,_this.from,_this.messageId,_this.messageType);
+}
 
 @override
 String toString() {
-  return 'NotificationMessage(senderId: $senderId, category: $category, groupId: $groupId, path: $path, from: $from, messageId: $messageId, messageType: $messageType)';
+  final _this = this as NotificationMessage;
+  return 'NotificationMessage(senderId: ${_this.senderId}, category: ${_this.category}, groupId: ${_this.groupId}, path: ${_this.path}, from: ${_this.from}, messageId: ${_this.messageId}, messageType: ${_this.messageType})';
 }
 
 
@@ -63,7 +69,7 @@ class _$NotificationMessageCopyWithImpl<$Res>
 /// Create a copy of NotificationMessage
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? senderId = freezed,Object? category = freezed,Object? groupId = freezed,Object? path = freezed,Object? from = freezed,Object? messageId = freezed,Object? messageType = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(NotificationMessage(
 senderId: freezed == senderId ? _self.senderId : senderId // ignore: cast_nullable_to_non_nullable
 as NotificationMessageSenderId?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String?,groupId: freezed == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
@@ -233,16 +239,18 @@ _$NotificationMessageCopyWith<_NotificationMessage> get copyWith => __$Notificat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.path, path) || other.path == path)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _NotificationMessage&&(identical(other.senderId, senderId) || other.senderId == senderId)&&(identical(other.category, category) || other.category == category)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.path, path) || other.path == path)&&(identical(other.from, from) || other.from == from)&&(identical(other.messageId, messageId) || other.messageId == messageId)&&(identical(other.messageType, messageType) || other.messageType == messageType));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,senderId,category,groupId,path,from,messageId,messageType);
+int get hashCode {
+    return Object.hash(runtimeType,senderId,category,groupId,path,from,messageId,messageType);
+}
 
 @override
 String toString() {
-  return 'NotificationMessage(senderId: $senderId, category: $category, groupId: $groupId, path: $path, from: $from, messageId: $messageId, messageType: $messageType)';
+    return 'NotificationMessage(senderId: $senderId, category: $category, groupId: $groupId, path: $path, from: $from, messageId: $messageId, messageType: $messageType)';
 }
 
 

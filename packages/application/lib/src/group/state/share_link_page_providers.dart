@@ -10,6 +10,7 @@ ShareLinkId detailPageShareLinkId(Ref ref) =>
     throw UnimplementedError();
 
 /// 共有リンクページ内でのみ利用するProvider
+// ignore: avoid_classes_with_only_static_members
 class ShareLinkPageProviders {
-  static const DetailPageShareLinkIdProvider idProvider = _shareLinkIdProvider;
+  static final DetailPageShareLinkIdProvider idProvider = _shareLinkIdProvider;
 }

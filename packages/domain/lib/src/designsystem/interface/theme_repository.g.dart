@@ -13,7 +13,7 @@ part of 'theme_repository.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(themeRepository)
-const themeRepositoryProvider = ThemeRepositoryProvider._();
+final themeRepositoryProvider = ThemeRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -22,7 +22,7 @@ final class ThemeRepositoryProvider
         $FunctionalProvider<ThemeRepository, ThemeRepository, ThemeRepository>
     with $Provider<ThemeRepository> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const ThemeRepositoryProvider._()
+  ThemeRepositoryProvider._()
     : super(
         from: null,
         argument: null,

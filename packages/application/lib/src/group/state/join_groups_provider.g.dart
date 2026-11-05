@@ -13,7 +13,7 @@ part of 'join_groups_provider.dart';
 /// 認証ユーザーの参加グループの一覧
 
 @ProviderFor(joinGroups)
-const joinGroupsProvider = JoinGroupsProvider._();
+final joinGroupsProvider = JoinGroupsProvider._();
 
 /// 認証ユーザーの参加グループの一覧
 
@@ -26,7 +26,7 @@ final class JoinGroupsProvider
         >
     with $FutureModifier<List<Group>?>, $FutureProvider<List<Group>?> {
   /// 認証ユーザーの参加グループの一覧
-  const JoinGroupsProvider._()
+  JoinGroupsProvider._()
     : super(
         from: null,
         argument: null,

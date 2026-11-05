@@ -14,7 +14,7 @@ part of 'initial_location_provider.dart';
 /// アプリ起動時 または テスト時にoverrideして利用する前提
 
 @ProviderFor(initialLocation)
-const initialLocationProvider = InitialLocationProvider._();
+final initialLocationProvider = InitialLocationProvider._();
 
 /// 初期ロケーション
 /// アプリ起動時 または テスト時にoverrideして利用する前提
@@ -24,7 +24,7 @@ final class InitialLocationProvider
     with $Provider<String?> {
   /// 初期ロケーション
   /// アプリ起動時 または テスト時にoverrideして利用する前提
-  const InitialLocationProvider._()
+  InitialLocationProvider._()
     : super(
         from: null,
         argument: null,

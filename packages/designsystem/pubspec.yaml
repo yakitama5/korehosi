@@ -4,32 +4,32 @@ publish_to: "none"
 version: 0.0.1
 
 environment:
-  sdk: ^3.12.2
-  flutter: ^3.44.6
+  sdk: ^3.13.7
+  flutter: ^3.47.9
 
 resolution: workspace
 
 dependencies:
-  adaptive_dialog: ^2.5.0
-  animations: ^2.1.1
+  adaptive_dialog: ^2.8.4
+  animations: ^2.2.0
   cached_network_image: ^3.4.1
   collection: ^1.19.1
-  crop_your_image: ^2.0.0
-  cross_file: ^0.3.5+1
-  dynamic_color: ^1.8.1
+  crop_your_image: ^2.0.1
+  cross_file: ^0.3.5+5
+  dynamic_color: ^1.9.0
   flutter:
     sdk: flutter
   flutter_hooks: ^0.21.3+1
-  flutter_svg: ^2.2.3
+  flutter_svg: ^2.3.2
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
-  gauge_indicator: ^0.4.3
-  google_fonts: ^6.3.2
-  hooks_riverpod: ^3.0.3
-  image_picker: ^1.2.1
-  intl: ^0.20.2
+  gauge_indicator: ^0.6.0
+  google_fonts: ^8.2.1
+  hooks_riverpod: ^3.4.3
+  image_picker: ^1.2.4
+  intl: ^0.20.3
   linked_scroll_controller: ^0.2.0
-  lottie: ^3.3.2
+  lottie: ^3.8.2
   material3_indicators: ^2026.7.12+2
   material_color_utilities: ^0.13.0
   nested: ^1.0.0
@@ -39,30 +39,27 @@ dependencies:
     path: ../core
   packages_domain:
     path: ../domain
-  permission_handler: ^12.0.1
-  reactive_forms: ^18.2.0
+  permission_handler: ^13.0.2
+  reactive_forms: 18.2.0
   reactive_image_picker: ^8.0.1
   responsive_framework: ^1.5.1
-  riverpod_annotation: ^3.0.3
+  riverpod_annotation: ^4.0.7
   shimmer: ^3.0.0
-  slang: ^4.10.1
-  slang_flutter: ^4.10.0
+  slang: ^4.19.2
+  slang_flutter: ^4.19.0
   sliver_tools: ^0.2.12
   store_redirect: ^2.0.4
-  url_launcher: ^6.3.2
+  url_launcher: ^6.3.3
 
 dev_dependencies:
-  build_runner: ^2.15.0
-  custom_lint: ^0.8.1
+  build_runner: ^2.16.1
   flutter_gen_runner: ^5.15.0
   flutter_test:
     sdk: flutter
-  freezed: ^3.2.3
-  nilts: ^0.25.1
-  pedantic_mono: ^1.35.0
-  riverpod_generator: ^3.0.3
-  riverpod_lint: ^3.0.3
-  slang_build_runner: ^4.10.0
+  freezed: ^4.0.1
+  pedantic_mono: ^1.38.1
+  riverpod_generator: ^4.0.9
+  slang_build_runner: ^4.19.0
 
 flutter:
   uses-material-design: true

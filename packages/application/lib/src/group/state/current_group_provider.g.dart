@@ -13,7 +13,7 @@ part of 'current_group_provider.dart';
 /// 現在のグループ情報
 
 @ProviderFor(currentGroup)
-const currentGroupProvider = CurrentGroupProvider._();
+final currentGroupProvider = CurrentGroupProvider._();
 
 /// 現在のグループ情報
 
@@ -21,7 +21,7 @@ final class CurrentGroupProvider
     extends $FunctionalProvider<AsyncValue<Group?>, Group?, FutureOr<Group?>>
     with $FutureModifier<Group?>, $FutureProvider<Group?> {
   /// 現在のグループ情報
-  const CurrentGroupProvider._()
+  CurrentGroupProvider._()
     : super(
         from: null,
         argument: null,

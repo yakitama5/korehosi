@@ -13,7 +13,7 @@ part of 'token_timestamp_provider.dart';
 /// FCMトークンのタイムスタンプを管理するProvider
 
 @ProviderFor(tokenTimestamp)
-const tokenTimestampProvider = TokenTimestampFamily._();
+final tokenTimestampProvider = TokenTimestampFamily._();
 
 /// FCMトークンのタイムスタンプを管理するProvider
 
@@ -26,7 +26,7 @@ final class TokenTimestampProvider
         >
     with $FutureModifier<DateTime?>, $FutureProvider<DateTime?> {
   /// FCMトークンのタイムスタンプを管理するProvider
-  const TokenTimestampProvider._({
+  TokenTimestampProvider._({
     required TokenTimestampFamily super.from,
     required String super.argument,
   }) : super(
@@ -75,7 +75,7 @@ String _$tokenTimestampHash() => r'9dae9f8b03a0cae9bf27bc121780f56bd9e42b9c';
 
 final class TokenTimestampFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<DateTime?>, String> {
-  const TokenTimestampFamily._()
+  TokenTimestampFamily._()
     : super(
         retry: null,
         name: r'tokenTimestampProvider',

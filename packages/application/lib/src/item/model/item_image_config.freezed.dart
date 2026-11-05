@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'item_image_config.dart';
@@ -9,6 +9,7 @@ part of 'item_image_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ItemImageConfigCopyWith<ItemImageConfig> get copyWith => _$ItemImageConfigCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemImageConfig&&(identical(other.minWidth, minWidth) || other.minWidth == minWidth)&&(identical(other.minHeight, minHeight) || other.minHeight == minHeight)&&(identical(other.quality, quality) || other.quality == quality));
+  final _this = this as ItemImageConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemImageConfig&&(identical(other.minWidth, _this.minWidth) || other.minWidth == _this.minWidth)&&(identical(other.minHeight, _this.minHeight) || other.minHeight == _this.minHeight)&&(identical(other.quality, _this.quality) || other.quality == _this.quality));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,minWidth,minHeight,quality);
+int get hashCode {
+  final _this = this as ItemImageConfig;
+  return Object.hash(runtimeType,_this.minWidth,_this.minHeight,_this.quality);
+}
 
 @override
 String toString() {
-  return 'ItemImageConfig(minWidth: $minWidth, minHeight: $minHeight, quality: $quality)';
+  final _this = this as ItemImageConfig;
+  return 'ItemImageConfig(minWidth: ${_this.minWidth}, minHeight: ${_this.minHeight}, quality: ${_this.quality})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ItemImageConfigCopyWithImpl<$Res>
 /// Create a copy of ItemImageConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? minWidth = null,Object? minHeight = null,Object? quality = null,}) {
-  return _then(_self.copyWith(
+  return _then(ItemImageConfig(
 minWidth: null == minWidth ? _self.minWidth : minWidth // ignore: cast_nullable_to_non_nullable
 as int,minHeight: null == minHeight ? _self.minHeight : minHeight // ignore: cast_nullable_to_non_nullable
 as int,quality: null == quality ? _self.quality : quality // ignore: cast_nullable_to_non_nullable
@@ -225,16 +231,18 @@ _$ItemImageConfigCopyWith<_ItemImageConfig> get copyWith => __$ItemImageConfigCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemImageConfig&&(identical(other.minWidth, minWidth) || other.minWidth == minWidth)&&(identical(other.minHeight, minHeight) || other.minHeight == minHeight)&&(identical(other.quality, quality) || other.quality == quality));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemImageConfig&&(identical(other.minWidth, minWidth) || other.minWidth == minWidth)&&(identical(other.minHeight, minHeight) || other.minHeight == minHeight)&&(identical(other.quality, quality) || other.quality == quality));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,minWidth,minHeight,quality);
+int get hashCode {
+    return Object.hash(runtimeType,minWidth,minHeight,quality);
+}
 
 @override
 String toString() {
-  return 'ItemImageConfig(minWidth: $minWidth, minHeight: $minHeight, quality: $quality)';
+    return 'ItemImageConfig(minWidth: $minWidth, minHeight: $minHeight, quality: $quality)';
 }
 
 

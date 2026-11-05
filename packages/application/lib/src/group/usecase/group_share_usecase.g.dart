@@ -12,7 +12,7 @@ part of 'group_share_usecase.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(groupShareUsecase)
-const groupShareUsecaseProvider = GroupShareUsecaseProvider._();
+final groupShareUsecaseProvider = GroupShareUsecaseProvider._();
 
 final class GroupShareUsecaseProvider
     extends
@@ -22,7 +22,7 @@ final class GroupShareUsecaseProvider
           GroupShareUsecase
         >
     with $Provider<GroupShareUsecase> {
-  const GroupShareUsecaseProvider._()
+  GroupShareUsecaseProvider._()
     : super(
         from: null,
         argument: null,

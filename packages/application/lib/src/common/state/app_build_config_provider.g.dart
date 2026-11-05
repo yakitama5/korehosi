@@ -12,12 +12,12 @@ part of 'app_build_config_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(appBuildConfig)
-const appBuildConfigProvider = AppBuildConfigProvider._();
+final appBuildConfigProvider = AppBuildConfigProvider._();
 
 final class AppBuildConfigProvider
     extends $FunctionalProvider<AppBuildConfig, AppBuildConfig, AppBuildConfig>
     with $Provider<AppBuildConfig> {
-  const AppBuildConfigProvider._()
+  AppBuildConfigProvider._()
     : super(
         from: null,
         argument: null,

@@ -13,7 +13,7 @@ part of 'storage_service.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(storageService)
-const storageServiceProvider = StorageServiceProvider._();
+final storageServiceProvider = StorageServiceProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -21,7 +21,7 @@ final class StorageServiceProvider
     extends $FunctionalProvider<StorageService, StorageService, StorageService>
     with $Provider<StorageService> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const StorageServiceProvider._()
+  StorageServiceProvider._()
     : super(
         from: null,
         argument: null,

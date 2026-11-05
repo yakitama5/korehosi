@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'monthly_totals.dart';
@@ -9,6 +9,7 @@ part of 'monthly_totals.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $MonthlyTotalsCopyWith<MonthlyTotals> get copyWith => _$MonthlyTotalsCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthlyTotals&&(identical(other.yearMonth, yearMonth) || other.yearMonth == yearMonth)&&(identical(other.totalPrice, totalPrice) || other.totalPrice == totalPrice));
+  final _this = this as MonthlyTotals;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MonthlyTotals&&(identical(other.yearMonth, _this.yearMonth) || other.yearMonth == _this.yearMonth)&&(identical(other.totalPrice, _this.totalPrice) || other.totalPrice == _this.totalPrice));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,yearMonth,totalPrice);
+int get hashCode {
+  final _this = this as MonthlyTotals;
+  return Object.hash(runtimeType,_this.yearMonth,_this.totalPrice);
+}
 
 @override
 String toString() {
-  return 'MonthlyTotals(yearMonth: $yearMonth, totalPrice: $totalPrice)';
+  final _this = this as MonthlyTotals;
+  return 'MonthlyTotals(yearMonth: ${_this.yearMonth}, totalPrice: ${_this.totalPrice})';
 }
 
 
@@ -63,7 +69,7 @@ class _$MonthlyTotalsCopyWithImpl<$Res>
 /// Create a copy of MonthlyTotals
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? yearMonth = null,Object? totalPrice = null,}) {
-  return _then(_self.copyWith(
+  return _then(MonthlyTotals(
 yearMonth: null == yearMonth ? _self.yearMonth : yearMonth // ignore: cast_nullable_to_non_nullable
 as YearMonth,totalPrice: null == totalPrice ? _self.totalPrice : totalPrice // ignore: cast_nullable_to_non_nullable
 as int,
@@ -232,16 +238,18 @@ _$MonthlyTotalsCopyWith<_MonthlyTotals> get copyWith => __$MonthlyTotalsCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MonthlyTotals&&(identical(other.yearMonth, yearMonth) || other.yearMonth == yearMonth)&&(identical(other.totalPrice, totalPrice) || other.totalPrice == totalPrice));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _MonthlyTotals&&(identical(other.yearMonth, yearMonth) || other.yearMonth == yearMonth)&&(identical(other.totalPrice, totalPrice) || other.totalPrice == totalPrice));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,yearMonth,totalPrice);
+int get hashCode {
+    return Object.hash(runtimeType,yearMonth,totalPrice);
+}
 
 @override
 String toString() {
-  return 'MonthlyTotals(yearMonth: $yearMonth, totalPrice: $totalPrice)';
+    return 'MonthlyTotals(yearMonth: $yearMonth, totalPrice: $totalPrice)';
 }
 
 

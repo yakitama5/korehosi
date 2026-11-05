@@ -13,7 +13,7 @@ part of 'firestore_group_message_provider.dart';
 /// 通知メッセージコレクションの参照
 
 @ProviderFor(groupMessageCollectionRef)
-const groupMessageCollectionRefProvider = GroupMessageCollectionRefFamily._();
+final groupMessageCollectionRefProvider = GroupMessageCollectionRefFamily._();
 
 /// 通知メッセージコレクションの参照
 
@@ -26,7 +26,7 @@ final class GroupMessageCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreGroupMessageModel>> {
   /// 通知メッセージコレクションの参照
-  const GroupMessageCollectionRefProvider._({
+  GroupMessageCollectionRefProvider._({
     required GroupMessageCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -94,7 +94,7 @@ final class GroupMessageCollectionRefFamily extends $Family
           CollectionReference<FirestoreGroupMessageModel>,
           GroupId
         > {
-  const GroupMessageCollectionRefFamily._()
+  GroupMessageCollectionRefFamily._()
     : super(
         retry: null,
         name: r'groupMessageCollectionRefProvider',
@@ -115,7 +115,7 @@ final class GroupMessageCollectionRefFamily extends $Family
 /// 通知メッセージドキュメントの参照
 
 @ProviderFor(groupMessageDocumentRef)
-const groupMessageDocumentRefProvider = GroupMessageDocumentRefFamily._();
+final groupMessageDocumentRefProvider = GroupMessageDocumentRefFamily._();
 
 /// 通知メッセージドキュメントの参照
 
@@ -128,7 +128,7 @@ final class GroupMessageDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreGroupMessageModel>> {
   /// 通知メッセージドキュメントの参照
-  const GroupMessageDocumentRefProvider._({
+  GroupMessageDocumentRefProvider._({
     required GroupMessageDocumentRefFamily super.from,
     required ({GroupId groupId, NotificationMessageId? notificationMessageId})
     super.argument,
@@ -206,7 +206,7 @@ final class GroupMessageDocumentRefFamily extends $Family
           DocumentReference<FirestoreGroupMessageModel>,
           ({GroupId groupId, NotificationMessageId? notificationMessageId})
         > {
-  const GroupMessageDocumentRefFamily._()
+  GroupMessageDocumentRefFamily._()
     : super(
         retry: null,
         name: r'groupMessageDocumentRefProvider',

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'year_month.dart';
@@ -9,6 +9,7 @@ part of 'year_month.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $YearMonthCopyWith<YearMonth> get copyWith => _$YearMonthCopyWithImpl<YearMonth>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is YearMonth&&(identical(other.year, year) || other.year == year)&&(identical(other.month, month) || other.month == month));
+  final _this = this as YearMonth;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is YearMonth&&(identical(other.year, _this.year) || other.year == _this.year)&&(identical(other.month, _this.month) || other.month == _this.month));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,year,month);
+int get hashCode {
+  final _this = this as YearMonth;
+  return Object.hash(runtimeType,_this.year,_this.month);
+}
 
 @override
 String toString() {
-  return 'YearMonth(year: $year, month: $month)';
+  final _this = this as YearMonth;
+  return 'YearMonth(year: ${_this.year}, month: ${_this.month})';
 }
 
 
@@ -63,7 +69,7 @@ class _$YearMonthCopyWithImpl<$Res>
 /// Create a copy of YearMonth
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? year = null,Object? month = null,}) {
-  return _then(_self.copyWith(
+  return _then(YearMonth(
 year: null == year ? _self.year : year // ignore: cast_nullable_to_non_nullable
 as int,month: null == month ? _self.month : month // ignore: cast_nullable_to_non_nullable
 as int,
@@ -223,16 +229,18 @@ _$YearMonthCopyWith<_YearMonth> get copyWith => __$YearMonthCopyWithImpl<_YearMo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _YearMonth&&(identical(other.year, year) || other.year == year)&&(identical(other.month, month) || other.month == month));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _YearMonth&&(identical(other.year, year) || other.year == year)&&(identical(other.month, month) || other.month == month));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,year,month);
+int get hashCode {
+    return Object.hash(runtimeType,year,month);
+}
 
 @override
 String toString() {
-  return 'YearMonth(year: $year, month: $month)';
+    return 'YearMonth(year: $year, month: $month)';
 }
 
 

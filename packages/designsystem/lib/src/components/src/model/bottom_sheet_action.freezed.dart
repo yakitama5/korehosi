@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'bottom_sheet_action.dart';
@@ -9,6 +9,7 @@ part of 'bottom_sheet_action.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $BottomSheetActionCopyWith<T, BottomSheetAction<T>> get copyWith => _$BottomShee
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BottomSheetAction<T>&&(identical(other.title, title) || other.title == title)&&(identical(other.icon, icon) || other.icon == icon)&&const DeepCollectionEquality().equals(other.value, value));
+  final _this = this as BottomSheetAction<T>;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BottomSheetAction<T>&&(identical(other.title, _this.title) || other.title == _this.title)&&(identical(other.icon, _this.icon) || other.icon == _this.icon)&&const DeepCollectionEquality().equals(other.value, _this.value));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title,icon,const DeepCollectionEquality().hash(value));
+int get hashCode {
+  final _this = this as BottomSheetAction<T>;
+  return Object.hash(runtimeType,_this.title,_this.icon,const DeepCollectionEquality().hash(_this.value));
+}
 
 @override
 String toString() {
-  return 'BottomSheetAction<$T>(title: $title, icon: $icon, value: $value)';
+  final _this = this as BottomSheetAction<T>;
+  return 'BottomSheetAction<$T>(title: ${_this.title}, icon: ${_this.icon}, value: ${_this.value})';
 }
 
 
@@ -63,7 +69,7 @@ class _$BottomSheetActionCopyWithImpl<T,$Res>
 /// Create a copy of BottomSheetAction
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? icon = freezed,Object? value = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(BottomSheetAction(
 title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as Widget,icon: freezed == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
 as Widget?,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
@@ -225,16 +231,18 @@ _$BottomSheetActionCopyWith<T, _BottomSheetAction<T>> get copyWith => __$BottomS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BottomSheetAction<T>&&(identical(other.title, title) || other.title == title)&&(identical(other.icon, icon) || other.icon == icon)&&const DeepCollectionEquality().equals(other.value, value));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _BottomSheetAction<T>&&(identical(other.title, title) || other.title == title)&&(identical(other.icon, icon) || other.icon == icon)&&const DeepCollectionEquality().equals(other.value, value));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title,icon,const DeepCollectionEquality().hash(value));
+int get hashCode {
+    return Object.hash(runtimeType,title,icon,const DeepCollectionEquality().hash(value));
+}
 
 @override
 String toString() {
-  return 'BottomSheetAction<$T>(title: $title, icon: $icon, value: $value)';
+    return 'BottomSheetAction<$T>(title: $title, icon: $icon, value: $value)';
 }
 
 

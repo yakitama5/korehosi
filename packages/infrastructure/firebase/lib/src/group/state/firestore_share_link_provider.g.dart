@@ -13,7 +13,7 @@ part of 'firestore_share_link_provider.dart';
 /// グループ共有リンクコレクションの参照
 
 @ProviderFor(shareLinkCollectionRef)
-const shareLinkCollectionRefProvider = ShareLinkCollectionRefProvider._();
+final shareLinkCollectionRefProvider = ShareLinkCollectionRefProvider._();
 
 /// グループ共有リンクコレクションの参照
 
@@ -26,7 +26,7 @@ final class ShareLinkCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreShareLinkModel>> {
   /// グループ共有リンクコレクションの参照
-  const ShareLinkCollectionRefProvider._()
+  ShareLinkCollectionRefProvider._()
     : super(
         from: null,
         argument: null,
@@ -71,7 +71,7 @@ String _$shareLinkCollectionRefHash() =>
 /// グループ共有リンクドキュメントの参照
 
 @ProviderFor(shareLinkDocumentRef)
-const shareLinkDocumentRefProvider = ShareLinkDocumentRefFamily._();
+final shareLinkDocumentRefProvider = ShareLinkDocumentRefFamily._();
 
 /// グループ共有リンクドキュメントの参照
 
@@ -84,7 +84,7 @@ final class ShareLinkDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreShareLinkModel>> {
   /// グループ共有リンクドキュメントの参照
-  const ShareLinkDocumentRefProvider._({
+  ShareLinkDocumentRefProvider._({
     required ShareLinkDocumentRefFamily super.from,
     required ShareLinkId? super.argument,
   }) : super(
@@ -148,7 +148,7 @@ final class ShareLinkDocumentRefFamily extends $Family
           DocumentReference<FirestoreShareLinkModel>,
           ShareLinkId?
         > {
-  const ShareLinkDocumentRefFamily._()
+  ShareLinkDocumentRefFamily._()
     : super(
         retry: null,
         name: r'shareLinkDocumentRefProvider',

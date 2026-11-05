@@ -14,7 +14,7 @@ part of 'group_join_users_provider.dart';
 /// データの参照頻度を減らすため、`keepAlive`を指定
 
 @ProviderFor(groupJoinUsers)
-const groupJoinUsersProvider = GroupJoinUsersFamily._();
+final groupJoinUsersProvider = GroupJoinUsersFamily._();
 
 /// グループに参加中のユーザー情報
 /// データの参照頻度を減らすため、`keepAlive`を指定
@@ -29,7 +29,7 @@ final class GroupJoinUsersProvider
     with $FutureModifier<List<User>>, $StreamProvider<List<User>> {
   /// グループに参加中のユーザー情報
   /// データの参照頻度を減らすため、`keepAlive`を指定
-  const GroupJoinUsersProvider._({
+  GroupJoinUsersProvider._({
     required GroupJoinUsersFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -79,7 +79,7 @@ String _$groupJoinUsersHash() => r'd72df2b96387fcbae2fe379ba8fb14e69c72af5f';
 
 final class GroupJoinUsersFamily extends $Family
     with $FunctionalFamilyOverride<Stream<List<User>>, GroupId> {
-  const GroupJoinUsersFamily._()
+  GroupJoinUsersFamily._()
     : super(
         retry: null,
         name: r'groupJoinUsersProvider',

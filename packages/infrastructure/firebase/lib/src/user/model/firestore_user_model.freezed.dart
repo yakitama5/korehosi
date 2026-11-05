@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'firestore_user_model.dart';
@@ -9,6 +9,7 @@ part of 'firestore_user_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $FirestoreUserModelCopyWith<FirestoreUserModel> get copyWith => _$FirestoreUserM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirestoreUserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ageGroup, ageGroup) || other.ageGroup == ageGroup)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.joinGroupIds, joinGroupIds)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  final _this = this as FirestoreUserModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirestoreUserModel&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.ageGroup, _this.ageGroup) || other.ageGroup == _this.ageGroup)&&(identical(other.name, _this.name) || other.name == _this.name)&&const DeepCollectionEquality().equals(other.joinGroupIds, _this.joinGroupIds)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,ageGroup,name,const DeepCollectionEquality().hash(joinGroupIds),createdAt,updatedAt);
+int get hashCode {
+  final _this = this as FirestoreUserModel;
+  return Object.hash(runtimeType,_this.id,_this.ageGroup,_this.name,const DeepCollectionEquality().hash(_this.joinGroupIds),_this.createdAt,_this.updatedAt);
+}
 
 @override
 String toString() {
-  return 'FirestoreUserModel(id: $id, ageGroup: $ageGroup, name: $name, joinGroupIds: $joinGroupIds, createdAt: $createdAt, updatedAt: $updatedAt)';
+  final _this = this as FirestoreUserModel;
+  return 'FirestoreUserModel(id: ${_this.id}, ageGroup: ${_this.ageGroup}, name: ${_this.name}, joinGroupIds: ${_this.joinGroupIds}, createdAt: ${_this.createdAt}, updatedAt: ${_this.updatedAt})';
 }
 
 
@@ -66,7 +72,7 @@ class _$FirestoreUserModelCopyWithImpl<$Res>
 /// Create a copy of FirestoreUserModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? ageGroup = null,Object? name = freezed,Object? joinGroupIds = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(FirestoreUserModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,ageGroup: null == ageGroup ? _self.ageGroup : ageGroup // ignore: cast_nullable_to_non_nullable
 as AgeGroup,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -214,7 +220,7 @@ return $default(_that.id,_that.ageGroup,_that.name,_that.joinGroupIds,_that.crea
 @JsonSerializable()
 
 class _FirestoreUserModel implements FirestoreUserModel {
-  const _FirestoreUserModel({required this.id, required this.ageGroup, this.name, final  List<String>? joinGroupIds, @timestampKey this.createdAt, @timestampKey this.updatedAt}): _joinGroupIds = joinGroupIds;
+  const _FirestoreUserModel({required this.id, required this.ageGroup, this.name,  List<String>? joinGroupIds, @timestampKey this.createdAt, @timestampKey this.updatedAt}): _joinGroupIds = joinGroupIds;
   factory _FirestoreUserModel.fromJson(Map<String, dynamic> json) => _$FirestoreUserModelFromJson(json);
 
 @override final  String id;
@@ -245,16 +251,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirestoreUserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ageGroup, ageGroup) || other.ageGroup == ageGroup)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._joinGroupIds, _joinGroupIds)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirestoreUserModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ageGroup, ageGroup) || other.ageGroup == ageGroup)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.joinGroupIds, _joinGroupIds)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,ageGroup,name,const DeepCollectionEquality().hash(_joinGroupIds),createdAt,updatedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,ageGroup,name,const DeepCollectionEquality().hash(_joinGroupIds),createdAt,updatedAt);
+}
 
 @override
 String toString() {
-  return 'FirestoreUserModel(id: $id, ageGroup: $ageGroup, name: $name, joinGroupIds: $joinGroupIds, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'FirestoreUserModel(id: $id, ageGroup: $ageGroup, name: $name, joinGroupIds: $joinGroupIds, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 

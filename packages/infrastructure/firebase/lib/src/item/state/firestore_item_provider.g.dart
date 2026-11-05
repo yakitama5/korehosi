@@ -13,7 +13,7 @@ part of 'firestore_item_provider.dart';
 /// 欲しい物コレクションの参照
 
 @ProviderFor(itemCollectionRef)
-const itemCollectionRefProvider = ItemCollectionRefFamily._();
+final itemCollectionRefProvider = ItemCollectionRefFamily._();
 
 /// 欲しい物コレクションの参照
 
@@ -26,7 +26,7 @@ final class ItemCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreItemModel>> {
   /// 欲しい物コレクションの参照
-  const ItemCollectionRefProvider._({
+  ItemCollectionRefProvider._({
     required ItemCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -89,7 +89,7 @@ final class ItemCollectionRefFamily extends $Family
           CollectionReference<FirestoreItemModel>,
           GroupId
         > {
-  const ItemCollectionRefFamily._()
+  ItemCollectionRefFamily._()
     : super(
         retry: null,
         name: r'itemCollectionRefProvider',
@@ -110,7 +110,7 @@ final class ItemCollectionRefFamily extends $Family
 /// 欲しい物ドキュメントの参照
 
 @ProviderFor(itemDocumentRef)
-const itemDocumentRefProvider = ItemDocumentRefFamily._();
+final itemDocumentRefProvider = ItemDocumentRefFamily._();
 
 /// 欲しい物ドキュメントの参照
 
@@ -123,7 +123,7 @@ final class ItemDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreItemModel>> {
   /// 欲しい物ドキュメントの参照
-  const ItemDocumentRefProvider._({
+  ItemDocumentRefProvider._({
     required ItemDocumentRefFamily super.from,
     required ({GroupId groupId, ItemId? itemId}) super.argument,
   }) : super(
@@ -190,7 +190,7 @@ final class ItemDocumentRefFamily extends $Family
           DocumentReference<FirestoreItemModel>,
           ({GroupId groupId, ItemId? itemId})
         > {
-  const ItemDocumentRefFamily._()
+  ItemDocumentRefFamily._()
     : super(
         retry: null,
         name: r'itemDocumentRefProvider',

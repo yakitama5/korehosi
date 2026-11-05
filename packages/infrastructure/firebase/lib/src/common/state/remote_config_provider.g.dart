@@ -16,7 +16,7 @@ part of 'remote_config_provider.dart';
 /// 初期化自体は成功させる。
 
 @ProviderFor(remoteConfig)
-const remoteConfigProvider = RemoteConfigProvider._();
+final remoteConfigProvider = RemoteConfigProvider._();
 
 /// Firebase Remote Config。
 ///
@@ -37,7 +37,7 @@ final class RemoteConfigProvider
   ///
   /// fetchに失敗しても、SDKが保持するactivated/cached/default値を利用できるよう
   /// 初期化自体は成功させる。
-  const RemoteConfigProvider._()
+  RemoteConfigProvider._()
     : super(
         from: null,
         argument: null,
@@ -63,15 +63,15 @@ final class RemoteConfigProvider
   }
 }
 
-String _$remoteConfigHash() => r'81bb48b01e8e14e8ef39d0a394175a7d45f2ecc2';
+String _$remoteConfigHash() => r'6dc459ac6c44ae57626922bc5a649e685e36e99a';
 
 @ProviderFor(stringConfig)
-const stringConfigProvider = StringConfigFamily._();
+final stringConfigProvider = StringConfigFamily._();
 
 final class StringConfigProvider
     extends $FunctionalProvider<AsyncValue<String>, String, FutureOr<String>>
     with $FutureModifier<String>, $FutureProvider<String> {
-  const StringConfigProvider._({
+  StringConfigProvider._({
     required StringConfigFamily super.from,
     required RemoteConfigs<String> super.argument,
   }) : super(
@@ -118,7 +118,7 @@ String _$stringConfigHash() => r'9629e726337755b97478026bc3bcc0b70d517ec1';
 
 final class StringConfigFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<String>, RemoteConfigs<String>> {
-  const StringConfigFamily._()
+  StringConfigFamily._()
     : super(
         retry: null,
         name: r'stringConfigProvider',
@@ -135,12 +135,12 @@ final class StringConfigFamily extends $Family
 }
 
 @ProviderFor(boolConfig)
-const boolConfigProvider = BoolConfigFamily._();
+final boolConfigProvider = BoolConfigFamily._();
 
 final class BoolConfigProvider
     extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
     with $FutureModifier<bool>, $FutureProvider<bool> {
-  const BoolConfigProvider._({
+  BoolConfigProvider._({
     required BoolConfigFamily super.from,
     required RemoteConfigs<bool> super.argument,
   }) : super(
@@ -187,7 +187,7 @@ String _$boolConfigHash() => r'a8cc7ffd994eb559dce9dc12b1879770883ea63a';
 
 final class BoolConfigFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<bool>, RemoteConfigs<bool>> {
-  const BoolConfigFamily._()
+  BoolConfigFamily._()
     : super(
         retry: null,
         name: r'boolConfigProvider',
@@ -204,12 +204,12 @@ final class BoolConfigFamily extends $Family
 }
 
 @ProviderFor(stringStreamConfig)
-const stringStreamConfigProvider = StringStreamConfigFamily._();
+final stringStreamConfigProvider = StringStreamConfigFamily._();
 
 final class StringStreamConfigProvider
     extends $FunctionalProvider<AsyncValue<String>, String, Stream<String>>
     with $FutureModifier<String>, $StreamProvider<String> {
-  const StringStreamConfigProvider._({
+  StringStreamConfigProvider._({
     required StringStreamConfigFamily super.from,
     required RemoteConfigs<String> super.argument,
   }) : super(
@@ -257,7 +257,7 @@ String _$stringStreamConfigHash() =>
 
 final class StringStreamConfigFamily extends $Family
     with $FunctionalFamilyOverride<Stream<String>, RemoteConfigs<String>> {
-  const StringStreamConfigFamily._()
+  StringStreamConfigFamily._()
     : super(
         retry: null,
         name: r'stringStreamConfigProvider',
@@ -274,12 +274,12 @@ final class StringStreamConfigFamily extends $Family
 }
 
 @ProviderFor(boolStreamConfig)
-const boolStreamConfigProvider = BoolStreamConfigFamily._();
+final boolStreamConfigProvider = BoolStreamConfigFamily._();
 
 final class BoolStreamConfigProvider
     extends $FunctionalProvider<AsyncValue<bool>, bool, Stream<bool>>
     with $FutureModifier<bool>, $StreamProvider<bool> {
-  const BoolStreamConfigProvider._({
+  BoolStreamConfigProvider._({
     required BoolStreamConfigFamily super.from,
     required RemoteConfigs<bool> super.argument,
   }) : super(
@@ -326,7 +326,7 @@ String _$boolStreamConfigHash() => r'0cd53acec79ecdb47a766d0396d27a0bcf4209dd';
 
 final class BoolStreamConfigFamily extends $Family
     with $FunctionalFamilyOverride<Stream<bool>, RemoteConfigs<bool>> {
-  const BoolStreamConfigFamily._()
+  BoolStreamConfigFamily._()
     : super(
         retry: null,
         name: r'boolStreamConfigProvider',

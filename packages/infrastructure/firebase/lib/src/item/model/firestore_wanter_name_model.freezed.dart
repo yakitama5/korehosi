@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'firestore_wanter_name_model.dart';
@@ -9,6 +9,7 @@ part of 'firestore_wanter_name_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $FirestoreWanterNameModelCopyWith<FirestoreWanterNameModel> get copyWith => _$Fi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirestoreWanterNameModel&&(identical(other.name, name) || other.name == name));
+  final _this = this as FirestoreWanterNameModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FirestoreWanterNameModel&&(identical(other.name, _this.name) || other.name == _this.name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name);
+int get hashCode {
+  final _this = this as FirestoreWanterNameModel;
+  return Object.hash(runtimeType,_this.name);
+}
 
 @override
 String toString() {
-  return 'FirestoreWanterNameModel(name: $name)';
+  final _this = this as FirestoreWanterNameModel;
+  return 'FirestoreWanterNameModel(name: ${_this.name})';
 }
 
 
@@ -66,7 +72,7 @@ class _$FirestoreWanterNameModelCopyWithImpl<$Res>
 /// Create a copy of FirestoreWanterNameModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? name = null,}) {
-  return _then(_self.copyWith(
+  return _then(FirestoreWanterNameModel(
 name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -227,16 +233,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirestoreWanterNameModel&&(identical(other.name, name) || other.name == name));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _FirestoreWanterNameModel&&(identical(other.name, name) || other.name == name));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name);
+int get hashCode {
+    return Object.hash(runtimeType,name);
+}
 
 @override
 String toString() {
-  return 'FirestoreWanterNameModel(name: $name)';
+    return 'FirestoreWanterNameModel(name: $name)';
 }
 
 

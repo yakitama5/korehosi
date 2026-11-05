@@ -13,7 +13,7 @@ part of 'firestore_buyer_names_provider.dart';
 /// かった人コレクションの参照
 
 @ProviderFor(buyerNameCollectionRef)
-const buyerNameCollectionRefProvider = BuyerNameCollectionRefFamily._();
+final buyerNameCollectionRefProvider = BuyerNameCollectionRefFamily._();
 
 /// かった人コレクションの参照
 
@@ -26,7 +26,7 @@ final class BuyerNameCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreBuyerNameModel>> {
   /// かった人コレクションの参照
-  const BuyerNameCollectionRefProvider._({
+  BuyerNameCollectionRefProvider._({
     required BuyerNameCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -95,7 +95,7 @@ final class BuyerNameCollectionRefFamily extends $Family
           CollectionReference<FirestoreBuyerNameModel>,
           GroupId
         > {
-  const BuyerNameCollectionRefFamily._()
+  BuyerNameCollectionRefFamily._()
     : super(
         retry: null,
         name: r'buyerNameCollectionRefProvider',

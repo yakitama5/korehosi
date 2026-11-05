@@ -13,7 +13,7 @@ part of 'firestore_deleted_item_provider.dart';
 /// 削除済欲しい物コレクションの参照
 
 @ProviderFor(ditemCollectionRef)
-const ditemCollectionRefProvider = DitemCollectionRefFamily._();
+final ditemCollectionRefProvider = DitemCollectionRefFamily._();
 
 /// 削除済欲しい物コレクションの参照
 
@@ -26,7 +26,7 @@ final class DitemCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreItemModel>> {
   /// 削除済欲しい物コレクションの参照
-  const DitemCollectionRefProvider._({
+  DitemCollectionRefProvider._({
     required DitemCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -90,7 +90,7 @@ final class DitemCollectionRefFamily extends $Family
           CollectionReference<FirestoreItemModel>,
           GroupId
         > {
-  const DitemCollectionRefFamily._()
+  DitemCollectionRefFamily._()
     : super(
         retry: null,
         name: r'ditemCollectionRefProvider',
@@ -111,7 +111,7 @@ final class DitemCollectionRefFamily extends $Family
 /// 欲しい物ドキュメントの参照
 
 @ProviderFor(ditemDocumentRef)
-const ditemDocumentRefProvider = DitemDocumentRefFamily._();
+final ditemDocumentRefProvider = DitemDocumentRefFamily._();
 
 /// 欲しい物ドキュメントの参照
 
@@ -124,7 +124,7 @@ final class DitemDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreItemModel>> {
   /// 欲しい物ドキュメントの参照
-  const DitemDocumentRefProvider._({
+  DitemDocumentRefProvider._({
     required DitemDocumentRefFamily super.from,
     required ({GroupId groupId, ItemId? itemId}) super.argument,
   }) : super(
@@ -191,7 +191,7 @@ final class DitemDocumentRefFamily extends $Family
           DocumentReference<FirestoreItemModel>,
           ({GroupId groupId, ItemId? itemId})
         > {
-  const DitemDocumentRefFamily._()
+  DitemDocumentRefFamily._()
     : super(
         retry: null,
         name: r'ditemDocumentRefProvider',

@@ -12,7 +12,7 @@ part of 'monthly_totals_purchases_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(monthlyTotalsPurchases)
-const monthlyTotalsPurchasesProvider = MonthlyTotalsPurchasesFamily._();
+final monthlyTotalsPurchasesProvider = MonthlyTotalsPurchasesFamily._();
 
 final class MonthlyTotalsPurchasesProvider
     extends
@@ -24,7 +24,7 @@ final class MonthlyTotalsPurchasesProvider
     with
         $FutureModifier<MonthlyTotalsPurchases>,
         $FutureProvider<MonthlyTotalsPurchases> {
-  const MonthlyTotalsPurchasesProvider._({
+  MonthlyTotalsPurchasesProvider._({
     required MonthlyTotalsPurchasesFamily super.from,
     required YearMonthRange super.argument,
   }) : super(
@@ -78,7 +78,7 @@ final class MonthlyTotalsPurchasesFamily extends $Family
           FutureOr<MonthlyTotalsPurchases>,
           YearMonthRange
         > {
-  const MonthlyTotalsPurchasesFamily._()
+  MonthlyTotalsPurchasesFamily._()
     : super(
         retry: null,
         name: r'monthlyTotalsPurchasesProvider',

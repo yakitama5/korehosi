@@ -13,13 +13,13 @@ part of 'user_form_provider.dart';
 /// ユーザーの入力フォーム
 
 @ProviderFor(UserForm)
-const userFormProvider = UserFormProvider._();
+final userFormProvider = UserFormProvider._();
 
 /// ユーザーの入力フォーム
 final class UserFormProvider
     extends $AsyncNotifierProvider<UserForm, FormGroup> {
   /// ユーザーの入力フォーム
-  const UserFormProvider._()
+  UserFormProvider._()
     : super(
         from: null,
         argument: null,
@@ -46,8 +46,7 @@ abstract class _$UserForm extends $AsyncNotifier<FormGroup> {
   FutureOr<FormGroup> build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<AsyncValue<FormGroup>, FormGroup>;
     final element =
         ref.element
@@ -57,6 +56,6 @@ abstract class _$UserForm extends $AsyncNotifier<FormGroup> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

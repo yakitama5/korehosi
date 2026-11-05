@@ -12,7 +12,7 @@ part of 'wish_reminder_settings_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(wishReminderSettings)
-const wishReminderSettingsProvider = WishReminderSettingsProvider._();
+final wishReminderSettingsProvider = WishReminderSettingsProvider._();
 
 final class WishReminderSettingsProvider
     extends
@@ -24,7 +24,7 @@ final class WishReminderSettingsProvider
     with
         $FutureModifier<WishReminderSettings>,
         $StreamProvider<WishReminderSettings> {
-  const WishReminderSettingsProvider._()
+  WishReminderSettingsProvider._()
     : super(
         from: null,
         argument: null,

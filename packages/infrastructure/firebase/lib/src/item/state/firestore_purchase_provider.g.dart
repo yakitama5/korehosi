@@ -13,7 +13,7 @@ part of 'firestore_purchase_provider.dart';
 /// 購入情報コレクションの参照
 
 @ProviderFor(purchaseCollectionRef)
-const purchaseCollectionRefProvider = PurchaseCollectionRefFamily._();
+final purchaseCollectionRefProvider = PurchaseCollectionRefFamily._();
 
 /// 購入情報コレクションの参照
 
@@ -26,7 +26,7 @@ final class PurchaseCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestorePurchaseModel>> {
   /// 購入情報コレクションの参照
-  const PurchaseCollectionRefProvider._({
+  PurchaseCollectionRefProvider._({
     required PurchaseCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -94,7 +94,7 @@ final class PurchaseCollectionRefFamily extends $Family
           CollectionReference<FirestorePurchaseModel>,
           GroupId
         > {
-  const PurchaseCollectionRefFamily._()
+  PurchaseCollectionRefFamily._()
     : super(
         retry: null,
         name: r'purchaseCollectionRefProvider',
@@ -115,7 +115,7 @@ final class PurchaseCollectionRefFamily extends $Family
 /// 購入情報ドキュメントの参照
 
 @ProviderFor(purchaseDocumentRef)
-const purchaseDocumentRefProvider = PurchaseDocumentRefFamily._();
+final purchaseDocumentRefProvider = PurchaseDocumentRefFamily._();
 
 /// 購入情報ドキュメントの参照
 
@@ -128,7 +128,7 @@ final class PurchaseDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestorePurchaseModel>> {
   /// 購入情報ドキュメントの参照
-  const PurchaseDocumentRefProvider._({
+  PurchaseDocumentRefProvider._({
     required PurchaseDocumentRefFamily super.from,
     required ({GroupId groupId, PurchaseId? purchaseId}) super.argument,
   }) : super(
@@ -197,7 +197,7 @@ final class PurchaseDocumentRefFamily extends $Family
           DocumentReference<FirestorePurchaseModel>,
           ({GroupId groupId, PurchaseId? purchaseId})
         > {
-  const PurchaseDocumentRefFamily._()
+  PurchaseDocumentRefFamily._()
     : super(
         retry: null,
         name: r'purchaseDocumentRefProvider',

@@ -16,7 +16,7 @@ part of 'preferences_notifier_provider.dart';
 ///
 
 @ProviderFor(StringPreference)
-const stringPreferenceProvider = StringPreferenceFamily._();
+final stringPreferenceProvider = StringPreferenceFamily._();
 
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
@@ -28,7 +28,7 @@ final class StringPreferenceProvider
   /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
   /// `Preference<String>`のenum値を設定して利用する.
   ///
-  const StringPreferenceProvider._({
+  StringPreferenceProvider._({
     required StringPreferenceFamily super.from,
     required Preferences<String> super.argument,
   }) : super(
@@ -88,7 +88,7 @@ final class StringPreferenceFamily extends $Family
           String,
           Preferences<String>
         > {
-  const StringPreferenceFamily._()
+  StringPreferenceFamily._()
     : super(
         retry: null,
         name: r'stringPreferenceProvider',
@@ -121,8 +121,7 @@ abstract class _$StringPreference extends $Notifier<String> {
   String build(Preferences<String> pref);
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build(_$args);
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<String, String>;
     final element =
         ref.element
@@ -132,7 +131,7 @@ abstract class _$StringPreference extends $Notifier<String> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, () => build(_$args));
   }
 }
 
@@ -142,7 +141,7 @@ abstract class _$StringPreference extends $Notifier<String> {
 ///
 
 @ProviderFor(StringWithStringFamilyPreference)
-const stringWithStringFamilyPreferenceProvider =
+final stringWithStringFamilyPreferenceProvider =
     StringWithStringFamilyPreferenceFamily._();
 
 ///
@@ -155,7 +154,7 @@ final class StringWithStringFamilyPreferenceProvider
   /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
   /// `Preference<String>`のenum値を設定して利用する.
   ///
-  const StringWithStringFamilyPreferenceProvider._({
+  StringWithStringFamilyPreferenceProvider._({
     required StringWithStringFamilyPreferenceFamily super.from,
     required (Preferences<String>, String) super.argument,
   }) : super(
@@ -218,7 +217,7 @@ final class StringWithStringFamilyPreferenceFamily extends $Family
           String,
           (Preferences<String>, String)
         > {
-  const StringWithStringFamilyPreferenceFamily._()
+  StringWithStringFamilyPreferenceFamily._()
     : super(
         retry: null,
         name: r'stringWithStringFamilyPreferenceProvider',
@@ -257,8 +256,7 @@ abstract class _$StringWithStringFamilyPreference extends $Notifier<String> {
   String build(Preferences<String> pref, String family);
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build(_$args.$1, _$args.$2);
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<String, String>;
     final element =
         ref.element
@@ -268,7 +266,7 @@ abstract class _$StringWithStringFamilyPreference extends $Notifier<String> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, () => build(_$args.$1, _$args.$2));
   }
 }
 
@@ -278,7 +276,7 @@ abstract class _$StringWithStringFamilyPreference extends $Notifier<String> {
 ///
 
 @ProviderFor(BoolPreference)
-const boolPreferenceProvider = BoolPreferenceFamily._();
+final boolPreferenceProvider = BoolPreferenceFamily._();
 
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
@@ -290,7 +288,7 @@ final class BoolPreferenceProvider
   /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
   /// `Preference<bool>`のenum値を設定して利用する.
   ///
-  const BoolPreferenceProvider._({
+  BoolPreferenceProvider._({
     required BoolPreferenceFamily super.from,
     required Preferences<bool> super.argument,
   }) : super(
@@ -350,7 +348,7 @@ final class BoolPreferenceFamily extends $Family
           bool,
           Preferences<bool>
         > {
-  const BoolPreferenceFamily._()
+  BoolPreferenceFamily._()
     : super(
         retry: null,
         name: r'boolPreferenceProvider',
@@ -383,8 +381,7 @@ abstract class _$BoolPreference extends $Notifier<bool> {
   bool build(Preferences<bool> pref);
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build(_$args);
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -394,7 +391,7 @@ abstract class _$BoolPreference extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, () => build(_$args));
   }
 }
 
@@ -404,7 +401,7 @@ abstract class _$BoolPreference extends $Notifier<bool> {
 ///
 
 @ProviderFor(IntPreference)
-const intPreferenceProvider = IntPreferenceFamily._();
+final intPreferenceProvider = IntPreferenceFamily._();
 
 ///
 /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
@@ -416,7 +413,7 @@ final class IntPreferenceProvider
   /// shared_preferencesへの値の出し入れを管理するためのプロバイダー.
   /// `Preference<int>`のenum値を設定して利用する.
   ///
-  const IntPreferenceProvider._({
+  IntPreferenceProvider._({
     required IntPreferenceFamily super.from,
     required Preferences<int> super.argument,
   }) : super(
@@ -469,7 +466,7 @@ String _$intPreferenceHash() => r'ff1eb7bca50d959f32b13d584a657b5facf24585';
 
 final class IntPreferenceFamily extends $Family
     with $ClassFamilyOverride<IntPreference, int, int, int, Preferences<int>> {
-  const IntPreferenceFamily._()
+  IntPreferenceFamily._()
     : super(
         retry: null,
         name: r'intPreferenceProvider',
@@ -502,8 +499,7 @@ abstract class _$IntPreference extends $Notifier<int> {
   int build(Preferences<int> pref);
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build(_$args);
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<int, int>;
     final element =
         ref.element
@@ -513,6 +509,6 @@ abstract class _$IntPreference extends $Notifier<int> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, () => build(_$args));
   }
 }

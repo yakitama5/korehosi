@@ -13,7 +13,7 @@ part of 'search_items_provider.dart';
 /// ほしい物の一覧
 
 @ProviderFor(searchItems)
-const searchItemsProvider = SearchItemsFamily._();
+final searchItemsProvider = SearchItemsFamily._();
 
 /// ほしい物の一覧
 
@@ -26,7 +26,7 @@ final class SearchItemsProvider
         >
     with $FutureModifier<PageInfo<Item>>, $FutureProvider<PageInfo<Item>> {
   /// ほしい物の一覧
-  const SearchItemsProvider._({
+  SearchItemsProvider._({
     required SearchItemsFamily super.from,
     required int super.argument,
   }) : super(
@@ -76,7 +76,7 @@ String _$searchItemsHash() => r'824173ad11f72aeccc06f6be3abf907af205d7d8';
 
 final class SearchItemsFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<PageInfo<Item>>, int> {
-  const SearchItemsFamily._()
+  SearchItemsFamily._()
     : super(
         retry: null,
         name: r'searchItemsProvider',

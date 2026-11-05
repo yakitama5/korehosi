@@ -35,9 +35,9 @@ jobs:
         uses: ./.github/actions/setup-application-runtime
       - name: Install E2E tools
         run: |
-          dart pub global activate patrol_cli 4.5.1
-          dart pub global activate flutterfire_cli 1.4.0
-          npm install --global firebase-tools@15.20.0
+          dart pub global activate patrol_cli 4.9.0
+          dart pub global activate flutterfire_cli 1.4.1
+          npm install --global firebase-tools@15.34.2
           npm ci --prefix functions
       - name: Boot iOS simulator
         run: |
@@ -101,9 +101,9 @@ jobs:
         uses: ./.github/actions/setup-application-runtime
       - name: Install E2E tools
         run: |
-          dart pub global activate patrol_cli 4.5.1
-          dart pub global activate flutterfire_cli 1.4.0
-          npm install --global firebase-tools@15.20.0
+          dart pub global activate patrol_cli 4.9.0
+          dart pub global activate flutterfire_cli 1.4.1
+          npm install --global firebase-tools@15.34.2
           npm ci --prefix functions
       - name: Run Android critical path
         uses: reactivecircus/android-emulator-runner@v2

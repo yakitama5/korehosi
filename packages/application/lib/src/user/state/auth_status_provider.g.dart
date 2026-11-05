@@ -13,7 +13,7 @@ part of 'auth_status_provider.dart';
 /// 認証状態
 
 @ProviderFor(authStatus)
-const authStatusProvider = AuthStatusProvider._();
+final authStatusProvider = AuthStatusProvider._();
 
 /// 認証状態
 
@@ -26,7 +26,7 @@ final class AuthStatusProvider
         >
     with $FutureModifier<AuthStatus?>, $StreamProvider<AuthStatus?> {
   /// 認証状態
-  const AuthStatusProvider._()
+  AuthStatusProvider._()
     : super(
         from: null,
         argument: null,

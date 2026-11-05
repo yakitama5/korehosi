@@ -14,7 +14,7 @@ part of 'item_detail_providers.dart';
 /// `override`前提の利用を強制する
 
 @ProviderFor(detailPageItemId)
-const _itemIdProvider = DetailPageItemIdProvider._();
+final _itemIdProvider = DetailPageItemIdProvider._();
 
 /// 明細表示対象となる欲しい物のIDを管理するProvider
 /// `override`前提の利用を強制する
@@ -24,7 +24,7 @@ final class DetailPageItemIdProvider
     with $Provider<ItemId?> {
   /// 明細表示対象となる欲しい物のIDを管理するProvider
   /// `override`前提の利用を強制する
-  const DetailPageItemIdProvider._()
+  DetailPageItemIdProvider._()
     : super(
         from: null,
         argument: null,
@@ -63,7 +63,7 @@ String _$detailPageItemIdHash() => r'f3babfb340dac0b943dacff94238f08811617c01';
 /// `_itemIdProvider`に依存する
 
 @ProviderFor(detailPageItem)
-const _itemProvider = DetailPageItemProvider._();
+final _itemProvider = DetailPageItemProvider._();
 
 /// 明細表示対象となる欲しい物のEntityを管理するProvider
 /// `_itemIdProvider`に依存する
@@ -73,20 +73,20 @@ final class DetailPageItemProvider
     with $FutureModifier<Item?>, $FutureProvider<Item?> {
   /// 明細表示対象となる欲しい物のEntityを管理するProvider
   /// `_itemIdProvider`に依存する
-  const DetailPageItemProvider._()
+  DetailPageItemProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'_itemProvider',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[_itemIdProvider],
-        $allTransitiveDependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[_itemIdProvider],
+        $allTransitiveDependencies: <ProviderOrFamily>[
           DetailPageItemProvider.$allTransitiveDependencies0,
         ],
       );
 
-  static const $allTransitiveDependencies0 = _itemIdProvider;
+  static final $allTransitiveDependencies0 = _itemIdProvider;
 
   @override
   String debugGetCreateSourceHash() => _$detailPageItemHash();

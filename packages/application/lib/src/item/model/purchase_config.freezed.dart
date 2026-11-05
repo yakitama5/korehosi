@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'purchase_config.dart';
@@ -9,6 +9,7 @@ part of 'purchase_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $PurchaseConfigCopyWith<PurchaseConfig> get copyWith => _$PurchaseConfigCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchaseConfig&&(identical(other.maxPriceLength, maxPriceLength) || other.maxPriceLength == maxPriceLength)&&(identical(other.maxBuyerNameLength, maxBuyerNameLength) || other.maxBuyerNameLength == maxBuyerNameLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength));
+  final _this = this as PurchaseConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchaseConfig&&(identical(other.maxPriceLength, _this.maxPriceLength) || other.maxPriceLength == _this.maxPriceLength)&&(identical(other.maxBuyerNameLength, _this.maxBuyerNameLength) || other.maxBuyerNameLength == _this.maxBuyerNameLength)&&(identical(other.maxMemoLength, _this.maxMemoLength) || other.maxMemoLength == _this.maxMemoLength));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,maxPriceLength,maxBuyerNameLength,maxMemoLength);
+int get hashCode {
+  final _this = this as PurchaseConfig;
+  return Object.hash(runtimeType,_this.maxPriceLength,_this.maxBuyerNameLength,_this.maxMemoLength);
+}
 
 @override
 String toString() {
-  return 'PurchaseConfig(maxPriceLength: $maxPriceLength, maxBuyerNameLength: $maxBuyerNameLength, maxMemoLength: $maxMemoLength)';
+  final _this = this as PurchaseConfig;
+  return 'PurchaseConfig(maxPriceLength: ${_this.maxPriceLength}, maxBuyerNameLength: ${_this.maxBuyerNameLength}, maxMemoLength: ${_this.maxMemoLength})';
 }
 
 
@@ -63,7 +69,7 @@ class _$PurchaseConfigCopyWithImpl<$Res>
 /// Create a copy of PurchaseConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? maxPriceLength = null,Object? maxBuyerNameLength = null,Object? maxMemoLength = null,}) {
-  return _then(_self.copyWith(
+  return _then(PurchaseConfig(
 maxPriceLength: null == maxPriceLength ? _self.maxPriceLength : maxPriceLength // ignore: cast_nullable_to_non_nullable
 as int,maxBuyerNameLength: null == maxBuyerNameLength ? _self.maxBuyerNameLength : maxBuyerNameLength // ignore: cast_nullable_to_non_nullable
 as int,maxMemoLength: null == maxMemoLength ? _self.maxMemoLength : maxMemoLength // ignore: cast_nullable_to_non_nullable
@@ -225,16 +231,18 @@ _$PurchaseConfigCopyWith<_PurchaseConfig> get copyWith => __$PurchaseConfigCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseConfig&&(identical(other.maxPriceLength, maxPriceLength) || other.maxPriceLength == maxPriceLength)&&(identical(other.maxBuyerNameLength, maxBuyerNameLength) || other.maxBuyerNameLength == maxBuyerNameLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseConfig&&(identical(other.maxPriceLength, maxPriceLength) || other.maxPriceLength == maxPriceLength)&&(identical(other.maxBuyerNameLength, maxBuyerNameLength) || other.maxBuyerNameLength == maxBuyerNameLength)&&(identical(other.maxMemoLength, maxMemoLength) || other.maxMemoLength == maxMemoLength));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,maxPriceLength,maxBuyerNameLength,maxMemoLength);
+int get hashCode {
+    return Object.hash(runtimeType,maxPriceLength,maxBuyerNameLength,maxMemoLength);
+}
 
 @override
 String toString() {
-  return 'PurchaseConfig(maxPriceLength: $maxPriceLength, maxBuyerNameLength: $maxBuyerNameLength, maxMemoLength: $maxMemoLength)';
+    return 'PurchaseConfig(maxPriceLength: $maxPriceLength, maxBuyerNameLength: $maxBuyerNameLength, maxMemoLength: $maxMemoLength)';
 }
 
 

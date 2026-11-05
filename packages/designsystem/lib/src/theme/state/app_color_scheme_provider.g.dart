@@ -13,7 +13,7 @@ part of 'app_color_scheme_provider.dart';
 /// アプリ内のカラースキーマを管理
 
 @ProviderFor(appColorScheme)
-const appColorSchemeProvider = AppColorSchemeFamily._();
+final appColorSchemeProvider = AppColorSchemeFamily._();
 
 /// アプリ内のカラースキーマを管理
 
@@ -21,7 +21,7 @@ final class AppColorSchemeProvider
     extends $FunctionalProvider<ColorScheme, ColorScheme, ColorScheme>
     with $Provider<ColorScheme> {
   /// アプリ内のカラースキーマを管理
-  const AppColorSchemeProvider._({
+  AppColorSchemeProvider._({
     required AppColorSchemeFamily super.from,
     required Brightness super.argument,
   }) : super(
@@ -78,7 +78,7 @@ String _$appColorSchemeHash() => r'cc5f10491a5599f30df78289be489b39157bd072';
 
 final class AppColorSchemeFamily extends $Family
     with $FunctionalFamilyOverride<ColorScheme, Brightness> {
-  const AppColorSchemeFamily._()
+  AppColorSchemeFamily._()
     : super(
         retry: null,
         name: r'appColorSchemeProvider',

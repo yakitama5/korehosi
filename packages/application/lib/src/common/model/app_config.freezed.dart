@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_config.dart';
@@ -9,6 +9,7 @@ part of 'app_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $AppConfigCopyWith<AppConfig> get copyWith => _$AppConfigCopyWithImpl<AppConfig>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppConfig&&(identical(other.flavor, flavor) || other.flavor == flavor)&&(identical(other.appName, appName) || other.appName == appName)&&(identical(other.packageName, packageName) || other.packageName == packageName)&&(identical(other.bundleId, bundleId) || other.bundleId == bundleId)&&(identical(other.appStoreId, appStoreId) || other.appStoreId == appStoreId)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl));
+  final _this = this as AppConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppConfig&&(identical(other.flavor, _this.flavor) || other.flavor == _this.flavor)&&(identical(other.appName, _this.appName) || other.appName == _this.appName)&&(identical(other.packageName, _this.packageName) || other.packageName == _this.packageName)&&(identical(other.bundleId, _this.bundleId) || other.bundleId == _this.bundleId)&&(identical(other.appStoreId, _this.appStoreId) || other.appStoreId == _this.appStoreId)&&(identical(other.webUrl, _this.webUrl) || other.webUrl == _this.webUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,flavor,appName,packageName,bundleId,appStoreId,webUrl);
+int get hashCode {
+  final _this = this as AppConfig;
+  return Object.hash(runtimeType,_this.flavor,_this.appName,_this.packageName,_this.bundleId,_this.appStoreId,_this.webUrl);
+}
 
 @override
 String toString() {
-  return 'AppConfig(flavor: $flavor, appName: $appName, packageName: $packageName, bundleId: $bundleId, appStoreId: $appStoreId, webUrl: $webUrl)';
+  final _this = this as AppConfig;
+  return 'AppConfig(flavor: ${_this.flavor}, appName: ${_this.appName}, packageName: ${_this.packageName}, bundleId: ${_this.bundleId}, appStoreId: ${_this.appStoreId}, webUrl: ${_this.webUrl})';
 }
 
 
@@ -63,7 +69,7 @@ class _$AppConfigCopyWithImpl<$Res>
 /// Create a copy of AppConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? flavor = null,Object? appName = null,Object? packageName = null,Object? bundleId = null,Object? appStoreId = null,Object? webUrl = null,}) {
-  return _then(_self.copyWith(
+  return _then(AppConfig(
 flavor: null == flavor ? _self.flavor : flavor // ignore: cast_nullable_to_non_nullable
 as Flavor,appName: null == appName ? _self.appName : appName // ignore: cast_nullable_to_non_nullable
 as String,packageName: null == packageName ? _self.packageName : packageName // ignore: cast_nullable_to_non_nullable
@@ -231,16 +237,18 @@ _$AppConfigCopyWith<_AppConfig> get copyWith => __$AppConfigCopyWithImpl<_AppCon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppConfig&&(identical(other.flavor, flavor) || other.flavor == flavor)&&(identical(other.appName, appName) || other.appName == appName)&&(identical(other.packageName, packageName) || other.packageName == packageName)&&(identical(other.bundleId, bundleId) || other.bundleId == bundleId)&&(identical(other.appStoreId, appStoreId) || other.appStoreId == appStoreId)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppConfig&&(identical(other.flavor, flavor) || other.flavor == flavor)&&(identical(other.appName, appName) || other.appName == appName)&&(identical(other.packageName, packageName) || other.packageName == packageName)&&(identical(other.bundleId, bundleId) || other.bundleId == bundleId)&&(identical(other.appStoreId, appStoreId) || other.appStoreId == appStoreId)&&(identical(other.webUrl, webUrl) || other.webUrl == webUrl));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,flavor,appName,packageName,bundleId,appStoreId,webUrl);
+int get hashCode {
+    return Object.hash(runtimeType,flavor,appName,packageName,bundleId,appStoreId,webUrl);
+}
 
 @override
 String toString() {
-  return 'AppConfig(flavor: $flavor, appName: $appName, packageName: $packageName, bundleId: $bundleId, appStoreId: $appStoreId, webUrl: $webUrl)';
+    return 'AppConfig(flavor: $flavor, appName: $appName, packageName: $packageName, bundleId: $bundleId, appStoreId: $appStoreId, webUrl: $webUrl)';
 }
 
 

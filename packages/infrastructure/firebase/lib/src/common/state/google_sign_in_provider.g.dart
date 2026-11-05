@@ -14,7 +14,7 @@ part of 'google_sign_in_provider.dart';
 /// テスト時にDIすることを考慮して、Providerとして定義
 
 @ProviderFor(googleSignIn)
-const googleSignInProvider = GoogleSignInProvider._();
+final googleSignInProvider = GoogleSignInProvider._();
 
 /// Google Sign In
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -24,7 +24,7 @@ final class GoogleSignInProvider
     with $Provider<GoogleSignIn> {
   /// Google Sign In
   /// テスト時にDIすることを考慮して、Providerとして定義
-  const GoogleSignInProvider._()
+  GoogleSignInProvider._()
     : super(
         from: null,
         argument: null,

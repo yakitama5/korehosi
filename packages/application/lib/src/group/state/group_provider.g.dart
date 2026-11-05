@@ -14,7 +14,7 @@ part of 'group_provider.dart';
 /// データの参照頻度を減らすため、`keepAlive`を指定
 
 @ProviderFor(group)
-const groupProvider = GroupFamily._();
+final groupProvider = GroupFamily._();
 
 /// グループ情報
 /// データの参照頻度を減らすため、`keepAlive`を指定
@@ -24,7 +24,7 @@ final class GroupProvider
     with $FutureModifier<Group?>, $StreamProvider<Group?> {
   /// グループ情報
   /// データの参照頻度を減らすため、`keepAlive`を指定
-  const GroupProvider._({
+  GroupProvider._({
     required GroupFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -74,7 +74,7 @@ String _$groupHash() => r'65fdd35912a186d27d2097211ae7035445f02894';
 
 final class GroupFamily extends $Family
     with $FunctionalFamilyOverride<Stream<Group?>, GroupId> {
-  const GroupFamily._()
+  GroupFamily._()
     : super(
         retry: null,
         name: r'groupProvider',
