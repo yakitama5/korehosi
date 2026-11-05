@@ -164,8 +164,11 @@ jobs:
       - name: Setup application runtime
         uses: ./.github/actions/setup-application-runtime
       - name: Build simulator app
+        # The Xcode service-file build phase invokes FlutterFire CLI.
         working-directory: apps/app
         run: |
+          dart pub global activate flutterfire_cli 1.4.1
+          export PATH="$HOME/.pub-cache/bin:$PATH"
           flutter build ios --simulator --debug \
             --dart-define-from-file ../../.github/e2e_dart_defines.json \
             --dart-define=useFirebaseEmulators=true \
