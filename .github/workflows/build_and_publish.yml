@@ -90,6 +90,7 @@ jobs:
       (needs.version_up.result == 'success' || needs.version_up.result == 'skipped') &&
       (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'ios')
     runs-on: macos-latest
+    timeout-minutes: 90
 
     steps:
       # version_up がバージョンアップコミットを push している可能性があるため、
@@ -136,6 +137,9 @@ jobs:
           echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
           pip3 install --disable-pip-version-check -r .github/requirements-cd.txt
 
+      - name: 配布検証スクリプトのテスト
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+
       - name: 設定ファイルの復元
         env:
           DART_DEFINE_JSON: ${{ secrets.DART_DEFINE_JSON }}
@@ -169,16 +173,40 @@ jobs:
           CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
         run: |
           # 1. キーチェーンの初期化
-          keychain initialize
+          keychain initialize --path "$RUNNER_TEMP/korehosi-signing.keychain-db"
           # 2. 証明書とプロビジョニングプロファイルの取得（CodeMagic CLI）
           app-store-connect fetch-signing-files "com.yakuran.familyWishList" --type IOS_APP_STORE --create
           # 3. キーチェーンへの追加とXcodeプロジェクトへの適用
-          keychain add-certificates
+          keychain add-certificates --path "$RUNNER_TEMP/korehosi-signing.keychain-db"
           xcode-project use-profiles --project apps/app/ios/Runner.xcodeproj
           # 4. Melos経由でビルド
           melos run build:app:ios
           # 5. App Store Connectへアップロード
           app-store-connect publish --path apps/app/build/ios/ipa/*.ipa
+          # 6. Apple の処理完了を待ち、既存の内部テストグループだけに配布して確認
+          python3 .github/scripts/verify_internal_release.py ios \
+            --artifact 'apps/app/build/ios/ipa/*.ipa' \
+            --output "$RUNNER_TEMP/internal-release-ios.json"
+
+      - name: iOS 内部テスト配布の検証結果
+        uses: actions/upload-artifact@v7
+        with:
+          name: internal-release-ios
+          path: ${{ runner.temp }}/internal-release-ios.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: iOS 署名用キーチェーンと設定ファイルの削除
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/korehosi-signing.keychain-db" ]; then
+            keychain use-login
+            keychain delete --path "$RUNNER_TEMP/korehosi-signing.keychain-db"
+          fi
+          rm -f apps/app/dart_defines/prod.json
+          for ENV_PATH in packages/infrastructure/firebase/scripts/env packages/infrastructure/revenue_cat/scripts/env; do
+            rm -f "$ENV_PATH/.env" "$ENV_PATH/.env.dev"
+          done
 
   # ──────────────────────────────────────────────
   # Job 2: Android ビルド＆Google Play へ配布（Ubuntu ランナー）
@@ -191,6 +219,7 @@ jobs:
       (needs.version_up.result == 'success' || needs.version_up.result == 'skipped') &&
       (github.event.inputs.platform == 'all' || github.event.inputs.platform == 'android')
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@v7
@@ -234,6 +263,9 @@ jobs:
           echo "$HOME/.pub-cache/bin" >> "$GITHUB_PATH"
           pip3 install --disable-pip-version-check -r .github/requirements-cd.txt
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: 配布検証スクリプトのテスト
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
 
       - name: 設定ファイルの復元
         env:
@@ -285,4 +317,29 @@ jobs:
       - name: Google Play へパブリッシュ（内部テストトラック）
         env:
           GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
-        run: google-play bundles publish --bundle apps/app/build/app/outputs/bundle/release/app-release.aab --track internal
+        run: |
+          google-play bundles publish --bundle apps/app/build/app/outputs/bundle/release/app-release.aab --track internal
+          python3 .github/scripts/verify_internal_release.py android \
+            --artifact apps/app/build/app/outputs/bundle/release/app-release.aab \
+            --output "$RUNNER_TEMP/internal-release-android.json"
+
+      - name: Android 内部テスト配布の検証結果
+        uses: actions/upload-artifact@v7
+        with:
+          name: internal-release-android
+          path: ${{ runner.temp }}/internal-release-android.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Android 署名用ファイルと設定ファイルの削除
+        if: always()
+        env:
+          ANDROID_KEYSTORE_FILENAME: ${{ vars.ANDROID_KEYSTORE_FILENAME }}
+        run: |
+          if [ -n "$ANDROID_KEYSTORE_FILENAME" ]; then
+            rm -f "apps/app/android/app/$ANDROID_KEYSTORE_FILENAME"
+          fi
+          rm -f apps/app/android/key.properties apps/app/dart_defines/prod.json
+          for ENV_PATH in packages/infrastructure/firebase/scripts/env packages/infrastructure/revenue_cat/scripts/env; do
+            rm -f "$ENV_PATH/.env" "$ENV_PATH/.env.dev"
+          done
