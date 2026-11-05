@@ -10,7 +10,7 @@ class ResponsiveAutoScaleBox extends SingleChildStatelessWidget {
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
-    return ResponsiveBreakpoints.builder(
+    final scaledChild = ResponsiveBreakpoints.builder(
       breakpoints: [
         // HACK(yakitama5): 設定はテーマ側に定義したい
         const Breakpoint(start: 0, end: 450, name: MOBILE),
@@ -54,5 +54,50 @@ class ResponsiveAutoScaleBox extends SingleChildStatelessWidget {
         ),
       ),
     );
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final mediaQuery = MediaQuery.of(context);
+        final viewport = Size(constraints.maxWidth, constraints.maxHeight);
+        final hasViewport = _hasUsableSize(viewport);
+        final hasMediaSize = _hasUsableSize(mediaQuery.size);
+        final layoutSize = hasViewport
+            ? viewport
+            : hasMediaSize
+            ? mediaQuery.size
+            : const Size(450, 450);
+
+        // Android can report an empty surface while locked or resuming.
+        // Keep the subtree mounted, but give the scaler finite dimensions
+        // until the real metrics arrive so it never calculates 0 / 0.
+        return Offstage(
+          offstage: !hasViewport || !hasMediaSize,
+          child: SizedBox(
+            width: layoutSize.width,
+            height: layoutSize.height,
+            child: OverflowBox(
+              minWidth: layoutSize.width,
+              maxWidth: layoutSize.width,
+              minHeight: layoutSize.height,
+              maxHeight: layoutSize.height,
+              child: MediaQuery(
+                data: hasMediaSize
+                    ? mediaQuery
+                    : mediaQuery.copyWith(
+                        size: layoutSize,
+                        viewInsets: EdgeInsets.zero,
+                        viewPadding: EdgeInsets.zero,
+                        padding: EdgeInsets.zero,
+                      ),
+                child: scaledChild,
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
+
+bool _hasUsableSize(Size size) =>
+    size.width.isFinite && size.height.isFinite && !size.isEmpty;
