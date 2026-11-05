@@ -36,7 +36,9 @@ Future<List<Override>> initializeInfrastructureProviders() async {
     storageServiceProvider.overrideWith(FirebaseStorageService.new),
     analyticsServiceProvider.overrideWith(FirebaseAnalyticsService.new),
     messagingServiceProvider.overrideWith(
-      FirebaseMessagingMessagingService.new,
+      const bool.fromEnvironment('useFirebaseEmulators')
+          ? FirebaseEmulatorMessagingService.new
+          : FirebaseMessagingMessagingService.new,
     ),
     notificationTokenRepositoryProvider.overrideWith(
       FirebaseNotificationTokenRepository.new,

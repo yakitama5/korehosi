@@ -6,6 +6,12 @@ import 'package:patrol/patrol.dart';
 
 void main() {
   patrolTest('初回登録からほしいものの作成・編集・削除まで完了できる', ($) async {
+    expect(
+      const bool.fromEnvironment('useFirebaseEmulators'),
+      isTrue,
+      reason:
+          'The critical flow writes test data and must use Firebase emulators.',
+    );
     await app.main();
     // Firebase Auth persists credentials in the iOS Keychain even when the app
     // is uninstalled, so always begin the critical flow signed out.
@@ -41,8 +47,20 @@ void main() {
     await $(TextField).first.waitUntilVisible(
       timeout: const Duration(seconds: 20),
     );
+    await $('保存').tap();
+    await $('必須項目を入力して下さい').waitUntilVisible(
+      timeout: const Duration(seconds: 20),
+    );
+    expect($('保存'), findsOneWidget);
     await $(TextField).first.enterText('E2Eテスト商品');
     await $('保存').tap();
+    await $('E2Eテスト商品').waitUntilVisible(
+      timeout: const Duration(seconds: 20),
+    );
+    expect($('E2Eテスト商品'), findsWidgets);
+
+    await $.platform.mobile.pressHome();
+    await $.platform.mobile.openApp();
     await $('E2Eテスト商品').waitUntilVisible(
       timeout: const Duration(seconds: 20),
     );

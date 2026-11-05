@@ -2,6 +2,12 @@ name: Patrol E2E
 
 on:
   workflow_dispatch:
+    inputs:
+      build_local_simulator:
+        description: 'Build an emulator-backed app for a local iOS simulator'
+        required: true
+        default: false
+        type: boolean
   schedule:
     - cron: '0 18 * * 1-5'
 
@@ -15,6 +21,7 @@ concurrency:
 jobs:
   ios-critical-path:
     name: iOS critical path
+    if: ${{ !inputs.build_local_simulator }}
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
@@ -58,6 +65,7 @@ jobs:
         working-directory: apps/app
         run: |
           set -o pipefail
+          printf 'iosBundleId=%s\n' "$(jq -r '.iosBundleId' ../../.github/e2e_dart_defines.json)" > ios/Flutter/Dart-Defines.xcconfig
           patrol test --target patrol_test/critical_flow_test.dart \
             --uninstall --full-isolation \
             --verbose \
@@ -81,6 +89,7 @@ jobs:
 
   android-critical-path:
     name: Android critical path (scheduled)
+    if: ${{ !inputs.build_local_simulator }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -126,3 +135,73 @@ jobs:
           path: |
             patrol-android.log
             firebase-emulator.log
+
+  ios-local-simulator:
+    # cspell:ignore Rsrc iphonesimulator hashlib plistlib DTSDK hexdigest
+    name: Build local iOS simulator app
+    if: ${{ inputs.build_local_simulator }}
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Prepare emulator-only environment
+        run: |
+          for ENV_PATH in packages/infrastructure/firebase/scripts/env packages/infrastructure/revenue_cat/scripts/env; do
+            mkdir -p "$ENV_PATH"
+            printf '%s\n' \
+              'RECPTCHA_SITE_KEY=local-test-only' \
+              'REVENUE_CAT_KEY_APPLE_STORE=local-test-only' \
+              'REVENUE_CAT_KEY_PLAY_STORE=local-test-only' > "$ENV_PATH/.env"
+            cp "$ENV_PATH/.env" "$ENV_PATH/.env.dev"
+          done
+          printf 'iosBundleId=%s\n' "$(jq -r '.iosBundleId' .github/e2e_dart_defines.json)" > apps/app/ios/Flutter/Dart-Defines.xcconfig
+      - name: Setup application runtime
+        uses: ./.github/actions/setup-application-runtime
+      - name: Build simulator app
+        working-directory: apps/app
+        run: |
+          flutter build ios --simulator --debug \
+            --dart-define-from-file ../../.github/e2e_dart_defines.json \
+            --dart-define=useFirebaseEmulators=true \
+            --dart-define=firebaseEmulatorHost=127.0.0.1
+      - name: Archive simulator app and provenance
+        run: |
+          ditto -c -k --sequesterRsrc --keepParent \
+            apps/app/build/ios/iphonesimulator/Runner.app ios-local-simulator.zip
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import plistlib
+          import subprocess
+
+          info = plistlib.loads(Path("apps/app/build/ios/iphonesimulator/Runner.app/Info.plist").read_bytes())
+          if info["CFBundleIdentifier"] != "com.yakuran.familyWishList.dev":
+              raise SystemExit("Expected the development application bundle ID")
+          result = {
+              "source_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+              "bundle_id": info["CFBundleIdentifier"],
+              "version": info["CFBundleShortVersionString"],
+              "build_number": info["CFBundleVersion"],
+              "sdk": info["DTSDKName"],
+              "archive_sha256": hashlib.sha256(Path("ios-local-simulator.zip").read_bytes()).hexdigest(),
+              "use_firebase_emulators": True,
+              "firebase_emulator_host": "127.0.0.1",
+          }
+          Path("ios-local-simulator.json").write_text(json.dumps(result, indent=2) + "\n")
+          PY
+      - name: Upload simulator app
+        uses: actions/upload-artifact@v7
+        with:
+          name: ios-local-simulator
+          path: |
+            ios-local-simulator.zip
+            ios-local-simulator.json
+          if-no-files-found: error
+          retention-days: 3
