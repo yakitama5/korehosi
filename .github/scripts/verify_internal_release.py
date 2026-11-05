@@ -114,11 +114,22 @@ def valid_build(build):
     return True
 
 
-def verify_ios(api, metadata, timeout=2400, pause=30):
-    apps = api.resources("/v1/apps", **{"filter[bundleId]": metadata["bundle_id"], "limit": 200})
-    if len(apps) != 1:
-        raise VerificationError("Expected exactly one matching App Store Connect app")
-    app_id = apps[0]["id"]
+def verify_ios(api, metadata, timeout=2400, pause=30, app_id=None):
+    if app_id:
+        app_id = str(app_id)
+        if not app_id.isdigit():
+            raise VerificationError("App Store Apple ID must be numeric")
+        app = api.request("GET", f"/v1/apps/{app_id}")["data"]
+        if app.get("id") != app_id:
+            raise VerificationError("App Store Connect returned a different Apple ID")
+    else:
+        apps = api.resources("/v1/apps", **{"filter[bundleId]": metadata["bundle_id"], "limit": 200})
+        if len(apps) != 1:
+            raise VerificationError("Expected exactly one matching App Store Connect app")
+        app = apps[0]
+        app_id = app["id"]
+    if app.get("attributes", {}).get("bundleId") != metadata["bundle_id"]:
+        raise VerificationError("App Store Connect bundle ID does not match the uploaded application")
     groups = [group for group in api.resources(f"/v1/apps/{app_id}/betaGroups", limit=200)
               if group["attributes"].get("isInternalGroup") is True]
     if not groups:
@@ -161,7 +172,7 @@ def verify_ios(api, metadata, timeout=2400, pause=30):
             )
         }]
         if valid and state in {"READY_FOR_BETA_TESTING", "IN_BETA_TESTING"} and len(memberships) == len(groups):
-            return {**metadata, "build_id": build_id, "processing_state": "VALID",
+            return {**metadata, "app_id": app_id, "build_id": build_id, "processing_state": "VALID",
                     "expired": False, "internal_build_state": state,
                     "internal_groups": [{"id": group["id"], "name": group["attributes"]["name"]}
                                         for group in memberships]}
@@ -205,7 +216,7 @@ def main():
         raise VerificationError("Expected exactly one release artifact")
     artifact = Path(paths[0])
     if args.platform == "ios":
-        result = verify_ios(AppleApi(), ipa_metadata(artifact))
+        result = verify_ios(AppleApi(), ipa_metadata(artifact), app_id=os.environ.get("APP_STORE_APPLE_ID"))
     else:
         result = verify_android(aab_metadata(artifact))
     with artifact.open("rb") as stream:
