@@ -34,10 +34,11 @@ void main() {
     );
     await $(TextField).first.enterText('E2Eユーザー');
     await $(FilledButton).first.tap();
-    await $('はじめる').last.waitUntilVisible(
+    final signUpButton = $(find.widgetWithText(FilledButton, 'はじめる'));
+    await signUpButton.waitUntilVisible(
       timeout: const Duration(seconds: 20),
     );
-    await $('はじめる').last.tap();
+    await signUpButton.tap();
     await $('ほしいものを追加').waitUntilVisible(
       timeout: const Duration(seconds: 20),
     );
