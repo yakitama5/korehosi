@@ -28,7 +28,8 @@ class FirebaseMessagingMessagingService implements MessagingService {
     // FCM特有のドメインモデルに変換
     return switch (settings.authorizationStatus) {
       AuthorizationStatus.authorized => NotificationPermission.authorized,
-      AuthorizationStatus.denied => NotificationPermission.denied,
+      AuthorizationStatus.denied ||
+      AuthorizationStatus.deniedPermanently => NotificationPermission.denied,
       AuthorizationStatus.notDetermined => NotificationPermission.notDetermined,
       AuthorizationStatus.provisional => NotificationPermission.provisional,
     };

@@ -12,7 +12,7 @@ part of 'app_version_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(appVersionRepository)
-const appVersionRepositoryProvider = AppVersionRepositoryProvider._();
+final appVersionRepositoryProvider = AppVersionRepositoryProvider._();
 
 final class AppVersionRepositoryProvider
     extends
@@ -22,7 +22,7 @@ final class AppVersionRepositoryProvider
           AppVersionRepository
         >
     with $Provider<AppVersionRepository> {
-  const AppVersionRepositoryProvider._()
+  AppVersionRepositoryProvider._()
     : super(
         from: null,
         argument: null,

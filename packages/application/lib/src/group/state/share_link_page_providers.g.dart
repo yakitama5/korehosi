@@ -13,7 +13,7 @@ part of 'share_link_page_providers.dart';
 /// 共有リンク画面の共有リンクID
 
 @ProviderFor(detailPageShareLinkId)
-const _shareLinkIdProvider = DetailPageShareLinkIdProvider._();
+final _shareLinkIdProvider = DetailPageShareLinkIdProvider._();
 
 /// 共有リンク画面の共有リンクID
 
@@ -21,7 +21,7 @@ final class DetailPageShareLinkIdProvider
     extends $FunctionalProvider<ShareLinkId, ShareLinkId, ShareLinkId>
     with $Provider<ShareLinkId> {
   /// 共有リンク画面の共有リンクID
-  const DetailPageShareLinkIdProvider._()
+  DetailPageShareLinkIdProvider._()
     : super(
         from: null,
         argument: null,

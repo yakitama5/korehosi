@@ -13,7 +13,7 @@ part of 'notification_token_repository.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(notificationTokenRepository)
-const notificationTokenRepositoryProvider =
+final notificationTokenRepositoryProvider =
     NotificationTokenRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
@@ -27,7 +27,7 @@ final class NotificationTokenRepositoryProvider
         >
     with $Provider<NotificationTokenRepository> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const NotificationTokenRepositoryProvider._()
+  NotificationTokenRepositoryProvider._()
     : super(
         from: null,
         argument: null,

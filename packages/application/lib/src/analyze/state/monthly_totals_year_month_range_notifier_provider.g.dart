@@ -13,7 +13,7 @@ part of 'monthly_totals_year_month_range_notifier_provider.dart';
 /// 月間合計金額グラフの範囲
 
 @ProviderFor(MonthlyTotalsYearMonthRangeNotifier)
-const monthlyTotalsYearMonthRangeProvider =
+final monthlyTotalsYearMonthRangeProvider =
     MonthlyTotalsYearMonthRangeNotifierProvider._();
 
 /// 月間合計金額グラフの範囲
@@ -21,7 +21,7 @@ final class MonthlyTotalsYearMonthRangeNotifierProvider
     extends
         $NotifierProvider<MonthlyTotalsYearMonthRangeNotifier, YearMonthRange> {
   /// 月間合計金額グラフの範囲
-  const MonthlyTotalsYearMonthRangeNotifierProvider._()
+  MonthlyTotalsYearMonthRangeNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -60,8 +60,7 @@ abstract class _$MonthlyTotalsYearMonthRangeNotifier
   YearMonthRange build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<YearMonthRange, YearMonthRange>;
     final element =
         ref.element
@@ -71,6 +70,6 @@ abstract class _$MonthlyTotalsYearMonthRangeNotifier
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

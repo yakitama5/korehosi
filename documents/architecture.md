@@ -25,7 +25,7 @@
 - [envied](https://pub.dev/packages/envied)を利用した機密情報の難読化
 - [qr_flutter](https://pub.dev/packages/qr_flutter) を利用したQRコード生成
 - [responsive_framework](https://pub.dev/packages/responsive_framework) を利用したレスポンシブ対応
-- [custom_lint](https://pub.dev/packages/custom_lint)を利用した静的解析のカスタマイズ
+- [Dart analyzer plugins](https://dart.dev/tools/analysis)を利用した静的解析のカスタマイズ
 
 ### テスト
 

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'auth_status.dart';
@@ -9,6 +9,7 @@ part of 'auth_status.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $AuthStatusCopyWith<AuthStatus> get copyWith => _$AuthStatusCopyWithImpl<AuthSta
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.linkedGoogle, linkedGoogle) || other.linkedGoogle == linkedGoogle)&&(identical(other.linkedApple, linkedApple) || other.linkedApple == linkedApple));
+  final _this = this as AuthStatus;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthStatus&&(identical(other.userId, _this.userId) || other.userId == _this.userId)&&(identical(other.isAnonymous, _this.isAnonymous) || other.isAnonymous == _this.isAnonymous)&&(identical(other.linkedGoogle, _this.linkedGoogle) || other.linkedGoogle == _this.linkedGoogle)&&(identical(other.linkedApple, _this.linkedApple) || other.linkedApple == _this.linkedApple));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,userId,isAnonymous,linkedGoogle,linkedApple);
+int get hashCode {
+  final _this = this as AuthStatus;
+  return Object.hash(runtimeType,_this.userId,_this.isAnonymous,_this.linkedGoogle,_this.linkedApple);
+}
 
 @override
 String toString() {
-  return 'AuthStatus(userId: $userId, isAnonymous: $isAnonymous, linkedGoogle: $linkedGoogle, linkedApple: $linkedApple)';
+  final _this = this as AuthStatus;
+  return 'AuthStatus(userId: ${_this.userId}, isAnonymous: ${_this.isAnonymous}, linkedGoogle: ${_this.linkedGoogle}, linkedApple: ${_this.linkedApple})';
 }
 
 
@@ -63,7 +69,7 @@ class _$AuthStatusCopyWithImpl<$Res>
 /// Create a copy of AuthStatus
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? userId = null,Object? isAnonymous = null,Object? linkedGoogle = null,Object? linkedApple = null,}) {
-  return _then(_self.copyWith(
+  return _then(AuthStatus(
 userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as UserId,isAnonymous: null == isAnonymous ? _self.isAnonymous : isAnonymous // ignore: cast_nullable_to_non_nullable
 as bool,linkedGoogle: null == linkedGoogle ? _self.linkedGoogle : linkedGoogle // ignore: cast_nullable_to_non_nullable
@@ -227,16 +233,18 @@ _$AuthStatusCopyWith<_AuthStatus> get copyWith => __$AuthStatusCopyWithImpl<_Aut
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.linkedGoogle, linkedGoogle) || other.linkedGoogle == linkedGoogle)&&(identical(other.linkedApple, linkedApple) || other.linkedApple == linkedApple));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthStatus&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.isAnonymous, isAnonymous) || other.isAnonymous == isAnonymous)&&(identical(other.linkedGoogle, linkedGoogle) || other.linkedGoogle == linkedGoogle)&&(identical(other.linkedApple, linkedApple) || other.linkedApple == linkedApple));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,userId,isAnonymous,linkedGoogle,linkedApple);
+int get hashCode {
+    return Object.hash(runtimeType,userId,isAnonymous,linkedGoogle,linkedApple);
+}
 
 @override
 String toString() {
-  return 'AuthStatus(userId: $userId, isAnonymous: $isAnonymous, linkedGoogle: $linkedGoogle, linkedApple: $linkedApple)';
+    return 'AuthStatus(userId: $userId, isAnonymous: $isAnonymous, linkedGoogle: $linkedGoogle, linkedApple: $linkedApple)';
 }
 
 

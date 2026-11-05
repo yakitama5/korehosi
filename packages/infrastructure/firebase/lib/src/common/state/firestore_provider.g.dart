@@ -14,7 +14,7 @@ part of 'firestore_provider.dart';
 /// テスト時にDIすることを考慮して、Providerとして定義
 
 @ProviderFor(firestore)
-const firestoreProvider = FirestoreProvider._();
+final firestoreProvider = FirestoreProvider._();
 
 /// Firestore
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -29,7 +29,7 @@ final class FirestoreProvider
     with $Provider<FirebaseFirestore> {
   /// Firestore
   /// テスト時にDIすることを考慮して、Providerとして定義
-  const FirestoreProvider._()
+  FirestoreProvider._()
     : super(
         from: null,
         argument: null,

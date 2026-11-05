@@ -13,7 +13,7 @@ part of 'firestore_notification_token_provider.dart';
 /// 通知FCMトークンコレクションの参照
 
 @ProviderFor(notificationTokenCollectionRef)
-const notificationTokenCollectionRefProvider =
+final notificationTokenCollectionRefProvider =
     NotificationTokenCollectionRefFamily._();
 
 /// 通知FCMトークンコレクションの参照
@@ -27,7 +27,7 @@ final class NotificationTokenCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreNotificationTokenModel>> {
   /// 通知FCMトークンコレクションの参照
-  const NotificationTokenCollectionRefProvider._({
+  NotificationTokenCollectionRefProvider._({
     required NotificationTokenCollectionRefFamily super.from,
     required UserId super.argument,
   }) : super(
@@ -95,7 +95,7 @@ final class NotificationTokenCollectionRefFamily extends $Family
           CollectionReference<FirestoreNotificationTokenModel>,
           UserId
         > {
-  const NotificationTokenCollectionRefFamily._()
+  NotificationTokenCollectionRefFamily._()
     : super(
         retry: null,
         name: r'notificationTokenCollectionRefProvider',
@@ -116,7 +116,7 @@ final class NotificationTokenCollectionRefFamily extends $Family
 /// 通知FCMトークンドキュメントの参照
 
 @ProviderFor(notificationTokenDocumentRef)
-const notificationTokenDocumentRefProvider =
+final notificationTokenDocumentRefProvider =
     NotificationTokenDocumentRefFamily._();
 
 /// 通知FCMトークンドキュメントの参照
@@ -130,7 +130,7 @@ final class NotificationTokenDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreNotificationTokenModel>> {
   /// 通知FCMトークンドキュメントの参照
-  const NotificationTokenDocumentRefProvider._({
+  NotificationTokenDocumentRefProvider._({
     required NotificationTokenDocumentRefFamily super.from,
     required ({UserId userId, String? token}) super.argument,
   }) : super(
@@ -202,7 +202,7 @@ final class NotificationTokenDocumentRefFamily extends $Family
           DocumentReference<FirestoreNotificationTokenModel>,
           ({UserId userId, String? token})
         > {
-  const NotificationTokenDocumentRefFamily._()
+  NotificationTokenDocumentRefFamily._()
     : super(
         retry: null,
         name: r'notificationTokenDocumentRefProvider',

@@ -13,7 +13,7 @@ part of 'firestore_group_provider.dart';
 /// グループコレクションの参照
 
 @ProviderFor(groupCollectionRef)
-const groupCollectionRefProvider = GroupCollectionRefProvider._();
+final groupCollectionRefProvider = GroupCollectionRefProvider._();
 
 /// グループコレクションの参照
 
@@ -26,7 +26,7 @@ final class GroupCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreGroupModel>> {
   /// グループコレクションの参照
-  const GroupCollectionRefProvider._()
+  GroupCollectionRefProvider._()
     : super(
         from: null,
         argument: null,
@@ -67,7 +67,7 @@ String _$groupCollectionRefHash() =>
 /// グループドキュメントの参照
 
 @ProviderFor(groupDocumentRef)
-const groupDocumentRefProvider = GroupDocumentRefFamily._();
+final groupDocumentRefProvider = GroupDocumentRefFamily._();
 
 /// グループドキュメントの参照
 
@@ -80,7 +80,7 @@ final class GroupDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreGroupModel>> {
   /// グループドキュメントの参照
-  const GroupDocumentRefProvider._({
+  GroupDocumentRefProvider._({
     required GroupDocumentRefFamily super.from,
     required GroupId? super.argument,
   }) : super(
@@ -143,7 +143,7 @@ final class GroupDocumentRefFamily extends $Family
           DocumentReference<FirestoreGroupModel>,
           GroupId?
         > {
-  const GroupDocumentRefFamily._()
+  GroupDocumentRefFamily._()
     : super(
         retry: null,
         name: r'groupDocumentRefProvider',

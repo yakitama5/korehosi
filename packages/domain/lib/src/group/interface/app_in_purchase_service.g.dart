@@ -13,7 +13,7 @@ part of 'app_in_purchase_service.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(appInPurchaseService)
-const appInPurchaseServiceProvider = AppInPurchaseServiceProvider._();
+final appInPurchaseServiceProvider = AppInPurchaseServiceProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -26,7 +26,7 @@ final class AppInPurchaseServiceProvider
         >
     with $Provider<AppInPurchaseService> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const AppInPurchaseServiceProvider._()
+  AppInPurchaseServiceProvider._()
     : super(
         from: null,
         argument: null,

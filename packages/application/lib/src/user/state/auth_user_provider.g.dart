@@ -14,7 +14,7 @@ part of 'auth_user_provider.dart';
 /// データの参照頻度を減らすため、`keepAlive`を指定
 
 @ProviderFor(authUser)
-const authUserProvider = AuthUserProvider._();
+final authUserProvider = AuthUserProvider._();
 
 /// 認証済のユーザー
 /// データの参照頻度を減らすため、`keepAlive`を指定
@@ -24,7 +24,7 @@ final class AuthUserProvider
     with $FutureModifier<User?>, $FutureProvider<User?> {
   /// 認証済のユーザー
   /// データの参照頻度を減らすため、`keepAlive`を指定
-  const AuthUserProvider._()
+  AuthUserProvider._()
     : super(
         from: null,
         argument: null,

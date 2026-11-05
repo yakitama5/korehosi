@@ -12,7 +12,7 @@ part of 'core_palette_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(corePalette)
-const corePaletteProvider = CorePaletteProvider._();
+final corePaletteProvider = CorePaletteProvider._();
 
 final class CorePaletteProvider
     extends
@@ -22,7 +22,7 @@ final class CorePaletteProvider
           FutureOr<CorePalette?>
         >
     with $FutureModifier<CorePalette?>, $FutureProvider<CorePalette?> {
-  const CorePaletteProvider._()
+  CorePaletteProvider._()
     : super(
         from: null,
         argument: null,

@@ -1,4 +1,8 @@
-const admin = require('firebase-admin');
+const {initializeApp} = require('firebase-admin/app');
+const {getAuth} = require('firebase-admin/auth');
+const {getFirestore, FieldValue} = require('firebase-admin/firestore');
+const {getMessaging} = require('firebase-admin/messaging');
+const {getRemoteConfig} = require('firebase-admin/remote-config');
 const {
   setGlobalOptions,
 } = require('firebase-functions/v2');
@@ -33,7 +37,7 @@ const {
 } = require('./src/delete-user');
 const {createItemWriteHandler} = require('./src/item-write');
 
-admin.initializeApp();
+initializeApp();
 const tokyoTimeZone = 'Asia/Tokyo';
 
 // コレクションパス
@@ -50,19 +54,19 @@ setGlobalOptions({
   region: 'asia-northeast1',
 });
 
-const db = admin.firestore();
-const remoteConfig = admin.remoteConfig();
+const db = getFirestore();
+const remoteConfig = getRemoteConfig();
 const logger = {log, error, warn};
 
 const joinGroup = createJoinGroupHandler({
   db,
   remoteConfig,
-  fieldValue: admin.firestore.FieldValue,
+  fieldValue: FieldValue,
 });
 const syncUser = createUserSyncHandler({db, logger});
 const sendMessageNotifications = createMessageHandler({
   db,
-  messaging: admin.messaging(),
+  messaging: getMessaging(),
   logger,
 });
 const updateBuyerSuggestion = createSuggestionHandler({
@@ -81,17 +85,17 @@ const handleItemWrite = createItemWriteHandler({
 });
 const sendWishDateReminders = createWishReminderHandler({
   db,
-  messaging: admin.messaging(),
+  messaging: getMessaging(),
   logger,
 });
 const deleteUser = createDeleteUserHandler({
   db,
-  auth: admin.auth(),
-  fieldValue: admin.firestore.FieldValue,
+  auth: getAuth(),
+  fieldValue: FieldValue,
 });
 const retryUserDeletions = createRetryUserDeletionsHandler({
   db,
-  auth: admin.auth(),
+  auth: getAuth(),
   logger,
 });
 

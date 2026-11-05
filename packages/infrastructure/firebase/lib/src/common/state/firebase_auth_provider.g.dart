@@ -14,7 +14,7 @@ part of 'firebase_auth_provider.dart';
 /// テスト時にDIすることを考慮して、Providerとして定義
 
 @ProviderFor(firebaseAuth)
-const firebaseAuthProvider = FirebaseAuthProvider._();
+final firebaseAuthProvider = FirebaseAuthProvider._();
 
 /// Firebase Auth
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -24,7 +24,7 @@ final class FirebaseAuthProvider
     with $Provider<FirebaseAuth> {
   /// Firebase Auth
   /// テスト時にDIすることを考慮して、Providerとして定義
-  const FirebaseAuthProvider._()
+  FirebaseAuthProvider._()
     : super(
         from: null,
         argument: null,

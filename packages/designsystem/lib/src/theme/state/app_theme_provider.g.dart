@@ -13,7 +13,7 @@ part of 'app_theme_provider.dart';
 /// アプリ内のテーマを管理
 
 @ProviderFor(appTheme)
-const appThemeProvider = AppThemeFamily._();
+final appThemeProvider = AppThemeFamily._();
 
 /// アプリ内のテーマを管理
 
@@ -21,7 +21,7 @@ final class AppThemeProvider
     extends $FunctionalProvider<ThemeData, ThemeData, ThemeData>
     with $Provider<ThemeData> {
   /// アプリ内のテーマを管理
-  const AppThemeProvider._({
+  AppThemeProvider._({
     required AppThemeFamily super.from,
     required Brightness super.argument,
   }) : super(
@@ -78,7 +78,7 @@ String _$appThemeHash() => r'a027b8e826d0c1306853db34344070bccb18b326';
 
 final class AppThemeFamily extends $Family
     with $FunctionalFamilyOverride<ThemeData, Brightness> {
-  const AppThemeFamily._()
+  AppThemeFamily._()
     : super(
         retry: null,
         name: r'appThemeProvider',

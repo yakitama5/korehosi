@@ -14,7 +14,7 @@ part of 'ui_style_notifier_provider.dart';
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
 
 @ProviderFor(UiStyleNotifier)
-const uiStyleProvider = UiStyleNotifierProvider._();
+final uiStyleProvider = UiStyleNotifierProvider._();
 
 /// UIスタイルを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
@@ -22,7 +22,7 @@ final class UiStyleNotifierProvider
     extends $NotifierProvider<UiStyleNotifier, UIStyle> {
   /// UIスタイルを管理するProvider
   /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
-  const UiStyleNotifierProvider._()
+  UiStyleNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -58,8 +58,7 @@ abstract class _$UiStyleNotifier extends $Notifier<UIStyle> {
   UIStyle build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<UIStyle, UIStyle>;
     final element =
         ref.element
@@ -69,6 +68,6 @@ abstract class _$UiStyleNotifier extends $Notifier<UIStyle> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

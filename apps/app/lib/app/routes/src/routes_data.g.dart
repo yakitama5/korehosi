@@ -14,27 +14,36 @@ RouteBase get $baseShellRouteData => ShellRouteData.$route(
   navigatorKey: BaseShellRouteData.$navigatorKey,
   factory: $BaseShellRouteDataExtension._fromState,
   routes: [
-    GoRouteData.$route(path: '/', factory: $RootRouteData._fromState),
+    GoRouteData.$route(
+      path: '/',
+      hasOverriddenOnExit: false,
+      factory: $RootRouteData._fromState,
+    ),
     GoRouteData.$route(
       path: '/start',
+      hasOverriddenOnExit: false,
       factory: $OnboardStartRouteData._fromState,
       routes: [
         GoRouteData.$route(
           path: 'account_link',
+          hasOverriddenOnExit: false,
           factory: $AccountLinkRouteData._fromState,
         ),
       ],
     ),
     GoRouteData.$route(
       path: '/share_link/:shareLinkId',
+      hasOverriddenOnExit: false,
       factory: $ShareLinkRouteData._fromState,
     ),
     GoRouteData.$route(
       path: '/preview',
+      hasOverriddenOnExit: false,
       factory: $PhotoPreviewRouteData._fromState,
     ),
     GoRouteData.$route(
       path: '/onboard_form',
+      hasOverriddenOnExit: false,
       factory: $OnboardFormRouteData._fromState,
     ),
     StatefulShellRouteData.$route(
@@ -45,24 +54,29 @@ RouteBase get $baseShellRouteData => ShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/items',
+              hasOverriddenOnExit: false,
               factory: $ItemsRouteData._fromState,
               routes: [
                 GoRouteData.$route(
                   path: 'item/:itemId',
+                  hasOverriddenOnExit: false,
                   factory: $ItemRouteData._fromState,
                   routes: [
                     GoRouteData.$route(
                       path: 'edit',
+                      hasOverriddenOnExit: false,
                       factory: $ItemEditRouteData._fromState,
                     ),
                     GoRouteData.$route(
                       path: 'purchase',
+                      hasOverriddenOnExit: false,
                       factory: $PurchaseRouteData._fromState,
                     ),
                   ],
                 ),
                 GoRouteData.$route(
                   path: 'edit',
+                  hasOverriddenOnExit: false,
                   factory: $ItemCreateRouteData._fromState,
                 ),
               ],
@@ -73,10 +87,12 @@ RouteBase get $baseShellRouteData => ShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/analyze',
+              hasOverriddenOnExit: false,
               factory: $AnalyzeRouteData._fromState,
               routes: [
                 GoRouteData.$route(
                   path: 'analyze_detail',
+                  hasOverriddenOnExit: false,
                   factory: $AnalyzeDetailRouteData._fromState,
                 ),
               ],
@@ -87,44 +103,54 @@ RouteBase get $baseShellRouteData => ShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/settings',
+              hasOverriddenOnExit: false,
               factory: $SettingsRouteData._fromState,
               routes: [
                 GoRouteData.$route(
                   path: 'groups',
+                  hasOverriddenOnExit: false,
                   factory: $GroupsRouteData._fromState,
                   routes: [
                     GoRouteData.$route(
                       path: 'group/:groupId',
+                      hasOverriddenOnExit: false,
                       factory: $GroupRouteData._fromState,
                     ),
                   ],
                 ),
                 GoRouteData.$route(
                   path: 'profile',
+                  hasOverriddenOnExit: false,
                   factory: $ProfileRouteData._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'account',
+                  hasOverriddenOnExit: false,
                   factory: $AccountRouteData._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'license',
+                  hasOverriddenOnExit: false,
                   factory: $LicenseRouteData._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'ui_style',
+                  hasOverriddenOnExit: false,
                   factory: $SettingsUiStylePageRoute._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'color_style',
+                  hasOverriddenOnExit: false,
                   factory: $SettingsThemeColorPageRoute._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'theme_mode',
+                  hasOverriddenOnExit: false,
                   factory: $SettingsThemeModePageRoute._fromState,
                 ),
                 GoRouteData.$route(
                   path: 'wish_reminder',
+                  hasOverriddenOnExit: false,
                   factory: $WishReminderSettingsRouteData._fromState,
                 ),
               ],

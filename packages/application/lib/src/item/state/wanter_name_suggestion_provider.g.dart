@@ -14,7 +14,7 @@ part of 'wanter_name_suggestion_provider.dart';
 /// 対象は「だれがほしい？」に入力したことのある人 + 現在のグループ内のユーザー
 
 @ProviderFor(wanterNameSuggestion)
-const wanterNameSuggestionProvider = WanterNameSuggestionProvider._();
+final wanterNameSuggestionProvider = WanterNameSuggestionProvider._();
 
 /// 欲しい人のサジェストリスト
 /// 対象は「だれがほしい？」に入力したことのある人 + 現在のグループ内のユーザー
@@ -29,7 +29,7 @@ final class WanterNameSuggestionProvider
     with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
   /// 欲しい人のサジェストリスト
   /// 対象は「だれがほしい？」に入力したことのある人 + 現在のグループ内のユーザー
-  const WanterNameSuggestionProvider._()
+  WanterNameSuggestionProvider._()
     : super(
         from: null,
         argument: null,

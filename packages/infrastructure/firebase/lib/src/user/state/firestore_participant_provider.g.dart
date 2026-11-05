@@ -13,7 +13,7 @@ part of 'firestore_participant_provider.dart';
 /// グループ参加者コレクションの参照
 
 @ProviderFor(participantCollectionRef)
-const participantCollectionRefProvider = ParticipantCollectionRefFamily._();
+final participantCollectionRefProvider = ParticipantCollectionRefFamily._();
 
 /// グループ参加者コレクションの参照
 
@@ -26,7 +26,7 @@ final class ParticipantCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreUserModel>> {
   /// グループ参加者コレクションの参照
-  const ParticipantCollectionRefProvider._({
+  ParticipantCollectionRefProvider._({
     required ParticipantCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -91,7 +91,7 @@ final class ParticipantCollectionRefFamily extends $Family
           CollectionReference<FirestoreUserModel>,
           GroupId
         > {
-  const ParticipantCollectionRefFamily._()
+  ParticipantCollectionRefFamily._()
     : super(
         retry: null,
         name: r'participantCollectionRefProvider',
@@ -112,7 +112,7 @@ final class ParticipantCollectionRefFamily extends $Family
 /// グループ参加者ドキュメントの参照
 
 @ProviderFor(participantDocumentRef)
-const participantDocumentRefProvider = ParticipantDocumentRefFamily._();
+final participantDocumentRefProvider = ParticipantDocumentRefFamily._();
 
 /// グループ参加者ドキュメントの参照
 
@@ -125,7 +125,7 @@ final class ParticipantDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreUserModel>> {
   /// グループ参加者ドキュメントの参照
-  const ParticipantDocumentRefProvider._({
+  ParticipantDocumentRefProvider._({
     required ParticipantDocumentRefFamily super.from,
     required ({GroupId groupId, UserId? participantId}) super.argument,
   }) : super(
@@ -195,7 +195,7 @@ final class ParticipantDocumentRefFamily extends $Family
           DocumentReference<FirestoreUserModel>,
           ({GroupId groupId, UserId? participantId})
         > {
-  const ParticipantDocumentRefFamily._()
+  ParticipantDocumentRefFamily._()
     : super(
         retry: null,
         name: r'participantDocumentRefProvider',

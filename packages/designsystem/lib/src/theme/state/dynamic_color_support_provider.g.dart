@@ -12,7 +12,7 @@ part of 'dynamic_color_support_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(dynamicColorSupportProvider)
-const dynamicColorSupportProviderProvider =
+final dynamicColorSupportProviderProvider =
     DynamicColorSupportProviderProvider._();
 
 final class DynamicColorSupportProviderProvider
@@ -23,7 +23,7 @@ final class DynamicColorSupportProviderProvider
           DynamicColorSupportStatus
         >
     with $Provider<DynamicColorSupportStatus> {
-  const DynamicColorSupportProviderProvider._()
+  DynamicColorSupportProviderProvider._()
     : super(
         from: null,
         argument: null,

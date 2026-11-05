@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_config.dart';
@@ -9,6 +9,7 @@ part of 'user_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $UserConfigCopyWith<UserConfig> get copyWith => _$UserConfigCopyWithImpl<UserCon
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserConfig&&(identical(other.initialAgeGroup, initialAgeGroup) || other.initialAgeGroup == initialAgeGroup)&&(identical(other.nameKey, nameKey) || other.nameKey == nameKey)&&(identical(other.ageGroupKey, ageGroupKey) || other.ageGroupKey == ageGroupKey)&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength));
+  final _this = this as UserConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserConfig&&(identical(other.initialAgeGroup, _this.initialAgeGroup) || other.initialAgeGroup == _this.initialAgeGroup)&&(identical(other.nameKey, _this.nameKey) || other.nameKey == _this.nameKey)&&(identical(other.ageGroupKey, _this.ageGroupKey) || other.ageGroupKey == _this.ageGroupKey)&&(identical(other.maxNameLength, _this.maxNameLength) || other.maxNameLength == _this.maxNameLength));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,initialAgeGroup,nameKey,ageGroupKey,maxNameLength);
+int get hashCode {
+  final _this = this as UserConfig;
+  return Object.hash(runtimeType,_this.initialAgeGroup,_this.nameKey,_this.ageGroupKey,_this.maxNameLength);
+}
 
 @override
 String toString() {
-  return 'UserConfig(initialAgeGroup: $initialAgeGroup, nameKey: $nameKey, ageGroupKey: $ageGroupKey, maxNameLength: $maxNameLength)';
+  final _this = this as UserConfig;
+  return 'UserConfig(initialAgeGroup: ${_this.initialAgeGroup}, nameKey: ${_this.nameKey}, ageGroupKey: ${_this.ageGroupKey}, maxNameLength: ${_this.maxNameLength})';
 }
 
 
@@ -63,7 +69,7 @@ class _$UserConfigCopyWithImpl<$Res>
 /// Create a copy of UserConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? initialAgeGroup = null,Object? nameKey = null,Object? ageGroupKey = null,Object? maxNameLength = null,}) {
-  return _then(_self.copyWith(
+  return _then(UserConfig(
 initialAgeGroup: null == initialAgeGroup ? _self.initialAgeGroup : initialAgeGroup // ignore: cast_nullable_to_non_nullable
 as AgeGroup,nameKey: null == nameKey ? _self.nameKey : nameKey // ignore: cast_nullable_to_non_nullable
 as String,ageGroupKey: null == ageGroupKey ? _self.ageGroupKey : ageGroupKey // ignore: cast_nullable_to_non_nullable
@@ -227,16 +233,18 @@ _$UserConfigCopyWith<_UserConfig> get copyWith => __$UserConfigCopyWithImpl<_Use
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserConfig&&(identical(other.initialAgeGroup, initialAgeGroup) || other.initialAgeGroup == initialAgeGroup)&&(identical(other.nameKey, nameKey) || other.nameKey == nameKey)&&(identical(other.ageGroupKey, ageGroupKey) || other.ageGroupKey == ageGroupKey)&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserConfig&&(identical(other.initialAgeGroup, initialAgeGroup) || other.initialAgeGroup == initialAgeGroup)&&(identical(other.nameKey, nameKey) || other.nameKey == nameKey)&&(identical(other.ageGroupKey, ageGroupKey) || other.ageGroupKey == ageGroupKey)&&(identical(other.maxNameLength, maxNameLength) || other.maxNameLength == maxNameLength));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,initialAgeGroup,nameKey,ageGroupKey,maxNameLength);
+int get hashCode {
+    return Object.hash(runtimeType,initialAgeGroup,nameKey,ageGroupKey,maxNameLength);
+}
 
 @override
 String toString() {
-  return 'UserConfig(initialAgeGroup: $initialAgeGroup, nameKey: $nameKey, ageGroupKey: $ageGroupKey, maxNameLength: $maxNameLength)';
+    return 'UserConfig(initialAgeGroup: $initialAgeGroup, nameKey: $nameKey, ageGroupKey: $ageGroupKey, maxNameLength: $maxNameLength)';
 }
 
 

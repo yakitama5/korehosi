@@ -14,7 +14,7 @@ part of 'buyer_name_suggestion_provider.dart';
 /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー
 
 @ProviderFor(buyerNameSuggestion)
-const buyerNameSuggestionProvider = BuyerNameSuggestionProvider._();
+final buyerNameSuggestionProvider = BuyerNameSuggestionProvider._();
 
 /// 購入者のサジェストリスト
 /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー
@@ -29,7 +29,7 @@ final class BuyerNameSuggestionProvider
     with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
   /// 購入者のサジェストリスト
   /// 対象は購入者に入力したことのある人 + 現在のグループ内のユーザー
-  const BuyerNameSuggestionProvider._()
+  BuyerNameSuggestionProvider._()
     : super(
         from: null,
         argument: null,

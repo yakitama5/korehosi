@@ -13,7 +13,7 @@ part of 'current_group_join_users_provider.dart';
 /// 現在のグループに所属しているユーザー一覧
 
 @ProviderFor(currentGroupJoinUsers)
-const currentGroupJoinUsersProvider = CurrentGroupJoinUsersProvider._();
+final currentGroupJoinUsersProvider = CurrentGroupJoinUsersProvider._();
 
 /// 現在のグループに所属しているユーザー一覧
 
@@ -26,7 +26,7 @@ final class CurrentGroupJoinUsersProvider
         >
     with $FutureModifier<List<User>>, $FutureProvider<List<User>> {
   /// 現在のグループに所属しているユーザー一覧
-  const CurrentGroupJoinUsersProvider._()
+  CurrentGroupJoinUsersProvider._()
     : super(
         from: null,
         argument: null,

@@ -13,7 +13,7 @@ part of 'user_session_repository.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(userSessionRepository)
-const userSessionRepositoryProvider = UserSessionRepositoryProvider._();
+final userSessionRepositoryProvider = UserSessionRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -26,7 +26,7 @@ final class UserSessionRepositoryProvider
         >
     with $Provider<UserSessionRepository> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const UserSessionRepositoryProvider._()
+  UserSessionRepositoryProvider._()
     : super(
         from: null,
         argument: null,

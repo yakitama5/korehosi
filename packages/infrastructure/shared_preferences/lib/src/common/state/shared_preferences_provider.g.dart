@@ -14,7 +14,7 @@ part of 'shared_preferences_provider.dart';
 /// テスト時にDIすることを考慮して、Providerとして定義
 
 @ProviderFor(sharedPreferences)
-const sharedPreferencesProvider = SharedPreferencesProvider._();
+final sharedPreferencesProvider = SharedPreferencesProvider._();
 
 /// SharedPreference
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -29,7 +29,7 @@ final class SharedPreferencesProvider
     with $Provider<SharedPreferences> {
   /// SharedPreference
   /// テスト時にDIすることを考慮して、Providerとして定義
-  const SharedPreferencesProvider._()
+  SharedPreferencesProvider._()
     : super(
         from: null,
         argument: null,

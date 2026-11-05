@@ -13,7 +13,7 @@ part of 'firestore_deleted_user_provider.dart';
 /// 削除済ユーザーコレクションの参照
 
 @ProviderFor(duserCollectionRef)
-const duserCollectionRefProvider = DuserCollectionRefProvider._();
+final duserCollectionRefProvider = DuserCollectionRefProvider._();
 
 /// 削除済ユーザーコレクションの参照
 
@@ -26,7 +26,7 @@ final class DuserCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreUserModel>> {
   /// 削除済ユーザーコレクションの参照
-  const DuserCollectionRefProvider._()
+  DuserCollectionRefProvider._()
     : super(
         from: null,
         argument: null,
@@ -67,7 +67,7 @@ String _$duserCollectionRefHash() =>
 /// 削除済ユーザードキュメントの参照
 
 @ProviderFor(duserDocumentRef)
-const duserDocumentRefProvider = DuserDocumentRefFamily._();
+final duserDocumentRefProvider = DuserDocumentRefFamily._();
 
 /// 削除済ユーザードキュメントの参照
 
@@ -80,7 +80,7 @@ final class DuserDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreUserModel>> {
   /// 削除済ユーザードキュメントの参照
-  const DuserDocumentRefProvider._({
+  DuserDocumentRefProvider._({
     required DuserDocumentRefFamily super.from,
     required UserId? super.argument,
   }) : super(
@@ -143,7 +143,7 @@ final class DuserDocumentRefFamily extends $Family
           DocumentReference<FirestoreUserModel>,
           UserId?
         > {
-  const DuserDocumentRefFamily._()
+  DuserDocumentRefFamily._()
     : super(
         retry: null,
         name: r'duserDocumentRefProvider',

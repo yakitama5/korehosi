@@ -12,12 +12,12 @@ part of 'group_usecase.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(groupUsecase)
-const groupUsecaseProvider = GroupUsecaseProvider._();
+final groupUsecaseProvider = GroupUsecaseProvider._();
 
 final class GroupUsecaseProvider
     extends $FunctionalProvider<GroupUsecase, GroupUsecase, GroupUsecase>
     with $Provider<GroupUsecase> {
-  const GroupUsecaseProvider._()
+  GroupUsecaseProvider._()
     : super(
         from: null,
         argument: null,

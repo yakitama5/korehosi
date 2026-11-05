@@ -3,947 +3,1044 @@
 ///
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
-// dart format off
 
 part of 'strings.g.dart';
 
 // Path: <root>
 typedef TranslationsJa = Translations; // ignore: unused_element
-class Translations implements BaseTranslations<AppLocale, Translations> {
-	/// Returns the current translations of the given [context].
-	///
-	/// Usage:
-	/// final i18n = Translations.of(context);
-	static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
 
-	/// You can call this constructor and build your own translation instance of this locale.
-	/// Constructing via the enum [AppLocale.build] is preferred.
-	Translations({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
-		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-		  $meta = meta ?? TranslationMetadata(
-		    locale: AppLocale.ja,
-		    overrides: overrides ?? {},
-		    cardinalResolver: cardinalResolver,
-		    ordinalResolver: ordinalResolver,
-		  ) {
-		$meta.setFlatMapFunction(_flatMapFunction);
-	}
+class Translations with BaseTranslations<AppLocale, Translations> {
+  /// Returns the current translations of the given [context].
+  ///
+  /// Usage:
+  /// final i18n = Translations.of(context);
+  static Translations of(BuildContext context) =>
+      InheritedLocaleData.of<AppLocale, Translations>(context).translations;
 
-	/// Metadata for the translations of <ja>.
-	@override final TranslationMetadata<AppLocale, Translations> $meta;
+  /// You can call this constructor and build your own translation instance of this locale.
+  /// Constructing via the enum [AppLocale.build] is preferred.
+  Translations({
+    Map<String, Node>? overrides,
+    PluralResolver? cardinalResolver,
+    PluralResolver? ordinalResolver,
+    TranslationMetadata<AppLocale, Translations>? meta,
+  }) : assert(
+         overrides == null,
+         'Set "translation_overrides: true" in order to enable this feature.',
+       ),
+       _meta =
+           meta ??
+           TranslationMetadata(
+             locale: AppLocale.ja,
+             overrides: overrides ?? {},
+             cardinalResolver: cardinalResolver,
+             ordinalResolver: ordinalResolver,
+           ) {
+    _meta.setFlatMapFunction(_flatMapFunction);
+  }
 
-	/// Access flat map
-	dynamic operator[](String key) => $meta.getTranslation(key);
+  /// Metadata for the translations of <ja>.
+  final TranslationMetadata<AppLocale, Translations> _meta;
+  @override
+  TranslationMetadata<AppLocale, Translations> get $meta => _meta;
 
-	late final Translations _root = this; // ignore: unused_field
+  /// Access flat map
+  dynamic operator [](String key) => _meta.getTranslation(key);
 
-	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
+  late final Translations _root = this; // ignore: unused_field
 
-	// Translations
-	late final TranslationsAnalyzeJa analyze = TranslationsAnalyzeJa.internal(_root);
-	late final TranslationsGroupJa group = TranslationsGroupJa.internal(_root);
-	late final TranslationsItemJa item = TranslationsItemJa.internal(_root);
-	late final TranslationsSettingsJa settings = TranslationsSettingsJa.internal(_root);
-	late final TranslationsUserJa user = TranslationsUserJa.internal(_root);
+  Translations $copyWith({
+    TranslationMetadata<AppLocale, Translations>? meta,
+  }) => Translations(meta: meta ?? this.$meta);
+
+  // Translations
+  late final Translations$analyze$ja analyze = Translations$analyze$ja.internal(
+    _root,
+  );
+  late final Translations$group$ja group = Translations$group$ja.internal(
+    _root,
+  );
+  late final Translations$item$ja item = Translations$item$ja.internal(_root);
+  late final Translations$settings$ja settings =
+      Translations$settings$ja.internal(_root);
+  late final Translations$user$ja user = Translations$user$ja.internal(_root);
 }
 
 // Path: analyze
-class TranslationsAnalyzeJa {
-	TranslationsAnalyzeJa.internal(this._root);
+class Translations$analyze$ja {
+  Translations$analyze$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
-	late final TranslationsAnalyzeAnalyzePageJa analyzePage = TranslationsAnalyzeAnalyzePageJa.internal(_root);
+  // Translations
+  late final Translations$analyze$analyzePage$ja analyzePage =
+      Translations$analyze$analyzePage$ja.internal(_root);
 }
 
 // Path: group
-class TranslationsGroupJa {
-	TranslationsGroupJa.internal(this._root);
+class Translations$group$ja {
+  Translations$group$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
-	late final TranslationsGroupCommonJa common = TranslationsGroupCommonJa.internal(_root);
-	late final TranslationsGroupShareLinkPageJa shareLinkPage = TranslationsGroupShareLinkPageJa.internal(_root);
-	late final TranslationsGroupGroupsPageJa groupsPage = TranslationsGroupGroupsPageJa.internal(_root);
-	late final TranslationsGroupGroupPageJa groupPage = TranslationsGroupGroupPageJa.internal(_root);
+  // Translations
+  late final Translations$group$common$ja common =
+      Translations$group$common$ja.internal(_root);
+  late final Translations$group$shareLinkPage$ja shareLinkPage =
+      Translations$group$shareLinkPage$ja.internal(_root);
+  late final Translations$group$groupsPage$ja groupsPage =
+      Translations$group$groupsPage$ja.internal(_root);
+  late final Translations$group$groupPage$ja groupPage =
+      Translations$group$groupPage$ja.internal(_root);
 }
 
 // Path: item
-class TranslationsItemJa {
-	TranslationsItemJa.internal(this._root);
+class Translations$item$ja {
+  Translations$item$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
-	late final TranslationsItemCommonJa common = TranslationsItemCommonJa.internal(_root);
-	late final TranslationsItemItemsPageJa itemsPage = TranslationsItemItemsPageJa.internal(_root);
-	late final TranslationsItemItemPageJa itemPage = TranslationsItemItemPageJa.internal(_root);
-	late final TranslationsItemItemEditPageJa itemEditPage = TranslationsItemItemEditPageJa.internal(_root);
-	late final TranslationsItemPurchasePageJa purchasePage = TranslationsItemPurchasePageJa.internal(_root);
+  // Translations
+  late final Translations$item$common$ja common =
+      Translations$item$common$ja.internal(_root);
+  late final Translations$item$itemsPage$ja itemsPage =
+      Translations$item$itemsPage$ja.internal(_root);
+  late final Translations$item$itemPage$ja itemPage =
+      Translations$item$itemPage$ja.internal(_root);
+  late final Translations$item$itemEditPage$ja itemEditPage =
+      Translations$item$itemEditPage$ja.internal(_root);
+  late final Translations$item$purchasePage$ja purchasePage =
+      Translations$item$purchasePage$ja.internal(_root);
 }
 
 // Path: settings
-class TranslationsSettingsJa {
-	TranslationsSettingsJa.internal(this._root);
+class Translations$settings$ja {
+  Translations$settings$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
-	late final TranslationsSettingsSettingsPageJa settingsPage = TranslationsSettingsSettingsPageJa.internal(_root);
-	late final TranslationsSettingsWishReminderSettingsPageJa wishReminderSettingsPage = TranslationsSettingsWishReminderSettingsPageJa.internal(_root);
-	late final TranslationsSettingsAccountPageJa accountPage = TranslationsSettingsAccountPageJa.internal(_root);
-	late final TranslationsSettingsAccountLinkPageJa accountLinkPage = TranslationsSettingsAccountLinkPageJa.internal(_root);
+  // Translations
+  late final Translations$settings$settingsPage$ja settingsPage =
+      Translations$settings$settingsPage$ja.internal(_root);
+  late final Translations$settings$wishReminderSettingsPage$ja
+  wishReminderSettingsPage =
+      Translations$settings$wishReminderSettingsPage$ja.internal(_root);
+  late final Translations$settings$accountPage$ja accountPage =
+      Translations$settings$accountPage$ja.internal(_root);
+  late final Translations$settings$accountLinkPage$ja accountLinkPage =
+      Translations$settings$accountLinkPage$ja.internal(_root);
 }
 
 // Path: user
-class TranslationsUserJa {
-	TranslationsUserJa.internal(this._root);
+class Translations$user$ja {
+  Translations$user$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
-	late final TranslationsUserWelcomePageJa welcomePage = TranslationsUserWelcomePageJa.internal(_root);
-	late final TranslationsUserProfilePageJa profilePage = TranslationsUserProfilePageJa.internal(_root);
-	late final TranslationsUserOnboardPageJa onboardPage = TranslationsUserOnboardPageJa.internal(_root);
-	late final TranslationsUserCommonJa common = TranslationsUserCommonJa.internal(_root);
+  // Translations
+  late final Translations$user$welcomePage$ja welcomePage =
+      Translations$user$welcomePage$ja.internal(_root);
+  late final Translations$user$profilePage$ja profilePage =
+      Translations$user$profilePage$ja.internal(_root);
+  late final Translations$user$onboardPage$ja onboardPage =
+      Translations$user$onboardPage$ja.internal(_root);
+  late final Translations$user$common$ja common =
+      Translations$user$common$ja.internal(_root);
 }
 
 // Path: analyze.analyzePage
-class TranslationsAnalyzeAnalyzePageJa {
-	TranslationsAnalyzeAnalyzePageJa.internal(this._root);
+class Translations$analyze$analyzePage$ja {
+  Translations$analyze$analyzePage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ふりかえり'
-	String get title => 'ふりかえり';
+  /// ja: 'ふりかえり'
+  String get title => 'ふりかえり';
 
-	/// ja: '購入率'
-	String get purchaseRate => '購入率';
+  /// ja: '購入率'
+  String get purchaseRate => '購入率';
 
-	/// ja: '購入済'
-	String get purchased => '購入済';
+  /// ja: '購入済'
+  String get purchased => '購入済';
 
-	late final TranslationsAnalyzeAnalyzePageFormatJa format = TranslationsAnalyzeAnalyzePageFormatJa.internal(_root);
+  late final Translations$analyze$analyzePage$format$ja format =
+      Translations$analyze$analyzePage$format$ja.internal(_root);
 
-	/// ja: '合計金額'
-	String get totalPrice => '合計金額';
+  /// ja: '合計金額'
+  String get totalPrice => '合計金額';
 }
 
 // Path: group.common
-class TranslationsGroupCommonJa {
-	TranslationsGroupCommonJa.internal(this._root);
+class Translations$group$common$ja {
+  Translations$group$common$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'グループ名'
-	String get groupName => 'グループ名';
+  /// ja: 'グループ名'
+  String get groupName => 'グループ名';
 
-	/// ja: 'グループから脱退'
-	String get leaveGroup => 'グループから脱退';
+  /// ja: 'グループから脱退'
+  String get leaveGroup => 'グループから脱退';
 
-	late final TranslationsGroupCommonLeaveConfirmDialogJa leaveConfirmDialog = TranslationsGroupCommonLeaveConfirmDialogJa.internal(_root);
+  late final Translations$group$common$leaveConfirmDialog$ja
+  leaveConfirmDialog = Translations$group$common$leaveConfirmDialog$ja.internal(
+    _root,
+  );
 }
 
 // Path: group.shareLinkPage
-class TranslationsGroupShareLinkPageJa {
-	TranslationsGroupShareLinkPageJa.internal(this._root);
+class Translations$group$shareLinkPage$ja {
+  Translations$group$shareLinkPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
-	late final TranslationsGroupShareLinkPageJoinedGroupDialogJa joinedGroupDialog = TranslationsGroupShareLinkPageJoinedGroupDialogJa.internal(_root);
+  // Translations
+  late final Translations$group$shareLinkPage$joinedGroupDialog$ja
+  joinedGroupDialog =
+      Translations$group$shareLinkPage$joinedGroupDialog$ja.internal(_root);
 }
 
 // Path: group.groupsPage
-class TranslationsGroupGroupsPageJa {
-	TranslationsGroupGroupsPageJa.internal(this._root);
+class Translations$group$groupsPage$ja {
+  Translations$group$groupsPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '参加中のグループ'
-	String get title => '参加中のグループ';
+  /// ja: '参加中のグループ'
+  String get title => '参加中のグループ';
 
-	/// ja: 'ヘルプ'
-	String get help => 'ヘルプ';
+  /// ja: 'ヘルプ'
+  String get help => 'ヘルプ';
 
-	late final TranslationsGroupGroupsPageShareGroupHelpDialogJa shareGroupHelpDialog = TranslationsGroupGroupsPageShareGroupHelpDialogJa.internal(_root);
+  late final Translations$group$groupsPage$shareGroupHelpDialog$ja
+  shareGroupHelpDialog =
+      Translations$group$groupsPage$shareGroupHelpDialog$ja.internal(_root);
 
-	/// ja: 'グループを作成'
-	String get createGroup => 'グループを作成';
+  /// ja: 'グループを作成'
+  String get createGroup => 'グループを作成';
 
-	/// ja: 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。'
-	String get notJoinGroup => 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。';
+  /// ja: 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。'
+  String get notJoinGroup => 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。';
 }
 
 // Path: group.groupPage
-class TranslationsGroupGroupPageJa {
-	TranslationsGroupGroupPageJa.internal(this._root);
+class Translations$group$groupPage$ja {
+  Translations$group$groupPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ほしい物の登録数制限を解放する'
-	String get limitBreak => 'ほしい物の登録数制限を解放する';
+  /// ja: 'ほしい物の登録数制限を解放する'
+  String get limitBreak => 'ほしい物の登録数制限を解放する';
 
-	late final TranslationsGroupGroupPageAppInPurchaseConfirmDialogJa appInPurchaseConfirmDialog = TranslationsGroupGroupPageAppInPurchaseConfirmDialogJa.internal(_root);
+  late final Translations$group$groupPage$appInPurchaseConfirmDialog$ja
+  appInPurchaseConfirmDialog =
+      Translations$group$groupPage$appInPurchaseConfirmDialog$ja.internal(
+        _root,
+      );
 
-	/// ja: '欲しい物の登録数制限が解放されました。(無制限)'
-	String get limitBreakPurchased => '欲しい物の登録数制限が解放されました。(無制限)';
+  /// ja: '欲しい物の登録数制限が解放されました。(無制限)'
+  String get limitBreakPurchased => '欲しい物の登録数制限が解放されました。(無制限)';
 
-	/// ja: '共有'
-	String get shareGroup => '共有';
+  /// ja: '共有'
+  String get shareGroup => '共有';
 
-	/// ja: '共有してメンバーを招待しましょう'
-	String get shareGroupCaption => '共有してメンバーを招待しましょう';
+  /// ja: '共有してメンバーを招待しましょう'
+  String get shareGroupCaption => '共有してメンバーを招待しましょう';
 
-	/// ja: 'コピー'
-	String get copyLink => 'コピー';
+  /// ja: 'コピー'
+  String get copyLink => 'コピー';
 
-	/// ja: 'コピーしました'
-	String get copiedLink => 'コピーしました';
+  /// ja: 'コピーしました'
+  String get copiedLink => 'コピーしました';
 
-	/// ja: '選択'
-	String get select => '選択';
+  /// ja: '選択'
+  String get select => '選択';
 
-	/// ja: '画像を保存しました。'
-	String get savedImage => '画像を保存しました。';
+  /// ja: '画像を保存しました。'
+  String get savedImage => '画像を保存しました。';
 }
 
 // Path: item.common
-class TranslationsItemCommonJa {
-	TranslationsItemCommonJa.internal(this._root);
+class Translations$item$common$ja {
+  Translations$item$common$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ほしいもの'
-	String get wishList => 'ほしいもの';
+  /// ja: 'ほしいもの'
+  String get wishList => 'ほしいもの';
 
-	/// ja: 'ステータス'
-	String get status => 'ステータス';
+  /// ja: 'ステータス'
+  String get status => 'ステータス';
 
-	/// ja: 'ほしい度'
-	String get wishRank => 'ほしい度';
+  /// ja: 'ほしい度'
+  String get wishRank => 'ほしい度';
 
-	/// ja: 'ほしいものの名前'
-	String get itemName => 'ほしいものの名前';
+  /// ja: 'ほしいものの名前'
+  String get itemName => 'ほしいものの名前';
 
-	/// ja: 'ほしい人'
-	String get wanterName => 'ほしい人';
+  /// ja: 'ほしい人'
+  String get wanterName => 'ほしい人';
 
-	/// ja: 'だれがほしい？'
-	String get wanterNameLabel => 'だれがほしい？';
+  /// ja: 'だれがほしい？'
+  String get wanterNameLabel => 'だれがほしい？';
 
-	/// ja: 'メモ'
-	String get memo => 'メモ';
+  /// ja: 'メモ'
+  String get memo => 'メモ';
 
-	/// ja: 'いつほしい？'
-	String get wishSeason => 'いつほしい？';
+  /// ja: 'いつほしい？'
+  String get wishSeason => 'いつほしい？';
 
-	/// ja: 'ほしい日'
-	String get wishDate => 'ほしい日';
+  /// ja: 'ほしい日'
+  String get wishDate => 'ほしい日';
 
-	/// ja: 'URL'
-	String get url => 'URL';
+  /// ja: 'URL'
+  String get url => 'URL';
 
-	/// ja: '価格'
-	String get price => '価格';
+  /// ja: '価格'
+  String get price => '価格';
 
-	/// ja: 'かう予定の日'
-	String get purchasePlanDate => 'かう予定の日';
+  /// ja: 'かう予定の日'
+  String get purchasePlanDate => 'かう予定の日';
 
-	/// ja: 'わたした日'
-	String get sentDate => 'わたした日';
+  /// ja: 'わたした日'
+  String get sentDate => 'わたした日';
 
-	/// ja: 'かった人'
-	String get buyerName => 'かった人';
+  /// ja: 'かった人'
+  String get buyerName => 'かった人';
 
-	/// ja: '¥${price:int}'
-	String currencyFormat({required int price}) => '¥${price}';
+  /// ja: '¥${price:int}'
+  String currencyFormat({required int price}) => '¥${price}';
 
-	/// ja: '¥'
-	String get currencySymbol => '¥';
+  /// ja: '¥'
+  String get currencySymbol => '¥';
 }
 
 // Path: item.itemsPage
-class TranslationsItemItemsPageJa {
-	TranslationsItemItemsPageJa.internal(this._root);
+class Translations$item$itemsPage$ja {
+  Translations$item$itemsPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ほしいもの'
-	String get title => 'ほしいもの';
+  /// ja: 'ほしいもの'
+  String get title => 'ほしいもの';
 
-	/// ja: 'ほしいものを追加'
-	String get add => 'ほしいものを追加';
+  /// ja: 'ほしいものを追加'
+  String get add => 'ほしいものを追加';
 
-	late final TranslationsItemItemsPageNotSelectedGroupDialogJa notSelectedGroupDialog = TranslationsItemItemsPageNotSelectedGroupDialogJa.internal(_root);
+  late final Translations$item$itemsPage$notSelectedGroupDialog$ja
+  notSelectedGroupDialog =
+      Translations$item$itemsPage$notSelectedGroupDialog$ja.internal(_root);
 
-	/// ja: 'アカウント'
-	String get account => 'アカウント';
+  /// ja: 'アカウント'
+  String get account => 'アカウント';
 
-	/// ja: 'グループを切り替えました。'
-	String get completeChangeGroup => 'グループを切り替えました。';
+  /// ja: 'グループを切り替えました。'
+  String get completeChangeGroup => 'グループを切り替えました。';
 
-	/// ja: 'ほしいものが見つかりませんでした。'
-	String get itemEmpty => 'ほしいものが見つかりませんでした。';
+  /// ja: 'ほしいものが見つかりませんでした。'
+  String get itemEmpty => 'ほしいものが見つかりませんでした。';
 
-	/// ja: '${length:int}件選択'
-	String selectNumberText({required int length}) => '${length}件選択';
+  /// ja: '${length:int}件選択'
+  String selectNumberText({required int length}) => '${length}件選択';
 
-	/// ja: '星${value:String}'
-	String wishRankFormat({required String value}) => '星${value}';
+  /// ja: '星${value:String}'
+  String wishRankFormat({required String value}) => '星${value}';
 
-	/// ja: '並び替え'
-	String get sortOrder => '並び替え';
+  /// ja: '並び替え'
+  String get sortOrder => '並び替え';
 }
 
 // Path: item.itemPage
-class TranslationsItemItemPageJa {
-	TranslationsItemItemPageJa.internal(this._root);
+class Translations$item$itemPage$ja {
+  Translations$item$itemPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ほしいものが見つかりませんでした。 削除された可能性があります。 再度操作して下さい。'
-	String get deletedItem => 'ほしいものが見つかりませんでした。 削除された可能性があります。\n再度操作して下さい。';
+  /// ja: 'ほしいものが見つかりませんでした。 削除された可能性があります。 再度操作して下さい。'
+  String get deletedItem => 'ほしいものが見つかりませんでした。 削除された可能性があります。\n再度操作して下さい。';
 
-	late final TranslationsItemItemPageWishSeasonJa wishSeason = TranslationsItemItemPageWishSeasonJa.internal(_root);
-	late final TranslationsItemItemPagePurchaseSectionJa purchaseSection = TranslationsItemItemPagePurchaseSectionJa.internal(_root);
+  late final Translations$item$itemPage$wishSeason$ja wishSeason =
+      Translations$item$itemPage$wishSeason$ja.internal(_root);
+  late final Translations$item$itemPage$purchaseSection$ja purchaseSection =
+      Translations$item$itemPage$purchaseSection$ja.internal(_root);
 
-	/// ja: '購入/購入予定'
-	String get purchase => '購入/購入予定';
+  /// ja: '購入/購入予定'
+  String get purchase => '購入/購入予定';
 
-	late final TranslationsItemItemPageTransferJa transfer = TranslationsItemItemPageTransferJa.internal(_root);
+  late final Translations$item$itemPage$transfer$ja transfer =
+      Translations$item$itemPage$transfer$ja.internal(_root);
 }
 
 // Path: item.itemEditPage
-class TranslationsItemItemEditPageJa {
-	TranslationsItemItemEditPageJa.internal(this._root);
+class Translations$item$itemEditPage$ja {
+  Translations$item$itemEditPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ほしいものを編集'
-	String get editTitle => 'ほしいものを編集';
+  /// ja: 'ほしいものを編集'
+  String get editTitle => 'ほしいものを編集';
 
-	/// ja: 'ほしいものを作成'
-	String get createTitle => 'ほしいものを作成';
+  /// ja: 'ほしいものを作成'
+  String get createTitle => 'ほしいものを作成';
 
-	late final TranslationsItemItemEditPageWishSeasonJa wishSeason = TranslationsItemItemEditPageWishSeasonJa.internal(_root);
-	late final TranslationsItemItemEditPageWishDateJa wishDate = TranslationsItemItemEditPageWishDateJa.internal(_root);
+  late final Translations$item$itemEditPage$wishSeason$ja wishSeason =
+      Translations$item$itemEditPage$wishSeason$ja.internal(_root);
+  late final Translations$item$itemEditPage$wishDate$ja wishDate =
+      Translations$item$itemEditPage$wishDate$ja.internal(_root);
 
-	/// ja: 'URLを追加'
-	String get addUrl => 'URLを追加';
+  /// ja: 'URLを追加'
+  String get addUrl => 'URLを追加';
 }
 
 // Path: item.purchasePage
-class TranslationsItemPurchasePageJa {
-	TranslationsItemPurchasePageJa.internal(this._root);
+class Translations$item$purchasePage$ja {
+  Translations$item$purchasePage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '購入/購入予定情報'
-	String get purchase => '購入/購入予定情報';
+  /// ja: '購入/購入予定情報'
+  String get purchase => '購入/購入予定情報';
 
-	late final TranslationsItemPurchasePageSurpriseJa surprise = TranslationsItemPurchasePageSurpriseJa.internal(_root);
-	late final TranslationsItemPurchasePagePurchasePlanDateJa purchasePlanDate = TranslationsItemPurchasePagePurchasePlanDateJa.internal(_root);
-	late final TranslationsItemPurchasePageSentDateJa sentDate = TranslationsItemPurchasePageSentDateJa.internal(_root);
+  late final Translations$item$purchasePage$surprise$ja surprise =
+      Translations$item$purchasePage$surprise$ja.internal(_root);
+  late final Translations$item$purchasePage$purchasePlanDate$ja
+  purchasePlanDate =
+      Translations$item$purchasePage$purchasePlanDate$ja.internal(_root);
+  late final Translations$item$purchasePage$sentDate$ja sentDate =
+      Translations$item$purchasePage$sentDate$ja.internal(_root);
 }
 
 // Path: settings.settingsPage
-class TranslationsSettingsSettingsPageJa {
-	TranslationsSettingsSettingsPageJa.internal(this._root);
+class Translations$settings$settingsPage$ja {
+  Translations$settings$settingsPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '設定'
-	String get title => '設定';
+  /// ja: '設定'
+  String get title => '設定';
 
-	late final TranslationsSettingsSettingsPageAccountJa account = TranslationsSettingsSettingsPageAccountJa.internal(_root);
-	late final TranslationsSettingsSettingsPageLayoutJa layout = TranslationsSettingsSettingsPageLayoutJa.internal(_root);
-	late final TranslationsSettingsSettingsPageHelpJa help = TranslationsSettingsSettingsPageHelpJa.internal(_root);
+  late final Translations$settings$settingsPage$account$ja account =
+      Translations$settings$settingsPage$account$ja.internal(_root);
+  late final Translations$settings$settingsPage$layout$ja layout =
+      Translations$settings$settingsPage$layout$ja.internal(_root);
+  late final Translations$settings$settingsPage$help$ja help =
+      Translations$settings$settingsPage$help$ja.internal(_root);
 }
 
 // Path: settings.wishReminderSettingsPage
-class TranslationsSettingsWishReminderSettingsPageJa {
-	TranslationsSettingsWishReminderSettingsPageJa.internal(this._root);
+class Translations$settings$wishReminderSettingsPage$ja {
+  Translations$settings$wishReminderSettingsPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ほしい日のリマインダー'
-	String get title => 'ほしい日のリマインダー';
+  /// ja: 'ほしい日のリマインダー'
+  String get title => 'ほしい日のリマインダー';
 
-	/// ja: 'リマインダーを受け取る'
-	String get enabled => 'リマインダーを受け取る';
+  /// ja: 'リマインダーを受け取る'
+  String get enabled => 'リマインダーを受け取る';
 
-	/// ja: '通知を希望する場合だけオンにしてください'
-	String get description => '通知を希望する場合だけオンにしてください';
+  /// ja: '通知を希望する場合だけオンにしてください'
+  String get description => '通知を希望する場合だけオンにしてください';
 
-	late final TranslationsSettingsWishReminderSettingsPageTimingJa timing = TranslationsSettingsWishReminderSettingsPageTimingJa.internal(_root);
-	late final TranslationsSettingsWishReminderSettingsPageAudienceJa audience = TranslationsSettingsWishReminderSettingsPageAudienceJa.internal(_root);
+  late final Translations$settings$wishReminderSettingsPage$timing$ja timing =
+      Translations$settings$wishReminderSettingsPage$timing$ja.internal(_root);
+  late final Translations$settings$wishReminderSettingsPage$audience$ja
+  audience =
+      Translations$settings$wishReminderSettingsPage$audience$ja.internal(
+        _root,
+      );
 }
 
 // Path: settings.accountPage
-class TranslationsSettingsAccountPageJa {
-	TranslationsSettingsAccountPageJa.internal(this._root);
+class Translations$settings$accountPage$ja {
+  Translations$settings$accountPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'アカウント'
-	String get title => 'アカウント';
+  /// ja: 'アカウント'
+  String get title => 'アカウント';
 
-	late final TranslationsSettingsAccountPageLinkJa link = TranslationsSettingsAccountPageLinkJa.internal(_root);
-	late final TranslationsSettingsAccountPageOtherJa other = TranslationsSettingsAccountPageOtherJa.internal(_root);
-	late final TranslationsSettingsAccountPageLeaveConfirmDialogJa leaveConfirmDialog = TranslationsSettingsAccountPageLeaveConfirmDialogJa.internal(_root);
+  late final Translations$settings$accountPage$link$ja link =
+      Translations$settings$accountPage$link$ja.internal(_root);
+  late final Translations$settings$accountPage$other$ja other =
+      Translations$settings$accountPage$other$ja.internal(_root);
+  late final Translations$settings$accountPage$leaveConfirmDialog$ja
+  leaveConfirmDialog =
+      Translations$settings$accountPage$leaveConfirmDialog$ja.internal(_root);
 }
 
 // Path: settings.accountLinkPage
-class TranslationsSettingsAccountLinkPageJa {
-	TranslationsSettingsAccountLinkPageJa.internal(this._root);
+class Translations$settings$accountLinkPage$ja {
+  Translations$settings$accountLinkPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'アカウント連携'
-	String get title => 'アカウント連携';
+  /// ja: 'アカウント連携'
+  String get title => 'アカウント連携';
 
-	late final TranslationsSettingsAccountLinkPageMeritDescriptionJa meritDescription = TranslationsSettingsAccountLinkPageMeritDescriptionJa.internal(_root);
+  late final Translations$settings$accountLinkPage$meritDescription$ja
+  meritDescription =
+      Translations$settings$accountLinkPage$meritDescription$ja.internal(_root);
 
-	/// ja: 'Googleアカウントでサインイン'
-	String get signInWithGoogle => 'Googleアカウントでサインイン';
+  /// ja: 'Googleアカウントでサインイン'
+  String get signInWithGoogle => 'Googleアカウントでサインイン';
 
-	/// ja: 'Appleアカウントでサインイン'
-	String get signInWithApple => 'Appleアカウントでサインイン';
+  /// ja: 'Appleアカウントでサインイン'
+  String get signInWithApple => 'Appleアカウントでサインイン';
 }
 
 // Path: user.welcomePage
-class TranslationsUserWelcomePageJa {
-	TranslationsUserWelcomePageJa.internal(this._root);
+class Translations$user$welcomePage$ja {
+  Translations$user$welcomePage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'はじめる'
-	String get start => 'はじめる';
+  /// ja: 'はじめる'
+  String get start => 'はじめる';
 
-	/// ja: 'はじめての方はこちら'
-	String get forFirstTimers => 'はじめての方はこちら';
+  /// ja: 'はじめての方はこちら'
+  String get forFirstTimers => 'はじめての方はこちら';
 
-	/// ja: 'アカウント連携'
-	String get accountLink => 'アカウント連携';
+  /// ja: 'アカウント連携'
+  String get accountLink => 'アカウント連携';
 }
 
 // Path: user.profilePage
-class TranslationsUserProfilePageJa {
-	TranslationsUserProfilePageJa.internal(this._root);
+class Translations$user$profilePage$ja {
+  Translations$user$profilePage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'プロフィール'
-	String get profile => 'プロフィール';
+  /// ja: 'プロフィール'
+  String get profile => 'プロフィール';
 }
 
 // Path: user.onboardPage
-class TranslationsUserOnboardPageJa {
-	TranslationsUserOnboardPageJa.internal(this._root);
+class Translations$user$onboardPage$ja {
+  Translations$user$onboardPage$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'はじめる'
-	String get start => 'はじめる';
+  /// ja: 'はじめる'
+  String get start => 'はじめる';
 
-	late final TranslationsUserOnboardPageIntroductionJa introduction = TranslationsUserOnboardPageIntroductionJa.internal(_root);
+  late final Translations$user$onboardPage$introduction$ja introduction =
+      Translations$user$onboardPage$introduction$ja.internal(_root);
 
-	/// ja: 'あなたは？'
-	String get profile => 'あなたは？';
+  /// ja: 'あなたは？'
+  String get profile => 'あなたは？';
 
-	/// ja: 'あっていますか？'
-	String get confirm => 'あっていますか？';
+  /// ja: 'あっていますか？'
+  String get confirm => 'あっていますか？';
 }
 
 // Path: user.common
-class TranslationsUserCommonJa {
-	TranslationsUserCommonJa.internal(this._root);
+class Translations$user$common$ja {
+  Translations$user$common$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '名前'
-	String get name => '名前';
+  /// ja: '名前'
+  String get name => '名前';
 
-	/// ja: '名前 または ニックネーム'
-	String get nameLabelText => '名前 または ニックネーム';
+  /// ja: '名前 または ニックネーム'
+  String get nameLabelText => '名前 または ニックネーム';
 
-	/// ja: '年齢層'
-	String get ageGroup => '年齢層';
+  /// ja: '年齢層'
+  String get ageGroup => '年齢層';
 }
 
 // Path: analyze.analyzePage.format
-class TranslationsAnalyzeAnalyzePageFormatJa {
-	TranslationsAnalyzeAnalyzePageFormatJa.internal(this._root);
+class Translations$analyze$analyzePage$format$ja {
+  Translations$analyze$analyzePage$format$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '${molecule:int}/${denominator:int}'
-	String fraction({required int molecule, required int denominator}) => '${molecule}/${denominator}';
+  /// ja: '${molecule:int}/${denominator:int}'
+  String fraction({required int molecule, required int denominator}) =>
+      '${molecule}/${denominator}';
 
-	/// ja: '${month:int}月'
-	String month({required int month}) => '${month}月';
+  /// ja: '${month:int}月'
+  String month({required int month}) => '${month}月';
 }
 
 // Path: group.common.leaveConfirmDialog
-class TranslationsGroupCommonLeaveConfirmDialogJa {
-	TranslationsGroupCommonLeaveConfirmDialogJa.internal(this._root);
+class Translations$group$common$leaveConfirmDialog$ja {
+  Translations$group$common$leaveConfirmDialog$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '離脱の確認'
-	String get title => '離脱の確認';
+  /// ja: '離脱の確認'
+  String get title => '離脱の確認';
 
-	/// ja: '「${groupName:String}」から離脱しますか？'
-	String message({required String groupName}) => '「${groupName}」から離脱しますか？';
+  /// ja: '「${groupName:String}」から離脱しますか？'
+  String message({required String groupName}) => '「${groupName}」から離脱しますか？';
 }
 
 // Path: group.shareLinkPage.joinedGroupDialog
-class TranslationsGroupShareLinkPageJoinedGroupDialogJa {
-	TranslationsGroupShareLinkPageJoinedGroupDialogJa.internal(this._root);
+class Translations$group$shareLinkPage$joinedGroupDialog$ja {
+  Translations$group$shareLinkPage$joinedGroupDialog$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'グループへ参加'
-	String get title => 'グループへ参加';
+  /// ja: 'グループへ参加'
+  String get title => 'グループへ参加';
 
-	/// ja: 'グループに参加しました。'
-	String get message => 'グループに参加しました。';
+  /// ja: 'グループに参加しました。'
+  String get message => 'グループに参加しました。';
 }
 
 // Path: group.groupsPage.shareGroupHelpDialog
-class TranslationsGroupGroupsPageShareGroupHelpDialogJa {
-	TranslationsGroupGroupsPageShareGroupHelpDialogJa.internal(this._root);
+class Translations$group$groupsPage$shareGroupHelpDialog$ja {
+  Translations$group$groupsPage$shareGroupHelpDialog$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'グループの共有/参加'
-	String get title => 'グループの共有/参加';
+  /// ja: 'グループの共有/参加'
+  String get title => 'グループの共有/参加';
 
-	/// ja: '【グループの共有】 グループから「共有」を行って下さい 【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます'
-	String get message => '【グループの共有】 グループから「共有」を行って下さい\n\n【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます';
+  /// ja: '【グループの共有】 グループから「共有」を行って下さい 【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます'
+  String get message =>
+      '【グループの共有】 グループから「共有」を行って下さい\n\n【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます';
 }
 
 // Path: group.groupPage.appInPurchaseConfirmDialog
-class TranslationsGroupGroupPageAppInPurchaseConfirmDialogJa {
-	TranslationsGroupGroupPageAppInPurchaseConfirmDialogJa.internal(this._root);
+class Translations$group$groupPage$appInPurchaseConfirmDialog$ja {
+  Translations$group$groupPage$appInPurchaseConfirmDialog$ja.internal(
+    this._root,
+  );
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '購入の確認'
-	String get title => '購入の確認';
+  /// ja: '購入の確認'
+  String get title => '購入の確認';
 
-	/// ja: '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで) 価格：¥${price:String}(無期限)'
-	String message({required String price}) => '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで)\n価格：¥${price}(無期限)';
+  /// ja: '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで) 価格：¥${price:String}(無期限)'
+  String message({required String price}) =>
+      '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで)\n価格：¥${price}(無期限)';
 
-	/// ja: '購入(¥${price:String})'
-	String okLabel({required String price}) => '購入(¥${price})';
+  /// ja: '購入(¥${price:String})'
+  String okLabel({required String price}) => '購入(¥${price})';
 }
 
 // Path: item.itemsPage.notSelectedGroupDialog
-class TranslationsItemItemsPageNotSelectedGroupDialogJa {
-	TranslationsItemItemsPageNotSelectedGroupDialogJa.internal(this._root);
+class Translations$item$itemsPage$notSelectedGroupDialog$ja {
+  Translations$item$itemsPage$notSelectedGroupDialog$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'グループが選択されていません'
-	String get title => 'グループが選択されていません';
+  /// ja: 'グループが選択されていません'
+  String get title => 'グループが選択されていません';
 
-	/// ja: 'グループを選択してからほしいものを追加して下さい'
-	String get message => 'グループを選択してからほしいものを追加して下さい';
+  /// ja: 'グループを選択してからほしいものを追加して下さい'
+  String get message => 'グループを選択してからほしいものを追加して下さい';
 }
 
 // Path: item.itemPage.wishSeason
-class TranslationsItemItemPageWishSeasonJa {
-	TranslationsItemItemPageWishSeasonJa.internal(this._root);
+class Translations$item$itemPage$wishSeason$ja {
+  Translations$item$itemPage$wishSeason$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '例：クリスマス、誕生日'
-	String get hint => '例：クリスマス、誕生日';
+  /// ja: '例：クリスマス、誕生日'
+  String get hint => '例：クリスマス、誕生日';
 }
 
 // Path: item.itemPage.purchaseSection
-class TranslationsItemItemPagePurchaseSectionJa {
-	TranslationsItemItemPagePurchaseSectionJa.internal(this._root);
+class Translations$item$itemPage$purchaseSection$ja {
+  Translations$item$itemPage$purchaseSection$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '購入/購入予定情報'
-	String get title => '購入/購入予定情報';
+  /// ja: '購入/購入予定情報'
+  String get title => '購入/購入予定情報';
 
-	/// ja: '以降の内容はグループ内の大人にだけ表示されます'
-	String get message => '以降の内容はグループ内の大人にだけ表示されます';
+  /// ja: '以降の内容はグループ内の大人にだけ表示されます'
+  String get message => '以降の内容はグループ内の大人にだけ表示されます';
 }
 
 // Path: item.itemPage.transfer
-class TranslationsItemItemPageTransferJa {
-	TranslationsItemItemPageTransferJa.internal(this._root);
+class Translations$item$itemPage$transfer$ja {
+  Translations$item$itemPage$transfer$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '別のグループへ'
-	String get menu => '別のグループへ';
+  /// ja: '別のグループへ'
+  String get menu => '別のグループへ';
 
-	/// ja: '別のグループにコピー'
-	String get copy => '別のグループにコピー';
+  /// ja: '別のグループにコピー'
+  String get copy => '別のグループにコピー';
 
-	/// ja: '別のグループに移動'
-	String get move => '別のグループに移動';
+  /// ja: '別のグループに移動'
+  String get move => '別のグループに移動';
 
-	/// ja: '送り先のグループを選択'
-	String get selectGroup => '送り先のグループを選択';
+  /// ja: '送り先のグループを選択'
+  String get selectGroup => '送り先のグループを選択';
 
-	/// ja: 'コピー・移動できる他のグループがありません。'
-	String get noDestination => 'コピー・移動できる他のグループがありません。';
+  /// ja: 'コピー・移動できる他のグループがありません。'
+  String get noDestination => 'コピー・移動できる他のグループがありません。';
 
-	/// ja: 'コピーしました。'
-	String get copied => 'コピーしました。';
+  /// ja: 'コピーしました。'
+  String get copied => 'コピーしました。';
 
-	/// ja: '移動しました。'
-	String get moved => '移動しました。';
+  /// ja: '移動しました。'
+  String get moved => '移動しました。';
 }
 
 // Path: item.itemEditPage.wishSeason
-class TranslationsItemItemEditPageWishSeasonJa {
-	TranslationsItemItemEditPageWishSeasonJa.internal(this._root);
+class Translations$item$itemEditPage$wishSeason$ja {
+  Translations$item$itemEditPage$wishSeason$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '例：クリスマス、誕生日'
-	String get hint => '例：クリスマス、誕生日';
+  /// ja: '例：クリスマス、誕生日'
+  String get hint => '例：クリスマス、誕生日';
 }
 
 // Path: item.itemEditPage.wishDate
-class TranslationsItemItemEditPageWishDateJa {
-	TranslationsItemItemEditPageWishDateJa.internal(this._root);
+class Translations$item$itemEditPage$wishDate$ja {
+  Translations$item$itemEditPage$wishDate$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '具体的な日付が決まっている場合に入力して下さい'
-	String get hint => '具体的な日付が決まっている場合に入力して下さい';
+  /// ja: '具体的な日付が決まっている場合に入力して下さい'
+  String get hint => '具体的な日付が決まっている場合に入力して下さい';
 }
 
 // Path: item.purchasePage.surprise
-class TranslationsItemPurchasePageSurpriseJa {
-	TranslationsItemPurchasePageSurpriseJa.internal(this._root);
+class Translations$item$purchasePage$surprise$ja {
+  Translations$item$purchasePage$surprise$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'サプライズ'
-	String get label => 'サプライズ';
+  /// ja: 'サプライズ'
+  String get label => 'サプライズ';
 
-	/// ja: '状況を子供に知られたくない'
-	String get caption => '状況を子供に知られたくない';
+  /// ja: '状況を子供に知られたくない'
+  String get caption => '状況を子供に知られたくない';
 }
 
 // Path: item.purchasePage.purchasePlanDate
-class TranslationsItemPurchasePagePurchasePlanDateJa {
-	TranslationsItemPurchasePagePurchasePlanDateJa.internal(this._root);
+class Translations$item$purchasePage$purchasePlanDate$ja {
+  Translations$item$purchasePage$purchasePlanDate$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '入力すると「購入予定」になります'
-	String get hint => '入力すると「購入予定」になります';
+  /// ja: '入力すると「購入予定」になります'
+  String get hint => '入力すると「購入予定」になります';
 }
 
 // Path: item.purchasePage.sentDate
-class TranslationsItemPurchasePageSentDateJa {
-	TranslationsItemPurchasePageSentDateJa.internal(this._root);
+class Translations$item$purchasePage$sentDate$ja {
+  Translations$item$purchasePage$sentDate$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '入力すると「購入済」になります'
-	String get hint => '入力すると「購入済」になります';
+  /// ja: '入力すると「購入済」になります'
+  String get hint => '入力すると「購入済」になります';
 }
 
 // Path: settings.settingsPage.account
-class TranslationsSettingsSettingsPageAccountJa {
-	TranslationsSettingsSettingsPageAccountJa.internal(this._root);
+class Translations$settings$settingsPage$account$ja {
+  Translations$settings$settingsPage$account$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'アカウント'
-	String get head => 'アカウント';
+  /// ja: 'アカウント'
+  String get head => 'アカウント';
 
-	/// ja: 'プロフィール'
-	String get profile => 'プロフィール';
+  /// ja: 'プロフィール'
+  String get profile => 'プロフィール';
 
-	/// ja: 'グループ'
-	String get group => 'グループ';
+  /// ja: 'グループ'
+  String get group => 'グループ';
 
-	/// ja: 'アカウント'
-	String get account => 'アカウント';
+  /// ja: 'アカウント'
+  String get account => 'アカウント';
 
-	late final TranslationsSettingsSettingsPageAccountPushNotificationJa pushNotification = TranslationsSettingsSettingsPageAccountPushNotificationJa.internal(_root);
-	late final TranslationsSettingsSettingsPageAccountWishReminderJa wishReminder = TranslationsSettingsSettingsPageAccountWishReminderJa.internal(_root);
+  late final Translations$settings$settingsPage$account$pushNotification$ja
+  pushNotification =
+      Translations$settings$settingsPage$account$pushNotification$ja.internal(
+        _root,
+      );
+  late final Translations$settings$settingsPage$account$wishReminder$ja
+  wishReminder =
+      Translations$settings$settingsPage$account$wishReminder$ja.internal(
+        _root,
+      );
 }
 
 // Path: settings.settingsPage.layout
-class TranslationsSettingsSettingsPageLayoutJa {
-	TranslationsSettingsSettingsPageLayoutJa.internal(this._root);
+class Translations$settings$settingsPage$layout$ja {
+  Translations$settings$settingsPage$layout$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'レイアウト'
-	String get title => 'レイアウト';
+  /// ja: 'レイアウト'
+  String get title => 'レイアウト';
 
-	/// ja: 'UIスタイル'
-	String get uiStyle => 'UIスタイル';
+  /// ja: 'UIスタイル'
+  String get uiStyle => 'UIスタイル';
 
-	/// ja: 'テーマモード'
-	String get themeMode => 'テーマモード';
+  /// ja: 'テーマモード'
+  String get themeMode => 'テーマモード';
 
-	/// ja: 'カラー'
-	String get colorTheme => 'カラー';
+  /// ja: 'カラー'
+  String get colorTheme => 'カラー';
 }
 
 // Path: settings.settingsPage.help
-class TranslationsSettingsSettingsPageHelpJa {
-	TranslationsSettingsSettingsPageHelpJa.internal(this._root);
+class Translations$settings$settingsPage$help$ja {
+  Translations$settings$settingsPage$help$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ヘルプ'
-	String get head => 'ヘルプ';
+  /// ja: 'ヘルプ'
+  String get head => 'ヘルプ';
 
-	/// ja: 'つかい方'
-	String get howToUse => 'つかい方';
+  /// ja: 'つかい方'
+  String get howToUse => 'つかい方';
 
-	/// ja: 'お問い合わせ'
-	String get contactUs => 'お問い合わせ';
+  /// ja: 'お問い合わせ'
+  String get contactUs => 'お問い合わせ';
 
-	/// ja: '開発者X (旧Twitter)'
-	String get developerX => '開発者X (旧Twitter)';
+  /// ja: '開発者X (旧Twitter)'
+  String get developerX => '開発者X (旧Twitter)';
 
-	/// ja: 'プライバシーポリシー'
-	String get privacyPolicy => 'プライバシーポリシー';
+  /// ja: 'プライバシーポリシー'
+  String get privacyPolicy => 'プライバシーポリシー';
 
-	/// ja: 'ライセンス'
-	String get license => 'ライセンス';
+  /// ja: 'ライセンス'
+  String get license => 'ライセンス';
 }
 
 // Path: settings.wishReminderSettingsPage.timing
-class TranslationsSettingsWishReminderSettingsPageTimingJa {
-	TranslationsSettingsWishReminderSettingsPageTimingJa.internal(this._root);
+class Translations$settings$wishReminderSettingsPage$timing$ja {
+  Translations$settings$wishReminderSettingsPage$timing$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '通知タイミング'
-	String get title => '通知タイミング';
+  /// ja: '通知タイミング'
+  String get title => '通知タイミング';
 
-	/// ja: '当日'
-	String get sameDay => '当日';
+  /// ja: '当日'
+  String get sameDay => '当日';
 
-	/// ja: '1日前'
-	String get dayBefore => '1日前';
+  /// ja: '1日前'
+  String get dayBefore => '1日前';
 
-	/// ja: '1週間前'
-	String get weekBefore => '1週間前';
+  /// ja: '1週間前'
+  String get weekBefore => '1週間前';
 }
 
 // Path: settings.wishReminderSettingsPage.audience
-class TranslationsSettingsWishReminderSettingsPageAudienceJa {
-	TranslationsSettingsWishReminderSettingsPageAudienceJa.internal(this._root);
+class Translations$settings$wishReminderSettingsPage$audience$ja {
+  Translations$settings$wishReminderSettingsPage$audience$ja.internal(
+    this._root,
+  );
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '通知対象'
-	String get title => '通知対象';
+  /// ja: '通知対象'
+  String get title => '通知対象';
 
-	/// ja: '子どもを含む全員を対象にする'
-	String get everyone => '子どもを含む全員を対象にする';
+  /// ja: '子どもを含む全員を対象にする'
+  String get everyone => '子どもを含む全員を対象にする';
 
-	/// ja: 'オフの場合は大人だけが通知を受け取ります'
-	String get description => 'オフの場合は大人だけが通知を受け取ります';
+  /// ja: 'オフの場合は大人だけが通知を受け取ります'
+  String get description => 'オフの場合は大人だけが通知を受け取ります';
 }
 
 // Path: settings.accountPage.link
-class TranslationsSettingsAccountPageLinkJa {
-	TranslationsSettingsAccountPageLinkJa.internal(this._root);
+class Translations$settings$accountPage$link$ja {
+  Translations$settings$accountPage$link$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'アカウント連携'
-	String get head => 'アカウント連携';
+  /// ja: 'アカウント連携'
+  String get head => 'アカウント連携';
 
-	/// ja: 'Google'
-	String get google => 'Google';
+  /// ja: 'Google'
+  String get google => 'Google';
 
-	/// ja: 'Apple'
-	String get apple => 'Apple';
+  /// ja: 'Apple'
+  String get apple => 'Apple';
 }
 
 // Path: settings.accountPage.other
-class TranslationsSettingsAccountPageOtherJa {
-	TranslationsSettingsAccountPageOtherJa.internal(this._root);
+class Translations$settings$accountPage$other$ja {
+  Translations$settings$accountPage$other$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'その他'
-	String get head => 'その他';
+  /// ja: 'その他'
+  String get head => 'その他';
 
-	/// ja: 'ログアウト'
-	String get logout => 'ログアウト';
+  /// ja: 'ログアウト'
+  String get logout => 'ログアウト';
 
-	/// ja: '退会'
-	String get leave => '退会';
+  /// ja: '退会'
+  String get leave => '退会';
 }
 
 // Path: settings.accountPage.leaveConfirmDialog
-class TranslationsSettingsAccountPageLeaveConfirmDialogJa {
-	TranslationsSettingsAccountPageLeaveConfirmDialogJa.internal(this._root);
+class Translations$settings$accountPage$leaveConfirmDialog$ja {
+  Translations$settings$accountPage$leaveConfirmDialog$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: '退会しますか？'
-	String get title => '退会しますか？';
+  /// ja: '退会しますか？'
+  String get title => '退会しますか？';
 
-	/// ja: '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。'
-	String get message => '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
+  /// ja: '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。'
+  String get message => '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。';
 }
 
 // Path: settings.accountLinkPage.meritDescription
-class TranslationsSettingsAccountLinkPageMeritDescriptionJa {
-	TranslationsSettingsAccountLinkPageMeritDescriptionJa.internal(this._root);
+class Translations$settings$accountLinkPage$meritDescription$ja {
+  Translations$settings$accountLinkPage$meritDescription$ja.internal(
+    this._root,
+  );
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'アカウント連携を行うことで、 下記の機能をご利用いただけます。'
-	String get title => 'アカウント連携を行うことで、\n下記の機能をご利用いただけます。';
+  /// ja: 'アカウント連携を行うことで、 下記の機能をご利用いただけます。'
+  String get title => 'アカウント連携を行うことで、\n下記の機能をご利用いただけます。';
 
-	List<String> get itemizedMessages => [
-		'クラウドへのデータバックアップ',
-		'複数端末での同時利用',
-		'端末変更に伴うデータ移行',
-	];
+  List<String> get itemizedMessages => [
+    'クラウドへのデータバックアップ',
+    '複数端末での同時利用',
+    '端末変更に伴うデータ移行',
+  ];
 }
 
 // Path: user.onboardPage.introduction
-class TranslationsUserOnboardPageIntroductionJa {
-	TranslationsUserOnboardPageIntroductionJa.internal(this._root);
+class Translations$user$onboardPage$introduction$ja {
+  Translations$user$onboardPage$introduction$ja.internal(this._root);
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'はじめに'
-	String get title => 'はじめに';
+  /// ja: 'はじめに'
+  String get title => 'はじめに';
 
-	/// ja: 'まずはプロフィールを登録しましょう'
-	String get message => 'まずはプロフィールを登録しましょう';
+  /// ja: 'まずはプロフィールを登録しましょう'
+  String get message => 'まずはプロフィールを登録しましょう';
 }
 
 // Path: settings.settingsPage.account.pushNotification
-class TranslationsSettingsSettingsPageAccountPushNotificationJa {
-	TranslationsSettingsSettingsPageAccountPushNotificationJa.internal(this._root);
+class Translations$settings$settingsPage$account$pushNotification$ja {
+  Translations$settings$settingsPage$account$pushNotification$ja.internal(
+    this._root,
+  );
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'プッシュ通知'
-	String get title => 'プッシュ通知';
+  /// ja: 'プッシュ通知'
+  String get title => 'プッシュ通知';
 
-	/// ja: 'グループ内でほしいものが追加された場合に通知が受け取れます'
-	String get caption => 'グループ内でほしいものが追加された場合に通知が受け取れます';
+  /// ja: 'グループ内でほしいものが追加された場合に通知が受け取れます'
+  String get caption => 'グループ内でほしいものが追加された場合に通知が受け取れます';
 }
 
 // Path: settings.settingsPage.account.wishReminder
-class TranslationsSettingsSettingsPageAccountWishReminderJa {
-	TranslationsSettingsSettingsPageAccountWishReminderJa.internal(this._root);
+class Translations$settings$settingsPage$account$wishReminder$ja {
+  Translations$settings$settingsPage$account$wishReminder$ja.internal(
+    this._root,
+  );
 
-	final Translations _root; // ignore: unused_field
+  final Translations _root; // ignore: unused_field
 
-	// Translations
+  // Translations
 
-	/// ja: 'ほしい日のリマインダー'
-	String get title => 'ほしい日のリマインダー';
+  /// ja: 'ほしい日のリマインダー'
+  String get title => 'ほしい日のリマインダー';
 
-	/// ja: 'ほしい日の前に通知を受け取ります'
-	String get caption => 'ほしい日の前に通知を受け取ります';
+  /// ja: 'ほしい日の前に通知を受け取ります'
+  String get caption => 'ほしい日の前に通知を受け取ります';
 }
 
 /// The flat map containing all translations for locale <ja>.
@@ -952,148 +1049,169 @@ class TranslationsSettingsSettingsPageAccountWishReminderJa {
 /// The Dart AOT compiler has issues with very large switch statements,
 /// so the map is split into smaller functions (512 entries each).
 extension on Translations {
-	dynamic _flatMapFunction(String path) {
-		return _flatMapFunction$0(path);
-	}
-
-	dynamic _flatMapFunction$0(String path) {
-		return switch (path) {
-			'analyze.analyzePage.title' => 'ふりかえり',
-			'analyze.analyzePage.purchaseRate' => '購入率',
-			'analyze.analyzePage.purchased' => '購入済',
-			'analyze.analyzePage.format.fraction' => ({required int molecule, required int denominator}) => '${molecule}/${denominator}',
-			'analyze.analyzePage.format.month' => ({required int month}) => '${month}月',
-			'analyze.analyzePage.totalPrice' => '合計金額',
-			'group.common.groupName' => 'グループ名',
-			'group.common.leaveGroup' => 'グループから脱退',
-			'group.common.leaveConfirmDialog.title' => '離脱の確認',
-			'group.common.leaveConfirmDialog.message' => ({required String groupName}) => '「${groupName}」から離脱しますか？',
-			'group.shareLinkPage.joinedGroupDialog.title' => 'グループへ参加',
-			'group.shareLinkPage.joinedGroupDialog.message' => 'グループに参加しました。',
-			'group.groupsPage.title' => '参加中のグループ',
-			'group.groupsPage.help' => 'ヘルプ',
-			'group.groupsPage.shareGroupHelpDialog.title' => 'グループの共有/参加',
-			'group.groupsPage.shareGroupHelpDialog.message' => '【グループの共有】 グループから「共有」を行って下さい\n\n【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます',
-			'group.groupsPage.createGroup' => 'グループを作成',
-			'group.groupsPage.notJoinGroup' => 'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。',
-			'group.groupPage.limitBreak' => 'ほしい物の登録数制限を解放する',
-			'group.groupPage.appInPurchaseConfirmDialog.title' => '購入の確認',
-			'group.groupPage.appInPurchaseConfirmDialog.message' => ({required String price}) => '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで)\n価格：¥${price}(無期限)',
-			'group.groupPage.appInPurchaseConfirmDialog.okLabel' => ({required String price}) => '購入(¥${price})',
-			'group.groupPage.limitBreakPurchased' => '欲しい物の登録数制限が解放されました。(無制限)',
-			'group.groupPage.shareGroup' => '共有',
-			'group.groupPage.shareGroupCaption' => '共有してメンバーを招待しましょう',
-			'group.groupPage.copyLink' => 'コピー',
-			'group.groupPage.copiedLink' => 'コピーしました',
-			'group.groupPage.select' => '選択',
-			'group.groupPage.savedImage' => '画像を保存しました。',
-			'item.common.wishList' => 'ほしいもの',
-			'item.common.status' => 'ステータス',
-			'item.common.wishRank' => 'ほしい度',
-			'item.common.itemName' => 'ほしいものの名前',
-			'item.common.wanterName' => 'ほしい人',
-			'item.common.wanterNameLabel' => 'だれがほしい？',
-			'item.common.memo' => 'メモ',
-			'item.common.wishSeason' => 'いつほしい？',
-			'item.common.wishDate' => 'ほしい日',
-			'item.common.url' => 'URL',
-			'item.common.price' => '価格',
-			'item.common.purchasePlanDate' => 'かう予定の日',
-			'item.common.sentDate' => 'わたした日',
-			'item.common.buyerName' => 'かった人',
-			'item.common.currencyFormat' => ({required int price}) => '¥${price}',
-			'item.common.currencySymbol' => '¥',
-			'item.itemsPage.title' => 'ほしいもの',
-			'item.itemsPage.add' => 'ほしいものを追加',
-			'item.itemsPage.notSelectedGroupDialog.title' => 'グループが選択されていません',
-			'item.itemsPage.notSelectedGroupDialog.message' => 'グループを選択してからほしいものを追加して下さい',
-			'item.itemsPage.account' => 'アカウント',
-			'item.itemsPage.completeChangeGroup' => 'グループを切り替えました。',
-			'item.itemsPage.itemEmpty' => 'ほしいものが見つかりませんでした。',
-			'item.itemsPage.selectNumberText' => ({required int length}) => '${length}件選択',
-			'item.itemsPage.wishRankFormat' => ({required String value}) => '星${value}',
-			'item.itemsPage.sortOrder' => '並び替え',
-			'item.itemPage.deletedItem' => 'ほしいものが見つかりませんでした。 削除された可能性があります。\n再度操作して下さい。',
-			'item.itemPage.wishSeason.hint' => '例：クリスマス、誕生日',
-			'item.itemPage.purchaseSection.title' => '購入/購入予定情報',
-			'item.itemPage.purchaseSection.message' => '以降の内容はグループ内の大人にだけ表示されます',
-			'item.itemPage.purchase' => '購入/購入予定',
-			'item.itemPage.transfer.menu' => '別のグループへ',
-			'item.itemPage.transfer.copy' => '別のグループにコピー',
-			'item.itemPage.transfer.move' => '別のグループに移動',
-			'item.itemPage.transfer.selectGroup' => '送り先のグループを選択',
-			'item.itemPage.transfer.noDestination' => 'コピー・移動できる他のグループがありません。',
-			'item.itemPage.transfer.copied' => 'コピーしました。',
-			'item.itemPage.transfer.moved' => '移動しました。',
-			'item.itemEditPage.editTitle' => 'ほしいものを編集',
-			'item.itemEditPage.createTitle' => 'ほしいものを作成',
-			'item.itemEditPage.wishSeason.hint' => '例：クリスマス、誕生日',
-			'item.itemEditPage.wishDate.hint' => '具体的な日付が決まっている場合に入力して下さい',
-			'item.itemEditPage.addUrl' => 'URLを追加',
-			'item.purchasePage.purchase' => '購入/購入予定情報',
-			'item.purchasePage.surprise.label' => 'サプライズ',
-			'item.purchasePage.surprise.caption' => '状況を子供に知られたくない',
-			'item.purchasePage.purchasePlanDate.hint' => '入力すると「購入予定」になります',
-			'item.purchasePage.sentDate.hint' => '入力すると「購入済」になります',
-			'settings.settingsPage.title' => '設定',
-			'settings.settingsPage.account.head' => 'アカウント',
-			'settings.settingsPage.account.profile' => 'プロフィール',
-			'settings.settingsPage.account.group' => 'グループ',
-			'settings.settingsPage.account.account' => 'アカウント',
-			'settings.settingsPage.account.pushNotification.title' => 'プッシュ通知',
-			'settings.settingsPage.account.pushNotification.caption' => 'グループ内でほしいものが追加された場合に通知が受け取れます',
-			'settings.settingsPage.account.wishReminder.title' => 'ほしい日のリマインダー',
-			'settings.settingsPage.account.wishReminder.caption' => 'ほしい日の前に通知を受け取ります',
-			'settings.settingsPage.layout.title' => 'レイアウト',
-			'settings.settingsPage.layout.uiStyle' => 'UIスタイル',
-			'settings.settingsPage.layout.themeMode' => 'テーマモード',
-			'settings.settingsPage.layout.colorTheme' => 'カラー',
-			'settings.settingsPage.help.head' => 'ヘルプ',
-			'settings.settingsPage.help.howToUse' => 'つかい方',
-			'settings.settingsPage.help.contactUs' => 'お問い合わせ',
-			'settings.settingsPage.help.developerX' => '開発者X (旧Twitter)',
-			'settings.settingsPage.help.privacyPolicy' => 'プライバシーポリシー',
-			'settings.settingsPage.help.license' => 'ライセンス',
-			'settings.wishReminderSettingsPage.title' => 'ほしい日のリマインダー',
-			'settings.wishReminderSettingsPage.enabled' => 'リマインダーを受け取る',
-			'settings.wishReminderSettingsPage.description' => '通知を希望する場合だけオンにしてください',
-			'settings.wishReminderSettingsPage.timing.title' => '通知タイミング',
-			'settings.wishReminderSettingsPage.timing.sameDay' => '当日',
-			'settings.wishReminderSettingsPage.timing.dayBefore' => '1日前',
-			'settings.wishReminderSettingsPage.timing.weekBefore' => '1週間前',
-			'settings.wishReminderSettingsPage.audience.title' => '通知対象',
-			'settings.wishReminderSettingsPage.audience.everyone' => '子どもを含む全員を対象にする',
-			'settings.wishReminderSettingsPage.audience.description' => 'オフの場合は大人だけが通知を受け取ります',
-			'settings.accountPage.title' => 'アカウント',
-			'settings.accountPage.link.head' => 'アカウント連携',
-			'settings.accountPage.link.google' => 'Google',
-			'settings.accountPage.link.apple' => 'Apple',
-			'settings.accountPage.other.head' => 'その他',
-			'settings.accountPage.other.logout' => 'ログアウト',
-			'settings.accountPage.other.leave' => '退会',
-			'settings.accountPage.leaveConfirmDialog.title' => '退会しますか？',
-			'settings.accountPage.leaveConfirmDialog.message' => '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。',
-			'settings.accountLinkPage.title' => 'アカウント連携',
-			'settings.accountLinkPage.meritDescription.title' => 'アカウント連携を行うことで、\n下記の機能をご利用いただけます。',
-			'settings.accountLinkPage.meritDescription.itemizedMessages.0' => 'クラウドへのデータバックアップ',
-			'settings.accountLinkPage.meritDescription.itemizedMessages.1' => '複数端末での同時利用',
-			'settings.accountLinkPage.meritDescription.itemizedMessages.2' => '端末変更に伴うデータ移行',
-			'settings.accountLinkPage.signInWithGoogle' => 'Googleアカウントでサインイン',
-			'settings.accountLinkPage.signInWithApple' => 'Appleアカウントでサインイン',
-			'user.welcomePage.start' => 'はじめる',
-			'user.welcomePage.forFirstTimers' => 'はじめての方はこちら',
-			'user.welcomePage.accountLink' => 'アカウント連携',
-			'user.profilePage.profile' => 'プロフィール',
-			'user.onboardPage.start' => 'はじめる',
-			'user.onboardPage.introduction.title' => 'はじめに',
-			'user.onboardPage.introduction.message' => 'まずはプロフィールを登録しましょう',
-			'user.onboardPage.profile' => 'あなたは？',
-			'user.onboardPage.confirm' => 'あっていますか？',
-			'user.common.name' => '名前',
-			'user.common.nameLabelText' => '名前 または ニックネーム',
-			'user.common.ageGroup' => '年齢層',
-			_ => null,
-		};
-	}
+  dynamic _flatMapFunction(String path) {
+    return switch (path) {
+      'analyze.analyzePage.title' => 'ふりかえり',
+      'analyze.analyzePage.purchaseRate' => '購入率',
+      'analyze.analyzePage.purchased' => '購入済',
+      'analyze.analyzePage.format.fraction' => ({
+        required int molecule,
+        required int denominator,
+      }) => '${molecule}/${denominator}',
+      'analyze.analyzePage.format.month' => ({
+        required int month,
+      }) => '${month}月',
+      'analyze.analyzePage.totalPrice' => '合計金額',
+      'group.common.groupName' => 'グループ名',
+      'group.common.leaveGroup' => 'グループから脱退',
+      'group.common.leaveConfirmDialog.title' => '離脱の確認',
+      'group.common.leaveConfirmDialog.message' => ({
+        required String groupName,
+      }) => '「${groupName}」から離脱しますか？',
+      'group.shareLinkPage.joinedGroupDialog.title' => 'グループへ参加',
+      'group.shareLinkPage.joinedGroupDialog.message' => 'グループに参加しました。',
+      'group.groupsPage.title' => '参加中のグループ',
+      'group.groupsPage.help' => 'ヘルプ',
+      'group.groupsPage.shareGroupHelpDialog.title' => 'グループの共有/参加',
+      'group.groupsPage.shareGroupHelpDialog.message' => '【グループの共有】 グループから「共有」を行って下さい\n\n【グループへの参加】 共有されたURLをクリックするか、 QRコードを読み取ることで参加できます',
+      'group.groupsPage.createGroup' => 'グループを作成',
+      'group.groupsPage.notJoinGroup' =>
+        'グループに所属していません。 グループを作成するか、 招待されたグループに参加して下さい。',
+      'group.groupPage.limitBreak' => 'ほしい物の登録数制限を解放する',
+      'group.groupPage.appInPurchaseConfirmDialog.title' => '購入の確認',
+      'group.groupPage.appInPurchaseConfirmDialog.message' => ({
+        required String price,
+      }) => '商品を購入すると 表示中のグループに登録できる 欲しい物の制限が解放されます。 (無料版は30個まで)\n価格：¥${price}(無期限)',
+      'group.groupPage.appInPurchaseConfirmDialog.okLabel' => ({
+        required String price,
+      }) => '購入(¥${price})',
+      'group.groupPage.limitBreakPurchased' => '欲しい物の登録数制限が解放されました。(無制限)',
+      'group.groupPage.shareGroup' => '共有',
+      'group.groupPage.shareGroupCaption' => '共有してメンバーを招待しましょう',
+      'group.groupPage.copyLink' => 'コピー',
+      'group.groupPage.copiedLink' => 'コピーしました',
+      'group.groupPage.select' => '選択',
+      'group.groupPage.savedImage' => '画像を保存しました。',
+      'item.common.wishList' => 'ほしいもの',
+      'item.common.status' => 'ステータス',
+      'item.common.wishRank' => 'ほしい度',
+      'item.common.itemName' => 'ほしいものの名前',
+      'item.common.wanterName' => 'ほしい人',
+      'item.common.wanterNameLabel' => 'だれがほしい？',
+      'item.common.memo' => 'メモ',
+      'item.common.wishSeason' => 'いつほしい？',
+      'item.common.wishDate' => 'ほしい日',
+      'item.common.url' => 'URL',
+      'item.common.price' => '価格',
+      'item.common.purchasePlanDate' => 'かう予定の日',
+      'item.common.sentDate' => 'わたした日',
+      'item.common.buyerName' => 'かった人',
+      'item.common.currencyFormat' => ({required int price}) => '¥${price}',
+      'item.common.currencySymbol' => '¥',
+      'item.itemsPage.title' => 'ほしいもの',
+      'item.itemsPage.add' => 'ほしいものを追加',
+      'item.itemsPage.notSelectedGroupDialog.title' => 'グループが選択されていません',
+      'item.itemsPage.notSelectedGroupDialog.message' =>
+        'グループを選択してからほしいものを追加して下さい',
+      'item.itemsPage.account' => 'アカウント',
+      'item.itemsPage.completeChangeGroup' => 'グループを切り替えました。',
+      'item.itemsPage.itemEmpty' => 'ほしいものが見つかりませんでした。',
+      'item.itemsPage.selectNumberText' => ({
+        required int length,
+      }) => '${length}件選択',
+      'item.itemsPage.wishRankFormat' => ({
+        required String value,
+      }) => '星${value}',
+      'item.itemsPage.sortOrder' => '並び替え',
+      'item.itemPage.deletedItem' =>
+        'ほしいものが見つかりませんでした。 削除された可能性があります。\n再度操作して下さい。',
+      'item.itemPage.wishSeason.hint' => '例：クリスマス、誕生日',
+      'item.itemPage.purchaseSection.title' => '購入/購入予定情報',
+      'item.itemPage.purchaseSection.message' => '以降の内容はグループ内の大人にだけ表示されます',
+      'item.itemPage.purchase' => '購入/購入予定',
+      'item.itemPage.transfer.menu' => '別のグループへ',
+      'item.itemPage.transfer.copy' => '別のグループにコピー',
+      'item.itemPage.transfer.move' => '別のグループに移動',
+      'item.itemPage.transfer.selectGroup' => '送り先のグループを選択',
+      'item.itemPage.transfer.noDestination' => 'コピー・移動できる他のグループがありません。',
+      'item.itemPage.transfer.copied' => 'コピーしました。',
+      'item.itemPage.transfer.moved' => '移動しました。',
+      'item.itemEditPage.editTitle' => 'ほしいものを編集',
+      'item.itemEditPage.createTitle' => 'ほしいものを作成',
+      'item.itemEditPage.wishSeason.hint' => '例：クリスマス、誕生日',
+      'item.itemEditPage.wishDate.hint' => '具体的な日付が決まっている場合に入力して下さい',
+      'item.itemEditPage.addUrl' => 'URLを追加',
+      'item.purchasePage.purchase' => '購入/購入予定情報',
+      'item.purchasePage.surprise.label' => 'サプライズ',
+      'item.purchasePage.surprise.caption' => '状況を子供に知られたくない',
+      'item.purchasePage.purchasePlanDate.hint' => '入力すると「購入予定」になります',
+      'item.purchasePage.sentDate.hint' => '入力すると「購入済」になります',
+      'settings.settingsPage.title' => '設定',
+      'settings.settingsPage.account.head' => 'アカウント',
+      'settings.settingsPage.account.profile' => 'プロフィール',
+      'settings.settingsPage.account.group' => 'グループ',
+      'settings.settingsPage.account.account' => 'アカウント',
+      'settings.settingsPage.account.pushNotification.title' => 'プッシュ通知',
+      'settings.settingsPage.account.pushNotification.caption' =>
+        'グループ内でほしいものが追加された場合に通知が受け取れます',
+      'settings.settingsPage.account.wishReminder.title' => 'ほしい日のリマインダー',
+      'settings.settingsPage.account.wishReminder.caption' =>
+        'ほしい日の前に通知を受け取ります',
+      'settings.settingsPage.layout.title' => 'レイアウト',
+      'settings.settingsPage.layout.uiStyle' => 'UIスタイル',
+      'settings.settingsPage.layout.themeMode' => 'テーマモード',
+      'settings.settingsPage.layout.colorTheme' => 'カラー',
+      'settings.settingsPage.help.head' => 'ヘルプ',
+      'settings.settingsPage.help.howToUse' => 'つかい方',
+      'settings.settingsPage.help.contactUs' => 'お問い合わせ',
+      'settings.settingsPage.help.developerX' => '開発者X (旧Twitter)',
+      'settings.settingsPage.help.privacyPolicy' => 'プライバシーポリシー',
+      'settings.settingsPage.help.license' => 'ライセンス',
+      'settings.wishReminderSettingsPage.title' => 'ほしい日のリマインダー',
+      'settings.wishReminderSettingsPage.enabled' => 'リマインダーを受け取る',
+      'settings.wishReminderSettingsPage.description' => '通知を希望する場合だけオンにしてください',
+      'settings.wishReminderSettingsPage.timing.title' => '通知タイミング',
+      'settings.wishReminderSettingsPage.timing.sameDay' => '当日',
+      'settings.wishReminderSettingsPage.timing.dayBefore' => '1日前',
+      'settings.wishReminderSettingsPage.timing.weekBefore' => '1週間前',
+      'settings.wishReminderSettingsPage.audience.title' => '通知対象',
+      'settings.wishReminderSettingsPage.audience.everyone' => '子どもを含む全員を対象にする',
+      'settings.wishReminderSettingsPage.audience.description' =>
+        'オフの場合は大人だけが通知を受け取ります',
+      'settings.accountPage.title' => 'アカウント',
+      'settings.accountPage.link.head' => 'アカウント連携',
+      'settings.accountPage.link.google' => 'Google',
+      'settings.accountPage.link.apple' => 'Apple',
+      'settings.accountPage.other.head' => 'その他',
+      'settings.accountPage.other.logout' => 'ログアウト',
+      'settings.accountPage.other.leave' => '退会',
+      'settings.accountPage.leaveConfirmDialog.title' => '退会しますか？',
+      'settings.accountPage.leaveConfirmDialog.message' =>
+        '本当に退会してもよろしいですか？\nこの操作は元に戻すことができません。',
+      'settings.accountLinkPage.title' => 'アカウント連携',
+      'settings.accountLinkPage.meritDescription.title' =>
+        'アカウント連携を行うことで、\n下記の機能をご利用いただけます。',
+      'settings.accountLinkPage.meritDescription.itemizedMessages.0' =>
+        'クラウドへのデータバックアップ',
+      'settings.accountLinkPage.meritDescription.itemizedMessages.1' =>
+        '複数端末での同時利用',
+      'settings.accountLinkPage.meritDescription.itemizedMessages.2' =>
+        '端末変更に伴うデータ移行',
+      'settings.accountLinkPage.signInWithGoogle' => 'Googleアカウントでサインイン',
+      'settings.accountLinkPage.signInWithApple' => 'Appleアカウントでサインイン',
+      'user.welcomePage.start' => 'はじめる',
+      'user.welcomePage.forFirstTimers' => 'はじめての方はこちら',
+      'user.welcomePage.accountLink' => 'アカウント連携',
+      'user.profilePage.profile' => 'プロフィール',
+      'user.onboardPage.start' => 'はじめる',
+      'user.onboardPage.introduction.title' => 'はじめに',
+      'user.onboardPage.introduction.message' => 'まずはプロフィールを登録しましょう',
+      'user.onboardPage.profile' => 'あなたは？',
+      'user.onboardPage.confirm' => 'あっていますか？',
+      'user.common.name' => '名前',
+      'user.common.nameLabelText' => '名前 または ニックネーム',
+      'user.common.ageGroup' => '年齢層',
+      _ => null,
+    };
+  }
 }
-

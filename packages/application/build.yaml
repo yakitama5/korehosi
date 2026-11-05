@@ -1,6 +1,30 @@
 targets:
   $default:
+    # Slang writes these outputs in a post-process builder.
+    sources:
+      exclude:
+        - lib/i18n/*.g.dart
     builders:
+      slang_build_runner:
+        options:
+          base_locale: ja
+          fallback_strategy: base_locale
+          input_directory: assets/i18n
+          output_directory: lib/i18n
+          translate_var: i18n
+          input_file_pattern: .i18n.yaml
+          namespaces: true
+          lazy: false
+          format:
+            enabled: true
+
+          # Config
+          imports:
+            - "package:flutter/material.dart"
+            - "package:packages_domain/user.dart"
+          contexts:
+            AgeGroup:
+              generate_enum: false
       freezed:
         # https://github.com/dart-lang/build/blob/master/docs/faq.md#how-do-i-avoid-running-builders-on-unnecessary-inputs
         generate_for:

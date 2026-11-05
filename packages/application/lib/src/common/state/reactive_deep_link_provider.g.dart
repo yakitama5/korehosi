@@ -13,7 +13,7 @@ part of 'reactive_deep_link_provider.dart';
 /// ディープリンク(購読)
 
 @ProviderFor(reactiveDeepLink)
-const reactiveDeepLinkProvider = ReactiveDeepLinkProvider._();
+final reactiveDeepLinkProvider = ReactiveDeepLinkProvider._();
 
 /// ディープリンク(購読)
 
@@ -21,7 +21,7 @@ final class ReactiveDeepLinkProvider
     extends $FunctionalProvider<AsyncValue<Uri>, Uri, Stream<Uri>>
     with $FutureModifier<Uri>, $StreamProvider<Uri> {
   /// ディープリンク(購読)
-  const ReactiveDeepLinkProvider._()
+  ReactiveDeepLinkProvider._()
     : super(
         from: null,
         argument: null,

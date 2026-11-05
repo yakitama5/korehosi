@@ -13,7 +13,7 @@ part of 'wanter_name_histories_provider.dart';
 /// ほしい人の履歴を取得する
 
 @ProviderFor(wanterNameHistories)
-const wanterNameHistoriesProvider = WanterNameHistoriesFamily._();
+final wanterNameHistoriesProvider = WanterNameHistoriesFamily._();
 
 /// ほしい人の履歴を取得する
 
@@ -26,7 +26,7 @@ final class WanterNameHistoriesProvider
         >
     with $FutureModifier<List<String>>, $FutureProvider<List<String>> {
   /// ほしい人の履歴を取得する
-  const WanterNameHistoriesProvider._({
+  WanterNameHistoriesProvider._({
     required WanterNameHistoriesFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -77,7 +77,7 @@ String _$wanterNameHistoriesHash() =>
 
 final class WanterNameHistoriesFamily extends $Family
     with $FunctionalFamilyOverride<FutureOr<List<String>>, GroupId> {
-  const WanterNameHistoriesFamily._()
+  WanterNameHistoriesFamily._()
     : super(
         retry: null,
         name: r'wanterNameHistoriesProvider',

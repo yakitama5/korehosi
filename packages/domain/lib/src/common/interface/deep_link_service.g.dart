@@ -13,7 +13,7 @@ part of 'deep_link_service.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(deepLinkService)
-const deepLinkServiceProvider = DeepLinkServiceProvider._();
+final deepLinkServiceProvider = DeepLinkServiceProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -22,7 +22,7 @@ final class DeepLinkServiceProvider
         $FunctionalProvider<DeepLinkService, DeepLinkService, DeepLinkService>
     with $Provider<DeepLinkService> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const DeepLinkServiceProvider._()
+  DeepLinkServiceProvider._()
     : super(
         from: null,
         argument: null,

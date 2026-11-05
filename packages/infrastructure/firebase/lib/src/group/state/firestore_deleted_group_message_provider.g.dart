@@ -13,7 +13,7 @@ part of 'firestore_deleted_group_message_provider.dart';
 /// 削除済通知メッセージコレクションの参照
 
 @ProviderFor(dgroupMessageCollectionRef)
-const dgroupMessageCollectionRefProvider = DgroupMessageCollectionRefFamily._();
+final dgroupMessageCollectionRefProvider = DgroupMessageCollectionRefFamily._();
 
 /// 削除済通知メッセージコレクションの参照
 
@@ -26,7 +26,7 @@ final class DgroupMessageCollectionRefProvider
         >
     with $Provider<CollectionReference<FirestoreGroupMessageModel>> {
   /// 削除済通知メッセージコレクションの参照
-  const DgroupMessageCollectionRefProvider._({
+  DgroupMessageCollectionRefProvider._({
     required DgroupMessageCollectionRefFamily super.from,
     required GroupId super.argument,
   }) : super(
@@ -94,7 +94,7 @@ final class DgroupMessageCollectionRefFamily extends $Family
           CollectionReference<FirestoreGroupMessageModel>,
           GroupId
         > {
-  const DgroupMessageCollectionRefFamily._()
+  DgroupMessageCollectionRefFamily._()
     : super(
         retry: null,
         name: r'dgroupMessageCollectionRefProvider',
@@ -115,7 +115,7 @@ final class DgroupMessageCollectionRefFamily extends $Family
 /// 削除済通知メッセージドキュメントの参照
 
 @ProviderFor(dgroupMessageDocumentRef)
-const dgroupMessageDocumentRefProvider = DgroupMessageDocumentRefFamily._();
+final dgroupMessageDocumentRefProvider = DgroupMessageDocumentRefFamily._();
 
 /// 削除済通知メッセージドキュメントの参照
 
@@ -128,7 +128,7 @@ final class DgroupMessageDocumentRefProvider
         >
     with $Provider<DocumentReference<FirestoreGroupMessageModel>> {
   /// 削除済通知メッセージドキュメントの参照
-  const DgroupMessageDocumentRefProvider._({
+  DgroupMessageDocumentRefProvider._({
     required DgroupMessageDocumentRefFamily super.from,
     required ({GroupId groupId, NotificationMessageId? dnotificationMessageId})
     super.argument,
@@ -206,7 +206,7 @@ final class DgroupMessageDocumentRefFamily extends $Family
           DocumentReference<FirestoreGroupMessageModel>,
           ({GroupId groupId, NotificationMessageId? dnotificationMessageId})
         > {
-  const DgroupMessageDocumentRefFamily._()
+  DgroupMessageDocumentRefFamily._()
     : super(
         retry: null,
         name: r'dgroupMessageDocumentRefProvider',

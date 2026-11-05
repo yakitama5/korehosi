@@ -8,6 +8,7 @@
     "**/*.{dart,js,json,md,ts,yaml,yml}"
   ],
   "ignorePaths": [
+    "third_party/**",
     "**/.dart_tool/**",
     "**/.firebase/**",
     "**/.gradle/**",
@@ -65,6 +66,7 @@
     "flutterfire",
     "fontello",
     "fvmrc",
+    "GHSA",
     "gitmessage",
     "googleusercontent",
     "goldens",

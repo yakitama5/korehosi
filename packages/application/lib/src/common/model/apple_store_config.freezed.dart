@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'apple_store_config.dart';
@@ -9,6 +9,7 @@ part of 'apple_store_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $AppleStoreConfigCopyWith<AppleStoreConfig> get copyWith => _$AppleStoreConfigCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppleStoreConfig&&(identical(other.bundleId, bundleId) || other.bundleId == bundleId)&&(identical(other.appStoreId, appStoreId) || other.appStoreId == appStoreId));
+  final _this = this as AppleStoreConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppleStoreConfig&&(identical(other.bundleId, _this.bundleId) || other.bundleId == _this.bundleId)&&(identical(other.appStoreId, _this.appStoreId) || other.appStoreId == _this.appStoreId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,bundleId,appStoreId);
+int get hashCode {
+  final _this = this as AppleStoreConfig;
+  return Object.hash(runtimeType,_this.bundleId,_this.appStoreId);
+}
 
 @override
 String toString() {
-  return 'AppleStoreConfig(bundleId: $bundleId, appStoreId: $appStoreId)';
+  final _this = this as AppleStoreConfig;
+  return 'AppleStoreConfig(bundleId: ${_this.bundleId}, appStoreId: ${_this.appStoreId})';
 }
 
 
@@ -63,7 +69,7 @@ class _$AppleStoreConfigCopyWithImpl<$Res>
 /// Create a copy of AppleStoreConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? bundleId = null,Object? appStoreId = null,}) {
-  return _then(_self.copyWith(
+  return _then(AppleStoreConfig(
 bundleId: null == bundleId ? _self.bundleId : bundleId // ignore: cast_nullable_to_non_nullable
 as String,appStoreId: null == appStoreId ? _self.appStoreId : appStoreId // ignore: cast_nullable_to_non_nullable
 as String,
@@ -223,16 +229,18 @@ _$AppleStoreConfigCopyWith<_AppleStoreConfig> get copyWith => __$AppleStoreConfi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppleStoreConfig&&(identical(other.bundleId, bundleId) || other.bundleId == bundleId)&&(identical(other.appStoreId, appStoreId) || other.appStoreId == appStoreId));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppleStoreConfig&&(identical(other.bundleId, bundleId) || other.bundleId == bundleId)&&(identical(other.appStoreId, appStoreId) || other.appStoreId == appStoreId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,bundleId,appStoreId);
+int get hashCode {
+    return Object.hash(runtimeType,bundleId,appStoreId);
+}
 
 @override
 String toString() {
-  return 'AppleStoreConfig(bundleId: $bundleId, appStoreId: $appStoreId)';
+    return 'AppleStoreConfig(bundleId: $bundleId, appStoreId: $appStoreId)';
 }
 
 

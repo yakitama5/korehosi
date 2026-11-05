@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'item_analyze_query.dart';
@@ -9,6 +9,7 @@ part of 'item_analyze_query.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ItemAnalyzeQueryCopyWith<ItemAnalyzeQuery> get copyWith => _$ItemAnalyzeQueryCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemAnalyzeQuery&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.buyerName, buyerName) || other.buyerName == buyerName));
+  final _this = this as ItemAnalyzeQuery;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemAnalyzeQuery&&(identical(other.wanterName, _this.wanterName) || other.wanterName == _this.wanterName)&&(identical(other.buyerName, _this.buyerName) || other.buyerName == _this.buyerName));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,wanterName,buyerName);
+int get hashCode {
+  final _this = this as ItemAnalyzeQuery;
+  return Object.hash(runtimeType,_this.wanterName,_this.buyerName);
+}
 
 @override
 String toString() {
-  return 'ItemAnalyzeQuery(wanterName: $wanterName, buyerName: $buyerName)';
+  final _this = this as ItemAnalyzeQuery;
+  return 'ItemAnalyzeQuery(wanterName: ${_this.wanterName}, buyerName: ${_this.buyerName})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ItemAnalyzeQueryCopyWithImpl<$Res>
 /// Create a copy of ItemAnalyzeQuery
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? wanterName = freezed,Object? buyerName = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(ItemAnalyzeQuery(
 wanterName: freezed == wanterName ? _self.wanterName : wanterName // ignore: cast_nullable_to_non_nullable
 as String?,buyerName: freezed == buyerName ? _self.buyerName : buyerName // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -223,16 +229,18 @@ _$ItemAnalyzeQueryCopyWith<_ItemAnalyzeQuery> get copyWith => __$ItemAnalyzeQuer
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemAnalyzeQuery&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.buyerName, buyerName) || other.buyerName == buyerName));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemAnalyzeQuery&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.buyerName, buyerName) || other.buyerName == buyerName));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,wanterName,buyerName);
+int get hashCode {
+    return Object.hash(runtimeType,wanterName,buyerName);
+}
 
 @override
 String toString() {
-  return 'ItemAnalyzeQuery(wanterName: $wanterName, buyerName: $buyerName)';
+    return 'ItemAnalyzeQuery(wanterName: $wanterName, buyerName: $buyerName)';
 }
 
 

@@ -12,7 +12,7 @@ part of 'notification_message_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(notificationMessage)
-const notificationMessageProvider = NotificationMessageProvider._();
+final notificationMessageProvider = NotificationMessageProvider._();
 
 final class NotificationMessageProvider
     extends
@@ -24,7 +24,7 @@ final class NotificationMessageProvider
     with
         $FutureModifier<NotificationMessage>,
         $StreamProvider<NotificationMessage> {
-  const NotificationMessageProvider._()
+  NotificationMessageProvider._()
     : super(
         from: null,
         argument: null,

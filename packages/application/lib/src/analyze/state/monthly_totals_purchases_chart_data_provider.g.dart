@@ -13,7 +13,7 @@ part of 'monthly_totals_purchases_chart_data_provider.dart';
 /// 分析で利用する月別の購入金額のグラフデータを管理
 
 @ProviderFor(monthlyTotalsPurchasesChartData)
-const monthlyTotalsPurchasesChartDataProvider =
+final monthlyTotalsPurchasesChartDataProvider =
     MonthlyTotalsPurchasesChartDataProvider._();
 
 /// 分析で利用する月別の購入金額のグラフデータを管理
@@ -29,7 +29,7 @@ final class MonthlyTotalsPurchasesChartDataProvider
         $FutureModifier<MonthlyTotalsPurchasesChartData>,
         $FutureProvider<MonthlyTotalsPurchasesChartData> {
   /// 分析で利用する月別の購入金額のグラフデータを管理
-  const MonthlyTotalsPurchasesChartDataProvider._()
+  MonthlyTotalsPurchasesChartDataProvider._()
     : super(
         from: null,
         argument: null,

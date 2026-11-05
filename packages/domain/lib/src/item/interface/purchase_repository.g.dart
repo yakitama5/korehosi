@@ -13,7 +13,7 @@ part of 'purchase_repository.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(purchaseRepository)
-const purchaseRepositoryProvider = PurchaseRepositoryProvider._();
+final purchaseRepositoryProvider = PurchaseRepositoryProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -26,7 +26,7 @@ final class PurchaseRepositoryProvider
         >
     with $Provider<PurchaseRepository> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const PurchaseRepositoryProvider._()
+  PurchaseRepositoryProvider._()
     : super(
         from: null,
         argument: null,

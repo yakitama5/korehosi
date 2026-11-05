@@ -14,7 +14,7 @@ part of 'revenue_cat_provider.dart';
 /// テスト時にDIすることを考慮して、Providerとして定義
 
 @ProviderFor(revenueCat)
-const revenueCatProvider = RevenueCatProvider._();
+final revenueCatProvider = RevenueCatProvider._();
 
 /// RevenueCat
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -24,7 +24,7 @@ final class RevenueCatProvider
     with $Provider<Purchases> {
   /// RevenueCat
   /// テスト時にDIすることを考慮して、Providerとして定義
-  const RevenueCatProvider._()
+  RevenueCatProvider._()
     : super(
         from: null,
         argument: null,

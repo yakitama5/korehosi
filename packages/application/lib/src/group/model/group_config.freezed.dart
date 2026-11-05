@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'group_config.dart';
@@ -9,6 +9,7 @@ part of 'group_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $GroupConfigCopyWith<GroupConfig> get copyWith => _$GroupConfigCopyWithImpl<Grou
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GroupConfig&&(identical(other.initialPremium, initialPremium) || other.initialPremium == initialPremium)&&(identical(other.initialItemCount, initialItemCount) || other.initialItemCount == initialItemCount)&&(identical(other.validDays, validDays) || other.validDays == validDays));
+  final _this = this as GroupConfig;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GroupConfig&&(identical(other.initialPremium, _this.initialPremium) || other.initialPremium == _this.initialPremium)&&(identical(other.initialItemCount, _this.initialItemCount) || other.initialItemCount == _this.initialItemCount)&&(identical(other.validDays, _this.validDays) || other.validDays == _this.validDays));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,initialPremium,initialItemCount,validDays);
+int get hashCode {
+  final _this = this as GroupConfig;
+  return Object.hash(runtimeType,_this.initialPremium,_this.initialItemCount,_this.validDays);
+}
 
 @override
 String toString() {
-  return 'GroupConfig(initialPremium: $initialPremium, initialItemCount: $initialItemCount, validDays: $validDays)';
+  final _this = this as GroupConfig;
+  return 'GroupConfig(initialPremium: ${_this.initialPremium}, initialItemCount: ${_this.initialItemCount}, validDays: ${_this.validDays})';
 }
 
 
@@ -63,7 +69,7 @@ class _$GroupConfigCopyWithImpl<$Res>
 /// Create a copy of GroupConfig
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? initialPremium = null,Object? initialItemCount = null,Object? validDays = null,}) {
-  return _then(_self.copyWith(
+  return _then(GroupConfig(
 initialPremium: null == initialPremium ? _self.initialPremium : initialPremium // ignore: cast_nullable_to_non_nullable
 as bool,initialItemCount: null == initialItemCount ? _self.initialItemCount : initialItemCount // ignore: cast_nullable_to_non_nullable
 as int,validDays: null == validDays ? _self.validDays : validDays // ignore: cast_nullable_to_non_nullable
@@ -225,16 +231,18 @@ _$GroupConfigCopyWith<_GroupConfig> get copyWith => __$GroupConfigCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GroupConfig&&(identical(other.initialPremium, initialPremium) || other.initialPremium == initialPremium)&&(identical(other.initialItemCount, initialItemCount) || other.initialItemCount == initialItemCount)&&(identical(other.validDays, validDays) || other.validDays == validDays));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _GroupConfig&&(identical(other.initialPremium, initialPremium) || other.initialPremium == initialPremium)&&(identical(other.initialItemCount, initialItemCount) || other.initialItemCount == initialItemCount)&&(identical(other.validDays, validDays) || other.validDays == validDays));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,initialPremium,initialItemCount,validDays);
+int get hashCode {
+    return Object.hash(runtimeType,initialPremium,initialItemCount,validDays);
+}
 
 @override
 String toString() {
-  return 'GroupConfig(initialPremium: $initialPremium, initialItemCount: $initialItemCount, validDays: $validDays)';
+    return 'GroupConfig(initialPremium: $initialPremium, initialItemCount: $initialItemCount, validDays: $validDays)';
 }
 
 

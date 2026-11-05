@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'selected_image_model.dart';
@@ -9,6 +9,7 @@ part of 'selected_image_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $SelectedImageModelCopyWith<SelectedImageModel> get copyWith => _$SelectedImageM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
+  final _this = this as SelectedImageModel;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectedImageModel&&(identical(other.savedImage, _this.savedImage) || other.savedImage == _this.savedImage)&&(identical(other.uploadFile, _this.uploadFile) || other.uploadFile == _this.uploadFile));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,savedImage,uploadFile);
+int get hashCode {
+  final _this = this as SelectedImageModel;
+  return Object.hash(runtimeType,_this.savedImage,_this.uploadFile);
+}
 
 @override
 String toString() {
-  return 'SelectedImageModel(savedImage: $savedImage, uploadFile: $uploadFile)';
+  final _this = this as SelectedImageModel;
+  return 'SelectedImageModel(savedImage: ${_this.savedImage}, uploadFile: ${_this.uploadFile})';
 }
 
 
@@ -63,7 +69,7 @@ class _$SelectedImageModelCopyWithImpl<$Res>
 /// Create a copy of SelectedImageModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? savedImage = freezed,Object? uploadFile = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(SelectedImageModel(
 savedImage: freezed == savedImage ? _self.savedImage : savedImage // ignore: cast_nullable_to_non_nullable
 as ItemImage?,uploadFile: freezed == uploadFile ? _self.uploadFile : uploadFile // ignore: cast_nullable_to_non_nullable
 as XFile?,
@@ -235,16 +241,18 @@ _$SelectedImageModelCopyWith<_SelectedImageModel> get copyWith => __$SelectedIma
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectedImageModel&&(identical(other.savedImage, savedImage) || other.savedImage == savedImage)&&(identical(other.uploadFile, uploadFile) || other.uploadFile == uploadFile));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,savedImage,uploadFile);
+int get hashCode {
+    return Object.hash(runtimeType,savedImage,uploadFile);
+}
 
 @override
 String toString() {
-  return 'SelectedImageModel(savedImage: $savedImage, uploadFile: $uploadFile)';
+    return 'SelectedImageModel(savedImage: $savedImage, uploadFile: $uploadFile)';
 }
 
 

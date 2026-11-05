@@ -13,7 +13,7 @@ part of 'initial_notification_provider.dart';
 /// プッシュ通知でアプリを表示した際の初期メッセージ
 
 @ProviderFor(initialNotificationMessage)
-const initialNotificationMessageProvider =
+final initialNotificationMessageProvider =
     InitialNotificationMessageProvider._();
 
 /// プッシュ通知でアプリを表示した際の初期メッセージ
@@ -29,7 +29,7 @@ final class InitialNotificationMessageProvider
         $FutureModifier<NotificationMessage?>,
         $FutureProvider<NotificationMessage?> {
   /// プッシュ通知でアプリを表示した際の初期メッセージ
-  const InitialNotificationMessageProvider._()
+  InitialNotificationMessageProvider._()
     : super(
         from: null,
         argument: null,

@@ -14,7 +14,7 @@ part of 'theme_color_notifier_provider.dart';
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
 
 @ProviderFor(ThemeColorNotifier)
-const themeColorProvider = ThemeColorNotifierProvider._();
+final themeColorProvider = ThemeColorNotifierProvider._();
 
 /// テーマカラーを管理するProvider
 /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
@@ -22,7 +22,7 @@ final class ThemeColorNotifierProvider
     extends $NotifierProvider<ThemeColorNotifier, ThemeColor> {
   /// テーマカラーを管理するProvider
   /// SharedPreferencesの同期を待たずにUIに反映するため、Notifierを利用している
-  const ThemeColorNotifierProvider._()
+  ThemeColorNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -59,8 +59,7 @@ abstract class _$ThemeColorNotifier extends $Notifier<ThemeColor> {
   ThemeColor build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<ThemeColor, ThemeColor>;
     final element =
         ref.element
@@ -70,6 +69,6 @@ abstract class _$ThemeColorNotifier extends $Notifier<ThemeColor> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

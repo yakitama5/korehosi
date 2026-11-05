@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'item.dart';
@@ -9,6 +9,7 @@ part of 'item.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $ItemCopyWith<Item> get copyWith => _$ItemCopyWithImpl<Item>(this as Item, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.images, images)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&(identical(other.wishDate, wishDate) || other.wishDate == wishDate)&&const DeepCollectionEquality().equals(other.urls, urls)&&const DeepCollectionEquality().equals(other.urlThumbnails, urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchase, purchase) || other.purchase == purchase)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  final _this = this as Item;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Item&&(identical(other.id, _this.id) || other.id == _this.id)&&const DeepCollectionEquality().equals(other.images, _this.images)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.wanterName, _this.wanterName) || other.wanterName == _this.wanterName)&&(identical(other.wishRank, _this.wishRank) || other.wishRank == _this.wishRank)&&(identical(other.wishSeason, _this.wishSeason) || other.wishSeason == _this.wishSeason)&&(identical(other.wishDate, _this.wishDate) || other.wishDate == _this.wishDate)&&const DeepCollectionEquality().equals(other.urls, _this.urls)&&const DeepCollectionEquality().equals(other.urlThumbnails, _this.urlThumbnails)&&(identical(other.memo, _this.memo) || other.memo == _this.memo)&&(identical(other.purchase, _this.purchase) || other.purchase == _this.purchase)&&(identical(other.purchaseStatus, _this.purchaseStatus) || other.purchaseStatus == _this.purchaseStatus)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(images),name,wanterName,wishRank,wishSeason,wishDate,const DeepCollectionEquality().hash(urls),const DeepCollectionEquality().hash(urlThumbnails),memo,purchase,purchaseStatus,createdAt,updatedAt);
+int get hashCode {
+  final _this = this as Item;
+  return Object.hash(runtimeType,_this.id,const DeepCollectionEquality().hash(_this.images),_this.name,_this.wanterName,_this.wishRank,_this.wishSeason,_this.wishDate,const DeepCollectionEquality().hash(_this.urls),const DeepCollectionEquality().hash(_this.urlThumbnails),_this.memo,_this.purchase,_this.purchaseStatus,_this.createdAt,_this.updatedAt);
+}
 
 @override
 String toString() {
-  return 'Item(id: $id, images: $images, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, wishDate: $wishDate, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchase: $purchase, purchaseStatus: $purchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
+  final _this = this as Item;
+  return 'Item(id: ${_this.id}, images: ${_this.images}, name: ${_this.name}, wanterName: ${_this.wanterName}, wishRank: ${_this.wishRank}, wishSeason: ${_this.wishSeason}, wishDate: ${_this.wishDate}, urls: ${_this.urls}, urlThumbnails: ${_this.urlThumbnails}, memo: ${_this.memo}, purchase: ${_this.purchase}, purchaseStatus: ${_this.purchaseStatus}, createdAt: ${_this.createdAt}, updatedAt: ${_this.updatedAt})';
 }
 
 
@@ -63,7 +69,7 @@ class _$ItemCopyWithImpl<$Res>
 /// Create a copy of Item
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? images = freezed,Object? name = null,Object? wanterName = freezed,Object? wishRank = null,Object? wishSeason = freezed,Object? wishDate = freezed,Object? urls = freezed,Object? urlThumbnails = freezed,Object? memo = freezed,Object? purchase = freezed,Object? purchaseStatus = null,Object? createdAt = null,Object? updatedAt = null,}) {
-  return _then(_self.copyWith(
+  return _then(Item(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as ItemId,images: freezed == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
 as List<ItemImage>?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -231,7 +237,7 @@ return $default(_that.id,_that.images,_that.name,_that.wanterName,_that.wishRank
 
 
 class _Item implements Item {
-  const _Item({required this.id, final  List<ItemImage>? images, required this.name, this.wanterName, required this.wishRank, this.wishSeason, this.wishDate, final  List<String>? urls, final  Map<String, String?>? urlThumbnails, this.memo, this.purchase, required this.purchaseStatus, required this.createdAt, required this.updatedAt}): _images = images,_urls = urls,_urlThumbnails = urlThumbnails;
+  const _Item({required this.id,  List<ItemImage>? images, required this.name, this.wanterName, required this.wishRank, this.wishSeason, this.wishDate,  List<String>? urls,  Map<String, String?>? urlThumbnails, this.memo, this.purchase, required this.purchaseStatus, required this.createdAt, required this.updatedAt}): _images = images,_urls = urls,_urlThumbnails = urlThumbnails;
   
 
 @override final  ItemId id;
@@ -283,16 +289,18 @@ _$ItemCopyWith<_Item> get copyWith => __$ItemCopyWithImpl<_Item>(this, _$identit
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other._images, _images)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&(identical(other.wishDate, wishDate) || other.wishDate == wishDate)&&const DeepCollectionEquality().equals(other._urls, _urls)&&const DeepCollectionEquality().equals(other._urlThumbnails, _urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchase, purchase) || other.purchase == purchase)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Item&&(identical(other.id, id) || other.id == id)&&const DeepCollectionEquality().equals(other.images, _images)&&(identical(other.name, name) || other.name == name)&&(identical(other.wanterName, wanterName) || other.wanterName == wanterName)&&(identical(other.wishRank, wishRank) || other.wishRank == wishRank)&&(identical(other.wishSeason, wishSeason) || other.wishSeason == wishSeason)&&(identical(other.wishDate, wishDate) || other.wishDate == wishDate)&&const DeepCollectionEquality().equals(other.urls, _urls)&&const DeepCollectionEquality().equals(other.urlThumbnails, _urlThumbnails)&&(identical(other.memo, memo) || other.memo == memo)&&(identical(other.purchase, purchase) || other.purchase == purchase)&&(identical(other.purchaseStatus, purchaseStatus) || other.purchaseStatus == purchaseStatus)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_images),name,wanterName,wishRank,wishSeason,wishDate,const DeepCollectionEquality().hash(_urls),const DeepCollectionEquality().hash(_urlThumbnails),memo,purchase,purchaseStatus,createdAt,updatedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,const DeepCollectionEquality().hash(_images),name,wanterName,wishRank,wishSeason,wishDate,const DeepCollectionEquality().hash(_urls),const DeepCollectionEquality().hash(_urlThumbnails),memo,purchase,purchaseStatus,createdAt,updatedAt);
+}
 
 @override
 String toString() {
-  return 'Item(id: $id, images: $images, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, wishDate: $wishDate, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchase: $purchase, purchaseStatus: $purchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Item(id: $id, images: $images, name: $name, wanterName: $wanterName, wishRank: $wishRank, wishSeason: $wishSeason, wishDate: $wishDate, urls: $urls, urlThumbnails: $urlThumbnails, memo: $memo, purchase: $purchase, purchaseStatus: $purchaseStatus, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 

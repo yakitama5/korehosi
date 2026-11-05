@@ -12,11 +12,11 @@ part of 'item_analyze_query_notifier_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(ItemAnalyzeQueryNotifier)
-const itemAnalyzeQueryProvider = ItemAnalyzeQueryNotifierProvider._();
+final itemAnalyzeQueryProvider = ItemAnalyzeQueryNotifierProvider._();
 
 final class ItemAnalyzeQueryNotifierProvider
     extends $NotifierProvider<ItemAnalyzeQueryNotifier, ItemAnalyzeQuery> {
-  const ItemAnalyzeQueryNotifierProvider._()
+  ItemAnalyzeQueryNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -50,8 +50,7 @@ abstract class _$ItemAnalyzeQueryNotifier extends $Notifier<ItemAnalyzeQuery> {
   ItemAnalyzeQuery build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<ItemAnalyzeQuery, ItemAnalyzeQuery>;
     final element =
         ref.element
@@ -61,6 +60,6 @@ abstract class _$ItemAnalyzeQueryNotifier extends $Notifier<ItemAnalyzeQuery> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

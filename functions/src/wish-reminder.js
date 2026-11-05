@@ -1,5 +1,3 @@
-/* eslint-disable valid-jsdoc */
-
 const {createHash} = require('node:crypto');
 
 const DEFAULT_TIME_ZONE = 'Asia/Tokyo';

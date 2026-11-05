@@ -13,13 +13,13 @@ part of 'items_search_query_notifier_provider.dart';
 /// ほしいものの検索条件を管理するProvider
 
 @ProviderFor(ItemsSearchQueryNotifier)
-const itemsSearchQueryProvider = ItemsSearchQueryNotifierProvider._();
+final itemsSearchQueryProvider = ItemsSearchQueryNotifierProvider._();
 
 /// ほしいものの検索条件を管理するProvider
 final class ItemsSearchQueryNotifierProvider
     extends $NotifierProvider<ItemsSearchQueryNotifier, ItemsSearchQuery> {
   /// ほしいものの検索条件を管理するProvider
-  const ItemsSearchQueryNotifierProvider._()
+  ItemsSearchQueryNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -55,8 +55,7 @@ abstract class _$ItemsSearchQueryNotifier extends $Notifier<ItemsSearchQuery> {
   ItemsSearchQuery build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<ItemsSearchQuery, ItemsSearchQuery>;
     final element =
         ref.element
@@ -66,6 +65,6 @@ abstract class _$ItemsSearchQueryNotifier extends $Notifier<ItemsSearchQuery> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

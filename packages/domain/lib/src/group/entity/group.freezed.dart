@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'group.dart';
@@ -9,6 +9,7 @@ part of 'group.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -25,16 +26,21 @@ $GroupCopyWith<Group> get copyWith => _$GroupCopyWithImpl<Group>(this as Group, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Group&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.joinUids, joinUids)&&(identical(other.ownerUid, ownerUid) || other.ownerUid == ownerUid)&&(identical(other.itemCount, itemCount) || other.itemCount == itemCount)&&(identical(other.premium, premium) || other.premium == premium)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+  final _this = this as Group;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Group&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.name, _this.name) || other.name == _this.name)&&const DeepCollectionEquality().equals(other.joinUids, _this.joinUids)&&(identical(other.ownerUid, _this.ownerUid) || other.ownerUid == _this.ownerUid)&&(identical(other.itemCount, _this.itemCount) || other.itemCount == _this.itemCount)&&(identical(other.premium, _this.premium) || other.premium == _this.premium)&&(identical(other.createdAt, _this.createdAt) || other.createdAt == _this.createdAt)&&(identical(other.updatedAt, _this.updatedAt) || other.updatedAt == _this.updatedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(joinUids),ownerUid,itemCount,premium,createdAt,updatedAt);
+int get hashCode {
+  final _this = this as Group;
+  return Object.hash(runtimeType,_this.id,_this.name,const DeepCollectionEquality().hash(_this.joinUids),_this.ownerUid,_this.itemCount,_this.premium,_this.createdAt,_this.updatedAt);
+}
 
 @override
 String toString() {
-  return 'Group(id: $id, name: $name, joinUids: $joinUids, ownerUid: $ownerUid, itemCount: $itemCount, premium: $premium, createdAt: $createdAt, updatedAt: $updatedAt)';
+  final _this = this as Group;
+  return 'Group(id: ${_this.id}, name: ${_this.name}, joinUids: ${_this.joinUids}, ownerUid: ${_this.ownerUid}, itemCount: ${_this.itemCount}, premium: ${_this.premium}, createdAt: ${_this.createdAt}, updatedAt: ${_this.updatedAt})';
 }
 
 
@@ -63,7 +69,7 @@ class _$GroupCopyWithImpl<$Res>
 /// Create a copy of Group
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? joinUids = null,Object? ownerUid = null,Object? itemCount = freezed,Object? premium = null,Object? createdAt = null,Object? updatedAt = null,}) {
-  return _then(_self.copyWith(
+  return _then(Group(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as GroupId,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,joinUids: null == joinUids ? _self.joinUids : joinUids // ignore: cast_nullable_to_non_nullable
@@ -213,7 +219,7 @@ return $default(_that.id,_that.name,_that.joinUids,_that.ownerUid,_that.itemCoun
 
 
 class _Group implements Group {
-  const _Group({required this.id, required this.name, required final  List<UserId> joinUids, required this.ownerUid, this.itemCount, required this.premium, required this.createdAt, required this.updatedAt}): _joinUids = joinUids;
+  const _Group({required this.id, required this.name, required  List<UserId> joinUids, required this.ownerUid, this.itemCount, required this.premium, required this.createdAt, required this.updatedAt}): _joinUids = joinUids;
   
 
 @override final  GroupId id;
@@ -241,16 +247,18 @@ _$GroupCopyWith<_Group> get copyWith => __$GroupCopyWithImpl<_Group>(this, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Group&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._joinUids, _joinUids)&&(identical(other.ownerUid, ownerUid) || other.ownerUid == ownerUid)&&(identical(other.itemCount, itemCount) || other.itemCount == itemCount)&&(identical(other.premium, premium) || other.premium == premium)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Group&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.joinUids, _joinUids)&&(identical(other.ownerUid, ownerUid) || other.ownerUid == ownerUid)&&(identical(other.itemCount, itemCount) || other.itemCount == itemCount)&&(identical(other.premium, premium) || other.premium == premium)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(_joinUids),ownerUid,itemCount,premium,createdAt,updatedAt);
+int get hashCode {
+    return Object.hash(runtimeType,id,name,const DeepCollectionEquality().hash(_joinUids),ownerUid,itemCount,premium,createdAt,updatedAt);
+}
 
 @override
 String toString() {
-  return 'Group(id: $id, name: $name, joinUids: $joinUids, ownerUid: $ownerUid, itemCount: $itemCount, premium: $premium, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Group(id: $id, name: $name, joinUids: $joinUids, ownerUid: $ownerUid, itemCount: $itemCount, premium: $premium, createdAt: $createdAt, updatedAt: $updatedAt)';
 }
 
 

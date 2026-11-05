@@ -13,7 +13,7 @@ part of 'has_current_group_provider.dart';
 /// 現在のグループが選択されているか否か
 
 @ProviderFor(hasCurrentGroup)
-const hasCurrentGroupProvider = HasCurrentGroupProvider._();
+final hasCurrentGroupProvider = HasCurrentGroupProvider._();
 
 /// 現在のグループが選択されているか否か
 
@@ -21,7 +21,7 @@ final class HasCurrentGroupProvider
     extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
     with $FutureModifier<bool>, $FutureProvider<bool> {
   /// 現在のグループが選択されているか否か
-  const HasCurrentGroupProvider._()
+  HasCurrentGroupProvider._()
     : super(
         from: null,
         argument: null,

@@ -13,7 +13,7 @@ part of 'messaging_service.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(messagingService)
-const messagingServiceProvider = MessagingServiceProvider._();
+final messagingServiceProvider = MessagingServiceProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -26,7 +26,7 @@ final class MessagingServiceProvider
         >
     with $Provider<MessagingService> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const MessagingServiceProvider._()
+  MessagingServiceProvider._()
     : super(
         from: null,
         argument: null,

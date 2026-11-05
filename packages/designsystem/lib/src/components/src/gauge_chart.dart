@@ -45,7 +45,7 @@ class GaugeChart extends HookWidget {
             value: value,
             axis: GaugeAxis(
               max: maxValue,
-              degrees: 360,
+              sweepDegrees: 360,
               pointer: const GaugePointer.circle(
                 radius: 0,
                 color: Colors.white,
@@ -57,8 +57,8 @@ class GaugeChart extends HookWidget {
                     ? Colors.transparent
                     : color ?? cs.primary,
               ),
-              segments: [
-                GaugeSegment(
+              zones: [
+                GaugeZone(
                   from: minValue,
                   to: maxValue,
                   color: emptyColor ?? cs.surfaceContainer,

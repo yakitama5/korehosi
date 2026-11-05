@@ -11,6 +11,10 @@ import 'package:packages_dependency_override/dependency_override.dart';
 import 'package:packages_designsystem/i18n.dart';
 
 Future<void> main() async {
+  if (const bool.fromEnvironment('devicePreview')) {
+    DevicePreview.enable();
+  }
+
   // アプリの初期処理
   final initializedResult = await AppInitializer.initialize();
 
@@ -37,8 +41,6 @@ Future<void> main() async {
           _AppTranslationProvider(),
           DesignsystemTranslationProvider(),
           ApplicationTranslationProvider(),
-
-          _DevicePreviewWrapper(),
         ],
         child: const App(),
       ),
@@ -52,17 +54,4 @@ final class _AppTranslationProvider extends SingleChildStatelessWidget {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) =>
       TranslationProvider(child: child ?? const SizedBox.shrink());
-}
-
-final class _DevicePreviewWrapper extends SingleChildStatelessWidget {
-  const _DevicePreviewWrapper();
-  @override
-  Widget buildWithChild(BuildContext context, Widget? child) {
-    const enableDevicePreview = bool.fromEnvironment('devicePreview');
-
-    return DevicePreview(
-      enabled: enableDevicePreview,
-      builder: (context) => child ?? const SizedBox.shrink(),
-    );
-  }
 }

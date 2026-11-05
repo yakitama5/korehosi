@@ -228,9 +228,11 @@ class FirebaseUserRepository implements UserRepository {
       // 現在のユーザー情報があれば連携する
       final current = _currentUser;
       if (current != null) {
-        return current.linkWithCredential(credential);
+        return await current.linkWithCredential(credential);
       } else {
-        return ref.read(firebaseAuthProvider).signInWithCredential(credential);
+        return await ref
+            .read(firebaseAuthProvider)
+            .signInWithCredential(credential);
       }
     } on Exception catch (error) {
       logger.e(error.toString());

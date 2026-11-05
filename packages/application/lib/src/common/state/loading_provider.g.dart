@@ -13,13 +13,13 @@ part of 'loading_provider.dart';
 /// アプリ全体で共通するローディング表示を管理
 
 @ProviderFor(LoadingNotifier)
-const loadingProvider = LoadingNotifierProvider._();
+final loadingProvider = LoadingNotifierProvider._();
 
 /// アプリ全体で共通するローディング表示を管理
 final class LoadingNotifierProvider
     extends $NotifierProvider<LoadingNotifier, bool> {
   /// アプリ全体で共通するローディング表示を管理
-  const LoadingNotifierProvider._()
+  LoadingNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -54,8 +54,7 @@ abstract class _$LoadingNotifier extends $Notifier<bool> {
   bool build();
   @$mustCallSuper
   @override
-  void runBuild() {
-    final created = build();
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<bool, bool>;
     final element =
         ref.element
@@ -65,6 +64,6 @@ abstract class _$LoadingNotifier extends $Notifier<bool> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    return element.handleCreate(ref, build);
   }
 }

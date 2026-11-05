@@ -12,7 +12,7 @@ part of 'app_maintenance_status_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(appMaintenanceStatus)
-const appMaintenanceStatusProvider = AppMaintenanceStatusProvider._();
+final appMaintenanceStatusProvider = AppMaintenanceStatusProvider._();
 
 final class AppMaintenanceStatusProvider
     extends
@@ -24,7 +24,7 @@ final class AppMaintenanceStatusProvider
     with
         $FutureModifier<AppMaintenanceStatus>,
         $StreamProvider<AppMaintenanceStatus> {
-  const AppMaintenanceStatusProvider._()
+  AppMaintenanceStatusProvider._()
     : super(
         from: null,
         argument: null,

@@ -12,12 +12,12 @@ part of 'force_update_version_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(forceUpdateVersion)
-const forceUpdateVersionProvider = ForceUpdateVersionProvider._();
+final forceUpdateVersionProvider = ForceUpdateVersionProvider._();
 
 final class ForceUpdateVersionProvider
     extends $FunctionalProvider<AsyncValue<Version>, Version, Stream<Version>>
     with $FutureModifier<Version>, $StreamProvider<Version> {
-  const ForceUpdateVersionProvider._()
+  ForceUpdateVersionProvider._()
     : super(
         from: null,
         argument: null,

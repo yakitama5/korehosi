@@ -12,7 +12,7 @@ part of 'app_update_status_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(appUpdateStatus)
-const appUpdateStatusProvider = AppUpdateStatusProvider._();
+final appUpdateStatusProvider = AppUpdateStatusProvider._();
 
 final class AppUpdateStatusProvider
     extends
@@ -22,7 +22,7 @@ final class AppUpdateStatusProvider
           FutureOr<AppUpdateStatus>
         >
     with $FutureModifier<AppUpdateStatus>, $FutureProvider<AppUpdateStatus> {
-  const AppUpdateStatusProvider._()
+  AppUpdateStatusProvider._()
     : super(
         from: null,
         argument: null,

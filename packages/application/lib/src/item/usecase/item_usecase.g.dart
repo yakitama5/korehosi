@@ -12,12 +12,12 @@ part of 'item_usecase.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(itemUsecase)
-const itemUsecaseProvider = ItemUsecaseProvider._();
+final itemUsecaseProvider = ItemUsecaseProvider._();
 
 final class ItemUsecaseProvider
     extends $FunctionalProvider<ItemUsecase, ItemUsecase, ItemUsecase>
     with $Provider<ItemUsecase> {
-  const ItemUsecaseProvider._()
+  ItemUsecaseProvider._()
     : super(
         from: null,
         argument: null,

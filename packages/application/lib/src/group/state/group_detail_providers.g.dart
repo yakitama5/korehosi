@@ -14,7 +14,7 @@ part of 'group_detail_providers.dart';
 /// `override`前提の利用を強制する
 
 @ProviderFor(detailPageGroupId)
-const _groupIdProvider = DetailPageGroupIdProvider._();
+final _groupIdProvider = DetailPageGroupIdProvider._();
 
 /// 明細表示対象となるグループのIDを管理するProvider
 /// `override`前提の利用を強制する
@@ -24,7 +24,7 @@ final class DetailPageGroupIdProvider
     with $Provider<GroupId?> {
   /// 明細表示対象となるグループのIDを管理するProvider
   /// `override`前提の利用を強制する
-  const DetailPageGroupIdProvider._()
+  DetailPageGroupIdProvider._()
     : super(
         from: null,
         argument: null,
@@ -63,7 +63,7 @@ String _$detailPageGroupIdHash() => r'9ff9f4e14f1fea43d63250d653b80bf9dfb6cfcb';
 /// `_groupIdProvider`に依存する
 
 @ProviderFor(detailPageGroup)
-const _groupProvider = DetailPageGroupProvider._();
+final _groupProvider = DetailPageGroupProvider._();
 
 /// 明細表示対象となるグループのEntityを管理するProvider
 /// `_groupIdProvider`に依存する
@@ -73,20 +73,20 @@ final class DetailPageGroupProvider
     with $FutureModifier<Group?>, $FutureProvider<Group?> {
   /// 明細表示対象となるグループのEntityを管理するProvider
   /// `_groupIdProvider`に依存する
-  const DetailPageGroupProvider._()
+  DetailPageGroupProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'_groupProvider',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[_groupIdProvider],
-        $allTransitiveDependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[_groupIdProvider],
+        $allTransitiveDependencies: <ProviderOrFamily>[
           DetailPageGroupProvider.$allTransitiveDependencies0,
         ],
       );
 
-  static const $allTransitiveDependencies0 = _groupIdProvider;
+  static final $allTransitiveDependencies0 = _groupIdProvider;
 
   @override
   String debugGetCreateSourceHash() => _$detailPageGroupHash();
@@ -108,7 +108,7 @@ String _$detailPageGroupHash() => r'd6814e834b351cbec8928dbed0f08c1ed775f8e3';
 /// `_groupIdProvider`に依存する
 
 @ProviderFor(detailPageUsers)
-const _usersProvider = DetailPageUsersProvider._();
+final _usersProvider = DetailPageUsersProvider._();
 
 /// グループに参加中のユーザーを管理するProvider
 /// `_groupIdProvider`に依存する
@@ -123,20 +123,20 @@ final class DetailPageUsersProvider
     with $FutureModifier<List<User>>, $FutureProvider<List<User>> {
   /// グループに参加中のユーザーを管理するProvider
   /// `_groupIdProvider`に依存する
-  const DetailPageUsersProvider._()
+  DetailPageUsersProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
         name: r'_usersProvider',
         isAutoDispose: true,
-        dependencies: const <ProviderOrFamily>[_groupIdProvider],
-        $allTransitiveDependencies: const <ProviderOrFamily>[
+        dependencies: <ProviderOrFamily>[_groupIdProvider],
+        $allTransitiveDependencies: <ProviderOrFamily>[
           DetailPageUsersProvider.$allTransitiveDependencies0,
         ],
       );
 
-  static const $allTransitiveDependencies0 = _groupIdProvider;
+  static final $allTransitiveDependencies0 = _groupIdProvider;
 
   @override
   String debugGetCreateSourceHash() => _$detailPageUsersHash();

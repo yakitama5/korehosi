@@ -12,12 +12,12 @@ part of 'fcm_config_provider.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(fcmConfig)
-const fcmConfigProvider = FcmConfigProvider._();
+final fcmConfigProvider = FcmConfigProvider._();
 
 final class FcmConfigProvider
     extends $FunctionalProvider<FCMConfig, FCMConfig, FCMConfig>
     with $Provider<FCMConfig> {
-  const FcmConfigProvider._()
+  FcmConfigProvider._()
     : super(
         from: null,
         argument: null,

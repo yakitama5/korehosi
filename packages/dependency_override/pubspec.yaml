@@ -4,7 +4,7 @@ publish_to: "none"
 version: 0.0.1
 
 environment:
-  sdk: ^3.12.2
+  sdk: ^3.13.7
 
 dependencies:
   infrastructure_branch:
@@ -19,12 +19,9 @@ dependencies:
     path: ../infrastructure/shared_preferences
   packages_domain:
     path: ../domain
-  riverpod: ^3.0.3
+  riverpod: ^3.4.3
 
 dev_dependencies:
-  custom_lint: ^0.8.1
-  nilts: ^0.25.1
-  pedantic_mono: ^1.35.0
-  riverpod_lint: ^3.0.3
+  pedantic_mono: ^1.38.1
 
 resolution: workspace

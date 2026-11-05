@@ -14,7 +14,7 @@ part of 'firebase_functions_provider.dart';
 /// テスト時にDIすることを考慮して、Providerとして定義
 
 @ProviderFor(firebaseFunctions)
-const firebaseFunctionsProvider = FirebaseFunctionsProvider._();
+final firebaseFunctionsProvider = FirebaseFunctionsProvider._();
 
 /// Firebase Functions
 /// テスト時にDIすることを考慮して、Providerとして定義
@@ -29,7 +29,7 @@ final class FirebaseFunctionsProvider
     with $Provider<FirebaseFunctions> {
   /// Firebase Functions
   /// テスト時にDIすることを考慮して、Providerとして定義
-  const FirebaseFunctionsProvider._()
+  FirebaseFunctionsProvider._()
     : super(
         from: null,
         argument: null,

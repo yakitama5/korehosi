@@ -13,7 +13,7 @@ part of 'analytics_service.dart';
 /// DI用 (依存性逆転のためドメイン層に定義)
 
 @ProviderFor(analyticsService)
-const analyticsServiceProvider = AnalyticsServiceProvider._();
+final analyticsServiceProvider = AnalyticsServiceProvider._();
 
 /// DI用 (依存性逆転のためドメイン層に定義)
 
@@ -26,7 +26,7 @@ final class AnalyticsServiceProvider
         >
     with $Provider<AnalyticsService> {
   /// DI用 (依存性逆転のためドメイン層に定義)
-  const AnalyticsServiceProvider._()
+  AnalyticsServiceProvider._()
     : super(
         from: null,
         argument: null,

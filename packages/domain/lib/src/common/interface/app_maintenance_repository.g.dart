@@ -12,7 +12,7 @@ part of 'app_maintenance_repository.dart';
 // ignore_for_file: type=lint, type=warning
 
 @ProviderFor(appMaintenanceRepository)
-const appMaintenanceRepositoryProvider = AppMaintenanceRepositoryProvider._();
+final appMaintenanceRepositoryProvider = AppMaintenanceRepositoryProvider._();
 
 final class AppMaintenanceRepositoryProvider
     extends
@@ -22,7 +22,7 @@ final class AppMaintenanceRepositoryProvider
           AppMaintenanceRepository
         >
     with $Provider<AppMaintenanceRepository> {
-  const AppMaintenanceRepositoryProvider._()
+  AppMaintenanceRepositoryProvider._()
     : super(
         from: null,
         argument: null,
