@@ -3,6 +3,12 @@ name: Patrol E2E
 on:
   workflow_dispatch:
     inputs:
+      platform:
+        description: 'Critical path platform (ignored for local simulator builds)'
+        required: true
+        default: all
+        type: choice
+        options: [all, ios, android]
       build_local_simulator:
         description: 'Build an emulator-backed app for a local iOS simulator'
         required: true
@@ -21,7 +27,7 @@ concurrency:
 jobs:
   ios-critical-path:
     name: iOS critical path
-    if: ${{ !inputs.build_local_simulator }}
+    if: ${{ !inputs.build_local_simulator && inputs.platform != 'android' }}
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
@@ -36,6 +42,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
       - name: Setup config files
         uses: ./.github/actions/setup-config-files
         env:
@@ -65,7 +76,7 @@ jobs:
           done
           exit 1
       - name: Run iOS critical path
-        timeout-minutes: 30
+        timeout-minutes: 35
         working-directory: apps/app
         run: |
           set -o pipefail
@@ -75,7 +86,18 @@ jobs:
             --verbose \
             --dart-define-from-file ../../.github/e2e_dart_defines.json \
             --dart-define useFirebaseEmulators=true \
+            --dart-define firebaseEmulatorHost=127.0.0.1 \
             2>&1 | tee ../../patrol-ios.log
+      - name: Verify persisted critical-path state
+        run: >-
+          python3 .github/scripts/verify_emulator_state.py
+          --verify --output emulator-state-ios.json
+      - name: Capture emulator state
+        if: always()
+        continue-on-error: true
+        run: >-
+          python3 .github/scripts/verify_emulator_state.py
+          --output emulator-state-ios-capture.json
       - name: Capture simulator on failure
         if: failure()
         run: xcrun simctl io booted screenshot ios-failure.png || true
@@ -88,12 +110,15 @@ jobs:
           path: |
             patrol-ios.log
             firebase-emulator.log
+            firebase-debug.log
+            firestore-debug.log
+            emulator-state-ios*.json
             ios-failure.png
             apps/app/build/ios_results*.xcresult
 
   android-critical-path:
     name: Android critical path
-    if: ${{ !inputs.build_local_simulator }}
+    if: ${{ !inputs.build_local_simulator && inputs.platform != 'ios' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -112,6 +137,11 @@ jobs:
           DEV_ENV_FILE: ${{ secrets.DEV_ENV_FILE }}
       - name: Setup application runtime
         uses: ./.github/actions/setup-application-runtime
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
       - name: Install E2E tools
         run: |
           dart pub global activate patrol_cli 4.9.0
@@ -136,24 +166,49 @@ jobs:
             sleep 2
           done
           exit 1
+      - name: Enable and verify KVM acceleration
+        # The runner otherwise silently falls back to software CPU emulation.
+        # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
+        # cspell:ignore udevadm
+        run: |
+          test -c /dev/kvm
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          sudo udevadm settle --timeout=10
+          test -r /dev/kvm && test -w /dev/kvm
       - name: Run Android critical path
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
           arch: x86_64
-          # This action runs each input line in a separate sh process.
-          script: >-
-            bash -euo pipefail -c
-            'cd apps/app; patrol test --target patrol_test/critical_flow_test.dart --uninstall --verbose --dart-define-from-file ../../.github/e2e_dart_defines.json --dart-define useFirebaseEmulators=true --dart-define firebaseEmulatorHost=10.0.2.2 2>&1 | tee ../../patrol-android.log'
+          ram-size: 2048M
+          heap-size: 256M
+          force-avd-creation: true
+          disable-animations: true
+          disable-linux-hw-accel: false
+          pre-emulator-launch-script: '"$ANDROID_HOME/emulator/emulator" -accel-check'
+          script: bash .github/scripts/run_android_critical_path.sh
+      - name: Capture Android emulator state
+        if: always()
+        run: >-
+          python3 .github/scripts/verify_emulator_state.py
+          --output emulator-state-android-capture.json
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: patrol-android-diagnostics
           if-no-files-found: ignore
+          retention-days: 7
           path: |
             patrol-android.log
+            patrol-android-diagnostics/
             firebase-emulator.log
+            firebase-debug.log
+            firestore-debug.log
+            emulator-state-android.json
+            emulator-state-android-capture.json
 
   ios-local-simulator:
     # cspell:ignore Rsrc iphonesimulator hashlib plistlib DTSDK hexdigest

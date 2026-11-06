@@ -73,7 +73,8 @@ void main() {
     );
     await signUpButton.tap();
     await $('ほしいものを追加').waitUntilVisible(
-      timeout: const Duration(seconds: 20),
+      // The first emulator-backed transaction is slower on a cold CI runner.
+      timeout: const Duration(seconds: 90),
     );
 
     expect($('ほしいもの'), findsWidgets);

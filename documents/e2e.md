@@ -94,7 +94,46 @@ Remove these forwards after testing with `adb -s "$ANDROID_DEVICE_ID" reverse
 The `Patrol E2E` workflow has manual and scheduled triggers. It does not run on
 pull requests. Scheduled runs and manual runs with `build_local_simulator=false`
 run both iOS and Android critical paths. They upload Patrol and Firebase Emulator
-logs; an iOS failure also captures the current simulator screen.
+logs, including `firebase-debug.log` and `firestore-debug.log`; an iOS failure
+also captures the current simulator screen and Xcode test results.
+
+Both jobs use Node 22, matching the Functions runtime and the locally verified
+environment. iOS explicitly connects to `127.0.0.1`, matching the successful
+local simulator run. Only the first wait after registration allows 90 seconds:
+the recorded CI failure was still loading at the old 20-second deadline and
+reached the item list later. Other UI assertions and timeouts remain unchanged.
+
+Android separates the APK build from device test execution, stops Gradle before
+launching instrumentation, and uses the same direct Patrol JUnit runner that
+passed on the connected physical device. CI requires one successful test;
+process exit alone is insufficient. This avoids retaining the build JVM and
+Test Orchestrator while the emulator runs. A successful APK build alone does
+not establish remote test success; inspect the JUnit and backend-state results.
+
+The Linux job enables KVM permissions using the emulator action's documented
+configuration and checks acceleration before boot. It requires acceleration
+instead of silently falling back to software CPU emulation: the earlier AVD
+reported a system-process ANR before the application was installed. Manual
+runs can select `platform=android` or `platform=ios`; the default and scheduled
+runs cover both. `build_local_simulator=true` selects the iOS artifact build
+regardless of that platform choice.
+
+After the UI test succeeds, both jobs run a read-only server-state check:
+
+```sh
+python3 .github/scripts/verify_emulator_state.py \
+  --verify --output emulator-state.json
+```
+
+The helper only contacts `127.0.0.1` Auth/Firestore emulators for the fixed
+development project. Within 60 seconds it requires one Auth account, its user
+and owned group, matching membership, the Functions-generated participant copy
+(including name and age group), and no remaining items after deletion. A missing
+participant fails verification even when the Flutter UI succeeds. This catches
+the Functions worker load failure found in the earlier CI log. No token or
+password fields are saved. The same command without `--verify` captures one
+diagnostic snapshot even when the UI test fails; it does not change emulator
+data or turn a failed UI test into success.
 
 With `build_local_simulator=true`, the workflow instead builds a normal debug
 application for operation in a **local** iOS simulator. It uses the runner's
@@ -149,6 +188,7 @@ not establish successful operation on a simulator or device.
 For local debugging, run one target with `--verbose`, inspect
 `firebase-debug.log`, and use `patrol develop` when iterating on selectors.
 
-Android uses Patrol's instrumentation runner and Test Orchestrator. Tests are
-isolated by clearing app data between runs. The configured package and bundle
+The CI Android path uses Patrol's instrumentation runner directly and clears
+application data before the test. Local `patrol test` can still use the
+project's Test Orchestrator configuration. The configured package and bundle
 identifiers target the development application.
