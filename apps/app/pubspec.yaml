@@ -75,6 +75,8 @@ dev_dependencies:
   alchemist: ^0.14.1
   build_runner: ^2.16.1
   firebase_auth: ^6.7.1
+  infrastructure_firebase:
+    path: ../../packages/infrastructure/firebase
   flutter_gen_runner: ^5.15.0
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0

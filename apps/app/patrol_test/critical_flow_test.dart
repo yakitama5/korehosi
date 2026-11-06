@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/main.dart' as app;
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:infrastructure_firebase/src/common/state/firebase_functions_provider.dart';
 import 'package:patrol/patrol.dart';
 
 void main() {
@@ -13,6 +16,26 @@ void main() {
           'The critical flow writes test data and must use Firebase emulators.',
     );
     await app.main();
+    // Inspect the callable actually used by repositories, without invoking a
+    // handler that requires App Check or may contact external services.
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+    final callable = container
+        .read(firebaseFunctionsProvider)
+        .httpsCallable('v2JoinGroup');
+    const hostOverride = String.fromEnvironment('firebaseEmulatorHost');
+    final host = hostOverride.isNotEmpty
+        ? hostOverride
+        : defaultTargetPlatform == TargetPlatform.android
+        ? '10.0.2.2'
+        : 'localhost';
+    // Patrol tests live outside test/, but use the SDK's testing seam to
+    // verify emulator routing without making a network request.
+    // ignore: invalid_use_of_visible_for_testing_member
+    final delegate = callable.delegate;
+    expect(delegate.origin, 'http://$host:5001');
+    expect(delegate.functions.region, 'asia-northeast1');
+
     // Firebase Auth persists credentials in the iOS Keychain even when the app
     // is uninstalled, so always begin the critical flow signed out.
     await FirebaseAuth.instance.signOut();

@@ -30,6 +30,9 @@ firebase emulators:start --project family-wish-list-ad3c7-dev \
 The critical-path test covers anonymous onboarding, required item-name
 validation, item create/edit/delete, and returning to the app from the home
 screen. It requires `useFirebaseEmulators=true` before application startup.
+It also inspects the repository's Functions callable through the SDK's public
+testing API to verify its emulator origin and region, without invoking a
+handler that requires App Check or may access external services.
 The test explicitly signs out because iOS Keychain credentials can survive an
 uninstall; it does **not** reset the Auth or Firestore emulator server. Start
 fresh emulators without imported data, or clear only the local test data before
@@ -77,6 +80,8 @@ The application selects the emulator host before configuring each Firebase SDK
 and disables their `automaticHostMapping`. Otherwise FlutterFire rewrites
 `127.0.0.1` to `10.0.2.2` on Android, bypassing USB reverse forwarding on a
 physical device. This applies to Auth, Firestore, Functions, and Storage.
+Functions must configure the same `asia-northeast1` instance used by the
+application's provider; emulator settings are scoped to each region instance.
 
 Remove these forwards after testing with `adb -s "$ANDROID_DEVICE_ID" reverse
 --remove tcp:PORT` for each of the four ports. The development package is
