@@ -167,7 +167,7 @@ jobs:
           done
           exit 1
       - name: Enable and verify KVM acceleration
-        # The runner otherwise silently falls back to unaccelerated emulation.
+        # The runner otherwise silently falls back to software CPU emulation.
         # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
         # cspell:ignore udevadm
         run: |
