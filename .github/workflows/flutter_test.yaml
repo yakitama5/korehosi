@@ -24,6 +24,11 @@ jobs:
       - name: 💾Checkout
         uses: actions/checkout@v4
 
+      - name: Verify CI helpers
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+
       - name: ⚙️Setup Config Files
         uses: ./.github/actions/setup-config-files
         env:
