@@ -179,6 +179,7 @@ jobs:
           app-store-connect fetch-signing-files "com.yakuran.familyWishList" --type IOS_APP_STORE --create
           # 3. キーチェーンへの追加とXcodeプロジェクトへの適用
           keychain add-certificates --path "$RUNNER_TEMP/korehosi-signing.keychain-db"
+          printf 'iosBundleId=%s\n' "$(jq -r '.iosBundleId // "com.yakuran.familyWishList"' apps/app/dart_defines/prod.json)" > apps/app/ios/Flutter/Dart-Defines.xcconfig
           xcode-project use-profiles --project apps/app/ios/Runner.xcodeproj
           # 4. Melos経由でビルド
           melos run build:app:ios

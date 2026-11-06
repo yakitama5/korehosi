@@ -14,6 +14,7 @@ import 'package:infrastructure_firebase/env/env.dev.dart';
 import 'package:infrastructure_firebase/src/common/config/firebase_options.dart';
 import 'package:infrastructure_firebase/src/common/config/firebase_options_dev.dart'
     as dev;
+import 'package:infrastructure_firebase/src/common/config/region.dart';
 import 'package:infrastructure_firebase/src/common/state/background_handler.dart';
 import 'package:packages_domain/common.dart';
 import 'package:packages_domain/notification.dart';
@@ -110,9 +111,27 @@ final class FirebaseInitializer {
 
   static Future<void> _connectToFirebaseEmulators() async {
     final host = _firebaseEmulatorHost;
-    await FirebaseAuth.instance.useAuthEmulator(host, 9099);
-    FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
-    FirebaseFunctions.instance.useFunctionsEmulator(host, 5001);
-    await FirebaseStorage.instance.useStorageEmulator(host, 9199);
+    // Host selection above already handles Android emulators. Preserve an
+    // explicit localhost override for physical devices using adb reverse.
+    await FirebaseAuth.instance.useAuthEmulator(
+      host,
+      9099,
+      automaticHostMapping: false,
+    );
+    FirebaseFirestore.instance.useFirestoreEmulator(
+      host,
+      8080,
+      automaticHostMapping: false,
+    );
+    FirebaseFunctions.instanceFor(region: firebaseRegion).useFunctionsEmulator(
+      host,
+      5001,
+      automaticHostMapping: false,
+    );
+    await FirebaseStorage.instance.useStorageEmulator(
+      host,
+      9199,
+      automaticHostMapping: false,
+    );
   }
 }

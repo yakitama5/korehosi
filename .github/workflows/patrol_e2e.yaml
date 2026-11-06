@@ -2,6 +2,12 @@ name: Patrol E2E
 
 on:
   workflow_dispatch:
+    inputs:
+      build_local_simulator:
+        description: 'Build an emulator-backed app for a local iOS simulator'
+        required: true
+        default: false
+        type: boolean
   schedule:
     - cron: '0 18 * * 1-5'
 
@@ -15,12 +21,17 @@ concurrency:
 jobs:
   ios-critical-path:
     name: iOS critical path
+    if: ${{ !inputs.build_local_simulator }}
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -58,6 +69,7 @@ jobs:
         working-directory: apps/app
         run: |
           set -o pipefail
+          printf 'iosBundleId=%s\n' "$(jq -r '.iosBundleId' ../../.github/e2e_dart_defines.json)" > ios/Flutter/Dart-Defines.xcconfig
           patrol test --target patrol_test/critical_flow_test.dart \
             --uninstall --full-isolation \
             --verbose \
@@ -80,7 +92,8 @@ jobs:
             apps/app/build/ios_results*.xcresult
 
   android-critical-path:
-    name: Android critical path (scheduled)
+    name: Android critical path
+    if: ${{ !inputs.build_local_simulator }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -105,18 +118,33 @@ jobs:
           dart pub global activate flutterfire_cli 1.4.1
           npm install --global firebase-tools@15.34.2
           npm ci --prefix functions
+      - name: Prepare debug signing configuration
+        # Gradle evaluates the release configuration even for Patrol's debug build.
+        # Debug uses its own keystore; this placeholder never signs a release.
+        run: |
+          printf '%s\n' \
+            'storePassword=local-test-only' \
+            'keyPassword=local-test-only' \
+            'keyAlias=local-test-only' \
+            'storeFile=unused-e2e-signing.jks' > apps/app/android/key.properties
+      - name: Start Firebase emulators
+        run: |
+          firebase emulators:start --project family-wish-list-ad3c7-dev \
+            --only auth,firestore,functions,storage > firebase-emulator.log 2>&1 &
+          for _ in {1..120}; do
+            curl --silent --fail http://127.0.0.1:4000 >/dev/null && exit 0
+            sleep 2
+          done
+          exit 1
       - name: Run Android critical path
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
           arch: x86_64
-          script: |
-            firebase emulators:start --project family-wish-list-ad3c7-dev --only auth,firestore,functions,storage > firebase-emulator.log 2>&1 &
-            for _ in {1..120}; do curl --silent --fail http://127.0.0.1:4000 >/dev/null && break; sleep 2; done
-            curl --silent --fail http://127.0.0.1:4000 >/dev/null
-            cd apps/app
-            set -o pipefail
-            patrol test --target patrol_test/critical_flow_test.dart --uninstall --verbose --dart-define-from-file ../../.github/e2e_dart_defines.json --dart-define useFirebaseEmulators=true --dart-define firebaseEmulatorHost=10.0.2.2 2>&1 | tee ../../patrol-android.log
+          # This action runs each input line in a separate sh process.
+          script: >-
+            bash -euo pipefail -c
+            'cd apps/app; patrol test --target patrol_test/critical_flow_test.dart --uninstall --verbose --dart-define-from-file ../../.github/e2e_dart_defines.json --dart-define useFirebaseEmulators=true --dart-define firebaseEmulatorHost=10.0.2.2 2>&1 | tee ../../patrol-android.log'
       - name: Upload diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -126,3 +154,76 @@ jobs:
           path: |
             patrol-android.log
             firebase-emulator.log
+
+  ios-local-simulator:
+    # cspell:ignore Rsrc iphonesimulator hashlib plistlib DTSDK hexdigest
+    name: Build local iOS simulator app
+    if: ${{ inputs.build_local_simulator }}
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Prepare emulator-only environment
+        run: |
+          for ENV_PATH in packages/infrastructure/firebase/scripts/env packages/infrastructure/revenue_cat/scripts/env; do
+            mkdir -p "$ENV_PATH"
+            printf '%s\n' \
+              'RECPTCHA_SITE_KEY=local-test-only' \
+              'REVENUE_CAT_KEY_APPLE_STORE=local-test-only' \
+              'REVENUE_CAT_KEY_PLAY_STORE=local-test-only' > "$ENV_PATH/.env"
+            cp "$ENV_PATH/.env" "$ENV_PATH/.env.dev"
+          done
+          printf 'iosBundleId=%s\n' "$(jq -r '.iosBundleId' .github/e2e_dart_defines.json)" > apps/app/ios/Flutter/Dart-Defines.xcconfig
+      - name: Setup application runtime
+        uses: ./.github/actions/setup-application-runtime
+      - name: Build simulator app
+        # The Xcode service-file build phase invokes FlutterFire CLI.
+        working-directory: apps/app
+        run: |
+          dart pub global activate flutterfire_cli 1.4.1
+          export PATH="$HOME/.pub-cache/bin:$PATH"
+          flutter build ios --simulator --debug \
+            --dart-define-from-file ../../.github/e2e_dart_defines.json \
+            --dart-define=useFirebaseEmulators=true \
+            --dart-define=firebaseEmulatorHost=127.0.0.1
+      - name: Archive simulator app and provenance
+        run: |
+          ditto -c -k --sequesterRsrc --keepParent \
+            apps/app/build/ios/iphonesimulator/Runner.app ios-local-simulator.zip
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import plistlib
+          import subprocess
+
+          info = plistlib.loads(Path("apps/app/build/ios/iphonesimulator/Runner.app/Info.plist").read_bytes())
+          if info["CFBundleIdentifier"] != "com.yakuran.familyWishList.dev":
+              raise SystemExit("Expected the development application bundle ID")
+          result = {
+              "source_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+              "bundle_id": info["CFBundleIdentifier"],
+              "version": info["CFBundleShortVersionString"],
+              "build_number": info["CFBundleVersion"],
+              "sdk": info["DTSDKName"],
+              "archive_sha256": hashlib.sha256(Path("ios-local-simulator.zip").read_bytes()).hexdigest(),
+              "use_firebase_emulators": True,
+              "firebase_emulator_host": "127.0.0.1",
+          }
+          Path("ios-local-simulator.json").write_text(json.dumps(result, indent=2) + "\n")
+          PY
+      - name: Upload simulator app
+        uses: actions/upload-artifact@v7
+        with:
+          name: ios-local-simulator
+          path: |
+            ios-local-simulator.zip
+            ios-local-simulator.json
+          if-no-files-found: error
+          retention-days: 3

@@ -82,6 +82,8 @@ dev_dependencies:
     sdk: flutter
   freezed: ^4.0.1
   go_router_builder: ^4.5.3
+  infrastructure_firebase:
+    path: ../../packages/infrastructure/firebase
   json_serializable: ^6.15.2
   patrol: ^4.11.0
   pedantic_mono: ^1.38.1
