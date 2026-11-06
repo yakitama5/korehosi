@@ -177,7 +177,6 @@ jobs:
           sudo udevadm trigger --name-match=kvm
           sudo udevadm settle --timeout=10
           test -r /dev/kvm && test -w /dev/kvm
-          "$ANDROID_HOME/emulator/emulator" -accel-check
       - name: Run Android critical path
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -188,6 +187,7 @@ jobs:
           force-avd-creation: true
           disable-animations: true
           disable-linux-hw-accel: false
+          pre-emulator-launch-script: '"$ANDROID_HOME/emulator/emulator" -accel-check'
           script: bash .github/scripts/run_android_critical_path.sh
       - name: Capture Android emulator state
         if: always()
