@@ -73,6 +73,11 @@ patrol test \
   --dart-define firebaseEmulatorHost=127.0.0.1
 ```
 
+The application selects the emulator host before configuring each Firebase SDK
+and disables their `automaticHostMapping`. Otherwise FlutterFire rewrites
+`127.0.0.1` to `10.0.2.2` on Android, bypassing USB reverse forwarding on a
+physical device. This applies to Auth, Firestore, Functions, and Storage.
+
 Remove these forwards after testing with `adb -s "$ANDROID_DEVICE_ID" reverse
 --remove tcp:PORT` for each of the four ports. The development package is
 `com.yakuran.family_wish_list.dev`, separate from the production application.

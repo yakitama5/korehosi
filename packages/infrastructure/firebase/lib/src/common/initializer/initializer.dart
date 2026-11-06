@@ -110,9 +110,27 @@ final class FirebaseInitializer {
 
   static Future<void> _connectToFirebaseEmulators() async {
     final host = _firebaseEmulatorHost;
-    await FirebaseAuth.instance.useAuthEmulator(host, 9099);
-    FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
-    FirebaseFunctions.instance.useFunctionsEmulator(host, 5001);
-    await FirebaseStorage.instance.useStorageEmulator(host, 9199);
+    // Host selection above already handles Android emulators. Preserve an
+    // explicit localhost override for physical devices using adb reverse.
+    await FirebaseAuth.instance.useAuthEmulator(
+      host,
+      9099,
+      automaticHostMapping: false,
+    );
+    FirebaseFirestore.instance.useFirestoreEmulator(
+      host,
+      8080,
+      automaticHostMapping: false,
+    );
+    FirebaseFunctions.instance.useFunctionsEmulator(
+      host,
+      5001,
+      automaticHostMapping: false,
+    );
+    await FirebaseStorage.instance.useStorageEmulator(
+      host,
+      9199,
+      automaticHostMapping: false,
+    );
   }
 }
