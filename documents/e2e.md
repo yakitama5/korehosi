@@ -107,8 +107,16 @@ Android separates the APK build from device test execution, stops Gradle before
 launching instrumentation, and uses the same direct Patrol JUnit runner that
 passed on the connected physical device. CI requires one successful test;
 process exit alone is insufficient. This avoids retaining the build JVM and
-Test Orchestrator while the emulator runs. These runner changes still require
-their own completed CI run to establish remote success.
+Test Orchestrator while the emulator runs. A successful APK build alone does
+not establish remote test success; inspect the JUnit and backend-state results.
+
+The Linux job enables KVM permissions using the emulator action's documented
+configuration and checks acceleration before boot. It requires acceleration
+instead of silently falling back to software CPU emulation: the earlier AVD
+reported a system-process ANR before the application was installed. Manual
+runs can select `platform=android` or `platform=ios`; the default and scheduled
+runs cover both. `build_local_simulator=true` selects the iOS artifact build
+regardless of that platform choice.
 
 After the UI test succeeds, both jobs run a read-only server-state check:
 

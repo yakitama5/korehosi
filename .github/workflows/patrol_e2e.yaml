@@ -3,6 +3,12 @@ name: Patrol E2E
 on:
   workflow_dispatch:
     inputs:
+      platform:
+        description: 'Critical path platform (ignored for local simulator builds)'
+        required: true
+        default: all
+        type: choice
+        options: [all, ios, android]
       build_local_simulator:
         description: 'Build an emulator-backed app for a local iOS simulator'
         required: true
@@ -21,7 +27,7 @@ concurrency:
 jobs:
   ios-critical-path:
     name: iOS critical path
-    if: ${{ !inputs.build_local_simulator }}
+    if: ${{ !inputs.build_local_simulator && inputs.platform != 'android' }}
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
@@ -112,7 +118,7 @@ jobs:
 
   android-critical-path:
     name: Android critical path
-    if: ${{ !inputs.build_local_simulator }}
+    if: ${{ !inputs.build_local_simulator && inputs.platform != 'ios' }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
@@ -160,6 +166,18 @@ jobs:
             sleep 2
           done
           exit 1
+      - name: Enable and verify KVM acceleration
+        # The runner otherwise silently falls back to unaccelerated emulation.
+        # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
+        # cspell:ignore udevadm
+        run: |
+          test -c /dev/kvm
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          sudo udevadm settle --timeout=10
+          test -r /dev/kvm && test -w /dev/kvm
+          "$ANDROID_HOME/emulator/emulator" -accel-check
       - name: Run Android critical path
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -169,6 +187,7 @@ jobs:
           heap-size: 256M
           force-avd-creation: true
           disable-animations: true
+          disable-linux-hw-accel: false
           script: bash .github/scripts/run_android_critical_path.sh
       - name: Capture Android emulator state
         if: always()
