@@ -15,6 +15,16 @@ void main() {
       reason:
           'The critical flow writes test data and must use Firebase emulators.',
     );
+    // Text selectors must not depend on the CI simulator's system language.
+    // AppInitializer reads the device locale during app.main().
+    final platformDispatcher = $.tester.platformDispatcher
+      ..localeTestValue = const Locale('ja')
+      ..localesTestValue = const [Locale('ja')];
+    addTearDown(() {
+      platformDispatcher
+        ..clearLocaleTestValue()
+        ..clearLocalesTestValue();
+    });
     await app.main();
     // Inspect the callable actually used by repositories, without invoking a
     // handler that requires App Check or may contact external services.

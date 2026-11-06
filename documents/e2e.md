@@ -30,6 +30,8 @@ firebase emulators:start --project family-wish-list-ad3c7-dev \
 The critical-path test covers anonymous onboarding, required item-name
 validation, item create/edit/delete, and returning to the app from the home
 screen. It requires `useFirebaseEmulators=true` before application startup.
+The test fixes the Flutter device locale to Japanese before initialization so
+text selectors work on English-language CI simulators, then restores it.
 It also inspects the repository's Functions callable through the SDK's public
 testing API to verify its emulator origin and region, without invoking a
 handler that requires App Check or may access external services.
